@@ -42,12 +42,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Logo styling */
+/* Logo styling - ACCamargo */
 .logo-icon {
   width: 48px;
   height: 48px;
   margin-right: 16px;
-  filter: drop-shadow(0 2px 4px rgba(22, 163, 74, 0.1));
+  filter: drop-shadow(0 2px 4px rgba(45, 122, 78, 0.2));
+  transition: transform 0.3s ease;
+}
+
+.logo-icon:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 4px 8px rgba(45, 122, 78, 0.3));
 }
 
 /* Card hover effects com tema verde */
@@ -81,11 +87,12 @@ body {
   border-color: var(--primary-green-light);
 }
 
-/* Footer gradient verde */
+/* Footer gradient verde - ACCamargo */
 .footer-gradient {
-  background: linear-gradient(135deg, #064e3b 0%, #047857 50%, #059669 100%);
+  background: linear-gradient(135deg, #1a5c38 0%, #2d7a4e 50%, #3a8f5f 100%);
   position: relative;
   overflow: hidden;
+  border-top: 3px solid #2d7a4e;
 }
 
 .footer-gradient::before {

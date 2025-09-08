@@ -20,7 +20,7 @@ export const wellnessPage = (c: any) => {
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <a href="/" class="flex items-center">
-                            <img src="/static/logo.svg" alt="Logo" class="logo-icon">
+                            <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="logo-icon">
                             <span class="text-xl font-bold text-gray-800 ml-2">Bem-Estar e Apoio Psicológico</span>
                         </a>
                     </div>
@@ -43,7 +43,7 @@ export const wellnessPage = (c: any) => {
                         <h1 class="text-2xl font-bold mb-2">Centro de Bem-Estar e Suporte Emocional</h1>
                         <p class="opacity-90">"Um corpo doente precisa de uma mente saudável para potencializar sua cura"</p>
                     </div>
-                    <img src="/static/logo.svg" alt="Logo" class="w-20 h-20 opacity-50">
+                    <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="w-20 h-20 opacity-50">
                 </div>
             </div>
 
@@ -194,7 +194,7 @@ export const wellnessPage = (c: any) => {
             <!-- Wellness Activities -->
             <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100 mb-8">
                 <h3 class="font-bold text-gray-800 mb-4">
-                    <img src="/static/logo.svg" alt="Logo" class="w-6 h-6 inline mr-2">
+                    <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="w-6 h-6 inline mr-2">
                     Atividades de Bem-Estar da Semana
                 </h3>
                 

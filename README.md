@@ -1,7 +1,7 @@
-# Plataforma Integrada de Gestão da Jornada Oncológica com IA
+# ACCamargo Cancer Center - Plataforma Integrada de Gestão Oncológica
 
 ## 🏥 Visão Geral
-Uma solução completa de transformação digital para gestão oncológica, desenvolvida em parceria entre **Laura Technology** e **ACCamargo Cancer Center**, oferecendo uma experiência integrada e humanizada para pacientes, médicos e gestores.
+Plataforma de transformação digital desenvolvida pelo **ACCamargo Cancer Center**, líder em oncologia no Brasil há 70 anos, com tecnologia avançada de IA desenvolvida em parceria com a **Laura Technology**, oferecendo uma experiência integrada e humanizada para toda a jornada oncológica.
 
 ## 🌟 Status do Projeto
 - **Status**: ✅ **Ativo e Operacional**
@@ -11,15 +11,14 @@ Uma solução completa de transformação digital para gestão oncológica, dese
 - **GitHub**: [A ser configurado]
 
 ## 🎨 Identidade Visual
-- **Tema**: Verde institucional com tons sóbrios
+- **Logo Principal**: ACCamargo - Círculo verde com sorriso (símbolo de esperança e acolhimento)
+- **Tema**: Verde institucional ACCamargo (#2d7a4e)
 - **Ícones**: Design outline/stroke para aparência profissional
-- **Logo**: DNA helix com coração integrado (símbolo de vida e cuidado)
 - **Paleta de Cores**:
-  - Primary Green: #16a34a
-  - Emerald: #10b981
-  - Teal: #14b8a6
-  - Cyan: #06b6d4
-  - Lime: #84cc16
+  - ACCamargo Green: #2d7a4e
+  - Dark Green: #1a5c38
+  - Light Green: #3a8f5f
+  - Complementary: #10b981, #14b8a6, #06b6d4
 
 ## ✅ Funcionalidades Implementadas
 
@@ -180,23 +179,32 @@ Uma solução completa de transformação digital para gestão oncológica, dese
    - [ ] A/B testing framework
    - [ ] Business Intelligence avançado
 
-## 👥 Parceiros Institucionais
-
-### Laura Technology
-- **CNPJ**: 38.475.698/0001-74
-- **Endereço**: Av. Sete de Setembro, 6460, Curitiba - PR
-- **Contato**: contato@laura.technology
-- **Telefone**: +55 (41) 99553-5304
+## 🏭 Instituição Principal
 
 ### ACCamargo Cancer Center
-- **Especialidade**: Centro de Referência em Oncologia
-- **Experiência**: 70 anos de excelência
+- **Fundação**: 1953 - 70 anos de excelência
+- **Missão**: Centro Integrado de Diagnóstico, Tratamento, Ensino e Pesquisa
+- **Estrutura**: 
+  - Mais de 5.000 colaboradores
+  - Mais de 500 leitos
+  - Centro de Pesquisa Avançada
+  - Formação de Especialistas
 - **Localização**: São Paulo - SP
-- **Foco**: Pesquisa, Ensino e Tratamento
+- **Website**: accamargo.org.br
+- **Acreditações**: Internacional, LGPD Compliant, ISO 27001
+
+### Parceiro Tecnológico
+
+#### Laura Technology
+- **Especialidade**: Inteligência Artificial para Saúde
+- **Contribuição**: Desenvolvimento da plataforma e algoritmos de IA
+- **CNPJ**: 38.475.698/0001-74
+- **Localização**: Curitiba - PR
 
 ## 📝 Licença e Copyright
-© 2024 Laura Technology LTDA. Todos os direitos reservados.
-Desenvolvido com ❤️ para transformar a jornada oncológica.
+© 2024 ACCamargo Cancer Center. Todos os direitos reservados.
+Tecnologia desenvolvida em parceria com Laura Technology LTDA.
+Transformando o cuidado oncológico no Brasil há 70 anos.
 
 ---
 

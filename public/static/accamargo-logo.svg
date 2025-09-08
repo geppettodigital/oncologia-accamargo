@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- ACCamargo Logo - Círculo verde com sorriso -->
+  <defs>
+    <linearGradient id="accGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d7a4e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a5c38;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Círculo principal verde -->
+  <circle cx="100" cy="100" r="90" fill="#2d7a4e"/>
+  
+  <!-- Sorriso branco -->
+  <path d="M 50 120 Q 100 160 150 120" 
+        stroke="white" 
+        stroke-width="12" 
+        fill="none" 
+        stroke-linecap="round"/>
+  
+  <!-- Versão alternativa com preenchimento para maior impacto -->
+  <path d="M 45 115 Q 100 165 155 115 L 150 120 Q 100 155 50 120 Z" 
+        fill="white" 
+        opacity="0.3"/>
+</svg>

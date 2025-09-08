@@ -62,7 +62,12 @@ app.get('/', (c) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Plataforma Integrada de Gestão da Jornada Oncológica</title>
+        <title>ACCamargo Cancer Center - Plataforma Integrada de Gestão Oncológica</title>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+        <meta name="description" content="Plataforma Integrada de Gestão da Jornada Oncológica - ACCamargo Cancer Center">
+        <meta name="author" content="ACCamargo Cancer Center">
+        <meta property="og:title" content="ACCamargo - Plataforma Oncológica">
+        <meta property="og:description" content="70 anos transformando o cuidado oncológico no Brasil">
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <link href="/static/style.css" rel="stylesheet">
@@ -73,9 +78,9 @@ app.get('/', (c) => {
             <div class="container mx-auto px-4 py-4">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
-                        <img src="/static/logo.svg" alt="Logo" class="logo-icon">
+                        <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="logo-icon">
                         <div>
-                            <h1 class="text-2xl font-bold text-gray-800">Plataforma Oncológica Inteligente</h1>
+                            <h1 class="text-2xl font-bold text-gray-800">ACCamargo Cancer Center</h1>
                             <p class="text-sm text-gray-600 italic">"A Vida é muito maior que o Câncer"</p>
                         </div>
                     </div>
@@ -183,7 +188,7 @@ app.get('/', (c) => {
             <!-- Estatísticas -->
             <div class="bg-white rounded-xl shadow-md p-8 border border-gray-100">
                 <div class="flex items-center justify-center mb-6">
-                    <img src="/static/logo.svg" alt="Logo" class="w-12 h-12 mr-3">
+                    <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="w-12 h-12 mr-3">
                     <h2 class="text-2xl font-bold text-gray-800">Estatísticas da Plataforma</h2>
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -246,51 +251,58 @@ app.get('/', (c) => {
         <footer class="footer-gradient text-white mt-12">
             <div class="container mx-auto px-4 py-8">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Coluna 1: Laura Technology -->
-                    <div>
+                    <!-- Coluna 1: ACCamargo Cancer Center (DESTAQUE) -->
+                    <div class="md:col-span-1 order-1 md:order-1">
                         <div class="flex items-center mb-4">
-                            <img src="/static/logo.svg" alt="Logo" class="w-10 h-10 mr-3">
-                            <h3 class="text-lg font-bold">Laura Technology</h3>
+                            <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="w-14 h-14 mr-3">
+                            <h3 class="text-xl font-bold">ACCamargo Cancer Center</h3>
                         </div>
-                        <p class="text-sm opacity-90 mb-2">
-                            Transformando a saúde com inteligência artificial
+                        <p class="text-sm opacity-95 mb-3 font-medium">
+                            70 anos transformando o cuidado oncológico no Brasil
                         </p>
-                        <p class="text-xs opacity-75">
-                            CNPJ: 38.475.698/0001-74<br>
-                            Av. Sete de Setembro, 6460, Sala 1<br>
-                            Seminário, Curitiba - PR<br>
-                            CEP: 80060-070
+                        <p class="text-sm opacity-90 mb-3">
+                            <strong>Centro Integrado de Diagnóstico, Tratamento, Ensino e Pesquisa</strong>
                         </p>
-                        <div class="mt-3">
-                            <a href="mailto:contato@laura.technology" class="text-sm opacity-90 hover:opacity-100">
-                                <i class="far fa-envelope mr-2"></i>contato@laura.technology
-                            </a><br>
-                            <a href="tel:+554199553-5304" class="text-sm opacity-90 hover:opacity-100">
-                                <i class="far fa-phone-alt mr-2"></i>+55 (41) 99553-5304
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Coluna 2: ACCamargo Cancer Center -->
-                    <div>
-                        <h3 class="text-lg font-bold mb-4">ACCamargo Cancer Center</h3>
-                        <p class="text-sm opacity-90 mb-2">
-                            70 anos de excelência em oncologia
+                        <p class="text-xs opacity-85 leading-relaxed">
+                            <i class="far fa-hospital mr-2 text-green-300"></i>Instituição de Referência Nacional<br>
+                            <i class="far fa-award mr-2 text-green-300"></i>Acreditação Internacional<br>
+                            <i class="far fa-microscope mr-2 text-green-300"></i>Centro de Pesquisa Avançada<br>
+                            <i class="far fa-graduation-cap mr-2 text-green-300"></i>Formação de Especialistas<br>
+                            <i class="far fa-users mr-2 text-green-300"></i>+ 5.000 colaboradores<br>
+                            <i class="far fa-bed mr-2 text-green-300"></i>+ 500 leitos
                         </p>
-                        <p class="text-xs opacity-75">
-                            Centro de Referência em Oncologia<br>
-                            Pesquisa, Ensino e Tratamento<br>
-                            São Paulo - SP
-                        </p>
-                        <div class="mt-3">
-                            <p class="text-xs opacity-75">
-                                <i class="far fa-hospital mr-2"></i>Instituição de referência nacional
+                        <div class="mt-4 pt-3 border-t border-white/20">
+                            <p class="text-xs opacity-90">
+                                <i class="far fa-map-marker-alt mr-2"></i>São Paulo - SP<br>
+                                <i class="far fa-globe mr-2"></i><a href="https://accamargo.org.br" class="hover:text-green-300">accamargo.org.br</a>
                             </p>
                         </div>
                     </div>
 
+                    <!-- Coluna 2: Parceria Tecnológica -->
+                    <div class="md:col-span-1 order-3 md:order-2">
+                        <h3 class="text-lg font-bold mb-4">Parceria Tecnológica</h3>
+                        <p class="text-sm opacity-90 mb-3">
+                            Plataforma desenvolvida em colaboração com:
+                        </p>
+                        <div class="mb-4">
+                            <p class="text-sm font-medium opacity-95 mb-2">Laura Technology</p>
+                            <p class="text-xs opacity-75">
+                                Especialista em IA para Saúde<br>
+                                CNPJ: 38.475.698/0001-74<br>
+                                Curitiba - PR
+                            </p>
+                        </div>
+                        <div class="text-xs opacity-75 space-y-1">
+                            <p><i class="far fa-check-circle mr-2 text-green-300"></i>Inteligência Artificial</p>
+                            <p><i class="far fa-check-circle mr-2 text-green-300"></i>Machine Learning</p>
+                            <p><i class="far fa-check-circle mr-2 text-green-300"></i>Análise Preditiva</p>
+                            <p><i class="far fa-check-circle mr-2 text-green-300"></i>Automação de Processos</p>
+                        </div>
+                    </div>
+
                     <!-- Coluna 3: Informações Legais -->
-                    <div>
+                    <div class="md:col-span-1 order-2 md:order-3">
                         <h3 class="text-lg font-bold mb-4">Conformidade e Segurança</h3>
                         <ul class="text-sm opacity-90 space-y-2">
                             <li><i class="far fa-check-circle mr-2"></i>LGPD Compliant</li>
@@ -309,7 +321,8 @@ app.get('/', (c) => {
                 <!-- Copyright -->
                 <div class="border-t border-white/20 mt-8 pt-6 text-center">
                     <p class="text-sm opacity-90">
-                        © 2024 Laura Technology LTDA. Todos os direitos reservados.
+                        © 2024 ACCamargo Cancer Center. Todos os direitos reservados.
+                        <br><span class="text-xs opacity-75">Tecnologia desenvolvida em parceria com Laura Technology LTDA</span>
                     </p>
                     <p class="text-xs opacity-75 mt-2">
                         Desenvolvido com <i class="far fa-heart text-green-300"></i> para transformar a jornada oncológica

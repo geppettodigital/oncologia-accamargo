@@ -21,8 +21,8 @@ export const researchPage = (c: any) => {
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <a href="/" class="flex items-center">
-                            <img src="/static/logo.svg" alt="Logo" class="logo-icon">
-                            <span class="text-xl font-bold text-gray-800 ml-2">Portal de Pesquisa Clínica</span>
+                            <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="logo-icon">
+                            <span class="text-xl font-bold text-gray-800 ml-2">Portal de Pesquisa - ACCamargo</span>
                         </a>
                     </div>
                     <div class="flex items-center space-x-4">
@@ -83,7 +83,7 @@ export const researchPage = (c: any) => {
             <!-- Active Studies -->
             <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100 mb-8">
                 <h3 class="font-bold text-gray-800 mb-4">
-                    <img src="/static/logo.svg" alt="Logo" class="w-6 h-6 inline mr-2">
+                    <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="w-6 h-6 inline mr-2">
                     Estudos em Andamento
                 </h3>
                 

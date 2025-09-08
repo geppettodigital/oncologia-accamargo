@@ -20,8 +20,8 @@ export const navigatorPage = (c: any) => {
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <a href="/" class="flex items-center">
-                            <img src="/static/logo.svg" alt="Logo" class="logo-icon">
-                            <span class="text-xl font-bold text-gray-800 ml-2">Navegador de Pacientes</span>
+                            <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="logo-icon">
+                            <span class="text-xl font-bold text-gray-800 ml-2">Navegador - ACCamargo</span>
                         </a>
                     </div>
                     <div class="flex items-center space-x-4">
@@ -39,7 +39,7 @@ export const navigatorPage = (c: any) => {
             <!-- Kanban Board -->
             <div class="mb-8">
                 <h2 class="text-2xl font-bold text-gray-800 mb-4">
-                    <img src="/static/logo.svg" alt="Logo" class="w-8 h-8 inline mr-2">
+                    <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="w-8 h-8 inline mr-2">
                     Fluxo de Pacientes - Visão Kanban
                 </h2>
                 
