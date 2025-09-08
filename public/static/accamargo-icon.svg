@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Ícone ACCamargo - apenas o círculo com sorriso -->
+  
+  <!-- Círculo verde -->
+  <circle cx="60" cy="60" r="55" fill="#2B6B47"/>
+  
+  <!-- Sorriso branco -->
+  <path d="M 30 70 Q 60 95 90 70" 
+        stroke="white" 
+        stroke-width="7" 
+        fill="none" 
+        stroke-linecap="round"/>
+</svg>

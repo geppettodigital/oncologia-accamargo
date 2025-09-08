@@ -1,4 +1,4 @@
-# ACCamargo Cancer Center - Plataforma Integrada de Gestão Oncológica
+# Plataforma Oncológica com IA - ACCamargo Cancer Center
 
 ## 🏥 Visão Geral
 Plataforma de transformação digital desenvolvida pelo **ACCamargo Cancer Center**, líder em oncologia no Brasil há 70 anos, com tecnologia avançada de IA desenvolvida em parceria com a **Laura Technology**, oferecendo uma experiência integrada e humanizada para toda a jornada oncológica.
@@ -11,11 +11,11 @@ Plataforma de transformação digital desenvolvida pelo **ACCamargo Cancer Cente
 - **GitHub**: [A ser configurado]
 
 ## 🎨 Identidade Visual
-- **Logo Principal**: ACCamargo - Círculo verde com sorriso (símbolo de esperança e acolhimento)
-- **Tema**: Verde institucional ACCamargo (#2d7a4e)
-- **Ícones**: Design outline/stroke para aparência profissional
+- **Logo Principal**: ACCamargo Oficial - Círculo verde com sorriso branco
+- **Tema**: Verde institucional ACCamargo (#2B6B47)
+- **Ícones**: Mix de solid (fas) e regular (far) conforme disponibilidade
 - **Paleta de Cores**:
-  - ACCamargo Green: #2d7a4e
+  - ACCamargo Green: #2B6B47
   - Dark Green: #1a5c38
   - Light Green: #3a8f5f
   - Complementary: #10b981, #14b8a6, #06b6d4

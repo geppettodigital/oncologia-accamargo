@@ -165,7 +165,7 @@ export const navigatorPage = (c: any) => {
                             Agendar Consulta/Exame
                         </button>
                         <button class="w-full text-left p-3 bg-green-50 rounded-lg hover:bg-green-100 transition-all">
-                            <i class="far fa-phone-alt text-green-500 mr-2"></i>
+                            <i class="fas fa-phone text-green-500 mr-2"></i>
                             Contatar Paciente
                         </button>
                         <button class="w-full text-left p-3 bg-purple-50 rounded-lg hover:bg-teal-100 transition-all">
@@ -223,7 +223,7 @@ export const navigatorPage = (c: any) => {
             <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="font-bold text-gray-800">
-                        <i class="far fa-users text-green-600 mr-2"></i>
+                        <i class="fas fa-users text-green-600 mr-2"></i>
                         Lista de Pacientes Ativos
                     </h3>
                     <div class="flex space-x-2">
@@ -273,7 +273,7 @@ export const navigatorPage = (c: any) => {
                                         <i class="far fa-eye"></i>
                                     </button>
                                     <button class="text-green-500 hover:text-green-600">
-                                        <i class="far fa-phone-alt"></i>
+                                        <i class="fas fa-phone"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -297,7 +297,7 @@ export const navigatorPage = (c: any) => {
                                         <i class="far fa-eye"></i>
                                     </button>
                                     <button class="text-green-500 hover:text-green-600">
-                                        <i class="far fa-phone-alt"></i>
+                                        <i class="fas fa-phone"></i>
                                     </button>
                                 </td>
                             </tr>

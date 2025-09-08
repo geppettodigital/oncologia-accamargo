@@ -45,7 +45,7 @@ export const researchPage = (c: any) => {
                             <p class="text-gray-600 text-sm">Estudos Ativos</p>
                             <p class="text-2xl font-bold text-gray-800">12</p>
                         </div>
-                        <i class="far fa-flask text-green-700 text-2xl"></i>
+                        <i class="fas fa-flask text-green-700 text-2xl"></i>
                     </div>
                 </div>
                 
@@ -55,7 +55,7 @@ export const researchPage = (c: any) => {
                             <p class="text-gray-600 text-sm">Pacientes Inscritos</p>
                             <p class="text-2xl font-bold text-gray-800">456</p>
                         </div>
-                        <i class="far fa-users text-teal-600 text-2xl"></i>
+                        <i class="fas fa-users text-teal-600 text-2xl"></i>
                     </div>
                 </div>
                 
@@ -75,7 +75,7 @@ export const researchPage = (c: any) => {
                             <p class="text-gray-600 text-sm">Insights Gerados</p>
                             <p class="text-2xl font-bold text-gray-800">89</p>
                         </div>
-                        <i class="far fa-lightbulb text-green-500 text-2xl"></i>
+                        <i class="fas fa-brain text-green-500 text-2xl"></i>
                     </div>
                 </div>
             </div>
@@ -139,7 +139,7 @@ export const researchPage = (c: any) => {
             <!-- AI-Generated Insights -->
             <div class="bg-gradient-to-r from-indigo-100 to-purple-100 rounded-xl p-6 mb-8">
                 <h3 class="font-bold text-gray-800 mb-4">
-                    <i class="far fa-lightbulb text-teal-600 mr-2"></i>
+                    <i class="fas fa-brain text-teal-600 mr-2"></i>
                     Insights Recentes da IA
                 </h3>
                 
@@ -196,7 +196,7 @@ export const researchPage = (c: any) => {
             <!-- Research Opportunities -->
             <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
                 <h3 class="font-bold text-gray-800 mb-4">
-                    <i class="far fa-flask text-green-700 mr-2"></i>
+                    <i class="fas fa-flask text-green-700 mr-2"></i>
                     Oportunidades de Pesquisa Identificadas pela IA
                 </h3>
                 

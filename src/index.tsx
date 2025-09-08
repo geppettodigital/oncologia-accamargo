@@ -118,7 +118,7 @@ app.get('/', (c) => {
                 <div class="bg-white rounded-xl shadow-md p-6 card-hover cursor-pointer border border-gray-100" onclick="window.location.href='/doctor'">
                     <div class="text-center">
                         <div class="mb-4 text-emerald-600">
-                            <i class="far fa-user-md text-5xl"></i>
+                            <i class="fas fa-user-md text-5xl"></i>
                         </div>
                         <h2 class="text-xl font-semibold mb-2 text-gray-800">Portal Médico</h2>
                         <p class="text-gray-600 text-sm mb-4">Assistente clínico com IA e gestão de pacientes</p>
@@ -174,7 +174,7 @@ app.get('/', (c) => {
                 <div class="bg-white rounded-xl shadow-md p-6 card-hover cursor-pointer border border-gray-100" onclick="window.location.href='/research'">
                     <div class="text-center">
                         <div class="mb-4 text-green-700">
-                            <i class="far fa-flask text-5xl"></i>
+                            <i class="fas fa-flask text-5xl"></i>
                         </div>
                         <h2 class="text-xl font-semibold mb-2 text-gray-800">Pesquisa Clínica</h2>
                         <p class="text-gray-600 text-sm mb-4">Análise de dados e insights para pesquisa</p>
@@ -223,23 +223,23 @@ app.get('/', (c) => {
             <div class="mt-12 bg-gradient-to-r from-green-700 to-emerald-700 rounded-xl shadow-lg p-8 text-white">
                 <div class="flex items-center justify-center mb-6">
                     <h2 class="text-2xl font-bold">
-                        <i class="far fa-memory mr-3"></i>
+                        <i class="fas fa-microchip mr-3"></i>
                         Tecnologias Inovadoras
                     </h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="text-center">
-                        <i class="far fa-lightbulb text-4xl mb-3"></i>
+                        <i class="fas fa-brain text-4xl mb-3"></i>
                         <h3 class="text-lg font-semibold mb-2">Motor de IA</h3>
                         <p class="text-sm opacity-90">Inteligência artificial avançada para análise preditiva e suporte à decisão</p>
                     </div>
                     <div class="text-center">
-                        <i class="far fa-cog text-4xl mb-3"></i>
+                        <i class="fas fa-cogs text-4xl mb-3"></i>
                         <h3 class="text-lg font-semibold mb-2">Servos Mecanismos</h3>
                         <p class="text-sm opacity-90">Automação inteligente de processos e tarefas rotineiras</p>
                     </div>
                     <div class="text-center">
-                        <i class="far fa-comments text-4xl mb-3"></i>
+                        <i class="fas fa-comments text-4xl mb-3"></i>
                         <h3 class="text-lg font-semibold mb-2">Engenharia de Prompt</h3>
                         <p class="text-sm opacity-90">Otimização de interações com IA para resultados precisos</p>
                     </div>
@@ -265,16 +265,16 @@ app.get('/', (c) => {
                         </p>
                         <p class="text-xs opacity-85 leading-relaxed">
                             <i class="far fa-hospital mr-2 text-green-300"></i>Instituição de Referência Nacional<br>
-                            <i class="far fa-award mr-2 text-green-300"></i>Acreditação Internacional<br>
-                            <i class="far fa-microscope mr-2 text-green-300"></i>Centro de Pesquisa Avançada<br>
-                            <i class="far fa-graduation-cap mr-2 text-green-300"></i>Formação de Especialistas<br>
-                            <i class="far fa-users mr-2 text-green-300"></i>+ 5.000 colaboradores<br>
-                            <i class="far fa-bed mr-2 text-green-300"></i>+ 500 leitos
+                            <i class="fas fa-award mr-2 text-green-300"></i>Acreditação Internacional<br>
+                            <i class="fas fa-microscope mr-2 text-green-300"></i>Centro de Pesquisa Avançada<br>
+                            <i class="fas fa-graduation-cap mr-2 text-green-300"></i>Formação de Especialistas<br>
+                            <i class="fas fa-users mr-2 text-green-300"></i>+ 5.000 colaboradores<br>
+                            <i class="fas fa-hospital-alt mr-2 text-green-300"></i>+ 500 leitos
                         </p>
                         <div class="mt-4 pt-3 border-t border-white/20">
                             <p class="text-xs opacity-90">
-                                <i class="far fa-map-marker-alt mr-2"></i>São Paulo - SP<br>
-                                <i class="far fa-globe mr-2"></i><a href="https://accamargo.org.br" class="hover:text-green-300">accamargo.org.br</a>
+                                <i class="fas fa-map-marker-alt mr-2"></i>São Paulo - SP<br>
+                                <i class="fas fa-globe mr-2"></i><a href="https://accamargo.org.br" class="hover:text-green-300">accamargo.org.br</a>
                             </p>
                         </div>
                     </div>

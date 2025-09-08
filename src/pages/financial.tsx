@@ -87,7 +87,7 @@ export const financialPage = (c: any) => {
                                 <i class="far fa-cog"></i> Via IA
                             </p>
                         </div>
-                        <i class="far fa-lightbulb text-teal-600 text-2xl"></i>
+                        <i class="fas fa-brain text-teal-600 text-2xl"></i>
                     </div>
                 </div>
             </div>
@@ -118,7 +118,7 @@ export const financialPage = (c: any) => {
                 <div class="flex items-start justify-between">
                     <div>
                         <h3 class="font-bold text-gray-800 mb-2">
-                            <i class="far fa-lightbulb text-teal-600 mr-2"></i>
+                            <i class="fas fa-brain text-teal-600 mr-2"></i>
                             Prevenção de Glosas com IA
                         </h3>
                         <p class="text-gray-600 mb-4">Sistema preditivo identificou potenciais glosas esta semana</p>
@@ -211,7 +211,7 @@ export const financialPage = (c: any) => {
                             <tr class="border-b hover:bg-gray-50">
                                 <td class="py-3">
                                     <div class="flex items-center">
-                                        <i class="far fa-bed text-emerald-600 mr-2"></i>
+                                        <i class="fas fa-hospital-alt text-emerald-600 mr-2"></i>
                                         Cirurgia
                                     </div>
                                 </td>
@@ -237,7 +237,7 @@ export const financialPage = (c: any) => {
             <!-- Optimization Suggestions -->
             <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
                 <h3 class="font-bold text-gray-800 mb-4">
-                    <i class="far fa-lightbulb text-lime-600 mr-2"></i>
+                    <i class="fas fa-brain text-lime-600 mr-2"></i>
                     Sugestões de Otimização (IA)
                 </h3>
                 
@@ -257,7 +257,7 @@ export const financialPage = (c: any) => {
                     
                     <div class="border rounded-lg p-4 hover:shadow-md transition-all">
                         <div class="flex items-start">
-                            <i class="far fa-bed text-green-600 text-xl mr-3 mt-1"></i>
+                            <i class="fas fa-hospital-alt text-green-600 text-xl mr-3 mt-1"></i>
                             <div>
                                 <h4 class="font-semibold text-gray-800">Gestão de Leitos</h4>
                                 <p class="text-sm text-gray-600 mt-1">Redução de 15% no tempo de permanência pode economizar R$ 30.000/mês</p>

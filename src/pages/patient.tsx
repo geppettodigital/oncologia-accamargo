@@ -53,7 +53,7 @@ export const patientPage = (c: any) => {
             <!-- Quick Actions -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
                 <button onclick="openTriageChat()" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-all border border-gray-100">
-                    <i class="far fa-comments text-green-600 text-2xl mb-2"></i>
+                    <i class="fas fa-comments text-green-600 text-2xl mb-2"></i>
                     <p class="font-semibold text-gray-800">Auto-Triagem</p>
                     <p class="text-xs text-gray-600">Avalie seus sintomas</p>
                 </button>
@@ -160,13 +160,13 @@ export const patientPage = (c: any) => {
             <!-- Support Network -->
             <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
                 <h3 class="font-bold text-gray-800 mb-4">
-                    <i class="far fa-users text-green-600 mr-2"></i>
+                    <i class="fas fa-users text-green-600 mr-2"></i>
                     Sua Rede de Apoio
                 </h3>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div class="text-center">
                         <div class="bg-gray-100 rounded-full w-16 h-16 mx-auto mb-2 flex items-center justify-center">
-                            <i class="far fa-user-md text-2xl text-green-500"></i>
+                            <i class="fas fa-user-md text-2xl text-green-500"></i>
                         </div>
                         <p class="text-sm font-semibold">Dr. João Silva</p>
                         <p class="text-xs text-gray-600">Oncologista</p>
@@ -180,7 +180,7 @@ export const patientPage = (c: any) => {
                     </div>
                     <div class="text-center">
                         <div class="bg-gray-100 rounded-full w-16 h-16 mx-auto mb-2 flex items-center justify-center">
-                            <i class="far fa-lightbulb text-2xl text-teal-600"></i>
+                            <i class="fas fa-brain text-2xl text-teal-600"></i>
                         </div>
                         <p class="text-sm font-semibold">Ana Costa</p>
                         <p class="text-xs text-gray-600">Psicóloga</p>

@@ -50,7 +50,7 @@ export const doctorPage = (c: any) => {
                             <p class="text-gray-600 text-sm">Pacientes Hoje</p>
                             <p class="text-2xl font-bold text-gray-800">12</p>
                         </div>
-                        <i class="far fa-users text-green-600 text-2xl"></i>
+                        <i class="fas fa-users text-green-600 text-2xl"></i>
                     </div>
                 </div>
                 
@@ -80,7 +80,7 @@ export const doctorPage = (c: any) => {
                             <p class="text-gray-600 text-sm">IA Assistências</p>
                             <p class="text-2xl font-bold text-gray-800">23</p>
                         </div>
-                        <i class="far fa-cog text-teal-600 text-2xl"></i>
+                        <i class="fas fa-cogs text-teal-600 text-2xl"></i>
                     </div>
                 </div>
             </div>
@@ -128,7 +128,7 @@ export const doctorPage = (c: any) => {
                                     <i class="far fa-exclamation-triangle mr-1"></i>Neutropenia G2
                                 </span>
                                 <span class="text-xs bg-green-100 text-blue-700 px-2 py-1 rounded">
-                                    <i class="far fa-flask mr-1"></i>Lab pendente
+                                    <i class="fas fa-flask mr-1"></i>Lab pendente
                                 </span>
                             </div>
                         </div>
@@ -193,13 +193,13 @@ export const doctorPage = (c: any) => {
                 <!-- AI Assistant Panel -->
                 <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
                     <h2 class="text-xl font-bold text-gray-800 mb-4">
-                        <i class="far fa-cog text-teal-600 mr-2"></i>
+                        <i class="fas fa-cogs text-teal-600 mr-2"></i>
                         Assistente IA
                     </h2>
                     
                     <div class="space-y-3 mb-4">
                         <button onclick="askAI('treatment')" class="w-full text-left p-3 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg hover:from-purple-100 hover:to-blue-100 transition-all">
-                            <i class="far fa-lightbulb text-teal-600 mr-2"></i>
+                            <i class="fas fa-brain text-teal-600 mr-2"></i>
                             <span class="text-sm font-semibold">Sugestão de Tratamento</span>
                         </button>
                         
@@ -219,7 +219,7 @@ export const doctorPage = (c: any) => {
                         <textarea id="aiQuery" rows="3" class="w-full p-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500" 
                                   placeholder="Digite sua pergunta clínica..."></textarea>
                         <button onclick="askCustomAI()" class="mt-2 w-full bg-gradient-to-r from-teal-600 to-blue-500 text-white py-2 rounded-lg hover:from-teal-700 hover:to-green-700 transition-all">
-                            <i class="far fa-lightbulb mr-2"></i>Consultar IA
+                            <i class="fas fa-brain mr-2"></i>Consultar IA
                         </button>
                     </div>
                     
@@ -285,7 +285,7 @@ export const doctorPage = (c: any) => {
                         
                         <div class="bg-yellow-50 p-4 rounded-lg">
                             <h3 class="font-semibold text-yellow-800 mb-2">
-                                <i class="far fa-flask mr-2"></i>Laboratório
+                                <i class="fas fa-flask mr-2"></i>Laboratório
                             </h3>
                             <div class="space-y-2 text-sm">
                                 <p><strong>Hb:</strong> 11.2 g/dL ↓</p>
@@ -299,7 +299,7 @@ export const doctorPage = (c: any) => {
                     <!-- AI Insights -->
                     <div class="bg-gradient-to-br from-purple-100 to-blue-100 p-4 rounded-lg">
                         <h3 class="font-semibold text-purple-800 mb-3">
-                            <i class="far fa-lightbulb mr-2"></i>Insights da IA
+                            <i class="fas fa-brain mr-2"></i>Insights da IA
                         </h3>
                         <div class="space-y-3">
                             <div class="bg-white p-3 rounded">
@@ -311,7 +311,7 @@ export const doctorPage = (c: any) => {
                             
                             <div class="bg-white p-3 rounded">
                                 <p class="text-sm font-semibold text-lime-700">
-                                    <i class="far fa-lightbulb mr-1"></i>Recomendação
+                                    <i class="fas fa-brain mr-1"></i>Recomendação
                                 </p>
                                 <p class="text-xs text-gray-600 mt-1">Considerar G-CSF profilático</p>
                             </div>

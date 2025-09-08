@@ -100,7 +100,7 @@ export const wellnessPage = (c: any) => {
                                     <p class="text-sm text-gray-600">Depressão: 8/10 | Ansiedade: 9/10</p>
                                     <div class="mt-2">
                                         <span class="text-xs bg-emerald-100 text-red-700 px-2 py-1 rounded">
-                                            <i class="far fa-lightbulb"></i> Ideação suicida
+                                            <i class="fas fa-brain"></i> Ideação suicida
                                         </span>
                                         <span class="text-xs bg-teal-100 text-purple-700 px-2 py-1 rounded ml-1">
                                             <i class="far fa-calendar"></i> Sessão hoje 14h
@@ -108,7 +108,7 @@ export const wellnessPage = (c: any) => {
                                     </div>
                                 </div>
                                 <button class="text-emerald-600 hover:text-red-600">
-                                    <i class="far fa-phone-alt"></i>
+                                    <i class="fas fa-phone"></i>
                                 </button>
                             </div>
                         </div>
@@ -135,7 +135,7 @@ export const wellnessPage = (c: any) => {
                 <!-- Support Groups -->
                 <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
                     <h3 class="font-bold text-gray-800 mb-4">
-                        <i class="far fa-users text-teal-600 mr-2"></i>
+                        <i class="fas fa-users text-teal-600 mr-2"></i>
                         Grupos de Apoio Ativos
                     </h3>
                     
@@ -207,7 +207,7 @@ export const wellnessPage = (c: any) => {
                     </div>
                     
                     <div class="text-center p-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg">
-                        <i class="far fa-lightbulb text-3xl text-green-600 mb-2"></i>
+                        <i class="fas fa-brain text-3xl text-green-600 mb-2"></i>
                         <p class="font-semibold">Meditação</p>
                         <p class="text-xs text-gray-600">Diário - 10h e 16h</p>
                         <p class="text-xs mt-2">22 inscritos</p>
@@ -232,7 +232,7 @@ export const wellnessPage = (c: any) => {
             <!-- AI Emotional Risk Prediction -->
             <div class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl p-6 border border-purple-200">
                 <h3 class="font-bold text-gray-800 mb-4">
-                    <i class="far fa-cog text-teal-600 mr-2"></i>
+                    <i class="fas fa-cogs text-teal-600 mr-2"></i>
                     Predição de Risco Emocional (IA)
                 </h3>
                 
