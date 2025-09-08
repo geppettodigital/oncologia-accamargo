@@ -1,4 +1,4 @@
-# Plataforma Oncológica com IA - ACCamargo Cancer Center
+# Plataforma Integrada da Jornada Oncológica com IA - ACCamargo Cancer Center
 
 ## 🏥 Visão Geral
 Plataforma de transformação digital desenvolvida pelo **ACCamargo Cancer Center**, líder em oncologia no Brasil há 70 anos, com tecnologia avançada de IA desenvolvida em parceria com a **Laura Technology**, oferecendo uma experiência integrada e humanizada para toda a jornada oncológica.

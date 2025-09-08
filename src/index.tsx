@@ -62,7 +62,7 @@ app.get('/', (c) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ACCamargo Cancer Center - Plataforma Integrada de Gestão Oncológica</title>
+        <title>Plataforma Integrada da Jornada Oncológica com IA - ACCamargo Cancer Center</title>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg">
         <meta name="description" content="Plataforma Integrada de Gestão da Jornada Oncológica - ACCamargo Cancer Center">
         <meta name="author" content="ACCamargo Cancer Center">
@@ -78,10 +78,10 @@ app.get('/', (c) => {
             <div class="container mx-auto px-4 py-4">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
-                        <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="logo-icon">
+                        <img src="/static/accamargo-icon.svg" alt="ACCamargo Logo" class="logo-icon">
                         <div>
-                            <h1 class="text-2xl font-bold text-gray-800">ACCamargo Cancer Center</h1>
-                            <p class="text-sm text-gray-600 italic">"A Vida é muito maior que o Câncer"</p>
+                            <h1 class="text-2xl font-bold text-gray-800">Plataforma Integrada da Jornada Oncológica com IA</h1>
+                            <p class="text-sm text-gray-600 italic">ACCamargo Cancer Center - "A Vida é muito maior que o Câncer"</p>
                         </div>
                     </div>
                     <div class="flex items-center space-x-4">
@@ -98,7 +98,41 @@ app.get('/', (c) => {
 
         <!-- Main Content -->
         <main class="flex-grow container mx-auto px-4 py-8">
-            <!-- Módulos Grid com ícones outline -->
+            <!-- Estatísticas da Plataforma (PRIMEIRO) -->
+            <div class="bg-white rounded-xl shadow-md p-8 border border-gray-100 mb-8">
+                <div class="flex items-center justify-center mb-6">
+                    <img src="/static/accamargo-icon.svg" alt="ACCamargo Logo" class="w-12 h-12 mr-3">
+                    <h2 class="text-2xl font-bold text-gray-800">Estatísticas da Plataforma</h2>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
+                            <span id="stat-patients">234</span>
+                        </div>
+                        <div class="text-gray-600 mt-2 text-sm">Pacientes Ativos</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-emerald-700 bg-clip-text text-transparent">
+                            <span id="stat-appointments">56</span>
+                        </div>
+                        <div class="text-gray-600 mt-2 text-sm">Consultas Hoje</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold bg-gradient-to-r from-teal-600 to-teal-700 bg-clip-text text-transparent">
+                            <span id="stat-adherence">87</span>%
+                        </div>
+                        <div class="text-gray-600 mt-2 text-sm">Taxa de Adesão</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold bg-gradient-to-r from-lime-600 to-lime-700 bg-clip-text text-transparent">
+                            <span id="stat-savings">145</span>
+                        </div>
+                        <div class="text-gray-600 mt-2 text-sm">Glosas Evitadas</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Módulos Grid com ícones (SEGUNDO) -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                 <!-- Paciente -->
                 <div class="bg-white rounded-xl shadow-md p-6 card-hover cursor-pointer border border-gray-100" onclick="window.location.href='/patient'">
@@ -146,7 +180,7 @@ app.get('/', (c) => {
                 <div class="bg-white rounded-xl shadow-md p-6 card-hover cursor-pointer border border-gray-100" onclick="window.location.href='/financial'">
                     <div class="text-center">
                         <div class="mb-4 text-lime-600">
-                            <i class="far fa-chart-line text-5xl"></i>
+                            <i class="fas fa-dollar-sign text-5xl"></i>
                         </div>
                         <h2 class="text-xl font-semibold mb-2 text-gray-800">Gestão Financeira</h2>
                         <p class="text-gray-600 text-sm mb-4">Prevenção de glosas e análise financeira com IA</p>
@@ -185,40 +219,6 @@ app.get('/', (c) => {
                 </div>
             </div>
 
-            <!-- Estatísticas -->
-            <div class="bg-white rounded-xl shadow-md p-8 border border-gray-100">
-                <div class="flex items-center justify-center mb-6">
-                    <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="w-12 h-12 mr-3">
-                    <h2 class="text-2xl font-bold text-gray-800">Estatísticas da Plataforma</h2>
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div class="text-center">
-                        <div class="text-3xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
-                            <span id="stat-patients">0</span>
-                        </div>
-                        <div class="text-gray-600 mt-2 text-sm">Pacientes Ativos</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-emerald-700 bg-clip-text text-transparent">
-                            <span id="stat-appointments">0</span>
-                        </div>
-                        <div class="text-gray-600 mt-2 text-sm">Consultas Hoje</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold bg-gradient-to-r from-teal-600 to-teal-700 bg-clip-text text-transparent">
-                            <span id="stat-adherence">0</span>%
-                        </div>
-                        <div class="text-gray-600 mt-2 text-sm">Taxa de Adesão</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold bg-gradient-to-r from-lime-600 to-lime-700 bg-clip-text text-transparent">
-                            <span id="stat-savings">0</span>
-                        </div>
-                        <div class="text-gray-600 mt-2 text-sm">Glosas Evitadas</div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Features Section -->
             <div class="mt-12 bg-gradient-to-r from-green-700 to-emerald-700 rounded-xl shadow-lg p-8 text-white">
                 <div class="flex items-center justify-center mb-6">
@@ -239,7 +239,7 @@ app.get('/', (c) => {
                         <p class="text-sm opacity-90">Automação inteligente de processos e tarefas rotineiras</p>
                     </div>
                     <div class="text-center">
-                        <i class="fas fa-comments text-4xl mb-3"></i>
+                        <i class="fas fa-robot text-4xl mb-3"></i>
                         <h3 class="text-lg font-semibold mb-2">Engenharia de Prompt</h3>
                         <p class="text-sm opacity-90">Otimização de interações com IA para resultados precisos</p>
                     </div>
@@ -254,7 +254,7 @@ app.get('/', (c) => {
                     <!-- Coluna 1: ACCamargo Cancer Center (DESTAQUE) -->
                     <div class="md:col-span-1 order-1 md:order-1">
                         <div class="flex items-center mb-4">
-                            <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="w-14 h-14 mr-3">
+                            <img src="/static/accamargo-icon.svg" alt="ACCamargo Logo" class="w-14 h-14 mr-3">
                             <h3 class="text-xl font-bold">ACCamargo Cancer Center</h3>
                         </div>
                         <p class="text-sm opacity-95 mb-3 font-medium">
@@ -268,8 +268,6 @@ app.get('/', (c) => {
                             <i class="fas fa-award mr-2 text-green-300"></i>Acreditação Internacional<br>
                             <i class="fas fa-microscope mr-2 text-green-300"></i>Centro de Pesquisa Avançada<br>
                             <i class="fas fa-graduation-cap mr-2 text-green-300"></i>Formação de Especialistas<br>
-                            <i class="fas fa-users mr-2 text-green-300"></i>+ 5.000 colaboradores<br>
-                            <i class="fas fa-hospital-alt mr-2 text-green-300"></i>+ 500 leitos
                         </p>
                         <div class="mt-4 pt-3 border-t border-white/20">
                             <p class="text-xs opacity-90">
