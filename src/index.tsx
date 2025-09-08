@@ -132,12 +132,18 @@ app.get('/', (c) => {
                     <img src="/static/accamargo-icon.svg" alt="ACCamargo Logo" class="w-14 h-14 mr-4 drop-shadow-lg">
                     <h2 class="text-3xl font-bold text-gray-800">Estatísticas em Tempo Real</h2>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
                     <div class="text-center">
                         <div class="text-4xl font-bold gradient-text mb-2">
                             <span id="stat-patients">234</span>
                         </div>
                         <div class="text-gray-600 font-medium">Pacientes Ativos</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold gradient-text mb-2">
+                            <span id="stat-navigation">178</span>
+                        </div>
+                        <div class="text-gray-600 font-medium">Em Navegação</div>
                     </div>
                     <div class="text-center">
                         <div class="text-4xl font-bold gradient-text mb-2">
@@ -342,6 +348,8 @@ app.get('/', (c) => {
                             <p class="text-base font-medium opacity-95 mb-2">Laura Technology</p>
                             <p class="text-sm opacity-80">
                                 Especialista em IA para Saúde<br>
+                                Geppetto Digital<br>
+                                #borasalvarvidas<br>
                                 CNPJ: 38.475.698/0001-74<br>
                                 Curitiba - PR
                             </p>
@@ -378,7 +386,7 @@ app.get('/', (c) => {
                         <br><span class="text-xs opacity-75">Tecnologia desenvolvida em parceria com Laura Technology LTDA</span>
                     </p>
                     <p class="text-xs opacity-75 mt-2">
-                        Desenvolvido com <i class="far fa-heart text-green-300"></i> para transformar a jornada oncológica
+                        Desenvolvido com Amor <i class="far fa-heart text-green-300"></i> para Impactar 1 Bilhão de Vidas
                     </p>
                     <p class="text-xs opacity-60 mt-2">
                         Versão 1.0.0 | Última atualização: ${new Date().toLocaleDateString('pt-BR')}
@@ -407,6 +415,7 @@ app.get('/', (c) => {
 
                 setTimeout(() => {
                     animateCounter(document.getElementById('stat-patients'), 234);
+                    animateCounter(document.getElementById('stat-navigation'), 178);
                     animateCounter(document.getElementById('stat-appointments'), 56);
                     animateCounter(document.getElementById('stat-adherence'), 87);
                     animateCounter(document.getElementById('stat-savings'), 145);

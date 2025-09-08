@@ -117,6 +117,7 @@ Plataforma de transformação digital desenvolvida pelo **ACCamargo Cancer Cente
 
 ## 📊 Métricas de Performance
 - **Pacientes Ativos**: 234
+- **Pacientes em Navegação**: 178
 - **Taxa de Adesão**: 87%
 - **Glosas Evitadas**: R$ 145.000
 - **Tempo Médio de Resposta**: < 200ms
@@ -197,6 +198,8 @@ Plataforma de transformação digital desenvolvida pelo **ACCamargo Cancer Cente
 
 #### Laura Technology
 - **Especialidade**: Inteligência Artificial para Saúde
+- **Iniciativa**: Geppetto Digital
+- **Missão**: #borasalvarvidas
 - **Contribuição**: Desenvolvimento da plataforma e algoritmos de IA
 - **CNPJ**: 38.475.698/0001-74
 - **Localização**: Curitiba - PR
@@ -204,7 +207,7 @@ Plataforma de transformação digital desenvolvida pelo **ACCamargo Cancer Cente
 ## 📝 Licença e Copyright
 © 2024 ACCamargo Cancer Center. Todos os direitos reservados.
 Tecnologia desenvolvida em parceria com Laura Technology LTDA.
-Transformando o cuidado oncológico no Brasil há 70 anos.
+Desenvolvido com Amor ❤️ para Impactar 1 Bilhão de Vidas.
 
 ---
 

@@ -15,32 +15,27 @@ export const patientPage = (c: any) => {
     </head>
     <body class="bg-gray-50 min-h-screen flex flex-col">
         <!-- Header -->
-                <!-- Header com Logo Moderno -->
-        <header class="glass-effect shadow-lg border-b border-gray-100">
+        <header class="bg-white shadow-sm border-b border-gray-200">
             <div class="container mx-auto px-4 py-4">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
-                        <img src="/static/accamargo-icon.svg" alt="ACCamargo Logo" class="w-12 h-12 mr-4 drop-shadow-md">
-                        <div>
-                            <h1 class="text-2xl font-bold gradient-text">Plataforma Integrada da Jornada Oncológica com IA</h1>
-                            <p class="text-sm text-gray-600 font-medium">Portal do Paciente • ACCamargo Cancer Center</p>
-                        </div>
+                        <a href="/" class="flex items-center">
+                            <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="logo-icon">
+                            <span class="text-xl font-bold text-gray-800 ml-2">Portal do Paciente - ACCamargo</span>
+                        </a>
                     </div>
                     <div class="flex items-center space-x-4">
-                        <a href="/" class="text-gray-600 hover:text-green-600 transition-colors">
-                            <i class="fas fa-home text-xl"></i>
-                        </a>
-                        <button class="text-gray-600 hover:text-green-600 transition-colors">
+                        <span class="text-sm text-gray-600">Olá, João Silva</span>
+                        <button class="text-gray-600 hover:text-gray-800">
                             <i class="far fa-bell text-xl"></i>
                         </button>
-                        <button class="text-gray-600 hover:text-green-600 transition-colors">
+                        <button class="text-gray-600 hover:text-gray-800">
                             <i class="far fa-user-circle text-xl"></i>
                         </button>
                     </div>
                 </div>
             </div>
         </header>
-
 
         <!-- Main Content -->
         <main class="flex-grow container mx-auto px-4 py-8">
