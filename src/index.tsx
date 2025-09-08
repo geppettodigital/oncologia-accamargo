@@ -13,6 +13,14 @@ import { researchRoutes } from './routes/research'
 import { adminRoutes } from './routes/admin'
 import { aiRoutes } from './routes/ai'
 
+// Import page handlers
+import { patientPage } from './pages/patient'
+import { doctorPage } from './pages/doctor'
+import { navigatorPage } from './pages/navigator'
+import { financialPage } from './pages/financial'
+import { wellnessPage } from './pages/wellness'
+import { researchPage } from './pages/research'
+
 // Type definitions for Cloudflare bindings
 type Bindings = {
   DB?: D1Database;
@@ -38,7 +46,15 @@ app.route('/api/research', researchRoutes)
 app.route('/api/admin', adminRoutes)
 app.route('/api/ai', aiRoutes)
 
-// Main landing page
+// Mount page routes
+app.get('/patient', patientPage)
+app.get('/doctor', doctorPage)
+app.get('/navigator', navigatorPage)
+app.get('/financial', financialPage)
+app.get('/wellness', wellnessPage)
+app.get('/research', researchPage)
+
+// Main landing page with updated design
 app.get('/', (c) => {
   return c.html(html`
     <!DOCTYPE html>
@@ -51,149 +67,284 @@ app.get('/', (c) => {
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <link href="/static/style.css" rel="stylesheet">
     </head>
-    <body class="bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen">
-        <div class="container mx-auto px-4 py-8">
-            <!-- Header -->
-            <header class="text-center mb-12">
-                <h1 class="text-5xl font-bold text-gray-800 mb-4">
-                    <i class="fas fa-heartbeat text-purple-600 mr-3"></i>
-                    Plataforma Oncológica Inteligente
-                </h1>
-                <p class="text-xl text-gray-600 italic">"A Vida é muito maior que o Câncer"</p>
-                <div class="mt-4 text-sm text-gray-500">
-                    Desenvolvido por Laura Technology | ACCamargo Cancer Center
+    <body class="bg-gradient-to-br from-gray-50 to-green-50 min-h-screen flex flex-col">
+        <!-- Header com Logo -->
+        <header class="bg-white shadow-sm border-b border-gray-200">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <img src="/static/logo.svg" alt="Logo" class="logo-icon">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-800">Plataforma Oncológica Inteligente</h1>
+                            <p class="text-sm text-gray-600 italic">"A Vida é muito maior que o Câncer"</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="text-gray-600 hover:text-gray-800">
+                            <i class="far fa-bell text-xl"></i>
+                        </button>
+                        <button class="text-gray-600 hover:text-gray-800">
+                            <i class="far fa-user-circle text-xl"></i>
+                        </button>
+                    </div>
                 </div>
-            </header>
+            </div>
+        </header>
 
-            <!-- Módulos Grid -->
+        <!-- Main Content -->
+        <main class="flex-grow container mx-auto px-4 py-8">
+            <!-- Módulos Grid com ícones outline -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                 <!-- Paciente -->
-                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-shadow cursor-pointer" onclick="window.location.href='/patient'">
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover cursor-pointer border border-gray-100" onclick="window.location.href='/patient'">
                     <div class="text-center">
-                        <i class="fas fa-user-injured text-5xl text-blue-500 mb-4"></i>
-                        <h2 class="text-2xl font-semibold mb-2">Portal do Paciente</h2>
-                        <p class="text-gray-600">Auto-triagem, agendamentos e acompanhamento da jornada</p>
-                        <button class="mt-4 bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">
-                            Acessar
+                        <div class="mb-4 text-green-600">
+                            <i class="far fa-user text-5xl"></i>
+                        </div>
+                        <h2 class="text-xl font-semibold mb-2 text-gray-800">Portal do Paciente</h2>
+                        <p class="text-gray-600 text-sm mb-4">Auto-triagem, agendamentos e acompanhamento da jornada</p>
+                        <button class="mt-2 bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-2 rounded-lg hover:from-green-700 hover:to-green-800 transition-all">
+                            <i class="far fa-arrow-right mr-2"></i>Acessar
                         </button>
                     </div>
                 </div>
 
                 <!-- Médico -->
-                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-shadow cursor-pointer" onclick="window.location.href='/doctor'">
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover cursor-pointer border border-gray-100" onclick="window.location.href='/doctor'">
                     <div class="text-center">
-                        <i class="fas fa-user-md text-5xl text-green-500 mb-4"></i>
-                        <h2 class="text-2xl font-semibold mb-2">Portal Médico</h2>
-                        <p class="text-gray-600">Assistente clínico com IA e gestão de pacientes</p>
-                        <button class="mt-4 bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600">
-                            Acessar
+                        <div class="mb-4 text-emerald-600">
+                            <i class="far fa-user-md text-5xl"></i>
+                        </div>
+                        <h2 class="text-xl font-semibold mb-2 text-gray-800">Portal Médico</h2>
+                        <p class="text-gray-600 text-sm mb-4">Assistente clínico com IA e gestão de pacientes</p>
+                        <button class="mt-2 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white px-6 py-2 rounded-lg hover:from-emerald-700 hover:to-emerald-800 transition-all">
+                            <i class="far fa-arrow-right mr-2"></i>Acessar
                         </button>
                     </div>
                 </div>
 
                 <!-- Navegador -->
-                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-shadow cursor-pointer" onclick="window.location.href='/navigator'">
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover cursor-pointer border border-gray-100" onclick="window.location.href='/navigator'">
                     <div class="text-center">
-                        <i class="fas fa-route text-5xl text-purple-500 mb-4"></i>
-                        <h2 class="text-2xl font-semibold mb-2">Navegador de Pacientes</h2>
-                        <p class="text-gray-600">Coordenação e acompanhamento da jornada</p>
-                        <button class="mt-4 bg-purple-500 text-white px-6 py-2 rounded-lg hover:bg-purple-600">
-                            Acessar
+                        <div class="mb-4 text-teal-600">
+                            <i class="far fa-compass text-5xl"></i>
+                        </div>
+                        <h2 class="text-xl font-semibold mb-2 text-gray-800">Navegador de Pacientes</h2>
+                        <p class="text-gray-600 text-sm mb-4">Coordenação e acompanhamento da jornada</p>
+                        <button class="mt-2 bg-gradient-to-r from-teal-600 to-teal-700 text-white px-6 py-2 rounded-lg hover:from-teal-700 hover:to-teal-800 transition-all">
+                            <i class="far fa-arrow-right mr-2"></i>Acessar
                         </button>
                     </div>
                 </div>
 
                 <!-- Financeiro -->
-                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-shadow cursor-pointer" onclick="window.location.href='/financial'">
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover cursor-pointer border border-gray-100" onclick="window.location.href='/financial'">
                     <div class="text-center">
-                        <i class="fas fa-chart-line text-5xl text-yellow-500 mb-4"></i>
-                        <h2 class="text-2xl font-semibold mb-2">Gestão Financeira</h2>
-                        <p class="text-gray-600">Prevenção de glosas e análise financeira com IA</p>
-                        <button class="mt-4 bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600">
-                            Acessar
+                        <div class="mb-4 text-lime-600">
+                            <i class="far fa-chart-line text-5xl"></i>
+                        </div>
+                        <h2 class="text-xl font-semibold mb-2 text-gray-800">Gestão Financeira</h2>
+                        <p class="text-gray-600 text-sm mb-4">Prevenção de glosas e análise financeira com IA</p>
+                        <button class="mt-2 bg-gradient-to-r from-lime-600 to-lime-700 text-white px-6 py-2 rounded-lg hover:from-lime-700 hover:to-lime-800 transition-all">
+                            <i class="far fa-arrow-right mr-2"></i>Acessar
                         </button>
                     </div>
                 </div>
 
                 <!-- Bem-Estar -->
-                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-shadow cursor-pointer" onclick="window.location.href='/wellness'">
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover cursor-pointer border border-gray-100" onclick="window.location.href='/wellness'">
                     <div class="text-center">
-                        <i class="fas fa-heart text-5xl text-pink-500 mb-4"></i>
-                        <h2 class="text-2xl font-semibold mb-2">Bem-Estar e Apoio</h2>
-                        <p class="text-gray-600">Suporte psicológico e monitoramento emocional</p>
-                        <button class="mt-4 bg-pink-500 text-white px-6 py-2 rounded-lg hover:bg-pink-600">
-                            Acessar
+                        <div class="mb-4 text-cyan-600">
+                            <i class="far fa-heart text-5xl"></i>
+                        </div>
+                        <h2 class="text-xl font-semibold mb-2 text-gray-800">Bem-Estar e Apoio</h2>
+                        <p class="text-gray-600 text-sm mb-4">Suporte psicológico e monitoramento emocional</p>
+                        <button class="mt-2 bg-gradient-to-r from-cyan-600 to-cyan-700 text-white px-6 py-2 rounded-lg hover:from-cyan-700 hover:to-cyan-800 transition-all">
+                            <i class="far fa-arrow-right mr-2"></i>Acessar
                         </button>
                     </div>
                 </div>
 
                 <!-- Pesquisa -->
-                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-shadow cursor-pointer" onclick="window.location.href='/research'">
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover cursor-pointer border border-gray-100" onclick="window.location.href='/research'">
                     <div class="text-center">
-                        <i class="fas fa-microscope text-5xl text-indigo-500 mb-4"></i>
-                        <h2 class="text-2xl font-semibold mb-2">Pesquisa Clínica</h2>
-                        <p class="text-gray-600">Análise de dados e insights para pesquisa</p>
-                        <button class="mt-4 bg-indigo-500 text-white px-6 py-2 rounded-lg hover:bg-indigo-600">
-                            Acessar
+                        <div class="mb-4 text-green-700">
+                            <i class="far fa-flask text-5xl"></i>
+                        </div>
+                        <h2 class="text-xl font-semibold mb-2 text-gray-800">Pesquisa Clínica</h2>
+                        <p class="text-gray-600 text-sm mb-4">Análise de dados e insights para pesquisa</p>
+                        <button class="mt-2 bg-gradient-to-r from-green-700 to-green-800 text-white px-6 py-2 rounded-lg hover:from-green-800 hover:to-green-900 transition-all">
+                            <i class="far fa-arrow-right mr-2"></i>Acessar
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Estatísticas -->
-            <div class="bg-white rounded-xl shadow-lg p-8">
-                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">
-                    <i class="fas fa-chart-bar mr-2"></i>
-                    Estatísticas da Plataforma
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="bg-white rounded-xl shadow-md p-8 border border-gray-100">
+                <div class="flex items-center justify-center mb-6">
+                    <img src="/static/logo.svg" alt="Logo" class="w-12 h-12 mr-3">
+                    <h2 class="text-2xl font-bold text-gray-800">Estatísticas da Plataforma</h2>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                     <div class="text-center">
-                        <div class="text-4xl font-bold text-blue-600">0</div>
-                        <div class="text-gray-600 mt-2">Pacientes Ativos</div>
+                        <div class="text-3xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
+                            <span id="stat-patients">0</span>
+                        </div>
+                        <div class="text-gray-600 mt-2 text-sm">Pacientes Ativos</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-4xl font-bold text-green-600">0</div>
-                        <div class="text-gray-600 mt-2">Consultas Hoje</div>
+                        <div class="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-emerald-700 bg-clip-text text-transparent">
+                            <span id="stat-appointments">0</span>
+                        </div>
+                        <div class="text-gray-600 mt-2 text-sm">Consultas Hoje</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-4xl font-bold text-purple-600">0%</div>
-                        <div class="text-gray-600 mt-2">Taxa de Adesão</div>
+                        <div class="text-3xl font-bold bg-gradient-to-r from-teal-600 to-teal-700 bg-clip-text text-transparent">
+                            <span id="stat-adherence">0</span>%
+                        </div>
+                        <div class="text-gray-600 mt-2 text-sm">Taxa de Adesão</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-4xl font-bold text-yellow-600">0</div>
-                        <div class="text-gray-600 mt-2">Glosas Evitadas</div>
+                        <div class="text-3xl font-bold bg-gradient-to-r from-lime-600 to-lime-700 bg-clip-text text-transparent">
+                            <span id="stat-savings">0</span>
+                        </div>
+                        <div class="text-gray-600 mt-2 text-sm">Glosas Evitadas</div>
                     </div>
                 </div>
             </div>
 
             <!-- Features Section -->
-            <div class="mt-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl shadow-lg p-8 text-white">
-                <h2 class="text-3xl font-bold mb-6 text-center">
-                    <i class="fas fa-robot mr-2"></i>
-                    Tecnologias Inovadoras
-                </h2>
+            <div class="mt-12 bg-gradient-to-r from-green-700 to-emerald-700 rounded-xl shadow-lg p-8 text-white">
+                <div class="flex items-center justify-center mb-6">
+                    <h2 class="text-2xl font-bold">
+                        <i class="far fa-memory mr-3"></i>
+                        Tecnologias Inovadoras
+                    </h2>
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="text-center">
-                        <i class="fas fa-brain text-4xl mb-3"></i>
-                        <h3 class="text-xl font-semibold mb-2">Motor de IA</h3>
-                        <p class="text-sm">Inteligência artificial avançada para análise preditiva e suporte à decisão</p>
+                        <i class="far fa-lightbulb text-4xl mb-3"></i>
+                        <h3 class="text-lg font-semibold mb-2">Motor de IA</h3>
+                        <p class="text-sm opacity-90">Inteligência artificial avançada para análise preditiva e suporte à decisão</p>
                     </div>
                     <div class="text-center">
-                        <i class="fas fa-cogs text-4xl mb-3"></i>
-                        <h3 class="text-xl font-semibold mb-2">Servos Mecanismos</h3>
-                        <p class="text-sm">Automação inteligente de processos e tarefas rotineiras</p>
+                        <i class="far fa-cog text-4xl mb-3"></i>
+                        <h3 class="text-lg font-semibold mb-2">Servos Mecanismos</h3>
+                        <p class="text-sm opacity-90">Automação inteligente de processos e tarefas rotineiras</p>
                     </div>
                     <div class="text-center">
-                        <i class="fas fa-comments text-4xl mb-3"></i>
-                        <h3 class="text-xl font-semibold mb-2">Engenharia de Prompt</h3>
-                        <p class="text-sm">Otimização de interações com IA para resultados precisos</p>
+                        <i class="far fa-comments text-4xl mb-3"></i>
+                        <h3 class="text-lg font-semibold mb-2">Engenharia de Prompt</h3>
+                        <p class="text-sm opacity-90">Otimização de interações com IA para resultados precisos</p>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
+
+        <!-- Footer Institucional -->
+        <footer class="footer-gradient text-white mt-12">
+            <div class="container mx-auto px-4 py-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Coluna 1: Laura Technology -->
+                    <div>
+                        <div class="flex items-center mb-4">
+                            <img src="/static/logo.svg" alt="Logo" class="w-10 h-10 mr-3">
+                            <h3 class="text-lg font-bold">Laura Technology</h3>
+                        </div>
+                        <p class="text-sm opacity-90 mb-2">
+                            Transformando a saúde com inteligência artificial
+                        </p>
+                        <p class="text-xs opacity-75">
+                            CNPJ: 38.475.698/0001-74<br>
+                            Av. Sete de Setembro, 6460, Sala 1<br>
+                            Seminário, Curitiba - PR<br>
+                            CEP: 80060-070
+                        </p>
+                        <div class="mt-3">
+                            <a href="mailto:contato@laura.technology" class="text-sm opacity-90 hover:opacity-100">
+                                <i class="far fa-envelope mr-2"></i>contato@laura.technology
+                            </a><br>
+                            <a href="tel:+554199553-5304" class="text-sm opacity-90 hover:opacity-100">
+                                <i class="far fa-phone-alt mr-2"></i>+55 (41) 99553-5304
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Coluna 2: ACCamargo Cancer Center -->
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">ACCamargo Cancer Center</h3>
+                        <p class="text-sm opacity-90 mb-2">
+                            70 anos de excelência em oncologia
+                        </p>
+                        <p class="text-xs opacity-75">
+                            Centro de Referência em Oncologia<br>
+                            Pesquisa, Ensino e Tratamento<br>
+                            São Paulo - SP
+                        </p>
+                        <div class="mt-3">
+                            <p class="text-xs opacity-75">
+                                <i class="far fa-hospital mr-2"></i>Instituição de referência nacional
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Coluna 3: Informações Legais -->
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">Conformidade e Segurança</h3>
+                        <ul class="text-sm opacity-90 space-y-2">
+                            <li><i class="far fa-check-circle mr-2"></i>LGPD Compliant</li>
+                            <li><i class="far fa-check-circle mr-2"></i>HIPAA Ready</li>
+                            <li><i class="far fa-check-circle mr-2"></i>ISO 27001 Standards</li>
+                            <li><i class="far fa-check-circle mr-2"></i>Criptografia AES-256</li>
+                        </ul>
+                        <div class="mt-4">
+                            <a href="#" class="text-xs opacity-75 hover:opacity-100 mr-3">Termos de Uso</a>
+                            <a href="#" class="text-xs opacity-75 hover:opacity-100 mr-3">Privacidade</a>
+                            <a href="#" class="text-xs opacity-75 hover:opacity-100">Cookies</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Copyright -->
+                <div class="border-t border-white/20 mt-8 pt-6 text-center">
+                    <p class="text-sm opacity-90">
+                        © 2024 Laura Technology LTDA. Todos os direitos reservados.
+                    </p>
+                    <p class="text-xs opacity-75 mt-2">
+                        Desenvolvido com <i class="far fa-heart text-green-300"></i> para transformar a jornada oncológica
+                    </p>
+                    <p class="text-xs opacity-60 mt-2">
+                        Versão 1.0.0 | Última atualização: ${new Date().toLocaleDateString('pt-BR')}
+                    </p>
+                </div>
+            </div>
+        </footer>
 
         <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
         <script src="/static/app.js"></script>
+        <script>
+            // Animate statistics on load
+            document.addEventListener('DOMContentLoaded', () => {
+                const animateCounter = (element, target) => {
+                    let current = 0;
+                    const increment = target / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        element.textContent = Math.floor(current);
+                    }, 30);
+                };
+
+                animateCounter(document.getElementById('stat-patients'), 234);
+                animateCounter(document.getElementById('stat-appointments'), 56);
+                animateCounter(document.getElementById('stat-adherence'), 87);
+                animateCounter(document.getElementById('stat-savings'), 145);
+            });
+        </script>
     </body>
     </html>
   `)
@@ -204,6 +355,7 @@ app.get('/api/health', (c) => {
   return c.json({ 
     status: 'healthy',
     service: 'Plataforma Oncológica',
+    version: '1.0.0',
     timestamp: new Date().toISOString()
   })
 })

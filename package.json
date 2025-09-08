@@ -20,7 +20,9 @@
     "db:console:prod": "wrangler d1 execute oncologia-db",
     "git:commit": "git add . && git commit -m",
     "git:status": "git status",
-    "git:log": "git log --oneline"
+    "git:log": "git log --oneline",
+    "test": "node tests/api.test.js",
+    "test:install": "npm install axios"
   },
   "dependencies": {
     "hono": "^4.9.6"
