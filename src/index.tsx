@@ -86,6 +86,25 @@ app.get('/', (c) => {
             .tech-card {
                 transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 cursor: pointer;
+                position: relative;
+                overflow: hidden;
+            }
+            .tech-card::before {
+                content: '';
+                position: absolute;
+                top: -20px;
+                right: -20px;
+                width: 100px;
+                height: 100px;
+                background: url('/static/accamargo-icon-white.svg') no-repeat center;
+                background-size: contain;
+                opacity: 0.1;
+                transform: rotate(-15deg);
+                transition: all 0.4s ease;
+            }
+            .tech-card:hover::before {
+                opacity: 0.2;
+                transform: rotate(0deg) scale(1.1);
             }
             .tech-card:hover {
                 transform: translateY(-10px) scale(1.05);
@@ -94,6 +113,23 @@ app.get('/', (c) => {
             .module-card {
                 background: linear-gradient(145deg, #ffffff 0%, #f9fafb 100%);
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                position: relative;
+                overflow: hidden;
+            }
+            .dark-circle {
+                position: relative;
+            }
+            .dark-circle::after {
+                content: '';
+                position: absolute;
+                bottom: 2px;
+                right: 2px;
+                width: 20px;
+                height: 20px;
+                background: url('/static/accamargo-icon-white.svg') no-repeat center;
+                background-size: contain;
+                opacity: 0.3;
+                border-radius: 50%;
             }
             .module-card:hover {
                 background: linear-gradient(145deg, #ffffff 0%, #f0fdf4 100%);
@@ -171,7 +207,7 @@ app.get('/', (c) => {
                 <!-- Paciente -->
                 <div class="module-card rounded-2xl shadow-lg p-8 card-hover cursor-pointer border border-white/50" onclick="window.location.href='/patient'">
                     <div class="text-center">
-                        <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-green-600 shadow-lg">
+                        <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-green-600 shadow-lg dark-circle">
                             <i class="far fa-user text-3xl text-white"></i>
                         </div>
                         <h2 class="text-xl font-bold mb-3 text-gray-800">Portal do Paciente</h2>
@@ -185,7 +221,7 @@ app.get('/', (c) => {
                 <!-- Médico -->
                 <div class="module-card rounded-2xl shadow-lg p-8 card-hover cursor-pointer border border-white/50" onclick="window.location.href='/doctor'">
                     <div class="text-center">
-                        <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-lg">
+                        <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-lg dark-circle">
                             <i class="fas fa-user-md text-3xl text-white"></i>
                         </div>
                         <h2 class="text-xl font-bold mb-3 text-gray-800">Portal Médico</h2>
@@ -199,7 +235,7 @@ app.get('/', (c) => {
                 <!-- Navegador -->
                 <div class="module-card rounded-2xl shadow-lg p-8 card-hover cursor-pointer border border-white/50" onclick="window.location.href='/navigator'">
                     <div class="text-center">
-                        <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 shadow-lg">
+                        <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 shadow-lg dark-circle">
                             <i class="far fa-compass text-3xl text-white"></i>
                         </div>
                         <h2 class="text-xl font-bold mb-3 text-gray-800">Navegador de Pacientes</h2>
@@ -213,7 +249,7 @@ app.get('/', (c) => {
                 <!-- Financeiro -->
                 <div class="module-card rounded-2xl shadow-lg p-8 card-hover cursor-pointer border border-white/50" onclick="window.location.href='/financial'">
                     <div class="text-center">
-                        <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-lime-500 to-lime-600 shadow-lg">
+                        <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-lime-500 to-lime-600 shadow-lg dark-circle">
                             <i class="fas fa-dollar-sign text-3xl text-white"></i>
                         </div>
                         <h2 class="text-xl font-bold mb-3 text-gray-800">Gestão Financeira</h2>
@@ -227,7 +263,7 @@ app.get('/', (c) => {
                 <!-- Bem-Estar -->
                 <div class="module-card rounded-2xl shadow-lg p-8 card-hover cursor-pointer border border-white/50" onclick="window.location.href='/wellness'">
                     <div class="text-center">
-                        <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-600 shadow-lg">
+                        <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-600 shadow-lg dark-circle">
                             <i class="far fa-heart text-3xl text-white"></i>
                         </div>
                         <h2 class="text-xl font-bold mb-3 text-gray-800">Bem-Estar e Apoio</h2>
@@ -241,7 +277,7 @@ app.get('/', (c) => {
                 <!-- Pesquisa -->
                 <div class="module-card rounded-2xl shadow-lg p-8 card-hover cursor-pointer border border-white/50" onclick="window.location.href='/research'">
                     <div class="text-center">
-                        <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-green-600 to-green-700 shadow-lg">
+                        <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-green-600 to-green-700 shadow-lg dark-circle">
                             <i class="fas fa-flask text-3xl text-white"></i>
                         </div>
                         <h2 class="text-xl font-bold mb-3 text-gray-800">Pesquisa Clínica</h2>
@@ -261,9 +297,9 @@ app.get('/', (c) => {
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Motor de IA -->
-                    <div class="tech-card glass-effect rounded-2xl p-8 border border-white/50 shadow-xl" onclick="window.location.href='/ai/engine'">
-                        <div class="text-center">
-                            <div class="mb-6 inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 shadow-xl">
+                    <div class="tech-card glass-effect rounded-2xl p-8 border border-white/50 shadow-xl bg-gradient-to-br from-purple-500/10 to-purple-600/10" onclick="window.location.href='/ai/engine'">
+                        <div class="text-center relative z-10">
+                            <div class="mb-6 inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 shadow-xl dark-circle">
                                 <i class="fas fa-brain text-4xl text-white"></i>
                             </div>
                             <h3 class="text-xl font-bold mb-3 text-gray-800">Motor de IA</h3>
@@ -276,9 +312,9 @@ app.get('/', (c) => {
                     </div>
 
                     <!-- Servos Mecanismos -->
-                    <div class="tech-card glass-effect rounded-2xl p-8 border border-white/50 shadow-xl" onclick="window.location.href='/ai/servos'">
-                        <div class="text-center">
-                            <div class="mb-6 inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 shadow-xl">
+                    <div class="tech-card glass-effect rounded-2xl p-8 border border-white/50 shadow-xl bg-gradient-to-br from-blue-500/10 to-blue-600/10" onclick="window.location.href='/ai/servos'">
+                        <div class="text-center relative z-10">
+                            <div class="mb-6 inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 shadow-xl dark-circle">
                                 <i class="fas fa-cogs text-4xl text-white"></i>
                             </div>
                             <h3 class="text-xl font-bold mb-3 text-gray-800">Servos Mecanismos</h3>
@@ -291,9 +327,9 @@ app.get('/', (c) => {
                     </div>
 
                     <!-- Engenharia de Prompt -->
-                    <div class="tech-card glass-effect rounded-2xl p-8 border border-white/50 shadow-xl" onclick="window.location.href='/ai/prompt'">
-                        <div class="text-center">
-                            <div class="mb-6 inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 shadow-xl">
+                    <div class="tech-card glass-effect rounded-2xl p-8 border border-white/50 shadow-xl bg-gradient-to-br from-orange-500/10 to-orange-600/10" onclick="window.location.href='/ai/prompt'">
+                        <div class="text-center relative z-10">
+                            <div class="mb-6 inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 shadow-xl dark-circle">
                                 <i class="fas fa-robot text-4xl text-white"></i>
                             </div>
                             <h3 class="text-xl font-bold mb-3 text-gray-800">Engenharia de Prompt</h3>
