@@ -51,7 +51,7 @@ export const patientPage = (c: any) => {
                         <h1 class="text-2xl font-bold mb-2">Bem-vindo ao seu Portal de Saúde</h1>
                         <p class="opacity-90">Acompanhe sua jornada de tratamento e mantenha-se informado</p>
                     </div>
-                    <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="w-20 h-20 opacity-50">
+                    <img src="/static/accamargo-icon.svg" alt="ACCamargo Logo" class="w-20 h-20 opacity-50">
                 </div>
             </div>
 
@@ -85,7 +85,7 @@ export const patientPage = (c: any) => {
             <!-- Journey Timeline -->
             <div class="bg-white rounded-xl shadow-md p-6 mb-8 border border-gray-100">
                 <div class="flex items-center mb-4">
-                    <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="w-8 h-8 mr-3">
+                    <img src="/static/accamargo-icon.svg" alt="ACCamargo Logo" class="w-8 h-8 mr-3">
                     <h2 class="text-xl font-bold text-gray-800">Sua Jornada de Tratamento</h2>
                 </div>
                 <div class="relative">
@@ -206,7 +206,7 @@ export const patientPage = (c: any) => {
             <div class="bg-white rounded-xl max-w-md w-full max-h-[80vh] flex flex-col">
                 <div class="p-4 border-b flex items-center justify-between">
                     <h3 class="font-bold text-gray-800">
-                        <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="w-6 h-6 inline mr-2">
+                        <img src="/static/accamargo-icon.svg" alt="ACCamargo Logo" class="w-6 h-6 inline mr-2">
                         Assistente de Triagem
                     </h3>
                     <button onclick="closeTriageChat()" class="text-gray-500 hover:text-gray-700">

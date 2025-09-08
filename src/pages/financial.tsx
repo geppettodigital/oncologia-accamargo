@@ -105,7 +105,7 @@ export const financialPage = (c: any) => {
                 <!-- Revenue Chart -->
                 <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
                     <h3 class="font-bold text-gray-800 mb-4">
-                        <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="w-6 h-6 inline mr-2">
+                        <img src="/static/accamargo-icon.svg" alt="ACCamargo Logo" class="w-6 h-6 inline mr-2">
                         Evolução de Receita
                     </h3>
                     <canvas id="revenueChart" height="200"></canvas>

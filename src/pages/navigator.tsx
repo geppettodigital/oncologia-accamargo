@@ -47,7 +47,7 @@ export const navigatorPage = (c: any) => {
             <!-- Kanban Board -->
             <div class="mb-8">
                 <h2 class="text-2xl font-bold text-gray-800 mb-4">
-                    <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="w-8 h-8 inline mr-2">
+                    <img src="/static/accamargo-icon.svg" alt="ACCamargo Logo" class="w-8 h-8 inline mr-2">
                     Fluxo de Pacientes - Visão Kanban
                 </h2>
                 

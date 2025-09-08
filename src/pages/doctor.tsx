@@ -93,7 +93,7 @@ export const doctorPage = (c: any) => {
                 <div class="lg:col-span-2 bg-white rounded-xl shadow-md p-6 border border-gray-100">
                     <div class="flex items-center justify-between mb-4">
                         <h2 class="text-xl font-bold text-gray-800">
-                            <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="w-6 h-6 inline mr-2">
+                            <img src="/static/accamargo-icon.svg" alt="ACCamargo Logo" class="w-6 h-6 inline mr-2">
                             Pacientes do Dia
                         </h2>
                         <button class="text-green-600 hover:text-green-700">
@@ -235,7 +235,7 @@ export const doctorPage = (c: any) => {
             <div id="patient360Modal" class="hidden bg-white rounded-xl shadow-lg p-6 border border-gray-200 mb-8">
                 <div class="flex items-center justify-between mb-6">
                     <h2 class="text-2xl font-bold text-gray-800">
-                        <img src="/static/accamargo-logo.svg" alt="ACCamargo Logo" class="w-8 h-8 inline mr-2">
+                        <img src="/static/accamargo-icon.svg" alt="ACCamargo Logo" class="w-8 h-8 inline mr-2">
                         Visão 360° do Paciente
                     </h2>
                     <button onclick="closePatient360()" class="text-gray-500 hover:text-gray-700">
