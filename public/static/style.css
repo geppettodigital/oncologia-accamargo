@@ -56,12 +56,14 @@ body {
   filter: drop-shadow(0 4px 8px rgba(45, 122, 78, 0.3));
 }
 
-/* Card hover effects com tema verde */
+/* Card hover effects com tema verde moderno */
 .card-hover {
-  transition: all 0.3s ease;
-  border: 1px solid rgba(22, 163, 74, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid transparent;
   position: relative;
   overflow: hidden;
+  background: linear-gradient(145deg, #ffffff 0%, #f9fafb 100%);
+  backdrop-filter: blur(10px);
 }
 
 .card-hover::before {
@@ -81,18 +83,20 @@ body {
 }
 
 .card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 25px -5px rgba(22, 163, 74, 0.1), 
-              0 10px 10px -5px rgba(22, 163, 74, 0.04);
-  border-color: var(--primary-green-light);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 50px -12px rgba(43, 95, 63, 0.25),
+              0 15px 20px -8px rgba(43, 95, 63, 0.15);
+  border-color: rgba(43, 95, 63, 0.2);
+  background: linear-gradient(145deg, #ffffff 0%, #f0fdf4 100%);
 }
 
-/* Footer gradient verde - ACCamargo */
+/* Footer gradient verde moderno - ACCamargo */
 .footer-gradient {
-  background: linear-gradient(135deg, #1a5c38 0%, #2d7a4e 50%, #3a8f5f 100%);
+  background: linear-gradient(135deg, #0f3722 0%, #1a5c38 25%, #2B5F3F 50%, #2d7a4e 75%, #3a8f5f 100%);
   position: relative;
   overflow: hidden;
-  border-top: 3px solid #2d7a4e;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -10px 40px rgba(43, 95, 63, 0.2);
 }
 
 .footer-gradient::before {
@@ -120,11 +124,22 @@ body {
   stroke-width: 1px;
 }
 
-/* Botões com gradiente verde */
-button[class*="from-green"] {
+/* Botões modernos com gradiente verde */
+button[class*="from-green"], 
+button[class*="from-emerald"],
+button[class*="from-teal"],
+button[class*="from-lime"],
+button[class*="from-cyan"] {
   position: relative;
   overflow: hidden;
   z-index: 1;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 button[class*="from-green"]::before {
