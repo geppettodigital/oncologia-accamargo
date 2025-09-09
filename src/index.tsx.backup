@@ -172,134 +172,86 @@ app.get('/', (c) => {
             <!-- Módulos Grid - Design Moderno -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                 <!-- Paciente -->
-                <div class="module-card rounded-2xl shadow-lg p-8 card-hover cursor-pointer border border-white/50" >
+                <div class="module-card rounded-2xl shadow-lg p-8 card-hover cursor-pointer border border-white/50" onclick="window.location.href='/patient'">
                     <div class="text-center">
                         <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-green-600 shadow-lg">
                             <i class="far fa-user text-3xl text-white"></i>
                         </div>
                         <h2 class="text-xl font-bold mb-3 text-gray-800">Portal do Paciente</h2>
                         <p class="text-gray-600 mb-6 leading-relaxed">Auto-triagem inteligente, agendamentos e acompanhamento personalizado</p>
-                        <div class="flex gap-2 justify-center items-center">
-                            <button onclick="window.location.href='/patient'" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
-                                Acessar
-                            </button>
-                            <button onclick="event.stopPropagation(); showPortalHelp('patient')" class="portal-help-btn w-12 h-12 rounded-full bg-gray-500 hover:bg-gray-600 text-white flex items-center justify-center transition-all hover:scale-110" title="Informações sobre este portal">
-                                <i class="fas fa-question text-lg"></i>
-                            </button>
-                            <button onclick="event.stopPropagation(); openAIForPortal('patient')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="Assistente IA para este portal">
-                                <img src="/static/robot-auditor-icon.svg" alt="IA" class="w-6 h-6 filter brightness-0 invert">
-                            </button>
-                        </div>
+                        <button class="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
+                            Acessar
+                        </button>
                     </div>
                 </div>
 
                 <!-- Médico -->
-                <div class="module-card rounded-2xl shadow-lg p-8 card-hover cursor-pointer border border-white/50" >
+                <div class="module-card rounded-2xl shadow-lg p-8 card-hover cursor-pointer border border-white/50" onclick="window.location.href='/doctor'">
                     <div class="text-center">
                         <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-lg">
                             <i class="fas fa-user-md text-3xl text-white"></i>
                         </div>
                         <h2 class="text-xl font-bold mb-3 text-gray-800">Portal Médico</h2>
                         <p class="text-gray-600 mb-6 leading-relaxed">Assistente clínico com IA e gestão integrada de pacientes</p>
-                        <div class="flex gap-2 justify-center items-center">
-                            <button onclick="window.location.href='/doctor'" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
-                                Acessar
-                            </button>
-                            <button onclick="event.stopPropagation(); showPortalHelp('doctor')" class="portal-help-btn w-12 h-12 rounded-full bg-gray-500 hover:bg-gray-600 text-white flex items-center justify-center transition-all hover:scale-110" title="Informações sobre este portal">
-                                <i class="fas fa-question text-lg"></i>
-                            </button>
-                            <button onclick="event.stopPropagation(); openAIForPortal('doctor')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="Assistente IA para este portal">
-                                <img src="/static/robot-auditor-icon.svg" alt="IA" class="w-6 h-6 filter brightness-0 invert">
-                            </button>
-                        </div>
+                        <button class="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white px-8 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
+                            Acessar
+                        </button>
                     </div>
                 </div>
 
                 <!-- Navegador -->
-                <div class="module-card rounded-2xl shadow-lg p-8 card-hover cursor-pointer border border-white/50" >
+                <div class="module-card rounded-2xl shadow-lg p-8 card-hover cursor-pointer border border-white/50" onclick="window.location.href='/navigator'">
                     <div class="text-center">
                         <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 shadow-lg">
                             <i class="far fa-compass text-3xl text-white"></i>
                         </div>
                         <h2 class="text-xl font-bold mb-3 text-gray-800">Navegador de Pacientes</h2>
                         <p class="text-gray-600 mb-6 leading-relaxed">Coordenação e acompanhamento otimizado da jornada</p>
-                        <div class="flex gap-2 justify-center items-center">
-                            <button onclick="window.location.href='/navigator'" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
-                                Acessar
-                            </button>
-                            <button onclick="event.stopPropagation(); showPortalHelp('navigator')" class="portal-help-btn w-12 h-12 rounded-full bg-gray-500 hover:bg-gray-600 text-white flex items-center justify-center transition-all hover:scale-110" title="Informações sobre este portal">
-                                <i class="fas fa-question text-lg"></i>
-                            </button>
-                            <button onclick="event.stopPropagation(); openAIForPortal('navigator')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="Assistente IA para este portal">
-                                <img src="/static/robot-auditor-icon.svg" alt="IA" class="w-6 h-6 filter brightness-0 invert">
-                            </button>
-                        </div>
+                        <button class="bg-gradient-to-r from-teal-600 to-teal-700 text-white px-8 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
+                            Acessar
+                        </button>
                     </div>
                 </div>
 
                 <!-- Financeiro -->
-                <div class="module-card rounded-2xl shadow-lg p-8 card-hover cursor-pointer border border-white/50" >
+                <div class="module-card rounded-2xl shadow-lg p-8 card-hover cursor-pointer border border-white/50" onclick="window.location.href='/financial'">
                     <div class="text-center">
                         <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-lime-500 to-lime-600 shadow-lg">
                             <i class="fas fa-dollar-sign text-3xl text-white"></i>
                         </div>
                         <h2 class="text-xl font-bold mb-3 text-gray-800">Gestão Financeira</h2>
                         <p class="text-gray-600 mb-6 leading-relaxed">Prevenção inteligente de glosas e análise financeira com IA</p>
-                        <div class="flex gap-2 justify-center items-center">
-                            <button onclick="window.location.href='/financial'" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
-                                Acessar
-                            </button>
-                            <button onclick="event.stopPropagation(); showPortalHelp('financial')" class="portal-help-btn w-12 h-12 rounded-full bg-gray-500 hover:bg-gray-600 text-white flex items-center justify-center transition-all hover:scale-110" title="Informações sobre este portal">
-                                <i class="fas fa-question text-lg"></i>
-                            </button>
-                            <button onclick="event.stopPropagation(); openAIForPortal('financial')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="Assistente IA para este portal">
-                                <img src="/static/robot-auditor-icon.svg" alt="IA" class="w-6 h-6 filter brightness-0 invert">
-                            </button>
-                        </div>
+                        <button class="bg-gradient-to-r from-lime-600 to-lime-700 text-white px-8 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
+                            Acessar
+                        </button>
                     </div>
                 </div>
 
                 <!-- Bem-Estar -->
-                <div class="module-card rounded-2xl shadow-lg p-8 card-hover cursor-pointer border border-white/50" >
+                <div class="module-card rounded-2xl shadow-lg p-8 card-hover cursor-pointer border border-white/50" onclick="window.location.href='/wellness'">
                     <div class="text-center">
                         <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-600 shadow-lg">
                             <i class="far fa-heart text-3xl text-white"></i>
                         </div>
                         <h2 class="text-xl font-bold mb-3 text-gray-800">Bem-Estar e Apoio</h2>
                         <p class="text-gray-600 mb-6 leading-relaxed">Suporte psicológico e monitoramento emocional integrado</p>
-                        <div class="flex gap-2 justify-center items-center">
-                            <button onclick="window.location.href='/wellness'" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
-                                Acessar
-                            </button>
-                            <button onclick="event.stopPropagation(); showPortalHelp('wellness')" class="portal-help-btn w-12 h-12 rounded-full bg-gray-500 hover:bg-gray-600 text-white flex items-center justify-center transition-all hover:scale-110" title="Informações sobre este portal">
-                                <i class="fas fa-question text-lg"></i>
-                            </button>
-                            <button onclick="event.stopPropagation(); openAIForPortal('wellness')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="Assistente IA para este portal">
-                                <img src="/static/robot-auditor-icon.svg" alt="IA" class="w-6 h-6 filter brightness-0 invert">
-                            </button>
-                        </div>
+                        <button class="bg-gradient-to-r from-cyan-600 to-cyan-700 text-white px-8 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
+                            Acessar
+                        </button>
                     </div>
                 </div>
 
                 <!-- Pesquisa -->
-                <div class="module-card rounded-2xl shadow-lg p-8 card-hover cursor-pointer border border-white/50" >
+                <div class="module-card rounded-2xl shadow-lg p-8 card-hover cursor-pointer border border-white/50" onclick="window.location.href='/research'">
                     <div class="text-center">
                         <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-green-600 to-green-700 shadow-lg">
                             <i class="fas fa-flask text-3xl text-white"></i>
                         </div>
                         <h2 class="text-xl font-bold mb-3 text-gray-800">Pesquisa Clínica</h2>
                         <p class="text-gray-600 mb-6 leading-relaxed">Análise avançada de dados e insights para pesquisa</p>
-                        <div class="flex gap-2 justify-center items-center">
-                            <button onclick="window.location.href='/research'" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
-                                Acessar
-                            </button>
-                            <button onclick="event.stopPropagation(); showPortalHelp('research')" class="portal-help-btn w-12 h-12 rounded-full bg-gray-500 hover:bg-gray-600 text-white flex items-center justify-center transition-all hover:scale-110" title="Informações sobre este portal">
-                                <i class="fas fa-question text-lg"></i>
-                            </button>
-                            <button onclick="event.stopPropagation(); openAIForPortal('research')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="Assistente IA para este portal">
-                                <img src="/static/robot-auditor-icon.svg" alt="IA" class="w-6 h-6 filter brightness-0 invert">
-                            </button>
-                        </div>
+                        <button class="bg-gradient-to-r from-green-700 to-green-800 text-white px-8 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
+                            Acessar
+                        </button>
                     </div>
                 </div>
             </div>
@@ -486,7 +438,6 @@ app.get('/', (c) => {
         </script>
         <script src="/static/ai-assistant.js"></script>
     <script src="/static/portal-helpers.js"></script>
-    <script src="/static/portal-functions.js"></script>
     </body>
     </html>
   `)
