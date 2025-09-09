@@ -355,6 +355,7 @@ export const patientPage = (c: any) => {
         <script src="/static/ai-assistant.js"></script>
         <script src="/static/portal-helpers.js"></script>
         <script src="/static/ai-concerns.js"></script>
+    <script src="/static/action-plan-system.js"></script>
     </body>
     </html>
   `)
