@@ -1,6 +1,5 @@
 import { Hono } from 'hono'
 import { html } from 'hono/html'
-import { aiConcernsHTML, aiConcernsStyles, aiConcernsScript } from '../components/ai-concerns'
 
 export const wellnessPage = (c: any) => {
   return c.html(html`
@@ -304,6 +303,7 @@ export const wellnessPage = (c: any) => {
         <script src="/static/portal-helpers.js"></script>
         <script src="/static/ai-assistant.js"></script>
         <script src="/static/portal-helpers.js"></script>
+        <script src="/static/ai-concerns.js"></script>
     </body>
     </html>
   `)

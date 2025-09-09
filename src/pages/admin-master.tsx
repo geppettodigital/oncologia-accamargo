@@ -1,6 +1,5 @@
 import { Hono } from 'hono'
 import { html } from 'hono/html'
-import { aiConcernsHTML, aiConcernsStyles, aiConcernsScript } from '../components/ai-concerns'
 
 export const adminMasterPage = (c: any) => {
   return c.html(html`
@@ -235,8 +234,7 @@ export const adminMasterPage = (c: any) => {
                 </div>
             </div>
 
-            <!-- AI Concerns Dashboard -->
-            ${aiConcernsHTML('admin-master')}
+            
 
             <!-- Quick Actions -->
             <div class="glass-effect rounded-2xl p-6 border border-white/50">
@@ -279,6 +277,7 @@ export const adminMasterPage = (c: any) => {
         </script>
         <script src="/static/ai-assistant.js"></script>
         <script src="/static/portal-helpers.js"></script>
+        <script src="/static/ai-concerns.js"></script>
     </body>
     </html>
   `)
