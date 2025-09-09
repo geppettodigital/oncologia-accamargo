@@ -31,10 +31,10 @@ export const navigatorPage = (c: any) => {
                             <i class="fas fa-home text-xl"></i>
                         </a>
                         <button class="text-gray-600 hover:text-green-600 transition-colors">
-                            <i class="fas fa-bell text-xl"></i>
+                            <i class="far fa-bell text-xl"></i>
                         </button>
                         <button class="text-gray-600 hover:text-green-600 transition-colors">
-                            <i class="fas fa-user-circle text-xl"></i>
+                            <i class="far fa-user-circle text-xl"></i>
                         </button>
                     </div>
                 </div>
@@ -63,7 +63,7 @@ export const navigatorPage = (c: any) => {
                                 <p class="font-semibold text-sm">Ana Silva</p>
                                 <p class="text-xs text-gray-600">Aguardando há 2h</p>
                                 <span class="text-xs bg-lime-100 text-yellow-700 px-2 py-1 rounded mt-1 inline-block">
-                                    <i class="fas fa-clock"></i> Prioridade
+                                    <i class="far fa-clock"></i> Prioridade
                                 </span>
                             </div>
                             <div class="bg-white p-3 rounded shadow-sm">
@@ -91,7 +91,7 @@ export const navigatorPage = (c: any) => {
                                 <p class="font-semibold text-sm">Maria Costa</p>
                                 <p class="text-xs text-gray-600">Exame atrasado</p>
                                 <span class="text-xs bg-emerald-100 text-red-700 px-2 py-1 rounded mt-1 inline-block">
-                                    <i class="fas fa-exclamation-circle"></i> Urgente
+                                    <i class="far fa-exclamation-triangle"></i> Urgente
                                 </span>
                             </div>
                         </div>
@@ -144,7 +144,7 @@ export const navigatorPage = (c: any) => {
             <!-- Bottlenecks Alert -->
             <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg mb-8">
                 <div class="flex items-start">
-                    <i class="fas fa-exclamation-circle text-emerald-600 text-xl mr-3 mt-1"></i>
+                    <i class="far fa-exclamation-triangle text-emerald-600 text-xl mr-3 mt-1"></i>
                     <div>
                         <h3 class="font-bold text-red-800 mb-2">Gargalos Identificados</h3>
                         <ul class="space-y-2 text-sm text-red-700">
@@ -243,7 +243,7 @@ export const navigatorPage = (c: any) => {
                             <option>Acompanhamento</option>
                         </select>
                         <button class="px-3 py-1 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700">
-                            <i class="fas fa-filter mr-1"></i>Filtrar
+                            <i class="far fa-filter mr-1"></i>Filtrar
                         </button>
                     </div>
                 </div>

@@ -32,10 +32,10 @@ export const financialPage = (c: any) => {
                             <i class="fas fa-home text-xl"></i>
                         </a>
                         <button class="text-gray-600 hover:text-green-600 transition-colors">
-                            <i class="fas fa-bell text-xl"></i>
+                            <i class="far fa-bell text-xl"></i>
                         </button>
                         <button class="text-gray-600 hover:text-green-600 transition-colors">
-                            <i class="fas fa-user-circle text-xl"></i>
+                            <i class="far fa-user-circle text-xl"></i>
                         </button>
                     </div>
                 </div>
@@ -114,7 +114,7 @@ export const financialPage = (c: any) => {
                 <!-- Glosas Analysis -->
                 <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
                     <h3 class="font-bold text-gray-800 mb-4">
-                        <i class="fas fa-chart-pie text-lime-600 mr-2"></i>
+                        <i class="far fa-chart-pie text-lime-600 mr-2"></i>
                         Análise de Glosas
                     </h3>
                     <canvas id="glosasChart" height="200"></canvas>

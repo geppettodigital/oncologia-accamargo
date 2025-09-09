@@ -114,10 +114,10 @@ app.get('/', (c) => {
                     </div>
                     <div class="flex items-center space-x-4">
                         <button class="text-gray-600 hover:text-green-600 transition-colors">
-                            <i class="far fa-bell text-xl"></i>
+                            <i class="fas fa-bell text-xl"></i>
                         </button>
                         <button class="text-gray-600 hover:text-green-600 transition-colors">
-                            <i class="far fa-user-circle text-xl"></i>
+                            <i class="fas fa-user-circle text-xl"></i>
                         </button>
                     </div>
                 </div>
