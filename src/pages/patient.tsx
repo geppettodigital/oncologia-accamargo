@@ -58,13 +58,13 @@ export const patientPage = (c: any) => {
             <!-- Quick Actions -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
                 <button onclick="openTriageChat()" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-all border border-gray-100">
-                    <i class="fas fa-stethoscope text-green-600 text-2xl mb-2"></i>
+                    <i class="fas fa-user-md text-green-600 text-2xl mb-2"></i>
                     <p class="font-semibold text-gray-800">Auto-Triagem</p>
                     <p class="text-xs text-gray-600">Avalie seus sintomas</p>
                 </button>
                 
                 <button onclick="showAppointments()" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-all border border-gray-100">
-                    <i class="fas fa-calendar-alt text-green-500 text-2xl mb-2"></i>
+                    <i class="fas fa-calendar-check text-green-500 text-2xl mb-2"></i>
                     <p class="font-semibold text-gray-800">Consultas</p>
                     <p class="text-xs text-gray-600">Próxima: 15/02</p>
                 </button>
@@ -76,7 +76,7 @@ export const patientPage = (c: any) => {
                 </button>
                 
                 <button onclick="viewSupport()" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-all border border-gray-100">
-                    <i class="fas fa-hands-helping text-cyan-600 text-2xl mb-2"></i>
+                    <i class="fas fa-hand-holding-medical text-cyan-600 text-2xl mb-2"></i>
                     <p class="font-semibold text-gray-800">Rede de Apoio</p>
                     <p class="text-xs text-gray-600">Conecte-se</p>
                 </button>
@@ -210,7 +210,7 @@ export const patientPage = (c: any) => {
                         Assistente de Triagem
                     </h3>
                     <button onclick="closeTriageChat()" class="text-gray-500 hover:text-gray-700">
-                        <i class="far fa-times"></i>
+                        <i class="far fa-times-circle"></i>
                     </button>
                 </div>
                 <div class="flex-grow p-4 overflow-y-auto" id="chatMessages">

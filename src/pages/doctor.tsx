@@ -239,7 +239,7 @@ export const doctorPage = (c: any) => {
                         Visão 360° do Paciente
                     </h2>
                     <button onclick="closePatient360()" class="text-gray-500 hover:text-gray-700">
-                        <i class="far fa-times text-xl"></i>
+                        <i class="far fa-times-circle text-xl"></i>
                     </button>
                 </div>
                 

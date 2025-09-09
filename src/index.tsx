@@ -114,10 +114,10 @@ app.get('/', (c) => {
                     </div>
                     <div class="flex items-center space-x-4">
                         <button class="text-gray-600 hover:text-green-600 transition-colors">
-                            <i class="fas fa-bell text-xl"></i>
+                            <i class="far fa-bell text-xl"></i>
                         </button>
                         <button class="text-gray-600 hover:text-green-600 transition-colors">
-                            <i class="fas fa-user-circle text-xl"></i>
+                            <i class="far fa-user-circle text-xl"></i>
                         </button>
                     </div>
                 </div>
@@ -159,7 +159,7 @@ app.get('/', (c) => {
                     </div>
                     <div class="text-center">
                         <div class="text-4xl font-bold gradient-text mb-2">
-                            <span id="stat-savings">145</span>k
+                            <span id="stat-savings">R$ 0.0M</span>
                         </div>
                         <div class="text-gray-600 font-medium">Glosas Evitadas</div>
                     </div>
@@ -253,11 +253,11 @@ app.get('/', (c) => {
                 </div>
             </div>
 
-            <!-- Tecnologias Inovadoras - Blocos Navegáveis -->
+            <!-- Tecnologias Proprietárias - Blocos Navegáveis -->
             <div class="mb-12">
                 <h2 class="text-3xl font-bold text-center mb-10 gradient-text">
                     <i class="fas fa-microchip mr-3"></i>
-                    Tecnologias Inovadoras
+                    Tecnologias Proprietárias
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Motor de IA -->
@@ -418,7 +418,18 @@ app.get('/', (c) => {
                     animateCounter(document.getElementById('stat-navigation'), 178);
                     animateCounter(document.getElementById('stat-appointments'), 56);
                     animateCounter(document.getElementById('stat-adherence'), 87);
-                    animateCounter(document.getElementById('stat-savings'), 145);
+                    // Animar valor monetário das glosas
+                    const savingsElement = document.getElementById('stat-savings');
+                    let currentSavings = 0;
+                    const targetSavings = 2.4;
+                    const savingsTimer = setInterval(() => {
+                        currentSavings += targetSavings / 60;
+                        if (currentSavings >= targetSavings) {
+                            currentSavings = targetSavings;
+                            clearInterval(savingsTimer);
+                        }
+                        savingsElement.textContent = 'R$ ' + currentSavings.toFixed(1) + 'M';
+                    }, 25);
                 }, 500);
             });
         </script>

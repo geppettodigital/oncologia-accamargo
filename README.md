@@ -109,7 +109,7 @@ Plataforma de transformação digital desenvolvida pelo **ACCamargo Cancer Cente
 - wellness_assessments (avaliações de bem-estar)
 ```
 
-### Serviços de IA
+### Tecnologias Proprietárias
 1. **Motor de Engenharia de Prompt (MEP)**: Otimização automática de prompts
 2. **Servos de Mecanismos**: Automação inteligente de processos
 3. **RLHF**: Aprendizado contínuo com feedback humano
@@ -119,7 +119,7 @@ Plataforma de transformação digital desenvolvida pelo **ACCamargo Cancer Cente
 - **Pacientes Ativos**: 234
 - **Pacientes em Navegação**: 178
 - **Taxa de Adesão**: 87%
-- **Glosas Evitadas**: R$ 145.000
+- **Glosas Evitadas**: R$ 2.4 Milhões
 - **Tempo Médio de Resposta**: < 200ms
 - **Uptime**: 99.9%
 
