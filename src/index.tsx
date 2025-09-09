@@ -22,6 +22,7 @@ import { financialPage } from './pages/financial'
 import { wellnessPage } from './pages/wellness'
 import { researchPage } from './pages/research'
 import { adminMasterPage } from './pages/admin-master'
+import { testIntegrationPage } from './pages/test-integration'
 
 // Type definitions for Cloudflare bindings
 type Bindings = {
@@ -56,6 +57,7 @@ app.get('/financial', financialPage)
 app.get('/wellness', wellnessPage)
 app.get('/research', researchPage)
 app.get('/admin-master', adminMasterPage)
+app.get('/test-integration', testIntegrationPage)
 
 // Main landing page with updated modern design
 app.get('/', (c) => {
@@ -188,8 +190,13 @@ app.get('/', (c) => {
                             <button onclick="event.stopPropagation(); showPortalHelp('patient')" class="portal-help-btn w-12 h-12 rounded-full bg-gray-500 hover:bg-gray-600 text-white flex items-center justify-center transition-all hover:scale-110" title="Informações sobre este portal">
                                 <i class="fas fa-question text-lg"></i>
                             </button>
-                            <button onclick="event.stopPropagation(); openAIForPortal('patient')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="Assistente IA para este portal">
-                                <img src="/static/robot-auditor-icon.svg" alt="IA" class="w-6 h-6 filter brightness-0 invert">
+                            <button onclick="event.stopPropagation(); openAIForPortal('patient')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="LAURA Assistant para este portal">
+                                <svg width="24" height="24" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="10" y="10" width="80" height="80" rx="20" ry="20" fill="white"/>
+                                    <rect x="25" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
+                                    <rect x="60" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
+                                    <path d="M 30 60 Q 50 70 70 60" stroke="#ff6b35" stroke-width="4" fill="none" stroke-linecap="round"/>
+                                </svg>
                             </button>
                         </div>
                     </div>
@@ -210,8 +217,13 @@ app.get('/', (c) => {
                             <button onclick="event.stopPropagation(); showPortalHelp('doctor')" class="portal-help-btn w-12 h-12 rounded-full bg-gray-500 hover:bg-gray-600 text-white flex items-center justify-center transition-all hover:scale-110" title="Informações sobre este portal">
                                 <i class="fas fa-question text-lg"></i>
                             </button>
-                            <button onclick="event.stopPropagation(); openAIForPortal('doctor')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="Assistente IA para este portal">
-                                <img src="/static/robot-auditor-icon.svg" alt="IA" class="w-6 h-6 filter brightness-0 invert">
+                            <button onclick="event.stopPropagation(); openAIForPortal('doctor')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="LAURA Assistant para este portal">
+                                <svg width="24" height="24" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="10" y="10" width="80" height="80" rx="20" ry="20" fill="white"/>
+                                    <rect x="25" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
+                                    <rect x="60" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
+                                    <path d="M 30 60 Q 50 70 70 60" stroke="#ff6b35" stroke-width="4" fill="none" stroke-linecap="round"/>
+                                </svg>
                             </button>
                         </div>
                     </div>
@@ -232,8 +244,13 @@ app.get('/', (c) => {
                             <button onclick="event.stopPropagation(); showPortalHelp('navigator')" class="portal-help-btn w-12 h-12 rounded-full bg-gray-500 hover:bg-gray-600 text-white flex items-center justify-center transition-all hover:scale-110" title="Informações sobre este portal">
                                 <i class="fas fa-question text-lg"></i>
                             </button>
-                            <button onclick="event.stopPropagation(); openAIForPortal('navigator')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="Assistente IA para este portal">
-                                <img src="/static/robot-auditor-icon.svg" alt="IA" class="w-6 h-6 filter brightness-0 invert">
+                            <button onclick="event.stopPropagation(); openAIForPortal('navigator')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="LAURA Assistant para este portal">
+                                <svg width="24" height="24" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="10" y="10" width="80" height="80" rx="20" ry="20" fill="white"/>
+                                    <rect x="25" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
+                                    <rect x="60" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
+                                    <path d="M 30 60 Q 50 70 70 60" stroke="#ff6b35" stroke-width="4" fill="none" stroke-linecap="round"/>
+                                </svg>
                             </button>
                         </div>
                     </div>
@@ -254,8 +271,13 @@ app.get('/', (c) => {
                             <button onclick="event.stopPropagation(); showPortalHelp('financial')" class="portal-help-btn w-12 h-12 rounded-full bg-gray-500 hover:bg-gray-600 text-white flex items-center justify-center transition-all hover:scale-110" title="Informações sobre este portal">
                                 <i class="fas fa-question text-lg"></i>
                             </button>
-                            <button onclick="event.stopPropagation(); openAIForPortal('financial')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="Assistente IA para este portal">
-                                <img src="/static/robot-auditor-icon.svg" alt="IA" class="w-6 h-6 filter brightness-0 invert">
+                            <button onclick="event.stopPropagation(); openAIForPortal('financial')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="LAURA Assistant para este portal">
+                                <svg width="24" height="24" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="10" y="10" width="80" height="80" rx="20" ry="20" fill="white"/>
+                                    <rect x="25" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
+                                    <rect x="60" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
+                                    <path d="M 30 60 Q 50 70 70 60" stroke="#ff6b35" stroke-width="4" fill="none" stroke-linecap="round"/>
+                                </svg>
                             </button>
                         </div>
                     </div>
@@ -276,8 +298,13 @@ app.get('/', (c) => {
                             <button onclick="event.stopPropagation(); showPortalHelp('wellness')" class="portal-help-btn w-12 h-12 rounded-full bg-gray-500 hover:bg-gray-600 text-white flex items-center justify-center transition-all hover:scale-110" title="Informações sobre este portal">
                                 <i class="fas fa-question text-lg"></i>
                             </button>
-                            <button onclick="event.stopPropagation(); openAIForPortal('wellness')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="Assistente IA para este portal">
-                                <img src="/static/robot-auditor-icon.svg" alt="IA" class="w-6 h-6 filter brightness-0 invert">
+                            <button onclick="event.stopPropagation(); openAIForPortal('wellness')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="LAURA Assistant para este portal">
+                                <svg width="24" height="24" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="10" y="10" width="80" height="80" rx="20" ry="20" fill="white"/>
+                                    <rect x="25" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
+                                    <rect x="60" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
+                                    <path d="M 30 60 Q 50 70 70 60" stroke="#ff6b35" stroke-width="4" fill="none" stroke-linecap="round"/>
+                                </svg>
                             </button>
                         </div>
                     </div>
@@ -298,8 +325,13 @@ app.get('/', (c) => {
                             <button onclick="event.stopPropagation(); showPortalHelp('research')" class="portal-help-btn w-12 h-12 rounded-full bg-gray-500 hover:bg-gray-600 text-white flex items-center justify-center transition-all hover:scale-110" title="Informações sobre este portal">
                                 <i class="fas fa-question text-lg"></i>
                             </button>
-                            <button onclick="event.stopPropagation(); openAIForPortal('research')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="Assistente IA para este portal">
-                                <img src="/static/robot-auditor-icon.svg" alt="IA" class="w-6 h-6 filter brightness-0 invert">
+                            <button onclick="event.stopPropagation(); openAIForPortal('research')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="LAURA Assistant para este portal">
+                                <svg width="24" height="24" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="10" y="10" width="80" height="80" rx="20" ry="20" fill="white"/>
+                                    <rect x="25" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
+                                    <rect x="60" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
+                                    <path d="M 30 60 Q 50 70 70 60" stroke="#ff6b35" stroke-width="4" fill="none" stroke-linecap="round"/>
+                                </svg>
                             </button>
                         </div>
                     </div>
@@ -489,9 +521,11 @@ app.get('/', (c) => {
         <script src="/static/ai-assistant.js"></script>
     <script src="/static/portal-helpers.js"></script>
     <script src="/static/portal-functions.js"></script>
+    <script src="/static/laura-assistant-final.js"></script>
     <script src="/static/ai-concerns.js"></script>
     <script src="/static/action-plan-system.js"></script>
-    <script src="/static/action-plan-integration.js"></script>
+    <script src="/static/action-plan-handlers.js"></script>
+    <script src="/static/laura-integration.js"></script>
     </body>
     </html>
   `)

@@ -1,4 +1,4 @@
-// AI Concerns Dashboard - Preocupação do Assistente de IA
+// AI Concerns Dashboard - Ansiedade de Laura
 class AIConcernsDashboard {
     constructor() {
         this.portalConfigs = this.getPortalConfigs();
@@ -153,14 +153,19 @@ class AIConcernsDashboard {
                 <div class="flex items-center justify-between mb-6">
                     <div class="flex items-center gap-3">
                         <div class="relative">
-                            <img src="/static/robot-auditor-icon.svg" alt="IA" class="w-10 h-10">
+                            <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="10" y="10" width="80" height="80" rx="20" ry="20" fill="#ff6b35"/>
+                                <rect x="25" y="30" width="15" height="15" rx="3" fill="white"/>
+                                <rect x="60" y="30" width="15" height="15" rx="3" fill="white"/>
+                                <path d="M 30 60 Q 50 70 70 60" stroke="white" stroke-width="4" fill="none" stroke-linecap="round"/>
+                            </svg>
                             <span class="absolute -top-1 -right-1 flex h-3 w-3">
                                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
                                 <span class="relative inline-flex rounded-full h-3 w-3 bg-orange-500"></span>
                             </span>
                         </div>
                         <div>
-                            <h3 class="text-lg font-bold text-gray-800">Preocupação do Assistente de IA</h3>
+                            <h3 class="text-lg font-bold text-gray-800">Ansiedade de Laura</h3>
                             <p class="text-sm text-gray-600">${config.subtitle}</p>
                         </div>
                     </div>

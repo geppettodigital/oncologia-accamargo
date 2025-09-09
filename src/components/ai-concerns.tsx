@@ -1,9 +1,9 @@
-// AI Concerns Dashboard Component - Preocupação do Assistente de IA
+// AI Concerns Dashboard Component - Ansiedade de Laura
 export const aiConcernsHTML = (portalType: string, data?: any) => {
   const concerns = getConcernsForPortal(portalType, data);
   
   return `
-    <!-- Preocupação do Assistente de IA -->
+    <!-- Ansiedade de Laura -->
     <div class="ai-concerns-dashboard glass-effect rounded-2xl p-6 mb-8 border border-orange-200/50">
       <!-- Header com ícone animado -->
       <div class="flex items-center justify-between mb-6">
@@ -16,7 +16,7 @@ export const aiConcernsHTML = (portalType: string, data?: any) => {
             </span>
           </div>
           <div>
-            <h3 class="text-lg font-bold text-gray-800">Preocupação do Assistente de IA</h3>
+            <h3 class="text-lg font-bold text-gray-800">Ansiedade de Laura</h3>
             <p class="text-sm text-gray-600">${concerns.subtitle}</p>
           </div>
         </div>

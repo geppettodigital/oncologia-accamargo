@@ -362,13 +362,14 @@ export const financialPage = (c: any) => {
                 }
             });
         </script>
-        <script src="/static/ai-assistant.js"></script>
+        <script src="/static/laura-assistant-final.js"></script>
         <script src="/static/portal-helpers.js"></script>
-        <script src="/static/ai-assistant.js"></script>
+        <script src="/static/laura-assistant-final.js"></script>
         <script src="/static/portal-helpers.js"></script>
         <script src="/static/ai-concerns.js"></script>
     <script src="/static/action-plan-system.js"></script>
-    <script src="/static/action-plan-integration.js"></script>
+        <script src="/static/action-plan-handlers.js"></script>
+    <script src="/static/laura-integration.js"></script>
     </body>
     </html>
   `)

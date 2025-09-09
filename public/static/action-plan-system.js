@@ -1,4 +1,4 @@
-// Sistema de Planos de Ação - Integrado com Preocupação do Assistente de IA
+// Sistema de Planos de Ação - Integrado com Ansiedade de Laura
 class ActionPlanSystem {
     constructor() {
         this.currentAlert = null;

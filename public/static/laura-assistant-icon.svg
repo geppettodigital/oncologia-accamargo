@@ -1,0 +1,16 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <!-- Rounded square container with orange fill -->
+    <rect x="10" y="10" width="80" height="80" rx="20" ry="20" 
+          fill="#ff6b35" stroke="none"/>
+    
+    <!-- Robot face elements -->
+    <!-- Left eye -->
+    <rect x="25" y="30" width="15" height="15" rx="3" fill="white"/>
+    
+    <!-- Right eye -->
+    <rect x="60" y="30" width="15" height="15" rx="3" fill="white"/>
+    
+    <!-- Smile -->
+    <path d="M 30 60 Q 50 70 70 60" 
+          stroke="white" stroke-width="4" fill="none" stroke-linecap="round"/>
+</svg>
