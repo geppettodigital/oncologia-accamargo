@@ -31,6 +31,9 @@ export const financialPage = (c: any) => {
                         <a href="/" class="text-gray-600 hover:text-green-600 transition-colors">
                             <i class="fas fa-home text-xl"></i>
                         </a>
+                        <a href="/patient" class="text-gray-600 hover:text-green-600 transition-colors" title="Portal do Paciente">
+                            <i class="fas fa-hospital-user text-xl"></i>
+                        </a>
                         <button class="text-gray-600 hover:text-green-600 transition-colors">
                             <i class="fas fa-bell text-xl"></i>
                         </button>
@@ -108,7 +111,7 @@ export const financialPage = (c: any) => {
                         <img src="/static/accamargo-icon.svg" alt="ACCamargo Logo" class="w-6 h-6 inline mr-2">
                         Evolução de Receita
                     </h3>
-                    <canvas id="revenueChart" height="200"></canvas>
+                    <canvas style="max-width: 100%; height: auto;" id="revenueChart" class="w-full max-w-full" style="max-height: 400px;"></canvas>
                 </div>
 
                 <!-- Glosas Analysis -->
@@ -117,7 +120,7 @@ export const financialPage = (c: any) => {
                         <i class="fas fa-chart-pie text-lime-600 mr-2"></i>
                         Análise de Glosas
                     </h3>
-                    <canvas id="glosasChart" height="200"></canvas>
+                    <canvas style="max-width: 100%; height: auto;" id="glosasChart" class="w-full max-w-full" style="max-height: 400px;"></canvas>
                 </div>
             </div>
 
@@ -313,7 +316,7 @@ export const financialPage = (c: any) => {
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,
+                    maintainAspectRatio: true,
                     plugins: {
                         legend: {
                             position: 'bottom'
@@ -350,7 +353,7 @@ export const financialPage = (c: any) => {
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,
+                    maintainAspectRatio: true,
                     plugins: {
                         legend: {
                             position: 'right'

@@ -31,6 +31,9 @@ export const researchPage = (c: any) => {
                         <a href="/" class="text-gray-600 hover:text-green-600 transition-colors">
                             <i class="fas fa-home text-xl"></i>
                         </a>
+                        <a href="/patient" class="text-gray-600 hover:text-green-600 transition-colors" title="Portal do Paciente">
+                            <i class="fas fa-hospital-user text-xl"></i>
+                        </a>
                         <button class="text-gray-600 hover:text-green-600 transition-colors">
                             <i class="fas fa-bell text-xl"></i>
                         </button>
@@ -188,7 +191,7 @@ export const researchPage = (c: any) => {
                         <i class="far fa-chart-bar text-green-600 mr-2"></i>
                         Análise de Coorte
                     </h3>
-                    <canvas id="cohortChart" height="200"></canvas>
+                    <canvas style="max-width: 100%; height: auto;" id="cohortChart" class="w-full max-w-full" style="max-height: 400px;"></canvas>
                 </div>
 
                 <!-- Survival Analysis -->
@@ -197,7 +200,7 @@ export const researchPage = (c: any) => {
                         <i class="far fa-chart-line text-green-500 mr-2"></i>
                         Análise de Sobrevida
                     </h3>
-                    <canvas id="survivalChart" height="200"></canvas>
+                    <canvas style="max-width: 100%; height: auto;" id="survivalChart" class="w-full max-w-full" style="max-height: 400px;"></canvas>
                 </div>
             </div>
 
@@ -262,7 +265,7 @@ export const researchPage = (c: any) => {
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,
+                    maintainAspectRatio: true,
                     scales: {
                         y: {
                             beginAtZero: true,
@@ -299,7 +302,7 @@ export const researchPage = (c: any) => {
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,
+                    maintainAspectRatio: true,
                     plugins: {
                         legend: {
                             position: 'bottom'

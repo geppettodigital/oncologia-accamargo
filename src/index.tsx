@@ -20,6 +20,7 @@ import { navigatorPage } from './pages/navigator'
 import { financialPage } from './pages/financial'
 import { wellnessPage } from './pages/wellness'
 import { researchPage } from './pages/research'
+import { adminMasterPage } from './pages/admin-master'
 
 // Type definitions for Cloudflare bindings
 type Bindings = {
@@ -53,6 +54,7 @@ app.get('/navigator', navigatorPage)
 app.get('/financial', financialPage)
 app.get('/wellness', wellnessPage)
 app.get('/research', researchPage)
+app.get('/admin-master', adminMasterPage)
 
 // Main landing page with updated modern design
 app.get('/', (c) => {
@@ -116,9 +118,10 @@ app.get('/', (c) => {
                         <button class="text-gray-600 hover:text-green-600 transition-colors">
                             <i class="far fa-bell text-xl"></i>
                         </button>
-                        <button class="text-gray-600 hover:text-green-600 transition-colors">
-                            <i class="far fa-user-circle text-xl"></i>
-                        </button>
+                        <a href="/admin-master" class="flex items-center bg-gradient-to-r from-green-600 to-green-700 text-white px-3 py-1 rounded-full hover:from-green-700 hover:to-green-800 transition-all">
+                            <i class="fas fa-user-shield text-sm mr-2"></i>
+                            <span class="text-sm font-semibold">Master Admin</span>
+                        </a>
                     </div>
                 </div>
             </div>

@@ -30,6 +30,9 @@ export const doctorPage = (c: any) => {
                         <a href="/" class="text-gray-600 hover:text-green-600 transition-colors">
                             <i class="fas fa-home text-xl"></i>
                         </a>
+                        <a href="/patient" class="text-gray-600 hover:text-green-600 transition-colors" title="Portal do Paciente">
+                            <i class="fas fa-hospital-user text-xl"></i>
+                        </a>
                         <button class="text-gray-600 hover:text-green-600 transition-colors">
                             <i class="fas fa-bell text-xl"></i>
                         </button>
