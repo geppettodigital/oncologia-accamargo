@@ -175,8 +175,8 @@ export const adminMasterPage = (c: any) => {
                             </h2>
                             <p class="text-sm text-gray-600">Gestão de modelos e treinamento de algoritmos</p>
                         </div>
-                        <div class="text-4xl text-purple-600 opacity-20">
-                            <i class="fas fa-robot"></i>
+                        <div class="opacity-20">
+                            <img src="/static/robot-auditor-icon.svg" alt="IA" class="w-12 h-12">
                         </div>
                     </div>
                     <div class="space-y-3">
@@ -273,6 +273,7 @@ export const adminMasterPage = (c: any) => {
         <script>
             // Add interactivity here if needed
         </script>
+        <script src="/static/ai-assistant.js"></script>
     </body>
     </html>
   `)

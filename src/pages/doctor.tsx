@@ -415,6 +415,8 @@ export const doctorPage = (c: any) => {
                 responseDiv.querySelector('p').innerHTML = response.data.response;
             }
         </script>
+        <script src="/static/ai-assistant.js"></script>
+        <script src="/static/ai-assistant.js"></script>
     </body>
     </html>
   `)

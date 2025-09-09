@@ -362,6 +362,8 @@ export const financialPage = (c: any) => {
                 }
             });
         </script>
+        <script src="/static/ai-assistant.js"></script>
+        <script src="/static/ai-assistant.js"></script>
     </body>
     </html>
   `)

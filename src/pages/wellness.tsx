@@ -299,6 +299,8 @@ export const wellnessPage = (c: any) => {
         </footer>
 
         <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
+        <script src="/static/ai-assistant.js"></script>
+        <script src="/static/ai-assistant.js"></script>
     </body>
     </html>
   `)

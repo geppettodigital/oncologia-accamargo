@@ -297,7 +297,7 @@ app.get('/', (c) => {
                     <div class="tech-card glass-effect rounded-2xl p-8 border border-white/50 shadow-xl" onclick="window.location.href='/ai/prompt'">
                         <div class="text-center">
                             <div class="mb-6 inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 shadow-xl">
-                                <i class="fas fa-robot text-4xl text-white"></i>
+                                <img src="/static/robot-auditor-icon.svg" alt="IA" class="w-12 h-12 filter brightness-0 invert">
                             </div>
                             <h3 class="text-xl font-bold mb-3 text-gray-800">Engenharia de Prompt</h3>
                             <p class="text-gray-600 mb-6 leading-relaxed">Otimização de interações com IA para resultados precisos e contextualizados</p>
@@ -436,6 +436,7 @@ app.get('/', (c) => {
                 }, 500);
             });
         </script>
+        <script src="/static/ai-assistant.js"></script>
     </body>
     </html>
   `)
