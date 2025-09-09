@@ -1,5 +1,6 @@
 import { Hono } from 'hono'
 import { html } from 'hono/html'
+import { aiConcernsHTML, aiConcernsStyles, aiConcernsScript } from '../components/ai-concerns'
 
 export const patientPage = (c: any) => {
   return c.html(html`
@@ -54,6 +55,9 @@ export const patientPage = (c: any) => {
                     <img src="/static/accamargo-icon.svg" alt="ACCamargo Logo" class="w-20 h-20 opacity-50">
                 </div>
             </div>
+
+            <!-- AI Concerns Dashboard -->
+            ${aiConcernsHTML('patient')}
 
             <!-- Quick Actions -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">

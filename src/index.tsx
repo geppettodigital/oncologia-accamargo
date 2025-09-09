@@ -12,6 +12,7 @@ import { wellnessRoutes } from './routes/wellness'
 import { researchRoutes } from './routes/research'
 import { adminRoutes } from './routes/admin'
 import { aiRoutes } from './routes/ai'
+import { aiConcernsHTML, aiConcernsStyles, aiConcernsScript } from './components/ai-concerns'
 
 // Import page handlers
 import { patientPage } from './pages/patient'
@@ -73,6 +74,7 @@ app.get('/', (c) => {
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <link href="/static/style.css" rel="stylesheet">
+        ${aiConcernsStyles}
         <style>
             .glass-effect {
                 background: rgba(255, 255, 255, 0.95);
@@ -129,6 +131,9 @@ app.get('/', (c) => {
 
         <!-- Main Content -->
         <main class="flex-grow container mx-auto px-4 py-8">
+            <!-- AI Concerns Dashboard Integrado -->
+            ${aiConcernsHTML('admin-master')}
+
             <!-- Estatísticas da Plataforma (PRIMEIRO) - Design Moderno -->
             <div class="glass-effect rounded-2xl shadow-xl p-8 mb-10 border border-white/50">
                 <div class="flex items-center justify-center mb-8">
@@ -487,6 +492,7 @@ app.get('/', (c) => {
         <script src="/static/ai-assistant.js"></script>
     <script src="/static/portal-helpers.js"></script>
     <script src="/static/portal-functions.js"></script>
+    ${aiConcernsScript}
     </body>
     </html>
   `)
