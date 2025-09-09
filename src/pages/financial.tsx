@@ -363,7 +363,9 @@ export const financialPage = (c: any) => {
             });
         </script>
         <script src="/static/ai-assistant.js"></script>
+        <script src="/static/portal-helpers.js"></script>
         <script src="/static/ai-assistant.js"></script>
+        <script src="/static/portal-helpers.js"></script>
     </body>
     </html>
   `)

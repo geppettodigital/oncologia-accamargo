@@ -437,6 +437,7 @@ app.get('/', (c) => {
             });
         </script>
         <script src="/static/ai-assistant.js"></script>
+    <script src="/static/portal-helpers.js"></script>
     </body>
     </html>
   `)

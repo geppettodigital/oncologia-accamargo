@@ -274,6 +274,7 @@ export const adminMasterPage = (c: any) => {
             // Add interactivity here if needed
         </script>
         <script src="/static/ai-assistant.js"></script>
+        <script src="/static/portal-helpers.js"></script>
     </body>
     </html>
   `)

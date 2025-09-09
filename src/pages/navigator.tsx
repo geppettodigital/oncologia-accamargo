@@ -331,7 +331,9 @@ export const navigatorPage = (c: any) => {
 
         <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
         <script src="/static/ai-assistant.js"></script>
+        <script src="/static/portal-helpers.js"></script>
         <script src="/static/ai-assistant.js"></script>
+        <script src="/static/portal-helpers.js"></script>
     </body>
     </html>
   `)
