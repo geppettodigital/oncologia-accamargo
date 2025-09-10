@@ -14,21 +14,30 @@ Plataforma completa de gestão oncológica integrada com LAURA Assistant, oferec
 
 ## 🚀 Funcionalidades Implementadas
 
-### ✅ Módulos Principais
+### ✅ Módulos Principais (Portal Unificado SPA)
 1. **Portal do Paciente** - Auto-triagem inteligente e acompanhamento personalizado
 2. **Portal Médico** - Assistente clínico com IA e gestão integrada
 3. **Navegador de Pacientes** - Coordenação otimizada da jornada
+   - **🆕 Trilho de Atendimentos**: Visão Kanban completa da jornada
+   - Drag & Drop entre fases do tratamento
+   - 5 colunas: Triagem → Diagnóstico → Tratamento → Acompanhamento → Alta
 4. **Gestão Financeira** - Prevenção inteligente de glosas
 5. **Bem-estar Integrado** - Suporte psicológico e qualidade de vida
 6. **Pesquisa Clínica** - Recrutamento e gestão de trials
 7. **Administração Master** - Visão executiva completa
 8. **Engenharia de Prompt** - Otimização de interações com IA
 
-### 🤖 LAURA Assistant
+### 🤖 Sistemas de IA Integrados
 - **Ansiedade de Laura** - Sistema preditivo de alertas críticos
-- **Visão 360°** - Visualização completa do paciente
-- **Planos de Ação** - Geração automática com 5 tipos de ações
-- **Chat Integrado** - Assistência em tempo real
+  - Implementado em TODOS os portais com ajustes por persona
+  - Interface collapse/expand com memória de estado
+  - Checkboxes interativos com execução em lote
+  - Ações específicas por tipo de usuário (médico, paciente, navegador, etc.)
+- **Trilho de Atendimentos Kanban** - Gestão visual da jornada
+  - 178 pacientes em navegação simultânea
+  - Drag & Drop entre fases do tratamento
+  - Indicadores de prioridade e urgência
+  - Exportação de dados em CSV
 
 ### 📊 Dashboards e Análises
 - Dashboard executivo com métricas em tempo real
@@ -129,13 +138,19 @@ pm2 logs oncologia-plataforma --nostream  # Ver logs
 
 ## 📝 Notas da Versão
 
-### v1.0.0 (Atual)
+### v1.1.0 (Atual - Janeiro 2025)
+- ✅ Portal Unificado SPA - Navegação sem reload de página
+- ✅ Trilho de Atendimentos Kanban no Portal Navegador
+- ✅ Ansiedade de Laura em TODOS os portais com personalização
+- ✅ Drag & Drop para gestão de pacientes entre fases
+- ✅ Exportação de dados do Kanban em CSV
+- ✅ Performance otimizada com lazy loading
+
+### v1.0.0
 - ✅ 8 módulos principais funcionais
-- ✅ LAURA Assistant totalmente integrado
 - ✅ Sistema de Ansiedade de Laura ativo
 - ✅ Prevenção de R$ 2.4M em glosas
 - ✅ Interface responsiva e moderna
-- ✅ Performance otimizada
 
 ## 🔒 Segurança
 - Dados criptografados em trânsito

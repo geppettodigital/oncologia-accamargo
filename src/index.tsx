@@ -12,6 +12,7 @@ import { wellnessRoutes } from './routes/wellness'
 import { researchRoutes } from './routes/research'
 import { adminRoutes } from './routes/admin'
 import { aiRoutes } from './routes/ai'
+import { portalRoutes } from './routes/portal'
 
 
 // Import page handlers
@@ -22,6 +23,7 @@ import { financialPage } from './pages/financial'
 import { wellnessPage } from './pages/wellness'
 import { researchPage } from './pages/research'
 import { adminMasterPage } from './pages/admin-master'
+import { adminMasterCompletePage } from './pages/admin-master-complete'
 import { testIntegrationPage } from './pages/test-integration'
 
 // Type definitions for Cloudflare bindings
@@ -48,15 +50,17 @@ app.route('/api/wellness', wellnessRoutes)
 app.route('/api/research', researchRoutes)
 app.route('/api/admin', adminRoutes)
 app.route('/api/ai', aiRoutes)
+app.route('/api/portal', portalRoutes)
 
 // Mount page routes
-app.get('/patient', patientPage)
-app.get('/doctor', doctorPage)
-app.get('/navigator', navigatorPage)
-app.get('/financial', financialPage)
-app.get('/wellness', wellnessPage)
-app.get('/research', researchPage)
-app.get('/admin-master', adminMasterPage)
+app.get('/portal/patient', patientPage)
+app.get('/portal/doctor', doctorPage)
+app.get('/portal/navigator', navigatorPage)
+app.get('/portal/financial', financialPage)
+app.get('/portal/wellness', wellnessPage)
+app.get('/portal/research', researchPage)
+app.get('/portal/admin-master', adminMasterPage)
+app.get('/admin-master', adminMasterCompletePage)
 app.get('/test-integration', testIntegrationPage)
 
 // Main landing page with updated modern design
@@ -133,6 +137,8 @@ app.get('/', (c) => {
 
         <!-- Main Content -->
         <main class="flex-grow container mx-auto px-4 py-8">
+            <!-- Container Principal para Portais SPA -->
+            <div id="main-container">
             <!-- Estatísticas da Plataforma (PRIMEIRO) - Design Moderno -->
             <div class="glass-effect rounded-2xl shadow-xl p-8 mb-10 border border-white/50">
                 <div class="flex items-center justify-center mb-8">
@@ -184,19 +190,11 @@ app.get('/', (c) => {
                         <h2 class="text-xl font-bold mb-3 text-gray-800">Portal do Paciente</h2>
                         <p class="text-gray-600 mb-6 leading-relaxed">Auto-triagem inteligente, agendamentos e acompanhamento personalizado</p>
                         <div class="flex gap-2 justify-center items-center">
-                            <button onclick="window.location.href='/patient'" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
+                            <button onclick="loadPortal('patient')" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
                                 Acessar
                             </button>
                             <button onclick="event.stopPropagation(); showPortalHelp('patient')" class="portal-help-btn w-12 h-12 rounded-full bg-gray-500 hover:bg-gray-600 text-white flex items-center justify-center transition-all hover:scale-110" title="Informações sobre este portal">
                                 <i class="fas fa-question text-lg"></i>
-                            </button>
-                            <button onclick="event.stopPropagation(); openAIForPortal('patient')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="LAURA Assistant para este portal">
-                                <svg width="24" height="24" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="10" y="10" width="80" height="80" rx="20" ry="20" fill="white"/>
-                                    <rect x="25" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
-                                    <rect x="60" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
-                                    <path d="M 30 60 Q 50 70 70 60" stroke="#ff6b35" stroke-width="4" fill="none" stroke-linecap="round"/>
-                                </svg>
                             </button>
                         </div>
                     </div>
@@ -211,19 +209,11 @@ app.get('/', (c) => {
                         <h2 class="text-xl font-bold mb-3 text-gray-800">Portal Médico</h2>
                         <p class="text-gray-600 mb-6 leading-relaxed">Assistente clínico com IA e gestão integrada de pacientes</p>
                         <div class="flex gap-2 justify-center items-center">
-                            <button onclick="window.location.href='/doctor'" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
+                            <button onclick="loadPortal('doctor')" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
                                 Acessar
                             </button>
                             <button onclick="event.stopPropagation(); showPortalHelp('doctor')" class="portal-help-btn w-12 h-12 rounded-full bg-gray-500 hover:bg-gray-600 text-white flex items-center justify-center transition-all hover:scale-110" title="Informações sobre este portal">
                                 <i class="fas fa-question text-lg"></i>
-                            </button>
-                            <button onclick="event.stopPropagation(); openAIForPortal('doctor')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="LAURA Assistant para este portal">
-                                <svg width="24" height="24" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="10" y="10" width="80" height="80" rx="20" ry="20" fill="white"/>
-                                    <rect x="25" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
-                                    <rect x="60" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
-                                    <path d="M 30 60 Q 50 70 70 60" stroke="#ff6b35" stroke-width="4" fill="none" stroke-linecap="round"/>
-                                </svg>
                             </button>
                         </div>
                     </div>
@@ -238,19 +228,11 @@ app.get('/', (c) => {
                         <h2 class="text-xl font-bold mb-3 text-gray-800">Navegador de Pacientes</h2>
                         <p class="text-gray-600 mb-6 leading-relaxed">Coordenação e acompanhamento otimizado da jornada</p>
                         <div class="flex gap-2 justify-center items-center">
-                            <button onclick="window.location.href='/navigator'" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
+                            <button onclick="loadPortal('navigator')" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
                                 Acessar
                             </button>
                             <button onclick="event.stopPropagation(); showPortalHelp('navigator')" class="portal-help-btn w-12 h-12 rounded-full bg-gray-500 hover:bg-gray-600 text-white flex items-center justify-center transition-all hover:scale-110" title="Informações sobre este portal">
                                 <i class="fas fa-question text-lg"></i>
-                            </button>
-                            <button onclick="event.stopPropagation(); openAIForPortal('navigator')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="LAURA Assistant para este portal">
-                                <svg width="24" height="24" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="10" y="10" width="80" height="80" rx="20" ry="20" fill="white"/>
-                                    <rect x="25" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
-                                    <rect x="60" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
-                                    <path d="M 30 60 Q 50 70 70 60" stroke="#ff6b35" stroke-width="4" fill="none" stroke-linecap="round"/>
-                                </svg>
                             </button>
                         </div>
                     </div>
@@ -265,19 +247,11 @@ app.get('/', (c) => {
                         <h2 class="text-xl font-bold mb-3 text-gray-800">Gestão Financeira</h2>
                         <p class="text-gray-600 mb-6 leading-relaxed">Prevenção inteligente de glosas e análise financeira com IA</p>
                         <div class="flex gap-2 justify-center items-center">
-                            <button onclick="window.location.href='/financial'" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
+                            <button onclick="loadPortal('financial')" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
                                 Acessar
                             </button>
                             <button onclick="event.stopPropagation(); showPortalHelp('financial')" class="portal-help-btn w-12 h-12 rounded-full bg-gray-500 hover:bg-gray-600 text-white flex items-center justify-center transition-all hover:scale-110" title="Informações sobre este portal">
                                 <i class="fas fa-question text-lg"></i>
-                            </button>
-                            <button onclick="event.stopPropagation(); openAIForPortal('financial')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="LAURA Assistant para este portal">
-                                <svg width="24" height="24" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="10" y="10" width="80" height="80" rx="20" ry="20" fill="white"/>
-                                    <rect x="25" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
-                                    <rect x="60" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
-                                    <path d="M 30 60 Q 50 70 70 60" stroke="#ff6b35" stroke-width="4" fill="none" stroke-linecap="round"/>
-                                </svg>
                             </button>
                         </div>
                     </div>
@@ -292,19 +266,11 @@ app.get('/', (c) => {
                         <h2 class="text-xl font-bold mb-3 text-gray-800">Bem-Estar e Apoio</h2>
                         <p class="text-gray-600 mb-6 leading-relaxed">Suporte psicológico e monitoramento emocional integrado</p>
                         <div class="flex gap-2 justify-center items-center">
-                            <button onclick="window.location.href='/wellness'" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
+                            <button onclick="loadPortal('wellness')" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
                                 Acessar
                             </button>
                             <button onclick="event.stopPropagation(); showPortalHelp('wellness')" class="portal-help-btn w-12 h-12 rounded-full bg-gray-500 hover:bg-gray-600 text-white flex items-center justify-center transition-all hover:scale-110" title="Informações sobre este portal">
                                 <i class="fas fa-question text-lg"></i>
-                            </button>
-                            <button onclick="event.stopPropagation(); openAIForPortal('wellness')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="LAURA Assistant para este portal">
-                                <svg width="24" height="24" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="10" y="10" width="80" height="80" rx="20" ry="20" fill="white"/>
-                                    <rect x="25" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
-                                    <rect x="60" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
-                                    <path d="M 30 60 Q 50 70 70 60" stroke="#ff6b35" stroke-width="4" fill="none" stroke-linecap="round"/>
-                                </svg>
                             </button>
                         </div>
                     </div>
@@ -319,19 +285,11 @@ app.get('/', (c) => {
                         <h2 class="text-xl font-bold mb-3 text-gray-800">Pesquisa Clínica</h2>
                         <p class="text-gray-600 mb-6 leading-relaxed">Análise avançada de dados e insights para pesquisa</p>
                         <div class="flex gap-2 justify-center items-center">
-                            <button onclick="window.location.href='/research'" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
+                            <button onclick="loadPortal('research')" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
                                 Acessar
                             </button>
                             <button onclick="event.stopPropagation(); showPortalHelp('research')" class="portal-help-btn w-12 h-12 rounded-full bg-gray-500 hover:bg-gray-600 text-white flex items-center justify-center transition-all hover:scale-110" title="Informações sobre este portal">
                                 <i class="fas fa-question text-lg"></i>
-                            </button>
-                            <button onclick="event.stopPropagation(); openAIForPortal('research')" class="portal-ai-btn w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center justify-center transition-all hover:scale-110" title="LAURA Assistant para este portal">
-                                <svg width="24" height="24" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="10" y="10" width="80" height="80" rx="20" ry="20" fill="white"/>
-                                    <rect x="25" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
-                                    <rect x="60" y="30" width="15" height="15" rx="3" fill="#ff6b35"/>
-                                    <path d="M 30 60 Q 50 70 70 60" stroke="#ff6b35" stroke-width="4" fill="none" stroke-linecap="round"/>
-                                </svg>
                             </button>
                         </div>
                     </div>
@@ -390,6 +348,8 @@ app.get('/', (c) => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <!-- Fim do Container Principal -->
             </div>
         </main>
 
@@ -480,9 +440,28 @@ app.get('/', (c) => {
             </div>
         </footer>
 
+        <link href="/static/kanban-styles.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="/static/app.js"></script>
+        <script src="/static/portal-loader.js"></script>
+        <script src="/static/ai-concerns.js"></script>
+        <script src="/static/kanban-functions.js"></script>
         <script>
+            // Função para mostrar ajuda do portal
+            function showPortalHelp(portalType) {
+                const helpTexts = {
+                    patient: 'Portal do Paciente: Acesse seus exames, consultas, medicamentos e acompanhe sua jornada de tratamento.',
+                    doctor: 'Portal Médico: Gerencie pacientes, prescrições, protocolos e utilize IA para suporte à decisão clínica.',
+                    navigator: 'Navegador de Pacientes: Coordene jornadas, agende consultas e acompanhe a evolução dos pacientes.',
+                    financial: 'Gestão Financeira: Previna glosas, analise custos e otimize o faturamento com inteligência artificial.',
+                    wellness: 'Bem-Estar e Apoio: Acesse recursos de apoio psicológico, grupos de suporte e práticas integrativas.',
+                    research: 'Pesquisa Clínica: Gerencie estudos, analise dados e acompanhe publicações científicas.'
+                };
+                
+                alert(helpTexts[portalType] || 'Informações sobre este portal.');
+            }
+            
             // Animate statistics with smooth easing
             document.addEventListener('DOMContentLoaded', () => {
                 const animateCounter = (element, target) => {
@@ -518,14 +497,10 @@ app.get('/', (c) => {
                 }, 500);
             });
         </script>
-        <script src="/static/ai-assistant.js"></script>
     <script src="/static/portal-helpers.js"></script>
     <script src="/static/portal-functions.js"></script>
-    <script src="/static/laura-assistant-final.js"></script>
-    <script src="/static/ai-concerns.js"></script>
     <script src="/static/action-plan-system.js"></script>
     <script src="/static/action-plan-handlers.js"></script>
-    <script src="/static/laura-integration.js"></script>
     </body>
     </html>
   `)

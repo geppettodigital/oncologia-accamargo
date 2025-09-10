@@ -148,11 +148,8 @@ export const testIntegrationPage = (c: any) => {
         </div>
 
         <!-- Scripts -->
-        <script src="/static/laura-assistant-final.js"></script>
-        <script src="/static/ai-concerns.js"></script>
         <script src="/static/action-plan-system.js"></script>
         <script src="/static/action-plan-handlers.js"></script>
-        <script src="/static/laura-integration.js"></script>
         <script src="/static/test-integration.js"></script>
         
         <script>

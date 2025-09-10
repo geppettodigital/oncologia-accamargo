@@ -22,7 +22,10 @@
     "git:status": "git status",
     "git:log": "git log --oneline",
     "test": "node tests/api.test.js",
-    "test:install": "npm install axios"
+    "test:install": "npm install axios",
+    "build:static": "node build-static.js",
+    "build:github": "npm run build && npm run build:static",
+    "deploy:github": "npm run build:github && echo 'Ready for GitHub Pages'"
   },
   "dependencies": {
     "hono": "^4.9.6"

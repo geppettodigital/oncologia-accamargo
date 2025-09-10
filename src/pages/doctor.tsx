@@ -1,5 +1,6 @@
 import { Hono } from 'hono'
-import { html } from 'hono/html'
+import { html, raw } from 'hono/html'
+import { aiConcernsHTML } from '../components/ai-concerns-enhanced'
 
 export const doctorPage = (c: any) => {
   return c.html(html`
@@ -11,6 +12,7 @@ export const doctorPage = (c: any) => {
         <title>Portal Médico - Plataforma Oncológica</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <link href="/static/style.css" rel="stylesheet">
     </head>
     <body class="bg-gray-50 min-h-screen flex flex-col">
@@ -415,14 +417,10 @@ export const doctorPage = (c: any) => {
                 responseDiv.querySelector('p').innerHTML = response.data.response;
             }
         </script>
-        <script src="/static/laura-assistant-final.js"></script>
         <script src="/static/portal-helpers.js"></script>
-        <script src="/static/laura-assistant-final.js"></script>
         <script src="/static/portal-helpers.js"></script>
-        <script src="/static/ai-concerns.js"></script>
     <script src="/static/action-plan-system.js"></script>
         <script src="/static/action-plan-handlers.js"></script>
-    <script src="/static/laura-integration.js"></script>
     </body>
     </html>
   `)

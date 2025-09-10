@@ -1,5 +1,6 @@
 import { Hono } from 'hono'
-import { html } from 'hono/html'
+import { html, raw } from 'hono/html'
+import { aiConcernsHTML } from '../components/ai-concerns-enhanced'
 
 export const patientPage = (c: any) => {
   return c.html(html`
@@ -11,6 +12,7 @@ export const patientPage = (c: any) => {
         <title>Portal do Paciente - Plataforma Oncológica</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <link href="/static/style.css" rel="stylesheet">
     </head>
     <body class="bg-gray-50 min-h-screen flex flex-col">
@@ -55,7 +57,7 @@ export const patientPage = (c: any) => {
                 </div>
             </div>
 
-            
+            ${raw(aiConcernsHTML('patient'))}
 
             <!-- Quick Actions -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
@@ -84,120 +86,353 @@ export const patientPage = (c: any) => {
                 </button>
             </div>
 
-            <!-- Journey Timeline -->
-            <div class="bg-white rounded-xl shadow-md p-6 mb-8 border border-gray-100">
-                <div class="flex items-center mb-4">
-                    <img src="/static/accamargo-icon.svg" alt="ACCamargo Logo" class="w-8 h-8 mr-3">
-                    <h2 class="text-xl font-bold text-gray-800">Sua Jornada de Tratamento</h2>
-                </div>
-                <div class="relative">
-                    <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-300"></div>
-                    
-                    <div class="relative flex items-start mb-6">
-                        <div class="bg-green-500 rounded-full w-4 h-4 mt-1 z-10 relative"></div>
-                        <div class="ml-6">
-                            <p class="font-semibold text-gray-800">Diagnóstico Inicial</p>
-                            <p class="text-sm text-gray-600">01/01/2024 - Concluído</p>
-                        </div>
+            <!-- Three Column Layout: Journey, Symptoms, Wellness -->
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
+                <!-- Journey Timeline - Compact Version -->
+                <div class="bg-gradient-to-br from-white to-green-50/30 rounded-xl shadow-lg p-6 border border-green-100/50 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-gray-800 flex items-center">
+                            <div class="bg-green-100 p-2 rounded-lg mr-3">
+                                <i class="fas fa-route text-green-600 text-lg"></i>
+                            </div>
+                            Sua Jornada
+                        </h3>
+                        <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
+                            Fase 3/4
+                        </span>
                     </div>
                     
-                    <div class="relative flex items-start mb-6">
-                        <div class="bg-green-500 rounded-full w-4 h-4 mt-1 z-10 relative"></div>
-                        <div class="ml-6">
-                            <p class="font-semibold text-gray-800">Início do Tratamento</p>
-                            <p class="text-sm text-gray-600">15/01/2024 - Concluído</p>
+                    <div class="relative" style="min-height: 250px;">
+                        <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-green-500 to-gray-300"></div>
+                        
+                        <div class="relative flex items-start mb-4">
+                            <div class="bg-green-500 rounded-full w-3 h-3 mt-1 z-10 relative"></div>
+                            <div class="ml-5">
+                                <p class="text-sm font-semibold text-gray-800">Diagnóstico</p>
+                                <p class="text-xs text-gray-600">01/01 ✓</p>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="relative flex items-start mb-6">
-                        <div class="bg-green-600 rounded-full w-4 h-4 mt-1 z-10 relative animate-pulse"></div>
-                        <div class="ml-6">
-                            <p class="font-semibold text-gray-800">Quimioterapia - Ciclo 1</p>
-                            <p class="text-sm text-gray-600">01/02/2024 - Em andamento</p>
-                            <div class="mt-2 bg-blue-50 p-2 rounded">
-                                <p class="text-xs text-blue-800">3 de 6 sessões completadas</p>
+                        
+                        <div class="relative flex items-start mb-4">
+                            <div class="bg-green-500 rounded-full w-3 h-3 mt-1 z-10 relative"></div>
+                            <div class="ml-5">
+                                <p class="text-sm font-semibold text-gray-800">Início Tratamento</p>
+                                <p class="text-xs text-gray-600">15/01 ✓</p>
+                            </div>
+                        </div>
+                        
+                        <div class="relative flex items-start mb-4">
+                            <div class="bg-green-600 rounded-full w-3 h-3 mt-1 z-10 relative animate-pulse"></div>
+                            <div class="ml-5">
+                                <p class="text-sm font-semibold text-gray-800">Quimio - Ciclo 1</p>
+                                <p class="text-xs text-gray-600">Em andamento</p>
+                                <div class="mt-1 bg-blue-50 px-2 py-1 rounded">
+                                    <p class="text-xs text-blue-800">3/6 sessões</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="relative flex items-start">
+                            <div class="bg-gray-300 rounded-full w-3 h-3 mt-1 z-10 relative"></div>
+                            <div class="ml-5">
+                                <p class="text-sm font-semibold text-gray-400">Avaliação</p>
+                                <p class="text-xs text-gray-400">01/03 - Agendado</p>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="relative flex items-start">
-                        <div class="bg-gray-300 rounded-full w-4 h-4 mt-1 z-10 relative"></div>
-                        <div class="ml-6">
-                            <p class="font-semibold text-gray-400">Avaliação de Resposta</p>
-                            <p class="text-sm text-gray-400">01/03/2024 - Agendado</p>
+                    <!-- Progress Bar -->
+                    <div class="mt-4">
+                        <div class="flex justify-between text-xs text-gray-600 mb-1">
+                            <span>Progresso Total</span>
+                            <span class="font-bold">75%</span>
+                        </div>
+                        <div class="bg-gray-200 rounded-full h-2">
+                            <div class="bg-gradient-to-r from-green-500 to-green-600 h-2 rounded-full" style="width: 75%"></div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Health Metrics -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <!-- Symptoms Tracking -->
-                <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-                    <h3 class="font-bold text-gray-800 mb-4">
-                        <i class="far fa-chart-line text-teal-600 mr-2"></i>
-                        Monitoramento de Sintomas
-                    </h3>
-                    <canvas id="symptomsChart" height="200"></canvas>
+                <!-- Symptoms Tracking - Compact -->
+                <div class="bg-gradient-to-br from-white to-teal-50/30 rounded-xl shadow-lg p-6 border border-teal-100/50 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-gray-800 flex items-center">
+                            <div class="bg-teal-100 p-2 rounded-lg mr-3">
+                                <i class="fas fa-chart-line text-teal-600 text-lg"></i>
+                            </div>
+                            Monitoramento de Sintomas
+                        </h3>
+                        <div class="flex gap-2">
+                            <button onclick="toggleChartView('symptoms', 'week')" class="chart-toggle-btn active px-3 py-1 text-xs bg-teal-100 text-teal-700 rounded-lg hover:bg-teal-200 transition-colors">
+                                Semana
+                            </button>
+                            <button onclick="toggleChartView('symptoms', 'month')" class="chart-toggle-btn px-3 py-1 text-xs bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors">
+                                Mês
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Chart Container -->
+                    <div class="relative" style="height: 200px;">
+                        <canvas id="symptomsChart"></canvas>
+                    </div>
+                    
+                    <!-- Legend with interactive elements -->
+                    <div class="mt-4 grid grid-cols-2 gap-3">
+                        <div class="flex items-center justify-between bg-white/70 rounded-lg px-3 py-2">
+                            <div class="flex items-center">
+                                <span class="w-3 h-3 bg-purple-500 rounded-full mr-2"></span>
+                                <span class="text-sm text-gray-700">Náusea</span>
+                            </div>
+                            <span class="text-sm font-bold text-purple-600">↓ 25%</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-white/70 rounded-lg px-3 py-2">
+                            <div class="flex items-center">
+                                <span class="w-3 h-3 bg-pink-500 rounded-full mr-2"></span>
+                                <span class="text-sm text-gray-700">Fadiga</span>
+                            </div>
+                            <span class="text-sm font-bold text-pink-600">↓ 40%</span>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Wellness Score -->
-                <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-                    <h3 class="font-bold text-gray-800 mb-4">
-                        <i class="far fa-heart text-cyan-600 mr-2"></i>
-                        Score de Bem-Estar
-                    </h3>
-                    <div class="text-center">
-                        <div class="relative inline-block">
-                            <svg class="w-32 h-32">
-                                <circle cx="64" cy="64" r="60" stroke="#e5e7eb" stroke-width="8" fill="none"></circle>
-                                <circle cx="64" cy="64" r="60" stroke="#8b5cf6" stroke-width="8" fill="none"
-                                        stroke-dasharray="377" stroke-dashoffset="94" 
-                                        transform="rotate(-90 64 64)"></circle>
+                <!-- Wellness Score - Compact -->
+                <div class="bg-gradient-to-br from-white to-cyan-50/30 rounded-xl shadow-lg p-6 border border-cyan-100/50 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-gray-800 flex items-center">
+                            <div class="bg-cyan-100 p-2 rounded-lg mr-3">
+                                <i class="fas fa-heart text-cyan-600 text-lg"></i>
+                            </div>
+                            Score de Bem-Estar
+                        </h3>
+                        <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
+                            <i class="fas fa-arrow-up text-xs mr-1"></i>
+                            +5 pts
+                        </span>
+                    </div>
+                    
+                    <!-- Circular Progress - Smaller -->
+                    <div class="flex justify-center mb-3">
+                        <div class="relative">
+                            <svg class="w-32 h-32 transform -rotate-90">
+                                <!-- Background circle -->
+                                <circle cx="80" cy="80" r="70" 
+                                        stroke="#e5e7eb" 
+                                        stroke-width="12" 
+                                        fill="none"></circle>
+                                <!-- Progress circle -->
+                                <circle cx="80" cy="80" r="70" 
+                                        stroke="url(#wellness-gradient)" 
+                                        stroke-width="12" 
+                                        fill="none"
+                                        stroke-linecap="round"
+                                        stroke-dasharray="440"
+                                        stroke-dashoffset="110"
+                                        class="transition-all duration-1000 ease-out"></circle>
+                                <!-- Gradient definition -->
+                                <defs>
+                                    <linearGradient id="wellness-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#06b6d4" />
+                                        <stop offset="100%" stop-color="#8b5cf6" />
+                                    </linearGradient>
+                                </defs>
                             </svg>
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <span class="text-3xl font-bold text-teal-700">75%</span>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span class="text-4xl font-bold bg-gradient-to-r from-cyan-600 to-purple-600 bg-clip-text text-transparent">75%</span>
+                                <span class="text-xs text-gray-500 mt-1">Ótimo</span>
                             </div>
                         </div>
-                        <p class="mt-4 text-sm text-gray-600">Seu bem-estar está melhorando!</p>
+                    </div>
+                    
+                    <!-- Wellness Categories -->
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600 flex items-center">
+                                <i class="fas fa-bed text-blue-500 w-4 mr-2"></i>
+                                Sono
+                            </span>
+                            <div class="flex items-center">
+                                <div class="bg-gray-200 rounded-full h-2 w-16 mr-2">
+                                    <div class="bg-blue-500 h-2 rounded-full" style="width: 80%"></div>
+                                </div>
+                                <span class="text-xs font-medium text-gray-700">80%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600 flex items-center">
+                                <i class="fas fa-apple-alt text-green-500 w-4 mr-2"></i>
+                                Nutrição
+                            </span>
+                            <div class="flex items-center">
+                                <div class="bg-gray-200 rounded-full h-2 w-16 mr-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 70%"></div>
+                                </div>
+                                <span class="text-xs font-medium text-gray-700">70%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600 flex items-center">
+                                <i class="fas fa-smile text-yellow-500 w-4 mr-2"></i>
+                                Humor
+                            </span>
+                            <div class="flex items-center">
+                                <div class="bg-gray-200 rounded-full h-2 w-16 mr-2">
+                                    <div class="bg-yellow-500 h-2 rounded-full" style="width: 75%"></div>
+                                </div>
+                                <span class="text-xs font-medium text-gray-700">75%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <p class="text-sm text-gray-600 bg-cyan-50 rounded-lg py-2">
+                            <i class="fas fa-trophy text-cyan-600 mr-1"></i>
+                            Você está indo muito bem! Continue assim!
+                        </p>
                     </div>
                 </div>
             </div>
 
-            <!-- Support Network -->
-            <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-                <h3 class="font-bold text-gray-800 mb-4">
-                    <i class="fas fa-users text-green-600 mr-2"></i>
-                    Sua Rede de Apoio
-                </h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="text-center">
-                        <div class="bg-gray-100 rounded-full w-16 h-16 mx-auto mb-2 flex items-center justify-center">
-                            <i class="fas fa-user-md text-2xl text-green-500"></i>
+            <!-- Support Network - Enhanced with Actions -->
+            <div class="bg-gradient-to-br from-white to-green-50/20 rounded-xl shadow-lg p-6 border border-green-100/50 hover:shadow-xl transition-shadow">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="font-bold text-gray-800 flex items-center">
+                        <div class="bg-green-100 p-2 rounded-lg mr-3">
+                            <i class="fas fa-users text-green-600 text-lg"></i>
                         </div>
-                        <p class="text-sm font-semibold">Dr. João Silva</p>
-                        <p class="text-xs text-gray-600">Oncologista</p>
+                        Sua Rede de Apoio
+                    </h3>
+                    <span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">
+                        <i class="fas fa-circle text-green-500 text-xs mr-1 animate-pulse"></i>
+                        4 disponíveis agora
+                    </span>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Dr. João Silva - Oncologista -->
+                    <div class="bg-white rounded-xl p-4 border border-gray-100 hover:border-green-300 transition-all hover:shadow-md">
+                        <div class="flex flex-col items-center">
+                            <div class="relative mb-3">
+                                <div class="bg-gradient-to-br from-green-100 to-green-200 rounded-full w-20 h-20 flex items-center justify-center">
+                                    <i class="fas fa-user-md text-3xl text-green-600"></i>
+                                </div>
+                                <span class="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-2 border-white rounded-full"></span>
+                            </div>
+                            <p class="text-sm font-bold text-gray-800">Dr. João Silva</p>
+                            <p class="text-xs text-gray-600 mb-3">Oncologista</p>
+                            
+                            <!-- Action Buttons -->
+                            <div class="flex flex-col w-full gap-2">
+                                <button onclick="startChat('Dr. João Silva', 'oncologista')" 
+                                        class="flex items-center justify-center gap-2 bg-green-50 hover:bg-green-100 text-green-700 px-3 py-2 rounded-lg text-xs font-medium transition-colors">
+                                    <i class="fas fa-comments"></i>
+                                    Iniciar Conversa
+                                </button>
+                                <button onclick="requestHelp('Dr. João Silva', 'oncologista')" 
+                                        class="flex items-center justify-center gap-2 bg-orange-50 hover:bg-orange-100 text-orange-700 px-3 py-2 rounded-lg text-xs font-medium transition-colors">
+                                    <i class="fas fa-hand-holding-medical"></i>
+                                    Pedir Ajuda
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="text-center">
-                        <div class="bg-gray-100 rounded-full w-16 h-16 mx-auto mb-2 flex items-center justify-center">
-                            <i class="far fa-user text-2xl text-green-600"></i>
+                    
+                    <!-- Maria Santos - Navegadora -->
+                    <div class="bg-white rounded-xl p-4 border border-gray-100 hover:border-green-300 transition-all hover:shadow-md">
+                        <div class="flex flex-col items-center">
+                            <div class="relative mb-3">
+                                <div class="bg-gradient-to-br from-green-100 to-emerald-200 rounded-full w-20 h-20 flex items-center justify-center">
+                                    <i class="fas fa-compass text-3xl text-green-600"></i>
+                                </div>
+                                <span class="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-2 border-white rounded-full"></span>
+                            </div>
+                            <p class="text-sm font-bold text-gray-800">Maria Santos</p>
+                            <p class="text-xs text-gray-600 mb-3">Navegadora</p>
+                            
+                            <!-- Action Buttons -->
+                            <div class="flex flex-col w-full gap-2">
+                                <button onclick="startChat('Maria Santos', 'navegadora')" 
+                                        class="flex items-center justify-center gap-2 bg-green-50 hover:bg-green-100 text-green-700 px-3 py-2 rounded-lg text-xs font-medium transition-colors">
+                                    <i class="fas fa-comments"></i>
+                                    Iniciar Conversa
+                                </button>
+                                <button onclick="requestHelp('Maria Santos', 'navegadora')" 
+                                        class="flex items-center justify-center gap-2 bg-orange-50 hover:bg-orange-100 text-orange-700 px-3 py-2 rounded-lg text-xs font-medium transition-colors">
+                                    <i class="fas fa-hand-holding-medical"></i>
+                                    Pedir Ajuda
+                                </button>
+                            </div>
                         </div>
-                        <p class="text-sm font-semibold">Maria Santos</p>
-                        <p class="text-xs text-gray-600">Navegadora</p>
                     </div>
-                    <div class="text-center">
-                        <div class="bg-gray-100 rounded-full w-16 h-16 mx-auto mb-2 flex items-center justify-center">
-                            <i class="fas fa-brain text-2xl text-teal-600"></i>
+                    
+                    <!-- Ana Costa - Psicóloga -->
+                    <div class="bg-white rounded-xl p-4 border border-gray-100 hover:border-teal-300 transition-all hover:shadow-md">
+                        <div class="flex flex-col items-center">
+                            <div class="relative mb-3">
+                                <div class="bg-gradient-to-br from-teal-100 to-teal-200 rounded-full w-20 h-20 flex items-center justify-center">
+                                    <i class="fas fa-brain text-3xl text-teal-600"></i>
+                                </div>
+                                <span class="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-2 border-white rounded-full"></span>
+                            </div>
+                            <p class="text-sm font-bold text-gray-800">Ana Costa</p>
+                            <p class="text-xs text-gray-600 mb-3">Psicóloga</p>
+                            
+                            <!-- Action Buttons -->
+                            <div class="flex flex-col w-full gap-2">
+                                <button onclick="startChat('Ana Costa', 'psicóloga')" 
+                                        class="flex items-center justify-center gap-2 bg-green-50 hover:bg-green-100 text-green-700 px-3 py-2 rounded-lg text-xs font-medium transition-colors">
+                                    <i class="fas fa-comments"></i>
+                                    Iniciar Conversa
+                                </button>
+                                <button onclick="requestHelp('Ana Costa', 'psicóloga')" 
+                                        class="flex items-center justify-center gap-2 bg-orange-50 hover:bg-orange-100 text-orange-700 px-3 py-2 rounded-lg text-xs font-medium transition-colors">
+                                    <i class="fas fa-hand-holding-medical"></i>
+                                    Pedir Ajuda
+                                </button>
+                            </div>
                         </div>
-                        <p class="text-sm font-semibold">Ana Costa</p>
-                        <p class="text-xs text-gray-600">Psicóloga</p>
                     </div>
-                    <div class="text-center">
-                        <div class="bg-gray-100 rounded-full w-16 h-16 mx-auto mb-2 flex items-center justify-center">
-                            <i class="far fa-heart text-2xl text-cyan-600"></i>
+                    
+                    <!-- Família -->
+                    <div class="bg-white rounded-xl p-4 border border-gray-100 hover:border-cyan-300 transition-all hover:shadow-md">
+                        <div class="flex flex-col items-center">
+                            <div class="relative mb-3">
+                                <div class="bg-gradient-to-br from-cyan-100 to-cyan-200 rounded-full w-20 h-20 flex items-center justify-center">
+                                    <i class="fas fa-heart text-3xl text-cyan-600"></i>
+                                </div>
+                                <span class="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-2 border-white rounded-full"></span>
+                            </div>
+                            <p class="text-sm font-bold text-gray-800">Família</p>
+                            <p class="text-xs text-gray-600 mb-3">3 membros</p>
+                            
+                            <!-- Action Buttons -->
+                            <div class="flex flex-col w-full gap-2">
+                                <button onclick="startChat('Família', 'grupo familiar')" 
+                                        class="flex items-center justify-center gap-2 bg-green-50 hover:bg-green-100 text-green-700 px-3 py-2 rounded-lg text-xs font-medium transition-colors">
+                                    <i class="fas fa-comments"></i>
+                                    Iniciar Conversa
+                                </button>
+                                <button onclick="requestHelp('Família', 'grupo familiar')" 
+                                        class="flex items-center justify-center gap-2 bg-orange-50 hover:bg-orange-100 text-orange-700 px-3 py-2 rounded-lg text-xs font-medium transition-colors">
+                                    <i class="fas fa-hand-holding-medical"></i>
+                                    Pedir Ajuda
+                                </button>
+                            </div>
                         </div>
-                        <p class="text-sm font-semibold">Família</p>
-                        <p class="text-xs text-gray-600">3 membros</p>
+                    </div>
+                </div>
+                
+                <!-- Status Bar -->
+                <div class="mt-6 bg-green-50 rounded-lg p-3 border border-green-200">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-info-circle text-green-600"></i>
+                            <span class="text-sm text-gray-700">Sua equipe está pronta para ajudar</span>
+                        </div>
+                        <button onclick="viewAllContacts()" class="text-sm text-green-600 hover:text-green-700 font-medium">
+                            Ver todos os contatos →
+                        </button>
                     </div>
                 </div>
             </div>
@@ -246,9 +481,9 @@ export const patientPage = (c: any) => {
         <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
-            // Chart initialization
+            // Enhanced Chart initialization with better styling
             const ctx = document.getElementById('symptomsChart').getContext('2d');
-            new Chart(ctx, {
+            const symptomsChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
@@ -256,30 +491,108 @@ export const patientPage = (c: any) => {
                         label: 'Náusea',
                         data: [3, 4, 3, 2, 3, 4, 3],
                         borderColor: 'rgb(139, 92, 246)',
-                        tension: 0.1
+                        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                        borderWidth: 3,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        pointBackgroundColor: 'white',
+                        pointBorderWidth: 2,
+                        tension: 0.4,
+                        fill: true
                     }, {
                         label: 'Fadiga',
                         data: [5, 5, 4, 4, 3, 4, 3],
                         borderColor: 'rgb(236, 72, 153)',
-                        tension: 0.1
+                        backgroundColor: 'rgba(236, 72, 153, 0.1)',
+                        borderWidth: 3,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        pointBackgroundColor: 'white',
+                        pointBorderWidth: 2,
+                        tension: 0.4,
+                        fill: true
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
                     plugins: {
                         legend: {
-                            position: 'bottom'
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: 12,
+                            titleColor: 'white',
+                            bodyColor: 'white',
+                            borderColor: 'white',
+                            borderWidth: 1,
+                            displayColors: true,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + '/10';
+                                }
+                            }
                         }
                     },
                     scales: {
                         y: {
                             beginAtZero: true,
-                            max: 10
+                            max: 10,
+                            ticks: {
+                                stepSize: 2,
+                                color: '#6b7280',
+                                font: {
+                                    size: 11
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)',
+                                drawBorder: false
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#6b7280',
+                                font: {
+                                    size: 11
+                                }
+                            },
+                            grid: {
+                                display: false,
+                                drawBorder: false
+                            }
                         }
                     }
                 }
             });
+            
+            // Toggle chart view function
+            function toggleChartView(chart, period) {
+                const buttons = document.querySelectorAll('.chart-toggle-btn');
+                buttons.forEach(btn => {
+                    btn.classList.remove('active', 'bg-teal-100', 'text-teal-700');
+                    btn.classList.add('bg-gray-100', 'text-gray-600');
+                });
+                
+                event.target.classList.remove('bg-gray-100', 'text-gray-600');
+                event.target.classList.add('active', 'bg-teal-100', 'text-teal-700');
+                
+                if (period === 'month') {
+                    symptomsChart.data.labels = ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4'];
+                    symptomsChart.data.datasets[0].data = [4, 3, 3, 2];
+                    symptomsChart.data.datasets[1].data = [5, 4, 3, 3];
+                } else {
+                    symptomsChart.data.labels = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
+                    symptomsChart.data.datasets[0].data = [3, 4, 3, 2, 3, 4, 3];
+                    symptomsChart.data.datasets[1].data = [5, 5, 4, 4, 3, 4, 3];
+                }
+                symptomsChart.update();
+            }
 
             // Chat functions
             function openTriageChat() {
@@ -342,6 +655,50 @@ export const patientPage = (c: any) => {
             function viewSupport() {
                 alert('Rede de apoio será exibida');
             }
+            
+            // Support Network Functions - Simplified
+            function startChat(personName, role) {
+                alert('Iniciando conversa com ' + personName + ' (' + role + ')\\n\\nEm breve este chat estará disponível!');
+            }
+            
+            function requestHelp(personName, role) {
+                const helpType = prompt('Que tipo de ajuda você precisa de ' + personName + '?\\n\\n1. Urgente\\n2. Agendamento\\n3. Informações\\n4. Outro');
+                if (helpType) {
+                    alert('Solicitação enviada para ' + personName + '\\n\\nTipo de ajuda: ' + helpType + '\\n\\nVocê receberá uma resposta em breve!');
+                }
+            }
+            
+            function sendHelpRequest(personName, helpType) {
+                alert('✅ Solicitação enviada com sucesso!\\n\\n' + personName + ' foi notificado(a)\\nAssunto: ' + helpType + '\\n\\nVocê receberá uma resposta em breve.');
+            }
+            
+            function viewAllContacts() {
+                alert('📋 Lista completa de contatos:\\n\\n• Dr. João Silva - Oncologista\\n• Maria Santos - Navegadora\\n• Ana Costa - Psicóloga\\n• Família - 3 membros\\n\\nTodos disponíveis para ajudar!');
+            }
+            
+
+                    <div class="bg-white rounded-xl max-w-md w-full max-h-[80vh] flex flex-col">
+                        <div class="p-4 border-b flex items-center justify-between bg-gradient-to-r from-green-50 to-green-100">
+                            <h3 class="font-bold text-gray-800 flex items-center">
+                                <i class="fas fa-comments text-green-600 mr-2"></i>
+                                Conversa com \${personName}
+                            </h3>
+                            <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                            <p class="font-bold">Solicitação enviada!</p>
+                            <p class="text-sm">' + personName + ' foi notificado(a) sobre: "' + helpType + '"</p>
+                            <p class="text-xs mt-1">Você receberá uma resposta em breve.</p>
+                        </div>
+                    </div>
+                \`;
+                document.body.appendChild(notification);
+                
+                // Remover notificação após 5 segundos
+                setTimeout(() => notification.remove(), 5000);
+            }
+
 
             // Enter key to send message
             document.getElementById('chatInput').addEventListener('keypress', (e) => {
@@ -350,14 +707,10 @@ export const patientPage = (c: any) => {
                 }
             });
         </script>
-        <script src="/static/laura-assistant-final.js"></script>
         <script src="/static/portal-helpers.js"></script>
-        <script src="/static/laura-assistant-final.js"></script>
         <script src="/static/portal-helpers.js"></script>
-        <script src="/static/ai-concerns.js"></script>
         <script src="/static/action-plan-system.js"></script>
         <script src="/static/action-plan-handlers.js"></script>
-        <script src="/static/laura-integration.js"></script>
     </body>
     </html>
   `)
