@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Showcase de Portais - Plataforma Oncológica v3.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .portal-preview {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .portal-preview:hover {
+            transform: scale(1.02);
+        }
+        
+        .cf-gradient {
+            background: linear-gradient(135deg, #f48120 0%, #0051c3 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-bold">
+                    <span class="cf-gradient bg-clip-text text-transparent">Showcase de Portais</span>
+                </h1>
+                <button onclick="window.location.href='/'" class="cf-gradient text-white px-4 py-2 rounded-lg">
+                    Voltar ao Sistema
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Grid de Portais -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- Portal Paciente -->
+            <div class="portal-preview glass-effect rounded-xl overflow-hidden shadow-xl" onclick="openPortal('/portal/patient')">
+                <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-4">
+                    <h3 class="text-white font-bold text-xl flex items-center">
+                        <i class="fas fa-user mr-3"></i>Portal do Paciente
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Crect fill='%23f3f4f6'/%3E%3Crect x='20' y='20' width='760' height='60' fill='%23fff' rx='8'/%3E%3Ccircle cx='60' cy='50' r='20' fill='%233b82f6'/%3E%3Crect x='100' y='35' width='200' height='10' fill='%23e5e7eb' rx='5'/%3E%3Crect x='100' y='55' width='150' height='10' fill='%23e5e7eb' rx='5'/%3E%3Crect x='20' y='100' width='360' height='280' fill='%23fff' rx='8'/%3E%3Crect x='40' y='120' width='320' height='40' fill='%23dbeafe' rx='4'/%3E%3Crect x='40' y='180' width='320' height='40' fill='%23dcfce7' rx='4'/%3E%3Crect x='40' y='240' width='320' height='40' fill='%23fef3c7' rx='4'/%3E%3Crect x='40' y='300' width='320' height='40' fill='%23fee2e2' rx='4'/%3E%3Crect x='400' y='100' width='380' height='280' fill='%23fff' rx='8'/%3E%3C/svg%3E" 
+                         alt="Portal Paciente Preview" class="w-full rounded-lg mb-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-calendar text-blue-500 mr-2"></i>
+                            Agendamentos Online
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-file-medical text-green-500 mr-2"></i>
+                            Resultados de Exames
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-comments text-purple-500 mr-2"></i>
+                            Chat com Equipe
+                        </div>
+                    </div>
+                    <button class="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
+                        Acessar Portal
+                    </button>
+                </div>
+            </div>
+
+            <!-- Portal Médico -->
+            <div class="portal-preview glass-effect rounded-xl overflow-hidden shadow-xl" onclick="openPortal('/portal/doctor')">
+                <div class="bg-gradient-to-r from-green-500 to-green-600 p-4">
+                    <h3 class="text-white font-bold text-xl flex items-center">
+                        <i class="fas fa-user-md mr-3"></i>Portal do Médico
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Crect fill='%23f3f4f6'/%3E%3Crect x='20' y='20' width='760' height='60' fill='%23fff' rx='8'/%3E%3Crect x='40' y='35' width='100' height='30' fill='%2310b981' rx='4'/%3E%3Crect x='150' y='35' width='100' height='30' fill='%23f59e0b' rx='4'/%3E%3Crect x='260' y='35' width='100' height='30' fill='%23ef4444' rx='4'/%3E%3Crect x='20' y='100' width='480' height='280' fill='%23fff' rx='8'/%3E%3Crect x='40' y='120' width='440' height='240' fill='%23f9fafb' rx='4'/%3E%3Cpath d='M60 200 L150 250 L240 180 L330 220 L420 160' stroke='%2310b981' stroke-width='3' fill='none'/%3E%3Crect x='520' y='100' width='260' height='130' fill='%23fff' rx='8'/%3E%3Crect x='520' y='250' width='260' height='130' fill='%23fff' rx='8'/%3E%3C/svg%3E" 
+                         alt="Portal Médico Preview" class="w-full rounded-lg mb-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-notes-medical text-green-500 mr-2"></i>
+                            Prontuário Eletrônico
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-brain text-purple-500 mr-2"></i>
+                            IA para Decisão
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-prescription text-blue-500 mr-2"></i>
+                            Prescrição Digital
+                        </div>
+                    </div>
+                    <button class="mt-4 w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600">
+                        Acessar Portal
+                    </button>
+                </div>
+            </div>
+
+            <!-- Portal Navegador -->
+            <div class="portal-preview glass-effect rounded-xl overflow-hidden shadow-xl" onclick="openPortal('/portal/navigator')">
+                <div class="bg-gradient-to-r from-purple-500 to-purple-600 p-4">
+                    <h3 class="text-white font-bold text-xl flex items-center">
+                        <i class="fas fa-compass mr-3"></i>Portal Navegador
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Crect fill='%23f3f4f6'/%3E%3Ccircle cx='400' cy='200' r='150' fill='%23fff'/%3E%3Ccircle cx='400' cy='200' r='120' fill='%23e9d5ff'/%3E%3Ccircle cx='400' cy='200' r='90' fill='%23d8b4fe'/%3E%3Ccircle cx='400' cy='200' r='60' fill='%23c084fc'/%3E%3Ccircle cx='400' cy='200' r='30' fill='%239333ea'/%3E%3Crect x='50' y='50' width='150' height='80' fill='%23fff' rx='8'/%3E%3Crect x='50' y='270' width='150' height='80' fill='%23fff' rx='8'/%3E%3Crect x='600' y='50' width='150' height='80' fill='%23fff' rx='8'/%3E%3Crect x='600' y='270' width='150' height='80' fill='%23fff' rx='8'/%3E%3C/svg%3E" 
+                         alt="Portal Navegador Preview" class="w-full rounded-lg mb-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-route text-purple-500 mr-2"></i>
+                            Jornada do Paciente
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-tasks text-blue-500 mr-2"></i>
+                            Gestão de Casos
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-users text-green-500 mr-2"></i>
+                            Coordenação de Equipe
+                        </div>
+                    </div>
+                    <button class="mt-4 w-full bg-purple-500 text-white py-2 rounded-lg hover:bg-purple-600">
+                        Acessar Portal
+                    </button>
+                </div>
+            </div>
+
+            <!-- Portal Financeiro -->
+            <div class="portal-preview glass-effect rounded-xl overflow-hidden shadow-xl" onclick="openPortal('/portal/financial')">
+                <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 p-4">
+                    <h3 class="text-white font-bold text-xl flex items-center">
+                        <i class="fas fa-chart-line mr-3"></i>Portal Financeiro
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Crect fill='%23f3f4f6'/%3E%3Crect x='50' y='50' width='300' height='150' fill='%23fff' rx='8'/%3E%3Ctext x='200' y='100' text-anchor='middle' font-size='36' font-weight='bold' fill='%23f59e0b'%3ER$ 2.4M%3C/text%3E%3Ctext x='200' y='130' text-anchor='middle' font-size='14' fill='%236b7280'%3EEconomia Anual%3C/text%3E%3Crect x='50' y='220' width='300' height='150' fill='%23fff' rx='8'/%3E%3Crect x='70' y='280' width='40' height='60' fill='%23fbbf24'/%3E%3Crect x='130' y='260' width='40' height='80' fill='%23f59e0b'/%3E%3Crect x='190' y='240' width='40' height='100' fill='%23d97706'/%3E%3Crect x='250' y='250' width='40' height='90' fill='%23f59e0b'/%3E%3Crect x='400' y='50' width='350' height='320' fill='%23fff' rx='8'/%3E%3C/svg%3E" 
+                         alt="Portal Financeiro Preview" class="w-full rounded-lg mb-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-dollar-sign text-yellow-500 mr-2"></i>
+                            Análise de Custos
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-file-invoice text-red-500 mr-2"></i>
+                            Gestão de Glosas
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-chart-pie text-blue-500 mr-2"></i>
+                            Dashboard Financeiro
+                        </div>
+                    </div>
+                    <button class="mt-4 w-full bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600">
+                        Acessar Portal
+                    </button>
+                </div>
+            </div>
+
+            <!-- Portal Pesquisa -->
+            <div class="portal-preview glass-effect rounded-xl overflow-hidden shadow-xl" onclick="openPortal('/portal/research')">
+                <div class="bg-gradient-to-r from-indigo-500 to-indigo-600 p-4">
+                    <h3 class="text-white font-bold text-xl flex items-center">
+                        <i class="fas fa-microscope mr-3"></i>Portal de Pesquisa
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Crect fill='%23f3f4f6'/%3E%3Crect x='50' y='50' width='700' height='40' fill='%23fff' rx='8'/%3E%3Crect x='70' y='60' width='400' height='20' fill='%23e0e7ff' rx='10'/%3E%3Ccircle cx='600' cy='70' r='15' fill='%236366f1'/%3E%3Crect x='50' y='110' width='340' height='260' fill='%23fff' rx='8'/%3E%3Crect x='70' y='130' width='300' height='30' fill='%23eef2ff'/%3E%3Crect x='70' y='170' width='300' height='30' fill='%23eef2ff'/%3E%3Crect x='70' y='210' width='300' height='30' fill='%23eef2ff'/%3E%3Crect x='70' y='250' width='300' height='30' fill='%23eef2ff'/%3E%3Crect x='410' y='110' width='340' height='260' fill='%23fff' rx='8'/%3E%3C/svg%3E" 
+                         alt="Portal Pesquisa Preview" class="w-full rounded-lg mb-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-flask text-indigo-500 mr-2"></i>
+                            Trials Clínicos
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-database text-purple-500 mr-2"></i>
+                            Base de Evidências
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-chart-bar text-blue-500 mr-2"></i>
+                            Analytics Avançado
+                        </div>
+                    </div>
+                    <button class="mt-4 w-full bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600">
+                        Acessar Portal
+                    </button>
+                </div>
+            </div>
+
+            <!-- Portal Bem-estar -->
+            <div class="portal-preview glass-effect rounded-xl overflow-hidden shadow-xl" onclick="openPortal('/portal/wellness')">
+                <div class="bg-gradient-to-r from-pink-500 to-pink-600 p-4">
+                    <h3 class="text-white font-bold text-xl flex items-center">
+                        <i class="fas fa-heart mr-3"></i>Portal Bem-estar
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Crect fill='%23f3f4f6'/%3E%3Cpath d='M400 150 C380 100, 320 100, 320 160 C320 220, 400 280, 400 280 C400 280, 480 220, 480 160 C480 100, 420 100, 400 150 Z' fill='%23ec4899'/%3E%3Crect x='50' y='50' width='200' height='100' fill='%23fff' rx='8'/%3E%3Crect x='550' y='50' width='200' height='100' fill='%23fff' rx='8'/%3E%3Crect x='50' y='250' width='200' height='100' fill='%23fff' rx='8'/%3E%3Crect x='550' y='250' width='200' height='100' fill='%23fff' rx='8'/%3E%3C/svg%3E" 
+                         alt="Portal Bem-estar Preview" class="w-full rounded-lg mb-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-brain text-pink-500 mr-2"></i>
+                            Apoio Psicológico
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-apple-alt text-green-500 mr-2"></i>
+                            Nutrição Oncológica
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-users text-purple-500 mr-2"></i>
+                            Grupos de Apoio
+                        </div>
+                    </div>
+                    <button class="mt-4 w-full bg-pink-500 text-white py-2 rounded-lg hover:bg-pink-600">
+                        Acessar Portal
+                    </button>
+                </div>
+            </div>
+
+            <!-- Portal Admin Master -->
+            <div class="portal-preview glass-effect rounded-xl overflow-hidden shadow-xl col-span-1 lg:col-span-2" onclick="openPortal('/portal/admin-master')">
+                <div class="bg-gradient-to-r from-red-500 to-red-600 p-4">
+                    <h3 class="text-white font-bold text-xl flex items-center">
+                        <i class="fas fa-cog mr-3"></i>Portal Admin Master
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Crect fill='%23f3f4f6'/%3E%3Crect x='20' y='20' width='180' height='100' fill='%23fee2e2' rx='8'/%3E%3Crect x='210' y='20' width='180' height='100' fill='%23dcfce7' rx='8'/%3E%3Crect x='400' y='20' width='180' height='100' fill='%23dbeafe' rx='8'/%3E%3Crect x='590' y='20' width='180' height='100' fill='%23fef3c7' rx='8'/%3E%3Crect x='20' y='140' width='760' height='240' fill='%23fff' rx='8'/%3E%3Cpath d='M50 300 L150 250 L250 270 L350 200 L450 220 L550 180 L650 210 L750 160' stroke='%23ef4444' stroke-width='3' fill='none'/%3E%3C/svg%3E" 
+                                 alt="Admin Dashboard" class="w-full rounded-lg">
+                        </div>
+                        <div class="space-y-3">
+                            <h4 class="font-bold text-gray-800">Controle Total do Sistema</h4>
+                            <div class="space-y-2">
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-users-cog text-red-500 mr-2"></i>
+                                    Gestão de Usuários e Permissões
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-server text-blue-500 mr-2"></i>
+                                    Monitoramento de Sistema
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-shield-alt text-green-500 mr-2"></i>
+                                    Logs e Auditoria
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-chart-line text-purple-500 mr-2"></i>
+                                    KPIs Institucionais
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-cogs text-yellow-500 mr-2"></i>
+                                    Configurações Avançadas
+                                </div>
+                            </div>
+                            <button class="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600">
+                                Acessar Portal Admin
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estatísticas Gerais -->
+        <div class="mt-12 glass-effect rounded-xl p-8">
+            <h2 class="text-2xl font-bold mb-6 text-center">
+                <span class="cf-gradient bg-clip-text text-transparent">Estatísticas da Plataforma</span>
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-orange-500">7</div>
+                    <div class="text-gray-600">Portais Ativos</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-blue-500">8</div>
+                    <div class="text-gray-600">Módulos Funcionais</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-green-500">13</div>
+                    <div class="text-gray-600">Integrações</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-purple-500">99.98%</div>
+                    <div class="text-gray-600">Uptime</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openPortal(url) {
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>

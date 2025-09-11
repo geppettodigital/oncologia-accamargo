@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview Completo - Plataforma Oncológica v3.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="/static/cloudflare-theme.css" rel="stylesheet">
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .cf-gradient {
+            background: linear-gradient(135deg, #f48120 0%, #0051c3 100%);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #f48120 0%, #0051c3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .portal-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .portal-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(244, 129, 32, 0.2);
+        }
+        
+        .module-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .module-card:hover {
+            border-color: #f48120;
+            transform: translateY(-4px);
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, rgba(244, 129, 32, 0.1) 0%, rgba(0, 81, 195, 0.1) 100%);
+        }
+        
+        .ai-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            background: #f48120;
+            border-radius: 50%;
+            position: absolute;
+            left: -6px;
+            top: 8px;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 0;
+            top: 20px;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #f48120 0%, #0051c3 100%);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 via-orange-50/10 to-blue-50/10 min-h-screen">
+    <!-- Header Principal -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 cf-gradient rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold gradient-text">Plataforma Oncológica v3.0</h1>
+                        <p class="text-sm text-gray-600">Sistema Multi-Cliente com IA Preditiva</p>
+                    </div>
+                </div>
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="#portais" class="text-gray-700 hover:text-orange-500 transition-colors">Portais</a>
+                    <a href="#modulos" class="text-gray-700 hover:text-orange-500 transition-colors">Módulos</a>
+                    <a href="#metricas" class="text-gray-700 hover:text-orange-500 transition-colors">Métricas</a>
+                    <a href="#ia" class="text-gray-700 hover:text-orange-500 transition-colors">IA Laura</a>
+                    <a href="/brand-customizer.html" class="cf-gradient text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg transition-all">
+                        <i class="fas fa-palette mr-2"></i>Customizar
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto text-center">
+            <div class="inline-flex items-center justify-center w-32 h-32 cf-gradient rounded-full shadow-2xl mb-8 ai-pulse">
+                <i class="fas fa-hospital text-5xl text-white"></i>
+            </div>
+            <h2 class="text-5xl font-bold mb-6">
+                <span class="gradient-text">Transformando o Cuidado Oncológico</span>
+            </h2>
+            <p class="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
+                Plataforma completa para gestão da jornada oncológica com inteligência artificial preditiva, 
+                customização instantânea e performance global via Cloudflare Edge Computing.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="scrollToSection('portais')" class="cf-gradient text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-xl transform hover:scale-105 transition-all">
+                    <i class="fas fa-rocket mr-2"></i>
+                    Explorar Plataforma
+                </button>
+                <button onclick="window.location.href='/brand-customizer.html'" class="bg-white text-orange-500 border-2 border-orange-500 px-8 py-4 rounded-full font-bold text-lg hover:bg-orange-50 transition-all">
+                    <i class="fas fa-paint-brush mr-2"></i>
+                    Personalizar Marca
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Métricas Principais -->
+    <section id="metricas" class="py-16 px-4">
+        <div class="container mx-auto">
+            <h3 class="text-3xl font-bold text-center mb-12 gradient-text">Resultados Comprovados</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-effect rounded-xl p-6 text-center metric-card">
+                    <div class="text-4xl font-bold text-orange-500 mb-2">R$ 2.4M+</div>
+                    <div class="text-gray-600">Economia Anual</div>
+                    <div class="text-sm text-gray-500 mt-2">em perdas prevenidas</div>
+                </div>
+                <div class="glass-effect rounded-xl p-6 text-center metric-card">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">45.000+</div>
+                    <div class="text-gray-600">Pacientes/Ano</div>
+                    <div class="text-sm text-gray-500 mt-2">atendidos com excelência</div>
+                </div>
+                <div class="glass-effect rounded-xl p-6 text-center metric-card">
+                    <div class="text-4xl font-bold text-green-500 mb-2">98.5%</div>
+                    <div class="text-gray-600">Satisfação</div>
+                    <div class="text-sm text-gray-500 mt-2">dos pacientes e médicos</div>
+                </div>
+                <div class="glass-effect rounded-xl p-6 text-center metric-card">
+                    <div class="text-4xl font-bold text-purple-500 mb-2"><50ms</div>
+                    <div class="text-gray-600">Latência Global</div>
+                    <div class="text-sm text-gray-500 mt-2">via Cloudflare Edge</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portais Especializados -->
+    <section id="portais" class="py-16 px-4 bg-white">
+        <div class="container mx-auto">
+            <h3 class="text-3xl font-bold text-center mb-4 gradient-text">7 Portais Especializados</h3>
+            <p class="text-center text-gray-600 mb-12">Experiência personalizada para cada tipo de usuário</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Portal Paciente -->
+                <div class="portal-card glass-effect rounded-xl p-6 cursor-pointer" onclick="showPortalDetails('patient')">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Portal do Paciente</h4>
+                    <p class="text-gray-600 text-sm mb-4">Jornada personalizada e acompanhamento integral</p>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Agendamentos online</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Resultados de exames</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Plano de cuidados</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Chat com equipe</li>
+                    </ul>
+                </div>
+
+                <!-- Portal Médico -->
+                <div class="portal-card glass-effect rounded-xl p-6 cursor-pointer" onclick="showPortalDetails('doctor')">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Portal do Médico</h4>
+                    <p class="text-gray-600 text-sm mb-4">Gestão clínica completa e suporte à decisão</p>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Prontuário eletrônico</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Protocolos clínicos</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>IA preditiva</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Prescrições digitais</li>
+                    </ul>
+                </div>
+
+                <!-- Portal Navegador -->
+                <div class="portal-card glass-effect rounded-xl p-6 cursor-pointer" onclick="showPortalDetails('navigator')">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-compass"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Portal Navegador</h4>
+                    <p class="text-gray-600 text-sm mb-4">Coordenação do cuidado end-to-end</p>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Gestão de casos</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Fluxos de trabalho</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Comunicação integrada</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Métricas de navegação</li>
+                    </ul>
+                </div>
+
+                <!-- Portal Financeiro -->
+                <div class="portal-card glass-effect rounded-xl p-6 cursor-pointer" onclick="showPortalDetails('financial')">
+                    <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Portal Financeiro</h4>
+                    <p class="text-gray-600 text-sm mb-4">Controle de custos e faturamento</p>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Análise de glosas</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Gestão de OPME</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Dashboard financeiro</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>ROI em tempo real</li>
+                    </ul>
+                </div>
+
+                <!-- Portal Pesquisa -->
+                <div class="portal-card glass-effect rounded-xl p-6 cursor-pointer" onclick="showPortalDetails('research')">
+                    <div class="w-16 h-16 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-lg flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Portal de Pesquisa</h4>
+                    <p class="text-gray-600 text-sm mb-4">Dados e estudos clínicos</p>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Trials clínicos</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Base de evidências</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Analytics avançado</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Publicações</li>
+                    </ul>
+                </div>
+
+                <!-- Portal Bem-estar -->
+                <div class="portal-card glass-effect rounded-xl p-6 cursor-pointer" onclick="showPortalDetails('wellness')">
+                    <div class="w-16 h-16 bg-gradient-to-br from-pink-400 to-pink-600 rounded-lg flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Portal Bem-estar</h4>
+                    <p class="text-gray-600 text-sm mb-4">Suporte integral ao paciente</p>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Apoio psicológico</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Nutrição oncológica</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Grupos de apoio</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Qualidade de vida</li>
+                    </ul>
+                </div>
+
+                <!-- Portal Admin -->
+                <div class="portal-card glass-effect rounded-xl p-6 cursor-pointer" onclick="showPortalDetails('admin')">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-lg flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Portal Admin Master</h4>
+                    <p class="text-gray-600 text-sm mb-4">Controle total do sistema</p>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Gestão de usuários</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Configurações gerais</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Logs e auditoria</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>KPIs institucionais</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Módulos Funcionais -->
+    <section id="modulos" class="py-16 px-4">
+        <div class="container mx-auto">
+            <h3 class="text-3xl font-bold text-center mb-4 gradient-text">8 Módulos Integrados</h3>
+            <p class="text-center text-gray-600 mb-12">Funcionalidades completas para gestão oncológica</p>
+            
+            <div class="feature-grid">
+                <!-- Agendamento -->
+                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center text-orange-500 text-xl mr-4">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800">Agendamento Inteligente</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-3">Otimização de agenda com IA para máxima eficiência</p>
+                    <div class="space-y-2 text-xs text-gray-500">
+                        <div class="flex items-center"><i class="fas fa-robot text-orange-400 mr-2"></i>IA para sugestões</div>
+                        <div class="flex items-center"><i class="fas fa-clock text-orange-400 mr-2"></i>Gestão de filas</div>
+                        <div class="flex items-center"><i class="fas fa-bell text-orange-400 mr-2"></i>Notificações automáticas</div>
+                    </div>
+                </div>
+
+                <!-- Triagem -->
+                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-500 text-xl mr-4">
+                            <i class="fas fa-filter"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800">Triagem Preditiva</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-3">Classificação de risco com machine learning</p>
+                    <div class="space-y-2 text-xs text-gray-500">
+                        <div class="flex items-center"><i class="fas fa-brain text-blue-400 mr-2"></i>ML para priorização</div>
+                        <div class="flex items-center"><i class="fas fa-exclamation-triangle text-blue-400 mr-2"></i>Alertas de risco</div>
+                        <div class="flex items-center"><i class="fas fa-chart-bar text-blue-400 mr-2"></i>Análise preditiva</div>
+                    </div>
+                </div>
+
+                <!-- Plano de Cuidados -->
+                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-500 text-xl mr-4">
+                            <i class="fas fa-notes-medical"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800">Plano de Cuidados</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-3">Personalização completa por paciente</p>
+                    <div class="space-y-2 text-xs text-gray-500">
+                        <div class="flex items-center"><i class="fas fa-user-circle text-green-400 mr-2"></i>Personalizado</div>
+                        <div class="flex items-center"><i class="fas fa-sync text-green-400 mr-2"></i>Atualização dinâmica</div>
+                        <div class="flex items-center"><i class="fas fa-tasks text-green-400 mr-2"></i>Checklist integrado</div>
+                    </div>
+                </div>
+
+                <!-- Quimioterapia -->
+                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center text-purple-500 text-xl mr-4">
+                            <i class="fas fa-vial"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800">Gestão de Quimioterapia</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-3">Protocolos e ciclos automatizados</p>
+                    <div class="space-y-2 text-xs text-gray-500">
+                        <div class="flex items-center"><i class="fas fa-prescription text-purple-400 mr-2"></i>Protocolos NCCN</div>
+                        <div class="flex items-center"><i class="fas fa-calculator text-purple-400 mr-2"></i>Cálculo de doses</div>
+                        <div class="flex items-center"><i class="fas fa-shield-alt text-purple-400 mr-2"></i>Segurança medicamentosa</div>
+                    </div>
+                </div>
+
+                <!-- Multidisciplinar -->
+                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center text-yellow-500 text-xl mr-4">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800">Equipe Multidisciplinar</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-3">Coordenação integrada de especialistas</p>
+                    <div class="space-y-2 text-xs text-gray-500">
+                        <div class="flex items-center"><i class="fas fa-comments text-yellow-400 mr-2"></i>Chat integrado</div>
+                        <div class="flex items-center"><i class="fas fa-video text-yellow-400 mr-2"></i>Tumor boards</div>
+                        <div class="flex items-center"><i class="fas fa-file-medical text-yellow-400 mr-2"></i>Decisão compartilhada</div>
+                    </div>
+                </div>
+
+                <!-- Farmacovigilância -->
+                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center text-red-500 text-xl mr-4">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800">Farmacovigilância</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-3">Monitoramento de reações adversas</p>
+                    <div class="space-y-2 text-xs text-gray-500">
+                        <div class="flex items-center"><i class="fas fa-exclamation-circle text-red-400 mr-2"></i>Alertas RAM</div>
+                        <div class="flex items-center"><i class="fas fa-database text-red-400 mr-2"></i>Base de dados</div>
+                        <div class="flex items-center"><i class="fas fa-file-alt text-red-400 mr-2"></i>Relatórios ANVISA</div>
+                    </div>
+                </div>
+
+                <!-- Integrações -->
+                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center text-indigo-500 text-xl mr-4">
+                            <i class="fas fa-plug"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800">Integrações</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-3">APIs para sistemas hospitalares</p>
+                    <div class="space-y-2 text-xs text-gray-500">
+                        <div class="flex items-center"><i class="fas fa-exchange-alt text-indigo-400 mr-2"></i>HL7 FHIR</div>
+                        <div class="flex items-center"><i class="fas fa-code text-indigo-400 mr-2"></i>REST APIs</div>
+                        <div class="flex items-center"><i class="fas fa-link text-indigo-400 mr-2"></i>Webhooks</div>
+                    </div>
+                </div>
+
+                <!-- Analytics -->
+                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center text-teal-500 text-xl mr-4">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800">Analytics</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-3">Dashboards e relatórios em tempo real</p>
+                    <div class="space-y-2 text-xs text-gray-500">
+                        <div class="flex items-center"><i class="fas fa-tachometer-alt text-teal-400 mr-2"></i>KPIs real-time</div>
+                        <div class="flex items-center"><i class="fas fa-chart-line text-teal-400 mr-2"></i>Tendências</div>
+                        <div class="flex items-center"><i class="fas fa-download text-teal-400 mr-2"></i>Exportação</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IA Ansiedade de Laura -->
+    <section id="ia" class="py-16 px-4 bg-gradient-to-br from-orange-50 to-blue-50">
+        <div class="container mx-auto">
+            <div class="glass-effect rounded-2xl p-8 md:p-12">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <div class="inline-flex items-center justify-center w-20 h-20 cf-gradient rounded-full shadow-xl mb-6 ai-pulse">
+                            <i class="fas fa-brain text-3xl text-white"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-4 gradient-text">IA "Ansiedade de Laura"</h3>
+                        <p class="text-gray-700 mb-6">
+                            Sistema de inteligência artificial preditiva que monitora continuamente os pacientes, 
+                            identificando riscos e sugerindo intervenções até 10 horas antes de complicações.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-gray-800">Predição de Riscos</h5>
+                                    <p class="text-sm text-gray-600">Identifica complicações com até 92% de precisão</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-gray-800">Alertas Inteligentes</h5>
+                                    <p class="text-sm text-gray-600">Notifica equipe médica em tempo real</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-gray-800">Aprendizado Contínuo</h5>
+                                    <p class="text-sm text-gray-600">Melhora precisão com cada caso analisado</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="bg-white rounded-xl shadow-xl p-6">
+                            <h4 class="font-bold text-gray-800 mb-4">Análise em Tempo Real</h4>
+                            <div class="space-y-3">
+                                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-exclamation-triangle text-yellow-500 mr-3"></i>
+                                        <div>
+                                            <div class="font-semibold text-sm">Risco Médio Detectado</div>
+                                            <div class="text-xs text-gray-600">Paciente #1234 - Possível neutropenia</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-green-50 border-l-4 border-green-400 p-3 rounded">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                        <div>
+                                            <div class="font-semibold text-sm">Evolução Positiva</div>
+                                            <div class="text-xs text-gray-600">Paciente #5678 - Resposta ao tratamento</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-red-50 border-l-4 border-red-400 p-3 rounded">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-bell text-red-500 mr-3 animate-pulse"></i>
+                                        <div>
+                                            <div class="font-semibold text-sm">Atenção Urgente</div>
+                                            <div class="text-xs text-gray-600">Paciente #9012 - Verificar sinais vitais</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-gray-200">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-600">Pacientes monitorados</span>
+                                    <span class="font-bold text-orange-500">342</span>
+                                </div>
+                                <div class="flex justify-between text-sm mt-2">
+                                    <span class="text-gray-600">Alertas hoje</span>
+                                    <span class="font-bold text-blue-500">18</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Técnicas -->
+    <section class="py-16 px-4 bg-white">
+        <div class="container mx-auto">
+            <h3 class="text-3xl font-bold text-center mb-4 gradient-text">Tecnologia de Ponta</h3>
+            <p class="text-center text-gray-600 mb-12">Infraestrutura global com performance excepcional</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Cloudflare Edge -->
+                <div class="glass-effect rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 cf-gradient rounded-lg flex items-center justify-center text-white text-xl mr-4">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800">Edge Computing</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm">Deploy em 200+ localizações globais via Cloudflare Workers</p>
+                </div>
+
+                <!-- Multi-Cliente -->
+                <div class="glass-effect rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 cf-gradient rounded-lg flex items-center justify-center text-white text-xl mr-4">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800">Multi-Cliente</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm">Suporte para múltiplos hospitais com isolamento total</p>
+                </div>
+
+                <!-- Customização -->
+                <div class="glass-effect rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 cf-gradient rounded-lg flex items-center justify-center text-white text-xl mr-4">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800">Customização Visual</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm">Interface personalizável com preview em tempo real</p>
+                </div>
+
+                <!-- Security -->
+                <div class="glass-effect rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 cf-gradient rounded-lg flex items-center justify-center text-white text-xl mr-4">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800">Segurança</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm">Criptografia end-to-end e compliance LGPD/HIPAA</p>
+                </div>
+
+                <!-- API -->
+                <div class="glass-effect rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 cf-gradient rounded-lg flex items-center justify-center text-white text-xl mr-4">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800">APIs RESTful</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm">Integração completa com sistemas hospitalares</p>
+                </div>
+
+                <!-- Analytics -->
+                <div class="glass-effect rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 cf-gradient rounded-lg flex items-center justify-center text-white text-xl mr-4">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800">Analytics Avançado</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm">Dashboards e KPIs em tempo real com IA</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline de Implementação -->
+    <section class="py-16 px-4">
+        <div class="container mx-auto">
+            <h3 class="text-3xl font-bold text-center mb-4 gradient-text">Implementação Rápida</h3>
+            <p class="text-center text-gray-600 mb-12">Do contrato à produção em 30 dias</p>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="relative">
+                    <!-- Timeline items -->
+                    <div class="space-y-8">
+                        <div class="relative pl-8">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-line"></div>
+                            <div class="glass-effect rounded-xl p-6">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-bold text-gray-800">Semana 1: Discovery & Setup</h4>
+                                    <span class="text-sm text-orange-500 font-semibold">Dias 1-7</span>
+                                </div>
+                                <p class="text-gray-600 text-sm">Levantamento de requisitos, configuração inicial e customização da marca</p>
+                            </div>
+                        </div>
+
+                        <div class="relative pl-8">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-line"></div>
+                            <div class="glass-effect rounded-xl p-6">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-bold text-gray-800">Semana 2: Integrações</h4>
+                                    <span class="text-sm text-blue-500 font-semibold">Dias 8-14</span>
+                                </div>
+                                <p class="text-gray-600 text-sm">Conexão com sistemas hospitalares, importação de dados e testes</p>
+                            </div>
+                        </div>
+
+                        <div class="relative pl-8">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-line"></div>
+                            <div class="glass-effect rounded-xl p-6">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-bold text-gray-800">Semana 3: Treinamento</h4>
+                                    <span class="text-sm text-green-500 font-semibold">Dias 15-21</span>
+                                </div>
+                                <p class="text-gray-600 text-sm">Capacitação das equipes, ajustes finos e validação com usuários</p>
+                            </div>
+                        </div>
+
+                        <div class="relative pl-8">
+                            <div class="timeline-dot"></div>
+                            <div class="glass-effect rounded-xl p-6">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-bold text-gray-800">Semana 4: Go Live!</h4>
+                                    <span class="text-sm text-purple-500 font-semibold">Dias 22-30</span>
+                                </div>
+                                <p class="text-gray-600 text-sm">Deploy em produção, monitoramento e suporte dedicado</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="py-20 px-4 bg-gradient-to-br from-orange-500 to-blue-600">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold text-white mb-6">
+                Pronto para Transformar seu Hospital?
+            </h2>
+            <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+                Junte-se aos hospitais que já economizam milhões e salvam mais vidas com nossa plataforma
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="window.location.href='/brand-customizer.html'" class="bg-white text-orange-500 px-8 py-4 rounded-full font-bold text-lg hover:shadow-xl transform hover:scale-105 transition-all">
+                    <i class="fas fa-rocket mr-2"></i>
+                    Começar Agora
+                </button>
+                <button onclick="showDemo()" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-orange-500 transition-all">
+                    <i class="fas fa-play mr-2"></i>
+                    Ver Demonstração
+                </button>
+            </div>
+            
+            <div class="mt-12 flex flex-wrap justify-center gap-8 text-white/80">
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-2xl mr-2"></i>
+                    <span>Implementação em 30 dias</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-2xl mr-2"></i>
+                    <span>Suporte 24/7</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-2xl mr-2"></i>
+                    <span>ROI garantido</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-4">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h5 class="font-bold mb-4">Plataforma</h5>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white">Recursos</a></li>
+                        <li><a href="#" class="hover:text-white">Módulos</a></li>
+                        <li><a href="#" class="hover:text-white">Portais</a></li>
+                        <li><a href="#" class="hover:text-white">IA Laura</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold mb-4">Empresa</h5>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white">Sobre</a></li>
+                        <li><a href="#" class="hover:text-white">Cases</a></li>
+                        <li><a href="#" class="hover:text-white">Blog</a></li>
+                        <li><a href="#" class="hover:text-white">Carreiras</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold mb-4">Suporte</h5>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white">Documentação</a></li>
+                        <li><a href="#" class="hover:text-white">API</a></li>
+                        <li><a href="#" class="hover:text-white">Status</a></li>
+                        <li><a href="#" class="hover:text-white">Contato</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold mb-4">Tecnologia</h5>
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-cloud text-white"></i>
+                        </div>
+                        <span class="text-sm text-gray-400">Powered by Cloudflare</span>
+                    </div>
+                    <p class="text-sm text-gray-400">
+                        Edge computing global com latência ultra-baixa
+                    </p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>© 2025 Plataforma Oncológica v3.0 - Desenvolvido por Geppetto Digital</p>
+                <p class="mt-2">Transformando o cuidado oncológico com tecnologia de ponta</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Portal (Hidden by default) -->
+    <div id="portalModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="modalTitle" class="text-2xl font-bold gradient-text">Portal Details</h3>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <div id="modalContent">
+                <!-- Content will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll to section
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Show portal details modal
+        function showPortalDetails(portal) {
+            const modal = document.getElementById('portalModal');
+            const title = document.getElementById('modalTitle');
+            const content = document.getElementById('modalContent');
+            
+            const portals = {
+                patient: {
+                    title: 'Portal do Paciente',
+                    content: `
+                        <div class="space-y-4">
+                            <p class="text-gray-600">Interface completa para o paciente oncológico gerenciar sua jornada de tratamento.</p>
+                            <h4 class="font-bold text-gray-800">Funcionalidades Principais:</h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• Agendamento online de consultas e exames</li>
+                                <li>• Visualização de resultados e laudos</li>
+                                <li>• Plano de cuidados personalizado</li>
+                                <li>• Chat direto com equipe médica</li>
+                                <li>• Histórico completo de tratamento</li>
+                                <li>• Lembretes de medicação</li>
+                                <li>• Diário de sintomas</li>
+                            </ul>
+                            <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                                <p class="text-sm text-blue-700">
+                                    <i class="fas fa-info-circle mr-2"></i>
+                                    Disponível em aplicativo mobile (iOS/Android)
+                                </p>
+                            </div>
+                        </div>
+                    `
+                },
+                doctor: {
+                    title: 'Portal do Médico',
+                    content: `
+                        <div class="space-y-4">
+                            <p class="text-gray-600">Ferramenta completa para gestão clínica e suporte à decisão médica.</p>
+                            <h4 class="font-bold text-gray-800">Recursos Avançados:</h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• Prontuário eletrônico integrado</li>
+                                <li>• Protocolos NCCN atualizados</li>
+                                <li>• IA para suporte à decisão</li>
+                                <li>• Prescrição eletrônica</li>
+                                <li>• Visualizador DICOM integrado</li>
+                                <li>• Tumor boards virtuais</li>
+                                <li>• Análise de biomarcadores</li>
+                            </ul>
+                            <div class="mt-4 p-4 bg-green-50 rounded-lg">
+                                <p class="text-sm text-green-700">
+                                    <i class="fas fa-check-circle mr-2"></i>
+                                    Certificado pelo CFM e ANS
+                                </p>
+                            </div>
+                        </div>
+                    `
+                }
+                // Add more portal details as needed
+            };
+            
+            const portalData = portals[portal] || { title: 'Portal', content: 'Detalhes em breve...' };
+            
+            title.textContent = portalData.title;
+            content.innerHTML = portalData.content;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        // Close modal
+        function closeModal() {
+            const modal = document.getElementById('portalModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Show demo
+        function showDemo() {
+            alert('Demonstração interativa será aberta em nova janela');
+            window.open('/', '_blank');
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
