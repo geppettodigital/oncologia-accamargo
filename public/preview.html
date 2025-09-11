@@ -129,11 +129,11 @@
                 <i class="fas fa-hospital text-5xl text-white"></i>
             </div>
             <h2 class="text-5xl font-bold mb-6">
-                <span class="gradient-text">Transformando o Cuidado Oncológico</span>
+                <span class="gradient-text">Ampliando o Cuidado Oncológico com Inteligência Artificial Proprietária</span>
             </h2>
             <p class="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
-                Plataforma completa para gestão da jornada oncológica com inteligência artificial preditiva, 
-                customização instantânea e performance global via Geppetto Digital Edge Computing.
+                Plataforma as a Service para gestão da jornada oncológica com IA preditiva, 
+                customização instantânea via Geppetto Digital com Edge Computing Robô Laura.
             </p>
             <div class="flex flex-wrap justify-center gap-4">
                 <button onclick="scrollToSection('portais')" class="gd-gradient text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-xl transform hover:scale-105 transition-all">
@@ -392,7 +392,7 @@
             
             <div class="feature-grid">
                 <!-- Agendamento -->
-                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl">
+                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl cursor-pointer" onclick="showModuleDetails('agendamento')">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center text-orange-500 text-xl mr-4">
                             <i class="fas fa-calendar-alt"></i>
@@ -408,7 +408,7 @@
                 </div>
 
                 <!-- Triagem -->
-                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl">
+                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl cursor-pointer" onclick="showModuleDetails('triagem')">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center text-orange-500 text-xl mr-4">
                             <i class="fas fa-filter"></i>
@@ -424,7 +424,7 @@
                 </div>
 
                 <!-- Plano de Cuidados -->
-                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl">
+                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl cursor-pointer" onclick="showModuleDetails('plano-cuidados')">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-500 text-xl mr-4">
                             <i class="fas fa-notes-medical"></i>
@@ -440,7 +440,7 @@
                 </div>
 
                 <!-- Quimioterapia -->
-                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl">
+                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl cursor-pointer" onclick="showModuleDetails('quimioterapia')">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center text-purple-500 text-xl mr-4">
                             <i class="fas fa-vial"></i>
@@ -456,7 +456,7 @@
                 </div>
 
                 <!-- Multidisciplinar -->
-                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl">
+                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl cursor-pointer" onclick="showModuleDetails('multidisciplinar')">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center text-yellow-500 text-xl mr-4">
                             <i class="fas fa-users"></i>
@@ -472,7 +472,7 @@
                 </div>
 
                 <!-- Farmacovigilância -->
-                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl">
+                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl cursor-pointer" onclick="showModuleDetails('farmacovigilancia')">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center text-red-500 text-xl mr-4">
                             <i class="fas fa-pills"></i>
@@ -488,7 +488,7 @@
                 </div>
 
                 <!-- Integrações -->
-                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl">
+                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl cursor-pointer" onclick="showModuleDetails('integracoes')">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center text-indigo-500 text-xl mr-4">
                             <i class="fas fa-plug"></i>
@@ -504,7 +504,7 @@
                 </div>
 
                 <!-- Analytics -->
-                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl">
+                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl cursor-pointer" onclick="showModuleDetails('analytics')">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center text-teal-500 text-xl mr-4">
                             <i class="fas fa-chart-pie"></i>
@@ -520,7 +520,7 @@
                 </div>
 
                 <!-- Gestão Financeira CFO-ON -->
-                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl">
+                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl cursor-pointer" onclick="showModuleDetails('cfo-on')">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center text-emerald-500 text-xl mr-4">
                             <i class="fas fa-dollar-sign"></i>
@@ -536,7 +536,7 @@
                 </div>
 
                 <!-- Geppetto Digital Zero Touch -->
-                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl">
+                <div class="module-card glass-effect rounded-xl p-6 hover:shadow-xl cursor-pointer" onclick="showModuleDetails('geppetto')">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center text-white text-xl mr-4">
                             <i class="fas fa-magic"></i>
@@ -889,6 +889,21 @@
         </div>
     </div>
 
+    <!-- Modal de Módulo -->
+    <div id="moduleModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-3xl mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="moduleModalTitle" class="text-2xl font-bold gradient-text">Detalhes do Módulo</h3>
+                <button onclick="closeModuleModal()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <div id="moduleModalContent">
+                <!-- Conteúdo dinâmico -->
+            </div>
+        </div>
+    </div>
+
     <script>
         // Smooth scroll to section
         function scrollToSection(sectionId) {
@@ -926,17 +941,90 @@
                         </div>
                     `
                 },
+                laura: {
+                    title: 'Portal Robô Laura - Orquestração de IA',
+                    content: `
+                        <div class="space-y-4">
+                            <p class="text-gray-600">Plataforma de orquestração de múltiplos agentes de IA para otimização hospitalar.</p>
+                            
+                            <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                                <h4 class="font-bold text-green-800 mb-2">
+                                    <i class="fas fa-shield-alt mr-2"></i>Segurança & Soberania de IA
+                                </h4>
+                                <ul class="space-y-1 text-sm text-green-700">
+                                    <li>• Processamento 100% local, sem cloud externa</li>
+                                    <li>• Modelos de IA proprietários e customizados</li>
+                                    <li>• Dados de treinamento isolados por instituição</li>
+                                    <li>• Auditoria completa de decisões da IA</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                                <h4 class="font-bold text-blue-800 mb-2">
+                                    <i class="fas fa-robot mr-2"></i>Agentes de IA Especializados
+                                </h4>
+                                <ul class="space-y-1 text-sm text-blue-700">
+                                    <li>• Agente de Triagem: Classificação automática de urgência</li>
+                                    <li>• Agente Preditivo: Antecipa complicações com 96% de precisão</li>
+                                    <li>• Agente Operacional: Otimiza fluxos em tempo real</li>
+                                    <li>• Agente Financeiro: Reduz custos automaticamente</li>
+                                    <li>• Agente de Qualidade: Monitora KPIs continuamente</li>
+                                </ul>
+                            </div>
+
+                            <h4 class="font-bold text-gray-800">Orquestração em Tempo Real:</h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• Coordenação simultânea de 10+ agentes de IA</li>
+                                <li>• Tomada de decisão em menos de 100ms</li>
+                                <li>• Aprendizado colaborativo entre agentes</li>
+                                <li>• Escalonamento automático para humanos quando necessário</li>
+                            </ul>
+                            
+                            <div class="mt-4 p-4 bg-cyan-50 rounded-lg">
+                                <p class="text-sm text-cyan-700">
+                                    <i class="fas fa-brain mr-2"></i>
+                                    <strong>Diferencial:</strong> Única plataforma com IA 100% proprietária, treinada exclusivamente com seus dados.
+                                </p>
+                            </div>
+                        </div>
+                    `
+                },
                 doctor: {
                     title: 'Portal do Médico',
                     content: `
                         <div class="space-y-4">
-                            <p class="text-gray-600">Ferramenta completa para gestão clínica e suporte à decisão médica.</p>
-                            <h4 class="font-bold text-gray-800">Recursos Avançados:</h4>
+                            <p class="text-gray-600">Ferramenta completa para gestão clínica com suporte à decisão baseado em IA.</p>
+                            
+                            <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                                <h4 class="font-bold text-green-800 mb-2">
+                                    <i class="fas fa-shield-alt mr-2"></i>Segurança Clínica
+                                </h4>
+                                <ul class="space-y-1 text-sm text-green-700">
+                                    <li>• Prontuário com blockchain para imutabilidade</li>
+                                    <li>• Assinatura digital certificada</li>
+                                    <li>• Acesso baseado em papel e contexto</li>
+                                    <li>• Logs detalhados de todas as ações</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                                <h4 class="font-bold text-blue-800 mb-2">
+                                    <i class="fas fa-brain mr-2"></i>IA para Decisão Clínica
+                                </h4>
+                                <ul class="space-y-1 text-sm text-blue-700">
+                                    <li>• Sugestões baseadas em evidências atualizadas</li>
+                                    <li>• Alertas de interações medicamentosas</li>
+                                    <li>• Predição de resposta ao tratamento</li>
+                                    <li>• Segunda opinião automática por IA</li>
+                                </ul>
+                            </div>
+
+                            <h4 class="font-bold text-gray-800">Implementação Instantânea:</h4>
                             <ul class="space-y-2 text-gray-600">
-                                <li>• Prontuário eletrônico integrado</li>
-                                <li>• Protocolos NCCN atualizados</li>
-                                <li>• IA para suporte à decisão</li>
-                                <li>• Prescrição eletrônica</li>
+                                <li>• Sincronização em tempo real entre dispositivos</li>
+                                <li>• Acesso offline com sincronização posterior</li>
+                                <li>• Integração com equipamentos médicos</li>
+                                <li>• Protocolos NCCN atualizados automaticamente</li>
                                 <li>• Visualizador DICOM integrado</li>
                                 <li>• Tumor boards virtuais</li>
                                 <li>• Análise de biomarcadores</li>
@@ -975,10 +1063,213 @@
             window.open('/', '_blank');
         }
 
+        // Show module details modal
+        function showModuleDetails(moduleName) {
+            const modal = document.getElementById('moduleModal');
+            const title = document.getElementById('moduleModalTitle');
+            const content = document.getElementById('moduleModalContent');
+            
+            const modules = {
+                'agendamento': {
+                    title: 'Agendamento Inteligente',
+                    content: `
+                        <div class="space-y-4">
+                            <p class="text-gray-600">Sistema avançado de agendamento com IA para otimização de recursos e tempo.</p>
+                            
+                            <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                                <h4 class="font-bold text-green-800 mb-2">
+                                    <i class="fas fa-shield-alt mr-2"></i>Segurança & Soberania
+                                </h4>
+                                <ul class="space-y-1 text-sm text-green-700">
+                                    <li>• Dados de agenda criptografados com AES-256</li>
+                                    <li>• Backup automático em tempo real</li>
+                                    <li>• Histórico imutável de alterações</li>
+                                    <li>• Controle de acesso granular por perfil</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                                <h4 class="font-bold text-blue-800 mb-2">
+                                    <i class="fas fa-brain mr-2"></i>IA Operacional
+                                </h4>
+                                <ul class="space-y-1 text-sm text-blue-700">
+                                    <li>• Predição de no-shows com 95% de precisão</li>
+                                    <li>• Otimização automática de slots</li>
+                                    <li>• Sugestão de reagendamentos inteligentes</li>
+                                    <li>• Análise de padrões de demanda</li>
+                                </ul>
+                            </div>
+
+                            <h4 class="font-bold text-gray-800">Implementação em Tempo Real:</h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• Sincronização instantânea entre setores</li>
+                                <li>• Notificações push em tempo real</li>
+                                <li>• Integração com calendários externos</li>
+                                <li>• API REST para sistemas terceiros</li>
+                            </ul>
+                        </div>
+                    `
+                },
+                'triagem': {
+                    title: 'Triagem Preditiva',
+                    content: `
+                        <div class="space-y-4">
+                            <p class="text-gray-600">Classificação de risco com machine learning para priorização eficiente.</p>
+                            
+                            <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                                <h4 class="font-bold text-green-800 mb-2">
+                                    <i class="fas fa-lock mr-2"></i>Dados Protegidos
+                                </h4>
+                                <ul class="space-y-1 text-sm text-green-700">
+                                    <li>• Anonimização automática para ML</li>
+                                    <li>• Processamento local sem cloud externa</li>
+                                    <li>• Audit trail completo de decisões</li>
+                                    <li>• Dados isolados por instituição</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                                <h4 class="font-bold text-blue-800 mb-2">
+                                    <i class="fas fa-chart-line mr-2"></i>IA Avançada
+                                </h4>
+                                <ul class="space-y-1 text-sm text-blue-700">
+                                    <li>• Modelo treinado com 1M+ casos oncológicos</li>
+                                    <li>• Precisão de 98% na classificação de urgência</li>
+                                    <li>• Aprendizado contínuo supervisionado</li>
+                                    <li>• Detecção precoce de complicações</li>
+                                </ul>
+                            </div>
+                        </div>
+                    `
+                },
+                'cfo-on': {
+                    title: 'Gestão Financeira (CFO-ON)',
+                    content: `
+                        <div class="space-y-4">
+                            <p class="text-gray-600">Controle financeiro completo com IA para otimização de recursos.</p>
+                            
+                            <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                                <h4 class="font-bold text-green-800 mb-2">
+                                    <i class="fas fa-vault mr-2"></i>Segurança Financeira
+                                </h4>
+                                <ul class="space-y-1 text-sm text-green-700">
+                                    <li>• Criptografia de dados financeiros sensíveis</li>
+                                    <li>• Compliance com normas contábeis e fiscais</li>
+                                    <li>• Blockchain para auditoria imutável</li>
+                                    <li>• Zero-knowledge proofs para privacidade</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                                <h4 class="font-bold text-blue-800 mb-2">
+                                    <i class="fas fa-robot mr-2"></i>IA Financeira
+                                </h4>
+                                <ul class="space-y-1 text-sm text-blue-700">
+                                    <li>• Predição de fluxo de caixa com 30 dias</li>
+                                    <li>• Detecção de anomalias em tempo real</li>
+                                    <li>• Otimização automática de custos</li>
+                                    <li>• ROI calculado e atualizado em tempo real</li>
+                                </ul>
+                            </div>
+                        </div>
+                    `
+                },
+                'geppetto': {
+                    title: 'Geppetto Digital - Zero Touch Setup',
+                    content: `
+                        <div class="space-y-4">
+                            <p class="text-gray-600">Implementação automatizada com mínima intervenção humana.</p>
+                            
+                            <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                                <h4 class="font-bold text-green-800 mb-2">
+                                    <i class="fas fa-server mr-2"></i>Infraestrutura Soberana
+                                </h4>
+                                <ul class="space-y-1 text-sm text-green-700">
+                                    <li>• Deploy em infraestrutura própria do hospital</li>
+                                    <li>• Dados nunca saem da instituição</li>
+                                    <li>• Backup geográfico redundante nacional</li>
+                                    <li>• Recovery instantâneo com zero downtime</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                                <h4 class="font-bold text-blue-800 mb-2">
+                                    <i class="fas fa-magic mr-2"></i>Automação Total
+                                </h4>
+                                <ul class="space-y-1 text-sm text-blue-700">
+                                    <li>• Configuração automática via IA</li>
+                                    <li>• Migração de dados sem interrupção</li>
+                                    <li>• Integração plug-and-play com sistemas</li>
+                                    <li>• GoLive em tempo real sem downtime</li>
+                                </ul>
+                            </div>
+                        </div>
+                    `
+                }
+            };
+            
+            // Default content for modules not specified
+            const defaultContent = `
+                <div class="space-y-4">
+                    <p class="text-gray-600">Módulo avançado com foco em segurança e eficiência operacional.</p>
+                    
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                        <h4 class="font-bold text-green-800 mb-2">
+                            <i class="fas fa-shield-alt mr-2"></i>Segurança & Soberania de Dados
+                        </h4>
+                        <ul class="space-y-1 text-sm text-green-700">
+                            <li>• Criptografia AES-256 em repouso e trânsito</li>
+                            <li>• Dados armazenados exclusivamente em território nacional</li>
+                            <li>• Backup automático a cada 15 minutos</li>
+                            <li>• Compliance total com LGPD e regulamentações</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                        <h4 class="font-bold text-blue-800 mb-2">
+                            <i class="fas fa-robot mr-2"></i>IA para Melhoria Operacional
+                        </h4>
+                        <ul class="space-y-1 text-sm text-blue-700">
+                            <li>• Otimização contínua de processos</li>
+                            <li>• Predição e prevenção de falhas</li>
+                            <li>• Automação inteligente de tarefas repetitivas</li>
+                            <li>• Análise em tempo real para tomada de decisão</li>
+                        </ul>
+                    </div>
+
+                    <h4 class="font-bold text-gray-800">Implementação em Tempo Real:</h4>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Ativação instantânea sem downtime</li>
+                        <li>• Sincronização em tempo real entre setores</li>
+                        <li>• Monitoramento 24/7 com alertas inteligentes</li>
+                        <li>• Atualizações automáticas sem interrupção</li>
+                    </ul>
+                </div>
+            `;
+            
+            const moduleData = modules[moduleName] || {
+                title: 'Detalhes do Módulo',
+                content: defaultContent
+            };
+            
+            title.innerHTML = moduleData.title;
+            content.innerHTML = moduleData.content;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        // Close module modal
+        function closeModuleModal() {
+            document.getElementById('moduleModal').classList.add('hidden');
+            document.getElementById('moduleModal').classList.remove('flex');
+        }
+
         // Close modal on escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeModal();
+                closeModuleModal();
             }
         });
     </script>
