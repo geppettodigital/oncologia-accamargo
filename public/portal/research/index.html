@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Pesquisa - Plataforma Oncológica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="/static/geppetto-digital-theme.css" rel="stylesheet">
+    <script src="/js/brand-config.js"></script>
+</head>
+<body class="bg-gradient-to-br from-gray-50 via-blue-50/10 to-blue-50/10 min-h-screen">
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-white">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">Portal de Pesquisa</h1>
+                        <p class="text-sm text-gray-600">Dados e análises clínicas</p>
+                    </div>
+                </div>
+                <a href="/preview.html" class="text-gray-600 hover:text-blue-600">
+                    <i class="fas fa-home text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+    <main class="container mx-auto px-4 py-8">
+        <div class="glass-effect rounded-xl p-8 text-center">
+            <i class="fas fa-microscope text-6xl text-blue-500 mb-4"></i>
+            <h2 class="text-3xl font-bold mb-4">Centro de Pesquisa Clínica</h2>
+            <p class="text-gray-600 mb-6">Análise avançada de dados, estudos clínicos e publicações científicas</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg p-6 shadow">
+                    <i class="fas fa-chart-bar text-3xl text-indigo-500 mb-3"></i>
+                    <h3 class="font-bold mb-2">Análise de Dados</h3>
+                    <p class="text-sm text-gray-600">Big Data e Machine Learning</p>
+                </div>
+                <div class="bg-white rounded-lg p-6 shadow">
+                    <i class="fas fa-vials text-3xl text-purple-500 mb-3"></i>
+                    <h3 class="font-bold mb-2">Estudos Clínicos</h3>
+                    <p class="text-sm text-gray-600">Trials em andamento</p>
+                </div>
+                <div class="bg-white rounded-lg p-6 shadow">
+                    <i class="fas fa-book-medical text-3xl text-teal-500 mb-3"></i>
+                    <h3 class="font-bold mb-2">Publicações</h3>
+                    <p class="text-sm text-gray-600">Artigos e papers</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>if (window.BrandConfig) window.BrandConfig.apply();</script>
+</body>
+</html>

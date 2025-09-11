@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Financeiro - Plataforma Oncológica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="/static/geppetto-digital-theme.css" rel="stylesheet">
+    <script src="/js/brand-config.js"></script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 via-green-50/10 to-green-50/10 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center text-white">
+                        <i class="fas fa-dollar-sign text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-800">Portal Financeiro</h1>
+                        <p class="text-sm text-gray-600">Gestão inteligente de custos e receitas</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="text-right">
+                        <p class="text-sm text-gray-600">Economia do Mês</p>
+                        <p class="text-lg font-bold text-green-600">R$ 2.4M</p>
+                    </div>
+                    <a href="/preview.html" class="text-gray-600 hover:text-green-600">
+                        <i class="fas fa-home text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Financial KPIs -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="glass-effect rounded-xl p-6">
+                <div class="flex items-center justify-between mb-2">
+                    <i class="fas fa-chart-line text-green-600 text-2xl"></i>
+                    <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">+23%</span>
+                </div>
+                <p class="text-2xl font-bold text-gray-800">R$ 8.7M</p>
+                <p class="text-sm text-gray-600">Receita Mensal</p>
+            </div>
+
+            <div class="glass-effect rounded-xl p-6">
+                <div class="flex items-center justify-between mb-2">
+                    <i class="fas fa-shield-alt text-blue-600 text-2xl"></i>
+                    <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">-37%</span>
+                </div>
+                <p class="text-2xl font-bold text-gray-800">R$ 2.4M</p>
+                <p class="text-sm text-gray-600">Glosas Evitadas</p>
+            </div>
+
+            <div class="glass-effect rounded-xl p-6">
+                <div class="flex items-center justify-between mb-2">
+                    <i class="fas fa-clock text-orange-600 text-2xl"></i>
+                    <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded">12 dias</span>
+                </div>
+                <p class="text-2xl font-bold text-gray-800">45 dias</p>
+                <p class="text-sm text-gray-600">Prazo Médio Recebimento</p>
+            </div>
+
+            <div class="glass-effect rounded-xl p-6">
+                <div class="flex items-center justify-between mb-2">
+                    <i class="fas fa-percentage text-purple-600 text-2xl"></i>
+                    <span class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded">Meta: 95%</span>
+                </div>
+                <p class="text-2xl font-bold text-gray-800">92.3%</p>
+                <p class="text-sm text-gray-600">Taxa de Aprovação</p>
+            </div>
+        </div>
+
+        <!-- AI Prevention Alerts -->
+        <div class="glass-effect rounded-xl p-6 mb-8 border-l-4 border-green-500">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">
+                <i class="fas fa-robot mr-2 text-green-600"></i>
+                IA Laura - Prevenção de Glosas em Tempo Real
+            </h3>
+            <div class="bg-green-50 rounded-lg p-4 mb-4">
+                <div class="flex items-start">
+                    <i class="fas fa-check-circle text-green-600 text-xl mr-3 mt-1"></i>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-gray-800">R$ 425.000 em glosas prevenidas esta semana</h4>
+                        <p class="text-sm text-gray-600 mt-1">
+                            Sistema identificou e corrigiu 142 inconsistências antes do faturamento. 
+                            Principais categorias: códigos TUSS incorretos (45%), falta de autorização prévia (28%), 
+                            documentação incompleta (27%).
+                        </p>
+                        <div class="mt-3 flex space-x-3">
+                            <button class="bg-green-600 text-white px-4 py-2 rounded text-sm hover:bg-green-700">
+                                Ver Detalhes
+                            </button>
+                            <button class="text-green-600 border border-green-600 px-4 py-2 rounded text-sm hover:bg-green-50">
+                                Exportar Relatório
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Glosas Analysis -->
+        <div class="glass-effect rounded-xl p-6 mb-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Análise de Glosas - Últimos 30 dias</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-3">Por Categoria</h4>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Documentação</span>
+                                <span class="font-bold">R$ 145.000</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-red-500 h-2 rounded-full" style="width: 35%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Autorização</span>
+                                <span class="font-bold">R$ 98.000</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-orange-500 h-2 rounded-full" style="width: 24%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Codificação</span>
+                                <span class="font-bold">R$ 76.000</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-yellow-500 h-2 rounded-full" style="width: 18%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-3">Por Convênio</h4>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Convênio A</span>
+                                <span class="font-bold">23%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full" style="width: 23%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Convênio B</span>
+                                <span class="font-bold">18%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 18%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Convênio C</span>
+                                <span class="font-bold">12%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-purple-500 h-2 rounded-full" style="width: 12%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="glass-effect rounded-xl p-6 text-center cursor-pointer hover:shadow-lg transition-all">
+                <i class="fas fa-file-invoice-dollar text-3xl text-green-600 mb-3"></i>
+                <h4 class="font-bold text-gray-800">Faturamento</h4>
+                <p class="text-xs text-gray-600 mt-2">Processar contas</p>
+            </div>
+
+            <div class="glass-effect rounded-xl p-6 text-center cursor-pointer hover:shadow-lg transition-all">
+                <i class="fas fa-search-dollar text-3xl text-blue-600 mb-3"></i>
+                <h4 class="font-bold text-gray-800">Auditoria</h4>
+                <p class="text-xs text-gray-600 mt-2">Análise detalhada</p>
+            </div>
+
+            <div class="glass-effect rounded-xl p-6 text-center cursor-pointer hover:shadow-lg transition-all">
+                <i class="fas fa-chart-pie text-3xl text-purple-600 mb-3"></i>
+                <h4 class="font-bold text-gray-800">Relatórios</h4>
+                <p class="text-xs text-gray-600 mt-2">Dashboards</p>
+            </div>
+
+            <div class="glass-effect rounded-xl p-6 text-center cursor-pointer hover:shadow-lg transition-all">
+                <i class="fas fa-cog text-3xl text-gray-600 mb-3"></i>
+                <h4 class="font-bold text-gray-800">Configurações</h4>
+                <p class="text-xs text-gray-600 mt-2">Regras e alertas</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Apply brand configuration
+        if (window.BrandConfig) {
+            window.BrandConfig.apply();
+        }
+    </script>
+</body>
+</html>

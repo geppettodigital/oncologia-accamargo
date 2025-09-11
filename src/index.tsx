@@ -28,6 +28,16 @@ import { researchPage } from './pages/research'
 import { adminMasterPage } from './pages/admin-master'
 import { adminMasterCompletePage } from './pages/admin-master-complete'
 import { testIntegrationPage } from './pages/test-integration'
+import { portalPatientPage } from './pages/portal-patient'
+import { 
+  portalDoctorPage,
+  portalNavigatorPage,
+  portalFinancialPage,
+  portalWellnessPage,
+  portalResearchPage,
+  portalAdminPage,
+  portalAdminMasterPage
+} from './pages/portals'
 
 // Type definitions for Geppetto Digital bindings
 type Bindings = {
@@ -41,21 +51,7 @@ const app = new Hono<{ Bindings: Bindings }>()
 // Enable CORS for API routes
 app.use('/api/*', cors())
 
-// Serve static files
-app.use('/static/*', serveStatic({ root: './public' }))
-
-// Portal redirects - serve the HTML files directly
-app.get('/portal/patient', (c) => c.redirect('/portal-patient.html'))
-app.get('/portal/doctor', (c) => c.redirect('/portal-doctor.html'))
-app.get('/portal/navigator', (c) => c.redirect('/portal-navigator.html'))
-app.get('/portal/financial', (c) => c.redirect('/portal-financial.html'))
-app.get('/portal/wellness', (c) => c.redirect('/portal-wellness.html'))
-app.get('/portal/research', (c) => c.redirect('/portal-research.html'))
-app.get('/portal/admin', (c) => c.redirect('/portal-admin.html'))
-app.get('/portal/admin-master', (c) => c.redirect('/portal-admin-master.html'))
-
-// Serve other static files
-app.use('/*', serveStatic({ root: './public' }))
+// Note: Static files are served directly by Cloudflare Pages, not through the worker
 
 // Mount brand customizer
 app.route('/', brandCustomizerRoute)
@@ -70,6 +66,16 @@ app.route('/api/research', researchRoutes)
 app.route('/api/admin', adminRoutes)
 app.route('/api/ai', aiRoutes)
 app.route('/api/portal', portalRoutes)
+
+// Mount portal page routes
+app.get('/portal/patient', portalPatientPage)
+app.get('/portal/doctor', portalDoctorPage)
+app.get('/portal/navigator', portalNavigatorPage)
+app.get('/portal/financial', portalFinancialPage)
+app.get('/portal/wellness', portalWellnessPage)
+app.get('/portal/research', portalResearchPage)
+app.get('/portal/admin', portalAdminPage)
+app.get('/portal/admin-master', portalAdminMasterPage)
 
 // Mount special page routes
 app.get('/admin-master', adminMasterCompletePage)
