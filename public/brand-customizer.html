@@ -7,301 +7,539 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
     <style>
+        /* Glass Morphism Effects */
         .glass-effect {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
         }
         
-        .preview-frame {
+        .glass-dark {
+            background: rgba(17, 24, 39, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Preview Scaling */
+        .preview-desktop {
+            transform: scale(0.6);
+            transform-origin: top center;
+            width: 166.67%;
+            height: 166.67%;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .preview-tablet {
             transform: scale(0.75);
-            transform-origin: top left;
+            transform-origin: top center;
             width: 133.33%;
             height: 133.33%;
+            max-width: 768px;
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            overflow: hidden;
         }
         
-        /* Geppetto Digital Design System Colors */
+        .preview-mobile {
+            transform: scale(1);
+            transform-origin: top center;
+            width: 100%;
+            max-width: 375px;
+            height: 667px;
+            border: 2px solid #e5e7eb;
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        
+        /* Theme Variables */
         :root {
-            --gd-orange: #f48120;
-            --gd-blue: #ff6b35;
-            --gd-purple: #7c3aed;
-            --gd-green: #10b981;
-            --gd-yellow: #fbbf24;
-            --gd-red: #ef4444;
-            --gd-gray-50: #f9fafb;
-            --gd-gray-100: #f3f4f6;
-            --gd-gray-200: #e5e7eb;
-            --gd-gray-300: #d1d5db;
-            --gd-gray-400: #9ca3af;
-            --gd-gray-500: #6b7280;
-            --gd-gray-600: #4b5563;
-            --gd-gray-700: #374151;
-            --gd-gray-800: #1f2937;
-            --gd-gray-900: #111827;
+            --brand-primary: #f48120;
+            --brand-secondary: #ff6b35;
+            --brand-accent: #ff8c42;
+            --brand-gradient: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
         }
         
-        .gd-gradient {
-            background: linear-gradient(135deg, #f48120 0%, #f48120 50%, #ff6b35 100%);
+        /* Animated Gradient Background */
+        .animated-gradient {
+            background: linear-gradient(135deg, #f48120, #ff6b35, #ff8c42, #f48120);
+            background-size: 400% 400%;
+            animation: gradientShift 10s ease infinite;
         }
         
-        .gd-button {
-            background: linear-gradient(135deg, #f48120 0%, #ff6b35 100%);
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Custom Color Picker */
+        .color-picker-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .color-picker {
+            width: 50px;
+            height: 50px;
+            border: 2px solid white;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* File Upload Area */
+        .upload-area {
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .upload-area:hover {
+            border-color: var(--brand-primary);
+            background: rgba(244, 129, 32, 0.05);
+        }
+        
+        .upload-area.dragover {
+            border-color: var(--brand-primary);
+            background: rgba(244, 129, 32, 0.1);
+            transform: scale(1.02);
+        }
+        
+        /* Loading Animation */
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--brand-primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Smooth Transitions */
+        * {
             transition: all 0.3s ease;
         }
         
-        .gd-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(244, 129, 32, 0.3);
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--brand-primary);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--brand-secondary);
+        }
+        
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 16px 24px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 9999;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .toast.success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        
+        .toast.error {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+        
+        .toast.info {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
         }
     </style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-gray-50 via-orange-50/20 to-orange-50/20">
-    <div class="container mx-auto px-4 py-8">
-        <!-- Header -->
-        <div class="text-center mb-8">
-            <div class="inline-flex items-center justify-center w-20 h-20 rounded-full gd-gradient shadow-2xl mb-4">
-                <i class="fas fa-palette text-3xl text-white"></i>
+<body class="min-h-screen bg-gradient-to-br from-gray-50 via-orange-50/30 to-amber-50/20">
+    <!-- Header -->
+    <div class="animated-gradient text-white py-6 px-4 shadow-2xl">
+        <div class="container mx-auto">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-white/20 backdrop-blur rounded-full flex items-center justify-center">
+                        <i class="fas fa-palette text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">Personalizador de Marca</h1>
+                        <p class="text-white/80 text-sm">Configure a identidade visual em tempo real</p>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="flex items-center space-x-3">
+                    <button onclick="resetToDefaults()" class="px-4 py-2 bg-white/20 backdrop-blur rounded-lg hover:bg-white/30 transition-all">
+                        <i class="fas fa-undo mr-2"></i>Resetar
+                    </button>
+                    <button onclick="exportConfig()" class="px-4 py-2 bg-white/20 backdrop-blur rounded-lg hover:bg-white/30 transition-all">
+                        <i class="fas fa-download mr-2"></i>Exportar
+                    </button>
+                    <button onclick="saveConfiguration()" class="px-6 py-2 bg-white text-orange-600 font-semibold rounded-lg hover:shadow-lg transition-all">
+                        <i class="fas fa-save mr-2"></i>Salvar
+                    </button>
+                </div>
             </div>
-            <h1 class="text-4xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
-                Personalizador de Marca
-            </h1>
-            <p class="text-gray-600 mt-2">Configure a identidade visual do seu hospital em tempo real</p>
         </div>
+    </div>
 
-        <div class="grid lg:grid-cols-3 gap-8">
-            <!-- Painel de Configuração -->
-            <div class="lg:col-span-1 space-y-6">
-                <!-- Informações Básicas -->
-                <div class="glass-effect rounded-xl p-6 shadow-xl">
-                    <h3 class="text-lg font-semibold mb-4 text-gray-800">
-                        <i class="fas fa-info-circle text-orange-500 mr-2"></i>
-                        Informações Básicas
-                    </h3>
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid lg:grid-cols-12 gap-6">
+            <!-- Left Panel - Configuration -->
+            <div class="lg:col-span-4 space-y-6">
+                <!-- Brand Information -->
+                <div class="glass-effect rounded-2xl p-6 hover:shadow-xl transition-all">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center mr-3">
+                            <i class="fas fa-building text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">Informações da Instituição</h3>
+                    </div>
                     
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Nome da Instituição</label>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                Nome da Instituição <span class="text-red-500">*</span>
+                            </label>
                             <input type="text" id="brandName" 
-                                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                                   placeholder="Hospital Example" value="Hospital Example">
+                                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-orange-200 focus:border-orange-500 transition-all"
+                                   placeholder="Ex: Hospital São Paulo" 
+                                   value="Hospital Example"
+                                   onchange="updatePreview()">
                         </div>
                         
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Slogan</label>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                Slogan Institucional
+                            </label>
                             <input type="text" id="brandTagline" 
-                                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                                   placeholder="Cuidando de vidas" value="Transformando o cuidado oncológico">
+                                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-orange-200 focus:border-orange-500 transition-all"
+                                   placeholder="Ex: Cuidando de vidas com excelência" 
+                                   value="Transformando o cuidado oncológico"
+                                   onchange="updatePreview()">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                Website
+                            </label>
+                            <input type="url" id="brandWebsite" 
+                                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-orange-200 focus:border-orange-500 transition-all"
+                                   placeholder="https://www.hospital.com.br" 
+                                   value="https://www.hospital.com.br"
+                                   onchange="updatePreview()">
                         </div>
                     </div>
                 </div>
 
-                <!-- Upload de Logo -->
-                <div class="glass-effect rounded-xl p-6 shadow-xl">
-                    <h3 class="text-lg font-semibold mb-4 text-gray-800">
-                        <i class="fas fa-image text-orange-500 mr-2"></i>
-                        Logo da Instituição
-                    </h3>
+                <!-- Logo Upload -->
+                <div class="glass-effect rounded-2xl p-6 hover:shadow-xl transition-all">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center mr-3">
+                            <i class="fas fa-image text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">Logo da Instituição</h3>
+                    </div>
                     
-                    <div class="space-y-4">
-                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-orange-500 transition-colors cursor-pointer"
-                             onclick="document.getElementById('logoUpload').click()">
-                            <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-2"></i>
-                            <p class="text-sm text-gray-600">Clique para enviar ou arraste o arquivo</p>
-                            <p class="text-xs text-gray-500 mt-1">PNG, JPG ou SVG (máx. 2MB)</p>
-                            <input type="file" id="logoUpload" class="hidden" accept="image/*" onchange="handleLogoUpload(event)">
+                    <!-- Logo Requirements -->
+                    <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-4 rounded-lg">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-info-circle text-blue-400 mt-1"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h4 class="text-sm font-semibold text-blue-800">Requisitos do Logo</h4>
+                                <ul class="mt-2 text-xs text-blue-700 space-y-1">
+                                    <li>• <strong>Formato:</strong> PNG, JPG, SVG ou WebP</li>
+                                    <li>• <strong>Tamanho máximo:</strong> 2MB</li>
+                                    <li>• <strong>Dimensões recomendadas:</strong> 512x512px (quadrado)</li>
+                                    <li>• <strong>Fundo:</strong> Preferencialmente transparente (PNG/SVG)</li>
+                                    <li>• <strong>Proporção:</strong> 1:1 ou horizontal (máx 3:1)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Upload Area -->
+                    <div id="uploadArea" class="upload-area">
+                        <input type="file" id="logoUpload" accept="image/*" class="hidden" onchange="handleLogoUpload(event)">
+                        
+                        <div id="uploadPlaceholder">
+                            <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
+                            <p class="text-gray-600 font-semibold">Clique ou arraste o logo aqui</p>
+                            <p class="text-gray-400 text-sm mt-1">PNG, JPG, SVG até 2MB</p>
                         </div>
                         
-                        <div id="logoPreview" class="hidden">
-                            <img id="logoImage" src="" alt="Logo" class="h-16 mx-auto">
-                            <button onclick="removeLogo()" class="mt-2 text-sm text-red-500 hover:text-red-700">
-                                <i class="fas fa-trash mr-1"></i> Remover
+                        <div id="uploadedLogo" class="hidden">
+                            <img id="logoPreview" src="" alt="Logo" class="mx-auto max-h-32 mb-3">
+                            <p class="text-green-600 font-semibold mb-2">
+                                <i class="fas fa-check-circle mr-1"></i>Logo carregado
+                            </p>
+                            <button onclick="removeLogo()" class="text-red-500 hover:text-red-700 text-sm">
+                                <i class="fas fa-trash mr-1"></i>Remover logo
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Cores -->
-                <div class="glass-effect rounded-xl p-6 shadow-xl">
-                    <h3 class="text-lg font-semibold mb-4 text-gray-800">
-                        <i class="fas fa-paint-brush text-orange-500 mr-2"></i>
-                        Esquema de Cores
-                    </h3>
-                    
-                    <div class="space-y-4">
-                        <!-- Temas Predefinidos -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Temas Rápidos</label>
-                            <div class="grid grid-cols-3 gap-2">
-                                <button onclick="applyTheme('geppetto-digital')" 
-                                        class="p-2 rounded-lg border-2 border-gray-200 hover:border-orange-500 transition-colors">
-                                    <div class="flex space-x-1 justify-center">
-                                        <div class="w-4 h-4 rounded" style="background: #f48120"></div>
-                                        <div class="w-4 h-4 rounded" style="background: #ff6b35"></div>
-                                    </div>
-                                    <span class="text-xs mt-1 block">Geppetto Digital</span>
-                                </button>
-                                
-                                <button onclick="applyTheme('medical')" 
-                                        class="p-2 rounded-lg border-2 border-gray-200 hover:border-orange-500 transition-colors">
-                                    <div class="flex space-x-1 justify-center">
-                                        <div class="w-4 h-4 rounded bg-orange-600"></div>
-                                        <div class="w-4 h-4 rounded bg-green-500"></div>
-                                    </div>
-                                    <span class="text-xs mt-1 block">Médico</span>
-                                </button>
-                                
-                                <button onclick="applyTheme('nature')" 
-                                        class="p-2 rounded-lg border-2 border-gray-200 hover:border-orange-500 transition-colors">
-                                    <div class="flex space-x-1 justify-center">
-                                        <div class="w-4 h-4 rounded bg-green-600"></div>
-                                        <div class="w-4 h-4 rounded bg-emerald-400"></div>
-                                    </div>
-                                    <span class="text-xs mt-1 block">Natural</span>
-                                </button>
-                            </div>
+                <!-- Color Scheme -->
+                <div class="glass-effect rounded-2xl p-6 hover:shadow-xl transition-all">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center mr-3">
+                            <i class="fas fa-paint-brush text-white"></i>
                         </div>
-                        
-                        <!-- Color Pickers -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Cor Primária</label>
+                        <h3 class="text-lg font-bold text-gray-800">Esquema de Cores</h3>
+                    </div>
+                    
+                    <!-- Preset Themes -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold text-gray-700 mb-3">Temas Predefinidos</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button onclick="applyTheme('geppetto')" class="p-3 rounded-xl border-2 border-gray-200 hover:border-orange-500 hover:shadow-lg transition-all group">
+                                <div class="w-full h-8 rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 mb-1"></div>
+                                <span class="text-xs font-medium text-gray-600 group-hover:text-gray-900">Geppetto</span>
+                            </button>
+                            
+                            <button onclick="applyTheme('accamargo')" class="p-3 rounded-xl border-2 border-gray-200 hover:border-green-500 hover:shadow-lg transition-all group">
+                                <div class="w-full h-8 rounded-lg bg-gradient-to-r from-green-600 to-green-700 mb-1"></div>
+                                <span class="text-xs font-medium text-gray-600 group-hover:text-gray-900">ACCamargo</span>
+                            </button>
+                            
+                            <button onclick="applyTheme('einstein')" class="p-3 rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:shadow-lg transition-all group">
+                                <div class="w-full h-8 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 mb-1"></div>
+                                <span class="text-xs font-medium text-gray-600 group-hover:text-gray-900">Einstein</span>
+                            </button>
+                            
+                            <button onclick="applyTheme('sirio')" class="p-3 rounded-xl border-2 border-gray-200 hover:border-red-500 hover:shadow-lg transition-all group">
+                                <div class="w-full h-8 rounded-lg bg-gradient-to-r from-red-600 to-red-700 mb-1"></div>
+                                <span class="text-xs font-medium text-gray-600 group-hover:text-gray-900">Sírio</span>
+                            </button>
+                            
+                            <button onclick="applyTheme('hcor')" class="p-3 rounded-xl border-2 border-gray-200 hover:border-purple-500 hover:shadow-lg transition-all group">
+                                <div class="w-full h-8 rounded-lg bg-gradient-to-r from-purple-600 to-purple-700 mb-1"></div>
+                                <span class="text-xs font-medium text-gray-600 group-hover:text-gray-900">HCor</span>
+                            </button>
+                            
+                            <button onclick="applyTheme('custom')" class="p-3 rounded-xl border-2 border-gray-200 hover:border-gray-500 hover:shadow-lg transition-all group">
+                                <div class="w-full h-8 rounded-lg bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 mb-1"></div>
+                                <span class="text-xs font-medium text-gray-600 group-hover:text-gray-900">Custom</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Custom Colors -->
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <label class="text-sm font-semibold text-gray-700">Cor Primária</label>
                             <div class="flex items-center space-x-2">
                                 <input type="color" id="primaryColor" value="#f48120" 
-                                       class="h-10 w-20 rounded cursor-pointer"
-                                       onchange="updateColors()">
+                                       class="color-picker" onchange="updateColors()">
                                 <input type="text" id="primaryHex" value="#f48120" 
-                                       class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                                       class="w-24 px-2 py-1 text-sm border rounded-lg"
                                        onchange="updateFromHex('primary')">
                             </div>
                         </div>
                         
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Cor Secundária</label>
+                        <div class="flex items-center justify-between">
+                            <label class="text-sm font-semibold text-gray-700">Cor Secundária</label>
                             <div class="flex items-center space-x-2">
                                 <input type="color" id="secondaryColor" value="#ff6b35" 
-                                       class="h-10 w-20 rounded cursor-pointer"
-                                       onchange="updateColors()">
+                                       class="color-picker" onchange="updateColors()">
                                 <input type="text" id="secondaryHex" value="#ff6b35" 
-                                       class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                                       class="w-24 px-2 py-1 text-sm border rounded-lg"
                                        onchange="updateFromHex('secondary')">
                             </div>
                         </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <label class="text-sm font-semibold text-gray-700">Cor de Destaque</label>
+                            <div class="flex items-center space-x-2">
+                                <input type="color" id="accentColor" value="#ff8c42" 
+                                       class="color-picker" onchange="updateColors()">
+                                <input type="text" id="accentHex" value="#ff8c42" 
+                                       class="w-24 px-2 py-1 text-sm border rounded-lg"
+                                       onchange="updateFromHex('accent')">
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Ações -->
-                <div class="space-y-3">
-                    <button onclick="saveConfiguration()" 
-                            class="w-full gd-button text-white px-6 py-3 rounded-lg font-semibold shadow-lg">
-                        <i class="fas fa-save mr-2"></i>
-                        Salvar Configuração
-                    </button>
-                    
-                    <button onclick="exportConfiguration()" 
-                            class="w-full bg-gray-700 hover:bg-gray-800 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
-                        <i class="fas fa-download mr-2"></i>
-                        Exportar JSON
-                    </button>
-                    
-                    <button onclick="resetConfiguration()" 
-                            class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold transition-colors">
-                        <i class="fas fa-undo mr-2"></i>
-                        Restaurar Padrão
-                    </button>
                 </div>
             </div>
 
-            <!-- Preview -->
-            <div class="lg:col-span-2">
-                <div class="glass-effect rounded-xl p-6 shadow-xl">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800">
-                            <i class="fas fa-eye text-orange-500 mr-2"></i>
-                            Preview em Tempo Real
-                        </h3>
+            <!-- Right Panel - Preview -->
+            <div class="lg:col-span-8">
+                <!-- Preview Controls -->
+                <div class="glass-effect rounded-2xl p-4 mb-6">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <span class="text-sm font-semibold text-gray-700">Modo de Visualização:</span>
+                            <div class="flex space-x-2">
+                                <button onclick="setPreviewMode('desktop')" id="btnDesktop" 
+                                        class="px-4 py-2 rounded-lg bg-orange-500 text-white font-medium">
+                                    <i class="fas fa-desktop mr-2"></i>Desktop
+                                </button>
+                                <button onclick="setPreviewMode('tablet')" id="btnTablet"
+                                        class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-medium hover:bg-gray-300">
+                                    <i class="fas fa-tablet-alt mr-2"></i>Tablet
+                                </button>
+                                <button onclick="setPreviewMode('mobile')" id="btnMobile"
+                                        class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-medium hover:bg-gray-300">
+                                    <i class="fas fa-mobile-alt mr-2"></i>Mobile
+                                </button>
+                            </div>
+                        </div>
                         
-                        <div class="flex space-x-2">
-                            <button onclick="setPreviewDevice('desktop')" id="btnDesktop"
-                                    class="px-3 py-1 rounded-lg bg-orange-100 text-orange-600 text-sm font-medium">
-                                <i class="fas fa-desktop mr-1"></i> Desktop
+                        <div class="flex items-center space-x-3">
+                            <button onclick="toggleDarkMode()" class="p-2 rounded-lg bg-gray-200 hover:bg-gray-300">
+                                <i id="darkModeIcon" class="fas fa-moon text-gray-700"></i>
                             </button>
-                            <button onclick="setPreviewDevice('tablet')" id="btnTablet"
-                                    class="px-3 py-1 rounded-lg bg-gray-100 text-gray-600 text-sm font-medium">
-                                <i class="fas fa-tablet-alt mr-1"></i> Tablet
-                            </button>
-                            <button onclick="setPreviewDevice('mobile')" id="btnMobile"
-                                    class="px-3 py-1 rounded-lg bg-gray-100 text-gray-600 text-sm font-medium">
-                                <i class="fas fa-mobile-alt mr-1"></i> Mobile
+                            <button onclick="refreshPreview()" class="p-2 rounded-lg bg-gray-200 hover:bg-gray-300">
+                                <i class="fas fa-sync-alt text-gray-700"></i>
                             </button>
                         </div>
                     </div>
-                    
-                    <div id="previewContainer" class="bg-gray-100 rounded-lg p-4 overflow-hidden" style="height: 600px;">
-                        <div id="previewFrame" class="bg-white rounded-lg shadow-lg w-full h-full overflow-auto">
-                            <!-- Mini versão da plataforma -->
-                            <div class="p-6">
-                                <!-- Header Preview -->
-                                <div class="flex items-center justify-between mb-8">
-                                    <div class="flex items-center space-x-3">
-                                        <div id="previewLogoContainer" class="h-10">
-                                            <div id="previewLogoPlaceholder" class="h-10 w-32 rounded flex items-center justify-center text-white font-bold"
-                                                 style="background: linear-gradient(135deg, var(--preview-primary) 0%, var(--preview-secondary) 100%);">
-                                                LOGO
+                </div>
+
+                <!-- Live Preview -->
+                <div class="glass-effect rounded-2xl p-6 min-h-[600px] flex items-center justify-center">
+                    <div id="previewContainer" class="w-full">
+                        <div id="previewFrame" class="preview-desktop bg-white rounded-lg shadow-2xl">
+                            <!-- Preview Content -->
+                            <div id="previewContent">
+                                <!-- Header -->
+                                <div id="previewHeader" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-6">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-4">
+                                            <div id="previewLogoContainer" class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                                                <img id="previewLogoImg" src="" alt="" class="hidden max-w-full max-h-full">
+                                                <i id="previewLogoIcon" class="fas fa-hospital text-2xl"></i>
                                             </div>
-                                            <img id="previewLogoImg" src="" alt="Logo" class="h-10 hidden">
+                                            <div>
+                                                <h1 id="previewBrandName" class="text-xl font-bold">Hospital Example</h1>
+                                                <p id="previewTagline" class="text-sm opacity-90">Transformando o cuidado oncológico</p>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <h1 id="previewName" class="text-xl font-bold" style="color: var(--preview-primary)">Hospital Example</h1>
-                                            <p id="previewTagline" class="text-sm text-gray-600">Transformando o cuidado oncológico</p>
+                                        <div class="hidden md:flex space-x-4">
+                                            <button class="px-4 py-2 bg-white/20 rounded-lg hover:bg-white/30">Início</button>
+                                            <button class="px-4 py-2 bg-white/20 rounded-lg hover:bg-white/30">Portais</button>
+                                            <button class="px-4 py-2 bg-white/20 rounded-lg hover:bg-white/30">Contato</button>
                                         </div>
                                     </div>
                                 </div>
-                                
-                                <!-- Cards Preview -->
-                                <div class="grid grid-cols-2 gap-4 mb-6">
-                                    <div class="p-4 rounded-lg border-2" style="border-color: var(--preview-primary);">
-                                        <div class="text-2xl font-bold" style="color: var(--preview-primary);">R$ 2.4M</div>
-                                        <div class="text-sm text-gray-600">Economia Anual</div>
+
+                                <!-- Hero Section -->
+                                <div class="p-8 text-center">
+                                    <h2 class="text-3xl font-bold mb-4" style="color: var(--brand-primary)">
+                                        Plataforma Oncológica Integrada
+                                    </h2>
+                                    <p class="text-gray-600 mb-8">Sistema completo de gestão e acompanhamento oncológico</p>
+                                    
+                                    <!-- Metrics -->
+                                    <div class="grid grid-cols-3 gap-4 mb-8">
+                                        <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4">
+                                            <div class="text-2xl font-bold" style="color: var(--brand-primary)">R$ 2.4M</div>
+                                            <div class="text-sm text-gray-600">Perdas Evitadas</div>
+                                        </div>
+                                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4">
+                                            <div class="text-2xl font-bold text-blue-600">15.000+</div>
+                                            <div class="text-sm text-gray-600">Pacientes</div>
+                                        </div>
+                                        <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4">
+                                            <div class="text-2xl font-bold text-green-600">98%</div>
+                                            <div class="text-sm text-gray-600">Satisfação</div>
+                                        </div>
                                     </div>
-                                    <div class="p-4 rounded-lg border-2" style="border-color: var(--preview-secondary);">
-                                        <div class="text-2xl font-bold" style="color: var(--preview-secondary);">45.000</div>
-                                        <div class="text-sm text-gray-600">Pacientes</div>
+
+                                    <!-- Features Grid -->
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                        <div class="bg-white border-2 rounded-xl p-4 hover:shadow-lg transition-all" style="border-color: var(--brand-primary)">
+                                            <i class="fas fa-user-md text-2xl mb-2" style="color: var(--brand-primary)"></i>
+                                            <div class="text-sm font-semibold">Portal Médico</div>
+                                        </div>
+                                        <div class="bg-white border-2 rounded-xl p-4 hover:shadow-lg transition-all" style="border-color: var(--brand-secondary)">
+                                            <i class="fas fa-procedures text-2xl mb-2" style="color: var(--brand-secondary)"></i>
+                                            <div class="text-sm font-semibold">Portal Paciente</div>
+                                        </div>
+                                        <div class="bg-white border-2 rounded-xl p-4 hover:shadow-lg transition-all" style="border-color: var(--brand-accent)">
+                                            <i class="fas fa-chart-line text-2xl mb-2" style="color: var(--brand-accent)"></i>
+                                            <div class="text-sm font-semibold">Analytics</div>
+                                        </div>
+                                        <div class="bg-white border-2 rounded-xl p-4 hover:shadow-lg transition-all" style="border-color: var(--brand-primary)">
+                                            <i class="fas fa-robot text-2xl mb-2" style="color: var(--brand-primary)"></i>
+                                            <div class="text-sm font-semibold">IA Laura</div>
+                                        </div>
                                     </div>
                                 </div>
-                                
-                                <!-- Buttons Preview -->
-                                <div class="space-y-3">
-                                    <button class="w-full text-white px-4 py-2 rounded-lg font-semibold"
-                                            style="background: linear-gradient(135deg, var(--preview-primary) 0%, var(--preview-secondary) 100%);">
-                                        Botão Primário
-                                    </button>
-                                    <button class="w-full px-4 py-2 rounded-lg font-semibold border-2"
-                                            style="color: var(--preview-primary); border-color: var(--preview-primary);">
-                                        Botão Secundário
-                                    </button>
-                                </div>
-                                
-                                <!-- Menu Preview -->
-                                <div class="mt-6 space-y-2">
-                                    <div class="p-3 rounded-lg" style="background: var(--preview-primary); opacity: 0.1;">
-                                        <div class="flex items-center justify-between">
-                                            <span style="color: var(--preview-primary); opacity: 1;">📊 Dashboard</span>
-                                            <i class="fas fa-chevron-right" style="color: var(--preview-primary);"></i>
-                                        </div>
-                                    </div>
-                                    <div class="p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
-                                        <div class="flex items-center justify-between">
-                                            <span class="text-gray-700">👥 Pacientes</span>
-                                            <i class="fas fa-chevron-right text-gray-400"></i>
-                                        </div>
-                                    </div>
-                                    <div class="p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
-                                        <div class="flex items-center justify-between">
-                                            <span class="text-gray-700">🏥 Agendamentos</span>
-                                            <i class="fas fa-chevron-right text-gray-400"></i>
-                                        </div>
-                                    </div>
+
+                                <!-- Footer -->
+                                <div id="previewFooter" class="bg-gray-100 p-6 text-center">
+                                    <p class="text-gray-600 text-sm">
+                                        © 2024 <span id="previewFooterName">Hospital Example</span>. Todos os direitos reservados.
+                                    </p>
+                                    <p id="previewWebsite" class="text-blue-600 text-sm mt-1">
+                                        https://www.hospital.com.br
+                                    </p>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Status Bar -->
+                <div class="glass-effect rounded-2xl p-4 mt-6">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse mr-2"></div>
+                                <span class="text-sm text-gray-600">Preview em tempo real ativo</span>
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                Última atualização: <span id="lastUpdate">agora</span>
+                            </div>
+                        </div>
+                        <div class="text-sm text-gray-500">
+                            <i class="fas fa-magic mr-1"></i>
+                            Powered by Geppetto Digital
                         </div>
                     </div>
                 </div>
@@ -309,183 +547,469 @@
         </div>
     </div>
 
+    <!-- JavaScript Implementation -->
     <script>
-        // Inicialização com tema Geppetto Digital
-        document.addEventListener('DOMContentLoaded', () => {
-            applyTheme('geppetto-digital');
-            updateColors();
-        });
+        // Global Variables
+        let currentTheme = 'geppetto';
+        let previewMode = 'desktop';
+        let darkMode = false;
+        let logoData = null;
 
-        // Temas predefinidos
+        // Theme Presets
         const themes = {
-            geppetto-digital: {
+            geppetto: {
                 primary: '#f48120',
-                secondary: '#ff6b35'
+                secondary: '#ff6b35',
+                accent: '#ff8c42'
             },
-            medical: {
-                primary: '#2563eb',
-                secondary: '#10b981'
+            accamargo: {
+                primary: '#2B5F3F',
+                secondary: '#1a3d2a',
+                accent: '#4a8060'
             },
-            nature: {
-                primary: '#059669',
-                secondary: '#34d399'
+            einstein: {
+                primary: '#0066CC',
+                secondary: '#004499',
+                accent: '#3399FF'
+            },
+            sirio: {
+                primary: '#DC143C',
+                secondary: '#8B0000',
+                accent: '#FF6B6B'
+            },
+            hcor: {
+                primary: '#663399',
+                secondary: '#4B0082',
+                accent: '#9370DB'
+            },
+            custom: {
+                primary: '#6B7280',
+                secondary: '#4B5563',
+                accent: '#9CA3AF'
             }
         };
 
-        function applyTheme(themeName) {
-            const theme = themes[themeName];
-            if (theme) {
-                document.getElementById('primaryColor').value = theme.primary;
-                document.getElementById('primaryHex').value = theme.primary;
-                document.getElementById('secondaryColor').value = theme.secondary;
-                document.getElementById('secondaryHex').value = theme.secondary;
-                updateColors();
-            }
-        }
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCustomizer();
+            setupEventListeners();
+            applyTheme('geppetto');
+            updatePreview();
+        });
 
-        function updateColors() {
-            const primary = document.getElementById('primaryColor').value;
-            const secondary = document.getElementById('secondaryColor').value;
+        // Initialize Customizer
+        function initializeCustomizer() {
+            // Set initial values
+            updateLastUpdateTime();
             
-            // Atualiza campos de texto
-            document.getElementById('primaryHex').value = primary;
-            document.getElementById('secondaryHex').value = secondary;
+            // Setup drag and drop
+            const uploadArea = document.getElementById('uploadArea');
             
-            // Atualiza preview
-            document.documentElement.style.setProperty('--preview-primary', primary);
-            document.documentElement.style.setProperty('--preview-secondary', secondary);
+            uploadArea.addEventListener('click', () => {
+                document.getElementById('logoUpload').click();
+            });
+            
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    handleLogoFile(files[0]);
+                }
+            });
         }
 
-        function updateFromHex(type) {
-            const hexValue = document.getElementById(type + 'Hex').value;
-            if (/^#[0-9A-F]{6}$/i.test(hexValue)) {
-                document.getElementById(type + 'Color').value = hexValue;
+        // Setup Event Listeners
+        function setupEventListeners() {
+            // Real-time updates
+            ['brandName', 'brandTagline', 'brandWebsite'].forEach(id => {
+                document.getElementById(id).addEventListener('input', updatePreview);
+            });
+            
+            // Color sync
+            document.getElementById('primaryColor').addEventListener('input', function() {
+                document.getElementById('primaryHex').value = this.value;
                 updateColors();
-            }
+            });
+            
+            document.getElementById('secondaryColor').addEventListener('input', function() {
+                document.getElementById('secondaryHex').value = this.value;
+                updateColors();
+            });
+            
+            document.getElementById('accentColor').addEventListener('input', function() {
+                document.getElementById('accentHex').value = this.value;
+                updateColors();
+            });
         }
 
+        // Handle Logo Upload
         function handleLogoUpload(event) {
             const file = event.target.files[0];
-            if (file && file.size <= 2097152) { // 2MB
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const logoData = e.target.result;
-                    document.getElementById('logoImage').src = logoData;
-                    document.getElementById('logoPreview').classList.remove('hidden');
-                    
-                    // Atualiza preview
-                    document.getElementById('previewLogoImg').src = logoData;
-                    document.getElementById('previewLogoImg').classList.remove('hidden');
-                    document.getElementById('previewLogoPlaceholder').classList.add('hidden');
-                };
-                reader.readAsDataURL(file);
-            } else {
-                alert('Arquivo muito grande. Máximo 2MB.');
+            if (file) {
+                handleLogoFile(file);
             }
+        }
+
+        function handleLogoFile(file) {
+            // Validate file
+            const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml', 'image/webp'];
+            const maxSize = 2 * 1024 * 1024; // 2MB
+            
+            if (!validTypes.includes(file.type)) {
+                showToast('Formato inválido! Use PNG, JPG, SVG ou WebP', 'error');
+                return;
+            }
+            
+            if (file.size > maxSize) {
+                showToast('Arquivo muito grande! Máximo 2MB', 'error');
+                return;
+            }
+            
+            // Read and display file
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                logoData = e.target.result;
+                displayLogo(logoData);
+                showToast('Logo carregado com sucesso!', 'success');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function displayLogo(dataUrl) {
+            // Update upload area
+            document.getElementById('uploadPlaceholder').classList.add('hidden');
+            document.getElementById('uploadedLogo').classList.remove('hidden');
+            document.getElementById('logoPreview').src = dataUrl;
+            
+            // Update preview
+            document.getElementById('previewLogoImg').src = dataUrl;
+            document.getElementById('previewLogoImg').classList.remove('hidden');
+            document.getElementById('previewLogoIcon').classList.add('hidden');
+            
+            updateLastUpdateTime();
         }
 
         function removeLogo() {
+            logoData = null;
+            
+            // Reset upload area
+            document.getElementById('uploadPlaceholder').classList.remove('hidden');
+            document.getElementById('uploadedLogo').classList.add('hidden');
             document.getElementById('logoUpload').value = '';
-            document.getElementById('logoPreview').classList.add('hidden');
+            
+            // Reset preview
             document.getElementById('previewLogoImg').classList.add('hidden');
-            document.getElementById('previewLogoPlaceholder').classList.remove('hidden');
+            document.getElementById('previewLogoIcon').classList.remove('hidden');
+            
+            showToast('Logo removido', 'info');
+            updateLastUpdateTime();
         }
 
-        // Atualização em tempo real
-        document.getElementById('brandName').addEventListener('input', (e) => {
-            document.getElementById('previewName').textContent = e.target.value || 'Hospital Example';
-        });
+        // Apply Theme
+        function applyTheme(themeName) {
+            currentTheme = themeName;
+            const theme = themes[themeName];
+            
+            // Update color pickers
+            document.getElementById('primaryColor').value = theme.primary;
+            document.getElementById('secondaryColor').value = theme.secondary;
+            document.getElementById('accentColor').value = theme.accent;
+            
+            // Update hex inputs
+            document.getElementById('primaryHex').value = theme.primary;
+            document.getElementById('secondaryHex').value = theme.secondary;
+            document.getElementById('accentHex').value = theme.accent;
+            
+            // Update CSS variables
+            updateColors();
+            
+            showToast(`Tema ${themeName} aplicado!`, 'success');
+        }
 
-        document.getElementById('brandTagline').addEventListener('input', (e) => {
-            document.getElementById('previewTagline').textContent = e.target.value || 'Transformando o cuidado oncológico';
-        });
+        // Update Colors
+        function updateColors() {
+            const primary = document.getElementById('primaryColor').value;
+            const secondary = document.getElementById('secondaryColor').value;
+            const accent = document.getElementById('accentColor').value;
+            
+            // Update CSS variables
+            document.documentElement.style.setProperty('--brand-primary', primary);
+            document.documentElement.style.setProperty('--brand-secondary', secondary);
+            document.documentElement.style.setProperty('--brand-accent', accent);
+            document.documentElement.style.setProperty('--brand-gradient', 
+                `linear-gradient(135deg, ${primary} 0%, ${secondary} 100%)`);
+            
+            // Update preview header
+            const header = document.getElementById('previewHeader');
+            header.style.background = `linear-gradient(135deg, ${primary} 0%, ${secondary} 100%)`;
+            
+            updateLastUpdateTime();
+        }
 
-        function setPreviewDevice(device) {
-            const frame = document.getElementById('previewFrame');
-            const buttons = ['btnDesktop', 'btnTablet', 'btnMobile'];
+        // Update from Hex Input
+        function updateFromHex(colorType) {
+            const hexInput = document.getElementById(colorType + 'Hex');
+            const colorPicker = document.getElementById(colorType + 'Color');
             
-            // Reset buttons
-            buttons.forEach(btn => {
-                document.getElementById(btn).className = 'px-3 py-1 rounded-lg bg-gray-100 text-gray-600 text-sm font-medium';
-            });
-            
-            // Set active button
-            const activeBtn = document.getElementById('btn' + device.charAt(0).toUpperCase() + device.slice(1));
-            activeBtn.className = 'px-3 py-1 rounded-lg bg-orange-100 text-orange-600 text-sm font-medium';
-            
-            // Adjust frame size
-            switch(device) {
-                case 'mobile':
-                    frame.style.maxWidth = '375px';
-                    frame.style.margin = '0 auto';
-                    break;
-                case 'tablet':
-                    frame.style.maxWidth = '768px';
-                    frame.style.margin = '0 auto';
-                    break;
-                default:
-                    frame.style.maxWidth = '100%';
-                    frame.style.margin = '0';
+            if (/^#[0-9A-Fa-f]{6}$/.test(hexInput.value)) {
+                colorPicker.value = hexInput.value;
+                updateColors();
+            } else {
+                showToast('Formato de cor inválido! Use #RRGGBB', 'error');
             }
         }
 
-        function saveConfiguration() {
-            const config = generateConfiguration();
-            localStorage.setItem('brandConfig', JSON.stringify(config));
+        // Update Preview
+        function updatePreview() {
+            const brandName = document.getElementById('brandName').value || 'Hospital Example';
+            const tagline = document.getElementById('brandTagline').value || 'Transformando o cuidado oncológico';
+            const website = document.getElementById('brandWebsite').value || 'https://www.hospital.com.br';
             
-            // Mostra notificação de sucesso
-            const notification = document.createElement('div');
-            notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
-            notification.innerHTML = '<i class="fas fa-check-circle mr-2"></i> Configuração salva com sucesso!';
-            document.body.appendChild(notification);
+            // Update preview elements
+            document.getElementById('previewBrandName').textContent = brandName;
+            document.getElementById('previewTagline').textContent = tagline;
+            document.getElementById('previewFooterName').textContent = brandName;
+            document.getElementById('previewWebsite').textContent = website;
             
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
+            updateLastUpdateTime();
         }
 
-        function generateConfiguration() {
-            const logoImg = document.getElementById('previewLogoImg');
-            return {
+        // Set Preview Mode
+        function setPreviewMode(mode) {
+            previewMode = mode;
+            
+            // Update buttons
+            ['desktop', 'tablet', 'mobile'].forEach(m => {
+                const btn = document.getElementById('btn' + m.charAt(0).toUpperCase() + m.slice(1));
+                if (m === mode) {
+                    btn.className = 'px-4 py-2 rounded-lg bg-orange-500 text-white font-medium';
+                } else {
+                    btn.className = 'px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-medium hover:bg-gray-300';
+                }
+            });
+            
+            // Update preview frame
+            const frame = document.getElementById('previewFrame');
+            frame.className = `preview-${mode} bg-white rounded-lg shadow-2xl`;
+            
+            showToast(`Modo ${mode} ativado`, 'info');
+        }
+
+        // Toggle Dark Mode
+        function toggleDarkMode() {
+            darkMode = !darkMode;
+            const icon = document.getElementById('darkModeIcon');
+            const preview = document.getElementById('previewFrame');
+            
+            if (darkMode) {
+                icon.className = 'fas fa-sun text-yellow-500';
+                preview.classList.add('bg-gray-900', 'text-white');
+                preview.classList.remove('bg-white');
+            } else {
+                icon.className = 'fas fa-moon text-gray-700';
+                preview.classList.remove('bg-gray-900', 'text-white');
+                preview.classList.add('bg-white');
+            }
+        }
+
+        // Refresh Preview
+        function refreshPreview() {
+            const preview = document.getElementById('previewContent');
+            preview.style.opacity = '0.5';
+            
+            setTimeout(() => {
+                updatePreview();
+                preview.style.opacity = '1';
+                showToast('Preview atualizado!', 'success');
+            }, 300);
+        }
+
+        // Reset to Defaults
+        function resetToDefaults() {
+            if (confirm('Resetar todas as configurações para o padrão?')) {
+                document.getElementById('brandName').value = 'Hospital Example';
+                document.getElementById('brandTagline').value = 'Transformando o cuidado oncológico';
+                document.getElementById('brandWebsite').value = 'https://www.hospital.com.br';
+                
+                removeLogo();
+                applyTheme('geppetto');
+                setPreviewMode('desktop');
+                
+                if (darkMode) toggleDarkMode();
+                
+                showToast('Configurações resetadas!', 'success');
+            }
+        }
+
+        // Save Configuration
+        function saveConfiguration() {
+            const config = {
                 brand: {
                     name: document.getElementById('brandName').value,
                     tagline: document.getElementById('brandTagline').value,
-                    logo: logoImg.src || null,
-                    colors: {
-                        primary: document.getElementById('primaryColor').value,
-                        secondary: document.getElementById('secondaryColor').value
-                    }
+                    website: document.getElementById('brandWebsite').value,
+                    logo: logoData
                 },
+                colors: {
+                    primary: document.getElementById('primaryColor').value,
+                    secondary: document.getElementById('secondaryColor').value,
+                    accent: document.getElementById('accentColor').value
+                },
+                theme: currentTheme,
                 timestamp: new Date().toISOString()
             };
+            
+            // Simulate API call
+            console.log('Saving configuration:', config);
+            
+            // Save to localStorage
+            localStorage.setItem('brandConfig', JSON.stringify(config));
+            
+            showToast('Configuração salva com sucesso!', 'success');
+            
+            // Optional: Send to backend
+            // fetch('/api/brand/save', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(config)
+            // });
         }
 
-        function exportConfiguration() {
-            const config = generateConfiguration();
+        // Export Configuration
+        function exportConfig() {
+            const config = {
+                brand: {
+                    name: document.getElementById('brandName').value,
+                    tagline: document.getElementById('brandTagline').value,
+                    website: document.getElementById('brandWebsite').value,
+                    logo: logoData
+                },
+                colors: {
+                    primary: document.getElementById('primaryColor').value,
+                    secondary: document.getElementById('secondaryColor').value,
+                    accent: document.getElementById('accentColor').value
+                },
+                theme: currentTheme,
+                exportDate: new Date().toISOString()
+            };
+            
+            // Create download
             const blob = new Blob([JSON.stringify(config, null, 2)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `brand-config-${config.brand.name.toLowerCase().replace(/\s+/g, '-')}.json`;
-            document.body.appendChild(a);
+            a.download = `brand-config-${Date.now()}.json`;
             a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+            
+            showToast('Configuração exportada!', 'success');
         }
 
-        function resetConfiguration() {
-            if (confirm('Restaurar configuração padrão Geppetto Digital?')) {
-                applyTheme('geppetto-digital');
-                document.getElementById('brandName').value = 'Hospital Example';
-                document.getElementById('brandTagline').value = 'Transformando o cuidado oncológico';
-                removeLogo();
-                updateColors();
-                
-                // Atualiza preview
-                document.getElementById('previewName').textContent = 'Hospital Example';
-                document.getElementById('previewTagline').textContent = 'Transformando o cuidado oncológico';
+        // Show Toast Notification
+        function showToast(message, type = 'info') {
+            // Remove existing toasts
+            const existingToast = document.querySelector('.toast');
+            if (existingToast) {
+                existingToast.remove();
             }
+            
+            // Create new toast
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'} mr-2"></i>
+                ${message}
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
         }
+
+        // Update Last Update Time
+        function updateLastUpdateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('pt-BR', { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit' 
+            });
+            document.getElementById('lastUpdate').textContent = timeStr;
+        }
+
+        // Auto-save to localStorage
+        setInterval(() => {
+            const config = {
+                brand: {
+                    name: document.getElementById('brandName').value,
+                    tagline: document.getElementById('brandTagline').value,
+                    website: document.getElementById('brandWebsite').value,
+                    logo: logoData
+                },
+                colors: {
+                    primary: document.getElementById('primaryColor').value,
+                    secondary: document.getElementById('secondaryColor').value,
+                    accent: document.getElementById('accentColor').value
+                },
+                theme: currentTheme
+            };
+            
+            localStorage.setItem('brandConfig_autosave', JSON.stringify(config));
+        }, 5000); // Auto-save every 5 seconds
+
+        // Load saved configuration on startup
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('brandConfig_autosave');
+            if (saved) {
+                try {
+                    const config = JSON.parse(saved);
+                    
+                    // Restore brand info
+                    if (config.brand) {
+                        document.getElementById('brandName').value = config.brand.name || '';
+                        document.getElementById('brandTagline').value = config.brand.tagline || '';
+                        document.getElementById('brandWebsite').value = config.brand.website || '';
+                        
+                        if (config.brand.logo) {
+                            logoData = config.brand.logo;
+                            displayLogo(logoData);
+                        }
+                    }
+                    
+                    // Restore colors
+                    if (config.colors) {
+                        document.getElementById('primaryColor').value = config.colors.primary || '#f48120';
+                        document.getElementById('secondaryColor').value = config.colors.secondary || '#ff6b35';
+                        document.getElementById('accentColor').value = config.colors.accent || '#ff8c42';
+                        
+                        document.getElementById('primaryHex').value = config.colors.primary || '#f48120';
+                        document.getElementById('secondaryHex').value = config.colors.secondary || '#ff6b35';
+                        document.getElementById('accentHex').value = config.colors.accent || '#ff8c42';
+                        
+                        updateColors();
+                    }
+                    
+                    updatePreview();
+                    console.log('Configuração anterior restaurada');
+                } catch (e) {
+                    console.error('Erro ao restaurar configuração:', e);
+                }
+            }
+        });
     </script>
 </body>
 </html>
