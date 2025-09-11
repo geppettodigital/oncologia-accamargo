@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-brand-title>Portal Principal - Plataforma Oncológica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="/js/brand-config.js"></script>
+    <style>
+        :root {
+            --brand-primary: #f48120;
+            --brand-secondary: #ff6b35;
+            --brand-accent: #ff8c42;
+            --brand-gradient: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .portal-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        
+        .portal-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .brand-gradient {
+            background: var(--brand-gradient);
+        }
+        
+        .brand-text {
+            color: var(--brand-primary);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 via-gray-100/50 to-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center text-white brand-gradient" data-brand-gradient>
+                        <img data-brand-logo class="hidden max-w-full max-h-full rounded" alt="Logo">
+                        <i data-brand-icon class="fas fa-hospital text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold brand-text" data-brand-primary data-brand-name>Hospital Example</h1>
+                        <p class="text-sm text-gray-600" data-brand-tagline>Transformando o cuidado oncológico</p>
+                    </div>
+                </div>
+                
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="/brand-customizer.html" class="text-gray-600 hover:text-gray-900 font-medium">
+                        <i class="fas fa-palette mr-2"></i>Personalizar
+                    </a>
+                    <a href="/preview.html" class="text-gray-600 hover:text-gray-900 font-medium">
+                        <i class="fas fa-eye mr-2"></i>Preview
+                    </a>
+                    <button class="px-6 py-2 brand-gradient text-white rounded-lg font-semibold hover:shadow-lg transition-all" data-brand-gradient>
+                        <i class="fas fa-sign-in-alt mr-2"></i>Entrar
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-4 text-center">
+            <div class="inline-flex items-center justify-center w-24 h-24 rounded-full brand-gradient shadow-2xl mb-8" data-brand-gradient>
+                <i class="fas fa-heartbeat text-4xl text-white"></i>
+            </div>
+            
+            <h1 class="text-5xl font-bold mb-6">
+                <span class="brand-text" data-brand-primary>Plataforma Oncológica</span>
+                <span class="text-gray-800"> Integrada</span>
+            </h1>
+            
+            <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+                Sistema completo de gestão hospitalar com IA preditiva, múltiplos portais especializados 
+                e análise avançada para otimização do cuidado oncológico
+            </p>
+
+            <!-- Metrics -->
+            <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12">
+                <div class="glass-effect rounded-xl p-6">
+                    <div class="text-4xl font-bold brand-text mb-2" data-brand-primary>R$ 2.4M</div>
+                    <div class="text-gray-600">Perdas Evitadas</div>
+                </div>
+                <div class="glass-effect rounded-xl p-6">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">15.000+</div>
+                    <div class="text-gray-600">Pacientes Atendidos</div>
+                </div>
+                <div class="glass-effect rounded-xl p-6">
+                    <div class="text-4xl font-bold text-green-600 mb-2">98%</div>
+                    <div class="text-gray-600">Satisfação</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portals Grid -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                <span class="brand-text" data-brand-primary>Escolha seu Portal</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                <!-- Portal Paciente -->
+                <div class="portal-card glass-effect rounded-xl p-6" onclick="enterPortal('patient')">
+                    <div class="w-16 h-16 rounded-lg brand-gradient flex items-center justify-center text-white text-2xl mb-4" data-brand-gradient>
+                        <i class="fas fa-procedures"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Portal do Paciente</h3>
+                    <p class="text-gray-600 text-sm mb-4">Acompanhe seu tratamento, exames e consultas</p>
+                    <div class="flex items-center text-sm brand-text" data-brand-primary>
+                        <span>Acessar</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+
+                <!-- Portal Médico -->
+                <div class="portal-card glass-effect rounded-xl p-6" onclick="enterPortal('doctor')">
+                    <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Portal Médico</h3>
+                    <p class="text-gray-600 text-sm mb-4">Gestão de pacientes e protocolos de tratamento</p>
+                    <div class="flex items-center text-sm text-blue-600">
+                        <span>Acessar</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+
+                <!-- Portal Navegador -->
+                <div class="portal-card glass-effect rounded-xl p-6" onclick="enterPortal('navigator')">
+                    <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-compass"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Portal Navegador</h3>
+                    <p class="text-gray-600 text-sm mb-4">Coordenação e acompanhamento de casos</p>
+                    <div class="flex items-center text-sm text-purple-600">
+                        <span>Acessar</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+
+                <!-- Portal Financeiro -->
+                <div class="portal-card glass-effect rounded-xl p-6" onclick="enterPortal('financial')">
+                    <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Portal Financeiro</h3>
+                    <p class="text-gray-600 text-sm mb-4">Análise de custos e otimização financeira</p>
+                    <div class="flex items-center text-sm text-green-600">
+                        <span>Acessar</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+
+                <!-- Portal Bem-estar -->
+                <div class="portal-card glass-effect rounded-xl p-6" onclick="enterPortal('wellness')">
+                    <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Portal Bem-estar</h3>
+                    <p class="text-gray-600 text-sm mb-4">Suporte emocional e qualidade de vida</p>
+                    <div class="flex items-center text-sm text-pink-600">
+                        <span>Acessar</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+
+                <!-- Portal Pesquisa -->
+                <div class="portal-card glass-effect rounded-xl p-6" onclick="enterPortal('research')">
+                    <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Portal Pesquisa</h3>
+                    <p class="text-gray-600 text-sm mb-4">Estudos clínicos e análise de dados</p>
+                    <div class="flex items-center text-sm text-indigo-600">
+                        <span>Acessar</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+
+                <!-- Portal Admin -->
+                <div class="portal-card glass-effect rounded-xl p-6" onclick="enterPortal('admin')">
+                    <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-gray-600 to-gray-700 flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Admin Master</h3>
+                    <p class="text-gray-600 text-sm mb-4">Configurações e gestão completa do sistema</p>
+                    <div class="flex items-center text-sm text-gray-600">
+                        <span>Acessar</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+
+                <!-- IA Ansiedade de Laura -->
+                <div class="portal-card glass-effect rounded-xl p-6" onclick="openAI()">
+                    <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">IA Laura</h3>
+                    <p class="text-gray-600 text-sm mb-4">Assistente inteligente com análise preditiva</p>
+                    <div class="flex items-center text-sm text-orange-600">
+                        <span>Conversar</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                <span class="brand-text" data-brand-primary>Recursos da Plataforma</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-4 rounded-full brand-gradient flex items-center justify-center text-white" data-brand-gradient>
+                        <i class="fas fa-brain text-3xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-2">IA Preditiva</h3>
+                    <p class="text-gray-600 text-sm">Análise inteligente e previsão de riscos</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white">
+                        <i class="fas fa-shield-alt text-3xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-2">Segurança Total</h3>
+                    <p class="text-gray-600 text-sm">Criptografia e compliance LGPD/HIPAA</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white">
+                        <i class="fas fa-chart-bar text-3xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-2">Analytics Avançado</h3>
+                    <p class="text-gray-600 text-sm">Dashboards e relatórios em tempo real</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white">
+                        <i class="fas fa-users text-3xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-2">Multi-usuário</h3>
+                    <p class="text-gray-600 text-sm">Acesso personalizado por perfil</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-3 mb-4">
+                    <div class="w-10 h-10 rounded-lg brand-gradient flex items-center justify-center" data-brand-gradient>
+                        <img data-brand-logo class="hidden max-w-full max-h-full rounded" alt="Logo">
+                        <i data-brand-icon class="fas fa-hospital"></i>
+                    </div>
+                    <span class="text-xl font-bold" data-brand-name>Hospital Example</span>
+                </div>
+                <p class="text-gray-400 mb-4" data-brand-tagline>Transformando o cuidado oncológico</p>
+                <p class="text-gray-500 text-sm">
+                    © 2024 Todos os direitos reservados | Powered by Geppetto Digital
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AI Chat Widget (Hidden by default) -->
+    <div id="aiChat" class="hidden fixed bottom-4 right-4 w-96 h-[500px] bg-white rounded-xl shadow-2xl z-50">
+        <div class="brand-gradient text-white p-4 rounded-t-xl flex items-center justify-between" data-brand-gradient>
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-robot text-xl"></i>
+                <span class="font-bold">IA Ansiedade de Laura</span>
+            </div>
+            <button onclick="closeAI()" class="text-white hover:text-gray-200">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        <div class="p-4 h-[400px] overflow-y-auto">
+            <div class="text-center py-8">
+                <i class="fas fa-robot text-6xl text-gray-300 mb-4"></i>
+                <p class="text-gray-500">Como posso ajudar você hoje?</p>
+            </div>
+        </div>
+        <div class="p-4 border-t">
+            <div class="flex space-x-2">
+                <input type="text" placeholder="Digite sua mensagem..." 
+                       class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                <button class="px-4 py-2 brand-gradient text-white rounded-lg hover:shadow-lg" data-brand-gradient>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Portal navigation
+        function enterPortal(portalType) {
+            // Save current brand config to session
+            const config = window.BrandConfig ? window.BrandConfig.get() : null;
+            if (config) {
+                sessionStorage.setItem('brandConfig', JSON.stringify(config));
+            }
+            
+            // Navigate to portal
+            const portalUrls = {
+                'patient': '/portal/patient',
+                'doctor': '/portal/doctor', 
+                'navigator': '/portal/navigator',
+                'financial': '/portal/financial',
+                'wellness': '/portal/wellness',
+                'research': '/portal/research',
+                'admin': '/portal/admin-master'
+            };
+            
+            const url = portalUrls[portalType] || '/';
+            console.log(`Navigating to ${portalType} portal:`, url);
+            
+            // For demo, just show alert
+            alert(`Portal ${portalType} será aberto com a configuração de marca atual!\n\nURL: ${url}`);
+            // window.location.href = url;
+        }
+        
+        // AI Chat
+        function openAI() {
+            document.getElementById('aiChat').classList.remove('hidden');
+        }
+        
+        function closeAI() {
+            document.getElementById('aiChat').classList.add('hidden');
+        }
+        
+        // Apply brand configuration on load
+        document.addEventListener('DOMContentLoaded', function() {
+            // BrandConfig.js will auto-initialize and apply settings
+            console.log('Portal home loaded with brand configuration');
+        });
+    </script>
+</body>
+</html>

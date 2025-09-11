@@ -25,13 +25,15 @@
         
         /* Preview Scaling */
         .preview-desktop {
-            transform: scale(0.6);
-            transform-origin: top center;
-            width: 166.67%;
-            height: 166.67%;
+            transform: scale(0.5);
+            transform-origin: top left;
+            width: 200%;
+            height: auto;
+            min-height: 800px;
             border: 2px solid #e5e7eb;
             border-radius: 8px;
             overflow: hidden;
+            margin: 0 auto;
         }
         
         .preview-tablet {
@@ -46,14 +48,30 @@
         }
         
         .preview-mobile {
-            transform: scale(1);
+            transform: scale(0.9);
             transform-origin: top center;
-            width: 100%;
-            max-width: 375px;
-            height: 667px;
-            border: 2px solid #e5e7eb;
-            border-radius: 24px;
+            width: 111%;
+            max-width: 390px;
+            height: 844px;
+            border: 8px solid #1f2937;
+            border-radius: 36px;
             overflow: hidden;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .preview-mobile::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 25px;
+            background: #1f2937;
+            border-radius: 20px;
+            z-index: 10;
         }
         
         /* Theme Variables */
@@ -209,6 +227,9 @@
                 
                 <!-- Action Buttons -->
                 <div class="flex items-center space-x-3">
+                    <button onclick="window.location.href='/'" class="px-4 py-2 bg-white/20 backdrop-blur rounded-lg hover:bg-white/30 transition-all">
+                        <i class="fas fa-home mr-2"></i>Portal
+                    </button>
                     <button onclick="resetToDefaults()" class="px-4 py-2 bg-white/20 backdrop-blur rounded-lg hover:bg-white/30 transition-all">
                         <i class="fas fa-undo mr-2"></i>Resetar
                     </button>
@@ -335,34 +356,34 @@
                     <div class="mb-6">
                         <label class="block text-sm font-semibold text-gray-700 mb-3">Temas Predefinidos</label>
                         <div class="grid grid-cols-3 gap-2">
-                            <button onclick="applyTheme('geppetto')" class="p-3 rounded-xl border-2 border-gray-200 hover:border-orange-500 hover:shadow-lg transition-all group">
+                            <button onclick="applyTheme('laranja')" class="p-3 rounded-xl border-2 border-gray-200 hover:border-orange-500 hover:shadow-lg transition-all group">
                                 <div class="w-full h-8 rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 mb-1"></div>
-                                <span class="text-xs font-medium text-gray-600 group-hover:text-gray-900">Geppetto</span>
+                                <span class="text-xs font-medium text-gray-600 group-hover:text-gray-900">Laranja</span>
                             </button>
                             
-                            <button onclick="applyTheme('accamargo')" class="p-3 rounded-xl border-2 border-gray-200 hover:border-green-500 hover:shadow-lg transition-all group">
+                            <button onclick="applyTheme('verde')" class="p-3 rounded-xl border-2 border-gray-200 hover:border-green-500 hover:shadow-lg transition-all group">
                                 <div class="w-full h-8 rounded-lg bg-gradient-to-r from-green-600 to-green-700 mb-1"></div>
-                                <span class="text-xs font-medium text-gray-600 group-hover:text-gray-900">ACCamargo</span>
+                                <span class="text-xs font-medium text-gray-600 group-hover:text-gray-900">Verde</span>
                             </button>
                             
-                            <button onclick="applyTheme('einstein')" class="p-3 rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:shadow-lg transition-all group">
+                            <button onclick="applyTheme('azul')" class="p-3 rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:shadow-lg transition-all group">
                                 <div class="w-full h-8 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 mb-1"></div>
-                                <span class="text-xs font-medium text-gray-600 group-hover:text-gray-900">Einstein</span>
+                                <span class="text-xs font-medium text-gray-600 group-hover:text-gray-900">Azul</span>
                             </button>
                             
-                            <button onclick="applyTheme('sirio')" class="p-3 rounded-xl border-2 border-gray-200 hover:border-red-500 hover:shadow-lg transition-all group">
+                            <button onclick="applyTheme('vermelho')" class="p-3 rounded-xl border-2 border-gray-200 hover:border-red-500 hover:shadow-lg transition-all group">
                                 <div class="w-full h-8 rounded-lg bg-gradient-to-r from-red-600 to-red-700 mb-1"></div>
-                                <span class="text-xs font-medium text-gray-600 group-hover:text-gray-900">Sírio</span>
+                                <span class="text-xs font-medium text-gray-600 group-hover:text-gray-900">Vermelho</span>
                             </button>
                             
-                            <button onclick="applyTheme('hcor')" class="p-3 rounded-xl border-2 border-gray-200 hover:border-purple-500 hover:shadow-lg transition-all group">
+                            <button onclick="applyTheme('roxo')" class="p-3 rounded-xl border-2 border-gray-200 hover:border-purple-500 hover:shadow-lg transition-all group">
                                 <div class="w-full h-8 rounded-lg bg-gradient-to-r from-purple-600 to-purple-700 mb-1"></div>
-                                <span class="text-xs font-medium text-gray-600 group-hover:text-gray-900">HCor</span>
+                                <span class="text-xs font-medium text-gray-600 group-hover:text-gray-900">Roxo</span>
                             </button>
                             
-                            <button onclick="applyTheme('custom')" class="p-3 rounded-xl border-2 border-gray-200 hover:border-gray-500 hover:shadow-lg transition-all group">
+                            <button onclick="applyTheme('personalizado')" class="p-3 rounded-xl border-2 border-gray-200 hover:border-gray-500 hover:shadow-lg transition-all group">
                                 <div class="w-full h-8 rounded-lg bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 mb-1"></div>
-                                <span class="text-xs font-medium text-gray-600 group-hover:text-gray-900">Custom</span>
+                                <span class="text-xs font-medium text-gray-600 group-hover:text-gray-900">Personal.</span>
                             </button>
                         </div>
                     </div>
@@ -467,45 +488,45 @@
                                 </div>
 
                                 <!-- Hero Section -->
-                                <div class="p-8 text-center">
-                                    <h2 class="text-3xl font-bold mb-4" style="color: var(--brand-primary)">
+                                <div class="p-4 md:p-8 text-center">
+                                    <h2 class="text-xl md:text-3xl font-bold mb-4" style="color: var(--brand-primary)">
                                         Plataforma Oncológica Integrada
                                     </h2>
-                                    <p class="text-gray-600 mb-8">Sistema completo de gestão e acompanhamento oncológico</p>
+                                    <p class="text-sm md:text-base text-gray-600 mb-4 md:mb-8">Sistema completo de gestão e acompanhamento oncológico</p>
                                     
                                     <!-- Metrics -->
-                                    <div class="grid grid-cols-3 gap-4 mb-8">
-                                        <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4">
-                                            <div class="text-2xl font-bold" style="color: var(--brand-primary)">R$ 2.4M</div>
-                                            <div class="text-sm text-gray-600">Perdas Evitadas</div>
+                                    <div class="grid grid-cols-3 gap-2 md:gap-4 mb-4 md:mb-8">
+                                        <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg md:rounded-xl p-2 md:p-4">
+                                            <div class="text-lg md:text-2xl font-bold" style="color: var(--brand-primary)">R$ 2.4M</div>
+                                            <div class="text-xs md:text-sm text-gray-600">Perdas Evitadas</div>
                                         </div>
-                                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4">
-                                            <div class="text-2xl font-bold text-blue-600">15.000+</div>
-                                            <div class="text-sm text-gray-600">Pacientes</div>
+                                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg md:rounded-xl p-2 md:p-4">
+                                            <div class="text-lg md:text-2xl font-bold text-blue-600">15.000+</div>
+                                            <div class="text-xs md:text-sm text-gray-600">Pacientes</div>
                                         </div>
-                                        <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4">
-                                            <div class="text-2xl font-bold text-green-600">98%</div>
-                                            <div class="text-sm text-gray-600">Satisfação</div>
+                                        <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg md:rounded-xl p-2 md:p-4">
+                                            <div class="text-lg md:text-2xl font-bold text-green-600">98%</div>
+                                            <div class="text-xs md:text-sm text-gray-600">Satisfação</div>
                                         </div>
                                     </div>
 
                                     <!-- Features Grid -->
-                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                        <div class="bg-white border-2 rounded-xl p-4 hover:shadow-lg transition-all" style="border-color: var(--brand-primary)">
-                                            <i class="fas fa-user-md text-2xl mb-2" style="color: var(--brand-primary)"></i>
-                                            <div class="text-sm font-semibold">Portal Médico</div>
+                                    <div class="grid grid-cols-2 gap-2 md:gap-4">
+                                        <div class="bg-white border rounded-lg md:rounded-xl p-2 md:p-4 hover:shadow-lg transition-all" style="border-color: var(--brand-primary); border-width: 1px">
+                                            <i class="fas fa-user-md text-lg md:text-2xl mb-1 md:mb-2" style="color: var(--brand-primary)"></i>
+                                            <div class="text-xs md:text-sm font-semibold">Portal Médico</div>
                                         </div>
-                                        <div class="bg-white border-2 rounded-xl p-4 hover:shadow-lg transition-all" style="border-color: var(--brand-secondary)">
-                                            <i class="fas fa-procedures text-2xl mb-2" style="color: var(--brand-secondary)"></i>
-                                            <div class="text-sm font-semibold">Portal Paciente</div>
+                                        <div class="bg-white border rounded-lg md:rounded-xl p-2 md:p-4 hover:shadow-lg transition-all" style="border-color: var(--brand-secondary); border-width: 1px">
+                                            <i class="fas fa-procedures text-lg md:text-2xl mb-1 md:mb-2" style="color: var(--brand-secondary)"></i>
+                                            <div class="text-xs md:text-sm font-semibold">Portal Paciente</div>
                                         </div>
-                                        <div class="bg-white border-2 rounded-xl p-4 hover:shadow-lg transition-all" style="border-color: var(--brand-accent)">
-                                            <i class="fas fa-chart-line text-2xl mb-2" style="color: var(--brand-accent)"></i>
-                                            <div class="text-sm font-semibold">Analytics</div>
+                                        <div class="bg-white border rounded-lg md:rounded-xl p-2 md:p-4 hover:shadow-lg transition-all" style="border-color: var(--brand-accent); border-width: 1px">
+                                            <i class="fas fa-chart-line text-lg md:text-2xl mb-1 md:mb-2" style="color: var(--brand-accent)"></i>
+                                            <div class="text-xs md:text-sm font-semibold">Analytics</div>
                                         </div>
-                                        <div class="bg-white border-2 rounded-xl p-4 hover:shadow-lg transition-all" style="border-color: var(--brand-primary)">
-                                            <i class="fas fa-robot text-2xl mb-2" style="color: var(--brand-primary)"></i>
-                                            <div class="text-sm font-semibold">IA Laura</div>
+                                        <div class="bg-white border rounded-lg md:rounded-xl p-2 md:p-4 hover:shadow-lg transition-all" style="border-color: var(--brand-primary); border-width: 1px">
+                                            <i class="fas fa-robot text-lg md:text-2xl mb-1 md:mb-2" style="color: var(--brand-primary)"></i>
+                                            <div class="text-xs md:text-sm font-semibold">IA Laura</div>
                                         </div>
                                     </div>
                                 </div>
@@ -550,42 +571,48 @@
     <!-- JavaScript Implementation -->
     <script>
         // Global Variables
-        let currentTheme = 'geppetto';
+        let currentTheme = 'laranja';
         let previewMode = 'desktop';
         let darkMode = false;
         let logoData = null;
 
         // Theme Presets
         const themes = {
-            geppetto: {
+            laranja: {
                 primary: '#f48120',
                 secondary: '#ff6b35',
-                accent: '#ff8c42'
+                accent: '#ff8c42',
+                name: 'Modelo Laranja'
             },
-            accamargo: {
+            verde: {
                 primary: '#2B5F3F',
                 secondary: '#1a3d2a',
-                accent: '#4a8060'
+                accent: '#4a8060',
+                name: 'Modelo Verde'
             },
-            einstein: {
+            azul: {
                 primary: '#0066CC',
                 secondary: '#004499',
-                accent: '#3399FF'
+                accent: '#3399FF',
+                name: 'Modelo Azul'
             },
-            sirio: {
+            vermelho: {
                 primary: '#DC143C',
                 secondary: '#8B0000',
-                accent: '#FF6B6B'
+                accent: '#FF6B6B',
+                name: 'Modelo Vermelho'
             },
-            hcor: {
+            roxo: {
                 primary: '#663399',
                 secondary: '#4B0082',
-                accent: '#9370DB'
+                accent: '#9370DB',
+                name: 'Modelo Roxo'
             },
-            custom: {
+            personalizado: {
                 primary: '#6B7280',
                 secondary: '#4B5563',
-                accent: '#9CA3AF'
+                accent: '#9CA3AF',
+                name: 'Personalizado'
             }
         };
 
@@ -593,7 +620,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             initializeCustomizer();
             setupEventListeners();
-            applyTheme('geppetto');
+            applyTheme('laranja');
             updatePreview();
         });
 
@@ -853,7 +880,7 @@
         }
 
         // Save Configuration
-        function saveConfiguration() {
+        async function saveConfiguration() {
             const config = {
                 brand: {
                     name: document.getElementById('brandName').value,
@@ -870,20 +897,56 @@
                 timestamp: new Date().toISOString()
             };
             
-            // Simulate API call
-            console.log('Saving configuration:', config);
-            
-            // Save to localStorage
+            // Save to localStorage for all portals
             localStorage.setItem('brandConfig', JSON.stringify(config));
+            localStorage.setItem('currentBrand', JSON.stringify(config));
             
-            showToast('Configuração salva com sucesso!', 'success');
+            // Apply to session storage for immediate effect
+            sessionStorage.setItem('brandConfig', JSON.stringify(config));
             
-            // Optional: Send to backend
-            // fetch('/api/brand/save', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(config)
-            // });
+            // Try to send to backend
+            try {
+                const response = await fetch('/api/brand/save', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(config)
+                });
+                
+                if (response.ok) {
+                    showToast('Configuração salva e aplicada em todos os portais!', 'success');
+                    
+                    // Refresh all open portal tabs
+                    broadcastConfigUpdate(config);
+                } else {
+                    // Fallback to localStorage only
+                    showToast('Configuração salva localmente!', 'success');
+                }
+            } catch (error) {
+                // Save worked locally at least
+                showToast('Configuração salva localmente!', 'success');
+                console.log('Backend save skipped:', error);
+            }
+        }
+        
+        // Broadcast configuration update to all tabs
+        function broadcastConfigUpdate(config) {
+            // Use BroadcastChannel API if available
+            if ('BroadcastChannel' in window) {
+                const channel = new BroadcastChannel('brand_config');
+                channel.postMessage({ type: 'update', config: config });
+                channel.close();
+            }
+            
+            // Also use localStorage event for broader support
+            localStorage.setItem('brandConfigUpdate', JSON.stringify({
+                config: config,
+                timestamp: Date.now()
+            }));
+            
+            // Force update after a short delay
+            setTimeout(() => {
+                localStorage.removeItem('brandConfigUpdate');
+            }, 100);
         }
 
         // Export Configuration
