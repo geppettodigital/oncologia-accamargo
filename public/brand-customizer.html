@@ -211,6 +211,20 @@
     </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-gray-50 via-orange-50/30 to-amber-50/20">
+    <!-- Navigation Breadcrumb -->
+    <div class="bg-white border-b px-4 py-2">
+        <div class="container mx-auto flex items-center space-x-2 text-sm text-gray-600">
+            <a href="/preview.html" class="hover:text-orange-600 transition-colors">
+                <i class="fas fa-home mr-1"></i>Principal
+            </a>
+            <span class="text-gray-400">›</span>
+            <span class="font-semibold text-gray-900">Personalizador de Marca</span>
+            <span class="text-gray-400 ml-4">|</span>
+            <a href="/portal-home.html" class="ml-4 text-green-600 hover:text-green-700 transition-colors">
+                <i class="fas fa-eye mr-1"></i>Ver Preview
+            </a>
+        </div>
+    </div>
     <!-- Header -->
     <div class="animated-gradient text-white py-6 px-4 shadow-2xl">
         <div class="container mx-auto">
@@ -227,8 +241,11 @@
                 
                 <!-- Action Buttons -->
                 <div class="flex items-center space-x-3">
-                    <button onclick="window.location.href='/'" class="px-4 py-2 bg-white/20 backdrop-blur rounded-lg hover:bg-white/30 transition-all">
-                        <i class="fas fa-home mr-2"></i>Portal
+                    <button onclick="window.location.href='/preview.html'" class="px-4 py-2 bg-white/20 backdrop-blur rounded-lg hover:bg-white/30 transition-all">
+                        <i class="fas fa-home mr-2"></i>Principal
+                    </button>
+                    <button onclick="window.location.href='/portal-home.html'" class="px-4 py-2 bg-white/20 backdrop-blur rounded-lg hover:bg-white/30 transition-all">
+                        <i class="fas fa-eye mr-2"></i>Preview
                     </button>
                     <button onclick="resetToDefaults()" class="px-4 py-2 bg-white/20 backdrop-blur rounded-lg hover:bg-white/30 transition-all">
                         <i class="fas fa-undo mr-2"></i>Resetar
@@ -236,8 +253,8 @@
                     <button onclick="exportConfig()" class="px-4 py-2 bg-white/20 backdrop-blur rounded-lg hover:bg-white/30 transition-all">
                         <i class="fas fa-download mr-2"></i>Exportar
                     </button>
-                    <button onclick="saveConfiguration()" class="px-6 py-2 bg-white text-orange-600 font-semibold rounded-lg hover:shadow-lg transition-all">
-                        <i class="fas fa-save mr-2"></i>Salvar
+                    <button onclick="saveAndPreview()" class="px-6 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 hover:shadow-lg transition-all">
+                        <i class="fas fa-check mr-2"></i>Salvar e Ver Preview
                     </button>
                 </div>
             </div>
@@ -879,6 +896,14 @@
             }
         }
 
+        // Save and Preview
+        async function saveAndPreview() {
+            await saveConfiguration();
+            setTimeout(() => {
+                window.open('/portal-home.html', '_blank');
+            }, 500);
+        }
+        
         // Save Configuration
         async function saveConfiguration() {
             const config = {

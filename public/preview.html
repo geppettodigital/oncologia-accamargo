@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preview Completo - Plataforma Oncológica v3.0</title>
+    <title>Plataforma Oncológica v3.0 - Sistema Integrado de Gestão Hospitalar</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
     <link href="/static/geppetto-digital-theme.css" rel="stylesheet">
@@ -111,8 +111,11 @@
                     <a href="#modulos" class="text-gray-700 hover:text-orange-500 transition-colors">Módulos</a>
                     <a href="#metricas" class="text-gray-700 hover:text-orange-500 transition-colors">Métricas</a>
                     <a href="#ia" class="text-gray-700 hover:text-orange-500 transition-colors">IA Laura</a>
+                    <a href="/portal-home.html" class="bg-green-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-600 transition-all">
+                        <i class="fas fa-eye mr-2"></i>Preview
+                    </a>
                     <a href="/brand-customizer.html" class="gd-gradient text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg transition-all">
-                        <i class="fas fa-palette mr-2"></i>Customizar
+                        <i class="fas fa-palette mr-2"></i>Personalizar
                     </a>
                 </nav>
             </div>
@@ -137,10 +140,87 @@
                     <i class="fas fa-rocket mr-2"></i>
                     Explorar Plataforma
                 </button>
-                <button onclick="window.location.href='/brand-customizer.html'" class="bg-white text-orange-500 border-2 border-orange-500 px-8 py-4 rounded-full font-bold text-lg hover:bg-orange-50 transition-all">
-                    <i class="fas fa-paint-brush mr-2"></i>
-                    Personalizar Marca
+                <button onclick="window.location.href='/portal-home.html'" class="bg-white text-green-600 border-2 border-green-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-green-50 transition-all">
+                    <i class="fas fa-eye mr-2"></i>
+                    Ver Preview Personalizado
                 </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Card Explicativo da Estrutura -->
+    <section class="py-8 px-4">
+        <div class="container mx-auto max-w-4xl">
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-200">
+                <div class="text-center mb-6">
+                    <i class="fas fa-sitemap text-4xl text-blue-600 mb-4"></i>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Estrutura da Plataforma</h3>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Principal -->
+                    <div class="bg-white rounded-xl p-4 border-2 border-blue-500 relative">
+                        <div class="absolute -top-3 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                            VOCÊ ESTÁ AQUI
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white mr-3">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Principal</h4>
+                                <p class="text-xs text-gray-600">Página inicial</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-700 mt-2">
+                            Visão geral completa da plataforma com todos os recursos e funcionalidades
+                        </p>
+                    </div>
+                    
+                    <!-- Preview -->
+                    <div class="bg-white rounded-xl p-4 border border-gray-300">
+                        <div class="flex items-center mb-2">
+                            <div class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center text-white mr-3">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Preview</h4>
+                                <p class="text-xs text-gray-600">Resultado personalizado</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-700 mt-2">
+                            Visualização com as configurações de marca aplicadas em tempo real
+                        </p>
+                        <a href="/portal-home.html" class="inline-block mt-3 text-green-600 text-sm hover:underline">
+                            Acessar Preview →
+                        </a>
+                    </div>
+                    
+                    <!-- Personalizador -->
+                    <div class="bg-white rounded-xl p-4 border border-gray-300">
+                        <div class="flex items-center mb-2">
+                            <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center text-white mr-3">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Personalizador</h4>
+                                <p class="text-xs text-gray-600">Customização visual</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-700 mt-2">
+                            Configure cores, logo e identidade visual da sua instituição
+                        </p>
+                        <a href="/brand-customizer.html" class="inline-block mt-3 text-orange-600 text-sm hover:underline">
+                            Personalizar Agora →
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="mt-6 text-center">
+                    <p class="text-sm text-gray-600">
+                        <i class="fas fa-info-circle mr-1"></i>
+                        Use o <strong>Personalizador</strong> para configurar a marca, depois veja o resultado no <strong>Preview</strong>
+                    </p>
+                </div>
             </div>
         </div>
     </section>
