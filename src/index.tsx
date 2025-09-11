@@ -43,6 +43,18 @@ app.use('/api/*', cors())
 
 // Serve static files
 app.use('/static/*', serveStatic({ root: './public' }))
+
+// Portal redirects - serve the HTML files directly
+app.get('/portal/patient', (c) => c.redirect('/portal-patient.html'))
+app.get('/portal/doctor', (c) => c.redirect('/portal-doctor.html'))
+app.get('/portal/navigator', (c) => c.redirect('/portal-navigator.html'))
+app.get('/portal/financial', (c) => c.redirect('/portal-financial.html'))
+app.get('/portal/wellness', (c) => c.redirect('/portal-wellness.html'))
+app.get('/portal/research', (c) => c.redirect('/portal-research.html'))
+app.get('/portal/admin', (c) => c.redirect('/portal-admin.html'))
+app.get('/portal/admin-master', (c) => c.redirect('/portal-admin-master.html'))
+
+// Serve other static files
 app.use('/*', serveStatic({ root: './public' }))
 
 // Mount brand customizer
@@ -59,14 +71,7 @@ app.route('/api/admin', adminRoutes)
 app.route('/api/ai', aiRoutes)
 app.route('/api/portal', portalRoutes)
 
-// Mount page routes
-app.get('/portal/patient', patientPage)
-app.get('/portal/doctor', doctorPage)
-app.get('/portal/navigator', navigatorPage)
-app.get('/portal/financial', financialPage)
-app.get('/portal/wellness', wellnessPage)
-app.get('/portal/research', researchPage)
-app.get('/portal/admin-master', adminMasterPage)
+// Mount special page routes
 app.get('/admin-master', adminMasterCompletePage)
 app.get('/test-integration', testIntegrationPage)
 
