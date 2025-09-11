@@ -1,0 +1,128 @@
+{
+  "brand": {
+    "id": "default",
+    "name": "Plataforma Oncológica",
+    "fullName": "Sistema Integrado de Gestão Oncológica",
+    "tagline": "Transformando o cuidado oncológico com inteligência artificial",
+    "description": "Plataforma completa para gestão da jornada oncológica com IA preditiva",
+    "years": "",
+    "logo": {
+      "light": "/static/logo.svg",
+      "dark": "/static/logo.svg",
+      "icon": "/static/logo.svg"
+    },
+    "colors": {
+      "primary": "#3b82f6",
+      "primaryDark": "#2563eb",
+      "secondary": "#8b5cf6",
+      "accent": "#ec4899",
+      "danger": "#ef4444",
+      "warning": "#f59e0b",
+      "success": "#22c55e",
+      "info": "#06b6d4",
+      "background": "#f9fafb",
+      "surface": "#ffffff",
+      "text": "#111827",
+      "textLight": "#6b7280"
+    },
+    "features": {
+      "modules": {
+        "agendamento": true,
+        "triagem": true,
+        "plano_cuidados": true,
+        "quimioterapia": true,
+        "multidisciplinar": true,
+        "farmacovigilancia": true,
+        "integracoes": true,
+        "analytics": true,
+        "ai_laura": true,
+        "gestao_verticalizada": true,
+        "financeiro": true,
+        "pesquisa": true,
+        "bem_estar": true
+      },
+      "verticals": {
+        "hospital": true,
+        "operadora": true,
+        "rede": true,
+        "regulador": false
+      },
+      "portals": {
+        "patient": true,
+        "doctor": true,
+        "navigator": true,
+        "financial": true,
+        "research": true,
+        "wellness": true,
+        "admin": true
+      }
+    },
+    "metrics": {
+      "economia_anual": "R$ 3.500.000",
+      "economia_label": "de economia anual",
+      "pacientes_atendidos": "50.000+",
+      "pacientes_label": "pacientes beneficiados",
+      "reducao_glosas": "42%",
+      "glosas_label": "menos glosas hospitalares",
+      "satisfacao": "96%",
+      "satisfacao_label": "de aprovação",
+      "tempo_atendimento": "38min",
+      "tempo_label": "redução no tempo de espera",
+      "taxa_resolutividade": "94%",
+      "resolutividade_label": "de efetividade"
+    },
+    "contact": {
+      "phone": "(11) 9999-9999",
+      "email": "contato@plataforma.com.br",
+      "website": "https://www.plataforma.com.br",
+      "address": {
+        "street": "",
+        "city": "São Paulo",
+        "state": "SP",
+        "zip": ""
+      }
+    },
+    "social": {
+      "facebook": "",
+      "instagram": "",
+      "linkedin": "",
+      "youtube": "",
+      "twitter": ""
+    },
+    "api": {
+      "endpoints": {
+        "his": "",
+        "erp": "",
+        "pacs": "",
+        "lis": "",
+        "ris": ""
+      },
+      "auth": {
+        "type": "bearer",
+        "token": ""
+      }
+    },
+    "customization": {
+      "showLogo": true,
+      "showMetrics": true,
+      "showAIInsights": true,
+      "language": "pt-BR",
+      "dateFormat": "DD/MM/YYYY",
+      "currency": "BRL",
+      "timezone": "America/Sao_Paulo"
+    }
+  },
+  "demo": {
+    "enabled": true,
+    "watermark": true,
+    "dataSource": "mock",
+    "expiresAt": null,
+    "restrictions": []
+  },
+  "deployment": {
+    "type": "cloudflare",
+    "projectName": "oncologia-demo",
+    "customDomain": "",
+    "environment": "development"
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "brand": {
+    "id": "cloudflare-default",
+    "name": "Plataforma Oncológica",
+    "fullName": "Sistema Integrado de Gestão Oncológica",
+    "tagline": "Transformando o cuidado com tecnologia de ponta",
+    "description": "Plataforma baseada em Cloudflare Workers para máxima performance e escala global",
+    "years": "",
+    "logo": {
+      "light": "/static/logo.svg",
+      "dark": "/static/logo.svg",
+      "icon": "/static/logo.svg"
+    },
+    "colors": {
+      "primary": "#f48120",
+      "primaryDark": "#e06d10",
+      "secondary": "#0051c3",
+      "secondaryDark": "#003d94",
+      "accent": "#7c3aed",
+      "danger": "#ef4444",
+      "warning": "#fbbf24",
+      "success": "#10b981",
+      "info": "#3b82f6",
+      "background": "#f9fafb",
+      "surface": "#ffffff",
+      "text": "#111827",
+      "textLight": "#6b7280",
+      "gray50": "#f9fafb",
+      "gray100": "#f3f4f6",
+      "gray200": "#e5e7eb",
+      "gray300": "#d1d5db",
+      "gray400": "#9ca3af",
+      "gray500": "#6b7280",
+      "gray600": "#4b5563",
+      "gray700": "#374151",
+      "gray800": "#1f2937",
+      "gray900": "#111827"
+    },
+    "gradients": {
+      "primary": "linear-gradient(135deg, #f48120 0%, #ff6b35 100%)",
+      "secondary": "linear-gradient(135deg, #0051c3 0%, #0080ff 100%)",
+      "sunset": "linear-gradient(135deg, #f48120 0%, #f48120 50%, #0051c3 100%)",
+      "aurora": "linear-gradient(135deg, #7c3aed 0%, #3b82f6 50%, #10b981 100%)",
+      "mesh": "radial-gradient(at 40% 20%, #f48120 0%, transparent 50%), radial-gradient(at 80% 0%, #0051c3 0%, transparent 50%), radial-gradient(at 10% 50%, #7c3aed 0%, transparent 50%)"
+    },
+    "effects": {
+      "glass": true,
+      "gradients": true,
+      "hover": true,
+      "animations": true,
+      "shadows": "modern"
+    },
+    "features": {
+      "modules": {
+        "agendamento": true,
+        "triagem": true,
+        "plano_cuidados": true,
+        "quimioterapia": true,
+        "multidisciplinar": true,
+        "farmacovigilancia": true,
+        "integracoes": true,
+        "analytics": true,
+        "ai_laura": true,
+        "gestao_verticalizada": true,
+        "financeiro": true,
+        "pesquisa": true,
+        "bem_estar": true
+      },
+      "verticals": {
+        "hospital": true,
+        "operadora": true,
+        "rede": true,
+        "regulador": false
+      },
+      "portals": {
+        "patient": true,
+        "doctor": true,
+        "navigator": true,
+        "financial": true,
+        "research": true,
+        "wellness": true,
+        "admin": true
+      }
+    },
+    "metrics": {
+      "economia_anual": "R$ 3.500.000",
+      "economia_label": "economia comprovada",
+      "pacientes_atendidos": "50.000+",
+      "pacientes_label": "pacientes beneficiados",
+      "reducao_glosas": "42%",
+      "glosas_label": "redução de glosas",
+      "satisfacao": "99.2%",
+      "satisfacao_label": "satisfação dos usuários",
+      "tempo_atendimento": "35min",
+      "tempo_label": "redução no tempo de espera",
+      "taxa_resolutividade": "95%",
+      "resolutividade_label": "taxa de resolutividade",
+      "uptime": "99.98%",
+      "uptime_label": "disponibilidade global",
+      "latencia": "<50ms",
+      "latencia_label": "latência média global"
+    },
+    "contact": {
+      "phone": "(11) 9999-9999",
+      "email": "contato@plataforma.com.br",
+      "website": "https://www.plataforma.com.br",
+      "address": {
+        "street": "",
+        "city": "São Paulo",
+        "state": "SP",
+        "zip": ""
+      }
+    },
+    "social": {
+      "facebook": "",
+      "instagram": "",
+      "linkedin": "",
+      "youtube": "",
+      "twitter": ""
+    },
+    "api": {
+      "endpoints": {
+        "his": "",
+        "erp": "",
+        "pacs": "",
+        "lis": "",
+        "ris": ""
+      },
+      "auth": {
+        "type": "bearer",
+        "token": ""
+      }
+    },
+    "customization": {
+      "showLogo": true,
+      "showMetrics": true,
+      "showAIInsights": true,
+      "language": "pt-BR",
+      "dateFormat": "DD/MM/YYYY",
+      "currency": "BRL",
+      "timezone": "America/Sao_Paulo",
+      "theme": "cloudflare"
+    }
+  },
+  "demo": {
+    "enabled": false,
+    "watermark": false,
+    "dataSource": "production",
+    "expiresAt": null,
+    "restrictions": []
+  },
+  "deployment": {
+    "type": "cloudflare",
+    "projectName": "oncologia-saas",
+    "customDomain": "",
+    "environment": "production",
+    "edge": true,
+    "workers": true,
+    "pages": true
+  }
+}

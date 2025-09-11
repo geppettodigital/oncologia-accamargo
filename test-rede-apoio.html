@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste - Rede de Apoio Interativa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8">✅ Teste da Rede de Apoio Interativa</h1>
+        
+        <!-- Rede de Apoio Implementada -->
+        <div class="bg-gradient-to-br from-white to-green-50/20 rounded-xl shadow-lg p-6 border border-green-100/50">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="font-bold text-gray-800 flex items-center">
+                    <div class="bg-green-100 p-2 rounded-lg mr-3">
+                        <i class="fas fa-users text-green-600 text-lg"></i>
+                    </div>
+                    Sua Rede de Apoio
+                </h3>
+                <span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">
+                    <i class="fas fa-circle text-green-500 text-xs mr-1 animate-pulse"></i>
+                    4 disponíveis agora
+                </span>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Dr. João Silva -->
+                <div class="bg-white rounded-xl p-4 border border-gray-100 hover:border-green-300 transition-all hover:shadow-md">
+                    <div class="flex flex-col items-center">
+                        <div class="relative mb-3">
+                            <div class="bg-gradient-to-br from-green-100 to-green-200 rounded-full w-20 h-20 flex items-center justify-center">
+                                <i class="fas fa-user-md text-3xl text-green-600"></i>
+                            </div>
+                            <span class="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-2 border-white rounded-full"></span>
+                        </div>
+                        <p class="text-sm font-bold text-gray-800">Dr. João Silva</p>
+                        <p class="text-xs text-gray-600 mb-3">Oncologista</p>
+                        
+                        <div class="flex flex-col w-full gap-2">
+                            <button onclick="alert('Iniciando conversa com Dr. João Silva')" 
+                                    class="flex items-center justify-center gap-2 bg-green-50 hover:bg-green-100 text-green-700 px-3 py-2 rounded-lg text-xs font-medium transition-colors">
+                                <i class="fas fa-comments"></i>
+                                Iniciar Conversa
+                            </button>
+                            <button onclick="alert('Solicitando ajuda de Dr. João Silva')" 
+                                    class="flex items-center justify-center gap-2 bg-orange-50 hover:bg-orange-100 text-orange-700 px-3 py-2 rounded-lg text-xs font-medium transition-colors">
+                                <i class="fas fa-hand-holding-medical"></i>
+                                Pedir Ajuda
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Maria Santos -->
+                <div class="bg-white rounded-xl p-4 border border-gray-100 hover:border-green-300 transition-all hover:shadow-md">
+                    <div class="flex flex-col items-center">
+                        <div class="relative mb-3">
+                            <div class="bg-gradient-to-br from-green-100 to-emerald-200 rounded-full w-20 h-20 flex items-center justify-center">
+                                <i class="fas fa-compass text-3xl text-green-600"></i>
+                            </div>
+                            <span class="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-2 border-white rounded-full"></span>
+                        </div>
+                        <p class="text-sm font-bold text-gray-800">Maria Santos</p>
+                        <p class="text-xs text-gray-600 mb-3">Navegadora</p>
+                        
+                        <div class="flex flex-col w-full gap-2">
+                            <button onclick="alert('Iniciando conversa com Maria Santos')" 
+                                    class="flex items-center justify-center gap-2 bg-green-50 hover:bg-green-100 text-green-700 px-3 py-2 rounded-lg text-xs font-medium transition-colors">
+                                <i class="fas fa-comments"></i>
+                                Iniciar Conversa
+                            </button>
+                            <button onclick="alert('Solicitando ajuda de Maria Santos')" 
+                                    class="flex items-center justify-center gap-2 bg-orange-50 hover:bg-orange-100 text-orange-700 px-3 py-2 rounded-lg text-xs font-medium transition-colors">
+                                <i class="fas fa-hand-holding-medical"></i>
+                                Pedir Ajuda
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ana Costa -->
+                <div class="bg-white rounded-xl p-4 border border-gray-100 hover:border-teal-300 transition-all hover:shadow-md">
+                    <div class="flex flex-col items-center">
+                        <div class="relative mb-3">
+                            <div class="bg-gradient-to-br from-teal-100 to-teal-200 rounded-full w-20 h-20 flex items-center justify-center">
+                                <i class="fas fa-brain text-3xl text-teal-600"></i>
+                            </div>
+                            <span class="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-2 border-white rounded-full"></span>
+                        </div>
+                        <p class="text-sm font-bold text-gray-800">Ana Costa</p>
+                        <p class="text-xs text-gray-600 mb-3">Psicóloga</p>
+                        
+                        <div class="flex flex-col w-full gap-2">
+                            <button onclick="alert('Iniciando conversa com Ana Costa')" 
+                                    class="flex items-center justify-center gap-2 bg-green-50 hover:bg-green-100 text-green-700 px-3 py-2 rounded-lg text-xs font-medium transition-colors">
+                                <i class="fas fa-comments"></i>
+                                Iniciar Conversa
+                            </button>
+                            <button onclick="alert('Solicitando ajuda de Ana Costa')" 
+                                    class="flex items-center justify-center gap-2 bg-orange-50 hover:bg-orange-100 text-orange-700 px-3 py-2 rounded-lg text-xs font-medium transition-colors">
+                                <i class="fas fa-hand-holding-medical"></i>
+                                Pedir Ajuda
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Família -->
+                <div class="bg-white rounded-xl p-4 border border-gray-100 hover:border-cyan-300 transition-all hover:shadow-md">
+                    <div class="flex flex-col items-center">
+                        <div class="relative mb-3">
+                            <div class="bg-gradient-to-br from-cyan-100 to-cyan-200 rounded-full w-20 h-20 flex items-center justify-center">
+                                <i class="fas fa-heart text-3xl text-cyan-600"></i>
+                            </div>
+                            <span class="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-2 border-white rounded-full"></span>
+                        </div>
+                        <p class="text-sm font-bold text-gray-800">Família</p>
+                        <p class="text-xs text-gray-600 mb-3">3 membros</p>
+                        
+                        <div class="flex flex-col w-full gap-2">
+                            <button onclick="alert('Iniciando conversa com a Família')" 
+                                    class="flex items-center justify-center gap-2 bg-green-50 hover:bg-green-100 text-green-700 px-3 py-2 rounded-lg text-xs font-medium transition-colors">
+                                <i class="fas fa-comments"></i>
+                                Iniciar Conversa
+                            </button>
+                            <button onclick="alert('Solicitando ajuda da Família')" 
+                                    class="flex items-center justify-center gap-2 bg-orange-50 hover:bg-orange-100 text-orange-700 px-3 py-2 rounded-lg text-xs font-medium transition-colors">
+                                <i class="fas fa-hand-holding-medical"></i>
+                                Pedir Ajuda
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-6 bg-green-50 rounded-lg p-3 border border-green-200">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-info-circle text-green-600"></i>
+                        <span class="text-sm text-gray-700">Sua equipe está pronta para ajudar</span>
+                    </div>
+                    <button onclick="alert('Ver todos os contatos')" class="text-sm text-green-600 hover:text-green-700 font-medium">
+                        Ver todos os contatos →
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-8 bg-white rounded-lg p-6 shadow">
+            <h2 class="text-xl font-bold mb-4">📊 Funcionalidades Implementadas:</h2>
+            <ul class="space-y-2">
+                <li class="flex items-start gap-2">
+                    <i class="fas fa-check-circle text-green-600 mt-1"></i>
+                    <div>
+                        <strong>2 Botões por Pessoa:</strong>
+                        <ul class="ml-4 mt-1 text-sm text-gray-600">
+                            <li>• "Iniciar Conversa" - Para chat direto</li>
+                            <li>• "Pedir Ajuda" - Para solicitações específicas</li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="flex items-start gap-2">
+                    <i class="fas fa-check-circle text-green-600 mt-1"></i>
+                    <div>
+                        <strong>Visual Aprimorado:</strong>
+                        <ul class="ml-4 mt-1 text-sm text-gray-600">
+                            <li>• Avatares maiores com gradientes</li>
+                            <li>• Indicador de status online (bolinha verde)</li>
+                            <li>• Cards com hover effects</li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="flex items-start gap-2">
+                    <i class="fas fa-check-circle text-green-600 mt-1"></i>
+                    <div>
+                        <strong>Responsividade:</strong>
+                        <ul class="ml-4 mt-1 text-sm text-gray-600">
+                            <li>• 1 coluna no mobile</li>
+                            <li>• 2 colunas no tablet</li>
+                            <li>• 4 colunas no desktop</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

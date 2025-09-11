@@ -1,0 +1,52 @@
+{
+  "name": "oncologia-plataforma",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:sandbox": "wrangler pages dev dist --ip 0.0.0.0 --port 3000",
+    "dev:d1": "wrangler pages dev dist --d1=oncologia-db --local --ip 0.0.0.0 --port 3000",
+    "dev:hospital": "VERTICAL=hospital npm run dev:sandbox",
+    "dev:operadora": "VERTICAL=operadora npm run dev:sandbox",
+    "dev:rede": "VERTICAL=rede npm run dev:sandbox",
+    "build": "vite build",
+    "preview": "wrangler pages dev dist",
+    "deploy": "npm run build && wrangler pages deploy dist --project-name oncologia-saas",
+    "deploy:prod": "npm run build && wrangler pages deploy dist --project-name oncologia-saas",
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings",
+    "clean-port": "fuser -k 3000/tcp 2>/dev/null || true",
+    "test": "curl http://localhost:3000",
+    "switch-brand": "node scripts/switch-brand.cjs",
+    "create-brand": "node scripts/create-brand.cjs",
+    "list-brands": "node scripts/list-brands.cjs",
+    "brand:switch": "node scripts/switch-brand.cjs",
+    "brand:create": "node scripts/create-brand.cjs",
+    "brand:list": "node scripts/list-brands.cjs",
+    "brand:cloudflare": "node scripts/apply-cloudflare-theme.cjs",
+    "brand:customize": "echo 'Acesse http://localhost:3000/brand-customizer.html após iniciar o servidor'",
+    "db:migrate:local": "wrangler d1 migrations apply oncologia-db --local",
+    "db:migrate:prod": "wrangler d1 migrations apply oncologia-db",
+    "db:seed": "wrangler d1 execute oncologia-db --local --file=./seed.sql",
+    "db:reset": "rm -rf .wrangler/state/v3/d1 && npm run db:migrate:local && npm run db:seed",
+    "db:console:local": "wrangler d1 execute oncologia-db --local",
+    "db:console:prod": "wrangler d1 execute oncologia-db",
+    "git:commit": "git add . && git commit -m",
+    "git:status": "git status",
+    "git:log": "git log --oneline",
+    "test:api": "node tests/api.test.js",
+    "test:install": "npm install axios",
+    "build:static": "node build-static.js",
+    "build:github": "npm run build && npm run build:static",
+    "deploy:github": "npm run build:github && echo 'Ready for GitHub Pages'"
+  },
+  "dependencies": {
+    "hono": "^4.9.6"
+  },
+  "devDependencies": {
+    "@hono/vite-build": "^1.2.0",
+    "@hono/vite-dev-server": "^0.18.2",
+    "@cloudflare/workers-types": "^4.0.0",
+    "typescript": "^5.0.0",
+    "vite": "^6.3.5",
+    "wrangler": "^4.4.0"
+  }
+}

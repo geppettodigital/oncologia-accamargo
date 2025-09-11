@@ -1,0 +1,128 @@
+{
+  "brand": {
+    "id": "einstein",
+    "name": "Einstein",
+    "fullName": "Hospital Israelita Albert Einstein",
+    "tagline": "Excelência em medicina que transforma vidas",
+    "description": "Centro de excelência em oncologia com tecnologia de ponta e atendimento humanizado",
+    "years": "52",
+    "logo": {
+      "light": "/brands/einstein/logo-light.svg",
+      "dark": "/brands/einstein/logo-dark.svg",
+      "icon": "/brands/einstein/icon.svg"
+    },
+    "colors": {
+      "primary": "#003C71",
+      "primaryDark": "#002547",
+      "secondary": "#0066CC",
+      "accent": "#00A0E3",
+      "danger": "#DC3545",
+      "warning": "#FFC107",
+      "success": "#28A745",
+      "info": "#17A2B8",
+      "background": "#F8F9FA",
+      "surface": "#FFFFFF",
+      "text": "#212529",
+      "textLight": "#6C757D"
+    },
+    "features": {
+      "modules": {
+        "agendamento": true,
+        "triagem": true,
+        "plano_cuidados": true,
+        "quimioterapia": true,
+        "multidisciplinar": true,
+        "farmacovigilancia": true,
+        "integracoes": true,
+        "analytics": true,
+        "ai_laura": true,
+        "gestao_verticalizada": true,
+        "financeiro": true,
+        "pesquisa": true,
+        "bem_estar": true
+      },
+      "verticals": {
+        "hospital": true,
+        "operadora": false,
+        "rede": true,
+        "regulador": false
+      },
+      "portals": {
+        "patient": true,
+        "doctor": true,
+        "navigator": true,
+        "financial": true,
+        "research": true,
+        "wellness": true,
+        "admin": true
+      }
+    },
+    "metrics": {
+      "economia_anual": "R$ 4.200.000",
+      "economia_label": "de economia anual",
+      "pacientes_atendidos": "62.000",
+      "pacientes_label": "pacientes oncológicos/ano",
+      "reducao_glosas": "45%",
+      "glosas_label": "redução em glosas",
+      "satisfacao": "99.2%",
+      "satisfacao_label": "índice de satisfação",
+      "tempo_atendimento": "35min",
+      "tempo_label": "tempo médio de espera",
+      "taxa_resolutividade": "96%",
+      "resolutividade_label": "resolutividade no primeiro atendimento"
+    },
+    "contact": {
+      "phone": "(11) 2151-1233",
+      "email": "atendimento@einstein.br",
+      "website": "https://www.einstein.br",
+      "address": {
+        "street": "Av. Albert Einstein, 627",
+        "city": "São Paulo",
+        "state": "SP",
+        "zip": "05652-900"
+      }
+    },
+    "social": {
+      "facebook": "https://www.facebook.com/HospitalAlbertEinstein",
+      "instagram": "https://www.instagram.com/hosp_einstein",
+      "linkedin": "https://www.linkedin.com/company/hospital-albert-einstein",
+      "youtube": "https://www.youtube.com/hospitaleinstein",
+      "twitter": "https://twitter.com/hosp_einstein"
+    },
+    "api": {
+      "endpoints": {
+        "his": "https://api.einstein.br/his/v2",
+        "erp": "https://api.einstein.br/erp/v1",
+        "pacs": "https://pacs.einstein.br/api",
+        "lis": "https://lis.einstein.br/api",
+        "ris": "https://ris.einstein.br/api"
+      },
+      "auth": {
+        "type": "bearer",
+        "token": ""
+      }
+    },
+    "customization": {
+      "showLogo": true,
+      "showMetrics": true,
+      "showAIInsights": true,
+      "language": "pt-BR",
+      "dateFormat": "DD/MM/YYYY",
+      "currency": "BRL",
+      "timezone": "America/Sao_Paulo"
+    }
+  },
+  "demo": {
+    "enabled": true,
+    "watermark": true,
+    "dataSource": "mock",
+    "expiresAt": null,
+    "restrictions": []
+  },
+  "deployment": {
+    "type": "cloudflare",
+    "projectName": "einstein-oncologia-demo",
+    "customDomain": "",
+    "environment": "demo"
+  }
+}

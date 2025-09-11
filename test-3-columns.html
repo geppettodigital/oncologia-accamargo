@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Layout 3 Colunas - Portal do Paciente</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+        }
+        .info-box {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .success { color: #10b981; font-weight: bold; }
+        .warning { color: #f59e0b; font-weight: bold; }
+        iframe {
+            width: 100%;
+            height: 900px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            background: white;
+        }
+        .layout-preview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .block-preview {
+            background: linear-gradient(135deg, #fff, #f0f0f0);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        .block-preview i {
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .block-1 { border-left: 3px solid #10b981; }
+        .block-2 { border-left: 3px solid #14b8a6; }
+        .block-3 { border-left: 3px solid #06b6d4; }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="info-box">
+        <h1>🎯 Teste do Layout de 3 Colunas - Portal do Paciente</h1>
+        
+        <h2>Layout Implementado:</h2>
+        <div class="layout-preview">
+            <div class="block-preview block-1">
+                <i class="fas fa-route" style="color: #10b981;"></i>
+                <strong>Sua Jornada</strong>
+                <p style="font-size: 12px; color: #666;">Timeline compacta do tratamento</p>
+            </div>
+            <div class="block-preview block-2">
+                <i class="fas fa-chart-line" style="color: #14b8a6;"></i>
+                <strong>Monitoramento de Sintomas</strong>
+                <p style="font-size: 12px; color: #666;">Gráfico com toggle Semana/Mês</p>
+            </div>
+            <div class="block-preview block-3">
+                <i class="fas fa-heart" style="color: #06b6d4;"></i>
+                <strong>Score de Bem-Estar</strong>
+                <p style="font-size: 12px; color: #666;">75% com categorias</p>
+            </div>
+        </div>
+        
+        <h3>✅ Características Implementadas:</h3>
+        <ul>
+            <li class="success">✓ Grid responsivo: 1 coluna (mobile) → 3 colunas (desktop XL)</li>
+            <li class="success">✓ Blocos com altura uniforme e alinhados</li>
+            <li class="success">✓ Gradientes suaves: verde, teal e cyan</li>
+            <li class="success">✓ Ícones em caixas coloridas</li>
+            <li class="success">✓ Hover effects com shadow</li>
+        </ul>
+        
+        <h3>📱 Responsividade:</h3>
+        <ul>
+            <li><strong>Mobile (< 1280px):</strong> Blocos empilhados verticalmente</li>
+            <li><strong>Desktop XL (≥ 1280px):</strong> 3 blocos lado a lado</li>
+        </ul>
+    </div>
+    
+    <div class="info-box">
+        <h2>Portal do Paciente - Visualização Ao Vivo:</h2>
+        <p class="warning">⚠️ Para ver o layout de 3 colunas, garanta que a janela tenha largura ≥ 1280px</p>
+    </div>
+    
+    <iframe src="https://3000-iaz7ve50scswt1gqdmtuk-6532622b.e2b.dev/portal/patient"></iframe>
+    
+    <script>
+        // Verificar largura da tela
+        function checkWidth() {
+            const width = window.innerWidth;
+            const status = document.createElement('div');
+            status.className = 'info-box';
+            
+            if (width >= 1280) {
+                status.innerHTML = '<p class="success">✅ Largura da tela: ' + width + 'px - Layout de 3 colunas ativo!</p>';
+            } else {
+                status.innerHTML = '<p class="warning">⚠️ Largura da tela: ' + width + 'px - Layout responsivo (1 coluna). Aumente a janela para ≥ 1280px para ver 3 colunas.</p>';
+            }
+            
+            document.body.insertBefore(status, document.querySelector('iframe'));
+        }
+        
+        checkWidth();
+        window.addEventListener('resize', checkWidth);
+    </script>
+</body>
+</html>

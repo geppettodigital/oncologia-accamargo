@@ -1,0 +1,128 @@
+{
+  "brand": {
+    "id": "cliente-id",
+    "name": "Nome do Hospital",
+    "fullName": "Nome Completo da Instituição",
+    "tagline": "Slogan institucional",
+    "description": "Descrição da instituição para o portal",
+    "years": "Anos de atuação",
+    "logo": {
+      "light": "/brands/{{id}}/logo-light.svg",
+      "dark": "/brands/{{id}}/logo-dark.svg",
+      "icon": "/brands/{{id}}/icon.svg"
+    },
+    "colors": {
+      "primary": "#2B5F3F",
+      "primaryDark": "#1a3d26",
+      "secondary": "#16a34a",
+      "accent": "#10b981",
+      "danger": "#ef4444",
+      "warning": "#f59e0b",
+      "success": "#22c55e",
+      "info": "#3b82f6",
+      "background": "#f3f4f6",
+      "surface": "#ffffff",
+      "text": "#1f2937",
+      "textLight": "#6b7280"
+    },
+    "features": {
+      "modules": {
+        "agendamento": true,
+        "triagem": true,
+        "plano_cuidados": true,
+        "quimioterapia": true,
+        "multidisciplinar": true,
+        "farmacovigilancia": true,
+        "integracoes": true,
+        "analytics": true,
+        "ai_laura": true,
+        "gestao_verticalizada": false,
+        "financeiro": true,
+        "pesquisa": true,
+        "bem_estar": true
+      },
+      "verticals": {
+        "hospital": true,
+        "operadora": false,
+        "rede": false,
+        "regulador": false
+      },
+      "portals": {
+        "patient": true,
+        "doctor": true,
+        "navigator": true,
+        "financial": true,
+        "research": true,
+        "wellness": true,
+        "admin": true
+      }
+    },
+    "metrics": {
+      "economia_anual": "R$ 2.400.000",
+      "economia_label": "em perdas prevenidas",
+      "pacientes_atendidos": "45.000",
+      "pacientes_label": "pacientes atendidos",
+      "reducao_glosas": "37%",
+      "glosas_label": "redução de glosas",
+      "satisfacao": "98.5%",
+      "satisfacao_label": "de satisfação",
+      "tempo_atendimento": "45min",
+      "tempo_label": "tempo médio de espera",
+      "taxa_resolutividade": "92%",
+      "resolutividade_label": "taxa de resolutividade"
+    },
+    "contact": {
+      "phone": "(11) 2189-5000",
+      "email": "contato@hospital.com.br",
+      "website": "https://www.hospital.com.br",
+      "address": {
+        "street": "Endereço",
+        "city": "São Paulo",
+        "state": "SP",
+        "zip": "01509-010"
+      }
+    },
+    "social": {
+      "facebook": "",
+      "instagram": "",
+      "linkedin": "",
+      "youtube": "",
+      "twitter": ""
+    },
+    "api": {
+      "endpoints": {
+        "his": "",
+        "erp": "",
+        "pacs": "",
+        "lis": "",
+        "ris": ""
+      },
+      "auth": {
+        "type": "bearer",
+        "token": ""
+      }
+    },
+    "customization": {
+      "showLogo": true,
+      "showMetrics": true,
+      "showAIInsights": true,
+      "language": "pt-BR",
+      "dateFormat": "DD/MM/YYYY",
+      "currency": "BRL",
+      "timezone": "America/Sao_Paulo"
+    }
+  },
+  "demo": {
+    "enabled": false,
+    "watermark": false,
+    "dataSource": "production",
+    "expiresAt": null,
+    "restrictions": []
+  },
+  "deployment": {
+    "type": "cloudflare",
+    "projectName": "",
+    "customDomain": "",
+    "environment": "production"
+  }
+}

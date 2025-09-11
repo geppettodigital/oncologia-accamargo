@@ -1,0 +1,18 @@
+# Configuração do GitHub Pages
+theme: null
+title: Plataforma Oncológica ACCamargo
+description: Sistema Integrado de Gestão da Jornada Oncológica com IA
+baseurl: "/oncologia-accamargo"
+url: "https://jacfressatto.github.io"
+
+# Build settings
+exclude:
+  - node_modules
+  - src
+  - .wrangler
+  - wrangler.jsonc
+  - vite.config.ts
+  - tsconfig.json
+  - package-lock.json
+  - .gitignore
+  - README.md
