@@ -3,14 +3,14 @@
 const fs = require('fs');
 const path = require('path');
 
-// Cloudflare theme configuration
-const cloudflareTheme = {
+// Geppetto Digital theme configuration
+const geppetto-digitalTheme = {
   brand: {
-    id: "cloudflare-default",
+    id: "geppetto-digital-default",
     name: "Plataforma Oncológica",
     fullName: "Sistema Integrado de Gestão Oncológica",
     tagline: "Transformando o cuidado com tecnologia de ponta",
-    description: "Plataforma baseada em Cloudflare Workers para máxima performance e escala global",
+    description: "Plataforma baseada em Geppetto Digital Workers para máxima performance e escala global",
     years: "",
     logo: {
       light: "/static/logo.svg",
@@ -18,18 +18,18 @@ const cloudflareTheme = {
       icon: "/static/logo.svg"
     },
     colors: {
-      // Cloudflare Brand Colors
-      primary: "#f48120",        // Cloudflare Orange
+      // Geppetto Digital Brand Colors
+      primary: "#f48120",        // Geppetto Digital Orange
       primaryDark: "#e06d10",    // Darker Orange
-      secondary: "#0051c3",      // Cloudflare Blue
-      secondaryDark: "#003d94",  // Darker Blue
+      secondary: "#ff6b35",      // Geppetto Digital Blue
+      secondaryDark: "#e55100",  // Darker Blue
       accent: "#7c3aed",         // Purple
       
       // Semantic Colors
       danger: "#ef4444",
       warning: "#fbbf24",
       success: "#10b981",
-      info: "#3b82f6",
+      info: "#fb923c",
       
       // UI Colors
       background: "#f9fafb",
@@ -37,7 +37,7 @@ const cloudflareTheme = {
       text: "#111827",
       textLight: "#6b7280",
       
-      // Grays (Cloudflare palette)
+      // Grays (Geppetto Digital palette)
       gray50: "#f9fafb",
       gray100: "#f3f4f6",
       gray200: "#e5e7eb",
@@ -51,10 +51,10 @@ const cloudflareTheme = {
     },
     gradients: {
       primary: "linear-gradient(135deg, #f48120 0%, #ff6b35 100%)",
-      secondary: "linear-gradient(135deg, #0051c3 0%, #0080ff 100%)",
-      sunset: "linear-gradient(135deg, #f48120 0%, #f48120 50%, #0051c3 100%)",
+      secondary: "linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%)",
+      sunset: "linear-gradient(135deg, #f48120 0%, #f48120 50%, #ff6b35 100%)",
       aurora: "linear-gradient(135deg, #7c3aed 0%, #3b82f6 50%, #10b981 100%)",
-      mesh: "radial-gradient(at 40% 20%, #f48120 0%, transparent 50%), radial-gradient(at 80% 0%, #0051c3 0%, transparent 50%), radial-gradient(at 10% 50%, #7c3aed 0%, transparent 50%)"
+      mesh: "radial-gradient(at 40% 20%, #f48120 0%, transparent 50%), radial-gradient(at 80% 0%, #ff6b35 0%, transparent 50%), radial-gradient(at 10% 50%, #7c3aed 0%, transparent 50%)"
     },
     effects: {
       glass: true,
@@ -152,7 +152,7 @@ const cloudflareTheme = {
       dateFormat: "DD/MM/YYYY",
       currency: "BRL",
       timezone: "America/Sao_Paulo",
-      theme: "cloudflare"
+      theme: "geppetto-digital"
     }
   },
   demo: {
@@ -163,7 +163,7 @@ const cloudflareTheme = {
     restrictions: []
   },
   deployment: {
-    type: "cloudflare",
+    type: "geppetto-digital",
     projectName: "oncologia-saas",
     customDomain: "",
     environment: "production",
@@ -174,31 +174,31 @@ const cloudflareTheme = {
 };
 
 // Function to apply theme
-function applyCloudflareTheme() {
-  console.log('\n🎨 Aplicando tema Cloudflare como padrão...\n');
+function applyGeppetto DigitalTheme() {
+  console.log('\n🎨 Aplicando tema Geppetto Digital como padrão...\n');
   
   try {
     const configDir = path.join(__dirname, '..', 'src', 'config');
     const brandsDir = path.join(configDir, 'brands');
     const activeConfigPath = path.join(configDir, 'active.json');
-    const cloudflareConfigPath = path.join(brandsDir, 'cloudflare.json');
+    const geppetto-digitalConfigPath = path.join(brandsDir, 'geppetto-digital.json');
     
-    // Save Cloudflare theme config
-    fs.writeFileSync(cloudflareConfigPath, JSON.stringify(cloudflareTheme, null, 2));
-    console.log('✅ Tema Cloudflare salvo em: brands/cloudflare.json');
+    // Save Geppetto Digital theme config
+    fs.writeFileSync(geppetto-digitalConfigPath, JSON.stringify(geppetto-digitalTheme, null, 2));
+    console.log('✅ Tema Geppetto Digital salvo em: brands/geppetto-digital.json');
     
     // Set as active
-    fs.writeFileSync(activeConfigPath, JSON.stringify(cloudflareTheme, null, 2));
-    console.log('✅ Tema Cloudflare definido como ativo');
+    fs.writeFileSync(activeConfigPath, JSON.stringify(geppetto-digitalTheme, null, 2));
+    console.log('✅ Tema Geppetto Digital definido como ativo');
     
-    // Create CSS file with Cloudflare theme
-    const cssContent = `/* Cloudflare Design System Theme */
+    // Create CSS file with Geppetto Digital theme
+    const cssContent = `/* Geppetto Digital Design System Theme */
 :root {
   /* Primary Colors */
   --color-primary: #f48120;
   --color-primary-dark: #e06d10;
-  --color-secondary: #0051c3;
-  --color-secondary-dark: #003d94;
+  --color-secondary: #ff6b35;
+  --color-secondary-dark: #e55100;
   --color-accent: #7c3aed;
   
   /* Semantic Colors */
@@ -221,8 +221,8 @@ function applyCloudflareTheme() {
   
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, #f48120 0%, #ff6b35 100%);
-  --gradient-secondary: linear-gradient(135deg, #0051c3 0%, #0080ff 100%);
-  --gradient-sunset: linear-gradient(135deg, #f48120 0%, #f48120 50%, #0051c3 100%);
+  --gradient-secondary: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+  --gradient-sunset: linear-gradient(135deg, #f48120 0%, #f48120 50%, #ff6b35 100%);
   --gradient-aurora: linear-gradient(135deg, #7c3aed 0%, #3b82f6 50%, #10b981 100%);
   
   /* Shadows */
@@ -245,7 +245,7 @@ function applyCloudflareTheme() {
   box-shadow: var(--shadow-lg);
 }
 
-/* Cloudflare Button Styles */
+/* Geppetto Digital Button Styles */
 .cf-button, .btn-primary {
   background: var(--gradient-primary);
   color: white;
@@ -263,7 +263,7 @@ function applyCloudflareTheme() {
   box-shadow: var(--shadow-orange);
 }
 
-/* Cloudflare Card Styles */
+/* Geppetto Digital Card Styles */
 .cf-card {
   background: white;
   border-radius: 0.75rem;
@@ -277,7 +277,7 @@ function applyCloudflareTheme() {
   box-shadow: var(--shadow-xl);
 }
 
-/* Override existing colors with Cloudflare theme */
+/* Override existing colors with Geppetto Digital theme */
 .bg-primary { background-color: var(--color-primary) !important; }
 .bg-secondary { background-color: var(--color-secondary) !important; }
 .text-primary { color: var(--color-primary) !important; }
@@ -299,13 +299,13 @@ function applyCloudflareTheme() {
   background-clip: text;
 }`;
     
-    const cssPath = path.join(__dirname, '..', 'public', 'static', 'cloudflare-theme.css');
+    const cssPath = path.join(__dirname, '..', 'public', 'static', 'geppetto-digital-theme.css');
     fs.writeFileSync(cssPath, cssContent);
-    console.log('✅ CSS do tema Cloudflare criado: public/static/cloudflare-theme.css');
+    console.log('✅ CSS do tema Geppetto Digital criado: public/static/geppetto-digital-theme.css');
     
-    console.log('\n🎯 Tema Cloudflare aplicado com sucesso!');
+    console.log('\n🎯 Tema Geppetto Digital aplicado com sucesso!');
     console.log('\n📋 Características do tema:');
-    console.log('  • Cores: Orange (#f48120) + Blue (#0051c3)');
+    console.log('  • Cores: Orange (#f48120) + Blue (#ff6b35)');
     console.log('  • Glass Morphism ativado');
     console.log('  • Gradientes modernos');
     console.log('  • Shadows otimizadas');
@@ -323,4 +323,4 @@ function applyCloudflareTheme() {
 }
 
 // Execute
-applyCloudflareTheme();
+applyGeppetto DigitalTheme();

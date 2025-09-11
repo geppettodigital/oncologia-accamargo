@@ -1,0 +1,106 @@
+/* Cloudflare Design System Theme */
+:root {
+  /* Primary Colors */
+  --color-primary: #f48120;
+  --color-primary-dark: #e06d10;
+  --color-secondary: #ff6b35;
+  --color-secondary-dark: #e55100;
+  --color-accent: #7c3aed;
+  
+  /* Semantic Colors */
+  --color-danger: #ef4444;
+  --color-warning: #fbbf24;
+  --color-success: #10b981;
+  --color-info: #fb923c;
+  
+  /* Grays */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #f48120 0%, #ff6b35 100%);
+  --gradient-secondary: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+  --gradient-sunset: linear-gradient(135deg, #f48120 0%, #f48120 50%, #ff6b35 100%);
+  --gradient-aurora: linear-gradient(135deg, #7c3aed 0%, #fb923c 50%, #10b981 100%);
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-orange: 0 10px 25px rgba(244, 129, 32, 0.3);
+  --shadow-blue: 0 10px 25px rgba(0, 81, 195, 0.3);
+}
+
+/* Glass Morphism Effect */
+.glass-effect, .gd-glass {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Cloudflare Button Styles */
+.gd-button, .btn-primary {
+  background: var(--gradient-primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+}
+
+.gd-button:hover, .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-orange);
+}
+
+/* Cloudflare Card Styles */
+.gd-card {
+  background: white;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gd-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Override existing colors with Cloudflare theme */
+.bg-primary { background-color: var(--color-primary) !important; }
+.bg-secondary { background-color: var(--color-secondary) !important; }
+.text-primary { color: var(--color-primary) !important; }
+.text-secondary { color: var(--color-secondary) !important; }
+.border-primary { border-color: var(--color-primary) !important; }
+.border-secondary { border-color: var(--color-secondary) !important; }
+
+/* Gradient utilities */
+.gradient-primary { background: var(--gradient-primary) !important; }
+.gradient-secondary { background: var(--gradient-secondary) !important; }
+.gradient-sunset { background: var(--gradient-sunset) !important; }
+.gradient-aurora { background: var(--gradient-aurora) !important; }
+
+/* Text gradient */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

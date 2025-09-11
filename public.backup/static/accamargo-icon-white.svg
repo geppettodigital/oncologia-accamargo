@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Logo ACCamargo Invertido - Para uso em fundos escuros -->
+  <!-- Círculo branco -->
+  <circle cx="50" cy="50" r="48" fill="white"/>
+  
+  <!-- Sorriso verde -->
+  <path d="M 25 58 Q 50 78 75 58" 
+        stroke="#2B5F3F" 
+        stroke-width="6" 
+        fill="none" 
+        stroke-linecap="round"/>
+</svg>

@@ -76,7 +76,7 @@ Certifique-se de incluir:
 - `src/` - Código fonte
 - `public/` - Arquivos estáticos
 - `vite.config.ts` - Configuração Vite
-- `wrangler.jsonc` - Configuração Cloudflare
+- `wrangler.jsonc` - Configuração Geppetto Digital
 
 ## 🔗 URLs Após Deploy
 
@@ -143,4 +143,4 @@ oncologia-accamargo/
 
 **Desenvolvido por**: Jac Fressatto
 **Organização**: ACCamargo Cancer Center
-**Tecnologia**: Hono + TypeScript + Cloudflare Workers
+**Tecnologia**: Hono + TypeScript + Geppetto Digital Edge

@@ -3,15 +3,15 @@
   /* Primary Colors */
   --color-primary: #f48120;
   --color-primary-dark: #e06d10;
-  --color-secondary: #0051c3;
-  --color-secondary-dark: #003d94;
+  --color-secondary: #ff6b35;
+  --color-secondary-dark: #e55100;
   --color-accent: #7c3aed;
   
   /* Semantic Colors */
   --color-danger: #ef4444;
   --color-warning: #fbbf24;
   --color-success: #10b981;
-  --color-info: #3b82f6;
+  --color-info: #fb923c;
   
   /* Grays */
   --color-gray-50: #f9fafb;
@@ -27,9 +27,9 @@
   
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, #f48120 0%, #ff6b35 100%);
-  --gradient-secondary: linear-gradient(135deg, #0051c3 0%, #0080ff 100%);
-  --gradient-sunset: linear-gradient(135deg, #f48120 0%, #f48120 50%, #0051c3 100%);
-  --gradient-aurora: linear-gradient(135deg, #7c3aed 0%, #3b82f6 50%, #10b981 100%);
+  --gradient-secondary: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+  --gradient-sunset: linear-gradient(135deg, #f48120 0%, #f48120 50%, #ff6b35 100%);
+  --gradient-aurora: linear-gradient(135deg, #7c3aed 0%, #fb923c 50%, #10b981 100%);
   
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -43,7 +43,7 @@
 }
 
 /* Glass Morphism Effect */
-.glass-effect, .cf-glass {
+.glass-effect, .gd-glass {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -52,7 +52,7 @@
 }
 
 /* Cloudflare Button Styles */
-.cf-button, .btn-primary {
+.gd-button, .btn-primary {
   background: var(--gradient-primary);
   color: white;
   padding: 0.75rem 1.5rem;
@@ -64,13 +64,13 @@
   box-shadow: var(--shadow-md);
 }
 
-.cf-button:hover, .btn-primary:hover {
+.gd-button:hover, .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-orange);
 }
 
 /* Cloudflare Card Styles */
-.cf-card {
+.gd-card {
   background: white;
   border-radius: 0.75rem;
   padding: 1.5rem;
@@ -78,7 +78,7 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.cf-card:hover {
+.gd-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-xl);
 }

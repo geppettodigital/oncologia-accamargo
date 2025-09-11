@@ -1,18 +1,18 @@
 import { Hono } from 'hono';
 import { html } from 'hono/html';
 
-// Cloudflare Design System Colors
-export const cloudflareTheme = {
+// Geppetto Digital Design System Colors
+export const geppettoDigitalTheme = {
   colors: {
-    primary: '#f48120',      // Cloudflare Orange
-    secondary: '#0051c3',    // Cloudflare Blue  
-    accent: '#7c3aed',       // Cloudflare Purple
+    primary: '#f48120',      // Geppetto Digital Orange
+    secondary: '#ff6b35',    // Geppetto Digital Blue  
+    accent: '#7c3aed',       // Geppetto Digital Purple
     success: '#10b981',      // Green
     warning: '#fbbf24',      // Yellow
     danger: '#ef4444',       // Red
     info: '#3b82f6',         // Light Blue
     
-    // Grays (Cloudflare palette)
+    // Grays (Geppetto Digital palette)
     gray: {
       50: '#f9fafb',
       100: '#f3f4f6',
@@ -48,10 +48,10 @@ export const cloudflareTheme = {
 
 // Componente de preview da marca
 export const BrandPreview = ({ config }: { config: any }) => {
-  const theme = config?.useCloudflareTheme ? cloudflareTheme : {
+  const theme = config?.useGeppettoDigitalTheme ? geppettoDigitalTheme : {
     colors: {
       primary: config?.brand?.colors?.primary || '#f48120',
-      secondary: config?.brand?.colors?.secondary || '#0051c3'
+      secondary: config?.brand?.colors?.secondary || '#ff6b35'
     }
   };
   
@@ -63,13 +63,13 @@ export const BrandPreview = ({ config }: { config: any }) => {
         --brand-gradient: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
       }
       
-      .cf-glass {
+      .gd-glass {
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.2);
       }
       
-      .cf-button {
+      .gd-button {
         background: var(--brand-gradient);
         color: white;
         padding: 0.75rem 1.5rem;
@@ -80,12 +80,12 @@ export const BrandPreview = ({ config }: { config: any }) => {
         cursor: pointer;
       }
       
-      .cf-button:hover {
+      .gd-button:hover {
         transform: translateY(-2px);
         box-shadow: ${theme.shadows?.orange || '0 10px 25px rgba(244, 129, 32, 0.3)'};
       }
       
-      .cf-card {
+      .gd-card {
         background: white;
         border-radius: 0.75rem;
         padding: 1.5rem;
@@ -93,12 +93,12 @@ export const BrandPreview = ({ config }: { config: any }) => {
         transition: all 0.3s ease;
       }
       
-      .cf-card:hover {
+      .gd-card:hover {
         transform: translateY(-4px);
         box-shadow: ${theme.shadows?.xl || '0 20px 25px -5px rgba(0, 0, 0, 0.1)'};
       }
       
-      .cf-metric {
+      .gd-metric {
         display: flex;
         flex-direction: column;
         padding: 1.5rem;
@@ -107,20 +107,20 @@ export const BrandPreview = ({ config }: { config: any }) => {
         color: white;
       }
       
-      .cf-metric-value {
+      .gd-metric-value {
         font-size: 2rem;
         font-weight: 700;
         margin-bottom: 0.25rem;
       }
       
-      .cf-metric-label {
+      .gd-metric-label {
         font-size: 0.875rem;
         opacity: 0.9;
       }
     </style>
     
     <div class="preview-container">
-      <div class="cf-glass p-6 rounded-xl">
+      <div class="gd-glass p-6 rounded-xl">
         <!-- Header -->
         <div class="flex items-center justify-between mb-8">
           <div class="flex items-center space-x-4">
@@ -145,27 +145,27 @@ export const BrandPreview = ({ config }: { config: any }) => {
         
         <!-- Metrics -->
         <div class="grid grid-cols-3 gap-4 mb-6">
-          <div class="cf-metric">
-            <div class="cf-metric-value">R$ 2.4M</div>
-            <div class="cf-metric-label">Economia Anual</div>
+          <div class="gd-metric">
+            <div class="gd-metric-value">R$ 2.4M</div>
+            <div class="gd-metric-label">Economia Anual</div>
           </div>
-          <div class="cf-metric">
-            <div class="cf-metric-value">45.000</div>
-            <div class="cf-metric-label">Pacientes</div>
+          <div class="gd-metric">
+            <div class="gd-metric-value">45.000</div>
+            <div class="gd-metric-label">Pacientes</div>
           </div>
-          <div class="cf-metric">
-            <div class="cf-metric-value">98.5%</div>
-            <div class="cf-metric-label">Satisfação</div>
+          <div class="gd-metric">
+            <div class="gd-metric-value">98.5%</div>
+            <div class="gd-metric-label">Satisfação</div>
           </div>
         </div>
         
         <!-- Sample Buttons -->
         <div class="flex space-x-4">
-          <button class="cf-button">
+          <button class="gd-button">
             <i class="fas fa-rocket mr-2"></i>
             Acessar Plataforma
           </button>
-          <button class="cf-button" style="background: white; color: var(--brand-primary); border: 2px solid var(--brand-primary);">
+          <button class="gd-button" style="background: white; color: var(--brand-primary); border: 2px solid var(--brand-primary);">
             <i class="fas fa-info-circle mr-2"></i>
             Saiba Mais
           </button>
@@ -175,17 +175,17 @@ export const BrandPreview = ({ config }: { config: any }) => {
   `;
 };
 
-// Helper para aplicar tema Cloudflare como padrão
-export const applyCloudflareDefaults = (config: any) => {
+// Helper para aplicar tema Geppetto Digital como padrão
+export const applyGeppettoDigitalDefaults = (config: any) => {
   if (!config.brand) {
     config.brand = {};
   }
   
-  // Se não houver cores customizadas, usa Cloudflare
-  if (!config.brand.colors || config.useCloudflareTheme) {
-    config.brand.colors = cloudflareTheme.colors;
-    config.brand.gradients = cloudflareTheme.gradients;
-    config.brand.shadows = cloudflareTheme.shadows;
+  // Se não houver cores customizadas, usa Geppetto Digital
+  if (!config.brand.colors || config.useGeppettoDigitalTheme) {
+    config.brand.colors = geppettoDigitalTheme.colors;
+    config.brand.gradients = geppettoDigitalTheme.gradients;
+    config.brand.shadows = geppettoDigitalTheme.shadows;
   }
   
   // Aplica glass morphism por padrão
@@ -227,8 +227,8 @@ brandCustomizerRoute.post('/api/brand/save', async (c) => {
   try {
     const config = await c.req.json();
     
-    // Aplica defaults do Cloudflare se necessário
-    const finalConfig = applyCloudflareDefaults(config);
+    // Aplica defaults do Geppetto Digital se necessário
+    const finalConfig = applyGeppettoDigitalDefaults(config);
     
     // Aqui você salvaria no banco de dados ou arquivo
     // Por enquanto, retorna sucesso
@@ -251,18 +251,18 @@ brandCustomizerRoute.get('/api/brand/load/:brandId', (c) => {
   const brandId = c.req.param('brandId');
   
   // Aqui você carregaria do banco de dados
-  // Por enquanto, retorna config padrão com tema Cloudflare
+  // Por enquanto, retorna config padrão com tema Geppetto Digital
   
   const config = {
     brand: {
       id: brandId,
       name: 'Hospital Example',
       tagline: 'Transformando o cuidado oncológico',
-      useCloudflareTheme: true
+      useGeppettoDigitalTheme: true
     }
   };
   
-  return c.json(applyCloudflareDefaults(config));
+  return c.json(applyGeppettoDigitalDefaults(config));
 });
 
 export default brandCustomizerRoute;

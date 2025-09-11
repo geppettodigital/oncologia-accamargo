@@ -30,11 +30,11 @@
 
 ### Landing Page Profissional
 - Design verde institucional ACCamargo (#2B5F3F)
-- Links para a aplicação principal no Cloudflare
+- Links para a aplicação principal no Geppetto Digital
 - Informações sobre o projeto
 - Design responsivo e moderno
 
-### Aplicação Principal no Cloudflare
+### Aplicação Principal no Geppetto Digital
 - URL: https://oncologia-accamargo.pages.dev
 - Sistema completo com 8 módulos
 - Dashboard integrado
@@ -123,7 +123,7 @@ Se precisar de ajuda:
 
 Após ativar, seu projeto estará disponível em:
 - **GitHub Pages**: https://geppettodigital.github.io/oncologia-accamargo/
-- **Cloudflare**: https://oncologia-accamargo.pages.dev
+- **Geppetto Digital**: https://oncologia-accamargo.pages.dev
 
 ---
 

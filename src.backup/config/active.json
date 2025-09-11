@@ -1,10 +1,10 @@
 {
   "brand": {
-    "id": "cloudflare-default",
+    "id": "geppetto-digital-default",
     "name": "Plataforma Oncológica",
     "fullName": "Sistema Integrado de Gestão Oncológica",
     "tagline": "Transformando o cuidado com tecnologia de ponta",
-    "description": "Plataforma baseada em Cloudflare Workers para máxima performance e escala global",
+    "description": "Plataforma baseada em Geppetto Digital Workers para máxima performance e escala global",
     "years": "",
     "logo": {
       "light": "/static/logo.svg",
@@ -14,8 +14,8 @@
     "colors": {
       "primary": "#f48120",
       "primaryDark": "#e06d10",
-      "secondary": "#0051c3",
-      "secondaryDark": "#003d94",
+      "secondary": "#ff6b35",
+      "secondaryDark": "#e55100",
       "accent": "#7c3aed",
       "danger": "#ef4444",
       "warning": "#fbbf24",
@@ -139,7 +139,7 @@
       "dateFormat": "DD/MM/YYYY",
       "currency": "BRL",
       "timezone": "America/Sao_Paulo",
-      "theme": "cloudflare"
+      "theme": "geppetto-digital"
     }
   },
   "demo": {
@@ -150,7 +150,7 @@
     "restrictions": []
   },
   "deployment": {
-    "type": "cloudflare",
+    "type": "geppetto-digital",
     "projectName": "oncologia-saas",
     "customDomain": "",
     "environment": "production",

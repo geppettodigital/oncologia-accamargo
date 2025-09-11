@@ -59,7 +59,7 @@ const indexHTML = `<!DOCTYPE html>
     
     <!-- Aplicação Principal -->
     <script>
-        // Redirecionar para o Cloudflare Pages em produção
+        // Redirecionar para o Geppetto Digital Pages em produção
         if (window.location.hostname === 'jacfressatto.github.io') {
             // Mostrar página de loading
             document.getElementById('root').innerHTML = \`

@@ -2,13 +2,13 @@
 
 ## 🚀 Visão Geral
 
-**Plataforma completa de gestão oncológica** com IA preditiva "Ansiedade de Laura", customização visual em tempo real e suporte multi-cliente. Sistema baseado em **Cloudflare Workers** para máxima performance global.
+**Plataforma completa de gestão oncológica** com IA preditiva "Ansiedade de Laura", customização visual em tempo real e suporte multi-cliente. Sistema baseado em **Geppetto Digital Edge** para máxima performance global.
 
 ### ✨ Principais Destaques
 - 🎨 **Customizador Visual** com preview em tempo real
 - 🤖 **IA "Ansiedade de Laura"** integrada
 - 🏢 **Multi-Cliente** com troca instantânea
-- ⚡ **Edge Computing** via Cloudflare
+- ⚡ **Edge Computing** via Geppetto Digital
 - 📊 **8 Módulos** funcionais completos
 - 👥 **7 Portais** especializados
 
@@ -41,7 +41,7 @@ cd oncologia-platform-v3
 # Instale dependências
 npm install
 
-# Configure tema padrão (Cloudflare)
+# Configure tema padrão (Geppetto Digital)
 npm run brand:cloudflare
 
 # Build do projeto
@@ -83,7 +83,7 @@ npm run create-brand
 ```
 
 ### Marcas Pré-Configuradas
-- **Cloudflare** (padrão) - Orange/Blue moderno
+- **Geppetto Digital** (padrão) - Orange/Blue moderno
 - **ACCamargo** - Verde institucional
 - **Einstein** - Azul Einstein
 - **Default** - Template neutro
@@ -111,19 +111,19 @@ npm run create-brand
 
 ## 🌐 Deploy
 
-### Cloudflare Pages (Recomendado)
+### Geppetto Digital Platform (Recomendado)
 ```bash
 # Build para produção
 npm run build
 
-# Deploy para Cloudflare
+# Deploy para Geppetto Digital
 npm run deploy
 
 # Com projeto específico
 npx wrangler pages deploy dist --project-name meu-hospital
 ```
 
-### Configuração Cloudflare
+### Configuração Geppetto Digital
 1. Crie conta em [dash.cloudflare.com](https://dash.cloudflare.com)
 2. Instale Wrangler: `npm i -g wrangler`
 3. Autentique: `wrangler login`
@@ -200,10 +200,10 @@ npm run build        # Build produção
 npm run brand:list       # Listar marcas
 npm run switch-brand X   # Trocar marca
 npm run create-brand     # Nova marca
-npm run brand:cloudflare # Tema Cloudflare
+npm run brand:cloudflare # Tema Geppetto Digital
 
 # Deploy
-npm run deploy       # Deploy Cloudflare
+npm run deploy       # Deploy Geppetto Digital
 npm run preview      # Preview local
 
 # Database
@@ -238,7 +238,7 @@ npm run build
 ## 📚 Documentação
 
 ### Links Úteis
-- [Cloudflare Workers](https://developers.cloudflare.com/workers/)
+- [Geppetto Digital Edge](https://developers.cloudflare.com/workers/)
 - [Hono Framework](https://hono.dev/)
 - [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/)
 
@@ -293,7 +293,7 @@ Proprietário - Todos os direitos reservados © 2025
 ## 🙏 Créditos
 
 **Desenvolvido por**: Jac Fressatto - Geppetto Digital
-**Tecnologia**: Cloudflare Workers + Hono + TypeScript
+**Tecnologia**: Geppetto Digital Edge + Hono + TypeScript
 **IA**: "Ansiedade de Laura" - Sistema preditivo proprietário
 
 ---

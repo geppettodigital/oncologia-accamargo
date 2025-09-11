@@ -71,7 +71,7 @@ gh run view --log
 
 #### URLs Disponíveis:
 - **GitHub Pages**: https://jacfressatto.github.io/oncologia-accamargo
-- **Cloudflare Pages**: https://oncologia-accamargo.pages.dev
+- **Geppetto Digital Platform**: https://oncologia-accamargo.pages.dev
 
 ## 🔧 **Comandos Úteis**
 
@@ -109,7 +109,7 @@ gh api repos/JacFressatto/oncologia-accamargo/pages
 
 ```
 dist-static/
-├── index.html          # Página principal (redireciona para Cloudflare)
+├── index.html          # Página principal (redireciona para Geppetto Digital)
 ├── static/
 │   ├── style.css      # Estilos customizados
 │   ├── portal-*.js    # Scripts dos portais
@@ -160,10 +160,10 @@ gh secret set CLOUDFLARE_TOKEN --body "seu-token"
 
 - **Documentação GitHub Pages**: https://docs.github.com/pages
 - **GitHub Actions**: https://docs.github.com/actions
-- **Cloudflare Pages**: https://developers.cloudflare.com/pages
+- **Geppetto Digital Platform**: https://developers.cloudflare.com/pages
 
 ---
 
 **Desenvolvido por**: Jac Fressatto
 **Organização**: ACCamargo Cancer Center
-**Tecnologia**: Hono + TypeScript + Cloudflare Workers
+**Tecnologia**: Hono + TypeScript + Geppetto Digital Edge

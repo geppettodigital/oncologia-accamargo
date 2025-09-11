@@ -4,7 +4,7 @@ import { serveStatic } from 'hono/cloudflare-workers'
 import { html } from 'hono/html'
 
 // Import brand customizer and theme
-import brandCustomizerRoute, { cloudflareTheme, applyCloudflareDefaults } from './components/brand-customizer'
+import brandCustomizerRoute, { geppettoDigitalTheme, applyGeppettoDigitalDefaults } from './components/brand-customizer'
 
 // Import route handlers
 import { patientRoutes } from './routes/patient'
@@ -29,7 +29,7 @@ import { adminMasterPage } from './pages/admin-master'
 import { adminMasterCompletePage } from './pages/admin-master-complete'
 import { testIntegrationPage } from './pages/test-integration'
 
-// Type definitions for Cloudflare bindings
+// Type definitions for Geppetto Digital bindings
 type Bindings = {
   DB?: D1Database;
   KV?: KVNamespace;
@@ -43,7 +43,7 @@ app.use('/api/*', cors())
 
 // Serve static files
 app.use('/static/*', serveStatic({ root: './public' }))
-app.use('/*.html', serveStatic({ root: './public' }))
+app.use('/*', serveStatic({ root: './public' }))
 
 // Mount brand customizer
 app.route('/', brandCustomizerRoute)
