@@ -42,7 +42,7 @@ cd oncologia-platform-v3
 npm install
 
 # Configure tema padrão (Geppetto Digital)
-npm run brand:cloudflare
+npm run brand:geppetto-digital
 
 # Build do projeto
 npm run build
@@ -200,10 +200,10 @@ npm run build        # Build produção
 npm run brand:list       # Listar marcas
 npm run switch-brand X   # Trocar marca
 npm run create-brand     # Nova marca
-npm run brand:cloudflare # Tema Geppetto Digital
+npm run brand:geppetto # Tema Geppetto Digital
 
 # Deploy
-npm run deploy       # Deploy Geppetto Digital
+npm run deploy       # Deploy Geppetto Digital Pages
 npm run preview      # Preview local
 
 # Database
@@ -238,7 +238,7 @@ npm run build
 ## 📚 Documentação
 
 ### Links Úteis
-- [Geppetto Digital Edge](https://developers.cloudflare.com/workers/)
+- [Geppetto Digital Edge](https://geppetto.digital/edge)
 - [Hono Framework](https://hono.dev/)
 - [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/)
 
