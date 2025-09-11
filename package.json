@@ -1,5 +1,9 @@
 {
-  "name": "oncologia-plataforma",
+  "name": "oncologia-platform-v3",
+  "version": "3.0.0",
+  "description": "Plataforma Oncológica Multi-Cliente com IA e Customização Visual",
+  "author": "Jac Fressatto - Geppetto Digital",
+  "license": "PROPRIETARY",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'oncologia-saas',
+      name: 'oncologia-v3',
       script: 'npx',
       args: 'wrangler pages dev dist --ip 0.0.0.0 --port 3000',
       env: {
@@ -10,7 +10,9 @@ module.exports = {
       },
       watch: false,
       instances: 1,
-      exec_mode: 'fork'
+      exec_mode: 'fork',
+      autorestart: true,
+      max_memory_restart: '500M'
     }
   ]
 }
