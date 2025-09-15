@@ -19,6 +19,11 @@ Plataforma completa de gestão oncológica integrada com LAURA Assistant, oferec
 2. **Portal Médico** - Assistente clínico com IA e gestão integrada
 3. **Navegador de Pacientes** - Coordenação otimizada da jornada
    - **🆕 Trilho de Atendimentos**: Visão Kanban completa da jornada
+   - **🆕 View Universal do Paciente**: Interface completa com 6 abas funcionais
+   - **🆕 Sistema Contatar**: Rede de apoio, equipe médica, contatos integrados
+   - **🆕 Sistema Agendar**: Calendário inteligente com slots disponíveis
+   - **🆕 Wiki Jornada**: Timeline interativo da jornada do paciente
+   - **🆕 Checklist Auditoria**: Sistema double-check com compliance
    - Drag & Drop entre fases do tratamento
    - 5 colunas: Triagem → Diagnóstico → Tratamento → Acompanhamento → Alta
 4. **Gestão Financeira** - Prevenção inteligente de glosas
@@ -44,6 +49,24 @@ Plataforma completa de gestão oncológica integrada com LAURA Assistant, oferec
 - Sistema de alertas preditivos por criticidade
 - Análise financeira com prevenção de glosas
 - Casos similares e padrões de tratamento
+
+## 🎯 Funcionalidades do Portal do Navegador
+
+### View Universal do Paciente
+Interface completa integrada ao Portal do Navegador com 6 abas funcionais:
+
+1. **📊 Visão Geral**: Dados clínicos, equipe médica, status atual e alertas
+2. **📞 Contatar**: Sistema completo de comunicação com paciente, rede de apoio e equipe médica
+3. **📅 Agendar**: Calendário inteligente para consultas e procedimentos
+4. **🛤️ Jornada**: Timeline interativo com histórico completo do tratamento
+5. **✅ Checklist**: Sistema double-check para documentação, exames e orientações
+6. **🧠 IA Laura**: Análise preditiva com score de ansiedade e recomendações
+
+### Como Usar
+1. Acesse o Portal do Navegador
+2. Clique em "Trilho de Atendimentos" para ver o Kanban
+3. Clique em qualquer card de paciente
+4. A View Universal abrirá automaticamente com todas as informações
 
 ## 🔧 Tecnologias Utilizadas
 
@@ -83,7 +106,9 @@ webapp/
 
 ### Desenvolvimento
 - **Local**: http://localhost:3000
-- **Sandbox**: https://3000-[sandbox-id].e2b.dev
+- **Sandbox**: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev
+- **Portal Navegador**: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev#navigator
+- **Teste Integrado**: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev/test-navigator
 
 ### Produção (quando deployado)
 - **Principal**: https://[project-name].pages.dev
