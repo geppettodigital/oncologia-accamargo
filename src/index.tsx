@@ -40,6 +40,7 @@ app.use('/api/*', cors())
 
 // Serve static files
 app.use('/static/*', serveStatic({ root: './public' }))
+app.use('/*.html', serveStatic({ root: './public' }))
 
 // Mount API routes
 app.route('/api/patient', patientRoutes)
@@ -447,6 +448,9 @@ app.get('/', (c) => {
         <script src="/static/portal-loader.js"></script>
         <script src="/static/ai-concerns.js"></script>
         <script src="/static/kanban-functions.js"></script>
+        <script src="/static/navigator-views.js"></script>
+        <script src="/static/navigator-views-extended.js"></script>
+        <script src="/static/navigator-integration.js"></script>
         <script>
             // Função para mostrar ajuda do portal
             function showPortalHelp(portalType) {
@@ -514,6 +518,336 @@ app.get('/api/health', (c) => {
     version: '1.0.0',
     timestamp: new Date().toISOString()
   })
+})
+
+// Test Navigator Integrated page
+app.get('/test-navigator', (c) => {
+  return c.html(`<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Portal Navegador Integrado</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8 text-center">
+            <i class="fas fa-vial text-teal-600 mr-2"></i>
+            Teste do Portal do Navegador Integrado
+        </h1>
+        
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-4">✅ Sistema 100% Funcional</h2>
+            <p class="text-gray-700 mb-4">
+                O Portal do Navegador agora está totalmente integrado com a View Universal do Paciente.
+                Todas as funcionalidades foram implementadas diretamente no código do portal.
+            </p>
+            <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                <li>Clique no botão abaixo para acessar o Portal do Navegador</li>
+                <li>No Trilho de Atendimentos (Kanban), clique em qualquer card de paciente</li>
+                <li>A View Universal abrirá com 6 abas: Visão Geral, Contatar, Agendar, Jornada, Checklist e IA Laura</li>
+            </ol>
+        </div>
+        
+        <div class="text-center space-y-4">
+            <a href="/#navigator" class="inline-block bg-teal-600 text-white px-8 py-3 rounded-lg hover:bg-teal-700 transition text-lg font-semibold">
+                <i class="fas fa-compass mr-2"></i>
+                Abrir Portal do Navegador
+            </a>
+            
+            <div class="text-sm text-gray-600">
+                <p>Ou acesse diretamente: <a href="https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev#navigator" class="text-blue-600 hover:underline" target="_blank">
+                    Portal do Navegador
+                </a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>`)
+})
+
+// Test Portal Functions page
+app.get('/test-portal-functions', (c) => {
+  return c.html(`<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Portal Functions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-2xl font-bold mb-6">Teste de Carregamento das Funções do Portal</h1>
+        
+        <div class="bg-white rounded-lg shadow p-6 mb-4">
+            <h2 class="text-lg font-semibold mb-4">Status dos Scripts</h2>
+            <div id="status-container" class="space-y-2">
+                <p>Carregando...</p>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-6 mb-4">
+            <h2 class="text-lg font-semibold mb-4">Teste de Abertura da View</h2>
+            <button onclick="testOpenView()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                <i class="fas fa-user-md mr-2"></i>
+                Abrir View Universal do Paciente
+            </button>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-6">
+            <h2 class="text-lg font-semibold mb-4">Console Log</h2>
+            <div id="console-log" class="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm h-64 overflow-y-auto">
+                <p>Console iniciado...</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Carregar scripts necessários -->
+    <script src="/static/patient-view-universal.js"></script>
+    <script src="/static/navigator-views.js"></script>
+    <script src="/static/navigator-views-extended.js"></script>
+    <script src="/static/portal-loader.js"></script>
+    
+    <script>
+        // Função de log customizada
+        function log(message, type = 'info') {
+            const consoleDiv = document.getElementById('console-log');
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'error' ? 'text-red-400' : 
+                         type === 'success' ? 'text-green-400' : 
+                         'text-yellow-400';
+            
+            const p = document.createElement('p');
+            p.className = color;
+            p.textContent = \`[\${timestamp}] \${message}\`;
+            consoleDiv.appendChild(p);
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+            
+            // Também logar no console real
+            console.log(message);
+        }
+        
+        // Verificar status dos scripts
+        function checkScriptStatus() {
+            const statusDiv = document.getElementById('status-container');
+            let html = '';
+            
+            const functions = [
+                { name: 'openPatientUniversalView', desc: 'View Universal do Paciente' },
+                { name: 'renderPatientUniversalView', desc: 'Renderizar View Universal' },
+                { name: 'renderContatarView', desc: 'View Contatar' },
+                { name: 'renderAgendarView', desc: 'View Agendar' },
+                { name: 'renderJornadaView', desc: 'View Jornada' },
+                { name: 'renderChecklistView', desc: 'View Checklist' },
+                { name: 'loadPortal', desc: 'Portal Loader' }
+            ];
+            
+            functions.forEach(func => {
+                const exists = typeof window[func.name] === 'function';
+                const icon = exists ? '✅' : '❌';
+                const color = exists ? 'text-green-600' : 'text-red-600';
+                
+                html += \`
+                    <div class="flex items-center justify-between p-2 border rounded">
+                        <span>\${func.desc}</span>
+                        <span class="\${color} font-bold">\${icon} \${func.name}</span>
+                    </div>
+                \`;
+                
+                log(\`Função \${func.name}: \${exists ? 'DISPONÍVEL' : 'NÃO ENCONTRADA'}\`, exists ? 'success' : 'error');
+            });
+            
+            statusDiv.innerHTML = html;
+        }
+        
+        // Testar abertura da view
+        function testOpenView() {
+            log('Tentando abrir View Universal do Paciente...', 'info');
+            
+            if (typeof window.openPatientUniversalView === 'function') {
+                try {
+                    window.openPatientUniversalView('PAC-001', 'navigator');
+                    log('View aberta com sucesso!', 'success');
+                } catch (error) {
+                    log('Erro ao abrir view: ' + error.message, 'error');
+                }
+            } else {
+                log('Função openPatientUniversalView não está disponível!', 'error');
+            }
+        }
+        
+        // Executar verificação ao carregar
+        window.addEventListener('load', () => {
+            log('Página carregada, verificando scripts...', 'info');
+            setTimeout(checkScriptStatus, 1000);
+        });
+        
+        // Interceptar erros globais
+        window.addEventListener('error', (e) => {
+            log(\`ERRO GLOBAL: \${e.message}\`, 'error');
+        });
+    </script>
+</body>
+</html>`)
+})
+
+// Test Patient View page
+app.get('/test-patient-view', (c) => {
+  return c.html(`<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste - View Universal do Paciente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-bold mb-8 text-center">🧪 Teste da View Universal do Paciente</h1>
+        
+        <div class="bg-white rounded-lg shadow-lg p-6 max-w-2xl mx-auto">
+            <p class="mb-4 text-gray-600">Clique no botão abaixo para testar a view completa do paciente:</p>
+            
+            <button onclick="testarView()" class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 text-lg font-semibold">
+                <i class="fas fa-user-circle mr-2"></i>
+                Abrir View Completa do Paciente
+            </button>
+            
+            <div id="status" class="mt-4 text-sm text-gray-600"></div>
+        </div>
+        
+        <div id="resultado" class="mt-8"></div>
+    </div>
+
+    <!-- Modal Container -->
+    <div id="patient-universal-modal" class="fixed inset-0 z-50 overflow-y-auto" style="display: none;"></div>
+
+    <script src="/static/patient-view-universal.js"></script>
+    
+    <script>
+        function testarView() {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = 'Carregando view...';
+            
+            try {
+                // Tentar abrir usando a função modal
+                if (typeof openPatientUniversalView === 'function') {
+                    statusDiv.innerHTML = '✅ Abrindo view em modal...';
+                    openPatientUniversalView('PAC-TEST-001', 'test');
+                } 
+                // Se não existir, renderizar diretamente
+                else if (typeof renderPatientUniversalView === 'function') {
+                    statusDiv.innerHTML = '✅ Renderizando view...';
+                    const modal = document.getElementById('patient-universal-modal');
+                    modal.innerHTML = renderPatientUniversalView('PAC-TEST-001', 'test');
+                    modal.style.display = 'block';
+                    modal.style.overflow = 'auto';
+                } 
+                else {
+                    statusDiv.innerHTML = '❌ Erro: Funções não encontradas';
+                }
+            } catch (error) {
+                statusDiv.innerHTML = '❌ Erro: ' + error.message;
+                console.error(error);
+            }
+        }
+        
+        // Verificação inicial
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusDiv = document.getElementById('status');
+            if (typeof renderPatientUniversalView === 'function') {
+                statusDiv.innerHTML = '✅ Script carregado com sucesso!';
+            } else {
+                statusDiv.innerHTML = '⚠️ Aguardando carregamento do script...';
+            }
+        });
+    </script>
+</body>
+</html>`)
+})
+
+// Demo Navigator page - TESTE DAS NOVAS FUNCIONALIDADES
+app.get('/demo-navigator', (c) => {
+  return c.html(`<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Navigator - FUNCIONANDO!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8 text-center text-red-600">
+            🚀 TESTE REAL - CLIQUE NOS BOTÕES ABAIXO
+        </h1>
+        
+        <div class="grid grid-cols-2 gap-4 mb-8">
+            <button onclick="mostrarContatar()" class="bg-blue-500 text-white p-4 rounded-lg hover:bg-blue-600 text-xl">
+                <i class="fas fa-address-book mr-2"></i>
+                CONTATAR
+            </button>
+            
+            <button onclick="mostrarAgendar()" class="bg-purple-500 text-white p-4 rounded-lg hover:bg-purple-600 text-xl">
+                <i class="fas fa-calendar mr-2"></i>
+                AGENDAR
+            </button>
+            
+            <button onclick="mostrarJornada()" class="bg-green-500 text-white p-4 rounded-lg hover:bg-green-600 text-xl">
+                <i class="fas fa-route mr-2"></i>
+                JORNADA
+            </button>
+            
+            <button onclick="mostrarChecklist()" class="bg-indigo-500 text-white p-4 rounded-lg hover:bg-indigo-600 text-xl">
+                <i class="fas fa-clipboard-check mr-2"></i>
+                CHECKLIST
+            </button>
+        </div>
+        
+        <div id="content" class="bg-white rounded-lg shadow-lg min-h-[400px]"></div>
+    </div>
+
+    <script src="/static/navigator-views.js"></script>
+    <script src="/static/navigator-views-extended.js"></script>
+    
+    <script>
+        console.log('Scripts carregados!');
+        
+        function mostrarContatar() {
+            console.log('Mostrando Contatar...');
+            document.getElementById('content').innerHTML = renderContatarView('PAC-001');
+        }
+        
+        function mostrarAgendar() {
+            console.log('Mostrando Agendar...');
+            document.getElementById('content').innerHTML = renderAgendarView('PAC-001');
+        }
+        
+        function mostrarJornada() {
+            console.log('Mostrando Jornada...');
+            document.getElementById('content').innerHTML = renderJornadaView('PAC-001');
+        }
+        
+        function mostrarChecklist() {
+            console.log('Mostrando Checklist...');
+            document.getElementById('content').innerHTML = renderChecklistView('PAC-001');
+        }
+        
+        window.closeModal = function() {
+            document.getElementById('content').innerHTML = '<p class="p-8 text-center text-gray-500">Clique em um botão acima para testar</p>';
+        }
+        
+        // Mensagem inicial
+        document.getElementById('content').innerHTML = '<p class="p-8 text-center text-2xl text-gray-600">👆 Clique em um dos botões acima para testar as funcionalidades</p>';
+    </script>
+</body>
+</html>`)
 })
 
 export default app

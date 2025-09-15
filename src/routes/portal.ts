@@ -396,7 +396,7 @@ portalRoutes.get('/navigator', async (c) => {
                                     <span class="bg-purple-600 text-white px-2 py-1 rounded-full text-xs font-bold">15</span>
                                 </div>
                                 <div class="space-y-3 max-h-96 overflow-y-auto">
-                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer">
+                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-001">
                                         <div class="flex items-start justify-between mb-2">
                                             <span class="font-semibold text-sm">Maria Silva</span>
                                             <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded">Prioridade</span>
@@ -410,7 +410,7 @@ portalRoutes.get('/navigator', async (c) => {
                                         </div>
                                     </div>
                                     
-                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer">
+                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-004">
                                         <div class="flex items-start justify-between mb-2">
                                             <span class="font-semibold text-sm">João Santos</span>
                                             <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Normal</span>
@@ -436,7 +436,7 @@ portalRoutes.get('/navigator', async (c) => {
                                     <span class="bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-bold">28</span>
                                 </div>
                                 <div class="space-y-3 max-h-96 overflow-y-auto">
-                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer">
+                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-002">
                                         <div class="flex items-start justify-between mb-2">
                                             <span class="font-semibold text-sm">Ana Costa</span>
                                             <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded">Urgente</span>
@@ -444,7 +444,7 @@ portalRoutes.get('/navigator', async (c) => {
                                         <p class="text-xs text-gray-600 mb-2">CA Pulmão • Aguardando PET</p>
                                         <div class="flex items-center justify-between text-xs">
                                             <span class="text-gray-500">3 dias aguardando</span>
-                                            <button class="text-blue-600 hover:text-blue-700">
+                                            <button class="text-blue-600 hover:text-blue-700 btn-patient-view" data-patient-id="PAC-002">
                                                 <i class="fas fa-arrow-right"></i>
                                             </button>
                                         </div>
@@ -462,7 +462,7 @@ portalRoutes.get('/navigator', async (c) => {
                                     <span class="bg-green-600 text-white px-2 py-1 rounded-full text-xs font-bold">85</span>
                                 </div>
                                 <div class="space-y-3 max-h-96 overflow-y-auto">
-                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer">
+                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-003">
                                         <div class="flex items-start justify-between mb-2">
                                             <span class="font-semibold text-sm">Carlos Mendes</span>
                                             <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Em dia</span>
@@ -488,7 +488,7 @@ portalRoutes.get('/navigator', async (c) => {
                                     <span class="bg-orange-600 text-white px-2 py-1 rounded-full text-xs font-bold">35</span>
                                 </div>
                                 <div class="space-y-3 max-h-96 overflow-y-auto">
-                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer">
+                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-006">
                                         <div class="flex items-start justify-between mb-2">
                                             <span class="font-semibold text-sm">Lucia Ferreira</span>
                                             <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">Controle</span>
@@ -572,37 +572,547 @@ portalRoutes.get('/navigator', async (c) => {
             });
         </script>
         
-        <!-- Ferramentas de Navegação -->
+        <!-- Ferramentas de Navegação - INTEGRADAS COM AS VIEWS -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
-            <button class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                <i class="fas fa-phone-alt text-3xl text-teal-600 mb-3"></i>
+            <button onclick="openNavigatorModal('contatar')" class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
+                <i class="fas fa-address-book text-3xl text-blue-600 mb-3"></i>
                 <h4 class="font-semibold text-gray-800">Contatar</h4>
-                <p class="text-sm text-gray-600 mt-1">Ligar para paciente</p>
+                <p class="text-sm text-gray-600 mt-1">Rede completa de contatos</p>
             </button>
             
-            <button class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                <i class="fas fa-calendar-plus text-3xl text-blue-600 mb-3"></i>
+            <button onclick="openNavigatorModal('agendar')" class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
+                <i class="fas fa-calendar-alt text-3xl text-purple-600 mb-3"></i>
                 <h4 class="font-semibold text-gray-800">Agendar</h4>
-                <p class="text-sm text-gray-600 mt-1">Marcar consultas</p>
+                <p class="text-sm text-gray-600 mt-1">Sistema de agendamento</p>
             </button>
             
-            <button class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                <i class="fas fa-map-marked-alt text-3xl text-green-600 mb-3"></i>
+            <button onclick="openNavigatorModal('jornada')" class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
+                <i class="fas fa-route text-3xl text-green-600 mb-3"></i>
                 <h4 class="font-semibold text-gray-800">Jornada</h4>
-                <p class="text-sm text-gray-600 mt-1">Ver mapa completo</p>
+                <p class="text-sm text-gray-600 mt-1">Wiki inteligente</p>
             </button>
             
-            <button class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                <i class="fas fa-clipboard-check text-3xl text-purple-600 mb-3"></i>
+            <button onclick="openNavigatorModal('checklist')" class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
+                <i class="fas fa-clipboard-check text-3xl text-indigo-600 mb-3"></i>
                 <h4 class="font-semibold text-gray-800">Checklist</h4>
-                <p class="text-sm text-gray-600 mt-1">Tarefas do dia</p>
+                <p class="text-sm text-gray-600 mt-1">Double-check auditoria</p>
             </button>
         </div>
     `;
     
+    // Adicionar apenas o modal ao content (botões flutuantes removidos)
+    const enhancedContent = content + `
+        <!-- Modal Container para as Views -->
+
+        <div id="navigator-modal" class="fixed inset-0 z-50 overflow-y-auto" style="display: none; overflow-y: auto !important;">
+            <!-- O conteúdo será inserido dinamicamente aqui -->
+        </div>
+    `;
+    
     return c.json({
-        html: generatePortalHTML('navigator', 'Navegador de Pacientes', content),
-        scripts: []
+        html: generatePortalHTML('navigator', 'Navegador de Pacientes', enhancedContent),
+        scripts: [
+            `
+            // ========================================
+            // SISTEMA COMPLETO DO PORTAL DO NAVEGADOR
+            // ========================================
+            
+            // Função principal para abrir view do paciente
+            function openPatientView(patientId) {
+                console.log('Abrindo view do paciente:', patientId);
+                
+                // Criar ou obter o modal
+                let modal = document.getElementById('patient-view-modal');
+                if (!modal) {
+                    modal = document.createElement('div');
+                    modal.id = 'patient-view-modal';
+                    modal.className = 'fixed inset-0 z-50 overflow-y-auto hidden';
+                    modal.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+                    document.body.appendChild(modal);
+                }
+                
+                // Dados simulados do paciente
+                const patients = {
+                    'PAC-001': {
+                        nome: 'Maria Silva Santos',
+                        idade: 52,
+                        diagnostico: 'Carcinoma Ductal Invasivo - Mama',
+                        estadiamento: 'IIA (T2N0M0)',
+                        navegador: 'Enf. Patricia Lima',
+                        medico: 'Dr. Roberto Almeida',
+                        telefone: '(11) 98765-4321',
+                        convenio: 'Unimed Premium',
+                        email: 'maria.silva@email.com'
+                    },
+                    'PAC-002': {
+                        nome: 'Ana Costa',
+                        idade: 45,
+                        diagnostico: 'Carcinoma Pulmonar',
+                        estadiamento: 'IIIA',
+                        navegador: 'Enf. Patricia Lima',
+                        medico: 'Dr. Carlos Mendes',
+                        telefone: '(11) 98765-1234',
+                        convenio: 'SulAmérica',
+                        email: 'ana.costa@email.com'
+                    },
+                    'PAC-003': {
+                        nome: 'Carlos Mendes',
+                        idade: 67,
+                        diagnostico: 'Adenocarcinoma Colorretal',
+                        estadiamento: 'IIB',
+                        navegador: 'Enf. Patricia Lima',
+                        medico: 'Dra. Fernanda Santos',
+                        telefone: '(11) 98765-5678',
+                        convenio: 'Bradesco Saúde',
+                        email: 'carlos.mendes@email.com'
+                    },
+                    'PAC-004': {
+                        nome: 'João Santos',
+                        idade: 72,
+                        diagnostico: 'Carcinoma Prostático',
+                        estadiamento: 'I',
+                        navegador: 'Enf. Patricia Lima',
+                        medico: 'Dr. Paulo Ribeiro',
+                        telefone: '(11) 98765-9876',
+                        convenio: 'Amil',
+                        email: 'joao.santos@email.com'
+                    },
+                    'PAC-005': {
+                        nome: 'Pedro Oliveira',
+                        idade: 58,
+                        diagnostico: 'Linfoma Não-Hodgkin',
+                        estadiamento: 'IIIB',
+                        navegador: 'Enf. Patricia Lima',
+                        medico: 'Dr. André Costa',
+                        telefone: '(11) 98765-4567',
+                        convenio: 'Porto Seguro',
+                        email: 'pedro.oliveira@email.com'
+                    },
+                    'PAC-006': {
+                        nome: 'Lucia Ferreira',
+                        idade: 61,
+                        diagnostico: 'Carcinoma de Ovário',
+                        estadiamento: 'IC',
+                        navegador: 'Enf. Patricia Lima',
+                        medico: 'Dra. Paula Lima',
+                        telefone: '(11) 98765-7890',
+                        convenio: 'NotreDame',
+                        email: 'lucia.ferreira@email.com'
+                    }
+                };
+                
+                const patient = patients[patientId] || patients['PAC-001'];
+                
+                // HTML completo da View Universal
+                modal.innerHTML = renderPatientViewHTML(patientId, patient);
+                
+                // Mostrar modal
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                
+                // Adicionar eventos ao modal
+                setupModalEvents();
+            }
+            
+            // Função para renderizar HTML da view do paciente
+            function renderPatientViewHTML(patientId, patient) {
+                return \`
+                    <div class="flex items-center justify-center min-h-screen p-4">
+                        <div class="bg-white rounded-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden shadow-2xl">
+                            <!-- Header -->
+                            <div class="bg-gradient-to-r from-teal-600 to-teal-700 text-white p-6">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h2 class="text-2xl font-bold mb-2">
+                                            <i class="fas fa-user-injured mr-2"></i>
+                                            \${patient.nome}
+                                        </h2>
+                                        <div class="flex gap-4 text-sm">
+                                            <span><i class="fas fa-id-card mr-1"></i> \${patientId}</span>
+                                            <span><i class="fas fa-birthday-cake mr-1"></i> \${patient.idade} anos</span>
+                                            <span><i class="fas fa-phone mr-1"></i> \${patient.telefone}</span>
+                                            <span><i class="fas fa-envelope mr-1"></i> \${patient.email}</span>
+                                        </div>
+                                    </div>
+                                    <button onclick="closePatientView()" class="text-white hover:text-teal-200">
+                                        <i class="fas fa-times text-2xl"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Tabs -->
+                            <div class="border-b border-gray-200 bg-gray-50">
+                                <nav class="flex -mb-px overflow-x-auto">
+                                    <button onclick="showTab('overview')" class="tab-btn active px-6 py-3 border-b-2 border-teal-600 text-teal-600 font-medium whitespace-nowrap">
+                                        <i class="fas fa-chart-line mr-2"></i>Visão Geral
+                                    </button>
+                                    <button onclick="showTab('contact')" class="tab-btn px-6 py-3 border-b-2 border-transparent text-gray-600 hover:text-teal-600 whitespace-nowrap">
+                                        <i class="fas fa-address-book mr-2"></i>Contatar
+                                    </button>
+                                    <button onclick="showTab('schedule')" class="tab-btn px-6 py-3 border-b-2 border-transparent text-gray-600 hover:text-teal-600 whitespace-nowrap">
+                                        <i class="fas fa-calendar-alt mr-2"></i>Agendar
+                                    </button>
+                                    <button onclick="showTab('journey')" class="tab-btn px-6 py-3 border-b-2 border-transparent text-gray-600 hover:text-teal-600 whitespace-nowrap">
+                                        <i class="fas fa-route mr-2"></i>Jornada
+                                    </button>
+                                    <button onclick="showTab('checklist')" class="tab-btn px-6 py-3 border-b-2 border-transparent text-gray-600 hover:text-teal-600 whitespace-nowrap">
+                                        <i class="fas fa-tasks mr-2"></i>Checklist
+                                    </button>
+                                    <button onclick="showTab('ai')" class="tab-btn px-6 py-3 border-b-2 border-transparent text-gray-600 hover:text-teal-600 whitespace-nowrap">
+                                        <i class="fas fa-brain mr-2"></i>IA Laura
+                                    </button>
+                                </nav>
+                            </div>
+                            
+                            <!-- Content Area -->
+                            <div class="overflow-y-auto" style="max-height: calc(90vh - 200px);">
+                                \${generateTabsContent(patient, patientId)}
+                            </div>
+                        </div>
+                    </div>
+                \`;
+            }
+            
+            // Função para gerar conteúdo das tabs
+            function generateTabsContent(patient, patientId) {
+                return \`
+                    <!-- Tab: Visão Geral -->
+                    <div id="tab-overview" class="tab-content p-6">
+                        \${generateOverviewTab(patient)}
+                    </div>
+                    
+                    <!-- Tab: Contatar -->
+                    <div id="tab-contact" class="tab-content hidden p-6">
+                        \${generateContactTab(patient)}
+                    </div>
+                    
+                    <!-- Tab: Agendar -->
+                    <div id="tab-schedule" class="tab-content hidden p-6">
+                        \${generateScheduleTab(patient)}
+                    </div>
+                    
+                    <!-- Tab: Jornada -->
+                    <div id="tab-journey" class="tab-content hidden p-6">
+                        \${generateJourneyTab(patient)}
+                    </div>
+                    
+                    <!-- Tab: Checklist -->
+                    <div id="tab-checklist" class="tab-content hidden p-6">
+                        \${generateChecklistTab(patient)}
+                    </div>
+                    
+                    <!-- Tab: IA Laura -->
+                    <div id="tab-ai" class="tab-content hidden p-6">
+                        \${generateAITab(patient)}
+                    </div>
+                \`;
+            }
+            
+            // Funções para gerar conteúdo de cada tab
+            function generateOverviewTab(patient) {
+                return \`
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h3 class="font-bold text-blue-900 mb-3">
+                                <i class="fas fa-notes-medical mr-2"></i>Dados Clínicos
+                            </h3>
+                            <div class="space-y-2 text-sm">
+                                <p><strong>Diagnóstico:</strong> \${patient.diagnostico}</p>
+                                <p><strong>Estadiamento:</strong> \${patient.estadiamento}</p>
+                                <p><strong>Início do Tratamento:</strong> 10/01/2025</p>
+                                <p><strong>Protocolo:</strong> NCCN Guidelines 2024</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h3 class="font-bold text-green-900 mb-3">
+                                <i class="fas fa-user-md mr-2"></i>Equipe Médica
+                            </h3>
+                            <div class="space-y-2 text-sm">
+                                <p><strong>Oncologista:</strong> \${patient.medico}</p>
+                                <p><strong>Navegador:</strong> \${patient.navegador}</p>
+                                <p><strong>Nutricionista:</strong> Dra. Ana Paula Santos</p>
+                                <p><strong>Psicóloga:</strong> Dra. Marina Costa</p>
+                            </div>
+                        </div>
+                    </div>
+                \`;
+            }
+            
+            function generateContactTab(patient) {
+                return \`
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white border rounded-lg p-4">
+                            <h3 class="font-bold text-gray-800 mb-4">
+                                <i class="fas fa-user mr-2"></i>Contatos do Paciente
+                            </h3>
+                            <div class="space-y-3">
+                                <button class="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
+                                    <i class="fas fa-phone mr-2"></i>Ligar: \${patient.telefone}
+                                </button>
+                                <button class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                                    <i class="fab fa-whatsapp mr-2"></i>WhatsApp
+                                </button>
+                                <button class="w-full bg-purple-500 text-white py-2 px-4 rounded hover:bg-purple-600">
+                                    <i class="fas fa-envelope mr-2"></i>E-mail: \${patient.email}
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white border rounded-lg p-4">
+                            <h3 class="font-bold text-gray-800 mb-4">
+                                <i class="fas fa-hospital-user mr-2"></i>Equipe Médica
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-blue-50 rounded">
+                                    <p class="font-semibold">\${patient.medico}</p>
+                                    <button class="mt-2 text-blue-600 hover:text-blue-700 text-sm">
+                                        <i class="fas fa-phone mr-1"></i>Contatar
+                                    </button>
+                                </div>
+                                <div class="p-3 bg-green-50 rounded">
+                                    <p class="font-semibold">\${patient.navegador}</p>
+                                    <button class="mt-2 text-green-600 hover:text-green-700 text-sm">
+                                        <i class="fas fa-phone mr-1"></i>Contatar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                \`;
+            }
+            
+            function generateScheduleTab(patient) {
+                return \`
+                    <div class="bg-white rounded-lg">
+                        <h3 class="font-bold text-gray-800 mb-4">
+                            <i class="fas fa-calendar-plus mr-2"></i>Agendar Consulta/Procedimento
+                        </h3>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Agendamento</label>
+                            <select class="w-full border rounded-lg px-3 py-2">
+                                <option>Consulta Médica</option>
+                                <option>Exame de Imagem</option>
+                                <option>Coleta de Sangue</option>
+                                <option>Quimioterapia</option>
+                                <option>Radioterapia</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Data e Horário</label>
+                            <input type="datetime-local" class="w-full border rounded-lg px-3 py-2">
+                        </div>
+                        <button class="w-full bg-teal-600 text-white py-3 rounded-lg hover:bg-teal-700">
+                            <i class="fas fa-check mr-2"></i>Confirmar Agendamento
+                        </button>
+                    </div>
+                \`;
+            }
+            
+            function generateJourneyTab(patient) {
+                return \`
+                    <h3 class="font-bold text-gray-800 mb-4">
+                        <i class="fas fa-route mr-2"></i>Jornada do Paciente
+                    </h3>
+                    <div class="relative">
+                        <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-green-500 text-white rounded-full p-2 z-10">
+                                    <i class="fas fa-check text-xs"></i>
+                                </div>
+                                <div class="ml-4 bg-green-50 rounded-lg p-4 flex-1">
+                                    <h4 class="font-semibold">Diagnóstico Confirmado</h4>
+                                    <p class="text-sm text-gray-600">10/01/2025</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-yellow-500 text-white rounded-full p-2 z-10 animate-pulse">
+                                    <i class="fas fa-clock text-xs"></i>
+                                </div>
+                                <div class="ml-4 bg-yellow-50 rounded-lg p-4 flex-1 border-2 border-yellow-300">
+                                    <h4 class="font-semibold">Em Tratamento</h4>
+                                    <p class="text-sm text-gray-600">3º Ciclo de Quimioterapia</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                \`;
+            }
+            
+            function generateChecklistTab(patient) {
+                return \`
+                    <h3 class="font-bold text-gray-800 mb-4">
+                        <i class="fas fa-tasks mr-2"></i>Checklist de Acompanhamento
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="bg-white border rounded-lg p-4">
+                            <h4 class="font-semibold mb-3 text-blue-800">
+                                <i class="fas fa-folder-open mr-2"></i>Documentação
+                            </h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" checked class="mr-2">
+                                    <span>Termo de Consentimento assinado</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" checked class="mr-2">
+                                    <span>Carteirinha do convênio atualizada</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="bg-white border rounded-lg p-4">
+                            <h4 class="font-semibold mb-3 text-green-800">
+                                <i class="fas fa-vial mr-2"></i>Exames
+                            </h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" checked class="mr-2">
+                                    <span>Hemograma completo</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2">
+                                    <span>Marcadores tumorais</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                \`;
+            }
+            
+            function generateAITab(patient) {
+                return \`
+                    <h3 class="font-bold text-gray-800 mb-4">
+                        <i class="fas fa-brain mr-2"></i>Análise Preditiva - IA Laura
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4">
+                            <h4 class="font-semibold text-purple-900 mb-3">Score de Ansiedade</h4>
+                            <div class="text-center">
+                                <div class="text-4xl font-bold text-purple-700">72</div>
+                                <div class="text-sm text-purple-600 mt-1">Moderado-Alto</div>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4">
+                            <h4 class="font-semibold text-green-900 mb-3">Recomendações</h4>
+                            <ul class="text-sm space-y-1 text-green-700">
+                                <li>• Intensificar contato telefônico</li>
+                                <li>• Agendar consulta psico-oncologia</li>
+                                <li>• Incluir familiar nas consultas</li>
+                            </ul>
+                        </div>
+                    </div>
+                \`;
+            }
+            
+            // Função para fechar a view do paciente
+            function closePatientView() {
+                const modal = document.getElementById('patient-view-modal');
+                if (modal) {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+            }
+            
+            // Função para mostrar tab
+            function showTab(tabName) {
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.classList.add('hidden');
+                });
+                
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('border-teal-600', 'text-teal-600', 'active');
+                    btn.classList.add('border-transparent', 'text-gray-600');
+                });
+                
+                const selectedTab = document.getElementById('tab-' + tabName);
+                if (selectedTab) {
+                    selectedTab.classList.remove('hidden');
+                }
+                
+                if (event && event.target) {
+                    event.target.classList.add('border-teal-600', 'text-teal-600', 'active');
+                    event.target.classList.remove('border-transparent', 'text-gray-600');
+                }
+            }
+            
+            // Função para configurar eventos do modal
+            function setupModalEvents() {
+                const modal = document.getElementById('patient-view-modal');
+                if (modal) {
+                    modal.addEventListener('click', function(e) {
+                        if (e.target === modal) {
+                            closePatientView();
+                        }
+                    });
+                }
+            }
+            
+            // Função para inicializar eventos do Kanban
+            function initializeKanbanEvents() {
+                console.log('Inicializando eventos do Kanban...');
+                
+                // Aguardar um momento para garantir que o DOM está pronto
+                setTimeout(() => {
+                    const kanbanCards = document.querySelectorAll('.kanban-card');
+                    console.log('Cards encontrados:', kanbanCards.length);
+                    
+                    kanbanCards.forEach(card => {
+                        card.style.cursor = 'pointer';
+                        card.addEventListener('click', function(e) {
+                            if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
+                                e.stopPropagation();
+                                return;
+                            }
+                            
+                            const patientId = this.dataset.patientId || 'PAC-001';
+                            console.log('Card clicado, abrindo paciente:', patientId);
+                            openPatientView(patientId);
+                        });
+                    });
+                    
+                    // Adicionar eventos aos botões dentro dos cards
+                    document.querySelectorAll('.kanban-card button').forEach(btn => {
+                        btn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            const card = this.closest('.kanban-card');
+                            const patientId = card?.dataset.patientId || 'PAC-001';
+                            openPatientView(patientId);
+                        });
+                    });
+                }, 500);
+            }
+            
+            // Marcar portal como navigator para ativar funcionalidades
+            document.addEventListener('DOMContentLoaded', function() {
+                document.body.classList.add('navigator-portal');
+                console.log('Portal Navegador carregado com sistema integrado!');
+                
+                // Inicializar eventos dos cards do Kanban
+                initializeKanbanEvents();
+                
+                // Adicionar botões de ação nas linhas da tabela de pacientes se existir
+                const actionCells = document.querySelectorAll('td.patient-actions');
+                actionCells.forEach(cell => {
+                    const patientId = cell.dataset.patientId || 'PAC-001';
+                    cell.innerHTML = \`
+                        <button onclick="openNavigatorModal('contatar', '\${patientId}')" class="text-blue-600 hover:text-blue-700 mr-2" title="Contatar">
+                            <i class="fas fa-address-book"></i>
+                        </button>
+                        <button onclick="openNavigatorModal('agendar', '\${patientId}')" class="text-purple-600 hover:text-purple-700 mr-2" title="Agendar">
+                            <i class="fas fa-calendar-alt"></i>
+                        </button>
+                        <button onclick="openNavigatorModal('jornada', '\${patientId}')" class="text-green-600 hover:text-green-700 mr-2" title="Jornada">
+                            <i class="fas fa-route"></i>
+                        </button>
+                        <button onclick="openNavigatorModal('checklist', '\${patientId}')" class="text-indigo-600 hover:text-indigo-700" title="Checklist">
+                            <i class="fas fa-clipboard-check"></i>
+                        </button>
+                    \`;
+                });
+            });
+            `
+        ]
     });
 });
 

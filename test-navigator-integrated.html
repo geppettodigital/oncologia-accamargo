@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Portal Navegador Integrado</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8 text-center">
+            <i class="fas fa-vial text-teal-600 mr-2"></i>
+            Teste do Portal do Navegador Integrado
+        </h1>
+        
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-4">Instruções de Teste</h2>
+            <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                <li>Acesse o Portal do Navegador clicando no botão abaixo</li>
+                <li>No Trilho de Atendimentos, clique em qualquer card de paciente</li>
+                <li>A View Universal do Paciente deve abrir com 6 abas funcionais</li>
+                <li>Teste cada aba: Visão Geral, Contatar, Agendar, Jornada, Checklist e IA Laura</li>
+                <li>Verifique se todos os dados estão sendo exibidos corretamente</li>
+            </ol>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-lg font-semibold mb-3">
+                    <i class="fas fa-check-circle text-green-600 mr-2"></i>
+                    Funcionalidades Implementadas
+                </h3>
+                <ul class="space-y-1 text-sm text-gray-700">
+                    <li>✅ View Universal do Paciente integrada</li>
+                    <li>✅ Sistema de tabs funcionando</li>
+                    <li>✅ Dados de 6 pacientes diferentes</li>
+                    <li>✅ Clique nos cards do Kanban</li>
+                    <li>✅ Modal responsivo com scroll</li>
+                    <li>✅ Todas as 4 funcionalidades (Contatar, Agendar, Jornada, Checklist)</li>
+                    <li>✅ Integração com IA Laura (Ansiedade de Laura)</li>
+                </ul>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-lg font-semibold mb-3">
+                    <i class="fas fa-users text-blue-600 mr-2"></i>
+                    Pacientes de Teste
+                </h3>
+                <ul class="space-y-1 text-sm text-gray-700">
+                    <li><strong>PAC-001:</strong> Maria Silva - CA Mama</li>
+                    <li><strong>PAC-002:</strong> Ana Costa - CA Pulmão</li>
+                    <li><strong>PAC-003:</strong> Carlos Mendes - CA Colorretal</li>
+                    <li><strong>PAC-004:</strong> João Santos - CA Próstata</li>
+                    <li><strong>PAC-005:</strong> Pedro Oliveira - Linfoma</li>
+                    <li><strong>PAC-006:</strong> Lucia Ferreira - CA Ovário</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="text-center space-y-4">
+            <a href="/#navigator" class="inline-block bg-teal-600 text-white px-8 py-3 rounded-lg hover:bg-teal-700 transition text-lg font-semibold">
+                <i class="fas fa-compass mr-2"></i>
+                Abrir Portal do Navegador
+            </a>
+            
+            <div class="text-sm text-gray-600">
+                <p>URL Pública: <a href="https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev#navigator" class="text-blue-600 hover:underline" target="_blank">
+                    https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev#navigator
+                </a></p>
+            </div>
+        </div>
+        
+        <div class="mt-8 bg-yellow-50 border-l-4 border-yellow-400 p-4">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-lightbulb text-yellow-400"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-yellow-700">
+                        <strong>Dica:</strong> Após clicar em um card do Kanban, aguarde 1-2 segundos para o modal carregar completamente. 
+                        O sistema está totalmente integrado ao código do portal, sem dependências externas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

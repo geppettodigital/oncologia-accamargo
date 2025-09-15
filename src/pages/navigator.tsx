@@ -282,11 +282,17 @@ export const navigatorPage = (c: any) => {
                                 </td>
                                 <td class="py-3">Maria Santos</td>
                                 <td class="py-3">
-                                    <button class="text-green-600 hover:text-green-700 mr-2">
-                                        <i class="far fa-eye"></i>
+                                    <button onclick="openNavigatorModal('contatar', 'MR001')" class="text-blue-600 hover:text-blue-700 mr-2" title="Contatar">
+                                        <i class="fas fa-address-book"></i>
                                     </button>
-                                    <button class="text-green-500 hover:text-green-600">
-                                        <i class="fas fa-phone"></i>
+                                    <button onclick="openNavigatorModal('agendar', 'MR001')" class="text-purple-600 hover:text-purple-700 mr-2" title="Agendar">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </button>
+                                    <button onclick="openNavigatorModal('jornada', 'MR001')" class="text-green-600 hover:text-green-700 mr-2" title="Jornada">
+                                        <i class="fas fa-route"></i>
+                                    </button>
+                                    <button onclick="openNavigatorModal('checklist', 'MR001')" class="text-indigo-600 hover:text-indigo-700" title="Checklist">
+                                        <i class="fas fa-clipboard-check"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -306,17 +312,60 @@ export const navigatorPage = (c: any) => {
                                 </td>
                                 <td class="py-3">Maria Santos</td>
                                 <td class="py-3">
-                                    <button class="text-green-600 hover:text-green-700 mr-2">
-                                        <i class="far fa-eye"></i>
+                                    <button onclick="openNavigatorModal('contatar', 'MR001')" class="text-blue-600 hover:text-blue-700 mr-2" title="Contatar">
+                                        <i class="fas fa-address-book"></i>
                                     </button>
-                                    <button class="text-green-500 hover:text-green-600">
-                                        <i class="fas fa-phone"></i>
+                                    <button onclick="openNavigatorModal('agendar', 'MR001')" class="text-purple-600 hover:text-purple-700 mr-2" title="Agendar">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </button>
+                                    <button onclick="openNavigatorModal('jornada', 'MR001')" class="text-green-600 hover:text-green-700 mr-2" title="Jornada">
+                                        <i class="fas fa-route"></i>
+                                    </button>
+                                    <button onclick="openNavigatorModal('checklist', 'MR001')" class="text-indigo-600 hover:text-indigo-700" title="Checklist">
+                                        <i class="fas fa-clipboard-check"></i>
                                     </button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+            </div>
+
+            <!-- NOVAS FUNCIONALIDADES - BOTÕES DE ACESSO RÁPIDO -->
+            <div class="fixed bottom-6 right-6 flex flex-col gap-3 z-40">
+                <button onclick="openNavigatorModal('contatar')" 
+                        class="w-14 h-14 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-all hover:scale-110 flex items-center justify-center group relative">
+                    <i class="fas fa-address-book text-xl"></i>
+                    <span class="absolute right-full mr-3 px-3 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                        Contatar
+                    </span>
+                </button>
+                <button onclick="openNavigatorModal('agendar')" 
+                        class="w-14 h-14 bg-purple-600 text-white rounded-full shadow-lg hover:bg-purple-700 transition-all hover:scale-110 flex items-center justify-center group relative">
+                    <i class="fas fa-calendar-alt text-xl"></i>
+                    <span class="absolute right-full mr-3 px-3 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                        Agendar
+                    </span>
+                </button>
+                <button onclick="openNavigatorModal('jornada')" 
+                        class="w-14 h-14 bg-green-600 text-white rounded-full shadow-lg hover:bg-green-700 transition-all hover:scale-110 flex items-center justify-center group relative">
+                    <i class="fas fa-route text-xl"></i>
+                    <span class="absolute right-full mr-3 px-3 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                        Jornada
+                    </span>
+                </button>
+                <button onclick="openNavigatorModal('checklist')" 
+                        class="w-14 h-14 bg-indigo-600 text-white rounded-full shadow-lg hover:bg-indigo-700 transition-all hover:scale-110 flex items-center justify-center group relative">
+                    <i class="fas fa-clipboard-check text-xl"></i>
+                    <span class="absolute right-full mr-3 px-3 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                        Checklist
+                    </span>
+                </button>
+            </div>
+
+            <!-- Modal Container para as Views -->
+            <div id="navigator-modal" class="fixed inset-0 z-50 overflow-y-auto" style="display: none;">
+                <!-- O conteúdo será inserido dinamicamente aqui -->
             </div>
         </main>
 
@@ -333,9 +382,21 @@ export const navigatorPage = (c: any) => {
 
         <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
         <script src="/static/portal-helpers.js"></script>
-        <script src="/static/portal-helpers.js"></script>
-    <script src="/static/action-plan-system.js"></script>
+        <script src="/static/action-plan-system.js"></script>
         <script src="/static/action-plan-handlers.js"></script>
+        
+        <!-- Scripts das Novas Funcionalidades -->
+        <script src="/static/navigator-views.js"></script>
+        <script src="/static/navigator-views-extended.js"></script>
+        <script src="/static/navigator-integration.js"></script>
+        
+        <script>
+            // Adicionar classe navigator-portal para identificação
+            document.addEventListener('DOMContentLoaded', function() {
+                document.body.classList.add('navigator-portal');
+                console.log('Portal do Navegador carregado com novas funcionalidades!');
+            });
+        </script>
     </body>
     </html>
   `)

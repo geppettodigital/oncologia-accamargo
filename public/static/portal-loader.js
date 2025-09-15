@@ -73,6 +73,9 @@ function renderPortal(data) {
     // Atualizar conteúdo
     document.getElementById('main-container').innerHTML = data.html;
     
+    // Processar e carregar scripts externos do HTML
+    loadExternalScripts();
+    
     // Executar scripts inline se houver
     if (data.scripts) {
         data.scripts.forEach(script => {
@@ -81,6 +84,47 @@ function renderPortal(data) {
             document.body.appendChild(scriptElement);
         });
     }
+}
+
+// Função para carregar scripts externos encontrados no HTML
+function loadExternalScripts() {
+    // Buscar todos os scripts com src no container recém-carregado
+    const container = document.getElementById('main-container');
+    const scripts = container.querySelectorAll('script[src]');
+    
+    scripts.forEach(script => {
+        const src = script.getAttribute('src');
+        
+        // Verificar se o script já foi carregado
+        if (!document.querySelector(`script[src="${src}"][data-portal-loaded="true"]`)) {
+            const newScript = document.createElement('script');
+            newScript.src = src;
+            newScript.setAttribute('data-portal-loaded', 'true');
+            
+            // Adicionar callback para garantir que o script foi carregado
+            newScript.onload = () => {
+                console.log(`Script carregado: ${src}`);
+                
+                // Se for o patient-view-universal.js, verificar se as funções estão disponíveis
+                if (src.includes('patient-view-universal.js')) {
+                    if (typeof window.renderPatientUniversalView === 'function') {
+                        console.log('✅ View Universal do Paciente carregada com sucesso!');
+                    } else {
+                        console.error('❌ Erro: Funções da View Universal não encontradas');
+                    }
+                }
+            };
+            
+            newScript.onerror = () => {
+                console.error(`Erro ao carregar script: ${src}`);
+            };
+            
+            document.head.appendChild(newScript);
+        }
+        
+        // Remover o script do container para evitar duplicação
+        script.remove();
+    });
 }
 
 // Voltar ao portal anterior
@@ -237,7 +281,111 @@ function initializeDoctorPortal() {
 
 function initializeNavigatorPortal() {
     console.log('Portal do Navegador inicializado');
-    // Adicionar funcionalidades específicas do navegador
+    
+    // Garantir que os scripts essenciais do navegador estão carregados
+    const scriptsToLoad = [
+        '/static/patient-view-universal.js',
+        '/static/navigator-views.js',
+        '/static/navigator-views-extended.js'
+    ];
+    
+    let scriptsLoaded = 0;
+    const totalScripts = scriptsToLoad.length;
+    
+    scriptsToLoad.forEach(scriptSrc => {
+        // Verificar se já está carregado
+        if (!document.querySelector(`script[src="${scriptSrc}"]`)) {
+            const script = document.createElement('script');
+            script.src = scriptSrc;
+            script.onload = () => {
+                scriptsLoaded++;
+                console.log(`✅ Script carregado (${scriptsLoaded}/${totalScripts}): ${scriptSrc}`);
+                
+                // Quando todos os scripts estiverem carregados
+                if (scriptsLoaded === totalScripts) {
+                    console.log('🎯 Todos os scripts do Portal do Navegador carregados!');
+                    
+                    // Verificar disponibilidade das funções
+                    if (typeof window.openPatientUniversalView === 'function') {
+                        console.log('✅ View Universal do Paciente disponível');
+                    }
+                    if (typeof window.renderContatarView === 'function') {
+                        console.log('✅ View Contatar disponível');
+                    }
+                    if (typeof window.renderAgendarView === 'function') {
+                        console.log('✅ View Agendar disponível');
+                    }
+                    if (typeof window.renderJornadaView === 'function') {
+                        console.log('✅ View Jornada disponível');
+                    }
+                    if (typeof window.renderChecklistView === 'function') {
+                        console.log('✅ View Checklist disponível');
+                    }
+                    
+                    // Reinicializar eventos de clique nos cards do Kanban
+                    initializeKanbanCardEvents();
+                }
+            };
+            script.onerror = () => {
+                console.error(`❌ Erro ao carregar: ${scriptSrc}`);
+            };
+            document.head.appendChild(script);
+        } else {
+            scriptsLoaded++;
+            if (scriptsLoaded === totalScripts) {
+                console.log('🎯 Scripts já carregados, reinicializando eventos...');
+                initializeKanbanCardEvents();
+            }
+        }
+    });
+}
+
+// Função para inicializar eventos de clique nos cards do Kanban
+function initializeKanbanCardEvents() {
+    // Aguardar um momento para garantir que o DOM está pronto
+    setTimeout(() => {
+        const kanbanCards = document.querySelectorAll('.kanban-card');
+        console.log(`Encontrados ${kanbanCards.length} cards no Kanban`);
+        
+        kanbanCards.forEach(card => {
+            // Remover onclick antigo se existir
+            card.removeAttribute('onclick');
+            
+            // Adicionar novo event listener
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', function(e) {
+                // Evitar propagação se clicar em botões internos
+                if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
+                    return;
+                }
+                
+                // Extrair ID do paciente (pode vir de data-patient-id ou do conteúdo)
+                const patientId = this.dataset.patientId || 
+                                 this.querySelector('[data-patient-id]')?.dataset.patientId || 
+                                 'PAC-001';
+                
+                console.log(`Abrindo View Universal para paciente: ${patientId}`);
+                
+                // Chamar função para abrir a view
+                if (typeof window.openPatientUniversalView === 'function') {
+                    window.openPatientUniversalView(patientId, 'navigator');
+                } else {
+                    console.error('Função openPatientUniversalView não encontrada!');
+                }
+            });
+        });
+        
+        // Também adicionar eventos aos botões de ação dentro dos cards
+        document.querySelectorAll('.btn-patient-view').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const patientId = this.dataset.patientId || 'PAC-001';
+                if (typeof window.openPatientUniversalView === 'function') {
+                    window.openPatientUniversalView(patientId, 'navigator');
+                }
+            });
+        });
+    }, 500);
 }
 
 function initializeFinancialPortal() {

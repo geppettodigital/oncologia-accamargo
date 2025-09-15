@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Portal Functions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-2xl font-bold mb-6">Teste de Carregamento das Funções do Portal</h1>
+        
+        <div class="bg-white rounded-lg shadow p-6 mb-4">
+            <h2 class="text-lg font-semibold mb-4">Status dos Scripts</h2>
+            <div id="status-container" class="space-y-2">
+                <p>Carregando...</p>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-6 mb-4">
+            <h2 class="text-lg font-semibold mb-4">Teste de Abertura da View</h2>
+            <button onclick="testOpenView()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                <i class="fas fa-user-md mr-2"></i>
+                Abrir View Universal do Paciente
+            </button>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-6">
+            <h2 class="text-lg font-semibold mb-4">Console Log</h2>
+            <div id="console-log" class="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm h-64 overflow-y-auto">
+                <p>Console iniciado...</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Carregar scripts necessários -->
+    <script src="/static/patient-view-universal.js"></script>
+    <script src="/static/navigator-views.js"></script>
+    <script src="/static/navigator-views-extended.js"></script>
+    <script src="/static/portal-loader.js"></script>
+    
+    <script>
+        // Função de log customizada
+        function log(message, type = 'info') {
+            const consoleDiv = document.getElementById('console-log');
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'error' ? 'text-red-400' : 
+                         type === 'success' ? 'text-green-400' : 
+                         'text-yellow-400';
+            
+            const p = document.createElement('p');
+            p.className = color;
+            p.textContent = `[${timestamp}] ${message}`;
+            consoleDiv.appendChild(p);
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+            
+            // Também logar no console real
+            console.log(message);
+        }
+        
+        // Verificar status dos scripts
+        function checkScriptStatus() {
+            const statusDiv = document.getElementById('status-container');
+            let html = '';
+            
+            const functions = [
+                { name: 'openPatientUniversalView', desc: 'View Universal do Paciente' },
+                { name: 'renderPatientUniversalView', desc: 'Renderizar View Universal' },
+                { name: 'renderContatarView', desc: 'View Contatar' },
+                { name: 'renderAgendarView', desc: 'View Agendar' },
+                { name: 'renderJornadaView', desc: 'View Jornada' },
+                { name: 'renderChecklistView', desc: 'View Checklist' },
+                { name: 'loadPortal', desc: 'Portal Loader' }
+            ];
+            
+            functions.forEach(func => {
+                const exists = typeof window[func.name] === 'function';
+                const icon = exists ? '✅' : '❌';
+                const color = exists ? 'text-green-600' : 'text-red-600';
+                
+                html += `
+                    <div class="flex items-center justify-between p-2 border rounded">
+                        <span>${func.desc}</span>
+                        <span class="${color} font-bold">${icon} ${func.name}</span>
+                    </div>
+                `;
+                
+                log(`Função ${func.name}: ${exists ? 'DISPONÍVEL' : 'NÃO ENCONTRADA'}`, exists ? 'success' : 'error');
+            });
+            
+            statusDiv.innerHTML = html;
+        }
+        
+        // Testar abertura da view
+        function testOpenView() {
+            log('Tentando abrir View Universal do Paciente...', 'info');
+            
+            if (typeof window.openPatientUniversalView === 'function') {
+                try {
+                    window.openPatientUniversalView('PAC-001', 'navigator');
+                    log('View aberta com sucesso!', 'success');
+                } catch (error) {
+                    log('Erro ao abrir view: ' + error.message, 'error');
+                }
+            } else {
+                log('Função openPatientUniversalView não está disponível!', 'error');
+                
+                // Tentar carregar manualmente
+                log('Tentando carregar script manualmente...', 'info');
+                const script = document.createElement('script');
+                script.src = '/static/patient-view-universal.js';
+                script.onload = () => {
+                    log('Script carregado, tentando novamente...', 'info');
+                    checkScriptStatus();
+                    if (typeof window.openPatientUniversalView === 'function') {
+                        window.openPatientUniversalView('PAC-001', 'navigator');
+                        log('View aberta após recarregar script!', 'success');
+                    }
+                };
+                document.head.appendChild(script);
+            }
+        }
+        
+        // Executar verificação ao carregar
+        window.addEventListener('load', () => {
+            log('Página carregada, verificando scripts...', 'info');
+            setTimeout(checkScriptStatus, 1000);
+        });
+        
+        // Interceptar erros globais
+        window.addEventListener('error', (e) => {
+            log(`ERRO GLOBAL: ${e.message}`, 'error');
+        });
+    </script>
+</body>
+</html>
