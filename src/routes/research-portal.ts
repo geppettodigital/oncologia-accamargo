@@ -138,73 +138,98 @@ researchPortal.get('/research-portal', (c) => {
 
         <!-- Dashboard Central -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-            <!-- Insights da IA -->
-            <div class="lg:col-span-2 bg-white rounded-xl shadow-lg p-6">
-                <h3 class="text-lg font-bold text-gray-800 mb-4">
-                    <i class="fas fa-brain text-purple-600 mr-2"></i>
-                    Insights LAURA - Análise de Dados
-                </h3>
-                <div class="space-y-3">
-                    <div class="p-4 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg border-l-4 border-purple-500">
-                        <div class="flex items-start">
-                            <i class="fas fa-lightbulb text-purple-500 mr-3 mt-1"></i>
-                            <div>
-                                <p class="font-semibold text-gray-800">Correlação Identificada</p>
-                                <p class="text-sm text-gray-600 mt-1">Forte correlação entre biomarcador X e resposta à imunoterapia (p<0.001)</p>
-                                <p class="text-xs text-purple-600 mt-2">42 pacientes analisados • Confiança: 94%</p>
-                            </div>
+            <!-- Ansiedade de Laura para Pesquisa -->
+            <div class="lg:col-span-2 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl shadow-lg p-6 border border-orange-200">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="relative">
+                            <i class="fas fa-brain text-3xl text-orange-500"></i>
+                            <span class="absolute -top-1 -right-1 flex h-3 w-3">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-3 w-3 bg-orange-500"></span>
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">Ansiedade de Laura</h3>
+                            <p class="text-sm text-gray-600">Alertas e Insights para Pesquisa Clínica</p>
                         </div>
                     </div>
-                    
-                    <div class="p-4 bg-gradient-to-r from-green-50 to-teal-50 rounded-lg border-l-4 border-green-500">
-                        <div class="flex items-start">
-                            <i class="fas fa-chart-line text-green-500 mr-3 mt-1"></i>
-                            <div>
-                                <p class="font-semibold text-gray-800">Tendência Positiva</p>
-                                <p class="text-sm text-gray-600 mt-1">Taxa de resposta 15% acima da média em protocolo modificado</p>
-                                <p class="text-xs text-green-600 mt-2">Sugestão: Expandir coorte</p>
-                            </div>
-                        </div>
-                    </div>
+                    <button onclick="toggleResearchAlerts()" class="text-gray-500 hover:text-orange-500 transition-all p-2 rounded-lg hover:bg-orange-50">
+                        <i id="research-toggle-icon" class="fas fa-compress-alt text-lg"></i>
+                    </button>
                 </div>
 
-                <!-- Mini Gráfico -->
-                <div class="mt-4">
-                    <canvas id="trendsChart" height="100"></canvas>
+                <div id="research-alerts-content">
+                    <!-- Alertas Principais -->
+                    <div class="space-y-3 mb-4">
+                        <div class="flex items-center p-3 bg-red-50 border-l-4 border-red-500 rounded-lg">
+                            <input type="checkbox" id="alert1" class="mr-3">
+                            <label for="alert1" class="flex-1 cursor-pointer">
+                                <div class="flex items-start">
+                                    <i class="fas fa-exclamation-triangle text-red-500 mr-3 mt-1"></i>
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-gray-800">Desvio de Protocolo Detectado</p>
+                                        <p class="text-sm text-gray-600">3 pacientes do Estudo ONC-2024-005 com dados inconsistentes</p>
+                                        <p class="text-xs text-red-600 mt-1">Ação: Revisar imediatamente</p>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        
+                        <div class="flex items-center p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded-lg">
+                            <input type="checkbox" id="alert2" class="mr-3">
+                            <label for="alert2" class="flex-1 cursor-pointer">
+                                <div class="flex items-start">
+                                    <i class="fas fa-clock text-yellow-500 mr-3 mt-1"></i>
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-gray-800">Prazo CEP Aproximando</p>
+                                        <p class="text-sm text-gray-600">2 estudos precisam de renovação em 30 dias</p>
+                                        <p class="text-xs text-yellow-600 mt-1">Ação: Preparar documentação</p>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        
+                        <div class="flex items-center p-3 bg-blue-50 border-l-4 border-blue-500 rounded-lg">
+                            <input type="checkbox" id="alert3" class="mr-3">
+                            <label for="alert3" class="flex-1 cursor-pointer">
+                                <div class="flex items-start">
+                                    <i class="fas fa-users text-blue-500 mr-3 mt-1"></i>
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-gray-800">Meta de Recrutamento</p>
+                                        <p class="text-sm text-gray-600">Estudo CAR-T abaixo da meta: 60% alcançado</p>
+                                        <p class="text-xs text-blue-600 mt-1">Ação: Intensificar recrutamento</p>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Métricas Rápidas -->
+                    <div class="grid grid-cols-3 gap-2 mb-4">
+                        <div class="bg-white/70 rounded-lg p-2 text-center">
+                            <div class="text-xl font-bold text-orange-600">8</div>
+                            <div class="text-xs text-gray-600">Alertas Ativos</div>
+                        </div>
+                        <div class="bg-white/70 rounded-lg p-2 text-center">
+                            <div class="text-xl font-bold text-purple-600">92%</div>
+                            <div class="text-xs text-gray-600">Conformidade</div>
+                        </div>
+                        <div class="bg-white/70 rounded-lg p-2 text-center">
+                            <div class="text-xl font-bold text-green-600">+15%</div>
+                            <div class="text-xs text-gray-600">Eficiência</div>
+                        </div>
+                    </div>
+
+                    <!-- Botão de Ação -->
+                    <button onclick="executeResearchActions()" class="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-2 rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all font-semibold">
+                        <i class="fas fa-play mr-2"></i>
+                        Executar Ações Selecionadas
+                    </button>
                 </div>
             </div>
 
-            <!-- Status dos Estudos -->
-            <div class="bg-white rounded-xl shadow-lg p-6">
-                <h3 class="text-lg font-bold text-gray-800 mb-4">
-                    <i class="fas fa-chart-pie text-orange-600 mr-2"></i>
-                    Status dos Estudos
-                </h3>
-                <canvas id="statusChart" height="200"></canvas>
-                <div class="mt-4 space-y-2">
-                    <div class="flex items-center justify-between text-sm">
-                        <span class="flex items-center">
-                            <span class="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
-                            Recrutando
-                        </span>
-                        <span class="font-semibold">28</span>
-                    </div>
-                    <div class="flex items-center justify-between text-sm">
-                        <span class="flex items-center">
-                            <span class="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
-                            Em Análise
-                        </span>
-                        <span class="font-semibold">8</span>
-                    </div>
-                    <div class="flex items-center justify-between text-sm">
-                        <span class="flex items-center">
-                            <span class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></span>
-                            Finalizado
-                        </span>
-                        <span class="font-semibold">6</span>
-                    </div>
-                </div>
-            </div>
+
         </div>
 
         <!-- Cards do Rodapé - Clicáveis -->
@@ -256,55 +281,64 @@ researchPortal.get('/research-portal', (c) => {
     </div>
 
     <script>
-        // Gráfico de Status
-        const statusCtx = document.getElementById('statusChart').getContext('2d');
-        new Chart(statusCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Recrutando', 'Em Análise', 'Finalizado'],
-                datasets: [{
-                    data: [28, 8, 6],
-                    backgroundColor: [
-                        'rgba(16, 185, 129, 0.8)',
-                        'rgba(59, 130, 246, 0.8)',
-                        'rgba(245, 158, 11, 0.8)'
-                    ]
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                }
+        // Funções para Ansiedade de Laura - Portal de Pesquisa
+        function toggleResearchAlerts() {
+            const content = document.getElementById('research-alerts-content');
+            const icon = document.getElementById('research-toggle-icon');
+            
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                icon.className = 'fas fa-compress-alt text-lg';
+            } else {
+                content.style.display = 'none';
+                icon.className = 'fas fa-expand-alt text-lg';
             }
-        });
-
-        // Gráfico de Tendências
-        const trendsCtx = document.getElementById('trendsChart').getContext('2d');
-        new Chart(trendsCtx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
-                datasets: [{
-                    label: 'Taxa de Recrutamento',
-                    data: [65, 72, 78, 82, 89, 95],
-                    borderColor: 'rgb(139, 92, 246)',
-                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 100
-                    }
+            
+            // Salvar preferência
+            localStorage.setItem('research-alerts-collapsed', content.style.display === 'none');
+        }
+        
+        function executeResearchActions() {
+            const checkboxes = document.querySelectorAll('#research-alerts-content input[type="checkbox"]:checked');
+            
+            if (checkboxes.length === 0) {
+                alert('Selecione pelo menos uma ação para executar');
+                return;
+            }
+            
+            const actions = [];
+            checkboxes.forEach(cb => {
+                const label = cb.nextElementSibling;
+                const actionText = label.querySelector('.font-semibold').textContent;
+                actions.push(actionText);
+            });
+            
+            // Simular execução
+            console.log('Executando ações:', actions);
+            
+            // Mostrar feedback
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check mr-2"></i>Ações Executadas!';
+            button.disabled = true;
+            
+            // Desmarcar checkboxes após 2 segundos
+            setTimeout(() => {
+                checkboxes.forEach(cb => cb.checked = false);
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }, 2000);
+        }
+        
+        // Restaurar estado salvo
+        window.addEventListener('DOMContentLoaded', () => {
+            const isCollapsed = localStorage.getItem('research-alerts-collapsed') === 'true';
+            if (isCollapsed) {
+                const content = document.getElementById('research-alerts-content');
+                const icon = document.getElementById('research-toggle-icon');
+                if (content && icon) {
+                    content.style.display = 'none';
+                    icon.className = 'fas fa-expand-alt text-lg';
                 }
             }
         });
