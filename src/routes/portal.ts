@@ -396,7 +396,7 @@ portalRoutes.get('/navigator', async (c) => {
                                     <span class="bg-purple-600 text-white px-2 py-1 rounded-full text-xs font-bold">15</span>
                                 </div>
                                 <div class="space-y-3 max-h-96 overflow-y-auto">
-                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-001" onclick="window.open('/patient-view/PAC-001', '_blank')">
+                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-001" onclick="window.open('/patient-view-integrated/PAC-001', '_blank')">
                                         <div class="flex items-start justify-between mb-2">
                                             <span class="font-semibold text-sm">Maria Silva</span>
                                             <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded">Prioridade</span>
@@ -410,7 +410,7 @@ portalRoutes.get('/navigator', async (c) => {
                                         </div>
                                     </div>
                                     
-                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-004" onclick="window.open('/patient-view/PAC-004', '_blank')">
+                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-004" onclick="window.open('/patient-view-integrated/PAC-004', '_blank')">
                                         <div class="flex items-start justify-between mb-2">
                                             <span class="font-semibold text-sm">João Santos</span>
                                             <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Normal</span>
@@ -436,7 +436,7 @@ portalRoutes.get('/navigator', async (c) => {
                                     <span class="bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-bold">28</span>
                                 </div>
                                 <div class="space-y-3 max-h-96 overflow-y-auto">
-                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-002" onclick="window.open('/patient-view/PAC-002', '_blank')">
+                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-002" onclick="window.open('/patient-view-integrated/PAC-002', '_blank')">
                                         <div class="flex items-start justify-between mb-2">
                                             <span class="font-semibold text-sm">Ana Costa</span>
                                             <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded">Urgente</span>
@@ -462,7 +462,7 @@ portalRoutes.get('/navigator', async (c) => {
                                     <span class="bg-green-600 text-white px-2 py-1 rounded-full text-xs font-bold">85</span>
                                 </div>
                                 <div class="space-y-3 max-h-96 overflow-y-auto">
-                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-003" onclick="window.open('/patient-view/PAC-003', '_blank')">
+                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-003" onclick="window.open('/patient-view-integrated/PAC-003', '_blank')">
                                         <div class="flex items-start justify-between mb-2">
                                             <span class="font-semibold text-sm">Carlos Mendes</span>
                                             <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Em dia</span>
@@ -488,7 +488,7 @@ portalRoutes.get('/navigator', async (c) => {
                                     <span class="bg-orange-600 text-white px-2 py-1 rounded-full text-xs font-bold">35</span>
                                 </div>
                                 <div class="space-y-3 max-h-96 overflow-y-auto">
-                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-006" onclick="window.open('/patient-view/PAC-006', '_blank')">
+                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-006" onclick="window.open('/patient-view-integrated/PAC-006', '_blank')">
                                         <div class="flex items-start justify-between mb-2">
                                             <span class="font-semibold text-sm">Lucia Ferreira</span>
                                             <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">Controle</span>
@@ -514,7 +514,7 @@ portalRoutes.get('/navigator', async (c) => {
                                     <span class="bg-teal-600 text-white px-2 py-1 rounded-full text-xs font-bold">15</span>
                                 </div>
                                 <div class="space-y-3 max-h-96 overflow-y-auto">
-                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer border-l-4 border-green-500" onclick="window.open('/patient-view/PAC-005', '_blank')">
+                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer border-l-4 border-green-500" onclick="window.open('/patient-view-integrated/PAC-005', '_blank')">
                                         <div class="flex items-start justify-between mb-2">
                                             <span class="font-semibold text-sm">Pedro Oliveira</span>
                                             <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Sucesso</span>

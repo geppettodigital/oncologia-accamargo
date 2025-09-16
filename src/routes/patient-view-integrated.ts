@@ -2,6 +2,67 @@ import { Hono } from 'hono';
 
 const patientViewIntegrated = new Hono();
 
+// Função para gerar dados de risco únicos para cada paciente
+function getRiskData(patientId: string) {
+    const riskProfiles = {
+        'PAC-001': {
+            naoAdesao: [45, 44, 42, 41, 38, 37, 35, 35, 35, 34, 33, 32],
+            complicacoes: [30, 31, 32, 33, 28, 27, 25, 24, 22, 21, 20, 19],
+            toxicidade: [25, 26, 24, 23, 28, 26, 22, 20, 18, 16, 15, 14],
+            agregado: [55, 54, 52, 50, 48, 46, 42, 40, 38, 36, 34, 32],
+            tendencia: '-28%',
+            pontoCritico: 'Jan 14',
+            previsao: 'Estável'
+        },
+        'PAC-002': {
+            naoAdesao: [50, 48, 47, 45, 44, 42, 40, 38, 37, 36, 35, 34],
+            complicacoes: [35, 36, 37, 38, 35, 33, 31, 29, 27, 25, 24, 23],
+            toxicidade: [40, 38, 36, 35, 37, 35, 33, 31, 29, 27, 25, 23],
+            agregado: [60, 58, 56, 54, 52, 50, 48, 46, 44, 42, 40, 38],
+            tendencia: '-22%',
+            pontoCritico: 'Jan 13',
+            previsao: 'Melhora Gradual'
+        },
+        'PAC-003': {
+            naoAdesao: [30, 31, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23],
+            complicacoes: [25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14],
+            toxicidade: [35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24],
+            agregado: [40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29],
+            tendencia: '-27.5%',
+            pontoCritico: 'Jan 12',
+            previsao: 'Muito Bom'
+        },
+        'PAC-004': {
+            naoAdesao: [55, 53, 51, 49, 47, 45, 43, 41, 39, 37, 35, 33],
+            complicacoes: [45, 44, 43, 42, 41, 40, 38, 36, 34, 32, 30, 28],
+            toxicidade: [30, 32, 34, 35, 33, 31, 29, 27, 25, 23, 21, 19],
+            agregado: [65, 63, 61, 59, 57, 55, 53, 51, 49, 47, 45, 43],
+            tendencia: '-34%',
+            pontoCritico: 'Jan 15',
+            previsao: 'Em Observação'
+        },
+        'PAC-005': {
+            naoAdesao: [20, 21, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13],
+            complicacoes: [15, 16, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8],
+            toxicidade: [25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14],
+            agregado: [30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19],
+            tendencia: '-36.7%',
+            pontoCritico: 'Jan 11',
+            previsao: 'Excelente'
+        },
+        'PAC-006': {
+            naoAdesao: [60, 58, 56, 54, 52, 50, 48, 46, 44, 42, 40, 38],
+            complicacoes: [50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39],
+            toxicidade: [45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34],
+            agregado: [70, 68, 66, 64, 62, 60, 58, 56, 54, 52, 50, 48],
+            tendencia: '-31.4%',
+            pontoCritico: 'Jan 16',
+            previsao: 'Atenção Especial'
+        }
+    };
+    return riskProfiles[patientId] || riskProfiles['PAC-001'];
+}
+
 // Dados completos dos pacientes
 const patientsData = {
     'PAC-001': {
@@ -111,6 +172,7 @@ const patientsData = {
 patientViewIntegrated.get('/patient-view-integrated/:id', (c) => {
     const patientId = c.req.param('id');
     const patient = patientsData[patientId as keyof typeof patientsData];
+    const riskData = getRiskData(patientId);
     
     if (!patient) {
         return c.html(`
@@ -797,12 +859,55 @@ patientViewIntegrated.get('/patient-view-integrated/:id', (c) => {
                     </div>
                 </div>
                 
-                <!-- Análise Temporal -->
+                <!-- Análise Temporal Avançada -->
                 <div class="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-xl">
                     <h4 class="font-semibold text-gray-800 mb-4">
-                        <i class="fas fa-history mr-2"></i>Evolução Temporal do Risco
+                        <i class="fas fa-history mr-2"></i>Evolução Temporal do Risco - Análise Multidimensional
                     </h4>
-                    <canvas id="timelineChart" width="800" height="200"></canvas>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
+                        <div class="bg-white p-3 rounded-lg">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-medium text-gray-600">Tendência Geral</span>
+                                <span class="text-green-600 font-bold flex items-center">
+                                    <i class="fas fa-arrow-down mr-1"></i>${riskData.tendencia}
+                                </span>
+                            </div>
+                            <div class="text-xs text-gray-500">Redução no risco agregado</div>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-medium text-gray-600">Ponto Crítico</span>
+                                <span class="text-orange-600 font-bold">${riskData.pontoCritico}</span>
+                            </div>
+                            <div class="text-xs text-gray-500">Pico de risco identificado</div>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-medium text-gray-600">Previsão 7 dias</span>
+                                <span class="text-blue-600 font-bold">${riskData.previsao}</span>
+                            </div>
+                            <div class="text-xs text-gray-500">Mantendo tendência positiva</div>
+                        </div>
+                    </div>
+                    <canvas id="timelineChart" width="800" height="300"></canvas>
+                    <div class="mt-4 grid grid-cols-1 md:grid-cols-4 gap-3">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-purple-500 rounded-full mr-2"></div>
+                            <span class="text-xs text-gray-600">Risco Não Adesão</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
+                            <span class="text-xs text-gray-600">Risco Complicações</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
+                            <span class="text-xs text-gray-600">Risco Toxicidade</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
+                            <span class="text-xs text-gray-600">Score Agregado</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -881,40 +986,148 @@ patientViewIntegrated.get('/patient-view-integrated/:id', (c) => {
                 });
             }
             
-            // Timeline Chart
+            // Enhanced Timeline Chart with Multiple Risk Dimensions
             const timelineCtx = document.getElementById('timelineChart');
             if (timelineCtx && !timelineCtx.chartInstance) {
                 timelineCtx.chartInstance = new Chart(timelineCtx, {
                     type: 'line',
                     data: {
-                        labels: ['Jan 10', 'Jan 12', 'Jan 14', 'Jan 16', 'Jan 18', 'Jan 20'],
+                        labels: ['Jan 10', 'Jan 11', 'Jan 12', 'Jan 13', 'Jan 14', 'Jan 15', 'Jan 16', 'Jan 17', 'Jan 18', 'Jan 19', 'Jan 20', 'Jan 21'],
                         datasets: [
                             {
                                 label: 'Risco Não Adesão',
-                                data: [45, 42, 38, 35, 35, 33],
+                                data: [${riskData.naoAdesao.join(', ')}],
                                 borderColor: '#8b5cf6',
-                                backgroundColor: 'rgba(139, 92, 246, 0.1)'
+                                backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                                tension: 0.3,
+                                borderWidth: 2,
+                                pointRadius: 3,
+                                pointHoverRadius: 5
                             },
                             {
                                 label: 'Risco Complicações',
-                                data: [30, 32, 28, 25, 22, 20],
+                                data: [${riskData.complicacoes.join(', ')}],
                                 borderColor: '#ef4444',
-                                backgroundColor: 'rgba(239, 68, 68, 0.1)'
+                                backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                                tension: 0.3,
+                                borderWidth: 2,
+                                pointRadius: 3,
+                                pointHoverRadius: 5
+                            },
+                            {
+                                label: 'Risco Toxicidade',
+                                data: [${riskData.toxicidade.join(', ')}],
+                                borderColor: '#eab308',
+                                backgroundColor: 'rgba(234, 179, 8, 0.1)',
+                                tension: 0.3,
+                                borderWidth: 2,
+                                pointRadius: 3,
+                                pointHoverRadius: 5
+                            },
+                            {
+                                label: 'Score Agregado LAURA',
+                                data: [${riskData.agregado.join(', ')}],
+                                borderColor: '#3b82f6',
+                                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                                tension: 0.3,
+                                borderWidth: 3,
+                                pointRadius: 4,
+                                pointHoverRadius: 6,
+                                borderDash: [5, 5]
                             }
                         ]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false,
+                        },
                         plugins: {
                             legend: { 
-                                position: 'bottom'
+                                display: false // Usando legenda customizada
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': ' + context.parsed.y + '%';
+                                    },
+                                    afterLabel: function(context) {
+                                        if (context.dataIndex === 4) {
+                                            return '⚠️ Ponto crítico detectado';
+                                        }
+                                        return '';
+                                    }
+                                },
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                padding: 12,
+                                titleFont: {
+                                    size: 14
+                                },
+                                bodyFont: {
+                                    size: 13
+                                }
+                            },
+                            annotation: {
+                                annotations: {
+                                    line1: {
+                                        type: 'line',
+                                        yMin: 50,
+                                        yMax: 50,
+                                        borderColor: 'rgba(255, 99, 132, 0.5)',
+                                        borderWidth: 2,
+                                        borderDash: [6, 6],
+                                        label: {
+                                            display: true,
+                                            content: 'Limiar de Alerta',
+                                            position: 'start'
+                                        }
+                                    },
+                                    point1: {
+                                        type: 'point',
+                                        xValue: 'Jan 14',
+                                        yValue: 48,
+                                        backgroundColor: 'rgba(255, 99, 132, 0.25)',
+                                        radius: 8,
+                                        borderColor: 'rgb(255, 99, 132)',
+                                        borderWidth: 2
+                                    }
+                                }
                             }
                         },
                         scales: {
                             y: {
                                 beginAtZero: true,
-                                max: 100
+                                max: 100,
+                                ticks: {
+                                    stepSize: 20,
+                                    callback: function(value) {
+                                        return value + '%';
+                                    }
+                                },
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.05)'
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Nível de Risco',
+                                    font: {
+                                        size: 12
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Timeline (Janeiro 2025)',
+                                    font: {
+                                        size: 12
+                                    }
+                                }
                             }
                         }
                     }
