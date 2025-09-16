@@ -242,105 +242,142 @@ export const wellnessPage = (c: any) => {
                 </div>
             </div>
 
-            <!-- Trilho de Atendimentos - Bem-estar -->
+            <!-- Trilho de Atendimentos - Replicado do Portal Navegador -->
             <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
                 <h3 class="text-xl font-bold text-gray-800 mb-4">
                     <i class="fas fa-stream text-purple-600 mr-2"></i>
-                    Trilho de Atendimentos - Bem-estar
+                    Trilho de Atendimentos
                 </h3>
                 
-                <!-- Kanban simplificado para bem-estar -->
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <!-- Kanban Board Completo -->
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
                     <!-- Coluna Triagem -->
-                    <div class="bg-purple-50 rounded-lg p-3">
-                        <h4 class="font-semibold text-purple-800 mb-3 flex items-center justify-between">
-                            <span>Triagem</span>
-                            <span class="bg-purple-200 text-purple-800 px-2 py-1 rounded text-xs">3</span>
-                        </h4>
+                    <div class="bg-gray-100 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-semibold text-gray-700">Triagem</h3>
+                            <span class="bg-purple-600 text-white text-xs px-2 py-1 rounded-full">12</span>
+                        </div>
                         <div class="space-y-2">
-                            <div class="bg-white p-2 rounded shadow-sm border-l-4 border-purple-500 cursor-pointer hover:shadow-md">
+                            <div class="bg-white p-3 rounded shadow-sm border-l-4 border-purple-600 cursor-pointer hover:shadow-md transition-all kanban-card" onclick="openPatientModal('PAC-001')">
                                 <p class="font-semibold text-sm">Ana Silva</p>
-                                <p class="text-xs text-gray-600">Ansiedade pós-diagnóstico</p>
-                                <div class="mt-1">
-                                    <span class="text-xs bg-red-100 text-red-700 px-1 py-0.5 rounded">Urgente</span>
-                                </div>
+                                <p class="text-xs text-gray-600">Depressão pós-diagnóstico</p>
+                                <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded mt-1 inline-block">
+                                    <i class="fas fa-clock"></i> Prioridade
+                                </span>
                             </div>
-                            <div class="bg-white p-2 rounded shadow-sm border-l-4 border-purple-400 cursor-pointer hover:shadow-md">
+                            <div class="bg-white p-3 rounded shadow-sm cursor-pointer hover:shadow-md transition-all kanban-card" onclick="openPatientModal('PAC-002')">
                                 <p class="font-semibold text-sm">Carlos Mendes</p>
-                                <p class="text-xs text-gray-600">Depressão inicial</p>
+                                <p class="text-xs text-gray-600">Ansiedade inicial</p>
+                            </div>
+                            <div class="bg-white p-3 rounded shadow-sm cursor-pointer hover:shadow-md transition-all kanban-card" onclick="openPatientModal('PAC-003')">
+                                <p class="font-semibold text-sm">Pedro Santos</p>
+                                <p class="text-xs text-gray-600">Suporte familiar</p>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Coluna Avaliação -->
-                    <div class="bg-blue-50 rounded-lg p-3">
-                        <h4 class="font-semibold text-blue-800 mb-3 flex items-center justify-between">
-                            <span>Avaliação</span>
-                            <span class="bg-blue-200 text-blue-800 px-2 py-1 rounded text-xs">5</span>
-                        </h4>
+
+                    <!-- Coluna Diagnóstico -->
+                    <div class="bg-gray-100 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-semibold text-gray-700">Diagnóstico</h3>
+                            <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded-full">8</span>
+                        </div>
                         <div class="space-y-2">
-                            <div class="bg-white p-2 rounded shadow-sm border-l-4 border-blue-500 cursor-pointer hover:shadow-md">
-                                <p class="font-semibold text-sm">Maria Santos</p>
-                                <p class="text-xs text-gray-600">Teste psicológico</p>
-                                <div class="mt-1 flex justify-between items-center">
-                                    <span class="text-xs bg-yellow-100 text-yellow-700 px-1 py-0.5 rounded">Hoje 14h</span>
-                                    <i class="fas fa-brain text-xs text-blue-500"></i>
-                                </div>
+                            <div class="bg-white p-3 rounded shadow-sm border-l-4 border-blue-500 cursor-pointer hover:shadow-md transition-all kanban-card" onclick="openPatientModal('PAC-004')">
+                                <p class="font-semibold text-sm">João Pedro</p>
+                                <p class="text-xs text-gray-600">Avaliação psicológica</p>
+                                <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded mt-1 inline-block">
+                                    <i class="fas fa-brain"></i> Em teste
+                                </span>
                             </div>
-                            <div class="bg-white p-2 rounded shadow-sm border-l-4 border-blue-400 cursor-pointer hover:shadow-md">
-                                <p class="font-semibold text-sm">João Paulo</p>
-                                <p class="text-xs text-gray-600">Avaliação familiar</p>
+                            <div class="bg-white p-3 rounded shadow-sm border-l-4 border-red-500 cursor-pointer hover:shadow-md transition-all kanban-card" onclick="openPatientModal('PAC-005')">
+                                <p class="font-semibold text-sm">Maria Costa</p>
+                                <p class="text-xs text-gray-600">Avaliação urgente</p>
+                                <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded mt-1 inline-block">
+                                    <i class="fas fa-exclamation-circle"></i> Urgente
+                                </span>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Coluna Terapia -->
-                    <div class="bg-green-50 rounded-lg p-3">
-                        <h4 class="font-semibold text-green-800 mb-3 flex items-center justify-between">
-                            <span>Em Terapia</span>
-                            <span class="bg-green-200 text-green-800 px-2 py-1 rounded text-xs">12</span>
-                        </h4>
-                        <div class="space-y-2">
-                            <div class="bg-white p-2 rounded shadow-sm border-l-4 border-green-500 cursor-pointer hover:shadow-md">
-                                <p class="font-semibold text-sm">Grupo Mama</p>
-                                <p class="text-xs text-gray-600">12 participantes</p>
-                                <div class="mt-1">
-                                    <div class="w-full bg-gray-200 rounded-full h-1.5">
-                                        <div class="bg-green-500 h-1.5 rounded-full" style="width: 75%"></div>
-                                    </div>
-                                    <p class="text-xs text-gray-500 mt-1">Sessão 8/10</p>
-                                </div>
-                            </div>
-                            <div class="bg-white p-2 rounded shadow-sm border-l-4 border-green-400 cursor-pointer hover:shadow-md">
-                                <p class="font-semibold text-sm">Pedro Costa</p>
-                                <p class="text-xs text-gray-600">Terapia individual</p>
-                                <span class="text-xs bg-green-100 text-green-700 px-1 py-0.5 rounded">Progresso</span>
-                            </div>
+
+                    <!-- Coluna Tratamento -->
+                    <div class="bg-gray-100 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-semibold text-gray-700">Tratamento</h3>
+                            <span class="bg-green-600 text-white text-xs px-2 py-1 rounded-full">45</span>
                         </div>
-                    </div>
-                    
-                    <!-- Coluna Acompanhamento -->
-                    <div class="bg-pink-50 rounded-lg p-3">
-                        <h4 class="font-semibold text-pink-800 mb-3 flex items-center justify-between">
-                            <span>Acompanhamento</span>
-                            <span class="bg-pink-200 text-pink-800 px-2 py-1 rounded text-xs">8</span>
-                        </h4>
                         <div class="space-y-2">
-                            <div class="bg-white p-2 rounded shadow-sm border-l-4 border-pink-500 cursor-pointer hover:shadow-md">
-                                <p class="font-semibold text-sm">Laura Ferreira</p>
-                                <p class="text-xs text-gray-600">Check-in mensal</p>
-                                <div class="mt-1 flex items-center">
-                                    <i class="fas fa-heart text-xs text-pink-500 mr-1"></i>
-                                    <span class="text-xs text-gray-600">Estável</span>
-                                </div>
-                            </div>
-                            <div class="bg-white p-2 rounded shadow-sm border-l-4 border-pink-400 cursor-pointer hover:shadow-md">
+                            <div class="bg-white p-3 rounded shadow-sm cursor-pointer hover:shadow-md transition-all kanban-card" onclick="openPatientModal('PAC-006')">
                                 <p class="font-semibold text-sm">Roberto Lima</p>
-                                <p class="text-xs text-gray-600">Alta próxima</p>
-                                <span class="text-xs bg-green-100 text-green-700 px-1 py-0.5 rounded">Recuperado</span>
+                                <p class="text-xs text-gray-600">Terapia CBT - Sessão 3/12</p>
+                                <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                                    <div class="bg-green-600 h-2 rounded-full" style="width: 25%"></div>
+                                </div>
+                            </div>
+                            <div class="bg-white p-3 rounded shadow-sm cursor-pointer hover:shadow-md transition-all kanban-card" onclick="openPatientModal('PAC-007')">
+                                <p class="font-semibold text-sm">Sandra Oliveira</p>
+                                <p class="text-xs text-gray-600">Grupo de apoio - 5/10</p>
+                                <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                                    <div class="bg-green-600 h-2 rounded-full" style="width: 50%"></div>
+                                </div>
+                            </div>
+                            <div class="bg-white p-3 rounded shadow-sm cursor-pointer hover:shadow-md transition-all kanban-card" onclick="openPatientModal('PAC-008')">
+                                <p class="font-semibold text-sm">Lucia Ferreira</p>
+                                <p class="text-xs text-gray-600">Mindfulness - 8/12</p>
+                                <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                                    <div class="bg-green-600 h-2 rounded-full" style="width: 67%"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Coluna Acompanhamento -->
+                    <div class="bg-gray-100 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-semibold text-gray-700">Acompanhamento</h3>
+                            <span class="bg-yellow-600 text-white text-xs px-2 py-1 rounded-full">23</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="bg-white p-3 rounded shadow-sm cursor-pointer hover:shadow-md transition-all kanban-card" onclick="openPatientModal('PAC-009')">
+                                <p class="font-semibold text-sm">Paulo Santos</p>
+                                <p class="text-xs text-gray-600">Check-in mensal</p>
+                                <span class="text-xs bg-green-100 text-green-700 px-1 py-0.5 rounded">Estável</span>
+                            </div>
+                            <div class="bg-white p-3 rounded shadow-sm cursor-pointer hover:shadow-md transition-all kanban-card" onclick="openPatientModal('PAC-010')">
+                                <p class="font-semibold text-sm">Julia Martinez</p>
+                                <p class="text-xs text-gray-600">Controle trimestral</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coluna Alta -->
+                    <div class="bg-gray-100 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-semibold text-gray-700">Alta</h3>
+                            <span class="bg-green-700 text-white text-xs px-2 py-1 rounded-full">15</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="bg-white p-3 rounded shadow-sm border-l-4 border-green-600 cursor-pointer hover:shadow-md transition-all kanban-card" onclick="openPatientModal('PAC-011')">
+                                <p class="font-semibold text-sm">Felipe Costa</p>
+                                <p class="text-xs text-gray-600">Alta programada</p>
+                                <span class="text-xs bg-green-100 text-green-700 px-1 py-0.5 rounded">
+                                    <i class="fas fa-check"></i> Recuperado
+                                </span>
+                            </div>
+                            <div class="bg-white p-3 rounded shadow-sm cursor-pointer hover:shadow-md transition-all kanban-card" onclick="openPatientModal('PAC-012')">
+                                <p class="font-semibold text-sm">Marina Silva</p>
+                                <p class="text-xs text-gray-600">Última sessão</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botão Visualizar Kanban Completo -->
+                <div class="mt-4 text-center">
+                    <button onclick="showFullKanban()" class="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-6 py-2 rounded-lg hover:from-purple-700 hover:to-purple-800 transition-all font-semibold">
+                        <i class="fas fa-expand-alt mr-2"></i>
+                        Visualizar Kanban Completo
+                    </button>
                 </div>
             </div>
 
@@ -788,6 +825,27 @@ export const wellnessPage = (c: any) => {
                     // Scroll suave até o conteúdo
                     contentDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }
+            }
+            
+            // Funções para o Trilho de Atendimentos (Kanban)
+            function openPatientModal(patientId) {
+                // Simular abertura de modal com informações do paciente
+                console.log('Abrindo modal para paciente:', patientId);
+                alert('Modal de paciente ' + patientId + ' seria aberto aqui com detalhes completos');
+                
+                // Em produção, aqui você chamaria:
+                // if (typeof window.openPatientUniversalView === 'function') {
+                //     window.openPatientUniversalView(patientId, 'wellness');
+                // }
+            }
+            
+            function showFullKanban() {
+                // Simular visualização do Kanban completo
+                console.log('Abrindo Kanban completo');
+                alert('Visualização completa do Kanban seria exibida em tela cheia');
+                
+                // Em produção, você pode redirecionar ou abrir modal fullscreen
+                // window.location.href = '#navigator';
             }
         </script>
     </body>
