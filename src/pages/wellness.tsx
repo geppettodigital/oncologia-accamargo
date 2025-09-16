@@ -64,7 +64,7 @@ export const wellnessPage = (c: any) => {
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                 <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg">
                     <div class="flex items-center">
-                        <i class="far fa-exclamation-triangle text-emerald-600 text-xl mr-3"></i>
+                        <i class="fas fa-exclamation-triangle text-red-600 text-xl mr-3"></i>
                         <div>
                             <p class="font-semibold text-red-800">Atenção Urgente</p>
                             <p class="text-2xl font-bold text-red-600">3 pacientes</p>
@@ -75,7 +75,7 @@ export const wellnessPage = (c: any) => {
                 
                 <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-lg">
                     <div class="flex items-center">
-                        <i class="far fa-exclamation-circle text-lime-600 text-xl mr-3"></i>
+                        <i class="fas fa-eye text-yellow-600 text-xl mr-3"></i>
                         <div>
                             <p class="font-semibold text-yellow-800">Monitoramento</p>
                             <p class="text-2xl font-bold text-lime-700">12 pacientes</p>
@@ -101,7 +101,7 @@ export const wellnessPage = (c: any) => {
                 <!-- High Risk Patients -->
                 <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
                     <h3 class="font-bold text-gray-800 mb-4">
-                        <i class="far fa-user-friends text-cyan-600 mr-2"></i>
+                        <i class="fas fa-user-friends text-purple-600 mr-2"></i>
                         Pacientes em Acompanhamento Intensivo
                     </h3>
                     
@@ -204,43 +204,6 @@ export const wellnessPage = (c: any) => {
                 </div>
             </div>
 
-            <!-- Wellness Activities -->
-            <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100 mb-8">
-                <h3 class="font-bold text-gray-800 mb-4">
-                    <img src="/static/accamargo-icon.svg" alt="ACCamargo Logo" class="w-6 h-6 inline mr-2">
-                    Atividades de Bem-Estar da Semana
-                </h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div class="text-center p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg">
-                        <i class="far fa-spa text-3xl text-teal-600 mb-2"></i>
-                        <p class="font-semibold">Yoga</p>
-                        <p class="text-xs text-gray-600">Seg/Qua/Sex - 8h</p>
-                        <p class="text-xs mt-2">15 inscritos</p>
-                    </div>
-                    
-                    <div class="text-center p-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg">
-                        <i class="fas fa-brain text-3xl text-green-600 mb-2"></i>
-                        <p class="font-semibold">Meditação</p>
-                        <p class="text-xs text-gray-600">Diário - 10h e 16h</p>
-                        <p class="text-xs mt-2">22 inscritos</p>
-                    </div>
-                    
-                    <div class="text-center p-4 bg-gradient-to-br from-green-50 to-blue-50 rounded-lg">
-                        <i class="far fa-palette text-3xl text-green-500 mb-2"></i>
-                        <p class="font-semibold">Arte-terapia</p>
-                        <p class="text-xs text-gray-600">Terça - 14h</p>
-                        <p class="text-xs mt-2">8 inscritos</p>
-                    </div>
-                    
-                    <div class="text-center p-4 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-lg">
-                        <i class="far fa-music text-3xl text-lime-600 mb-2"></i>
-                        <p class="font-semibold">Musicoterapia</p>
-                        <p class="text-xs text-gray-600">Quinta - 15h</p>
-                        <p class="text-xs mt-2">10 inscritos</p>
-                    </div>
-                </div>
-            </div>
 
             <!-- Trilho de Atendimentos - Replicado do Portal Navegador -->
             <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
