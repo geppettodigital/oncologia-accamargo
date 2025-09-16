@@ -5,6 +5,12 @@ window.portalHistory = [];
 // Função principal para carregar portais
 async function loadPortal(portalType) {
     try {
+        // Caso especial: Portal de Pesquisa redireciona para o novo portal aprimorado
+        if (portalType === 'research') {
+            window.location.href = '/research-portal';
+            return;
+        }
+        
         // Mostrar loading
         showLoading();
         
@@ -379,7 +385,8 @@ function initializeWellnessPortal() {
 
 function initializeResearchPortal() {
     console.log('Portal de Pesquisa inicializado');
-    // Adicionar funcionalidades específicas de pesquisa
+    // Redirecionar para o novo portal de pesquisa aprimorado
+    window.location.href = '/research-portal';
 }
 
 function initializeAdminPortal() {

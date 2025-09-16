@@ -24,8 +24,8 @@ researchViews.get('/research/studies', (c) => {
                     <i class="fas fa-flask mr-3 text-indigo-600"></i>
                     Estudos Clínicos Ativos
                 </h1>
-                <button onclick="window.history.back()" class="text-gray-600 hover:text-gray-800">
-                    <i class="fas fa-arrow-left mr-2"></i>Voltar
+                <button onclick="window.location.href='/research-portal'" class="text-gray-600 hover:text-gray-800">
+                    <i class="fas fa-arrow-left mr-2"></i>Portal de Pesquisa
                 </button>
             </div>
         </div>
@@ -260,43 +260,10 @@ researchViews.get('/research/studies', (c) => {
             </div>
         </div>
 
-        <!-- Gráfico de Distribuição -->
-        <div class="mt-6 bg-white rounded-xl shadow-lg p-6">
-            <h3 class="text-lg font-bold mb-4">Distribuição por Fase</h3>
-            <canvas id="phaseChart" height="100"></canvas>
-        </div>
     </div>
-
+    
     <script>
-        // Gráfico de Fases
-        const ctx = document.getElementById('phaseChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Fase I', 'Fase II', 'Fase III', 'Fase IV', 'Observacional'],
-                datasets: [{
-                    label: 'Número de Estudos',
-                    data: [5, 12, 15, 3, 7],
-                    backgroundColor: [
-                        'rgba(99, 102, 241, 0.8)',
-                        'rgba(139, 92, 246, 0.8)',
-                        'rgba(59, 130, 246, 0.8)',
-                        'rgba(16, 185, 129, 0.8)',
-                        'rgba(245, 158, 11, 0.8)'
-                    ]
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                },
-                scales: {
-                    y: { beginAtZero: true }
-                }
-            }
-        });
+        // Scripts para funcionalidades da página (sem gráfico)
     </script>
 </body>
 </html>
@@ -325,8 +292,8 @@ researchViews.get('/research/participants', (c) => {
                     <i class="fas fa-users mr-3 text-green-600"></i>
                     Gestão de Participantes de Pesquisa
                 </h1>
-                <button onclick="window.history.back()" class="text-gray-600 hover:text-gray-800">
-                    <i class="fas fa-arrow-left mr-2"></i>Voltar
+                <button onclick="window.location.href='/research-portal'" class="text-gray-600 hover:text-gray-800">
+                    <i class="fas fa-arrow-left mr-2"></i>Portal de Pesquisa
                 </button>
             </div>
         </div>
@@ -557,8 +524,8 @@ researchViews.get('/research/publications', (c) => {
                     <i class="fas fa-book-open mr-3 text-blue-600"></i>
                     Publicações Científicas
                 </h1>
-                <button onclick="window.history.back()" class="text-gray-600 hover:text-gray-800">
-                    <i class="fas fa-arrow-left mr-2"></i>Voltar
+                <button onclick="window.location.href='/research-portal'" class="text-gray-600 hover:text-gray-800">
+                    <i class="fas fa-arrow-left mr-2"></i>Portal de Pesquisa
                 </button>
             </div>
         </div>
@@ -735,8 +702,8 @@ researchViews.get('/research/database', (c) => {
                     <i class="fas fa-database mr-3 text-cyan-600"></i>
                     Banco de Dados REDCap - Pesquisa Clínica
                 </h1>
-                <button onclick="window.history.back()" class="text-gray-600 hover:text-gray-800">
-                    <i class="fas fa-arrow-left mr-2"></i>Voltar
+                <button onclick="window.location.href='/research-portal'" class="text-gray-600 hover:text-gray-800">
+                    <i class="fas fa-arrow-left mr-2"></i>Portal de Pesquisa
                 </button>
             </div>
         </div>
@@ -957,8 +924,8 @@ researchViews.get('/research/analysis', (c) => {
                     <i class="fas fa-chart-pie mr-3 text-purple-600"></i>
                     Centro de Análises Estatísticas
                 </h1>
-                <button onclick="window.history.back()" class="text-gray-600 hover:text-gray-800">
-                    <i class="fas fa-arrow-left mr-2"></i>Voltar
+                <button onclick="window.location.href='/research-portal'" class="text-gray-600 hover:text-gray-800">
+                    <i class="fas fa-arrow-left mr-2"></i>Portal de Pesquisa
                 </button>
             </div>
         </div>
@@ -1053,11 +1020,6 @@ researchViews.get('/research/analysis', (c) => {
                     </div>
                 </div>
 
-                <!-- Gráfico de Exemplo -->
-                <div class="mt-6">
-                    <h4 class="font-semibold mb-3">Curva de Sobrevida - Exemplo</h4>
-                    <canvas id="survivalChart" height="150"></canvas>
-                </div>
             </div>
 
             <!-- Ferramentas Estatísticas -->
@@ -1067,22 +1029,27 @@ researchViews.get('/research/analysis', (c) => {
                     Ferramentas
                 </h3>
                 <div class="space-y-3">
-                    <button class="w-full p-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg hover:from-purple-600 hover:to-purple-700 transition">
+                    <button onclick="showAnalysis('survival')" class="w-full p-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg hover:from-purple-600 hover:to-purple-700 transition">
                         <i class="fas fa-chart-line mr-2"></i>
                         Análise de Sobrevida
                     </button>
-                    <button class="w-full p-3 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-lg hover:from-indigo-600 hover:to-indigo-700 transition">
+                    <button onclick="showAnalysis('samplesize')" class="w-full p-3 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-lg hover:from-indigo-600 hover:to-indigo-700 transition">
                         <i class="fas fa-percentage mr-2"></i>
                         Cálculo de Sample Size
                     </button>
-                    <button class="w-full p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition">
+                    <button onclick="showAnalysis('hypothesis')" class="w-full p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition">
                         <i class="fas fa-balance-scale mr-2"></i>
                         Teste de Hipóteses
                     </button>
-                    <button class="w-full p-3 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-lg hover:from-pink-600 hover:to-pink-700 transition">
+                    <button onclick="showAnalysis('regression')" class="w-full p-3 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-lg hover:from-pink-600 hover:to-pink-700 transition">
                         <i class="fas fa-project-diagram mr-2"></i>
                         Regressão Multivariada
                     </button>
+                </div>
+
+                <!-- Área de Conteúdo Dinâmico -->
+                <div id="analysisContent" class="mt-6 p-4 bg-gray-50 rounded-lg hidden">
+                    <!-- Conteúdo será inserido dinamicamente -->
                 </div>
 
                 <!-- Software Disponível -->
@@ -1112,49 +1079,179 @@ researchViews.get('/research/analysis', (c) => {
     </div>
 
     <script>
-        // Curva de Sobrevida
-        new Chart(document.getElementById('survivalChart'), {
-            type: 'line',
-            data: {
-                labels: [0, 6, 12, 18, 24, 30, 36],
-                datasets: [{
-                    label: 'Tratamento',
-                    data: [100, 92, 85, 78, 72, 68, 65],
-                    borderColor: 'rgb(139, 92, 246)',
-                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
-                    tension: 0.4
-                }, {
-                    label: 'Controle',
-                    data: [100, 88, 75, 65, 58, 52, 48],
-                    borderColor: 'rgb(239, 68, 68)',
-                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { position: 'bottom' }
+        // Funções para mostrar conteúdo de análise
+        function showAnalysis(type) {
+            const content = document.getElementById('analysisContent');
+            content.classList.remove('hidden');
+            
+            const analyses = {
+                survival: {
+                    title: 'Análise de Sobrevida',
+                    icon: 'fa-chart-line',
+                    content: \`
+                        <h4 class="font-bold text-lg mb-3"><i class="fas fa-chart-line mr-2 text-purple-600"></i>Análise de Sobrevida Kaplan-Meier</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-sm text-gray-600 mb-2">Configurar Análise:</p>
+                                <div class="space-y-2">
+                                    <input type="text" placeholder="Variável de tempo" class="w-full p-2 border rounded">
+                                    <input type="text" placeholder="Variável de evento" class="w-full p-2 border rounded">
+                                    <select class="w-full p-2 border rounded">
+                                        <option>Método: Kaplan-Meier</option>
+                                        <option>Método: Cox Regression</option>
+                                        <option>Método: Log-rank test</option>
+                                    </select>
+                                    <button class="w-full p-2 bg-purple-600 text-white rounded hover:bg-purple-700">
+                                        <i class="fas fa-play mr-2"></i>Executar Análise
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="bg-white p-3 rounded">
+                                <p class="text-sm font-semibold mb-2">Resultados Esperados:</p>
+                                <ul class="text-xs space-y-1 text-gray-600">
+                                    <li>• Curva de sobrevida estratificada</li>
+                                    <li>• Mediana de sobrevida</li>
+                                    <li>• Taxa de sobrevida em 1, 3 e 5 anos</li>
+                                    <li>• Hazard ratio com IC 95%</li>
+                                    <li>• Valor-p do log-rank test</li>
+                                </ul>
+                            </div>
+                        </div>
+                    \`
                 },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 100,
-                        title: {
-                            display: true,
-                            text: 'Sobrevida (%)'
-                        }
-                    },
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Tempo (meses)'
-                        }
-                    }
+                samplesize: {
+                    title: 'Cálculo de Sample Size',
+                    icon: 'fa-percentage',
+                    content: \`
+                        <h4 class="font-bold text-lg mb-3"><i class="fas fa-percentage mr-2 text-indigo-600"></i>Cálculo de Tamanho Amostral</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-sm text-gray-600 mb-2">Parâmetros do Estudo:</p>
+                                <div class="space-y-2">
+                                    <input type="number" placeholder="Poder estatístico (%)" value="80" class="w-full p-2 border rounded">
+                                    <input type="number" placeholder="Nível de significância (%)" value="5" class="w-full p-2 border rounded">
+                                    <input type="number" placeholder="Diferença esperada" class="w-full p-2 border rounded">
+                                    <select class="w-full p-2 border rounded">
+                                        <option>Tipo: Superioridade</option>
+                                        <option>Tipo: Não-inferioridade</option>
+                                        <option>Tipo: Equivalência</option>
+                                    </select>
+                                    <button class="w-full p-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+                                        <i class="fas fa-calculator mr-2"></i>Calcular
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="bg-white p-3 rounded">
+                                <p class="text-sm font-semibold mb-2">Cálculo Automático:</p>
+                                <div class="text-center py-4">
+                                    <div class="text-3xl font-bold text-indigo-600">N = 384</div>
+                                    <p class="text-xs text-gray-500 mt-2">Tamanho amostral necessário</p>
+                                </div>
+                                <div class="text-xs text-gray-600 mt-3">
+                                    <p>• 192 pacientes por braço</p>
+                                    <p>• Considerar 10% de perda: 422 total</p>
+                                </div>
+                            </div>
+                        </div>
+                    \`
+                },
+                hypothesis: {
+                    title: 'Teste de Hipóteses',
+                    icon: 'fa-balance-scale',
+                    content: \`
+                        <h4 class="font-bold text-lg mb-3"><i class="fas fa-balance-scale mr-2 text-blue-600"></i>Teste de Hipóteses</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-sm text-gray-600 mb-2">Configuração do Teste:</p>
+                                <div class="space-y-2">
+                                    <select class="w-full p-2 border rounded">
+                                        <option>Teste t de Student</option>
+                                        <option>ANOVA</option>
+                                        <option>Qui-quadrado</option>
+                                        <option>Mann-Whitney U</option>
+                                        <option>Kruskal-Wallis</option>
+                                    </select>
+                                    <input type="text" placeholder="H0: Hipótese nula" class="w-full p-2 border rounded">
+                                    <input type="text" placeholder="H1: Hipótese alternativa" class="w-full p-2 border rounded">
+                                    <select class="w-full p-2 border rounded">
+                                        <option>Bicaudal</option>
+                                        <option>Unicaudal direito</option>
+                                        <option>Unicaudal esquerdo</option>
+                                    </select>
+                                    <button class="w-full p-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                                        <i class="fas fa-check-double mr-2"></i>Testar Hipótese
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="bg-white p-3 rounded">
+                                <p class="text-sm font-semibold mb-2">Interpretação:</p>
+                                <div class="space-y-2 text-xs">
+                                    <div class="p-2 bg-blue-50 rounded">
+                                        <p class="font-semibold">Valor-p < 0.05</p>
+                                        <p class="text-gray-600">Rejeitar H0</p>
+                                    </div>
+                                    <div class="p-2 bg-gray-50 rounded">
+                                        <p class="font-semibold">Valor-p ≥ 0.05</p>
+                                        <p class="text-gray-600">Não rejeitar H0</p>
+                                    </div>
+                                    <p class="text-gray-500 mt-2">IC 95% será calculado automaticamente</p>
+                                </div>
+                            </div>
+                        </div>
+                    \`
+                },
+                regression: {
+                    title: 'Regressão Multivariada',
+                    icon: 'fa-project-diagram',
+                    content: \`
+                        <h4 class="font-bold text-lg mb-3"><i class="fas fa-project-diagram mr-2 text-pink-600"></i>Regressão Multivariada</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-sm text-gray-600 mb-2">Modelo de Regressão:</p>
+                                <div class="space-y-2">
+                                    <select class="w-full p-2 border rounded">
+                                        <option>Linear Múltipla</option>
+                                        <option>Logística Binária</option>
+                                        <option>Logística Multinomial</option>
+                                        <option>Cox (Sobrevida)</option>
+                                        <option>Poisson</option>
+                                    </select>
+                                    <input type="text" placeholder="Variável dependente" class="w-full p-2 border rounded">
+                                    <textarea placeholder="Variáveis independentes (separadas por vírgula)" class="w-full p-2 border rounded" rows="2"></textarea>
+                                    <div class="flex gap-2">
+                                        <label class="flex items-center text-sm">
+                                            <input type="checkbox" class="mr-1"> Stepwise
+                                        </label>
+                                        <label class="flex items-center text-sm">
+                                            <input type="checkbox" class="mr-1"> VIF
+                                        </label>
+                                    </div>
+                                    <button class="w-full p-2 bg-pink-600 text-white rounded hover:bg-pink-700">
+                                        <i class="fas fa-chart-scatter mr-2"></i>Ajustar Modelo
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="bg-white p-3 rounded">
+                                <p class="text-sm font-semibold mb-2">Saídas do Modelo:</p>
+                                <ul class="text-xs space-y-1 text-gray-600">
+                                    <li>• Coeficientes β e erro padrão</li>
+                                    <li>• Odds Ratio / Hazard Ratio</li>
+                                    <li>• R² ajustado / Pseudo R²</li>
+                                    <li>• Teste de multicolinearidade</li>
+                                    <li>• Análise de resíduos</li>
+                                    <li>• Curva ROC (modelos logísticos)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    \`
                 }
+            };
+            
+            const analysis = analyses[type];
+            if (analysis) {
+                content.innerHTML = analysis.content;
             }
-        });
+        }
     </script>
 </body>
 </html>
@@ -1182,8 +1279,8 @@ researchViews.get('/research/protocols', (c) => {
                     <i class="fas fa-file-contract mr-3 text-green-600"></i>
                     Protocolos de Pesquisa - Comitê de Ética
                 </h1>
-                <button onclick="window.history.back()" class="text-gray-600 hover:text-gray-800">
-                    <i class="fas fa-arrow-left mr-2"></i>Voltar
+                <button onclick="window.location.href='/research-portal'" class="text-gray-600 hover:text-gray-800">
+                    <i class="fas fa-arrow-left mr-2"></i>Portal de Pesquisa
                 </button>
             </div>
         </div>
@@ -1366,8 +1463,8 @@ researchViews.get('/research/education', (c) => {
                     <i class="fas fa-graduation-cap mr-3 text-orange-600"></i>
                     Centro de Educação e Treinamento em Pesquisa
                 </h1>
-                <button onclick="window.history.back()" class="text-gray-600 hover:text-gray-800">
-                    <i class="fas fa-arrow-left mr-2"></i>Voltar
+                <button onclick="window.location.href='/research-portal'" class="text-gray-600 hover:text-gray-800">
+                    <i class="fas fa-arrow-left mr-2"></i>Portal de Pesquisa
                 </button>
             </div>
         </div>
