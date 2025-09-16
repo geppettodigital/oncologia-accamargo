@@ -31,6 +31,14 @@ Plataforma completa de gestão oncológica integrada com LAURA Assistant, oferec
 4. **Gestão Financeira** - Prevenção inteligente de glosas
 5. **Bem-estar Integrado** - Suporte psicológico e qualidade de vida
 6. **Pesquisa Clínica** - Recrutamento e gestão de trials
+   - **✅ Portal de Pesquisa Aprimorado**: Interface principal com navegação intuitiva
+   - **✅ Estudos Ativos**: Gestão completa de estudos clínicos em andamento
+   - **✅ Participantes**: Controle detalhado de participantes com filtros avançados
+   - **✅ Publicações**: Biblioteca científica com artigos e publicações
+   - **✅ Banco de Dados**: Interface integrada com REDCap
+   - **✅ Análises**: Dashboard analítico com visualizações interativas
+   - **✅ Protocolos**: Gestão de protocolos de pesquisa e documentação
+   - **✅ Educação**: Recursos educacionais e programas de treinamento
 7. **Administração Master** - Visão executiva completa
 8. **Engenharia de Prompt** - Otimização de interações com IA
 
@@ -110,7 +118,15 @@ webapp/
 - **Local**: http://localhost:3000
 - **Sandbox**: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev
 - **Portal Navegador**: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev#navigator
-- **Teste Integrado**: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev/test-navigator
+- **Portal de Pesquisa**: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev#research
+- **Views de Pesquisa**:
+  - Estudos: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev/research/studies
+  - Participantes: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev/research/participants
+  - Publicações: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev/research/publications
+  - Banco de Dados: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev/research/database
+  - Análises: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev/research/analysis
+  - Protocolos: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev/research/protocols
+  - Educação: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev/research/education
 
 ## 📱 Como Usar a View Universal do Paciente
 
@@ -190,7 +206,13 @@ pm2 logs oncologia-plataforma --nostream  # Ver logs
 
 ## 📝 Notas da Versão
 
-### v1.1.0 (Atual - Janeiro 2025)
+### v1.2.0 (Atual - Janeiro 2025)
+- ✅ Portal de Pesquisa Clínica completamente aprimorado
+- ✅ 7 novas views especializadas para gestão de pesquisa
+- ✅ Integração com REDCap e sistemas de análise
+- ✅ Dashboards interativos com Chart.js em todas as views
+
+### v1.1.0
 - ✅ Portal Unificado SPA - Navegação sem reload de página
 - ✅ Trilho de Atendimentos Kanban no Portal Navegador
 - ✅ Ansiedade de Laura em TODOS os portais com personalização
