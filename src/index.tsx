@@ -142,6 +142,10 @@ app.get('/', (c) => {
                         </div>
                     </div>
                     <div class="flex items-center space-x-4">
+                        <a href="/doctor-portal" class="flex items-center bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 py-1 rounded-full hover:from-blue-700 hover:to-blue-800 transition-all">
+                            <i class="fas fa-user-md text-sm mr-2"></i>
+                            <span class="text-sm font-semibold">Portal Médico</span>
+                        </a>
                         <button class="text-gray-600 hover:text-green-600 transition-colors">
                             <i class="far fa-bell text-xl"></i>
                         </button>
@@ -222,13 +226,13 @@ app.get('/', (c) => {
                 <!-- Médico -->
                 <div class="module-card rounded-2xl shadow-lg p-8 card-hover cursor-pointer border border-white/50" >
                     <div class="text-center">
-                        <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-lg">
+                        <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg">
                             <i class="fas fa-user-md text-3xl text-white"></i>
                         </div>
                         <h2 class="text-xl font-bold mb-3 text-gray-800">Portal Médico</h2>
-                        <p class="text-gray-600 mb-6 leading-relaxed">Assistente clínico com IA e gestão integrada de pacientes</p>
+                        <p class="text-gray-600 mb-6 leading-relaxed">Kanban de pacientes, alertas LAURA e assistente IA completo</p>
                         <div class="flex gap-2 justify-center items-center">
-                            <button onclick="loadPortal('doctor')" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
+                            <button onclick="window.location.href='/doctor-portal'" class="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all font-semibold">
                                 Acessar
                             </button>
                             <button onclick="event.stopPropagation(); showPortalHelp('doctor')" class="portal-help-btn w-12 h-12 rounded-full bg-gray-500 hover:bg-gray-600 text-white flex items-center justify-center transition-all hover:scale-110" title="Informações sobre este portal">
