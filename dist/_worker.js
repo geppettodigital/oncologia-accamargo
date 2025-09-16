@@ -1,4 +1,4 @@
-var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in e?ra(e,t,{enumerable:!0,configurable:!0,writable:!0,value:a}):e[t]=a;var x=(e,t,a)=>na(e,typeof t!="symbol"?t+"":t,a),Ue=(e,t,a)=>t.has(e)||Xe("Cannot "+a);var l=(e,t,a)=>(Ue(e,t,"read from private field"),a?a.call(e):t.get(e)),b=(e,t,a)=>t.has(e)?Xe("Cannot add the same private member more than once"):t instanceof WeakSet?t.add(e):t.set(e,a),g=(e,t,a,s)=>(Ue(e,t,"write to private field"),s?s.call(e,a):t.set(e,a),a),v=(e,t,a)=>(Ue(e,t,"access private method"),a);var et=(e,t,a,s)=>({set _(i){g(e,t,i,a)},get _(){return l(e,t,s)}});var tt=(e,t,a)=>(s,i)=>{let o=-1;return r(0);async function r(d){if(d<=o)throw new Error("next() called multiple times");o=d;let n,c=!1,p;if(e[d]?(p=e[d][0][0],s.req.routeIndex=d):p=d===e.length&&i||void 0,p)try{n=await p(s,()=>r(d+1))}catch(m){if(m instanceof Error&&t)s.error=m,n=await t(m,s),c=!0;else throw m}else s.finalized===!1&&a&&(n=await a(s));return n&&(s.finalized===!1||c)&&(s.res=n),s}},la=Symbol(),da=async(e,t=Object.create(null))=>{const{all:a=!1,dot:s=!1}=t,o=(e instanceof Bt?e.raw.headers:e.headers).get("Content-Type");return o!=null&&o.startsWith("multipart/form-data")||o!=null&&o.startsWith("application/x-www-form-urlencoded")?ca(e,{all:a,dot:s}):{}};async function ca(e,t){const a=await e.formData();return a?pa(a,t):{}}function pa(e,t){const a=Object.create(null);return e.forEach((s,i)=>{t.all||i.endsWith("[]")?ma(a,i,s):a[i]=s}),t.dot&&Object.entries(a).forEach(([s,i])=>{s.includes(".")&&(ga(a,s,i),delete a[s])}),a}var ma=(e,t,a)=>{e[t]!==void 0?Array.isArray(e[t])?e[t].push(a):e[t]=[e[t],a]:t.endsWith("[]")?e[t]=[a]:e[t]=a},ga=(e,t,a)=>{let s=e;const i=t.split(".");i.forEach((o,r)=>{r===i.length-1?s[o]=a:((!s[o]||typeof s[o]!="object"||Array.isArray(s[o])||s[o]instanceof File)&&(s[o]=Object.create(null)),s=s[o])})},Lt=e=>{const t=e.split("/");return t[0]===""&&t.shift(),t},xa=e=>{const{groups:t,path:a}=ua(e),s=Lt(a);return ba(s,t)},ua=e=>{const t=[];return e=e.replace(/\{[^}]+\}/g,(a,s)=>{const i=`@${s}`;return t.push([i,a]),i}),{groups:t,path:e}},ba=(e,t)=>{for(let a=t.length-1;a>=0;a--){const[s]=t[a];for(let i=e.length-1;i>=0;i--)if(e[i].includes(s)){e[i]=e[i].replace(s,t[a][1]);break}}return e},$e={},fa=(e,t)=>{if(e==="*")return"*";const a=e.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);if(a){const s=`${e}#${t}`;return $e[s]||(a[2]?$e[s]=t&&t[0]!==":"&&t[0]!=="*"?[s,a[1],new RegExp(`^${a[2]}(?=/${t})`)]:[e,a[1],new RegExp(`^${a[2]}$`)]:$e[s]=[e,a[1],!0]),$e[s]}return null},Ke=(e,t)=>{try{return t(e)}catch{return e.replace(/(?:%[0-9A-Fa-f]{2})+/g,a=>{try{return t(a)}catch{return a}})}},va=e=>Ke(e,decodeURI),Dt=e=>{const t=e.url,a=t.indexOf("/",t.indexOf(":")+4);let s=a;for(;s<t.length;s++){const i=t.charCodeAt(s);if(i===37){const o=t.indexOf("?",s),r=t.slice(a,o===-1?void 0:o);return va(r.includes("%25")?r.replace(/%25/g,"%2525"):r)}else if(i===63)break}return t.slice(a,s)},ha=e=>{const t=Dt(e);return t.length>1&&t.at(-1)==="/"?t.slice(0,-1):t},de=(e,t,...a)=>(a.length&&(t=de(t,...a)),`${(e==null?void 0:e[0])==="/"?"":"/"}${e}${t==="/"?"":`${(e==null?void 0:e.at(-1))==="/"?"":"/"}${(t==null?void 0:t[0])==="/"?t.slice(1):t}`}`),Ot=e=>{if(e.charCodeAt(e.length-1)!==63||!e.includes(":"))return null;const t=e.split("/"),a=[];let s="";return t.forEach(i=>{if(i!==""&&!/\:/.test(i))s+="/"+i;else if(/\:/.test(i))if(/\?/.test(i)){a.length===0&&s===""?a.push("/"):a.push(s);const o=i.replace("?","");s+="/"+o,a.push(s)}else s+="/"+i}),a.filter((i,o,r)=>r.indexOf(i)===o)},_e=e=>/[%+]/.test(e)?(e.indexOf("+")!==-1&&(e=e.replace(/\+/g," ")),e.indexOf("%")!==-1?Ke(e,$t):e):e,Nt=(e,t,a)=>{let s;if(!a&&t&&!/[%+]/.test(t)){let r=e.indexOf(`?${t}`,8);for(r===-1&&(r=e.indexOf(`&${t}`,8));r!==-1;){const d=e.charCodeAt(r+t.length+1);if(d===61){const n=r+t.length+2,c=e.indexOf("&",n);return _e(e.slice(n,c===-1?void 0:c))}else if(d==38||isNaN(d))return"";r=e.indexOf(`&${t}`,r+1)}if(s=/[%+]/.test(e),!s)return}const i={};s??(s=/[%+]/.test(e));let o=e.indexOf("?",8);for(;o!==-1;){const r=e.indexOf("&",o+1);let d=e.indexOf("=",o);d>r&&r!==-1&&(d=-1);let n=e.slice(o+1,d===-1?r===-1?void 0:r:d);if(s&&(n=_e(n)),o=r,n==="")continue;let c;d===-1?c="":(c=e.slice(d+1,r===-1?void 0:r),s&&(c=_e(c))),a?(i[n]&&Array.isArray(i[n])||(i[n]=[]),i[n].push(c)):i[n]??(i[n]=c)}return t?i[t]:i},ya=Nt,wa=(e,t)=>Nt(e,t,!0),$t=decodeURIComponent,at=e=>Ke(e,$t),ge,T,q,Ft,qt,We,G,Pt,Bt=(Pt=class{constructor(e,t="/",a=[[]]){b(this,q);x(this,"raw");b(this,ge);b(this,T);x(this,"routeIndex",0);x(this,"path");x(this,"bodyCache",{});b(this,G,e=>{const{bodyCache:t,raw:a}=this,s=t[e];if(s)return s;const i=Object.keys(t)[0];return i?t[i].then(o=>(i==="json"&&(o=JSON.stringify(o)),new Response(o)[e]())):t[e]=a[e]()});this.raw=e,this.path=t,g(this,T,a),g(this,ge,{})}param(e){return e?v(this,q,Ft).call(this,e):v(this,q,qt).call(this)}query(e){return ya(this.url,e)}queries(e){return wa(this.url,e)}header(e){if(e)return this.raw.headers.get(e)??void 0;const t={};return this.raw.headers.forEach((a,s)=>{t[s]=a}),t}async parseBody(e){var t;return(t=this.bodyCache).parsedBody??(t.parsedBody=await da(this,e))}json(){return l(this,G).call(this,"text").then(e=>JSON.parse(e))}text(){return l(this,G).call(this,"text")}arrayBuffer(){return l(this,G).call(this,"arrayBuffer")}blob(){return l(this,G).call(this,"blob")}formData(){return l(this,G).call(this,"formData")}addValidatedData(e,t){l(this,ge)[e]=t}valid(e){return l(this,ge)[e]}get url(){return this.raw.url}get method(){return this.raw.method}get[la](){return l(this,T)}get matchedRoutes(){return l(this,T)[0].map(([[,e]])=>e)}get routePath(){return l(this,T)[0].map(([[,e]])=>e)[this.routeIndex].path}},ge=new WeakMap,T=new WeakMap,q=new WeakSet,Ft=function(e){const t=l(this,T)[0][this.routeIndex][1][e],a=v(this,q,We).call(this,t);return a?/\%/.test(a)?at(a):a:void 0},qt=function(){const e={},t=Object.keys(l(this,T)[0][this.routeIndex][1]);for(const a of t){const s=v(this,q,We).call(this,l(this,T)[0][this.routeIndex][1][a]);s&&typeof s=="string"&&(e[a]=/\%/.test(s)?at(s):s)}return e},We=function(e){return l(this,T)[1]?l(this,T)[1][e]:e},G=new WeakMap,Pt),Ht={Stringify:1},me=(e,t)=>{const a=new String(e);return a.isEscaped=!0,a.callbacks=t,a},Ca=/[&<>'"]/,Aa=async(e,t)=>{let a="";t||(t=[]);const s=await Promise.all(e);for(let i=s.length-1;a+=s[i],i--,!(i<0);i--){let o=s[i];typeof o=="object"&&t.push(...o.callbacks||[]);const r=o.isEscaped;if(o=await(typeof o=="object"?o.toString():o),typeof o=="object"&&t.push(...o.callbacks||[]),o.isEscaped??r)a+=o;else{const d=[a];Qe(o,d),a=d[0]}}return me(a,t)},Qe=(e,t)=>{const a=e.search(Ca);if(a===-1){t[0]+=e;return}let s,i,o=0;for(i=a;i<e.length;i++){switch(e.charCodeAt(i)){case 34:s="&quot;";break;case 39:s="&#39;";break;case 38:s="&amp;";break;case 60:s="&lt;";break;case 62:s="&gt;";break;default:continue}t[0]+=e.substring(o,i)+s,o=i+1}t[0]+=e.substring(o,i)},Pa=e=>{const t=e.callbacks;if(!(t!=null&&t.length))return e;const a=[e],s={};return t.forEach(i=>i({phase:Ht.Stringify,buffer:a,context:s})),a[0]},Vt=async(e,t,a,s,i)=>{typeof e=="object"&&!(e instanceof String)&&(e instanceof Promise||(e=e.toString()),e instanceof Promise&&(e=await e));const o=e.callbacks;return o!=null&&o.length?(i?i[0]+=e:i=[e],Promise.all(o.map(d=>d({phase:t,buffer:i,context:s}))).then(d=>Promise.all(d.filter(Boolean).map(n=>Vt(n,t,!1,s,i))).then(()=>i[0]))):Promise.resolve(e)},ka="text/plain; charset=UTF-8",Je=(e,t)=>({"Content-Type":e,...t}),ke,Ie,N,xe,$,S,je,ue,be,X,Se,Ee,U,ce,kt,Ia=(kt=class{constructor(e,t){b(this,U);b(this,ke);b(this,Ie);x(this,"env",{});b(this,N);x(this,"finalized",!1);x(this,"error");b(this,xe);b(this,$);b(this,S);b(this,je);b(this,ue);b(this,be);b(this,X);b(this,Se);b(this,Ee);x(this,"render",(...e)=>(l(this,ue)??g(this,ue,t=>this.html(t)),l(this,ue).call(this,...e)));x(this,"setLayout",e=>g(this,je,e));x(this,"getLayout",()=>l(this,je));x(this,"setRenderer",e=>{g(this,ue,e)});x(this,"header",(e,t,a)=>{this.finalized&&g(this,S,new Response(l(this,S).body,l(this,S)));const s=l(this,S)?l(this,S).headers:l(this,X)??g(this,X,new Headers);t===void 0?s.delete(e):a!=null&&a.append?s.append(e,t):s.set(e,t)});x(this,"status",e=>{g(this,xe,e)});x(this,"set",(e,t)=>{l(this,N)??g(this,N,new Map),l(this,N).set(e,t)});x(this,"get",e=>l(this,N)?l(this,N).get(e):void 0);x(this,"newResponse",(...e)=>v(this,U,ce).call(this,...e));x(this,"body",(e,t,a)=>v(this,U,ce).call(this,e,t,a));x(this,"text",(e,t,a)=>!l(this,X)&&!l(this,xe)&&!t&&!a&&!this.finalized?new Response(e):v(this,U,ce).call(this,e,t,Je(ka,a)));x(this,"json",(e,t,a)=>v(this,U,ce).call(this,JSON.stringify(e),t,Je("application/json",a)));x(this,"html",(e,t,a)=>{const s=i=>v(this,U,ce).call(this,i,t,Je("text/html; charset=UTF-8",a));return typeof e=="object"?Vt(e,Ht.Stringify,!1,{}).then(s):s(e)});x(this,"redirect",(e,t)=>{const a=String(e);return this.header("Location",/[^\x00-\xFF]/.test(a)?encodeURI(a):a),this.newResponse(null,t??302)});x(this,"notFound",()=>(l(this,be)??g(this,be,()=>new Response),l(this,be).call(this,this)));g(this,ke,e),t&&(g(this,$,t.executionCtx),this.env=t.env,g(this,be,t.notFoundHandler),g(this,Ee,t.path),g(this,Se,t.matchResult))}get req(){return l(this,Ie)??g(this,Ie,new Bt(l(this,ke),l(this,Ee),l(this,Se))),l(this,Ie)}get event(){if(l(this,$)&&"respondWith"in l(this,$))return l(this,$);throw Error("This context has no FetchEvent")}get executionCtx(){if(l(this,$))return l(this,$);throw Error("This context has no ExecutionContext")}get res(){return l(this,S)||g(this,S,new Response(null,{headers:l(this,X)??g(this,X,new Headers)}))}set res(e){if(l(this,S)&&e){e=new Response(e.body,e);for(const[t,a]of l(this,S).headers.entries())if(t!=="content-type")if(t==="set-cookie"){const s=l(this,S).headers.getSetCookie();e.headers.delete("set-cookie");for(const i of s)e.headers.append("set-cookie",i)}else e.headers.set(t,a)}g(this,S,e),this.finalized=!0}get var(){return l(this,N)?Object.fromEntries(l(this,N)):{}}},ke=new WeakMap,Ie=new WeakMap,N=new WeakMap,xe=new WeakMap,$=new WeakMap,S=new WeakMap,je=new WeakMap,ue=new WeakMap,be=new WeakMap,X=new WeakMap,Se=new WeakMap,Ee=new WeakMap,U=new WeakSet,ce=function(e,t,a){const s=l(this,S)?new Headers(l(this,S).headers):l(this,X)??new Headers;if(typeof t=="object"&&"headers"in t){const o=t.headers instanceof Headers?t.headers:new Headers(t.headers);for(const[r,d]of o)r.toLowerCase()==="set-cookie"?s.append(r,d):s.set(r,d)}if(a)for(const[o,r]of Object.entries(a))if(typeof r=="string")s.set(o,r);else{s.delete(o);for(const d of r)s.append(o,d)}const i=typeof t=="number"?t:(t==null?void 0:t.status)??l(this,xe);return new Response(e,{status:i,headers:s})},kt),C="ALL",ja="all",Sa=["get","post","put","delete","options","patch"],zt="Can not add a route since the matcher is already built.",Gt=class extends Error{},Ea="__COMPOSED_HANDLER",Ta=e=>e.text("404 Not Found",404),st=(e,t)=>{if("getResponse"in e){const a=e.getResponse();return t.newResponse(a.body,a)}return console.error(e),t.text("Internal Server Error",500)},M,A,_t,R,K,Be,Fe,It,Ut=(It=class{constructor(t={}){b(this,A);x(this,"get");x(this,"post");x(this,"put");x(this,"delete");x(this,"options");x(this,"patch");x(this,"all");x(this,"on");x(this,"use");x(this,"router");x(this,"getPath");x(this,"_basePath","/");b(this,M,"/");x(this,"routes",[]);b(this,R,Ta);x(this,"errorHandler",st);x(this,"onError",t=>(this.errorHandler=t,this));x(this,"notFound",t=>(g(this,R,t),this));x(this,"fetch",(t,...a)=>v(this,A,Fe).call(this,t,a[1],a[0],t.method));x(this,"request",(t,a,s,i)=>t instanceof Request?this.fetch(a?new Request(t,a):t,s,i):(t=t.toString(),this.fetch(new Request(/^https?:\/\//.test(t)?t:`http://localhost${de("/",t)}`,a),s,i)));x(this,"fire",()=>{addEventListener("fetch",t=>{t.respondWith(v(this,A,Fe).call(this,t.request,t,void 0,t.request.method))})});[...Sa,ja].forEach(o=>{this[o]=(r,...d)=>(typeof r=="string"?g(this,M,r):v(this,A,K).call(this,o,l(this,M),r),d.forEach(n=>{v(this,A,K).call(this,o,l(this,M),n)}),this)}),this.on=(o,r,...d)=>{for(const n of[r].flat()){g(this,M,n);for(const c of[o].flat())d.map(p=>{v(this,A,K).call(this,c.toUpperCase(),l(this,M),p)})}return this},this.use=(o,...r)=>(typeof o=="string"?g(this,M,o):(g(this,M,"*"),r.unshift(o)),r.forEach(d=>{v(this,A,K).call(this,C,l(this,M),d)}),this);const{strict:s,...i}=t;Object.assign(this,i),this.getPath=s??!0?t.getPath??Dt:ha}route(t,a){const s=this.basePath(t);return a.routes.map(i=>{var r;let o;a.errorHandler===st?o=i.handler:(o=async(d,n)=>(await tt([],a.errorHandler)(d,()=>i.handler(d,n))).res,o[Ea]=i.handler),v(r=s,A,K).call(r,i.method,i.path,o)}),this}basePath(t){const a=v(this,A,_t).call(this);return a._basePath=de(this._basePath,t),a}mount(t,a,s){let i,o;s&&(typeof s=="function"?o=s:(o=s.optionHandler,s.replaceRequest===!1?i=n=>n:i=s.replaceRequest));const r=o?n=>{const c=o(n);return Array.isArray(c)?c:[c]}:n=>{let c;try{c=n.executionCtx}catch{}return[n.env,c]};i||(i=(()=>{const n=de(this._basePath,t),c=n==="/"?0:n.length;return p=>{const m=new URL(p.url);return m.pathname=m.pathname.slice(c)||"/",new Request(m,p)}})());const d=async(n,c)=>{const p=await a(i(n.req.raw),...r(n));if(p)return p;await c()};return v(this,A,K).call(this,C,de(t,"*"),d),this}},M=new WeakMap,A=new WeakSet,_t=function(){const t=new Ut({router:this.router,getPath:this.getPath});return t.errorHandler=this.errorHandler,g(t,R,l(this,R)),t.routes=this.routes,t},R=new WeakMap,K=function(t,a,s){t=t.toUpperCase(),a=de(this._basePath,a);const i={basePath:this._basePath,path:a,method:t,handler:s};this.router.add(t,a,[s,i]),this.routes.push(i)},Be=function(t,a){if(t instanceof Error)return this.errorHandler(t,a);throw t},Fe=function(t,a,s,i){if(i==="HEAD")return(async()=>new Response(null,await v(this,A,Fe).call(this,t,a,s,"GET")))();const o=this.getPath(t,{env:s}),r=this.router.match(i,o),d=new Ia(t,{path:o,matchResult:r,env:s,executionCtx:a,notFoundHandler:l(this,R)});if(r[0].length===1){let c;try{c=r[0][0][0][0](d,async()=>{d.res=await l(this,R).call(this,d)})}catch(p){return v(this,A,Be).call(this,p,d)}return c instanceof Promise?c.then(p=>p||(d.finalized?d.res:l(this,R).call(this,d))).catch(p=>v(this,A,Be).call(this,p,d)):c??l(this,R).call(this,d)}const n=tt(r[0],this.errorHandler,l(this,R));return(async()=>{try{const c=await n(d);if(!c.finalized)throw new Error("Context is not finalized. Did you forget to return a Response object or `await next()`?");return c.res}catch(c){return v(this,A,Be).call(this,c,d)}})()},It),He="[^/]+",Ae=".*",Pe="(?:|/.*)",pe=Symbol(),Ma=new Set(".\\+*[^]$()");function Ra(e,t){return e.length===1?t.length===1?e<t?-1:1:-1:t.length===1||e===Ae||e===Pe?1:t===Ae||t===Pe?-1:e===He?1:t===He?-1:e.length===t.length?e<t?-1:1:t.length-e.length}var ee,te,L,jt,Ye=(jt=class{constructor(){b(this,ee);b(this,te);b(this,L,Object.create(null))}insert(t,a,s,i,o){if(t.length===0){if(l(this,ee)!==void 0)throw pe;if(o)return;g(this,ee,a);return}const[r,...d]=t,n=r==="*"?d.length===0?["","",Ae]:["","",He]:r==="/*"?["","",Pe]:r.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);let c;if(n){const p=n[1];let m=n[2]||He;if(p&&n[2]&&(m===".*"||(m=m.replace(/^\((?!\?:)(?=[^)]+\)$)/,"(?:"),/\((?!\?:)/.test(m))))throw pe;if(c=l(this,L)[m],!c){if(Object.keys(l(this,L)).some(u=>u!==Ae&&u!==Pe))throw pe;if(o)return;c=l(this,L)[m]=new Ye,p!==""&&g(c,te,i.varIndex++)}!o&&p!==""&&s.push([p,l(c,te)])}else if(c=l(this,L)[r],!c){if(Object.keys(l(this,L)).some(p=>p.length>1&&p!==Ae&&p!==Pe))throw pe;if(o)return;c=l(this,L)[r]=new Ye}c.insert(d,a,s,i,o)}buildRegExpStr(){const a=Object.keys(l(this,L)).sort(Ra).map(s=>{const i=l(this,L)[s];return(typeof l(i,te)=="number"?`(${s})@${l(i,te)}`:Ma.has(s)?`\\${s}`:s)+i.buildRegExpStr()});return typeof l(this,ee)=="number"&&a.unshift(`#${l(this,ee)}`),a.length===0?"":a.length===1?a[0]:"(?:"+a.join("|")+")"}},ee=new WeakMap,te=new WeakMap,L=new WeakMap,jt),Ve,Te,St,La=(St=class{constructor(){b(this,Ve,{varIndex:0});b(this,Te,new Ye)}insert(e,t,a){const s=[],i=[];for(let r=0;;){let d=!1;if(e=e.replace(/\{[^}]+\}/g,n=>{const c=`@\\${r}`;return i[r]=[c,n],r++,d=!0,c}),!d)break}const o=e.match(/(?::[^\/]+)|(?:\/\*$)|./g)||[];for(let r=i.length-1;r>=0;r--){const[d]=i[r];for(let n=o.length-1;n>=0;n--)if(o[n].indexOf(d)!==-1){o[n]=o[n].replace(d,i[r][1]);break}}return l(this,Te).insert(o,t,s,l(this,Ve),a),s}buildRegExp(){let e=l(this,Te).buildRegExpStr();if(e==="")return[/^$/,[],[]];let t=0;const a=[],s=[];return e=e.replace(/#(\d+)|@(\d+)|\.\*\$/g,(i,o,r)=>o!==void 0?(a[++t]=Number(o),"$()"):(r!==void 0&&(s[Number(r)]=++t),"")),[new RegExp(`^${e}`),a,s]}},Ve=new WeakMap,Te=new WeakMap,St),Jt=[],Da=[/^$/,[],Object.create(null)],qe=Object.create(null);function Wt(e){return qe[e]??(qe[e]=new RegExp(e==="*"?"":`^${e.replace(/\/\*$|([.\\+*[^\]$()])/g,(t,a)=>a?`\\${a}`:"(?:|/.*)")}$`))}function Oa(){qe=Object.create(null)}function Na(e){var c;const t=new La,a=[];if(e.length===0)return Da;const s=e.map(p=>[!/\*|\/:/.test(p[0]),...p]).sort(([p,m],[u,w])=>p?1:u?-1:m.length-w.length),i=Object.create(null);for(let p=0,m=-1,u=s.length;p<u;p++){const[w,E,h]=s[p];w?i[E]=[h.map(([j])=>[j,Object.create(null)]),Jt]:m++;let y;try{y=t.insert(E,m,w)}catch(j){throw j===pe?new Gt(E):j}w||(a[m]=h.map(([j,ne])=>{const ye=Object.create(null);for(ne-=1;ne>=0;ne--){const[D,ze]=y[ne];ye[D]=ze}return[j,ye]}))}const[o,r,d]=t.buildRegExp();for(let p=0,m=a.length;p<m;p++)for(let u=0,w=a[p].length;u<w;u++){const E=(c=a[p][u])==null?void 0:c[1];if(!E)continue;const h=Object.keys(E);for(let y=0,j=h.length;y<j;y++)E[h[y]]=d[E[h[y]]]}const n=[];for(const p in r)n[p]=a[r[p]];return[o,n,i]}function le(e,t){if(e){for(const a of Object.keys(e).sort((s,i)=>i.length-s.length))if(Wt(a).test(t))return[...e[a]]}}var _,J,ve,Qt,Yt,Et,$a=(Et=class{constructor(){b(this,ve);x(this,"name","RegExpRouter");b(this,_);b(this,J);g(this,_,{[C]:Object.create(null)}),g(this,J,{[C]:Object.create(null)})}add(e,t,a){var d;const s=l(this,_),i=l(this,J);if(!s||!i)throw new Error(zt);s[e]||[s,i].forEach(n=>{n[e]=Object.create(null),Object.keys(n[C]).forEach(c=>{n[e][c]=[...n[C][c]]})}),t==="/*"&&(t="*");const o=(t.match(/\/:/g)||[]).length;if(/\*$/.test(t)){const n=Wt(t);e===C?Object.keys(s).forEach(c=>{var p;(p=s[c])[t]||(p[t]=le(s[c],t)||le(s[C],t)||[])}):(d=s[e])[t]||(d[t]=le(s[e],t)||le(s[C],t)||[]),Object.keys(s).forEach(c=>{(e===C||e===c)&&Object.keys(s[c]).forEach(p=>{n.test(p)&&s[c][p].push([a,o])})}),Object.keys(i).forEach(c=>{(e===C||e===c)&&Object.keys(i[c]).forEach(p=>n.test(p)&&i[c][p].push([a,o]))});return}const r=Ot(t)||[t];for(let n=0,c=r.length;n<c;n++){const p=r[n];Object.keys(i).forEach(m=>{var u;(e===C||e===m)&&((u=i[m])[p]||(u[p]=[...le(s[m],p)||le(s[C],p)||[]]),i[m][p].push([a,o-c+n+1]))})}}match(e,t){Oa();const a=v(this,ve,Qt).call(this);return this.match=(s,i)=>{const o=a[s]||a[C],r=o[2][i];if(r)return r;const d=i.match(o[0]);if(!d)return[[],Jt];const n=d.indexOf("",1);return[o[1][n],d]},this.match(e,t)}},_=new WeakMap,J=new WeakMap,ve=new WeakSet,Qt=function(){const e=Object.create(null);return Object.keys(l(this,J)).concat(Object.keys(l(this,_))).forEach(t=>{e[t]||(e[t]=v(this,ve,Yt).call(this,t))}),g(this,_,g(this,J,void 0)),e},Yt=function(e){const t=[];let a=e===C;return[l(this,_),l(this,J)].forEach(s=>{const i=s[e]?Object.keys(s[e]).map(o=>[o,s[e][o]]):[];i.length!==0?(a||(a=!0),t.push(...i)):e!==C&&t.push(...Object.keys(s[C]).map(o=>[o,s[C][o]]))}),a?Na(t):null},Et),W,B,Tt,Ba=(Tt=class{constructor(e){x(this,"name","SmartRouter");b(this,W,[]);b(this,B,[]);g(this,W,e.routers)}add(e,t,a){if(!l(this,B))throw new Error(zt);l(this,B).push([e,t,a])}match(e,t){if(!l(this,B))throw new Error("Fatal error");const a=l(this,W),s=l(this,B),i=a.length;let o=0,r;for(;o<i;o++){const d=a[o];try{for(let n=0,c=s.length;n<c;n++)d.add(...s[n]);r=d.match(e,t)}catch(n){if(n instanceof Gt)continue;throw n}this.match=d.match.bind(d),g(this,W,[d]),g(this,B,void 0);break}if(o===i)throw new Error("Fatal error");return this.name=`SmartRouter + ${this.activeRouter.name}`,r}get activeRouter(){if(l(this,B)||l(this,W).length!==1)throw new Error("No active router has been determined yet.");return l(this,W)[0]}},W=new WeakMap,B=new WeakMap,Tt),Ce=Object.create(null),Q,I,ae,fe,P,F,Z,Mt,Kt=(Mt=class{constructor(e,t,a){b(this,F);b(this,Q);b(this,I);b(this,ae);b(this,fe,0);b(this,P,Ce);if(g(this,I,a||Object.create(null)),g(this,Q,[]),e&&t){const s=Object.create(null);s[e]={handler:t,possibleKeys:[],score:0},g(this,Q,[s])}g(this,ae,[])}insert(e,t,a){g(this,fe,++et(this,fe)._);let s=this;const i=xa(t),o=[];for(let r=0,d=i.length;r<d;r++){const n=i[r],c=i[r+1],p=fa(n,c),m=Array.isArray(p)?p[0]:n;if(m in l(s,I)){s=l(s,I)[m],p&&o.push(p[1]);continue}l(s,I)[m]=new Kt,p&&(l(s,ae).push(p),o.push(p[1])),s=l(s,I)[m]}return l(s,Q).push({[e]:{handler:a,possibleKeys:o.filter((r,d,n)=>n.indexOf(r)===d),score:l(this,fe)}}),s}search(e,t){var d;const a=[];g(this,P,Ce);let i=[this];const o=Lt(t),r=[];for(let n=0,c=o.length;n<c;n++){const p=o[n],m=n===c-1,u=[];for(let w=0,E=i.length;w<E;w++){const h=i[w],y=l(h,I)[p];y&&(g(y,P,l(h,P)),m?(l(y,I)["*"]&&a.push(...v(this,F,Z).call(this,l(y,I)["*"],e,l(h,P))),a.push(...v(this,F,Z).call(this,y,e,l(h,P)))):u.push(y));for(let j=0,ne=l(h,ae).length;j<ne;j++){const ye=l(h,ae)[j],D=l(h,P)===Ce?{}:{...l(h,P)};if(ye==="*"){const z=l(h,I)["*"];z&&(a.push(...v(this,F,Z).call(this,z,e,l(h,P))),g(z,P,D),u.push(z));continue}const[ze,Ze,we]=ye;if(!p&&!(we instanceof RegExp))continue;const O=l(h,I)[ze],oa=o.slice(n).join("/");if(we instanceof RegExp){const z=we.exec(oa);if(z){if(D[Ze]=z[0],a.push(...v(this,F,Z).call(this,O,e,l(h,P),D)),Object.keys(l(O,I)).length){g(O,P,D);const Ge=((d=z[0].match(/\//))==null?void 0:d.length)??0;(r[Ge]||(r[Ge]=[])).push(O)}continue}}(we===!0||we.test(p))&&(D[Ze]=p,m?(a.push(...v(this,F,Z).call(this,O,e,D,l(h,P))),l(O,I)["*"]&&a.push(...v(this,F,Z).call(this,l(O,I)["*"],e,D,l(h,P)))):(g(O,P,D),u.push(O)))}}i=u.concat(r.shift()??[])}return a.length>1&&a.sort((n,c)=>n.score-c.score),[a.map(({handler:n,params:c})=>[n,c])]}},Q=new WeakMap,I=new WeakMap,ae=new WeakMap,fe=new WeakMap,P=new WeakMap,F=new WeakSet,Z=function(e,t,a,s){const i=[];for(let o=0,r=l(e,Q).length;o<r;o++){const d=l(e,Q)[o],n=d[t]||d[C],c={};if(n!==void 0&&(n.params=Object.create(null),i.push(n),a!==Ce||s&&s!==Ce))for(let p=0,m=n.possibleKeys.length;p<m;p++){const u=n.possibleKeys[p],w=c[n.score];n.params[u]=s!=null&&s[u]&&!w?s[u]:a[u]??(s==null?void 0:s[u]),c[n.score]=!0}}return i},Mt),se,Rt,Fa=(Rt=class{constructor(){x(this,"name","TrieRouter");b(this,se);g(this,se,new Kt)}add(e,t,a){const s=Ot(t);if(s){for(let i=0,o=s.length;i<o;i++)l(this,se).insert(e,s[i],a);return}l(this,se).insert(e,t,a)}match(e,t){return l(this,se).search(e,t)}},se=new WeakMap,Rt),k=class extends Ut{constructor(e={}){super(e),this.router=e.router??new Ba({routers:[new $a,new Fa]})}},qa=e=>{const a={...{origin:"*",allowMethods:["GET","HEAD","PUT","POST","DELETE","PATCH"],allowHeaders:[],exposeHeaders:[]},...e},s=(o=>typeof o=="string"?o==="*"?()=>o:r=>o===r?r:null:typeof o=="function"?o:r=>o.includes(r)?r:null)(a.origin),i=(o=>typeof o=="function"?o:Array.isArray(o)?()=>o:()=>[])(a.allowMethods);return async function(r,d){var p;function n(m,u){r.res.headers.set(m,u)}const c=await s(r.req.header("origin")||"",r);if(c&&n("Access-Control-Allow-Origin",c),a.origin!=="*"){const m=r.req.header("Vary");m?n("Vary",m):n("Vary","Origin")}if(a.credentials&&n("Access-Control-Allow-Credentials","true"),(p=a.exposeHeaders)!=null&&p.length&&n("Access-Control-Expose-Headers",a.exposeHeaders.join(",")),r.req.method==="OPTIONS"){a.maxAge!=null&&n("Access-Control-Max-Age",a.maxAge.toString());const m=await i(r.req.header("origin")||"",r);m.length&&n("Access-Control-Allow-Methods",m.join(","));let u=a.allowHeaders;if(!(u!=null&&u.length)){const w=r.req.header("Access-Control-Request-Headers");w&&(u=w.split(/\s*,\s*/))}return u!=null&&u.length&&(n("Access-Control-Allow-Headers",u.join(",")),r.res.headers.append("Vary","Access-Control-Request-Headers")),r.res.headers.delete("Content-Length"),r.res.headers.delete("Content-Type"),new Response(null,{headers:r.res.headers,status:204,statusText:"No Content"})}await d()}},Ha=/^\s*(?:text\/(?!event-stream(?:[;\s]|$))[^;\s]+|application\/(?:javascript|json|xml|xml-dtd|ecmascript|dart|postscript|rtf|tar|toml|vnd\.dart|vnd\.ms-fontobject|vnd\.ms-opentype|wasm|x-httpd-php|x-javascript|x-ns-proxy-autoconfig|x-sh|x-tar|x-virtualbox-hdd|x-virtualbox-ova|x-virtualbox-ovf|x-virtualbox-vbox|x-virtualbox-vdi|x-virtualbox-vhd|x-virtualbox-vmdk|x-www-form-urlencoded)|font\/(?:otf|ttf)|image\/(?:bmp|vnd\.adobe\.photoshop|vnd\.microsoft\.icon|vnd\.ms-dds|x-icon|x-ms-bmp)|message\/rfc822|model\/gltf-binary|x-shader\/x-fragment|x-shader\/x-vertex|[^;\s]+?\+(?:json|text|xml|yaml))(?:[;\s]|$)/i,it=(e,t=za)=>{const a=/\.([a-zA-Z0-9]+?)$/,s=e.match(a);if(!s)return;let i=t[s[1]];return i&&i.startsWith("text")&&(i+="; charset=utf-8"),i},Va={aac:"audio/aac",avi:"video/x-msvideo",avif:"image/avif",av1:"video/av1",bin:"application/octet-stream",bmp:"image/bmp",css:"text/css",csv:"text/csv",eot:"application/vnd.ms-fontobject",epub:"application/epub+zip",gif:"image/gif",gz:"application/gzip",htm:"text/html",html:"text/html",ico:"image/x-icon",ics:"text/calendar",jpeg:"image/jpeg",jpg:"image/jpeg",js:"text/javascript",json:"application/json",jsonld:"application/ld+json",map:"application/json",mid:"audio/x-midi",midi:"audio/x-midi",mjs:"text/javascript",mp3:"audio/mpeg",mp4:"video/mp4",mpeg:"video/mpeg",oga:"audio/ogg",ogv:"video/ogg",ogx:"application/ogg",opus:"audio/opus",otf:"font/otf",pdf:"application/pdf",png:"image/png",rtf:"application/rtf",svg:"image/svg+xml",tif:"image/tiff",tiff:"image/tiff",ts:"video/mp2t",ttf:"font/ttf",txt:"text/plain",wasm:"application/wasm",webm:"video/webm",weba:"audio/webm",webmanifest:"application/manifest+json",webp:"image/webp",woff:"font/woff",woff2:"font/woff2",xhtml:"application/xhtml+xml",xml:"application/xml",zip:"application/zip","3gp":"video/3gpp","3g2":"video/3gpp2",gltf:"model/gltf+json",glb:"model/gltf-binary"},za=Va,Ga=(...e)=>{let t=e.filter(i=>i!=="").join("/");t=t.replace(new RegExp("(?<=\\/)\\/+","g"),"");const a=t.split("/"),s=[];for(const i of a)i===".."&&s.length>0&&s.at(-1)!==".."?s.pop():i!=="."&&s.push(i);return s.join("/")||"."},Zt={br:".br",zstd:".zst",gzip:".gz"},Ua=Object.keys(Zt),_a="index.html",Ja=e=>{const t=e.root??"./",a=e.path,s=e.join??Ga;return async(i,o)=>{var p,m,u,w;if(i.finalized)return o();let r;if(e.path)r=e.path;else try{if(r=decodeURIComponent(i.req.path),/(?:^|[\/\\])\.\.(?:$|[\/\\])/.test(r))throw new Error}catch{return await((p=e.onNotFound)==null?void 0:p.call(e,i.req.path,i)),o()}let d=s(t,!a&&e.rewriteRequestPath?e.rewriteRequestPath(r):r);e.isDir&&await e.isDir(d)&&(d=s(d,_a));const n=e.getContent;let c=await n(d,i);if(c instanceof Response)return i.newResponse(c.body,c);if(c){const E=e.mimes&&it(d,e.mimes)||it(d);if(i.header("Content-Type",E||"application/octet-stream"),e.precompressed&&(!E||Ha.test(E))){const h=new Set((m=i.req.header("Accept-Encoding"))==null?void 0:m.split(",").map(y=>y.trim()));for(const y of Ua){if(!h.has(y))continue;const j=await n(d+Zt[y],i);if(j){c=j,i.header("Content-Encoding",y),i.header("Vary","Accept-Encoding",{append:!0});break}}}return await((u=e.onFound)==null?void 0:u.call(e,d,i)),i.body(c)}await((w=e.onNotFound)==null?void 0:w.call(e,d,i)),await o()}},Wa=async(e,t)=>{let a;t&&t.manifest?typeof t.manifest=="string"?a=JSON.parse(t.manifest):a=t.manifest:typeof __STATIC_CONTENT_MANIFEST=="string"?a=JSON.parse(__STATIC_CONTENT_MANIFEST):a=__STATIC_CONTENT_MANIFEST;let s;t&&t.namespace?s=t.namespace:s=__STATIC_CONTENT;const i=a[e]||e;if(!i)return null;const o=await s.get(i,{type:"stream"});return o||null},Qa=e=>async function(a,s){return Ja({...e,getContent:async o=>Wa(o,{manifest:e.manifest,namespace:e.namespace?e.namespace:a.env?a.env.__STATIC_CONTENT:void 0})})(a,s)},Xt=e=>Qa(e),H=(e,...t)=>{const a=[""];for(let s=0,i=e.length-1;s<i;s++){a[0]+=e[s];const o=Array.isArray(t[s])?t[s].flat(1/0):[t[s]];for(let r=0,d=o.length;r<d;r++){const n=o[r];if(typeof n=="string")Qe(n,a);else if(typeof n=="number")a[0]+=n;else{if(typeof n=="boolean"||n===null||n===void 0)continue;if(typeof n=="object"&&n.isEscaped)if(n.callbacks)a.unshift("",n);else{const c=n.toString();c instanceof Promise?a.unshift("",c):a[0]+=c}else n instanceof Promise?a.unshift("",n):Qe(n.toString(),a)}}}return a[0]+=e.at(-1),a.length===1?"callbacks"in a?me(Pa(me(a[0],a.callbacks))):me(a[0]):Aa(a,a.callbacks)};const Me=new k;Me.get("/profile/:id",async e=>{const t=e.req.param("id");return e.json({id:t,name:"João Silva",diagnosis:"Em tratamento",nextAppointment:"2024-02-15",treatmentStage:"Quimioterapia"})});Me.post("/symptoms",async e=>(await e.req.json(),e.json({success:!0,message:"Sintomas registrados com sucesso",aiRecommendation:"Monitoramento contínuo recomendado"})));Me.get("/journey/:id",async e=>{const t=e.req.param("id");return e.json({patientId:t,stages:[{date:"2024-01-01",event:"Diagnóstico inicial",status:"completed"},{date:"2024-01-15",event:"Início do tratamento",status:"completed"},{date:"2024-02-01",event:"Primeira sessão de quimioterapia",status:"in-progress"},{date:"2024-03-01",event:"Avaliação de resposta",status:"pending"}]})});Me.post("/triage",async e=>{const t=await e.req.json(),{symptoms:a,age:s,gender:i,history:o}=t,r=a.includes("dor intensa")?"high":"medium";return e.json({urgencyLevel:r,recommendation:r==="high"?"Procure atendimento médico imediato":"Agende uma consulta com seu médico",suggestedSpecialty:"Oncologia",estimatedWaitTime:r==="high"?"0-2 horas":"1-3 dias"})});const Re=new k;Re.get("/patients",async e=>e.json({patients:[{id:"1",name:"João Silva",age:55,diagnosis:"Câncer de Pulmão",stage:"IIIa",lastVisit:"2024-01-28",nextAppointment:"2024-02-15",riskScore:.7,alertLevel:"medium"},{id:"2",name:"Maria Santos",age:42,diagnosis:"Câncer de Mama",stage:"IIb",lastVisit:"2024-01-25",nextAppointment:"2024-02-10",riskScore:.4,alertLevel:"low"}]}));Re.post("/ai-assistant",async e=>{const t=await e.req.json(),{query:a,patientContext:s,type:i}=t;let o="";return i==="treatment-recommendation"?o=`Baseado no perfil do paciente e diretrizes atuais:
+var ls=Object.defineProperty;var et=e=>{throw TypeError(e)};var ds=(e,t,s)=>t in e?ls(e,t,{enumerable:!0,configurable:!0,writable:!0,value:s}):e[t]=s;var x=(e,t,s)=>ds(e,typeof t!="symbol"?t+"":t,s),_e=(e,t,s)=>t.has(e)||et("Cannot "+s);var l=(e,t,s)=>(_e(e,t,"read from private field"),s?s.call(e):t.get(e)),b=(e,t,s)=>t.has(e)?et("Cannot add the same private member more than once"):t instanceof WeakSet?t.add(e):t.set(e,s),g=(e,t,s,a)=>(_e(e,t,"write to private field"),a?a.call(e,s):t.set(e,s),s),v=(e,t,s)=>(_e(e,t,"access private method"),s);var tt=(e,t,s,a)=>({set _(i){g(e,t,i,s)},get _(){return l(e,t,a)}});var st=(e,t,s)=>(a,i)=>{let o=-1;return r(0);async function r(d){if(d<=o)throw new Error("next() called multiple times");o=d;let n,c=!1,p;if(e[d]?(p=e[d][0][0],a.req.routeIndex=d):p=d===e.length&&i||void 0,p)try{n=await p(a,()=>r(d+1))}catch(m){if(m instanceof Error&&t)a.error=m,n=await t(m,a),c=!0;else throw m}else a.finalized===!1&&s&&(n=await s(a));return n&&(a.finalized===!1||c)&&(a.res=n),a}},cs=Symbol(),ps=async(e,t=Object.create(null))=>{const{all:s=!1,dot:a=!1}=t,o=(e instanceof $t?e.raw.headers:e.headers).get("Content-Type");return o!=null&&o.startsWith("multipart/form-data")||o!=null&&o.startsWith("application/x-www-form-urlencoded")?ms(e,{all:s,dot:a}):{}};async function ms(e,t){const s=await e.formData();return s?gs(s,t):{}}function gs(e,t){const s=Object.create(null);return e.forEach((a,i)=>{t.all||i.endsWith("[]")?xs(s,i,a):s[i]=a}),t.dot&&Object.entries(s).forEach(([a,i])=>{a.includes(".")&&(us(s,a,i),delete s[a])}),s}var xs=(e,t,s)=>{e[t]!==void 0?Array.isArray(e[t])?e[t].push(s):e[t]=[e[t],s]:t.endsWith("[]")?e[t]=[s]:e[t]=s},us=(e,t,s)=>{let a=e;const i=t.split(".");i.forEach((o,r)=>{r===i.length-1?a[o]=s:((!a[o]||typeof a[o]!="object"||Array.isArray(a[o])||a[o]instanceof File)&&(a[o]=Object.create(null)),a=a[o])})},Lt=e=>{const t=e.split("/");return t[0]===""&&t.shift(),t},bs=e=>{const{groups:t,path:s}=fs(e),a=Lt(s);return vs(a,t)},fs=e=>{const t=[];return e=e.replace(/\{[^}]+\}/g,(s,a)=>{const i=`@${a}`;return t.push([i,s]),i}),{groups:t,path:e}},vs=(e,t)=>{for(let s=t.length-1;s>=0;s--){const[a]=t[s];for(let i=e.length-1;i>=0;i--)if(e[i].includes(a)){e[i]=e[i].replace(a,t[s][1]);break}}return e},Be={},hs=(e,t)=>{if(e==="*")return"*";const s=e.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);if(s){const a=`${e}#${t}`;return Be[a]||(s[2]?Be[a]=t&&t[0]!==":"&&t[0]!=="*"?[a,s[1],new RegExp(`^${s[2]}(?=/${t})`)]:[e,s[1],new RegExp(`^${s[2]}$`)]:Be[a]=[e,s[1],!0]),Be[a]}return null},Ze=(e,t)=>{try{return t(e)}catch{return e.replace(/(?:%[0-9A-Fa-f]{2})+/g,s=>{try{return t(s)}catch{return s}})}},ys=e=>Ze(e,decodeURI),Nt=e=>{const t=e.url,s=t.indexOf("/",t.indexOf(":")+4);let a=s;for(;a<t.length;a++){const i=t.charCodeAt(a);if(i===37){const o=t.indexOf("?",a),r=t.slice(s,o===-1?void 0:o);return ys(r.includes("%25")?r.replace(/%25/g,"%2525"):r)}else if(i===63)break}return t.slice(s,a)},ws=e=>{const t=Nt(e);return t.length>1&&t.at(-1)==="/"?t.slice(0,-1):t},ce=(e,t,...s)=>(s.length&&(t=ce(t,...s)),`${(e==null?void 0:e[0])==="/"?"":"/"}${e}${t==="/"?"":`${(e==null?void 0:e.at(-1))==="/"?"":"/"}${(t==null?void 0:t[0])==="/"?t.slice(1):t}`}`),Ot=e=>{if(e.charCodeAt(e.length-1)!==63||!e.includes(":"))return null;const t=e.split("/"),s=[];let a="";return t.forEach(i=>{if(i!==""&&!/\:/.test(i))a+="/"+i;else if(/\:/.test(i))if(/\?/.test(i)){s.length===0&&a===""?s.push("/"):s.push(a);const o=i.replace("?","");a+="/"+o,s.push(a)}else a+="/"+i}),s.filter((i,o,r)=>r.indexOf(i)===o)},Je=e=>/[%+]/.test(e)?(e.indexOf("+")!==-1&&(e=e.replace(/\+/g," ")),e.indexOf("%")!==-1?Ze(e,Bt):e):e,Ft=(e,t,s)=>{let a;if(!s&&t&&!/[%+]/.test(t)){let r=e.indexOf(`?${t}`,8);for(r===-1&&(r=e.indexOf(`&${t}`,8));r!==-1;){const d=e.charCodeAt(r+t.length+1);if(d===61){const n=r+t.length+2,c=e.indexOf("&",n);return Je(e.slice(n,c===-1?void 0:c))}else if(d==38||isNaN(d))return"";r=e.indexOf(`&${t}`,r+1)}if(a=/[%+]/.test(e),!a)return}const i={};a??(a=/[%+]/.test(e));let o=e.indexOf("?",8);for(;o!==-1;){const r=e.indexOf("&",o+1);let d=e.indexOf("=",o);d>r&&r!==-1&&(d=-1);let n=e.slice(o+1,d===-1?r===-1?void 0:r:d);if(a&&(n=Je(n)),o=r,n==="")continue;let c;d===-1?c="":(c=e.slice(d+1,r===-1?void 0:r),a&&(c=Je(c))),s?(i[n]&&Array.isArray(i[n])||(i[n]=[]),i[n].push(c)):i[n]??(i[n]=c)}return t?i[t]:i},Cs=Ft,As=(e,t)=>Ft(e,t,!0),Bt=decodeURIComponent,at=e=>Ze(e,Bt),xe,T,q,qt,Ht,We,G,kt,$t=(kt=class{constructor(e,t="/",s=[[]]){b(this,q);x(this,"raw");b(this,xe);b(this,T);x(this,"routeIndex",0);x(this,"path");x(this,"bodyCache",{});b(this,G,e=>{const{bodyCache:t,raw:s}=this,a=t[e];if(a)return a;const i=Object.keys(t)[0];return i?t[i].then(o=>(i==="json"&&(o=JSON.stringify(o)),new Response(o)[e]())):t[e]=s[e]()});this.raw=e,this.path=t,g(this,T,s),g(this,xe,{})}param(e){return e?v(this,q,qt).call(this,e):v(this,q,Ht).call(this)}query(e){return Cs(this.url,e)}queries(e){return As(this.url,e)}header(e){if(e)return this.raw.headers.get(e)??void 0;const t={};return this.raw.headers.forEach((s,a)=>{t[a]=s}),t}async parseBody(e){var t;return(t=this.bodyCache).parsedBody??(t.parsedBody=await ps(this,e))}json(){return l(this,G).call(this,"text").then(e=>JSON.parse(e))}text(){return l(this,G).call(this,"text")}arrayBuffer(){return l(this,G).call(this,"arrayBuffer")}blob(){return l(this,G).call(this,"blob")}formData(){return l(this,G).call(this,"formData")}addValidatedData(e,t){l(this,xe)[e]=t}valid(e){return l(this,xe)[e]}get url(){return this.raw.url}get method(){return this.raw.method}get[cs](){return l(this,T)}get matchedRoutes(){return l(this,T)[0].map(([[,e]])=>e)}get routePath(){return l(this,T)[0].map(([[,e]])=>e)[this.routeIndex].path}},xe=new WeakMap,T=new WeakMap,q=new WeakSet,qt=function(e){const t=l(this,T)[0][this.routeIndex][1][e],s=v(this,q,We).call(this,t);return s?/\%/.test(s)?at(s):s:void 0},Ht=function(){const e={},t=Object.keys(l(this,T)[0][this.routeIndex][1]);for(const s of t){const a=v(this,q,We).call(this,l(this,T)[0][this.routeIndex][1][s]);a&&typeof a=="string"&&(e[s]=/\%/.test(a)?at(a):a)}return e},We=function(e){return l(this,T)[1]?l(this,T)[1][e]:e},G=new WeakMap,kt),Vt={Stringify:1},ge=(e,t)=>{const s=new String(e);return s.isEscaped=!0,s.callbacks=t,s},Ps=/[&<>'"]/,ks=async(e,t)=>{let s="";t||(t=[]);const a=await Promise.all(e);for(let i=a.length-1;s+=a[i],i--,!(i<0);i--){let o=a[i];typeof o=="object"&&t.push(...o.callbacks||[]);const r=o.isEscaped;if(o=await(typeof o=="object"?o.toString():o),typeof o=="object"&&t.push(...o.callbacks||[]),o.isEscaped??r)s+=o;else{const d=[s];Qe(o,d),s=d[0]}}return ge(s,t)},Qe=(e,t)=>{const s=e.search(Ps);if(s===-1){t[0]+=e;return}let a,i,o=0;for(i=s;i<e.length;i++){switch(e.charCodeAt(i)){case 34:a="&quot;";break;case 39:a="&#39;";break;case 38:a="&amp;";break;case 60:a="&lt;";break;case 62:a="&gt;";break;default:continue}t[0]+=e.substring(o,i)+a,o=i+1}t[0]+=e.substring(o,i)},Is=e=>{const t=e.callbacks;if(!(t!=null&&t.length))return e;const s=[e],a={};return t.forEach(i=>i({phase:Vt.Stringify,buffer:s,context:a})),s[0]},zt=async(e,t,s,a,i)=>{typeof e=="object"&&!(e instanceof String)&&(e instanceof Promise||(e=e.toString()),e instanceof Promise&&(e=await e));const o=e.callbacks;return o!=null&&o.length?(i?i[0]+=e:i=[e],Promise.all(o.map(d=>d({phase:t,buffer:i,context:a}))).then(d=>Promise.all(d.filter(Boolean).map(n=>zt(n,t,!1,a,i))).then(()=>i[0]))):Promise.resolve(e)},js="text/plain; charset=UTF-8",Ye=(e,t)=>({"Content-Type":e,...t}),Ie,je,O,ue,F,E,Ee,be,fe,ee,Se,Te,U,pe,It,Es=(It=class{constructor(e,t){b(this,U);b(this,Ie);b(this,je);x(this,"env",{});b(this,O);x(this,"finalized",!1);x(this,"error");b(this,ue);b(this,F);b(this,E);b(this,Ee);b(this,be);b(this,fe);b(this,ee);b(this,Se);b(this,Te);x(this,"render",(...e)=>(l(this,be)??g(this,be,t=>this.html(t)),l(this,be).call(this,...e)));x(this,"setLayout",e=>g(this,Ee,e));x(this,"getLayout",()=>l(this,Ee));x(this,"setRenderer",e=>{g(this,be,e)});x(this,"header",(e,t,s)=>{this.finalized&&g(this,E,new Response(l(this,E).body,l(this,E)));const a=l(this,E)?l(this,E).headers:l(this,ee)??g(this,ee,new Headers);t===void 0?a.delete(e):s!=null&&s.append?a.append(e,t):a.set(e,t)});x(this,"status",e=>{g(this,ue,e)});x(this,"set",(e,t)=>{l(this,O)??g(this,O,new Map),l(this,O).set(e,t)});x(this,"get",e=>l(this,O)?l(this,O).get(e):void 0);x(this,"newResponse",(...e)=>v(this,U,pe).call(this,...e));x(this,"body",(e,t,s)=>v(this,U,pe).call(this,e,t,s));x(this,"text",(e,t,s)=>!l(this,ee)&&!l(this,ue)&&!t&&!s&&!this.finalized?new Response(e):v(this,U,pe).call(this,e,t,Ye(js,s)));x(this,"json",(e,t,s)=>v(this,U,pe).call(this,JSON.stringify(e),t,Ye("application/json",s)));x(this,"html",(e,t,s)=>{const a=i=>v(this,U,pe).call(this,i,t,Ye("text/html; charset=UTF-8",s));return typeof e=="object"?zt(e,Vt.Stringify,!1,{}).then(a):a(e)});x(this,"redirect",(e,t)=>{const s=String(e);return this.header("Location",/[^\x00-\xFF]/.test(s)?encodeURI(s):s),this.newResponse(null,t??302)});x(this,"notFound",()=>(l(this,fe)??g(this,fe,()=>new Response),l(this,fe).call(this,this)));g(this,Ie,e),t&&(g(this,F,t.executionCtx),this.env=t.env,g(this,fe,t.notFoundHandler),g(this,Te,t.path),g(this,Se,t.matchResult))}get req(){return l(this,je)??g(this,je,new $t(l(this,Ie),l(this,Te),l(this,Se))),l(this,je)}get event(){if(l(this,F)&&"respondWith"in l(this,F))return l(this,F);throw Error("This context has no FetchEvent")}get executionCtx(){if(l(this,F))return l(this,F);throw Error("This context has no ExecutionContext")}get res(){return l(this,E)||g(this,E,new Response(null,{headers:l(this,ee)??g(this,ee,new Headers)}))}set res(e){if(l(this,E)&&e){e=new Response(e.body,e);for(const[t,s]of l(this,E).headers.entries())if(t!=="content-type")if(t==="set-cookie"){const a=l(this,E).headers.getSetCookie();e.headers.delete("set-cookie");for(const i of a)e.headers.append("set-cookie",i)}else e.headers.set(t,s)}g(this,E,e),this.finalized=!0}get var(){return l(this,O)?Object.fromEntries(l(this,O)):{}}},Ie=new WeakMap,je=new WeakMap,O=new WeakMap,ue=new WeakMap,F=new WeakMap,E=new WeakMap,Ee=new WeakMap,be=new WeakMap,fe=new WeakMap,ee=new WeakMap,Se=new WeakMap,Te=new WeakMap,U=new WeakSet,pe=function(e,t,s){const a=l(this,E)?new Headers(l(this,E).headers):l(this,ee)??new Headers;if(typeof t=="object"&&"headers"in t){const o=t.headers instanceof Headers?t.headers:new Headers(t.headers);for(const[r,d]of o)r.toLowerCase()==="set-cookie"?a.append(r,d):a.set(r,d)}if(s)for(const[o,r]of Object.entries(s))if(typeof r=="string")a.set(o,r);else{a.delete(o);for(const d of r)a.append(o,d)}const i=typeof t=="number"?t:(t==null?void 0:t.status)??l(this,ue);return new Response(e,{status:i,headers:a})},It),C="ALL",Ss="all",Ts=["get","post","put","delete","options","patch"],Gt="Can not add a route since the matcher is already built.",Ut=class extends Error{},Rs="__COMPOSED_HANDLER",Ms=e=>e.text("404 Not Found",404),it=(e,t)=>{if("getResponse"in e){const s=e.getResponse();return t.newResponse(s.body,s)}return console.error(e),t.text("Internal Server Error",500)},R,A,Jt,M,Z,$e,qe,jt,_t=(jt=class{constructor(t={}){b(this,A);x(this,"get");x(this,"post");x(this,"put");x(this,"delete");x(this,"options");x(this,"patch");x(this,"all");x(this,"on");x(this,"use");x(this,"router");x(this,"getPath");x(this,"_basePath","/");b(this,R,"/");x(this,"routes",[]);b(this,M,Ms);x(this,"errorHandler",it);x(this,"onError",t=>(this.errorHandler=t,this));x(this,"notFound",t=>(g(this,M,t),this));x(this,"fetch",(t,...s)=>v(this,A,qe).call(this,t,s[1],s[0],t.method));x(this,"request",(t,s,a,i)=>t instanceof Request?this.fetch(s?new Request(t,s):t,a,i):(t=t.toString(),this.fetch(new Request(/^https?:\/\//.test(t)?t:`http://localhost${ce("/",t)}`,s),a,i)));x(this,"fire",()=>{addEventListener("fetch",t=>{t.respondWith(v(this,A,qe).call(this,t.request,t,void 0,t.request.method))})});[...Ts,Ss].forEach(o=>{this[o]=(r,...d)=>(typeof r=="string"?g(this,R,r):v(this,A,Z).call(this,o,l(this,R),r),d.forEach(n=>{v(this,A,Z).call(this,o,l(this,R),n)}),this)}),this.on=(o,r,...d)=>{for(const n of[r].flat()){g(this,R,n);for(const c of[o].flat())d.map(p=>{v(this,A,Z).call(this,c.toUpperCase(),l(this,R),p)})}return this},this.use=(o,...r)=>(typeof o=="string"?g(this,R,o):(g(this,R,"*"),r.unshift(o)),r.forEach(d=>{v(this,A,Z).call(this,C,l(this,R),d)}),this);const{strict:a,...i}=t;Object.assign(this,i),this.getPath=a??!0?t.getPath??Nt:ws}route(t,s){const a=this.basePath(t);return s.routes.map(i=>{var r;let o;s.errorHandler===it?o=i.handler:(o=async(d,n)=>(await st([],s.errorHandler)(d,()=>i.handler(d,n))).res,o[Rs]=i.handler),v(r=a,A,Z).call(r,i.method,i.path,o)}),this}basePath(t){const s=v(this,A,Jt).call(this);return s._basePath=ce(this._basePath,t),s}mount(t,s,a){let i,o;a&&(typeof a=="function"?o=a:(o=a.optionHandler,a.replaceRequest===!1?i=n=>n:i=a.replaceRequest));const r=o?n=>{const c=o(n);return Array.isArray(c)?c:[c]}:n=>{let c;try{c=n.executionCtx}catch{}return[n.env,c]};i||(i=(()=>{const n=ce(this._basePath,t),c=n==="/"?0:n.length;return p=>{const m=new URL(p.url);return m.pathname=m.pathname.slice(c)||"/",new Request(m,p)}})());const d=async(n,c)=>{const p=await s(i(n.req.raw),...r(n));if(p)return p;await c()};return v(this,A,Z).call(this,C,ce(t,"*"),d),this}},R=new WeakMap,A=new WeakSet,Jt=function(){const t=new _t({router:this.router,getPath:this.getPath});return t.errorHandler=this.errorHandler,g(t,M,l(this,M)),t.routes=this.routes,t},M=new WeakMap,Z=function(t,s,a){t=t.toUpperCase(),s=ce(this._basePath,s);const i={basePath:this._basePath,path:s,method:t,handler:a};this.router.add(t,s,[a,i]),this.routes.push(i)},$e=function(t,s){if(t instanceof Error)return this.errorHandler(t,s);throw t},qe=function(t,s,a,i){if(i==="HEAD")return(async()=>new Response(null,await v(this,A,qe).call(this,t,s,a,"GET")))();const o=this.getPath(t,{env:a}),r=this.router.match(i,o),d=new Es(t,{path:o,matchResult:r,env:a,executionCtx:s,notFoundHandler:l(this,M)});if(r[0].length===1){let c;try{c=r[0][0][0][0](d,async()=>{d.res=await l(this,M).call(this,d)})}catch(p){return v(this,A,$e).call(this,p,d)}return c instanceof Promise?c.then(p=>p||(d.finalized?d.res:l(this,M).call(this,d))).catch(p=>v(this,A,$e).call(this,p,d)):c??l(this,M).call(this,d)}const n=st(r[0],this.errorHandler,l(this,M));return(async()=>{try{const c=await n(d);if(!c.finalized)throw new Error("Context is not finalized. Did you forget to return a Response object or `await next()`?");return c.res}catch(c){return v(this,A,$e).call(this,c,d)}})()},jt),Ve="[^/]+",Pe=".*",ke="(?:|/.*)",me=Symbol(),Ds=new Set(".\\+*[^]$()");function Ls(e,t){return e.length===1?t.length===1?e<t?-1:1:-1:t.length===1||e===Pe||e===ke?1:t===Pe||t===ke?-1:e===Ve?1:t===Ve?-1:e.length===t.length?e<t?-1:1:t.length-e.length}var te,se,D,Et,Ke=(Et=class{constructor(){b(this,te);b(this,se);b(this,D,Object.create(null))}insert(t,s,a,i,o){if(t.length===0){if(l(this,te)!==void 0)throw me;if(o)return;g(this,te,s);return}const[r,...d]=t,n=r==="*"?d.length===0?["","",Pe]:["","",Ve]:r==="/*"?["","",ke]:r.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);let c;if(n){const p=n[1];let m=n[2]||Ve;if(p&&n[2]&&(m===".*"||(m=m.replace(/^\((?!\?:)(?=[^)]+\)$)/,"(?:"),/\((?!\?:)/.test(m))))throw me;if(c=l(this,D)[m],!c){if(Object.keys(l(this,D)).some(u=>u!==Pe&&u!==ke))throw me;if(o)return;c=l(this,D)[m]=new Ke,p!==""&&g(c,se,i.varIndex++)}!o&&p!==""&&a.push([p,l(c,se)])}else if(c=l(this,D)[r],!c){if(Object.keys(l(this,D)).some(p=>p.length>1&&p!==Pe&&p!==ke))throw me;if(o)return;c=l(this,D)[r]=new Ke}c.insert(d,s,a,i,o)}buildRegExpStr(){const s=Object.keys(l(this,D)).sort(Ls).map(a=>{const i=l(this,D)[a];return(typeof l(i,se)=="number"?`(${a})@${l(i,se)}`:Ds.has(a)?`\\${a}`:a)+i.buildRegExpStr()});return typeof l(this,te)=="number"&&s.unshift(`#${l(this,te)}`),s.length===0?"":s.length===1?s[0]:"(?:"+s.join("|")+")"}},te=new WeakMap,se=new WeakMap,D=new WeakMap,Et),ze,Re,St,Ns=(St=class{constructor(){b(this,ze,{varIndex:0});b(this,Re,new Ke)}insert(e,t,s){const a=[],i=[];for(let r=0;;){let d=!1;if(e=e.replace(/\{[^}]+\}/g,n=>{const c=`@\\${r}`;return i[r]=[c,n],r++,d=!0,c}),!d)break}const o=e.match(/(?::[^\/]+)|(?:\/\*$)|./g)||[];for(let r=i.length-1;r>=0;r--){const[d]=i[r];for(let n=o.length-1;n>=0;n--)if(o[n].indexOf(d)!==-1){o[n]=o[n].replace(d,i[r][1]);break}}return l(this,Re).insert(o,t,a,l(this,ze),s),a}buildRegExp(){let e=l(this,Re).buildRegExpStr();if(e==="")return[/^$/,[],[]];let t=0;const s=[],a=[];return e=e.replace(/#(\d+)|@(\d+)|\.\*\$/g,(i,o,r)=>o!==void 0?(s[++t]=Number(o),"$()"):(r!==void 0&&(a[Number(r)]=++t),"")),[new RegExp(`^${e}`),s,a]}},ze=new WeakMap,Re=new WeakMap,St),Yt=[],Os=[/^$/,[],Object.create(null)],He=Object.create(null);function Wt(e){return He[e]??(He[e]=new RegExp(e==="*"?"":`^${e.replace(/\/\*$|([.\\+*[^\]$()])/g,(t,s)=>s?`\\${s}`:"(?:|/.*)")}$`))}function Fs(){He=Object.create(null)}function Bs(e){var c;const t=new Ns,s=[];if(e.length===0)return Os;const a=e.map(p=>[!/\*|\/:/.test(p[0]),...p]).sort(([p,m],[u,w])=>p?1:u?-1:m.length-w.length),i=Object.create(null);for(let p=0,m=-1,u=a.length;p<u;p++){const[w,S,h]=a[p];w?i[S]=[h.map(([j])=>[j,Object.create(null)]),Yt]:m++;let y;try{y=t.insert(S,m,w)}catch(j){throw j===me?new Ut(S):j}w||(s[m]=h.map(([j,le])=>{const we=Object.create(null);for(le-=1;le>=0;le--){const[L,Ge]=y[le];we[L]=Ge}return[j,we]}))}const[o,r,d]=t.buildRegExp();for(let p=0,m=s.length;p<m;p++)for(let u=0,w=s[p].length;u<w;u++){const S=(c=s[p][u])==null?void 0:c[1];if(!S)continue;const h=Object.keys(S);for(let y=0,j=h.length;y<j;y++)S[h[y]]=d[S[h[y]]]}const n=[];for(const p in r)n[p]=s[r[p]];return[o,n,i]}function de(e,t){if(e){for(const s of Object.keys(e).sort((a,i)=>i.length-a.length))if(Wt(s).test(t))return[...e[s]]}}var _,J,he,Qt,Kt,Tt,$s=(Tt=class{constructor(){b(this,he);x(this,"name","RegExpRouter");b(this,_);b(this,J);g(this,_,{[C]:Object.create(null)}),g(this,J,{[C]:Object.create(null)})}add(e,t,s){var d;const a=l(this,_),i=l(this,J);if(!a||!i)throw new Error(Gt);a[e]||[a,i].forEach(n=>{n[e]=Object.create(null),Object.keys(n[C]).forEach(c=>{n[e][c]=[...n[C][c]]})}),t==="/*"&&(t="*");const o=(t.match(/\/:/g)||[]).length;if(/\*$/.test(t)){const n=Wt(t);e===C?Object.keys(a).forEach(c=>{var p;(p=a[c])[t]||(p[t]=de(a[c],t)||de(a[C],t)||[])}):(d=a[e])[t]||(d[t]=de(a[e],t)||de(a[C],t)||[]),Object.keys(a).forEach(c=>{(e===C||e===c)&&Object.keys(a[c]).forEach(p=>{n.test(p)&&a[c][p].push([s,o])})}),Object.keys(i).forEach(c=>{(e===C||e===c)&&Object.keys(i[c]).forEach(p=>n.test(p)&&i[c][p].push([s,o]))});return}const r=Ot(t)||[t];for(let n=0,c=r.length;n<c;n++){const p=r[n];Object.keys(i).forEach(m=>{var u;(e===C||e===m)&&((u=i[m])[p]||(u[p]=[...de(a[m],p)||de(a[C],p)||[]]),i[m][p].push([s,o-c+n+1]))})}}match(e,t){Fs();const s=v(this,he,Qt).call(this);return this.match=(a,i)=>{const o=s[a]||s[C],r=o[2][i];if(r)return r;const d=i.match(o[0]);if(!d)return[[],Yt];const n=d.indexOf("",1);return[o[1][n],d]},this.match(e,t)}},_=new WeakMap,J=new WeakMap,he=new WeakSet,Qt=function(){const e=Object.create(null);return Object.keys(l(this,J)).concat(Object.keys(l(this,_))).forEach(t=>{e[t]||(e[t]=v(this,he,Kt).call(this,t))}),g(this,_,g(this,J,void 0)),e},Kt=function(e){const t=[];let s=e===C;return[l(this,_),l(this,J)].forEach(a=>{const i=a[e]?Object.keys(a[e]).map(o=>[o,a[e][o]]):[];i.length!==0?(s||(s=!0),t.push(...i)):e!==C&&t.push(...Object.keys(a[C]).map(o=>[o,a[C][o]]))}),s?Bs(t):null},Tt),Y,B,Rt,qs=(Rt=class{constructor(e){x(this,"name","SmartRouter");b(this,Y,[]);b(this,B,[]);g(this,Y,e.routers)}add(e,t,s){if(!l(this,B))throw new Error(Gt);l(this,B).push([e,t,s])}match(e,t){if(!l(this,B))throw new Error("Fatal error");const s=l(this,Y),a=l(this,B),i=s.length;let o=0,r;for(;o<i;o++){const d=s[o];try{for(let n=0,c=a.length;n<c;n++)d.add(...a[n]);r=d.match(e,t)}catch(n){if(n instanceof Ut)continue;throw n}this.match=d.match.bind(d),g(this,Y,[d]),g(this,B,void 0);break}if(o===i)throw new Error("Fatal error");return this.name=`SmartRouter + ${this.activeRouter.name}`,r}get activeRouter(){if(l(this,B)||l(this,Y).length!==1)throw new Error("No active router has been determined yet.");return l(this,Y)[0]}},Y=new WeakMap,B=new WeakMap,Rt),Ae=Object.create(null),W,I,ae,ve,k,$,X,Mt,Zt=(Mt=class{constructor(e,t,s){b(this,$);b(this,W);b(this,I);b(this,ae);b(this,ve,0);b(this,k,Ae);if(g(this,I,s||Object.create(null)),g(this,W,[]),e&&t){const a=Object.create(null);a[e]={handler:t,possibleKeys:[],score:0},g(this,W,[a])}g(this,ae,[])}insert(e,t,s){g(this,ve,++tt(this,ve)._);let a=this;const i=bs(t),o=[];for(let r=0,d=i.length;r<d;r++){const n=i[r],c=i[r+1],p=hs(n,c),m=Array.isArray(p)?p[0]:n;if(m in l(a,I)){a=l(a,I)[m],p&&o.push(p[1]);continue}l(a,I)[m]=new Zt,p&&(l(a,ae).push(p),o.push(p[1])),a=l(a,I)[m]}return l(a,W).push({[e]:{handler:s,possibleKeys:o.filter((r,d,n)=>n.indexOf(r)===d),score:l(this,ve)}}),a}search(e,t){var d;const s=[];g(this,k,Ae);let i=[this];const o=Lt(t),r=[];for(let n=0,c=o.length;n<c;n++){const p=o[n],m=n===c-1,u=[];for(let w=0,S=i.length;w<S;w++){const h=i[w],y=l(h,I)[p];y&&(g(y,k,l(h,k)),m?(l(y,I)["*"]&&s.push(...v(this,$,X).call(this,l(y,I)["*"],e,l(h,k))),s.push(...v(this,$,X).call(this,y,e,l(h,k)))):u.push(y));for(let j=0,le=l(h,ae).length;j<le;j++){const we=l(h,ae)[j],L=l(h,k)===Ae?{}:{...l(h,k)};if(we==="*"){const z=l(h,I)["*"];z&&(s.push(...v(this,$,X).call(this,z,e,l(h,k))),g(z,k,L),u.push(z));continue}const[Ge,Xe,Ce]=we;if(!p&&!(Ce instanceof RegExp))continue;const N=l(h,I)[Ge],ns=o.slice(n).join("/");if(Ce instanceof RegExp){const z=Ce.exec(ns);if(z){if(L[Xe]=z[0],s.push(...v(this,$,X).call(this,N,e,l(h,k),L)),Object.keys(l(N,I)).length){g(N,k,L);const Ue=((d=z[0].match(/\//))==null?void 0:d.length)??0;(r[Ue]||(r[Ue]=[])).push(N)}continue}}(Ce===!0||Ce.test(p))&&(L[Xe]=p,m?(s.push(...v(this,$,X).call(this,N,e,L,l(h,k))),l(N,I)["*"]&&s.push(...v(this,$,X).call(this,l(N,I)["*"],e,L,l(h,k)))):(g(N,k,L),u.push(N)))}}i=u.concat(r.shift()??[])}return s.length>1&&s.sort((n,c)=>n.score-c.score),[s.map(({handler:n,params:c})=>[n,c])]}},W=new WeakMap,I=new WeakMap,ae=new WeakMap,ve=new WeakMap,k=new WeakMap,$=new WeakSet,X=function(e,t,s,a){const i=[];for(let o=0,r=l(e,W).length;o<r;o++){const d=l(e,W)[o],n=d[t]||d[C],c={};if(n!==void 0&&(n.params=Object.create(null),i.push(n),s!==Ae||a&&a!==Ae))for(let p=0,m=n.possibleKeys.length;p<m;p++){const u=n.possibleKeys[p],w=c[n.score];n.params[u]=a!=null&&a[u]&&!w?a[u]:s[u]??(a==null?void 0:a[u]),c[n.score]=!0}}return i},Mt),ie,Dt,Hs=(Dt=class{constructor(){x(this,"name","TrieRouter");b(this,ie);g(this,ie,new Zt)}add(e,t,s){const a=Ot(t);if(a){for(let i=0,o=a.length;i<o;i++)l(this,ie).insert(e,a[i],s);return}l(this,ie).insert(e,t,s)}match(e,t){return l(this,ie).search(e,t)}},ie=new WeakMap,Dt),P=class extends _t{constructor(e={}){super(e),this.router=e.router??new qs({routers:[new $s,new Hs]})}},Vs=e=>{const s={...{origin:"*",allowMethods:["GET","HEAD","PUT","POST","DELETE","PATCH"],allowHeaders:[],exposeHeaders:[]},...e},a=(o=>typeof o=="string"?o==="*"?()=>o:r=>o===r?r:null:typeof o=="function"?o:r=>o.includes(r)?r:null)(s.origin),i=(o=>typeof o=="function"?o:Array.isArray(o)?()=>o:()=>[])(s.allowMethods);return async function(r,d){var p;function n(m,u){r.res.headers.set(m,u)}const c=await a(r.req.header("origin")||"",r);if(c&&n("Access-Control-Allow-Origin",c),s.origin!=="*"){const m=r.req.header("Vary");m?n("Vary",m):n("Vary","Origin")}if(s.credentials&&n("Access-Control-Allow-Credentials","true"),(p=s.exposeHeaders)!=null&&p.length&&n("Access-Control-Expose-Headers",s.exposeHeaders.join(",")),r.req.method==="OPTIONS"){s.maxAge!=null&&n("Access-Control-Max-Age",s.maxAge.toString());const m=await i(r.req.header("origin")||"",r);m.length&&n("Access-Control-Allow-Methods",m.join(","));let u=s.allowHeaders;if(!(u!=null&&u.length)){const w=r.req.header("Access-Control-Request-Headers");w&&(u=w.split(/\s*,\s*/))}return u!=null&&u.length&&(n("Access-Control-Allow-Headers",u.join(",")),r.res.headers.append("Vary","Access-Control-Request-Headers")),r.res.headers.delete("Content-Length"),r.res.headers.delete("Content-Type"),new Response(null,{headers:r.res.headers,status:204,statusText:"No Content"})}await d()}},zs=/^\s*(?:text\/(?!event-stream(?:[;\s]|$))[^;\s]+|application\/(?:javascript|json|xml|xml-dtd|ecmascript|dart|postscript|rtf|tar|toml|vnd\.dart|vnd\.ms-fontobject|vnd\.ms-opentype|wasm|x-httpd-php|x-javascript|x-ns-proxy-autoconfig|x-sh|x-tar|x-virtualbox-hdd|x-virtualbox-ova|x-virtualbox-ovf|x-virtualbox-vbox|x-virtualbox-vdi|x-virtualbox-vhd|x-virtualbox-vmdk|x-www-form-urlencoded)|font\/(?:otf|ttf)|image\/(?:bmp|vnd\.adobe\.photoshop|vnd\.microsoft\.icon|vnd\.ms-dds|x-icon|x-ms-bmp)|message\/rfc822|model\/gltf-binary|x-shader\/x-fragment|x-shader\/x-vertex|[^;\s]+?\+(?:json|text|xml|yaml))(?:[;\s]|$)/i,ot=(e,t=Us)=>{const s=/\.([a-zA-Z0-9]+?)$/,a=e.match(s);if(!a)return;let i=t[a[1]];return i&&i.startsWith("text")&&(i+="; charset=utf-8"),i},Gs={aac:"audio/aac",avi:"video/x-msvideo",avif:"image/avif",av1:"video/av1",bin:"application/octet-stream",bmp:"image/bmp",css:"text/css",csv:"text/csv",eot:"application/vnd.ms-fontobject",epub:"application/epub+zip",gif:"image/gif",gz:"application/gzip",htm:"text/html",html:"text/html",ico:"image/x-icon",ics:"text/calendar",jpeg:"image/jpeg",jpg:"image/jpeg",js:"text/javascript",json:"application/json",jsonld:"application/ld+json",map:"application/json",mid:"audio/x-midi",midi:"audio/x-midi",mjs:"text/javascript",mp3:"audio/mpeg",mp4:"video/mp4",mpeg:"video/mpeg",oga:"audio/ogg",ogv:"video/ogg",ogx:"application/ogg",opus:"audio/opus",otf:"font/otf",pdf:"application/pdf",png:"image/png",rtf:"application/rtf",svg:"image/svg+xml",tif:"image/tiff",tiff:"image/tiff",ts:"video/mp2t",ttf:"font/ttf",txt:"text/plain",wasm:"application/wasm",webm:"video/webm",weba:"audio/webm",webmanifest:"application/manifest+json",webp:"image/webp",woff:"font/woff",woff2:"font/woff2",xhtml:"application/xhtml+xml",xml:"application/xml",zip:"application/zip","3gp":"video/3gpp","3g2":"video/3gpp2",gltf:"model/gltf+json",glb:"model/gltf-binary"},Us=Gs,_s=(...e)=>{let t=e.filter(i=>i!=="").join("/");t=t.replace(new RegExp("(?<=\\/)\\/+","g"),"");const s=t.split("/"),a=[];for(const i of s)i===".."&&a.length>0&&a.at(-1)!==".."?a.pop():i!=="."&&a.push(i);return a.join("/")||"."},Xt={br:".br",zstd:".zst",gzip:".gz"},Js=Object.keys(Xt),Ys="index.html",Ws=e=>{const t=e.root??"./",s=e.path,a=e.join??_s;return async(i,o)=>{var p,m,u,w;if(i.finalized)return o();let r;if(e.path)r=e.path;else try{if(r=decodeURIComponent(i.req.path),/(?:^|[\/\\])\.\.(?:$|[\/\\])/.test(r))throw new Error}catch{return await((p=e.onNotFound)==null?void 0:p.call(e,i.req.path,i)),o()}let d=a(t,!s&&e.rewriteRequestPath?e.rewriteRequestPath(r):r);e.isDir&&await e.isDir(d)&&(d=a(d,Ys));const n=e.getContent;let c=await n(d,i);if(c instanceof Response)return i.newResponse(c.body,c);if(c){const S=e.mimes&&ot(d,e.mimes)||ot(d);if(i.header("Content-Type",S||"application/octet-stream"),e.precompressed&&(!S||zs.test(S))){const h=new Set((m=i.req.header("Accept-Encoding"))==null?void 0:m.split(",").map(y=>y.trim()));for(const y of Js){if(!h.has(y))continue;const j=await n(d+Xt[y],i);if(j){c=j,i.header("Content-Encoding",y),i.header("Vary","Accept-Encoding",{append:!0});break}}}return await((u=e.onFound)==null?void 0:u.call(e,d,i)),i.body(c)}await((w=e.onNotFound)==null?void 0:w.call(e,d,i)),await o()}},Qs=async(e,t)=>{let s;t&&t.manifest?typeof t.manifest=="string"?s=JSON.parse(t.manifest):s=t.manifest:typeof __STATIC_CONTENT_MANIFEST=="string"?s=JSON.parse(__STATIC_CONTENT_MANIFEST):s=__STATIC_CONTENT_MANIFEST;let a;t&&t.namespace?a=t.namespace:a=__STATIC_CONTENT;const i=s[e]||e;if(!i)return null;const o=await a.get(i,{type:"stream"});return o||null},Ks=e=>async function(s,a){return Ws({...e,getContent:async o=>Qs(o,{manifest:e.manifest,namespace:e.namespace?e.namespace:s.env?s.env.__STATIC_CONTENT:void 0})})(s,a)},es=e=>Ks(e),H=(e,...t)=>{const s=[""];for(let a=0,i=e.length-1;a<i;a++){s[0]+=e[a];const o=Array.isArray(t[a])?t[a].flat(1/0):[t[a]];for(let r=0,d=o.length;r<d;r++){const n=o[r];if(typeof n=="string")Qe(n,s);else if(typeof n=="number")s[0]+=n;else{if(typeof n=="boolean"||n===null||n===void 0)continue;if(typeof n=="object"&&n.isEscaped)if(n.callbacks)s.unshift("",n);else{const c=n.toString();c instanceof Promise?s.unshift("",c):s[0]+=c}else n instanceof Promise?s.unshift("",n):Qe(n.toString(),s)}}}return s[0]+=e.at(-1),s.length===1?"callbacks"in s?ge(Is(ge(s[0],s.callbacks))):ge(s[0]):ks(s,s.callbacks)};const Me=new P;Me.get("/profile/:id",async e=>{const t=e.req.param("id");return e.json({id:t,name:"João Silva",diagnosis:"Em tratamento",nextAppointment:"2024-02-15",treatmentStage:"Quimioterapia"})});Me.post("/symptoms",async e=>(await e.req.json(),e.json({success:!0,message:"Sintomas registrados com sucesso",aiRecommendation:"Monitoramento contínuo recomendado"})));Me.get("/journey/:id",async e=>{const t=e.req.param("id");return e.json({patientId:t,stages:[{date:"2024-01-01",event:"Diagnóstico inicial",status:"completed"},{date:"2024-01-15",event:"Início do tratamento",status:"completed"},{date:"2024-02-01",event:"Primeira sessão de quimioterapia",status:"in-progress"},{date:"2024-03-01",event:"Avaliação de resposta",status:"pending"}]})});Me.post("/triage",async e=>{const t=await e.req.json(),{symptoms:s,age:a,gender:i,history:o}=t,r=s.includes("dor intensa")?"high":"medium";return e.json({urgencyLevel:r,recommendation:r==="high"?"Procure atendimento médico imediato":"Agende uma consulta com seu médico",suggestedSpecialty:"Oncologia",estimatedWaitTime:r==="high"?"0-2 horas":"1-3 dias"})});const De=new P;De.get("/patients",async e=>e.json({patients:[{id:"1",name:"João Silva",age:55,diagnosis:"Câncer de Pulmão",stage:"IIIa",lastVisit:"2024-01-28",nextAppointment:"2024-02-15",riskScore:.7,alertLevel:"medium"},{id:"2",name:"Maria Santos",age:42,diagnosis:"Câncer de Mama",stage:"IIb",lastVisit:"2024-01-25",nextAppointment:"2024-02-10",riskScore:.4,alertLevel:"low"}]}));De.post("/ai-assistant",async e=>{const t=await e.req.json(),{query:s,patientContext:a,type:i}=t;let o="";return i==="treatment-recommendation"?o=`Baseado no perfil do paciente e diretrizes atuais:
     1. Considerar esquema FOLFIRINOX para pacientes com bom performance status
     2. Avaliar função hepática e renal antes do início
     3. Monitorar toxicidade hematológica semanalmente
@@ -6,10 +6,10 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
     Referências: NCCN Guidelines 2024, ASCO Clinical Practice Guidelines`:i==="drug-interaction"?o=`Análise de interações medicamentosas:
     - Baixo risco de interação entre os medicamentos listados
     - Atenção especial para função renal
-    - Ajuste de dose pode ser necessário para pacientes idosos`:o=`Processando consulta: ${a}
-    Análise baseada em evidências científicas e protocolos institucionais.`,e.json({response:o,confidence:.92,references:["NCCN Guidelines 2024","ASCO Clinical Practice Guidelines","UpToDate Oncology"],timestamp:new Date().toISOString()})});Re.get("/patient/:id/360",async e=>{const t=e.req.param("id");return e.json({patientId:t,demographics:{name:"João Silva",age:55,gender:"M",bloodType:"O+"},clinicalHistory:{diagnosis:"Adenocarcinoma de pulmão",diagnosisDate:"2023-10-15",stage:"IIIa",mutations:["EGFR+","ALK-"],comorbidities:["Hipertensão","Diabetes tipo 2"]},currentTreatment:{protocol:"Carboplatin + Pemetrexed",cycle:3,startDate:"2024-01-01",response:"Partial response",sideEffects:["Náusea grau 2","Fadiga grau 1"]},labResults:{lastUpdate:"2024-01-28",hemoglobin:11.2,neutrophils:3.5,platelets:180,creatinine:1.1},imaging:{lastCT:"2024-01-20",findings:"Redução de 30% na massa tumoral primária"},psychosocial:{anxietyScore:6,depressionScore:4,socialSupport:"Good",financialConcerns:!0}})});Re.post("/decision-support",async e=>{const t=await e.req.json(),{patientId:a,clinicalQuestion:s}=t;return e.json({recommendations:[{priority:"high",recommendation:"Considerar redução de dose devido a toxicidade",evidence:"Grade A",rationale:"Neutropenia grau 3 recorrente"},{priority:"medium",recommendation:"Adicionar G-CSF profilático",evidence:"Grade B",rationale:"Prevenção de neutropenia febril"}],alternativeOptions:["Mudança para esquema com menor toxicidade hematológica","Considerar terapia alvo se mutação presente"],riskAssessment:{treatmentFailure:.15,severeAdverseEvents:.25,qualityOfLife:.7}})});const Le=new k;Le.get("/dashboard",async e=>e.json({summary:{totalPatients:156,inTreatment:89,waitingAppointment:34,pendingExams:23,criticalAlerts:10},bottlenecks:[{type:"exam_scheduling",severity:"high",affectedPatients:15,averageDelay:"5 days",recommendation:"Aumentar slots de ressonância magnética"},{type:"authorization_pending",severity:"medium",affectedPatients:8,averageDelay:"3 days",recommendation:"Contatar convênios para agilização"}],patientFlow:[{stage:"Triagem",count:12,avgTime:"2 horas"},{stage:"Diagnóstico",count:28,avgTime:"5 dias"},{stage:"Tratamento",count:89,avgTime:"3 meses"},{stage:"Acompanhamento",count:27,avgTime:"Contínuo"}]}));Le.get("/journey-status/:patientId",async e=>{const t=e.req.param("patientId");return e.json({patientId:t,currentStage:"treatment",timeline:[{date:"2024-01-01",event:"Primeira consulta",status:"completed",responsible:"Dr. Silva"},{date:"2024-01-05",event:"Exames solicitados",status:"completed",responsible:"Navegador Ana"},{date:"2024-01-10",event:"Biópsia realizada",status:"completed",responsible:"Dr. Santos"},{date:"2024-01-15",event:"Início quimioterapia",status:"in-progress",responsible:"Equipe Oncologia"},{date:"2024-02-15",event:"Avaliação de resposta",status:"scheduled",responsible:"Dr. Silva"}],alerts:[{type:"appointment_reminder",message:"Consulta em 3 dias",priority:"medium"}],nextSteps:["Completar ciclo de quimioterapia","Agendar exame de controle","Avaliar necessidade de radioterapia"]})});Le.post("/coordinate-care",async e=>{const t=await e.req.json(),{patientId:a,action:s,details:i}=t;let o={success:!0,actionTaken:s,timestamp:new Date().toISOString()};switch(s){case"schedule_appointment":o={...o,appointmentDate:"2024-02-20",department:i.department,doctor:i.doctor};break;case"expedite_exam":o={...o,examType:i.examType,newDate:"2024-02-05",previousDate:"2024-02-15"};break;case"contact_insurance":o={...o,insuranceCompany:i.company,authorizationNumber:"AUTH-2024-0123",status:"approved"};break}return e.json(o)});Le.get("/alerts",async e=>e.json({alerts:[{id:"1",patientId:"P001",patientName:"João Silva",type:"missed_appointment",message:"Paciente faltou à consulta de 28/01",priority:"high",timestamp:"2024-01-28T14:00:00Z",suggestedAction:"Contatar paciente e reagendar"},{id:"2",patientId:"P002",patientName:"Maria Santos",type:"exam_delay",message:"Tomografia agendada há mais de 7 dias",priority:"medium",timestamp:"2024-01-27T10:00:00Z",suggestedAction:"Verificar disponibilidade de horários alternativos"},{id:"3",patientId:"P003",patientName:"Pedro Costa",type:"insurance_pending",message:"Autorização de quimioterapia pendente há 5 dias",priority:"high",timestamp:"2024-01-26T09:00:00Z",suggestedAction:"Contatar convênio urgentemente"}],summary:{total:15,high:5,medium:7,low:3}}));const De=new k;De.get("/dashboard",async e=>e.json({summary:{totalRevenue:25e5,totalCosts:18e5,profit:7e5,profitMargin:28,glosasEvitadas:15e4,glosasRate:2.5},monthlyMetrics:[{month:"Janeiro 2024",revenue:85e4,costs:6e5,glosas:15e3,glosasEvitadas:45e3},{month:"Dezembro 2023",revenue:82e4,costs:58e4,glosas:2e4,glosasEvitadas:38e3}],glosasAnalysis:{totalGlosas:35e3,mainReasons:[{reason:"Documentação incompleta",count:45,value:15e3,percentage:42.8},{reason:"Código incorreto",count:30,value:1e4,percentage:28.5},{reason:"Autorização expirada",count:20,value:7e3,percentage:20},{reason:"Procedimento não coberto",count:10,value:3e3,percentage:8.7}]},costCenters:[{department:"Oncologia",budget:8e5,spent:65e4,percentage:81.25},{department:"Radioterapia",budget:5e5,spent:42e4,percentage:84},{department:"Cirurgia",budget:3e5,spent:25e4,percentage:83.33},{department:"Diagnóstico",budget:2e5,spent:18e4,percentage:90}]}));De.post("/predict-glosa",async e=>{const t=await e.req.json(),{procedure:a,diagnosis:s,insurance:i,documentation:o}=t;let r=.2,d=[];return o.includes("laudo_completo")||(r+=.3,d.push({factor:"Laudo médico incompleto",impact:"high",recommendation:"Solicitar laudo detalhado com CID e justificativa clínica"})),o.includes("autorizacao_previa")||(r+=.25,d.push({factor:"Autorização prévia ausente",impact:"high",recommendation:"Obter autorização antes do procedimento"})),a.complexity==="high"&&!o.includes("segunda_opiniao")&&(r+=.15,d.push({factor:"Segunda opinião não documentada",impact:"medium",recommendation:"Incluir parecer de especialista"})),e.json({riskScore:Math.min(r,1),riskLevel:r>.7?"high":r>.4?"medium":"low",estimatedGlosaValue:r*(a.value||1e4),risks:d,preventiveActions:["Revisar toda documentação antes do envio","Confirmar cobertura com o convênio","Garantir que todos os códigos estejam corretos","Manter registro fotográfico quando aplicável"],confidence:.87})});De.get("/revenue-analysis",async e=>e.json({byInsurance:[{name:"SUS",revenue:8e5,percentage:32,avgTicket:2500,paymentDelay:45},{name:"Unimed",revenue:6e5,percentage:24,avgTicket:5e3,paymentDelay:30},{name:"SulAmérica",revenue:45e4,percentage:18,avgTicket:4500,paymentDelay:25},{name:"Bradesco Saúde",revenue:4e5,percentage:16,avgTicket:4e3,paymentDelay:28},{name:"Particular",revenue:25e4,percentage:10,avgTicket:8e3,paymentDelay:0}],byProcedure:[{procedure:"Quimioterapia",revenue:9e5,count:180,avgValue:5e3},{procedure:"Radioterapia",revenue:6e5,count:120,avgValue:5e3},{procedure:"Cirurgia Oncológica",revenue:5e5,count:50,avgValue:1e4},{procedure:"Consultas",revenue:3e5,count:1e3,avgValue:300},{procedure:"Exames",revenue:2e5,count:400,avgValue:500}]}));De.get("/optimization-suggestions",async e=>e.json({suggestions:[{area:"Medicamentos",currentCost:3e5,potentialSaving:45e3,recommendation:"Negociar compra em volume com fornecedores",priority:"high",implementation:"immediate"},{area:"Exames Laboratoriais",currentCost:15e4,potentialSaving:22500,recommendation:"Implementar protocolos para evitar exames desnecessários",priority:"medium",implementation:"1-2 months"},{area:"Gestão de Leitos",currentCost:2e5,potentialSaving:3e4,recommendation:"Otimizar tempo de permanência com navegação de pacientes",priority:"high",implementation:"2-3 months"},{area:"Energia e Utilidades",currentCost:5e4,potentialSaving:7500,recommendation:"Implementar medidas de eficiência energética",priority:"low",implementation:"3-6 months"}],totalPotentialSaving:105e3,estimatedROI:3.5,implementationCost:3e4}));const Oe=new k;Oe.get("/profile/:patientId",async e=>{const t=e.req.param("patientId");return e.json({patientId:t,wellnessScore:72,mentalHealth:{anxietyLevel:5,depressionScore:3,stressLevel:6,lastAssessment:"2024-01-25",trend:"improving"},physicalWellbeing:{painLevel:4,fatigueLevel:5,sleepQuality:6,appetiteLevel:7,mobilityScore:8},socialSupport:{familySupport:"strong",friendsNetwork:"moderate",supportGroupParticipation:!0,communityEngagement:"active"},emotionalNeeds:[{need:"Medo do futuro",severity:"moderate",addressed:!0,intervention:"Sessões de terapia cognitivo-comportamental"},{need:"Preocupação com família",severity:"high",addressed:!1,intervention:"Terapia familiar recomendada"}],interventions:[{date:"2024-01-20",type:"Consulta psicológica",professional:"Dra. Ana Costa",outcome:"Melhora no manejo da ansiedade"},{date:"2024-01-22",type:"Grupo de apoio",professional:"Equipe multidisciplinar",outcome:"Paciente relatou sentir-se acolhido"}]})});Oe.post("/mental-health-screening",async e=>{const t=await e.req.json(),{patientId:a,responses:s}=t;let i=0,o=0;s.forEach(n=>{n.category==="anxiety"?i+=n.value:n.category==="depression"&&(o+=n.value)});const r=i>15?"severe":i>10?"moderate":i>5?"mild":"minimal",d=o>20?"severe":o>15?"moderately severe":o>10?"moderate":o>5?"mild":"minimal";return e.json({patientId:a,screeningDate:new Date().toISOString(),results:{anxiety:{score:i,severity:r,requiresIntervention:i>10},depression:{score:o,severity:d,requiresIntervention:o>10}},recommendations:[i>10&&"Encaminhar para psiquiatra",o>10&&"Iniciar psicoterapia",(i>5||o>5)&&"Monitoramento semanal","Manter grupo de apoio"].filter(Boolean),alertLevel:i>15||o>20?"high":i>10||o>15?"medium":"low"})});Oe.post("/predict-crisis",async e=>{const t=await e.req.json(),{patientId:a,recentEvents:s,symptoms:i,socialFactors:o}=t;let r=.2;return s.includes("loss")&&(r+=.2),s.includes("treatment_failure")&&(r+=.25),i.includes("hopelessness")&&(r+=.3),i.includes("isolation")&&(r+=.15),o.support==="weak"&&(r+=.2),o.financialStress&&(r+=.15),o.support==="strong"&&(r-=.1),o.activeInTherapy&&(r-=.15),r=Math.max(0,Math.min(1,r)),e.json({patientId:a,riskScore:r,riskLevel:r>.7?"high":r>.4?"medium":"low",timeframe:r>.7?"24-48 hours":r>.4?"1 week":"1 month",interventions:[r>.7&&{priority:"immediate",action:"Contato imediato com psiquiatra",responsible:"Equipe de plantão"},r>.4&&{priority:"urgent",action:"Agendar consulta em 48h",responsible:"Psicólogo responsável"},{priority:"routine",action:"Intensificar monitoramento",responsible:"Equipe de enfermagem"}].filter(Boolean),monitoringPlan:{frequency:r>.7?"daily":r>.4?"twice weekly":"weekly",method:"Phone check-in and mood tracking",duration:"2 weeks with reassessment"}})});Oe.get("/support-groups/:patientId",async e=>(e.req.param("patientId"),e.json({recommendedGroups:[{id:"G001",name:"Grupo de Apoio - Câncer de Mama",type:"disease-specific",meetingFrequency:"Semanal",nextMeeting:"2024-02-05 14:00",location:"Sala 201 - Ala B",facilitator:"Psic. Maria Silva",currentMembers:12,matchScore:.95},{id:"G002",name:"Mindfulness e Meditação",type:"wellness",meetingFrequency:"2x por semana",nextMeeting:"2024-02-03 10:00",location:"Espaço Bem-Estar",facilitator:"Terapeuta João Santos",currentMembers:8,matchScore:.82},{id:"G003",name:"Família e Cuidadores",type:"family-support",meetingFrequency:"Quinzenal",nextMeeting:"2024-02-10 16:00",location:"Auditório Principal",facilitator:"Assistente Social Ana Costa",currentMembers:20,matchScore:.78}],activeParticipation:[{groupId:"G001",joinedDate:"2024-01-01",attendance:"100%",engagement:"high"}]})));const he=new k;he.get("/dashboard",async e=>e.json({activeStudies:12,totalPatients:456,dataPoints:125e4,insights:89,studies:[{id:"ST001",title:"Eficácia da Imunoterapia em Câncer de Pulmão Avançado",phase:"III",enrolledPatients:85,targetEnrollment:100,startDate:"2023-06-01",estimatedCompletion:"2025-06-01",status:"recruiting"},{id:"ST002",title:"Biomarcadores Preditivos de Resposta à Quimioterapia",phase:"II",enrolledPatients:45,targetEnrollment:50,startDate:"2023-09-01",estimatedCompletion:"2024-09-01",status:"active"},{id:"ST003",title:"Qualidade de Vida Pós-Tratamento Radioterápico",phase:"Observational",enrolledPatients:120,targetEnrollment:150,startDate:"2023-03-01",estimatedCompletion:"2024-12-01",status:"recruiting"}],recentInsights:[{date:"2024-01-28",type:"correlation",finding:"Correlação positiva entre níveis de IL-6 e resposta à imunoterapia",significance:"p < 0.001",impact:"high"},{date:"2024-01-25",type:"pattern",finding:"Padrão de toxicidade identificado em pacientes > 65 anos",significance:"p = 0.023",impact:"medium"}]}));he.post("/analyze-cohort",async e=>{const t=await e.req.json(),{criteria:a,analysisType:s,variables:i}=t;return e.json({cohortSize:145,demographics:{meanAge:58.3,genderDistribution:{male:.52,female:.48},stageDistribution:{I:.15,II:.25,III:.35,IV:.25}},outcomes:{overallSurvival:{median:24.5,oneYear:.82,twoYear:.65,fiveYear:.45},progressionFreeSurvival:{median:11.2,sixMonth:.68,oneYear:.45},responseRate:{completeResponse:.12,partialResponse:.38,stableDisease:.3,progressiveDisease:.2}},correlations:[{variable1:"Age",variable2:"Treatment Response",coefficient:-.23,pValue:.042,interpretation:"Idade negativamente correlacionada com resposta"},{variable1:"Biomarker X",variable2:"Survival",coefficient:.56,pValue:.001,interpretation:"Forte correlação positiva com sobrevida"}],statisticalTests:{chiSquare:{value:15.23,df:3,pValue:.0016,significant:!0},logRankTest:{value:8.45,pValue:.0037,significant:!0}}})});he.get("/opportunities",async e=>e.json({dataGaps:[{area:"Toxicidade tardia em radioterapia",patientCount:230,dataCompleteness:.45,priority:"high",potentialImpact:"Melhor manejo de efeitos colaterais de longo prazo"},{area:"Marcadores genéticos em câncer colorretal",patientCount:156,dataCompleteness:.62,priority:"medium",potentialImpact:"Personalização do tratamento"}],emergingPatterns:[{pattern:"Aumento de resposta em combinação terapêutica específica",confidence:.87,patientsAffected:45,recommendation:"Considerar estudo prospectivo"},{pattern:"Subgrupo com resistência primária identificado",confidence:.92,patientsAffected:28,recommendation:"Investigar mecanismos moleculares"}],eligiblePatients:{forClinicalTrials:89,forObservationalStudies:234,forRegistries:456},collaborationOpportunities:[{institution:"Instituto Nacional do Câncer",area:"Genômica do câncer",status:"in-discussion"},{institution:"Harvard Medical School",area:"Imunoterapia",status:"proposal-submitted"}]}));he.post("/generate-hypothesis",async e=>{const t=await e.req.json(),{dataSource:a,variables:s,context:i}=t;return e.json({hypotheses:[{id:"H001",statement:"Pacientes com expressão elevada de PD-L1 e baixa carga mutacional apresentam melhor resposta à combinação de imunoterapia com quimioterapia",confidence:.78,supportingData:{nPatients:67,observedEffect:.42,pValue:.023},suggestedStudyDesign:"Randomized controlled trial com estratificação por biomarcadores",estimatedSampleSize:150,primaryEndpoint:"Progression-free survival"},{id:"H002",statement:"A administração de probióticos durante quimioterapia reduz incidência de mucosite severa",confidence:.65,supportingData:{nPatients:34,observedEffect:.31,pValue:.048},suggestedStudyDesign:"Double-blind placebo-controlled trial",estimatedSampleSize:100,primaryEndpoint:"Incidence of grade 3-4 mucositis"}],dataQuality:{completeness:.82,consistency:.91,timeliness:.88},recommendations:["Coletar dados adicionais de microbioma","Padronizar avaliação de toxicidade","Implementar coleta prospectiva de PROs"]})});he.post("/export-data",async e=>{const t=await e.req.json(),{studyId:a,variables:s,format:i,filters:o}=t;return e.json({exportId:"EXP-2024-0128-001",status:"processing",recordsCount:234,variables:s.length,anonymizationLevel:"full",format:i||"csv",estimatedSize:"15.2 MB",expirationDate:"2024-02-28",downloadUrl:"/api/research/download/EXP-2024-0128-001",auditLog:{requestedBy:"Dr. Research",requestDate:new Date().toISOString(),purpose:"Clinical trial analysis",ethicsApproval:"CEP-2024-001"}})});const ie=new k;ie.get("/system-health",async e=>e.json({status:"healthy",uptime:"45 days 12:34:56",timestamp:new Date().toISOString(),services:{database:{status:"operational",latency:12,connections:45,maxConnections:100},aiEngine:{status:"operational",activeModels:8,requestsPerMinute:234,avgResponseTime:145},storage:{status:"operational",used:"234 GB",total:"1 TB",percentage:23.4},cache:{status:"operational",hitRate:.89,memory:"512 MB",entries:12456}},performance:{cpu:45,memory:67,disk:23,network:{in:"125 Mbps",out:"89 Mbps"}},alerts:[{level:"warning",service:"database",message:"Connection pool reaching 80% capacity",timestamp:"2024-01-28T10:30:00Z"}]}));ie.get("/metrics",async e=>e.json({users:{total:523,active:412,newThisMonth:45,byRole:{patients:234,doctors:56,nurses:78,administrators:12,researchers:8,navigators:34,support:89,financial:12}},usage:{dailyActiveUsers:389,weeklyActiveUsers:456,monthlyActiveUsers:512,avgSessionDuration:"24 minutes",pageViews:{today:12456,week:78234,month:312456}},aiUsage:{totalRequests:45678,byType:{clinicalAssistant:12345,triage:8934,glosasPrediction:5678,emotionalRisk:3456,researchAnalysis:2345},avgConfidence:.87,feedbackScore:4.2},dataQuality:{completeness:.92,accuracy:.95,timeliness:.88,consistency:.91,validity:.94},compliance:{lgpdCompliance:!0,dataRetention:"compliant",auditLogsEnabled:!0,encryptionStatus:"AES-256",lastSecurityAudit:"2024-01-15",nextAudit:"2024-02-15"}}));ie.get("/users",async e=>e.json({users:[{id:"U001",name:"Dr. João Silva",email:"joao.silva@hospital.com",role:"doctor",department:"Oncologia",status:"active",lastLogin:"2024-01-28T09:15:00Z",created:"2023-06-01T10:00:00Z"},{id:"U002",name:"Maria Santos",email:"maria.santos@hospital.com",role:"nurse",department:"Navegação",status:"active",lastLogin:"2024-01-28T08:30:00Z",created:"2023-07-15T14:00:00Z"}],total:523,page:1,pageSize:20}));ie.get("/audit-logs",async e=>e.json({logs:[{id:"LOG001",timestamp:"2024-01-28T11:30:00Z",user:"Dr. João Silva",action:"VIEW_PATIENT_RECORD",resource:"Patient ID: P123",ip:"192.168.1.100",result:"success"},{id:"LOG002",timestamp:"2024-01-28T11:25:00Z",user:"Maria Santos",action:"UPDATE_APPOINTMENT",resource:"Appointment ID: A456",ip:"192.168.1.101",result:"success"},{id:"LOG003",timestamp:"2024-01-28T11:20:00Z",user:"System",action:"AI_PREDICTION",resource:"Glosas Risk Analysis",ip:"internal",result:"success",metadata:{confidence:.89,processingTime:"145ms"}}],filters:{dateRange:"last-24-hours",actions:"all",users:"all",results:"all"},total:12456,page:1,pageSize:50}));ie.get("/configuration",async e=>e.json({general:{institutionName:"ACCamargo Cancer Center",timezone:"America/Sao_Paulo",language:"pt-BR",dateFormat:"DD/MM/YYYY",currency:"BRL"},ai:{models:{clinical:{name:"clinical-assistant-v2",version:"2.1.0",lastUpdate:"2024-01-15",accuracy:.92},triage:{name:"auto-triage-v1",version:"1.5.0",lastUpdate:"2024-01-10",accuracy:.88},financial:{name:"glosas-predictor-v3",version:"3.0.1",lastUpdate:"2024-01-20",accuracy:.87}},thresholds:{confidenceMinimum:.75,alertThreshold:.85,autoApprovalThreshold:.95}},integration:{ehr:{system:"Custom EHR",status:"connected",lastSync:"2024-01-28T11:00:00Z"},laboratory:{system:"LabSystem Pro",status:"connected",lastSync:"2024-01-28T10:45:00Z"},imaging:{system:"PACS System",status:"connected",lastSync:"2024-01-28T10:30:00Z"}},security:{passwordPolicy:{minLength:12,requireSpecialChar:!0,requireNumber:!0,requireUppercase:!0,expirationDays:90},sessionTimeout:30,mfaRequired:!0,ipWhitelist:["192.168.0.0/16"]}}));ie.get("/ai-performance",async e=>e.json({models:[{name:"Clinical Assistant",performance:{accuracy:.92,precision:.89,recall:.91,f1Score:.9,auc:.94},usage:{requestsToday:1234,avgResponseTime:145,errorRate:.02},feedback:{positive:456,negative:23,neutral:89,avgRating:4.3},lastRetrained:"2024-01-15",nextRetraining:"2024-02-15"},{name:"Glosas Predictor",performance:{accuracy:.87,precision:.85,recall:.88,f1Score:.86,auc:.91},usage:{requestsToday:567,avgResponseTime:89,errorRate:.01},financialImpact:{glosasPrevenidas:145,valorEconomizado:45e4},lastRetrained:"2024-01-10",nextRetraining:"2024-02-10"}],training:{datasetSize:125e3,lastUpdate:"2024-01-20",validationAccuracy:.89,crossValidationFolds:5},alerts:[{model:"Emotional Risk Detector",issue:"Performance degradation detected",metric:"accuracy",current:.72,threshold:.75,recommendation:"Immediate retraining required"}]}));const oe=new k;oe.post("/prompt-engineering",async e=>{const t=await e.req.json(),{userInput:a,context:s,persona:i,intent:o}=t,r={original:a,enhanced:`[Context: ${s}] [Role: ${i}] [Intent: ${o}] ${a}`,templates:[{name:"clinical-query",prompt:`Como médico oncologista experiente, analise o seguinte caso: ${a}. 
-                 Considere as diretrizes atuais da NCCN e forneça recomendações baseadas em evidências.`},{name:"patient-communication",prompt:`Explique de forma clara e empática para o paciente: ${a}. 
-                 Use linguagem acessível e ofereça suporte emocional.`}],confidence:.92,suggestedModel:"clinical-gpt-4"};return e.json(r)});oe.post("/servo-mechanisms",async e=>{const t=await e.req.json(),{trigger:a,data:s,actionType:i}=t,o={"glosa-prevention":{triggered:!0,actions:[{type:"document-review",status:"completed",finding:"Missing procedure justification",correction:"Added clinical justification to record"},{type:"code-validation",status:"completed",finding:"Incorrect procedure code",correction:"Updated to correct ICD-10 code"}],prevented:!0,estimatedSaving:15e3},"appointment-optimization":{triggered:!0,actions:[{type:"schedule-analysis",finding:"Conflict detected",resolution:"Rescheduled to available slot"},{type:"resource-allocation",finding:"Equipment available",resolution:"Reserved MRI machine for patient"}],optimized:!0,timeSaved:"3 days"},"fatigue-alert":{triggered:!0,actions:[{type:"risk-assessment",score:.78,level:"high"},{type:"notification",sent_to:["psychologist","nurse","doctor"],priority:"urgent"},{type:"intervention-scheduled",appointment:"2024-02-01 10:00",professional:"Psic. Ana Costa"}]}};return e.json({servoId:`SERVO-${Date.now()}`,trigger:a,actionType:i,result:o[i]||{triggered:!1,reason:"Unknown action type"},timestamp:new Date().toISOString(),feedback_required:!0})});oe.post("/auto-triage",async e=>{const t=await e.req.json(),{message:a,sessionId:s,patientInfo:i}=t,o=a.toLowerCase();let r="low",d="",n=[];return o.includes("dor")&&(o.includes("forte")||o.includes("intensa"))?(r="high",d="Procure atendimento médico imediato no pronto-socorro",n=["Há quanto tempo sente esta dor?","A dor piora com algum movimento?"]):o.includes("febre")||o.includes("sangramento")?(r="medium",d="Agende consulta para hoje ou amanhã",n=["Qual sua temperatura?","Está tomando alguma medicação?"]):(r="low",d="Agende consulta de rotina com seu médico",n=["Há outros sintomas?","Isso interfere em suas atividades diárias?"]),e.json({sessionId:s,response:{message:`Entendo sua preocupação. ${d}`,urgency:r,questions:n,suggestedDepartment:"Oncologia",estimatedWaitTime:r==="high"?"Imediato":r==="medium"?"24-48h":"3-5 dias"},analysis:{detectedSymptoms:["dor","desconforto"],confidence:.85,requiresHumanReview:r==="high"}})});oe.post("/summarize-report",async e=>{const t=await e.req.json(),{reportText:a,reportType:s}=t,i={reportType:s,keyFindings:["Massa tumoral de 3.2cm no lobo superior direito","Sem evidência de metástases","Linfonodos mediastinais dentro dos limites normais"],diagnosis:"Adenocarcinoma pulmonar estadio IB",recommendations:["Ressecção cirúrgica recomendada","Avaliar necessidade de quimioterapia adjuvante","PET-CT de controle em 3 meses"],urgency:"moderate",extractedData:{tumorSize:"3.2cm",location:"Lobo superior direito",stage:"IB",biomarkers:{EGFR:"negative",ALK:"negative","PD-L1":"15%"}},confidence:.91};return e.json(i)});oe.post("/predict-risk",async e=>{const t=await e.req.json(),{patientId:a,riskType:s,clinicalData:i}=t,r={recurrence:{risk:.23,timeframe:"2 years",factors:[{factor:"Stage",weight:.3,value:"IIIA"},{factor:"Age",weight:.2,value:"65"},{factor:"Biomarkers",weight:.5,value:"EGFR+"}],recommendations:["Intensificar seguimento","Considerar terapia adjuvante estendida","Monitorar marcadores tumorais mensalmente"]},depression:{risk:.67,timeframe:"1 month",factors:[{factor:"Previous history",weight:.4,value:"Yes"},{factor:"Social support",weight:.3,value:"Low"},{factor:"Treatment phase",weight:.3,value:"Active chemo"}],recommendations:["Iniciar acompanhamento psicológico","Avaliar necessidade de medicação","Incluir em grupo de apoio"]},"treatment-adherence":{risk:.31,timeframe:"3 months",factors:[{factor:"Side effects",weight:.35,value:"Moderate"},{factor:"Distance from hospital",weight:.25,value:"50km"},{factor:"Financial situation",weight:.4,value:"Challenging"}],recommendations:["Implementar programa de navegação intensiva","Avaliar suporte financeiro","Considerar telemedicina para follow-ups"]}}[s]||{risk:0,error:"Unknown risk type"};return e.json({patientId:a,riskType:s,prediction:r,modelVersion:"2.1.0",timestamp:new Date().toISOString(),requiresClinicalValidation:r.risk>.7})});oe.post("/feedback",async e=>{const t=await e.req.json(),{predictionId:a,feedback:s,userId:i,comments:o}=t;return e.json({feedbackId:`FB-${Date.now()}`,status:"recorded",impact:s==="positive"?"reinforcement":"adjustment",modelUpdate:{scheduled:!0,nextRetraining:"2024-02-15",expectedImprovement:.02},message:"Obrigado pelo feedback. Sua contribuição ajuda a melhorar nosso sistema.",aggregatedFeedback:{total:1234,positive:1089,negative:145,accuracy:.88}})});const V=(e,t)=>{const a=Ya(e);return`
+    - Ajuste de dose pode ser necessário para pacientes idosos`:o=`Processando consulta: ${s}
+    Análise baseada em evidências científicas e protocolos institucionais.`,e.json({response:o,confidence:.92,references:["NCCN Guidelines 2024","ASCO Clinical Practice Guidelines","UpToDate Oncology"],timestamp:new Date().toISOString()})});De.get("/patient/:id/360",async e=>{const t=e.req.param("id");return e.json({patientId:t,demographics:{name:"João Silva",age:55,gender:"M",bloodType:"O+"},clinicalHistory:{diagnosis:"Adenocarcinoma de pulmão",diagnosisDate:"2023-10-15",stage:"IIIa",mutations:["EGFR+","ALK-"],comorbidities:["Hipertensão","Diabetes tipo 2"]},currentTreatment:{protocol:"Carboplatin + Pemetrexed",cycle:3,startDate:"2024-01-01",response:"Partial response",sideEffects:["Náusea grau 2","Fadiga grau 1"]},labResults:{lastUpdate:"2024-01-28",hemoglobin:11.2,neutrophils:3.5,platelets:180,creatinine:1.1},imaging:{lastCT:"2024-01-20",findings:"Redução de 30% na massa tumoral primária"},psychosocial:{anxietyScore:6,depressionScore:4,socialSupport:"Good",financialConcerns:!0}})});De.post("/decision-support",async e=>{const t=await e.req.json(),{patientId:s,clinicalQuestion:a}=t;return e.json({recommendations:[{priority:"high",recommendation:"Considerar redução de dose devido a toxicidade",evidence:"Grade A",rationale:"Neutropenia grau 3 recorrente"},{priority:"medium",recommendation:"Adicionar G-CSF profilático",evidence:"Grade B",rationale:"Prevenção de neutropenia febril"}],alternativeOptions:["Mudança para esquema com menor toxicidade hematológica","Considerar terapia alvo se mutação presente"],riskAssessment:{treatmentFailure:.15,severeAdverseEvents:.25,qualityOfLife:.7}})});const Le=new P;Le.get("/dashboard",async e=>e.json({summary:{totalPatients:156,inTreatment:89,waitingAppointment:34,pendingExams:23,criticalAlerts:10},bottlenecks:[{type:"exam_scheduling",severity:"high",affectedPatients:15,averageDelay:"5 days",recommendation:"Aumentar slots de ressonância magnética"},{type:"authorization_pending",severity:"medium",affectedPatients:8,averageDelay:"3 days",recommendation:"Contatar convênios para agilização"}],patientFlow:[{stage:"Triagem",count:12,avgTime:"2 horas"},{stage:"Diagnóstico",count:28,avgTime:"5 dias"},{stage:"Tratamento",count:89,avgTime:"3 meses"},{stage:"Acompanhamento",count:27,avgTime:"Contínuo"}]}));Le.get("/journey-status/:patientId",async e=>{const t=e.req.param("patientId");return e.json({patientId:t,currentStage:"treatment",timeline:[{date:"2024-01-01",event:"Primeira consulta",status:"completed",responsible:"Dr. Silva"},{date:"2024-01-05",event:"Exames solicitados",status:"completed",responsible:"Navegador Ana"},{date:"2024-01-10",event:"Biópsia realizada",status:"completed",responsible:"Dr. Santos"},{date:"2024-01-15",event:"Início quimioterapia",status:"in-progress",responsible:"Equipe Oncologia"},{date:"2024-02-15",event:"Avaliação de resposta",status:"scheduled",responsible:"Dr. Silva"}],alerts:[{type:"appointment_reminder",message:"Consulta em 3 dias",priority:"medium"}],nextSteps:["Completar ciclo de quimioterapia","Agendar exame de controle","Avaliar necessidade de radioterapia"]})});Le.post("/coordinate-care",async e=>{const t=await e.req.json(),{patientId:s,action:a,details:i}=t;let o={success:!0,actionTaken:a,timestamp:new Date().toISOString()};switch(a){case"schedule_appointment":o={...o,appointmentDate:"2024-02-20",department:i.department,doctor:i.doctor};break;case"expedite_exam":o={...o,examType:i.examType,newDate:"2024-02-05",previousDate:"2024-02-15"};break;case"contact_insurance":o={...o,insuranceCompany:i.company,authorizationNumber:"AUTH-2024-0123",status:"approved"};break}return e.json(o)});Le.get("/alerts",async e=>e.json({alerts:[{id:"1",patientId:"P001",patientName:"João Silva",type:"missed_appointment",message:"Paciente faltou à consulta de 28/01",priority:"high",timestamp:"2024-01-28T14:00:00Z",suggestedAction:"Contatar paciente e reagendar"},{id:"2",patientId:"P002",patientName:"Maria Santos",type:"exam_delay",message:"Tomografia agendada há mais de 7 dias",priority:"medium",timestamp:"2024-01-27T10:00:00Z",suggestedAction:"Verificar disponibilidade de horários alternativos"},{id:"3",patientId:"P003",patientName:"Pedro Costa",type:"insurance_pending",message:"Autorização de quimioterapia pendente há 5 dias",priority:"high",timestamp:"2024-01-26T09:00:00Z",suggestedAction:"Contatar convênio urgentemente"}],summary:{total:15,high:5,medium:7,low:3}}));const Ne=new P;Ne.get("/dashboard",async e=>e.json({summary:{totalRevenue:25e5,totalCosts:18e5,profit:7e5,profitMargin:28,glosasEvitadas:15e4,glosasRate:2.5},monthlyMetrics:[{month:"Janeiro 2024",revenue:85e4,costs:6e5,glosas:15e3,glosasEvitadas:45e3},{month:"Dezembro 2023",revenue:82e4,costs:58e4,glosas:2e4,glosasEvitadas:38e3}],glosasAnalysis:{totalGlosas:35e3,mainReasons:[{reason:"Documentação incompleta",count:45,value:15e3,percentage:42.8},{reason:"Código incorreto",count:30,value:1e4,percentage:28.5},{reason:"Autorização expirada",count:20,value:7e3,percentage:20},{reason:"Procedimento não coberto",count:10,value:3e3,percentage:8.7}]},costCenters:[{department:"Oncologia",budget:8e5,spent:65e4,percentage:81.25},{department:"Radioterapia",budget:5e5,spent:42e4,percentage:84},{department:"Cirurgia",budget:3e5,spent:25e4,percentage:83.33},{department:"Diagnóstico",budget:2e5,spent:18e4,percentage:90}]}));Ne.post("/predict-glosa",async e=>{const t=await e.req.json(),{procedure:s,diagnosis:a,insurance:i,documentation:o}=t;let r=.2,d=[];return o.includes("laudo_completo")||(r+=.3,d.push({factor:"Laudo médico incompleto",impact:"high",recommendation:"Solicitar laudo detalhado com CID e justificativa clínica"})),o.includes("autorizacao_previa")||(r+=.25,d.push({factor:"Autorização prévia ausente",impact:"high",recommendation:"Obter autorização antes do procedimento"})),s.complexity==="high"&&!o.includes("segunda_opiniao")&&(r+=.15,d.push({factor:"Segunda opinião não documentada",impact:"medium",recommendation:"Incluir parecer de especialista"})),e.json({riskScore:Math.min(r,1),riskLevel:r>.7?"high":r>.4?"medium":"low",estimatedGlosaValue:r*(s.value||1e4),risks:d,preventiveActions:["Revisar toda documentação antes do envio","Confirmar cobertura com o convênio","Garantir que todos os códigos estejam corretos","Manter registro fotográfico quando aplicável"],confidence:.87})});Ne.get("/revenue-analysis",async e=>e.json({byInsurance:[{name:"SUS",revenue:8e5,percentage:32,avgTicket:2500,paymentDelay:45},{name:"Unimed",revenue:6e5,percentage:24,avgTicket:5e3,paymentDelay:30},{name:"SulAmérica",revenue:45e4,percentage:18,avgTicket:4500,paymentDelay:25},{name:"Bradesco Saúde",revenue:4e5,percentage:16,avgTicket:4e3,paymentDelay:28},{name:"Particular",revenue:25e4,percentage:10,avgTicket:8e3,paymentDelay:0}],byProcedure:[{procedure:"Quimioterapia",revenue:9e5,count:180,avgValue:5e3},{procedure:"Radioterapia",revenue:6e5,count:120,avgValue:5e3},{procedure:"Cirurgia Oncológica",revenue:5e5,count:50,avgValue:1e4},{procedure:"Consultas",revenue:3e5,count:1e3,avgValue:300},{procedure:"Exames",revenue:2e5,count:400,avgValue:500}]}));Ne.get("/optimization-suggestions",async e=>e.json({suggestions:[{area:"Medicamentos",currentCost:3e5,potentialSaving:45e3,recommendation:"Negociar compra em volume com fornecedores",priority:"high",implementation:"immediate"},{area:"Exames Laboratoriais",currentCost:15e4,potentialSaving:22500,recommendation:"Implementar protocolos para evitar exames desnecessários",priority:"medium",implementation:"1-2 months"},{area:"Gestão de Leitos",currentCost:2e5,potentialSaving:3e4,recommendation:"Otimizar tempo de permanência com navegação de pacientes",priority:"high",implementation:"2-3 months"},{area:"Energia e Utilidades",currentCost:5e4,potentialSaving:7500,recommendation:"Implementar medidas de eficiência energética",priority:"low",implementation:"3-6 months"}],totalPotentialSaving:105e3,estimatedROI:3.5,implementationCost:3e4}));const Oe=new P;Oe.get("/profile/:patientId",async e=>{const t=e.req.param("patientId");return e.json({patientId:t,wellnessScore:72,mentalHealth:{anxietyLevel:5,depressionScore:3,stressLevel:6,lastAssessment:"2024-01-25",trend:"improving"},physicalWellbeing:{painLevel:4,fatigueLevel:5,sleepQuality:6,appetiteLevel:7,mobilityScore:8},socialSupport:{familySupport:"strong",friendsNetwork:"moderate",supportGroupParticipation:!0,communityEngagement:"active"},emotionalNeeds:[{need:"Medo do futuro",severity:"moderate",addressed:!0,intervention:"Sessões de terapia cognitivo-comportamental"},{need:"Preocupação com família",severity:"high",addressed:!1,intervention:"Terapia familiar recomendada"}],interventions:[{date:"2024-01-20",type:"Consulta psicológica",professional:"Dra. Ana Costa",outcome:"Melhora no manejo da ansiedade"},{date:"2024-01-22",type:"Grupo de apoio",professional:"Equipe multidisciplinar",outcome:"Paciente relatou sentir-se acolhido"}]})});Oe.post("/mental-health-screening",async e=>{const t=await e.req.json(),{patientId:s,responses:a}=t;let i=0,o=0;a.forEach(n=>{n.category==="anxiety"?i+=n.value:n.category==="depression"&&(o+=n.value)});const r=i>15?"severe":i>10?"moderate":i>5?"mild":"minimal",d=o>20?"severe":o>15?"moderately severe":o>10?"moderate":o>5?"mild":"minimal";return e.json({patientId:s,screeningDate:new Date().toISOString(),results:{anxiety:{score:i,severity:r,requiresIntervention:i>10},depression:{score:o,severity:d,requiresIntervention:o>10}},recommendations:[i>10&&"Encaminhar para psiquiatra",o>10&&"Iniciar psicoterapia",(i>5||o>5)&&"Monitoramento semanal","Manter grupo de apoio"].filter(Boolean),alertLevel:i>15||o>20?"high":i>10||o>15?"medium":"low"})});Oe.post("/predict-crisis",async e=>{const t=await e.req.json(),{patientId:s,recentEvents:a,symptoms:i,socialFactors:o}=t;let r=.2;return a.includes("loss")&&(r+=.2),a.includes("treatment_failure")&&(r+=.25),i.includes("hopelessness")&&(r+=.3),i.includes("isolation")&&(r+=.15),o.support==="weak"&&(r+=.2),o.financialStress&&(r+=.15),o.support==="strong"&&(r-=.1),o.activeInTherapy&&(r-=.15),r=Math.max(0,Math.min(1,r)),e.json({patientId:s,riskScore:r,riskLevel:r>.7?"high":r>.4?"medium":"low",timeframe:r>.7?"24-48 hours":r>.4?"1 week":"1 month",interventions:[r>.7&&{priority:"immediate",action:"Contato imediato com psiquiatra",responsible:"Equipe de plantão"},r>.4&&{priority:"urgent",action:"Agendar consulta em 48h",responsible:"Psicólogo responsável"},{priority:"routine",action:"Intensificar monitoramento",responsible:"Equipe de enfermagem"}].filter(Boolean),monitoringPlan:{frequency:r>.7?"daily":r>.4?"twice weekly":"weekly",method:"Phone check-in and mood tracking",duration:"2 weeks with reassessment"}})});Oe.get("/support-groups/:patientId",async e=>(e.req.param("patientId"),e.json({recommendedGroups:[{id:"G001",name:"Grupo de Apoio - Câncer de Mama",type:"disease-specific",meetingFrequency:"Semanal",nextMeeting:"2024-02-05 14:00",location:"Sala 201 - Ala B",facilitator:"Psic. Maria Silva",currentMembers:12,matchScore:.95},{id:"G002",name:"Mindfulness e Meditação",type:"wellness",meetingFrequency:"2x por semana",nextMeeting:"2024-02-03 10:00",location:"Espaço Bem-Estar",facilitator:"Terapeuta João Santos",currentMembers:8,matchScore:.82},{id:"G003",name:"Família e Cuidadores",type:"family-support",meetingFrequency:"Quinzenal",nextMeeting:"2024-02-10 16:00",location:"Auditório Principal",facilitator:"Assistente Social Ana Costa",currentMembers:20,matchScore:.78}],activeParticipation:[{groupId:"G001",joinedDate:"2024-01-01",attendance:"100%",engagement:"high"}]})));const ye=new P;ye.get("/dashboard",async e=>e.json({activeStudies:12,totalPatients:456,dataPoints:125e4,insights:89,studies:[{id:"ST001",title:"Eficácia da Imunoterapia em Câncer de Pulmão Avançado",phase:"III",enrolledPatients:85,targetEnrollment:100,startDate:"2023-06-01",estimatedCompletion:"2025-06-01",status:"recruiting"},{id:"ST002",title:"Biomarcadores Preditivos de Resposta à Quimioterapia",phase:"II",enrolledPatients:45,targetEnrollment:50,startDate:"2023-09-01",estimatedCompletion:"2024-09-01",status:"active"},{id:"ST003",title:"Qualidade de Vida Pós-Tratamento Radioterápico",phase:"Observational",enrolledPatients:120,targetEnrollment:150,startDate:"2023-03-01",estimatedCompletion:"2024-12-01",status:"recruiting"}],recentInsights:[{date:"2024-01-28",type:"correlation",finding:"Correlação positiva entre níveis de IL-6 e resposta à imunoterapia",significance:"p < 0.001",impact:"high"},{date:"2024-01-25",type:"pattern",finding:"Padrão de toxicidade identificado em pacientes > 65 anos",significance:"p = 0.023",impact:"medium"}]}));ye.post("/analyze-cohort",async e=>{const t=await e.req.json(),{criteria:s,analysisType:a,variables:i}=t;return e.json({cohortSize:145,demographics:{meanAge:58.3,genderDistribution:{male:.52,female:.48},stageDistribution:{I:.15,II:.25,III:.35,IV:.25}},outcomes:{overallSurvival:{median:24.5,oneYear:.82,twoYear:.65,fiveYear:.45},progressionFreeSurvival:{median:11.2,sixMonth:.68,oneYear:.45},responseRate:{completeResponse:.12,partialResponse:.38,stableDisease:.3,progressiveDisease:.2}},correlations:[{variable1:"Age",variable2:"Treatment Response",coefficient:-.23,pValue:.042,interpretation:"Idade negativamente correlacionada com resposta"},{variable1:"Biomarker X",variable2:"Survival",coefficient:.56,pValue:.001,interpretation:"Forte correlação positiva com sobrevida"}],statisticalTests:{chiSquare:{value:15.23,df:3,pValue:.0016,significant:!0},logRankTest:{value:8.45,pValue:.0037,significant:!0}}})});ye.get("/opportunities",async e=>e.json({dataGaps:[{area:"Toxicidade tardia em radioterapia",patientCount:230,dataCompleteness:.45,priority:"high",potentialImpact:"Melhor manejo de efeitos colaterais de longo prazo"},{area:"Marcadores genéticos em câncer colorretal",patientCount:156,dataCompleteness:.62,priority:"medium",potentialImpact:"Personalização do tratamento"}],emergingPatterns:[{pattern:"Aumento de resposta em combinação terapêutica específica",confidence:.87,patientsAffected:45,recommendation:"Considerar estudo prospectivo"},{pattern:"Subgrupo com resistência primária identificado",confidence:.92,patientsAffected:28,recommendation:"Investigar mecanismos moleculares"}],eligiblePatients:{forClinicalTrials:89,forObservationalStudies:234,forRegistries:456},collaborationOpportunities:[{institution:"Instituto Nacional do Câncer",area:"Genômica do câncer",status:"in-discussion"},{institution:"Harvard Medical School",area:"Imunoterapia",status:"proposal-submitted"}]}));ye.post("/generate-hypothesis",async e=>{const t=await e.req.json(),{dataSource:s,variables:a,context:i}=t;return e.json({hypotheses:[{id:"H001",statement:"Pacientes com expressão elevada de PD-L1 e baixa carga mutacional apresentam melhor resposta à combinação de imunoterapia com quimioterapia",confidence:.78,supportingData:{nPatients:67,observedEffect:.42,pValue:.023},suggestedStudyDesign:"Randomized controlled trial com estratificação por biomarcadores",estimatedSampleSize:150,primaryEndpoint:"Progression-free survival"},{id:"H002",statement:"A administração de probióticos durante quimioterapia reduz incidência de mucosite severa",confidence:.65,supportingData:{nPatients:34,observedEffect:.31,pValue:.048},suggestedStudyDesign:"Double-blind placebo-controlled trial",estimatedSampleSize:100,primaryEndpoint:"Incidence of grade 3-4 mucositis"}],dataQuality:{completeness:.82,consistency:.91,timeliness:.88},recommendations:["Coletar dados adicionais de microbioma","Padronizar avaliação de toxicidade","Implementar coleta prospectiva de PROs"]})});ye.post("/export-data",async e=>{const t=await e.req.json(),{studyId:s,variables:a,format:i,filters:o}=t;return e.json({exportId:"EXP-2024-0128-001",status:"processing",recordsCount:234,variables:a.length,anonymizationLevel:"full",format:i||"csv",estimatedSize:"15.2 MB",expirationDate:"2024-02-28",downloadUrl:"/api/research/download/EXP-2024-0128-001",auditLog:{requestedBy:"Dr. Research",requestDate:new Date().toISOString(),purpose:"Clinical trial analysis",ethicsApproval:"CEP-2024-001"}})});const oe=new P;oe.get("/system-health",async e=>e.json({status:"healthy",uptime:"45 days 12:34:56",timestamp:new Date().toISOString(),services:{database:{status:"operational",latency:12,connections:45,maxConnections:100},aiEngine:{status:"operational",activeModels:8,requestsPerMinute:234,avgResponseTime:145},storage:{status:"operational",used:"234 GB",total:"1 TB",percentage:23.4},cache:{status:"operational",hitRate:.89,memory:"512 MB",entries:12456}},performance:{cpu:45,memory:67,disk:23,network:{in:"125 Mbps",out:"89 Mbps"}},alerts:[{level:"warning",service:"database",message:"Connection pool reaching 80% capacity",timestamp:"2024-01-28T10:30:00Z"}]}));oe.get("/metrics",async e=>e.json({users:{total:523,active:412,newThisMonth:45,byRole:{patients:234,doctors:56,nurses:78,administrators:12,researchers:8,navigators:34,support:89,financial:12}},usage:{dailyActiveUsers:389,weeklyActiveUsers:456,monthlyActiveUsers:512,avgSessionDuration:"24 minutes",pageViews:{today:12456,week:78234,month:312456}},aiUsage:{totalRequests:45678,byType:{clinicalAssistant:12345,triage:8934,glosasPrediction:5678,emotionalRisk:3456,researchAnalysis:2345},avgConfidence:.87,feedbackScore:4.2},dataQuality:{completeness:.92,accuracy:.95,timeliness:.88,consistency:.91,validity:.94},compliance:{lgpdCompliance:!0,dataRetention:"compliant",auditLogsEnabled:!0,encryptionStatus:"AES-256",lastSecurityAudit:"2024-01-15",nextAudit:"2024-02-15"}}));oe.get("/users",async e=>e.json({users:[{id:"U001",name:"Dr. João Silva",email:"joao.silva@hospital.com",role:"doctor",department:"Oncologia",status:"active",lastLogin:"2024-01-28T09:15:00Z",created:"2023-06-01T10:00:00Z"},{id:"U002",name:"Maria Santos",email:"maria.santos@hospital.com",role:"nurse",department:"Navegação",status:"active",lastLogin:"2024-01-28T08:30:00Z",created:"2023-07-15T14:00:00Z"}],total:523,page:1,pageSize:20}));oe.get("/audit-logs",async e=>e.json({logs:[{id:"LOG001",timestamp:"2024-01-28T11:30:00Z",user:"Dr. João Silva",action:"VIEW_PATIENT_RECORD",resource:"Patient ID: P123",ip:"192.168.1.100",result:"success"},{id:"LOG002",timestamp:"2024-01-28T11:25:00Z",user:"Maria Santos",action:"UPDATE_APPOINTMENT",resource:"Appointment ID: A456",ip:"192.168.1.101",result:"success"},{id:"LOG003",timestamp:"2024-01-28T11:20:00Z",user:"System",action:"AI_PREDICTION",resource:"Glosas Risk Analysis",ip:"internal",result:"success",metadata:{confidence:.89,processingTime:"145ms"}}],filters:{dateRange:"last-24-hours",actions:"all",users:"all",results:"all"},total:12456,page:1,pageSize:50}));oe.get("/configuration",async e=>e.json({general:{institutionName:"ACCamargo Cancer Center",timezone:"America/Sao_Paulo",language:"pt-BR",dateFormat:"DD/MM/YYYY",currency:"BRL"},ai:{models:{clinical:{name:"clinical-assistant-v2",version:"2.1.0",lastUpdate:"2024-01-15",accuracy:.92},triage:{name:"auto-triage-v1",version:"1.5.0",lastUpdate:"2024-01-10",accuracy:.88},financial:{name:"glosas-predictor-v3",version:"3.0.1",lastUpdate:"2024-01-20",accuracy:.87}},thresholds:{confidenceMinimum:.75,alertThreshold:.85,autoApprovalThreshold:.95}},integration:{ehr:{system:"Custom EHR",status:"connected",lastSync:"2024-01-28T11:00:00Z"},laboratory:{system:"LabSystem Pro",status:"connected",lastSync:"2024-01-28T10:45:00Z"},imaging:{system:"PACS System",status:"connected",lastSync:"2024-01-28T10:30:00Z"}},security:{passwordPolicy:{minLength:12,requireSpecialChar:!0,requireNumber:!0,requireUppercase:!0,expirationDays:90},sessionTimeout:30,mfaRequired:!0,ipWhitelist:["192.168.0.0/16"]}}));oe.get("/ai-performance",async e=>e.json({models:[{name:"Clinical Assistant",performance:{accuracy:.92,precision:.89,recall:.91,f1Score:.9,auc:.94},usage:{requestsToday:1234,avgResponseTime:145,errorRate:.02},feedback:{positive:456,negative:23,neutral:89,avgRating:4.3},lastRetrained:"2024-01-15",nextRetraining:"2024-02-15"},{name:"Glosas Predictor",performance:{accuracy:.87,precision:.85,recall:.88,f1Score:.86,auc:.91},usage:{requestsToday:567,avgResponseTime:89,errorRate:.01},financialImpact:{glosasPrevenidas:145,valorEconomizado:45e4},lastRetrained:"2024-01-10",nextRetraining:"2024-02-10"}],training:{datasetSize:125e3,lastUpdate:"2024-01-20",validationAccuracy:.89,crossValidationFolds:5},alerts:[{model:"Emotional Risk Detector",issue:"Performance degradation detected",metric:"accuracy",current:.72,threshold:.75,recommendation:"Immediate retraining required"}]}));const re=new P;re.post("/prompt-engineering",async e=>{const t=await e.req.json(),{userInput:s,context:a,persona:i,intent:o}=t,r={original:s,enhanced:`[Context: ${a}] [Role: ${i}] [Intent: ${o}] ${s}`,templates:[{name:"clinical-query",prompt:`Como médico oncologista experiente, analise o seguinte caso: ${s}. 
+                 Considere as diretrizes atuais da NCCN e forneça recomendações baseadas em evidências.`},{name:"patient-communication",prompt:`Explique de forma clara e empática para o paciente: ${s}. 
+                 Use linguagem acessível e ofereça suporte emocional.`}],confidence:.92,suggestedModel:"clinical-gpt-4"};return e.json(r)});re.post("/servo-mechanisms",async e=>{const t=await e.req.json(),{trigger:s,data:a,actionType:i}=t,o={"glosa-prevention":{triggered:!0,actions:[{type:"document-review",status:"completed",finding:"Missing procedure justification",correction:"Added clinical justification to record"},{type:"code-validation",status:"completed",finding:"Incorrect procedure code",correction:"Updated to correct ICD-10 code"}],prevented:!0,estimatedSaving:15e3},"appointment-optimization":{triggered:!0,actions:[{type:"schedule-analysis",finding:"Conflict detected",resolution:"Rescheduled to available slot"},{type:"resource-allocation",finding:"Equipment available",resolution:"Reserved MRI machine for patient"}],optimized:!0,timeSaved:"3 days"},"fatigue-alert":{triggered:!0,actions:[{type:"risk-assessment",score:.78,level:"high"},{type:"notification",sent_to:["psychologist","nurse","doctor"],priority:"urgent"},{type:"intervention-scheduled",appointment:"2024-02-01 10:00",professional:"Psic. Ana Costa"}]}};return e.json({servoId:`SERVO-${Date.now()}`,trigger:s,actionType:i,result:o[i]||{triggered:!1,reason:"Unknown action type"},timestamp:new Date().toISOString(),feedback_required:!0})});re.post("/auto-triage",async e=>{const t=await e.req.json(),{message:s,sessionId:a,patientInfo:i}=t,o=s.toLowerCase();let r="low",d="",n=[];return o.includes("dor")&&(o.includes("forte")||o.includes("intensa"))?(r="high",d="Procure atendimento médico imediato no pronto-socorro",n=["Há quanto tempo sente esta dor?","A dor piora com algum movimento?"]):o.includes("febre")||o.includes("sangramento")?(r="medium",d="Agende consulta para hoje ou amanhã",n=["Qual sua temperatura?","Está tomando alguma medicação?"]):(r="low",d="Agende consulta de rotina com seu médico",n=["Há outros sintomas?","Isso interfere em suas atividades diárias?"]),e.json({sessionId:a,response:{message:`Entendo sua preocupação. ${d}`,urgency:r,questions:n,suggestedDepartment:"Oncologia",estimatedWaitTime:r==="high"?"Imediato":r==="medium"?"24-48h":"3-5 dias"},analysis:{detectedSymptoms:["dor","desconforto"],confidence:.85,requiresHumanReview:r==="high"}})});re.post("/summarize-report",async e=>{const t=await e.req.json(),{reportText:s,reportType:a}=t,i={reportType:a,keyFindings:["Massa tumoral de 3.2cm no lobo superior direito","Sem evidência de metástases","Linfonodos mediastinais dentro dos limites normais"],diagnosis:"Adenocarcinoma pulmonar estadio IB",recommendations:["Ressecção cirúrgica recomendada","Avaliar necessidade de quimioterapia adjuvante","PET-CT de controle em 3 meses"],urgency:"moderate",extractedData:{tumorSize:"3.2cm",location:"Lobo superior direito",stage:"IB",biomarkers:{EGFR:"negative",ALK:"negative","PD-L1":"15%"}},confidence:.91};return e.json(i)});re.post("/predict-risk",async e=>{const t=await e.req.json(),{patientId:s,riskType:a,clinicalData:i}=t,r={recurrence:{risk:.23,timeframe:"2 years",factors:[{factor:"Stage",weight:.3,value:"IIIA"},{factor:"Age",weight:.2,value:"65"},{factor:"Biomarkers",weight:.5,value:"EGFR+"}],recommendations:["Intensificar seguimento","Considerar terapia adjuvante estendida","Monitorar marcadores tumorais mensalmente"]},depression:{risk:.67,timeframe:"1 month",factors:[{factor:"Previous history",weight:.4,value:"Yes"},{factor:"Social support",weight:.3,value:"Low"},{factor:"Treatment phase",weight:.3,value:"Active chemo"}],recommendations:["Iniciar acompanhamento psicológico","Avaliar necessidade de medicação","Incluir em grupo de apoio"]},"treatment-adherence":{risk:.31,timeframe:"3 months",factors:[{factor:"Side effects",weight:.35,value:"Moderate"},{factor:"Distance from hospital",weight:.25,value:"50km"},{factor:"Financial situation",weight:.4,value:"Challenging"}],recommendations:["Implementar programa de navegação intensiva","Avaliar suporte financeiro","Considerar telemedicina para follow-ups"]}}[a]||{risk:0,error:"Unknown risk type"};return e.json({patientId:s,riskType:a,prediction:r,modelVersion:"2.1.0",timestamp:new Date().toISOString(),requiresClinicalValidation:r.risk>.7})});re.post("/feedback",async e=>{const t=await e.req.json(),{predictionId:s,feedback:a,userId:i,comments:o}=t;return e.json({feedbackId:`FB-${Date.now()}`,status:"recorded",impact:a==="positive"?"reinforcement":"adjustment",modelUpdate:{scheduled:!0,nextRetraining:"2024-02-15",expectedImprovement:.02},message:"Obrigado pelo feedback. Sua contribuição ajuda a melhorar nosso sistema.",aggregatedFeedback:{total:1234,positive:1089,negative:145,accuracy:.88}})});const V=(e,t)=>{const s=Zs(e);return`
     <!-- Ansiedade de Laura -->
     <div id="ai-concerns-container" class="ai-concerns-dashboard glass-effect rounded-2xl p-6 mb-8 border border-orange-200/50 transition-all duration-500">
       <!-- Header com ícone animado e botão de recolher -->
@@ -24,7 +24,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
           </div>
           <div>
             <h3 class="text-lg font-bold text-gray-800">Ansiedade de Laura</h3>
-            <p class="text-sm text-gray-600 ai-subtitle">${a.subtitle}</p>
+            <p class="text-sm text-gray-600 ai-subtitle">${s.subtitle}</p>
           </div>
         </div>
         <!-- Botão de Recolher/Expandir -->
@@ -37,18 +37,18 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
       <div id="ai-content-expanded" class="ai-expanded-content">
         <!-- Alertas Preditivos Principais -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          ${a.mainAlerts.map(s=>`
-            <div class="ai-concern-card ${s.severity}-severity rounded-xl p-4 cursor-pointer hover:shadow-lg transition-all" onclick="showConcernDetails('${s.id}')">
+          ${s.mainAlerts.map(a=>`
+            <div class="ai-concern-card ${a.severity}-severity rounded-xl p-4 cursor-pointer hover:shadow-lg transition-all" onclick="showConcernDetails('${a.id}')">
               <div class="flex items-start gap-3">
                 <div class="concern-icon-wrapper">
-                  <i class="${s.icon} text-2xl"></i>
+                  <i class="${a.icon} text-2xl"></i>
                 </div>
                 <div class="flex-1">
-                  <h4 class="font-semibold text-sm mb-1">${s.title}</h4>
-                  <p class="text-xs text-gray-600 mb-2">${s.description}</p>
+                  <h4 class="font-semibold text-sm mb-1">${a.title}</h4>
+                  <p class="text-xs text-gray-600 mb-2">${a.description}</p>
                   <div class="flex items-center justify-between">
-                    <span class="concern-badge">${s.timeframe}</span>
-                    <span class="text-xs font-bold">${s.impact}</span>
+                    <span class="concern-badge">${a.timeframe}</span>
+                    <span class="text-xs font-bold">${a.impact}</span>
                   </div>
                 </div>
               </div>
@@ -58,18 +58,18 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
 
         <!-- Métricas Preditivas -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          ${a.metrics.map(s=>`
+          ${s.metrics.map(a=>`
             <div class="metric-card bg-white/70 rounded-lg p-3 border border-gray-200">
               <div class="flex items-center justify-between mb-2">
-                <i class="${s.icon} text-orange-500"></i>
-                <span class="trend-indicator ${s.trend==="up"?"text-red-500":s.trend==="down"?"text-green-500":"text-gray-500"}">
-                  <i class="fas fa-arrow-${s.trend==="up"?"up":s.trend==="down"?"down":"right"} text-xs"></i>
+                <i class="${a.icon} text-orange-500"></i>
+                <span class="trend-indicator ${a.trend==="up"?"text-red-500":a.trend==="down"?"text-green-500":"text-gray-500"}">
+                  <i class="fas fa-arrow-${a.trend==="up"?"up":a.trend==="down"?"down":"right"} text-xs"></i>
                 </span>
               </div>
-              <div class="text-2xl font-bold text-gray-800">${s.value}</div>
-              <div class="text-xs text-gray-600">${s.label}</div>
+              <div class="text-2xl font-bold text-gray-800">${a.value}</div>
+              <div class="text-xs text-gray-600">${a.label}</div>
               <div class="text-xs text-orange-600 mt-1">
-                <i class="fas fa-exclamation-triangle text-xs"></i> ${s.prediction}
+                <i class="fas fa-exclamation-triangle text-xs"></i> ${a.prediction}
               </div>
             </div>
           `).join("")}
@@ -88,25 +88,25 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
             </button>
           </div>
           <div class="space-y-2">
-            ${a.recommendations.map((s,i)=>`
-              <div class="recommendation-item flex items-center gap-3 bg-white/80 rounded-lg p-3 hover:bg-white transition-colors" data-rec-id="${s.id}">
+            ${s.recommendations.map((a,i)=>`
+              <div class="recommendation-item flex items-center gap-3 bg-white/80 rounded-lg p-3 hover:bg-white transition-colors" data-rec-id="${a.id}">
                 <!-- Checkbox para seleção -->
                 <input type="checkbox" 
-                       id="rec-${s.id}" 
+                       id="rec-${a.id}" 
                        class="rec-checkbox w-4 h-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500" 
                        onchange="updateExecuteButton()">
                 
-                <label for="rec-${s.id}" class="flex-1 flex items-center gap-3 cursor-pointer">
+                <label for="rec-${a.id}" class="flex-1 flex items-center gap-3 cursor-pointer">
                   <div class="rec-number w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">
                     ${i+1}
                   </div>
                   <div class="flex-1">
-                    <p class="text-sm text-gray-700 rec-action-text">${s.action}</p>
-                    <p class="text-xs text-gray-500">${s.reason}</p>
+                    <p class="text-sm text-gray-700 rec-action-text">${a.action}</p>
+                    <p class="text-xs text-gray-500">${a.reason}</p>
                   </div>
                   <div class="rec-priority">
-                    <span class="priority-badge priority-${s.priority}">
-                      ${s.priority==="high"?"Urgente":s.priority==="medium"?"Importante":"Preventivo"}
+                    <span class="priority-badge priority-${a.priority}">
+                      ${a.priority==="high"?"Urgente":a.priority==="medium"?"Importante":"Preventivo"}
                     </span>
                   </div>
                 </label>
@@ -130,7 +130,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                 <i class="fas fa-exclamation-triangle text-red-500 text-sm"></i>
                 <span class="text-sm font-medium text-gray-700">Críticos:</span>
                 <span class="bg-red-100 text-red-700 px-2 py-1 rounded-full text-xs font-bold">
-                  ${a.mainAlerts.filter(s=>s.severity==="high").length}
+                  ${s.mainAlerts.filter(a=>a.severity==="high").length}
                 </span>
               </div>
               <div class="text-gray-400">|</div>
@@ -138,7 +138,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                 <i class="fas fa-exclamation-circle text-yellow-500 text-sm"></i>
                 <span class="text-sm font-medium text-gray-700">Médios:</span>
                 <span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full text-xs font-bold">
-                  ${a.mainAlerts.filter(s=>s.severity==="medium").length}
+                  ${s.mainAlerts.filter(a=>a.severity==="medium").length}
                 </span>
               </div>
               <div class="text-gray-400">|</div>
@@ -146,7 +146,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                 <i class="fas fa-info-circle text-blue-500 text-sm"></i>
                 <span class="text-sm font-medium text-gray-700">Baixos:</span>
                 <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs font-bold">
-                  ${a.mainAlerts.filter(s=>s.severity==="low").length}
+                  ${s.mainAlerts.filter(a=>a.severity==="low").length}
                 </span>
               </div>
             </div>
@@ -155,11 +155,11 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
             <div class="flex items-center gap-2 bg-orange-50 px-3 py-1.5 rounded-lg">
               <i class="fas fa-lightbulb text-orange-500"></i>
               <span class="text-sm font-medium text-gray-700">
-                ${a.recommendations.length} ações recomendadas
+                ${s.recommendations.length} ações recomendadas
               </span>
-              ${a.recommendations.filter(s=>s.priority==="high").length>0?`
+              ${s.recommendations.filter(a=>a.priority==="high").length>0?`
                 <span class="bg-orange-500 text-white px-2 py-0.5 rounded-full text-xs font-bold ml-1">
-                  ${a.recommendations.filter(s=>s.priority==="high").length} urgentes
+                  ${s.recommendations.filter(a=>a.priority==="high").length} urgentes
                 </span>
               `:""}
             </div>
@@ -564,7 +564,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
         // Removido o gráfico comparativo antigo - agora existe apenas no Master Admin como componente separado
       });
     <\/script>
-  `};function Ya(e,t){const a={patient:{subtitle:"Monitoramento preditivo da sua jornada oncológica",mainAlerts:[{id:"pa1",icon:"fas fa-calendar-exclamation",title:"Consulta Próxima",description:"Exame de controle em 3 dias",timeframe:"3 dias",impact:"Alto",severity:"high"},{id:"pa2",icon:"fas fa-pills",title:"Medicação",description:"Estoque baixo de Tamoxifeno",timeframe:"5 dias",impact:"Médio",severity:"medium"},{id:"pa3",icon:"fas fa-heartbeat",title:"Bem-estar",description:"Sessão psicológica recomendada",timeframe:"Preventivo",impact:"Preventivo",severity:"low"}],metrics:[{icon:"fas fa-user-check",value:"92%",label:"Adesão",trend:"stable",prediction:"Mantendo padrão"},{icon:"fas fa-calendar-check",value:"3/5",label:"Consultas",trend:"up",prediction:"2 agendamentos pendentes"},{icon:"fas fa-heart",value:"Bom",label:"Estado Geral",trend:"stable",prediction:"Estável"},{icon:"fas fa-flask",value:"2",label:"Exames Pendentes",trend:"down",prediction:"Agendar esta semana"}],recommendations:[{id:"rec1",action:"Agendar coleta de sangue para hemograma",reason:"Controle mensal do tratamento",priority:"high"},{id:"rec2",action:"Renovar receita de medicação contínua",reason:"Estoque termina em 5 dias",priority:"medium"},{id:"rec3",action:"Participar do grupo de apoio quinta-feira",reason:"Melhoria no bem-estar emocional",priority:"low"}]},doctor:{subtitle:"Alertas preditivos e insights clínicos dos seus pacientes",mainAlerts:[{id:"doc1",icon:"fas fa-exclamation-triangle",title:"Paciente Crítico",description:"João Silva - Risco de neutropenia",timeframe:"Imediato",impact:"Crítico",severity:"high"},{id:"doc2",icon:"fas fa-user-clock",title:"Atrasos Recorrentes",description:"5 pacientes com baixa adesão",timeframe:"Esta semana",impact:"Alto",severity:"medium"},{id:"doc3",icon:"fas fa-microscope",title:"Resultados Pendentes",description:"12 laudos aguardando revisão",timeframe:"24h",impact:"Médio",severity:"medium"}],metrics:[{icon:"fas fa-users",value:"47",label:"Pacientes Ativos",trend:"up",prediction:"+3 esta semana"},{icon:"fas fa-procedures",value:"8",label:"Internados",trend:"stable",prediction:"2 altas previstas"},{icon:"fas fa-clipboard-check",value:"89%",label:"Protocolos OK",trend:"down",prediction:"3 revisões urgentes"},{icon:"fas fa-chart-line",value:"94%",label:"Taxa Sucesso",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"drec1",action:"Revisar protocolo do paciente João Silva imediatamente",reason:"Sinais preditivos de complicação detectados",priority:"high"},{id:"drec2",action:"Agendar reunião multidisciplinar para casos complexos",reason:"3 pacientes necessitam revisão de conduta",priority:"medium"},{id:"drec3",action:"Atualizar protocolos de quimioterapia",reason:"Novas diretrizes publicadas esta semana",priority:"low"}]},navigator:{subtitle:"Coordenação inteligente e otimização da jornada dos pacientes",mainAlerts:[{id:"nav1",icon:"fas fa-exclamation-circle",title:"Pacientes Urgentes",description:"5 pacientes necessitam intervenção imediata",timeframe:"Agora",impact:"Crítico",severity:"high"},{id:"nav2",icon:"fas fa-clock",title:"Atrasos Detectados",description:"12 pacientes com atraso em exames",timeframe:"Hoje",impact:"Alto",severity:"medium"},{id:"nav3",icon:"fas fa-route",title:"Otimização de Rotas",description:"3 jornadas podem ser aceleradas",timeframe:"Esta semana",impact:"Médio",severity:"low"}],metrics:[{icon:"fas fa-users",value:"178",label:"Em Navegação",trend:"up",prediction:"+12 novos hoje"},{icon:"fas fa-tasks",value:"46",label:"Tarefas Pendentes",trend:"down",prediction:"23 urgentes"},{icon:"fas fa-percentage",value:"87%",label:"Taxa Adesão",trend:"stable",prediction:"Meta: 90%"},{icon:"fas fa-star",value:"92%",label:"Satisfação",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"navrec1",action:"Contatar pacientes com exames atrasados imediatamente",reason:"Prevenir abandono de tratamento",priority:"high"},{id:"navrec2",action:"Reorganizar agendamentos da próxima semana",reason:"Otimizar utilização de recursos",priority:"medium"},{id:"navrec3",action:"Atualizar protocolos de navegação",reason:"Novas diretrizes disponíveis",priority:"low"}]},financial:{subtitle:"Inteligência artificial para prevenção de glosas e otimização financeira",mainAlerts:[{id:"fin1",icon:"fas fa-exclamation-triangle",title:"Risco de Glosa Detectado",description:"15 contas com inconsistências identificadas",timeframe:"Urgente",impact:"R$ 127.000",severity:"high"},{id:"fin2",icon:"fas fa-file-invoice-dollar",title:"Faturamento Pendente",description:"42 procedimentos aguardando cobrança",timeframe:"Hoje",impact:"R$ 89.000",severity:"medium"},{id:"fin3",icon:"fas fa-chart-line",title:"Oportunidade de Melhoria",description:"Redução de 12% em glosas possível",timeframe:"Este mês",impact:"R$ 45.000",severity:"low"}],metrics:[{icon:"fas fa-shield-alt",value:"R$ 2.4M",label:"Glosas Evitadas",trend:"up",prediction:"+R$ 180K este mês"},{icon:"fas fa-percentage",value:"98.5%",label:"Taxa Aprovação",trend:"up",prediction:"Meta: 99%"},{icon:"fas fa-robot",value:"1,247",label:"Auditorias IA",trend:"up",prediction:"+89 hoje"},{icon:"fas fa-dollar-sign",value:"R$ 18.3M",label:"Faturamento Mês",trend:"stable",prediction:"Projeção: R$ 19M"}],recommendations:[{id:"finrec1",action:"Revisar 15 contas com alto risco de glosa imediatamente",reason:"IA detectou inconsistências em documentação e codificação",priority:"high"},{id:"finrec2",action:"Implementar checklist automático para procedimentos complexos",reason:"Redução de 30% em glosas prevista",priority:"medium"},{id:"finrec3",action:"Treinar equipe em novas diretrizes TUSS/TISS",reason:"Atualização normativa este mês",priority:"low"}]},wellness:{subtitle:"Monitoramento emocional e suporte psicossocial inteligente",mainAlerts:[{id:"well1",icon:"fas fa-heart-broken",title:"Pacientes em Risco",description:"8 pacientes com sinais de depressão severa",timeframe:"Imediato",impact:"Crítico",severity:"high"},{id:"well2",icon:"fas fa-users",title:"Grupos de Apoio",description:"3 grupos precisam de moderação",timeframe:"Hoje",impact:"Alto",severity:"medium"},{id:"well3",icon:"fas fa-calendar-check",title:"Sessões Agendadas",description:"24 atendimentos psicológicos esta semana",timeframe:"Semana",impact:"Normal",severity:"low"}],metrics:[{icon:"fas fa-smile",value:"73%",label:"Bem-Estar Geral",trend:"up",prediction:"Melhora gradual"},{icon:"fas fa-users",value:"234",label:"Pacientes Ativos",trend:"up",prediction:"+18 esta semana"},{icon:"fas fa-brain",value:"156",label:"Sessões Realizadas",trend:"stable",prediction:"24 agendadas"},{icon:"fas fa-hands-helping",value:"89%",label:"Satisfação",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"wellrec1",action:"Contatar 8 pacientes identificados com risco emocional elevado",reason:"Prevenção de crises e abandono de tratamento",priority:"high"},{id:"wellrec2",action:"Expandir horários de grupos de apoio online",reason:"Alta demanda detectada nos horários noturnos",priority:"medium"},{id:"wellrec3",action:"Implementar programa de mindfulness semanal",reason:"Evidências de redução de 40% em ansiedade",priority:"low"}]},research:{subtitle:"Análise preditiva para pesquisa clínica e recrutamento inteligente",mainAlerts:[{id:"res1",icon:"fas fa-vial",title:"Recrutamento Urgente",description:"Estudo ONCO-2024 precisa de 12 pacientes",timeframe:"2 semanas",impact:"Alto",severity:"high"},{id:"res2",icon:"fas fa-chart-bar",title:"Dados Incompletos",description:"38 CRFs pendentes de revisão",timeframe:"Esta semana",impact:"Médio",severity:"medium"},{id:"res3",icon:"fas fa-file-medical-alt",title:"Publicação Pronta",description:"3 artigos prontos para submissão",timeframe:"Este mês",impact:"Positivo",severity:"low"}],metrics:[{icon:"fas fa-flask",value:"24",label:"Estudos Ativos",trend:"up",prediction:"+2 iniciando"},{icon:"fas fa-users",value:"1,847",label:"Participantes",trend:"up",prediction:"+67 este mês"},{icon:"fas fa-percentage",value:"94%",label:"Taxa Retenção",trend:"stable",prediction:"Meta: 95%"},{icon:"fas fa-trophy",value:"42",label:"Publicações 2024",trend:"up",prediction:"15 com IF>5"}],recommendations:[{id:"resrec1",action:"Ativar protocolo de recrutamento acelerado para ONCO-2024",reason:"IA identificou 28 pacientes elegíveis no banco de dados",priority:"high"},{id:"resrec2",action:"Automatizar coleta de dados do REDCap",reason:"Redução de 60% no tempo de preenchimento de CRFs",priority:"medium"},{id:"resrec3",action:"Submeter artigos para journals de alto impacto",reason:"Janela de submissão favorável este mês",priority:"low"}]},admin:{subtitle:"Monitoramento preditivo de sistema e gestão inteligente de plataforma",mainAlerts:[{id:"adm1",icon:"fas fa-server",title:"Carga Crítica Detectada",description:"CPU 78% - Escalonamento automático ativado",timeframe:"Agora",impact:"Sistema",severity:"high"},{id:"adm2",icon:"fas fa-exclamation-circle",title:"Anomalias de Segurança",description:"3 tentativas de acesso suspeitas bloqueadas",timeframe:"Última hora",impact:"Segurança",severity:"medium"},{id:"adm3",icon:"fas fa-sync-alt",title:"Sincronização Pendente",description:"HIS/RIS com delay de 5 minutos",timeframe:"Contínuo",impact:"Integração",severity:"low"}],metrics:[{icon:"fas fa-server",value:"99.98%",label:"Uptime Sistema",trend:"stable",prediction:"SLA garantido"},{icon:"fas fa-tachometer-alt",value:"12ms",label:"Latência Edge",trend:"down",prediction:"Otimizado"},{icon:"fas fa-shield-alt",value:"100%",label:"Compliance",trend:"stable",prediction:"LGPD/ISO OK"},{icon:"fas fa-database",value:"523MB",label:"Database D1",trend:"up",prediction:"78% capacity"}],recommendations:[{id:"admrec1",action:"Implementar auto-scaling para Workers em horário de pico",reason:"Previsão de aumento de 40% na carga às 14h",priority:"high"},{id:"admrec2",action:"Atualizar certificados SSL antes do vencimento",reason:"3 certificados expiram em 15 dias",priority:"medium"},{id:"admrec3",action:"Revisar logs de segurança da última semana",reason:"Auditoria mensal de compliance",priority:"low"}]},default:{subtitle:"Monitoramento inteligente e preditivo",mainAlerts:[],metrics:[],recommendations:[]}};return a[e]||a.default}const Y=new k;function re(e,t,a){return`
+  `};function Zs(e,t){const s={patient:{subtitle:"Monitoramento preditivo da sua jornada oncológica",mainAlerts:[{id:"pa1",icon:"fas fa-calendar-exclamation",title:"Consulta Próxima",description:"Exame de controle em 3 dias",timeframe:"3 dias",impact:"Alto",severity:"high"},{id:"pa2",icon:"fas fa-pills",title:"Medicação",description:"Estoque baixo de Tamoxifeno",timeframe:"5 dias",impact:"Médio",severity:"medium"},{id:"pa3",icon:"fas fa-heartbeat",title:"Bem-estar",description:"Sessão psicológica recomendada",timeframe:"Preventivo",impact:"Preventivo",severity:"low"}],metrics:[{icon:"fas fa-user-check",value:"92%",label:"Adesão",trend:"stable",prediction:"Mantendo padrão"},{icon:"fas fa-calendar-check",value:"3/5",label:"Consultas",trend:"up",prediction:"2 agendamentos pendentes"},{icon:"fas fa-heart",value:"Bom",label:"Estado Geral",trend:"stable",prediction:"Estável"},{icon:"fas fa-flask",value:"2",label:"Exames Pendentes",trend:"down",prediction:"Agendar esta semana"}],recommendations:[{id:"rec1",action:"Agendar coleta de sangue para hemograma",reason:"Controle mensal do tratamento",priority:"high"},{id:"rec2",action:"Renovar receita de medicação contínua",reason:"Estoque termina em 5 dias",priority:"medium"},{id:"rec3",action:"Participar do grupo de apoio quinta-feira",reason:"Melhoria no bem-estar emocional",priority:"low"}]},doctor:{subtitle:"Alertas preditivos e insights clínicos dos seus pacientes",mainAlerts:[{id:"doc1",icon:"fas fa-exclamation-triangle",title:"Paciente Crítico",description:"João Silva - Risco de neutropenia",timeframe:"Imediato",impact:"Crítico",severity:"high"},{id:"doc2",icon:"fas fa-user-clock",title:"Atrasos Recorrentes",description:"5 pacientes com baixa adesão",timeframe:"Esta semana",impact:"Alto",severity:"medium"},{id:"doc3",icon:"fas fa-microscope",title:"Resultados Pendentes",description:"12 laudos aguardando revisão",timeframe:"24h",impact:"Médio",severity:"medium"}],metrics:[{icon:"fas fa-users",value:"47",label:"Pacientes Ativos",trend:"up",prediction:"+3 esta semana"},{icon:"fas fa-procedures",value:"8",label:"Internados",trend:"stable",prediction:"2 altas previstas"},{icon:"fas fa-clipboard-check",value:"89%",label:"Protocolos OK",trend:"down",prediction:"3 revisões urgentes"},{icon:"fas fa-chart-line",value:"94%",label:"Taxa Sucesso",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"drec1",action:"Revisar protocolo do paciente João Silva imediatamente",reason:"Sinais preditivos de complicação detectados",priority:"high"},{id:"drec2",action:"Agendar reunião multidisciplinar para casos complexos",reason:"3 pacientes necessitam revisão de conduta",priority:"medium"},{id:"drec3",action:"Atualizar protocolos de quimioterapia",reason:"Novas diretrizes publicadas esta semana",priority:"low"}]},navigator:{subtitle:"Coordenação inteligente e otimização da jornada dos pacientes",mainAlerts:[{id:"nav1",icon:"fas fa-exclamation-circle",title:"Pacientes Urgentes",description:"5 pacientes necessitam intervenção imediata",timeframe:"Agora",impact:"Crítico",severity:"high"},{id:"nav2",icon:"fas fa-clock",title:"Atrasos Detectados",description:"12 pacientes com atraso em exames",timeframe:"Hoje",impact:"Alto",severity:"medium"},{id:"nav3",icon:"fas fa-route",title:"Otimização de Rotas",description:"3 jornadas podem ser aceleradas",timeframe:"Esta semana",impact:"Médio",severity:"low"}],metrics:[{icon:"fas fa-users",value:"178",label:"Em Navegação",trend:"up",prediction:"+12 novos hoje"},{icon:"fas fa-tasks",value:"46",label:"Tarefas Pendentes",trend:"down",prediction:"23 urgentes"},{icon:"fas fa-percentage",value:"87%",label:"Taxa Adesão",trend:"stable",prediction:"Meta: 90%"},{icon:"fas fa-star",value:"92%",label:"Satisfação",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"navrec1",action:"Contatar pacientes com exames atrasados imediatamente",reason:"Prevenir abandono de tratamento",priority:"high"},{id:"navrec2",action:"Reorganizar agendamentos da próxima semana",reason:"Otimizar utilização de recursos",priority:"medium"},{id:"navrec3",action:"Atualizar protocolos de navegação",reason:"Novas diretrizes disponíveis",priority:"low"}]},financial:{subtitle:"Inteligência artificial para prevenção de glosas e otimização financeira",mainAlerts:[{id:"fin1",icon:"fas fa-exclamation-triangle",title:"Risco de Glosa Detectado",description:"15 contas com inconsistências identificadas",timeframe:"Urgente",impact:"R$ 127.000",severity:"high"},{id:"fin2",icon:"fas fa-file-invoice-dollar",title:"Faturamento Pendente",description:"42 procedimentos aguardando cobrança",timeframe:"Hoje",impact:"R$ 89.000",severity:"medium"},{id:"fin3",icon:"fas fa-chart-line",title:"Oportunidade de Melhoria",description:"Redução de 12% em glosas possível",timeframe:"Este mês",impact:"R$ 45.000",severity:"low"}],metrics:[{icon:"fas fa-shield-alt",value:"R$ 2.4M",label:"Glosas Evitadas",trend:"up",prediction:"+R$ 180K este mês"},{icon:"fas fa-percentage",value:"98.5%",label:"Taxa Aprovação",trend:"up",prediction:"Meta: 99%"},{icon:"fas fa-robot",value:"1,247",label:"Auditorias IA",trend:"up",prediction:"+89 hoje"},{icon:"fas fa-dollar-sign",value:"R$ 18.3M",label:"Faturamento Mês",trend:"stable",prediction:"Projeção: R$ 19M"}],recommendations:[{id:"finrec1",action:"Revisar 15 contas com alto risco de glosa imediatamente",reason:"IA detectou inconsistências em documentação e codificação",priority:"high"},{id:"finrec2",action:"Implementar checklist automático para procedimentos complexos",reason:"Redução de 30% em glosas prevista",priority:"medium"},{id:"finrec3",action:"Treinar equipe em novas diretrizes TUSS/TISS",reason:"Atualização normativa este mês",priority:"low"}]},wellness:{subtitle:"Monitoramento emocional e suporte psicossocial inteligente",mainAlerts:[{id:"well1",icon:"fas fa-heart-broken",title:"Pacientes em Risco",description:"8 pacientes com sinais de depressão severa",timeframe:"Imediato",impact:"Crítico",severity:"high"},{id:"well2",icon:"fas fa-users",title:"Grupos de Apoio",description:"3 grupos precisam de moderação",timeframe:"Hoje",impact:"Alto",severity:"medium"},{id:"well3",icon:"fas fa-calendar-check",title:"Sessões Agendadas",description:"24 atendimentos psicológicos esta semana",timeframe:"Semana",impact:"Normal",severity:"low"}],metrics:[{icon:"fas fa-smile",value:"73%",label:"Bem-Estar Geral",trend:"up",prediction:"Melhora gradual"},{icon:"fas fa-users",value:"234",label:"Pacientes Ativos",trend:"up",prediction:"+18 esta semana"},{icon:"fas fa-brain",value:"156",label:"Sessões Realizadas",trend:"stable",prediction:"24 agendadas"},{icon:"fas fa-hands-helping",value:"89%",label:"Satisfação",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"wellrec1",action:"Contatar 8 pacientes identificados com risco emocional elevado",reason:"Prevenção de crises e abandono de tratamento",priority:"high"},{id:"wellrec2",action:"Expandir horários de grupos de apoio online",reason:"Alta demanda detectada nos horários noturnos",priority:"medium"},{id:"wellrec3",action:"Implementar programa de mindfulness semanal",reason:"Evidências de redução de 40% em ansiedade",priority:"low"}]},research:{subtitle:"Análise preditiva para pesquisa clínica e recrutamento inteligente",mainAlerts:[{id:"res1",icon:"fas fa-vial",title:"Recrutamento Urgente",description:"Estudo ONCO-2024 precisa de 12 pacientes",timeframe:"2 semanas",impact:"Alto",severity:"high"},{id:"res2",icon:"fas fa-chart-bar",title:"Dados Incompletos",description:"38 CRFs pendentes de revisão",timeframe:"Esta semana",impact:"Médio",severity:"medium"},{id:"res3",icon:"fas fa-file-medical-alt",title:"Publicação Pronta",description:"3 artigos prontos para submissão",timeframe:"Este mês",impact:"Positivo",severity:"low"}],metrics:[{icon:"fas fa-flask",value:"24",label:"Estudos Ativos",trend:"up",prediction:"+2 iniciando"},{icon:"fas fa-users",value:"1,847",label:"Participantes",trend:"up",prediction:"+67 este mês"},{icon:"fas fa-percentage",value:"94%",label:"Taxa Retenção",trend:"stable",prediction:"Meta: 95%"},{icon:"fas fa-trophy",value:"42",label:"Publicações 2024",trend:"up",prediction:"15 com IF>5"}],recommendations:[{id:"resrec1",action:"Ativar protocolo de recrutamento acelerado para ONCO-2024",reason:"IA identificou 28 pacientes elegíveis no banco de dados",priority:"high"},{id:"resrec2",action:"Automatizar coleta de dados do REDCap",reason:"Redução de 60% no tempo de preenchimento de CRFs",priority:"medium"},{id:"resrec3",action:"Submeter artigos para journals de alto impacto",reason:"Janela de submissão favorável este mês",priority:"low"}]},admin:{subtitle:"Monitoramento preditivo de sistema e gestão inteligente de plataforma",mainAlerts:[{id:"adm1",icon:"fas fa-server",title:"Carga Crítica Detectada",description:"CPU 78% - Escalonamento automático ativado",timeframe:"Agora",impact:"Sistema",severity:"high"},{id:"adm2",icon:"fas fa-exclamation-circle",title:"Anomalias de Segurança",description:"3 tentativas de acesso suspeitas bloqueadas",timeframe:"Última hora",impact:"Segurança",severity:"medium"},{id:"adm3",icon:"fas fa-sync-alt",title:"Sincronização Pendente",description:"HIS/RIS com delay de 5 minutos",timeframe:"Contínuo",impact:"Integração",severity:"low"}],metrics:[{icon:"fas fa-server",value:"99.98%",label:"Uptime Sistema",trend:"stable",prediction:"SLA garantido"},{icon:"fas fa-tachometer-alt",value:"12ms",label:"Latência Edge",trend:"down",prediction:"Otimizado"},{icon:"fas fa-shield-alt",value:"100%",label:"Compliance",trend:"stable",prediction:"LGPD/ISO OK"},{icon:"fas fa-database",value:"523MB",label:"Database D1",trend:"up",prediction:"78% capacity"}],recommendations:[{id:"admrec1",action:"Implementar auto-scaling para Workers em horário de pico",reason:"Previsão de aumento de 40% na carga às 14h",priority:"high"},{id:"admrec2",action:"Atualizar certificados SSL antes do vencimento",reason:"3 certificados expiram em 15 dias",priority:"medium"},{id:"admrec3",action:"Revisar logs de segurança da última semana",reason:"Auditoria mensal de compliance",priority:"low"}]},default:{subtitle:"Monitoramento inteligente e preditivo",mainAlerts:[],metrics:[],recommendations:[]}};return s[e]||s.default}const Q=new P;function ne(e,t,s){return`
         <div class="portal-container min-h-screen bg-gradient-to-br from-gray-50 via-green-50/30 to-emerald-50/20">
             <!-- Portal Header -->
             <div class="glass-effect shadow-lg border-b border-gray-100 mb-8">
@@ -588,10 +588,10 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
             
             <!-- Portal Content -->
             <div class="container mx-auto px-4 pb-8">
-                ${a}
+                ${s}
             </div>
         </div>
-    `}Y.get("/patient",async e=>{const t=`
+    `}Q.get("/patient",async e=>{const t=`
         <!-- Métricas em 3 Colunas -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <!-- Coluna 1: Próximos Compromissos -->
@@ -706,7 +706,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                 <p class="text-sm text-gray-600 mt-1">Central de dúvidas</p>
             </button>
         </div>
-    `;return e.json({html:re("patient","Portal do Paciente",t),scripts:[]})});Y.get("/doctor",async e=>{const t=`
+    `;return e.json({html:ne("patient","Portal do Paciente",t),scripts:[]})});Q.get("/doctor",async e=>{const t=`
         <!-- Dashboard Médico -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <!-- Pacientes do Dia -->
@@ -798,7 +798,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                 <p class="text-sm text-gray-600 mt-1">Suporte à decisão</p>
             </button>
         </div>
-    `;return e.json({html:re("doctor","Portal Médico",t),scripts:[]})});Y.get("/navigator",async e=>{const a=`
+    `;return e.json({html:ne("doctor","Portal Médico",t),scripts:[]})});Q.get("/navigator",async e=>{const s=`
         <!-- Dashboard Navegador -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <!-- Pacientes em Navegação com Botão Trilho -->
@@ -1448,7 +1448,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
         <div id="navigator-modal" class="fixed inset-0 z-50 overflow-y-auto" style="display: none; overflow-y: auto !important;">
             <!-- O conteúdo será inserido dinamicamente aqui -->
         </div>
-    `;return e.json({html:re("navigator","Navegador de Pacientes",a),scripts:[`
+    `;return e.json({html:ne("navigator","Navegador de Pacientes",s),scripts:[`
             // ========================================
             // SISTEMA COMPLETO DO PORTAL DO NAVEGADOR
             // ========================================
@@ -1956,7 +1956,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                     \`;
                 });
             });
-            `]})});Y.get("/financial",async e=>{const t=`
+            `]})});Q.get("/financial",async e=>{const t=`
         <!-- Métricas Financeiras -->
         <div class="bg-gradient-to-r from-green-600 to-green-700 rounded-xl shadow-xl p-8 text-white mb-8">
             <h2 class="text-2xl font-bold mb-6">
@@ -2008,7 +2008,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                 <p class="text-sm text-gray-600 mt-1">Previsões e alertas</p>
             </button>
         </div>
-    `;return e.json({html:re("financial","Gestão Financeira",t),scripts:[]})});Y.get("/wellness",async e=>{const t=`
+    `;return e.json({html:ne("financial","Gestão Financeira",t),scripts:[]})});Q.get("/wellness",async e=>{const t=`
         <!-- Dashboard de Bem-Estar -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <!-- Estado Emocional -->
@@ -2098,7 +2098,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                 <p class="text-sm text-gray-600 mt-1">Registro emocional</p>
             </button>
         </div>
-    `;return e.json({html:re("wellness","Bem-Estar e Apoio",t),scripts:[]})});Y.get("/research",async e=>{const t=`
+    `;return e.json({html:ne("wellness","Bem-Estar e Apoio",t),scripts:[]})});Q.get("/research",async e=>{const t=`
         <!-- Dashboard de Pesquisa -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <!-- Estudos Ativos -->
@@ -2192,7 +2192,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                 <p class="text-sm text-gray-600 mt-1">Cursos e treinamentos</p>
             </button>
         </div>
-    `;return e.json({html:re("research","Pesquisa Clínica",t),scripts:[]})});Y.get("/admin",async e=>{const t=`
+    `;return e.json({html:ne("research","Pesquisa Clínica",t),scripts:[]})});Q.get("/admin",async e=>{const t=`
         <!-- Dashboard Master Admin -->
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
             <!-- Métricas Críticas do Sistema -->
@@ -2370,7 +2370,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                 <p class="text-sm text-gray-600 mt-1">Config & Deploy</p>
             </button>
         </div>
-    `;return e.json({html:re("admin","Master Administrator",t),scripts:[]})});const ea=new k;ea.get("/kanban-test",e=>e.html(`
+    `;return e.json({html:ne("admin","Master Administrator",t),scripts:[]})});const ts=new P;ts.get("/kanban-test",e=>e.html(`
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -2776,13 +2776,13 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
     <\/script>
 </body>
 </html>
-    `));const ta=new k,Ka={"PAC-001":{nome:"Maria Silva Santos",idade:52,diagnostico:"Carcinoma Ductal Invasivo - Mama",estadiamento:"IIA (T2N0M0)",medico:"Dr. Roberto Almeida",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4321",email:"maria.silva@email.com",convenio:"Unimed Premium",proximaConsulta:"25/01/2025 - 14:30",cicloTratamento:"2/6",risco:35},"PAC-002":{nome:"Ana Costa",idade:45,diagnostico:"Carcinoma Pulmonar",estadiamento:"IIIA",medico:"Dr. Carlos Santos",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4322",email:"ana.costa@email.com",convenio:"SulAmérica",proximaConsulta:"28/01/2025 - 10:00",cicloTratamento:"4/8",risco:45},"PAC-003":{nome:"Carlos Mendes",idade:58,diagnostico:"Linfoma de Hodgkin",estadiamento:"IIB",medico:"Dra. Marina Costa",navegador:"Enf. João Silva",telefone:"(11) 98765-4323",email:"carlos.mendes@email.com",convenio:"Bradesco Saúde",proximaConsulta:"20/01/2025 - 15:00",cicloTratamento:"3/6",risco:25},"PAC-004":{nome:"João Santos",idade:67,diagnostico:"Carcinoma de Próstata",estadiamento:"I",medico:"Dr. Paulo Ferreira",navegador:"Enf. Ana Rodrigues",telefone:"(11) 98765-4324",email:"joao.santos@email.com",convenio:"Amil",proximaConsulta:"22/01/2025 - 09:00",cicloTratamento:"1/4",risco:15},"PAC-005":{nome:"Pedro Oliveira",idade:49,diagnostico:"Melanoma",estadiamento:"IIA",medico:"Dra. Lucia Martins",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4325",email:"pedro.oliveira@email.com",convenio:"Porto Seguro",proximaConsulta:"Tratamento Concluído",cicloTratamento:"Completo",risco:10},"PAC-006":{nome:"Lucia Ferreira",idade:55,diagnostico:"Carcinoma Colorretal",estadiamento:"IIIC",medico:"Dr. Roberto Almeida",navegador:"Enf. João Silva",telefone:"(11) 98765-4326",email:"lucia.ferreira@email.com",convenio:"Unimed",proximaConsulta:"25/01/2025 - 11:00",cicloTratamento:"Pós-cirúrgico",risco:30}};ta.get("/patient-view/:id",e=>{const t=e.req.param("id"),a=Ka[t];return a?e.html(`
+    `));const ss=new P,Xs={"PAC-001":{nome:"Maria Silva Santos",idade:52,diagnostico:"Carcinoma Ductal Invasivo - Mama",estadiamento:"IIA (T2N0M0)",medico:"Dr. Roberto Almeida",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4321",email:"maria.silva@email.com",convenio:"Unimed Premium",proximaConsulta:"25/01/2025 - 14:30",cicloTratamento:"2/6",risco:35},"PAC-002":{nome:"Ana Costa",idade:45,diagnostico:"Carcinoma Pulmonar",estadiamento:"IIIA",medico:"Dr. Carlos Santos",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4322",email:"ana.costa@email.com",convenio:"SulAmérica",proximaConsulta:"28/01/2025 - 10:00",cicloTratamento:"4/8",risco:45},"PAC-003":{nome:"Carlos Mendes",idade:58,diagnostico:"Linfoma de Hodgkin",estadiamento:"IIB",medico:"Dra. Marina Costa",navegador:"Enf. João Silva",telefone:"(11) 98765-4323",email:"carlos.mendes@email.com",convenio:"Bradesco Saúde",proximaConsulta:"20/01/2025 - 15:00",cicloTratamento:"3/6",risco:25},"PAC-004":{nome:"João Santos",idade:67,diagnostico:"Carcinoma de Próstata",estadiamento:"I",medico:"Dr. Paulo Ferreira",navegador:"Enf. Ana Rodrigues",telefone:"(11) 98765-4324",email:"joao.santos@email.com",convenio:"Amil",proximaConsulta:"22/01/2025 - 09:00",cicloTratamento:"1/4",risco:15},"PAC-005":{nome:"Pedro Oliveira",idade:49,diagnostico:"Melanoma",estadiamento:"IIA",medico:"Dra. Lucia Martins",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4325",email:"pedro.oliveira@email.com",convenio:"Porto Seguro",proximaConsulta:"Tratamento Concluído",cicloTratamento:"Completo",risco:10},"PAC-006":{nome:"Lucia Ferreira",idade:55,diagnostico:"Carcinoma Colorretal",estadiamento:"IIIC",medico:"Dr. Roberto Almeida",navegador:"Enf. João Silva",telefone:"(11) 98765-4326",email:"lucia.ferreira@email.com",convenio:"Unimed",proximaConsulta:"25/01/2025 - 11:00",cicloTratamento:"Pós-cirúrgico",risco:30}};ss.get("/patient-view/:id",e=>{const t=e.req.param("id"),s=Xs[t];return s?e.html(`
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${a.nome} - View Universal</title>
+    <title>${s.nome} - View Universal</title>
     <script src="https://cdn.tailwindcss.com"><\/script>
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -2807,11 +2807,11 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                         <i class="fas fa-user-circle mr-3"></i>
                         View Universal do Paciente
                     </h1>
-                    <p class="text-teal-100 mt-2 text-lg">${a.nome} - ${t}</p>
+                    <p class="text-teal-100 mt-2 text-lg">${s.nome} - ${t}</p>
                 </div>
                 <div class="text-right">
-                    <p class="text-teal-100">Navegador: ${a.navegador}</p>
-                    <p class="text-teal-100">Médico: ${a.medico}</p>
+                    <p class="text-teal-100">Navegador: ${s.navegador}</p>
+                    <p class="text-teal-100">Médico: ${s.medico}</p>
                 </div>
             </div>
         </div>
@@ -2848,11 +2848,11 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                             <i class="fas fa-user mr-2 text-teal-600"></i>Dados Pessoais
                         </h3>
                         <div class="space-y-3">
-                            <p><strong>Nome:</strong> ${a.nome}</p>
-                            <p><strong>Idade:</strong> ${a.idade} anos</p>
-                            <p><strong>Telefone:</strong> ${a.telefone}</p>
-                            <p><strong>Email:</strong> ${a.email}</p>
-                            <p><strong>Convênio:</strong> ${a.convenio}</p>
+                            <p><strong>Nome:</strong> ${s.nome}</p>
+                            <p><strong>Idade:</strong> ${s.idade} anos</p>
+                            <p><strong>Telefone:</strong> ${s.telefone}</p>
+                            <p><strong>Email:</strong> ${s.email}</p>
+                            <p><strong>Convênio:</strong> ${s.convenio}</p>
                         </div>
                     </div>
                     
@@ -2861,11 +2861,11 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                             <i class="fas fa-notes-medical mr-2 text-teal-600"></i>Dados Clínicos
                         </h3>
                         <div class="space-y-3">
-                            <p><strong>Diagnóstico:</strong> ${a.diagnostico}</p>
-                            <p><strong>Estadiamento:</strong> ${a.estadiamento}</p>
-                            <p><strong>Médico Responsável:</strong> ${a.medico}</p>
-                            <p><strong>Navegador:</strong> ${a.navegador}</p>
-                            <p><strong>Ciclo de Tratamento:</strong> ${a.cicloTratamento}</p>
+                            <p><strong>Diagnóstico:</strong> ${s.diagnostico}</p>
+                            <p><strong>Estadiamento:</strong> ${s.estadiamento}</p>
+                            <p><strong>Médico Responsável:</strong> ${s.medico}</p>
+                            <p><strong>Navegador:</strong> ${s.navegador}</p>
+                            <p><strong>Ciclo de Tratamento:</strong> ${s.cicloTratamento}</p>
                         </div>
                     </div>
                 </div>
@@ -2879,8 +2879,8 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-blue-50 p-6 rounded-xl">
                         <h4 class="font-semibold text-blue-900 mb-3">Equipe Médica</h4>
-                        <p class="mb-2"><strong>Oncologista:</strong> ${a.medico}</p>
-                        <p><strong>Navegador:</strong> ${a.navegador}</p>
+                        <p class="mb-2"><strong>Oncologista:</strong> ${s.medico}</p>
+                        <p><strong>Navegador:</strong> ${s.navegador}</p>
                     </div>
                     <div class="bg-green-50 p-6 rounded-xl">
                         <h4 class="font-semibold text-green-900 mb-3">Contato Direto</h4>
@@ -2908,7 +2908,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                 <div class="bg-purple-50 p-6 rounded-xl">
                     <div class="mb-4">
                         <p class="text-purple-900 font-semibold text-lg">Próxima Consulta:</p>
-                        <p class="text-2xl font-bold text-purple-700 mt-2">${a.proximaConsulta}</p>
+                        <p class="text-2xl font-bold text-purple-700 mt-2">${s.proximaConsulta}</p>
                     </div>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
                         <button class="bg-white p-3 rounded-lg text-center hover:shadow-md transition">
@@ -2940,7 +2940,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                     <div class="border-l-4 border-teal-600 pl-6 relative">
                         <div class="absolute -left-2 top-0 w-4 h-4 bg-teal-600 rounded-full"></div>
                         <p class="font-semibold text-lg">Diagnóstico Inicial</p>
-                        <p class="text-gray-600">10/01/2025 - ${a.diagnostico}</p>
+                        <p class="text-gray-600">10/01/2025 - ${s.diagnostico}</p>
                     </div>
                     <div class="border-l-4 border-blue-600 pl-6 relative">
                         <div class="absolute -left-2 top-0 w-4 h-4 bg-blue-600 rounded-full"></div>
@@ -2950,7 +2950,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                     <div class="border-l-4 border-green-600 pl-6 relative">
                         <div class="absolute -left-2 top-0 w-4 h-4 bg-green-600 rounded-full"></div>
                         <p class="font-semibold text-lg">Em Tratamento</p>
-                        <p class="text-gray-600">Ciclo ${a.cicloTratamento}</p>
+                        <p class="text-gray-600">Ciclo ${s.cicloTratamento}</p>
                     </div>
                     <div class="border-l-4 border-gray-300 pl-6 relative">
                         <div class="absolute -left-2 top-0 w-4 h-4 bg-gray-300 rounded-full"></div>
@@ -3003,13 +3003,13 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                     <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl">
                         <div class="flex items-center justify-between mb-4">
                             <span class="font-semibold text-purple-900">Risco de Não Adesão</span>
-                            <span class="text-3xl font-bold text-purple-600">${a.risco}%</span>
+                            <span class="text-3xl font-bold text-purple-600">${s.risco}%</span>
                         </div>
                         <div class="w-full bg-gray-200 rounded-full h-3">
-                            <div class="bg-gradient-to-r from-green-500 to-red-500 h-3 rounded-full" style="width: ${a.risco}%"></div>
+                            <div class="bg-gradient-to-r from-green-500 to-red-500 h-3 rounded-full" style="width: ${s.risco}%"></div>
                         </div>
                         <p class="text-sm text-purple-700 mt-2">
-                            ${a.risco<30?"Baixo risco":a.risco<60?"Risco moderado":"Alto risco"}
+                            ${s.risco<30?"Baixo risco":s.risco<60?"Risco moderado":"Alto risco"}
                         </p>
                     </div>
                     
@@ -3096,13 +3096,13 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                 </div>
             </body>
             </html>
-        `)});const aa=new k,Za={"PAC-001":{nome:"Maria Silva Santos",idade:52,diagnostico:"Carcinoma Ductal Invasivo - Mama",estadiamento:"IIA (T2N0M0)",medico:"Dr. Roberto Almeida",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4321",email:"maria.silva@email.com",convenio:"Unimed Premium",proximaConsulta:"25/01/2025 - 14:30",cicloTratamento:"2/6",risco:35,foto:"https://ui-avatars.com/api/?name=Maria+Silva&background=EC4899&color=fff",dataInicio:"10/01/2025",fase:"Tratamento Ativo"},"PAC-002":{nome:"Ana Costa",idade:45,diagnostico:"Carcinoma Pulmonar",estadiamento:"IIIA",medico:"Dr. Carlos Santos",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4322",email:"ana.costa@email.com",convenio:"SulAmérica",proximaConsulta:"28/01/2025 - 10:00",cicloTratamento:"4/8",risco:45,foto:"https://ui-avatars.com/api/?name=Ana+Costa&background=F59E0B&color=fff",dataInicio:"05/01/2025",fase:"Quimioterapia"},"PAC-003":{nome:"Carlos Mendes",idade:58,diagnostico:"Linfoma de Hodgkin",estadiamento:"IIB",medico:"Dra. Marina Costa",navegador:"Enf. João Silva",telefone:"(11) 98765-4323",email:"carlos.mendes@email.com",convenio:"Bradesco Saúde",proximaConsulta:"20/01/2025 - 15:00",cicloTratamento:"3/6",risco:25,foto:"https://ui-avatars.com/api/?name=Carlos+Mendes&background=3B82F6&color=fff",dataInicio:"15/12/2024",fase:"Tratamento Combinado"},"PAC-004":{nome:"João Santos",idade:67,diagnostico:"Carcinoma de Próstata",estadiamento:"I",medico:"Dr. Paulo Ferreira",navegador:"Enf. Ana Rodrigues",telefone:"(11) 98765-4324",email:"joao.santos@email.com",convenio:"Amil",proximaConsulta:"22/01/2025 - 09:00",cicloTratamento:"1/4",risco:15,foto:"https://ui-avatars.com/api/?name=João+Santos&background=10B981&color=fff",dataInicio:"08/01/2025",fase:"Início do Tratamento"},"PAC-005":{nome:"Pedro Oliveira",idade:49,diagnostico:"Melanoma",estadiamento:"IIA",medico:"Dra. Lucia Martins",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4325",email:"pedro.oliveira@email.com",convenio:"Porto Seguro",proximaConsulta:"Acompanhamento Trimestral",cicloTratamento:"Completo",risco:10,foto:"https://ui-avatars.com/api/?name=Pedro+Oliveira&background=8B5CF6&color=fff",dataInicio:"01/10/2024",fase:"Remissão - Acompanhamento"},"PAC-006":{nome:"Lucia Ferreira",idade:55,diagnostico:"Carcinoma Colorretal",estadiamento:"IIIC",medico:"Dr. Roberto Almeida",navegador:"Enf. João Silva",telefone:"(11) 98765-4326",email:"lucia.ferreira@email.com",convenio:"Unimed",proximaConsulta:"25/01/2025 - 11:00",cicloTratamento:"Pós-cirúrgico",risco:30,foto:"https://ui-avatars.com/api/?name=Lucia+Ferreira&background=EF4444&color=fff",dataInicio:"20/12/2024",fase:"Recuperação Pós-Cirúrgica"}};aa.get("/patient-view-integrated/:id",e=>{const t=e.req.param("id"),a=Za[t];return a?e.html(`
+        `)});const as=new P,ea={"PAC-001":{nome:"Maria Silva Santos",idade:52,diagnostico:"Carcinoma Ductal Invasivo - Mama",estadiamento:"IIA (T2N0M0)",medico:"Dr. Roberto Almeida",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4321",email:"maria.silva@email.com",convenio:"Unimed Premium",proximaConsulta:"25/01/2025 - 14:30",cicloTratamento:"2/6",risco:35,foto:"https://ui-avatars.com/api/?name=Maria+Silva&background=EC4899&color=fff",dataInicio:"10/01/2025",fase:"Tratamento Ativo"},"PAC-002":{nome:"Ana Costa",idade:45,diagnostico:"Carcinoma Pulmonar",estadiamento:"IIIA",medico:"Dr. Carlos Santos",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4322",email:"ana.costa@email.com",convenio:"SulAmérica",proximaConsulta:"28/01/2025 - 10:00",cicloTratamento:"4/8",risco:45,foto:"https://ui-avatars.com/api/?name=Ana+Costa&background=F59E0B&color=fff",dataInicio:"05/01/2025",fase:"Quimioterapia"},"PAC-003":{nome:"Carlos Mendes",idade:58,diagnostico:"Linfoma de Hodgkin",estadiamento:"IIB",medico:"Dra. Marina Costa",navegador:"Enf. João Silva",telefone:"(11) 98765-4323",email:"carlos.mendes@email.com",convenio:"Bradesco Saúde",proximaConsulta:"20/01/2025 - 15:00",cicloTratamento:"3/6",risco:25,foto:"https://ui-avatars.com/api/?name=Carlos+Mendes&background=3B82F6&color=fff",dataInicio:"15/12/2024",fase:"Tratamento Combinado"},"PAC-004":{nome:"João Santos",idade:67,diagnostico:"Carcinoma de Próstata",estadiamento:"I",medico:"Dr. Paulo Ferreira",navegador:"Enf. Ana Rodrigues",telefone:"(11) 98765-4324",email:"joao.santos@email.com",convenio:"Amil",proximaConsulta:"22/01/2025 - 09:00",cicloTratamento:"1/4",risco:15,foto:"https://ui-avatars.com/api/?name=João+Santos&background=10B981&color=fff",dataInicio:"08/01/2025",fase:"Início do Tratamento"},"PAC-005":{nome:"Pedro Oliveira",idade:49,diagnostico:"Melanoma",estadiamento:"IIA",medico:"Dra. Lucia Martins",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4325",email:"pedro.oliveira@email.com",convenio:"Porto Seguro",proximaConsulta:"Acompanhamento Trimestral",cicloTratamento:"Completo",risco:10,foto:"https://ui-avatars.com/api/?name=Pedro+Oliveira&background=8B5CF6&color=fff",dataInicio:"01/10/2024",fase:"Remissão - Acompanhamento"},"PAC-006":{nome:"Lucia Ferreira",idade:55,diagnostico:"Carcinoma Colorretal",estadiamento:"IIIC",medico:"Dr. Roberto Almeida",navegador:"Enf. João Silva",telefone:"(11) 98765-4326",email:"lucia.ferreira@email.com",convenio:"Unimed",proximaConsulta:"25/01/2025 - 11:00",cicloTratamento:"Pós-cirúrgico",risco:30,foto:"https://ui-avatars.com/api/?name=Lucia+Ferreira&background=EF4444&color=fff",dataInicio:"20/12/2024",fase:"Recuperação Pós-Cirúrgica"}};as.get("/patient-view-integrated/:id",e=>{const t=e.req.param("id"),s=ea[t];return s?e.html(`
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${a.nome} - View Integrada</title>
+    <title>${s.nome} - View Integrada</title>
     <script src="https://cdn.tailwindcss.com"><\/script>
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"><\/script>
@@ -3144,12 +3144,12 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                         <i class="fas fa-hospital-user mr-3"></i>
                         View Integrada do Paciente
                     </h1>
-                    <p class="text-teal-100 mt-2 text-lg">${a.nome} - ${t}</p>
+                    <p class="text-teal-100 mt-2 text-lg">${s.nome} - ${t}</p>
                 </div>
                 <div class="text-right">
-                    <p class="text-teal-100">Navegador: ${a.navegador}</p>
-                    <p class="text-teal-100">Médico: ${a.medico}</p>
-                    <p class="text-xs text-teal-200 mt-1">Fase: ${a.fase}</p>
+                    <p class="text-teal-100">Navegador: ${s.navegador}</p>
+                    <p class="text-teal-100">Médico: ${s.medico}</p>
+                    <p class="text-xs text-teal-200 mt-1">Fase: ${s.fase}</p>
                 </div>
             </div>
         </div>
@@ -3181,11 +3181,11 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
             <!-- Tab Geral -->
             <div id="tab-geral" class="tab-content">
                 <div class="flex items-start gap-6 mb-6">
-                    <img src="${a.foto}" alt="${a.nome}" class="w-24 h-24 rounded-full shadow-lg">
+                    <img src="${s.foto}" alt="${s.nome}" class="w-24 h-24 rounded-full shadow-lg">
                     <div class="flex-1">
-                        <h2 class="text-2xl font-bold text-gray-800">${a.nome}</h2>
-                        <p class="text-gray-600">${a.idade} anos • ${a.convenio}</p>
-                        <p class="text-sm text-teal-600 mt-1">Início do Tratamento: ${a.dataInicio}</p>
+                        <h2 class="text-2xl font-bold text-gray-800">${s.nome}</h2>
+                        <p class="text-gray-600">${s.idade} anos • ${s.convenio}</p>
+                        <p class="text-sm text-teal-600 mt-1">Início do Tratamento: ${s.dataInicio}</p>
                     </div>
                 </div>
                 
@@ -3195,11 +3195,11 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                             <i class="fas fa-user mr-2 text-teal-600"></i>Dados Pessoais
                         </h3>
                         <div class="space-y-3">
-                            <p><strong>Nome:</strong> ${a.nome}</p>
-                            <p><strong>Idade:</strong> ${a.idade} anos</p>
-                            <p><strong>Telefone:</strong> ${a.telefone}</p>
-                            <p><strong>Email:</strong> ${a.email}</p>
-                            <p><strong>Convênio:</strong> ${a.convenio}</p>
+                            <p><strong>Nome:</strong> ${s.nome}</p>
+                            <p><strong>Idade:</strong> ${s.idade} anos</p>
+                            <p><strong>Telefone:</strong> ${s.telefone}</p>
+                            <p><strong>Email:</strong> ${s.email}</p>
+                            <p><strong>Convênio:</strong> ${s.convenio}</p>
                         </div>
                     </div>
                     
@@ -3208,11 +3208,11 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                             <i class="fas fa-notes-medical mr-2 text-teal-600"></i>Dados Clínicos
                         </h3>
                         <div class="space-y-3">
-                            <p><strong>Diagnóstico:</strong> ${a.diagnostico}</p>
-                            <p><strong>Estadiamento:</strong> ${a.estadiamento}</p>
-                            <p><strong>Médico Responsável:</strong> ${a.medico}</p>
-                            <p><strong>Navegador:</strong> ${a.navegador}</p>
-                            <p><strong>Ciclo de Tratamento:</strong> ${a.cicloTratamento}</p>
+                            <p><strong>Diagnóstico:</strong> ${s.diagnostico}</p>
+                            <p><strong>Estadiamento:</strong> ${s.estadiamento}</p>
+                            <p><strong>Médico Responsável:</strong> ${s.medico}</p>
+                            <p><strong>Navegador:</strong> ${s.navegador}</p>
+                            <p><strong>Ciclo de Tratamento:</strong> ${s.cicloTratamento}</p>
                         </div>
                     </div>
                 </div>
@@ -3315,7 +3315,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                                 <img src="https://ui-avatars.com/api/?name=Dr+Roberto&background=6366F1&color=fff" 
                                      class="w-14 h-14 rounded-full">
                                 <div class="flex-1">
-                                    <h5 class="font-semibold text-lg text-gray-800">${a.medico}</h5>
+                                    <h5 class="font-semibold text-lg text-gray-800">${s.medico}</h5>
                                     <p class="text-sm text-gray-600">Oncologia • CRM-SP 123456</p>
                                     <p class="text-xs text-indigo-600 mt-1">Torre A - Sala 302</p>
                                     <p class="text-xs text-gray-500">Seg, Qua, Sex - 08h às 12h</p>
@@ -3336,7 +3336,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                                 <img src="https://ui-avatars.com/api/?name=Enf+Patricia&background=EC4899&color=fff" 
                                      class="w-14 h-14 rounded-full">
                                 <div class="flex-1">
-                                    <h5 class="font-semibold text-lg text-gray-800">${a.navegador}</h5>
+                                    <h5 class="font-semibold text-lg text-gray-800">${s.navegador}</h5>
                                     <p class="text-sm text-gray-600">Navegação de Pacientes</p>
                                     <p class="text-xs text-pink-600 mt-1">Central de Navegação</p>
                                     <p class="text-xs text-gray-500">Seg-Sex - 08h às 17h</p>
@@ -3373,9 +3373,9 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                             <div class="flex items-center justify-between">
                                 <div>
                                     <p class="font-semibold text-lg text-gray-800">Consulta de Retorno</p>
-                                    <p class="text-sm text-gray-600">${a.medico}</p>
+                                    <p class="text-sm text-gray-600">${s.medico}</p>
                                     <p class="text-sm text-purple-600 mt-1">
-                                        <i class="far fa-calendar mr-1"></i>${a.proximaConsulta}
+                                        <i class="far fa-calendar mr-1"></i>${s.proximaConsulta}
                                     </p>
                                 </div>
                                 <div class="flex gap-2">
@@ -3424,7 +3424,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                         <div class="text-center text-sm font-semibold text-gray-600 p-2">Sáb</div>
                         
                         <!-- Dias do mês (simplificado) -->
-                        ${Array.from({length:31},(s,i)=>{const o=i+1,r=o===25||o===28||o===30;return`
+                        ${Array.from({length:31},(a,i)=>{const o=i+1,r=o===25||o===28||o===30;return`
                                 <div class="text-center p-2 ${r?"bg-purple-100 rounded-lg":"hover:bg-gray-100"} cursor-pointer">
                                     <span class="${r?"font-bold text-purple-600":"text-gray-700"}">${o}</span>
                                     ${r?'<div class="w-1 h-1 bg-purple-600 rounded-full mx-auto mt-1"></div>':""}
@@ -3455,9 +3455,9 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                             <div class="flex-1 bg-gradient-to-r from-teal-50 to-cyan-50 p-4 rounded-xl ml-6">
                                 <div class="flex items-center justify-between mb-2">
                                     <h4 class="font-semibold text-lg text-gray-800">Diagnóstico Inicial</h4>
-                                    <span class="text-sm text-teal-600">${a.dataInicio}</span>
+                                    <span class="text-sm text-teal-600">${s.dataInicio}</span>
                                 </div>
-                                <p class="text-gray-600">${a.diagnostico} - ${a.estadiamento}</p>
+                                <p class="text-gray-600">${s.diagnostico} - ${s.estadiamento}</p>
                                 <div class="mt-3 flex gap-2">
                                     <span class="bg-teal-100 text-teal-700 px-2 py-1 rounded-lg text-xs">Biópsia</span>
                                     <span class="bg-teal-100 text-teal-700 px-2 py-1 rounded-lg text-xs">Estadiamento</span>
@@ -3474,7 +3474,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                                     <h4 class="font-semibold text-lg text-gray-800">Início do Tratamento</h4>
                                     <span class="text-sm text-blue-600">15/01/2025</span>
                                 </div>
-                                <p class="text-gray-600">Protocolo ${a.cicloTratamento}</p>
+                                <p class="text-gray-600">Protocolo ${s.cicloTratamento}</p>
                                 <div class="mt-3">
                                     <div class="w-full bg-gray-200 rounded-full h-2">
                                         <div class="bg-blue-600 h-2 rounded-full" style="width: 33%"></div>
@@ -3618,16 +3618,16 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                             <svg class="w-32 h-32 mx-auto">
                                 <circle cx="64" cy="64" r="60" stroke="#e5e7eb" stroke-width="8" fill="none"/>
                                 <circle cx="64" cy="64" r="60" stroke="#8b5cf6" stroke-width="8" fill="none"
-                                        stroke-dasharray="${a.risco*3.77} 377"
+                                        stroke-dasharray="${s.risco*3.77} 377"
                                         stroke-dashoffset="0"
                                         transform="rotate(-90 64 64)"/>
                             </svg>
                             <div class="absolute inset-0 flex items-center justify-center">
-                                <span class="text-3xl font-bold text-purple-700">${a.risco}%</span>
+                                <span class="text-3xl font-bold text-purple-700">${s.risco}%</span>
                             </div>
                         </div>
                         <p class="text-center text-sm text-purple-700 mt-2">
-                            ${a.risco<30?"Baixo Risco":a.risco<60?"Risco Moderado":"Alto Risco"}
+                            ${s.risco<30?"Baixo Risco":s.risco<60?"Risco Moderado":"Alto Risco"}
                         </p>
                     </div>
                     
@@ -3854,7 +3854,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
                 </div>
             </body>
             </html>
-        `)});const sa=new k;sa.get("/doctor-portal",e=>e.html(`
+        `)});const is=new P;is.get("/doctor-portal",e=>e.html(`
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -4177,7 +4177,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
     </div>
 </body>
 </html>
-    `));const Ne=new k;Ne.get("/doctor/prescribe",e=>e.html(`
+    `));const Fe=new P;Fe.get("/doctor/prescribe",e=>e.html(`
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -4312,7 +4312,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
     </div>
 </body>
 </html>
-    `));Ne.get("/doctor/reports",e=>e.html(`
+    `));Fe.get("/doctor/reports",e=>e.html(`
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -4464,7 +4464,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
     </div>
 </body>
 </html>
-    `));Ne.get("/doctor/protocols",e=>e.html(`
+    `));Fe.get("/doctor/protocols",e=>e.html(`
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -4637,7 +4637,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
     </div>
 </body>
 </html>
-    `));Ne.get("/doctor/ai-assistant",e=>e.html(`
+    `));Fe.get("/doctor/ai-assistant",e=>e.html(`
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -4801,7 +4801,1831 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
     </div>
 </body>
 </html>
-    `));var ot=Object.freeze,Xa=Object.defineProperty,es=(e,t)=>ot(Xa(e,"raw",{value:ot(t||e.slice())})),rt;const ts=e=>e.html(H(rt||(rt=es([`
+    `));const os=new P;os.get("/research-portal",e=>e.html(`
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Pesquisa Clínica - A.C.Camargo</title>
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"><\/script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-50 via-white to-purple-50 min-h-screen">
+    <div class="max-w-7xl mx-auto p-4">
+        <!-- Header -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-6 glass-effect">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">
+                        <i class="fas fa-microscope mr-3 text-indigo-600"></i>
+                        Portal de Pesquisa Clínica
+                    </h1>
+                    <p class="text-gray-600 mt-1">Centro de Pesquisa A.C.Camargo Cancer Center</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <p class="text-sm text-gray-600">Segunda-feira, 16 de Janeiro</p>
+                        <p class="text-lg font-semibold text-indigo-600">14:45</p>
+                    </div>
+                    <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-700 rounded-full flex items-center justify-center text-white font-bold">
+                        PC
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cards do Topo - Clicáveis -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <!-- Estudos Ativos -->
+            <div onclick="window.location.href='/research/studies'" class="bg-white rounded-xl shadow-lg p-6 cursor-pointer hover-lift transition-all">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-gray-800">
+                        <i class="fas fa-flask text-indigo-600 mr-2"></i>
+                        Estudos Ativos
+                    </h3>
+                    <button class="text-indigo-600 hover:text-indigo-700">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="text-3xl font-bold text-indigo-600 mb-2">42</div>
+                <div class="space-y-2">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Fase III</span>
+                        <span class="font-semibold text-green-600">15</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Recrutando</span>
+                        <span class="font-semibold text-blue-600">28</span>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-gradient-to-r from-indigo-500 to-purple-600 h-2 rounded-full" style="width: 75%"></div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">75% da meta anual</p>
+                </div>
+            </div>
+
+            <!-- Participantes -->
+            <div onclick="window.location.href='/research/participants'" class="bg-white rounded-xl shadow-lg p-6 cursor-pointer hover-lift transition-all">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-gray-800">
+                        <i class="fas fa-users text-green-600 mr-2"></i>
+                        Participantes
+                    </h3>
+                    <button class="text-green-600 hover:text-green-700">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="text-3xl font-bold text-green-600 mb-2">523</div>
+                <div class="space-y-2">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Novos este mês</span>
+                        <span class="font-semibold text-blue-600">47</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Taxa de retenção</span>
+                        <span class="font-semibold text-green-600">87%</span>
+                    </div>
+                </div>
+                <div class="mt-4 flex gap-2">
+                    <span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs">+12% vs mês anterior</span>
+                </div>
+            </div>
+
+            <!-- Publicações -->
+            <div onclick="window.location.href='/research/publications'" class="bg-white rounded-xl shadow-lg p-6 cursor-pointer hover-lift transition-all">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-gray-800">
+                        <i class="fas fa-book-open text-blue-600 mr-2"></i>
+                        Publicações
+                    </h3>
+                    <button class="text-blue-600 hover:text-blue-700">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="text-3xl font-bold text-blue-600 mb-2">89</div>
+                <div class="space-y-2">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Impact Factor médio</span>
+                        <span class="font-semibold text-purple-600">12.4</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Citações 2024</span>
+                        <span class="font-semibold text-orange-600">3.2K</span>
+                    </div>
+                </div>
+                <div class="mt-4 flex gap-2">
+                    <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs">Nature: 3</span>
+                    <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs">NEJM: 2</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Central -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+            <!-- Insights da IA -->
+            <div class="lg:col-span-2 bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-lg font-bold text-gray-800 mb-4">
+                    <i class="fas fa-brain text-purple-600 mr-2"></i>
+                    Insights LAURA - Análise de Dados
+                </h3>
+                <div class="space-y-3">
+                    <div class="p-4 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg border-l-4 border-purple-500">
+                        <div class="flex items-start">
+                            <i class="fas fa-lightbulb text-purple-500 mr-3 mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-gray-800">Correlação Identificada</p>
+                                <p class="text-sm text-gray-600 mt-1">Forte correlação entre biomarcador X e resposta à imunoterapia (p<0.001)</p>
+                                <p class="text-xs text-purple-600 mt-2">42 pacientes analisados • Confiança: 94%</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-4 bg-gradient-to-r from-green-50 to-teal-50 rounded-lg border-l-4 border-green-500">
+                        <div class="flex items-start">
+                            <i class="fas fa-chart-line text-green-500 mr-3 mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-gray-800">Tendência Positiva</p>
+                                <p class="text-sm text-gray-600 mt-1">Taxa de resposta 15% acima da média em protocolo modificado</p>
+                                <p class="text-xs text-green-600 mt-2">Sugestão: Expandir coorte</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mini Gráfico -->
+                <div class="mt-4">
+                    <canvas id="trendsChart" height="100"></canvas>
+                </div>
+            </div>
+
+            <!-- Status dos Estudos -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-lg font-bold text-gray-800 mb-4">
+                    <i class="fas fa-chart-pie text-orange-600 mr-2"></i>
+                    Status dos Estudos
+                </h3>
+                <canvas id="statusChart" height="200"></canvas>
+                <div class="mt-4 space-y-2">
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="flex items-center">
+                            <span class="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
+                            Recrutando
+                        </span>
+                        <span class="font-semibold">28</span>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="flex items-center">
+                            <span class="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
+                            Em Análise
+                        </span>
+                        <span class="font-semibold">8</span>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="flex items-center">
+                            <span class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></span>
+                            Finalizado
+                        </span>
+                        <span class="font-semibold">6</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cards do Rodapé - Clicáveis -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Banco de Dados -->
+            <div onclick="window.location.href='/research/database'" class="bg-gradient-to-br from-cyan-500 to-cyan-600 text-white p-6 rounded-xl shadow-lg cursor-pointer hover:shadow-xl transition-all hover-lift">
+                <i class="fas fa-database text-4xl mb-3 opacity-90"></i>
+                <h4 class="text-lg font-bold mb-2">Banco de Dados</h4>
+                <p class="text-sm opacity-90 mb-3">REDCap e registros</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-xs opacity-75">12.5K registros</span>
+                    <i class="fas fa-arrow-right opacity-75"></i>
+                </div>
+            </div>
+
+            <!-- Análises -->
+            <div onclick="window.location.href='/research/analysis'" class="bg-gradient-to-br from-purple-500 to-purple-600 text-white p-6 rounded-xl shadow-lg cursor-pointer hover:shadow-xl transition-all hover-lift">
+                <i class="fas fa-chart-pie text-4xl mb-3 opacity-90"></i>
+                <h4 class="text-lg font-bold mb-2">Análises</h4>
+                <p class="text-sm opacity-90 mb-3">Estatísticas e IA</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-xs opacity-75">18 em andamento</span>
+                    <i class="fas fa-arrow-right opacity-75"></i>
+                </div>
+            </div>
+
+            <!-- Protocolos -->
+            <div onclick="window.location.href='/research/protocols'" class="bg-gradient-to-br from-green-500 to-green-600 text-white p-6 rounded-xl shadow-lg cursor-pointer hover:shadow-xl transition-all hover-lift">
+                <i class="fas fa-file-contract text-4xl mb-3 opacity-90"></i>
+                <h4 class="text-lg font-bold mb-2">Protocolos</h4>
+                <p class="text-sm opacity-90 mb-3">CEP/CONEP</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-xs opacity-75">8 em análise</span>
+                    <i class="fas fa-arrow-right opacity-75"></i>
+                </div>
+            </div>
+
+            <!-- Educação -->
+            <div onclick="window.location.href='/research/education'" class="bg-gradient-to-br from-orange-500 to-orange-600 text-white p-6 rounded-xl shadow-lg cursor-pointer hover:shadow-xl transition-all hover-lift">
+                <i class="fas fa-graduation-cap text-4xl mb-3 opacity-90"></i>
+                <h4 class="text-lg font-bold mb-2">Educação</h4>
+                <p class="text-sm opacity-90 mb-3">Treinamentos</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-xs opacity-75">24 cursos ativos</span>
+                    <i class="fas fa-arrow-right opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gráfico de Status
+        const statusCtx = document.getElementById('statusChart').getContext('2d');
+        new Chart(statusCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Recrutando', 'Em Análise', 'Finalizado'],
+                datasets: [{
+                    data: [28, 8, 6],
+                    backgroundColor: [
+                        'rgba(16, 185, 129, 0.8)',
+                        'rgba(59, 130, 246, 0.8)',
+                        'rgba(245, 158, 11, 0.8)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // Gráfico de Tendências
+        const trendsCtx = document.getElementById('trendsChart').getContext('2d');
+        new Chart(trendsCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Taxa de Recrutamento',
+                    data: [65, 72, 78, 82, 89, 95],
+                    borderColor: 'rgb(139, 92, 246)',
+                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+    <\/script>
+</body>
+</html>
+    `));const K=new P;K.get("/research/studies",e=>e.html(`
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudos Clínicos Ativos - A.C.Camargo</title>
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"><\/script>
+</head>
+<body class="bg-gradient-to-br from-indigo-50 via-white to-purple-50 min-h-screen">
+    <div class="max-w-7xl mx-auto p-4">
+        <!-- Header -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-gray-800">
+                    <i class="fas fa-flask mr-3 text-indigo-600"></i>
+                    Estudos Clínicos Ativos
+                </h1>
+                <button onclick="window.history.back()" class="text-gray-600 hover:text-gray-800">
+                    <i class="fas fa-arrow-left mr-2"></i>Voltar
+                </button>
+            </div>
+        </div>
+
+        <!-- Estatísticas -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl p-4 text-white">
+                <p class="text-indigo-100">Total de Estudos</p>
+                <p class="text-3xl font-bold">42</p>
+                <p class="text-xs mt-2">+3 este mês</p>
+            </div>
+            <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-4 text-white">
+                <p class="text-purple-100">Fase III</p>
+                <p class="text-3xl font-bold">15</p>
+                <p class="text-xs mt-2">35.7% do total</p>
+            </div>
+            <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4 text-white">
+                <p class="text-blue-100">Recrutando</p>
+                <p class="text-3xl font-bold">28</p>
+                <p class="text-xs mt-2">66.7% ativos</p>
+            </div>
+            <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-4 text-white">
+                <p class="text-green-100">Internacional</p>
+                <p class="text-3xl font-bold">12</p>
+                <p class="text-xs mt-2">Multicêntrico</p>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="bg-white rounded-xl shadow-lg p-4 mb-6">
+            <div class="flex flex-wrap gap-3">
+                <select class="px-3 py-2 border border-gray-300 rounded-lg">
+                    <option>Todas as Fases</option>
+                    <option>Fase I</option>
+                    <option>Fase II</option>
+                    <option>Fase III</option>
+                    <option>Fase IV</option>
+                </select>
+                <select class="px-3 py-2 border border-gray-300 rounded-lg">
+                    <option>Todos os Status</option>
+                    <option>Recrutando</option>
+                    <option>Em Andamento</option>
+                    <option>Análise de Dados</option>
+                    <option>Concluído</option>
+                </select>
+                <select class="px-3 py-2 border border-gray-300 rounded-lg">
+                    <option>Todas as Áreas</option>
+                    <option>Oncologia Mama</option>
+                    <option>Oncologia Pulmão</option>
+                    <option>Hematologia</option>
+                    <option>Oncologia GI</option>
+                </select>
+                <input type="text" placeholder="Buscar estudo..." class="flex-1 px-3 py-2 border border-gray-300 rounded-lg">
+                <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
+                    <i class="fas fa-search mr-2"></i>Buscar
+                </button>
+            </div>
+        </div>
+
+        <!-- Lista de Estudos -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <!-- Estudo 1 -->
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <div class="bg-gradient-to-r from-indigo-500 to-purple-500 p-4 rounded-t-xl">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-white font-bold">KEYNOTE-522</h3>
+                            <p class="text-indigo-100 text-sm">Pembrolizumabe + Quimio Neoadjuvante</p>
+                        </div>
+                        <span class="bg-white/20 text-white px-2 py-1 rounded text-xs">Fase III</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        <span class="px-2 py-1 bg-green-100 text-green-700 text-xs rounded">Recrutando</span>
+                        <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">Mama</span>
+                        <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded">Internacional</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-3">CA mama triplo negativo, estádios II-III. Avaliando eficácia de imunoterapia combinada.</p>
+                    <div class="grid grid-cols-2 gap-4 mb-3">
+                        <div>
+                            <p class="text-xs text-gray-500">Meta de Recrutamento</p>
+                            <div class="flex items-center">
+                                <span class="text-lg font-bold text-gray-800">45/60</span>
+                                <span class="text-xs text-gray-500 ml-2">(75%)</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500">Investigador Principal</p>
+                            <p class="text-sm font-semibold">Dr. Carlos Ferreira</p>
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mb-3">
+                        <div class="bg-indigo-600 h-2 rounded-full" style="width: 75%"></div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-500">Início: Jan/2023</span>
+                        <button class="text-indigo-600 hover:text-indigo-700 text-sm font-semibold">
+                            <i class="fas fa-arrow-right mr-1"></i>Detalhes
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Estudo 2 -->
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <div class="bg-gradient-to-r from-green-500 to-teal-500 p-4 rounded-t-xl">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-white font-bold">CheckMate-816</h3>
+                            <p class="text-green-100 text-sm">Nivolumabe Neoadjuvante NSCLC</p>
+                        </div>
+                        <span class="bg-white/20 text-white px-2 py-1 rounded text-xs">Fase III</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        <span class="px-2 py-1 bg-green-100 text-green-700 text-xs rounded">Recrutando</span>
+                        <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs rounded">Pulmão</span>
+                        <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded">Multicêntrico</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-3">CPNPC ressecável, estádios IB-IIIA. Imunoterapia + quimio vs quimio isolada.</p>
+                    <div class="grid grid-cols-2 gap-4 mb-3">
+                        <div>
+                            <p class="text-xs text-gray-500">Meta de Recrutamento</p>
+                            <div class="flex items-center">
+                                <span class="text-lg font-bold text-gray-800">32/40</span>
+                                <span class="text-xs text-gray-500 ml-2">(80%)</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500">Investigador Principal</p>
+                            <p class="text-sm font-semibold">Dra. Marina Costa</p>
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mb-3">
+                        <div class="bg-green-600 h-2 rounded-full" style="width: 80%"></div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-500">Início: Mar/2023</span>
+                        <button class="text-green-600 hover:text-green-700 text-sm font-semibold">
+                            <i class="fas fa-arrow-right mr-1"></i>Detalhes
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Estudo 3 -->
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <div class="bg-gradient-to-r from-blue-500 to-cyan-500 p-4 rounded-t-xl">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-white font-bold">VISION Trial</h3>
+                            <p class="text-blue-100 text-sm">Lu-PSMA-617 CA Próstata</p>
+                        </div>
+                        <span class="bg-white/20 text-white px-2 py-1 rounded text-xs">Fase II</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        <span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs rounded">Análise</span>
+                        <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">Próstata</span>
+                        <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">Nacional</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-3">mCRPC pós-quimioterapia. Radioligante direcionado PSMA.</p>
+                    <div class="grid grid-cols-2 gap-4 mb-3">
+                        <div>
+                            <p class="text-xs text-gray-500">Pacientes Incluídos</p>
+                            <div class="flex items-center">
+                                <span class="text-lg font-bold text-gray-800">25/25</span>
+                                <span class="text-xs text-green-500 ml-2">(Completo)</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500">Investigador Principal</p>
+                            <p class="text-sm font-semibold">Dr. Paulo Santos</p>
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mb-3">
+                        <div class="bg-blue-600 h-2 rounded-full" style="width: 100%"></div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-500">Início: Nov/2022</span>
+                        <button class="text-blue-600 hover:text-blue-700 text-sm font-semibold">
+                            <i class="fas fa-arrow-right mr-1"></i>Detalhes
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Estudo 4 -->
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <div class="bg-gradient-to-r from-orange-500 to-red-500 p-4 rounded-t-xl">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-white font-bold">DESTINY-Breast04</h3>
+                            <p class="text-orange-100 text-sm">T-DXd HER2-low</p>
+                        </div>
+                        <span class="bg-white/20 text-white px-2 py-1 rounded text-xs">Fase III</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        <span class="px-2 py-1 bg-green-100 text-green-700 text-xs rounded">Recrutando</span>
+                        <span class="px-2 py-1 bg-pink-100 text-pink-700 text-xs rounded">Mama</span>
+                        <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded">Global</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-3">CA mama metastático HER2-low. Trastuzumabe deruxtecana vs QT escolha.</p>
+                    <div class="grid grid-cols-2 gap-4 mb-3">
+                        <div>
+                            <p class="text-xs text-gray-500">Meta de Recrutamento</p>
+                            <div class="flex items-center">
+                                <span class="text-lg font-bold text-gray-800">18/30</span>
+                                <span class="text-xs text-gray-500 ml-2">(60%)</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500">Investigador Principal</p>
+                            <p class="text-sm font-semibold">Dra. Ana Silva</p>
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mb-3">
+                        <div class="bg-orange-600 h-2 rounded-full" style="width: 60%"></div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-500">Início: Jun/2023</span>
+                        <button class="text-orange-600 hover:text-orange-700 text-sm font-semibold">
+                            <i class="fas fa-arrow-right mr-1"></i>Detalhes
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráfico de Distribuição -->
+        <div class="mt-6 bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-lg font-bold mb-4">Distribuição por Fase</h3>
+            <canvas id="phaseChart" height="100"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Gráfico de Fases
+        const ctx = document.getElementById('phaseChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Fase I', 'Fase II', 'Fase III', 'Fase IV', 'Observacional'],
+                datasets: [{
+                    label: 'Número de Estudos',
+                    data: [5, 12, 15, 3, 7],
+                    backgroundColor: [
+                        'rgba(99, 102, 241, 0.8)',
+                        'rgba(139, 92, 246, 0.8)',
+                        'rgba(59, 130, 246, 0.8)',
+                        'rgba(16, 185, 129, 0.8)',
+                        'rgba(245, 158, 11, 0.8)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    <\/script>
+</body>
+</html>
+    `));K.get("/research/participants",e=>e.html(`
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Participantes - Pesquisa Clínica</title>
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"><\/script>
+</head>
+<body class="bg-gradient-to-br from-green-50 via-white to-teal-50 min-h-screen">
+    <div class="max-w-7xl mx-auto p-4">
+        <!-- Header -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-gray-800">
+                    <i class="fas fa-users mr-3 text-green-600"></i>
+                    Gestão de Participantes de Pesquisa
+                </h1>
+                <button onclick="window.history.back()" class="text-gray-600 hover:text-gray-800">
+                    <i class="fas fa-arrow-left mr-2"></i>Voltar
+                </button>
+            </div>
+        </div>
+
+        <!-- Estatísticas -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-4 text-white">
+                <p class="text-green-100">Total Participantes</p>
+                <p class="text-3xl font-bold">523</p>
+                <p class="text-xs mt-2">+47 este mês</p>
+            </div>
+            <div class="bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl p-4 text-white">
+                <p class="text-teal-100">Em Triagem</p>
+                <p class="text-3xl font-bold">89</p>
+                <p class="text-xs mt-2">17% do total</p>
+            </div>
+            <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4 text-white">
+                <p class="text-blue-100">Ativos</p>
+                <p class="text-3xl font-bold">387</p>
+                <p class="text-xs mt-2">74% adesão</p>
+            </div>
+            <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-4 text-white">
+                <p class="text-purple-100">Seguimento</p>
+                <p class="text-3xl font-bold">47</p>
+                <p class="text-xs mt-2">Pós-estudo</p>
+            </div>
+        </div>
+
+        <!-- Filtros e Busca -->
+        <div class="bg-white rounded-xl shadow-lg p-4 mb-6">
+            <div class="flex flex-wrap gap-3">
+                <input type="text" placeholder="Buscar participante..." class="flex-1 px-3 py-2 border border-gray-300 rounded-lg">
+                <select class="px-3 py-2 border border-gray-300 rounded-lg">
+                    <option>Todos os Estudos</option>
+                    <option>KEYNOTE-522</option>
+                    <option>CheckMate-816</option>
+                    <option>VISION Trial</option>
+                </select>
+                <select class="px-3 py-2 border border-gray-300 rounded-lg">
+                    <option>Todos os Status</option>
+                    <option>Triagem</option>
+                    <option>Ativo</option>
+                    <option>Descontinuado</option>
+                    <option>Completo</option>
+                </select>
+                <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+                    <i class="fas fa-user-plus mr-2"></i>Novo Participante
+                </button>
+            </div>
+        </div>
+
+        <!-- Lista de Participantes -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <table class="w-full">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID/Nome</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estudo</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Inclusão</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Próxima Visita</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Adesão</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Ações</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4">
+                            <div>
+                                <p class="text-sm font-semibold text-gray-900">PSQ-001</p>
+                                <p class="text-xs text-gray-500">Maria Silva</p>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="text-sm text-gray-900">KEYNOTE-522</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs">Ativo</span>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-900">10/01/2024</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">25/01/2025</td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center">
+                                <span class="text-sm text-gray-900 mr-2">95%</span>
+                                <div class="w-16 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-600 h-2 rounded-full" style="width: 95%"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <button class="text-indigo-600 hover:text-indigo-900 text-sm">
+                                <i class="fas fa-eye mr-1"></i>Ver
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4">
+                            <div>
+                                <p class="text-sm font-semibold text-gray-900">PSQ-002</p>
+                                <p class="text-xs text-gray-500">João Santos</p>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="text-sm text-gray-900">CheckMate-816</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs">Triagem</span>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-900">15/01/2024</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">22/01/2025</td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center">
+                                <span class="text-sm text-gray-900 mr-2">-</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <button class="text-indigo-600 hover:text-indigo-900 text-sm">
+                                <i class="fas fa-eye mr-1"></i>Ver
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4">
+                            <div>
+                                <p class="text-sm font-semibold text-gray-900">PSQ-003</p>
+                                <p class="text-xs text-gray-500">Ana Costa</p>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="text-sm text-gray-900">VISION Trial</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs">Ativo</span>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-900">05/12/2023</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">30/01/2025</td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center">
+                                <span class="text-sm text-gray-900 mr-2">88%</span>
+                                <div class="w-16 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-yellow-600 h-2 rounded-full" style="width: 88%"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <button class="text-indigo-600 hover:text-indigo-900 text-sm">
+                                <i class="fas fa-eye mr-1"></i>Ver
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Gráficos -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-lg font-bold mb-4">Recrutamento Mensal</h3>
+                <canvas id="recruitmentChart"></canvas>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-lg font-bold mb-4">Taxa de Retenção</h3>
+                <canvas id="retentionChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gráfico de Recrutamento
+        new Chart(document.getElementById('recruitmentChart'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Participantes',
+                    data: [12, 19, 23, 25, 32, 47],
+                    borderColor: 'rgb(16, 185, 129)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // Gráfico de Retenção
+        new Chart(document.getElementById('retentionChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Ativos', 'Descontinuados', 'Completos'],
+                datasets: [{
+                    data: [387, 89, 47],
+                    backgroundColor: [
+                        'rgba(16, 185, 129, 0.8)',
+                        'rgba(245, 158, 11, 0.8)',
+                        'rgba(99, 102, 241, 0.8)'
+                    ]
+                }]
+            }
+        });
+    <\/script>
+</body>
+</html>
+    `));K.get("/research/publications",e=>e.html(`
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicações Científicas - A.C.Camargo</title>
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-white to-indigo-50 min-h-screen">
+    <div class="max-w-7xl mx-auto p-4">
+        <!-- Header -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-gray-800">
+                    <i class="fas fa-book-open mr-3 text-blue-600"></i>
+                    Publicações Científicas
+                </h1>
+                <button onclick="window.history.back()" class="text-gray-600 hover:text-gray-800">
+                    <i class="fas fa-arrow-left mr-2"></i>Voltar
+                </button>
+            </div>
+        </div>
+
+        <!-- Estatísticas -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4 text-white">
+                <p class="text-blue-100">Total Publicações</p>
+                <p class="text-3xl font-bold">89</p>
+                <p class="text-xs mt-2">2024</p>
+            </div>
+            <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl p-4 text-white">
+                <p class="text-indigo-100">Impact Factor Médio</p>
+                <p class="text-3xl font-bold">12.4</p>
+                <p class="text-xs mt-2">+2.1 vs 2023</p>
+            </div>
+            <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-4 text-white">
+                <p class="text-purple-100">Citações</p>
+                <p class="text-3xl font-bold">3.2K</p>
+                <p class="text-xs mt-2">Total 2024</p>
+            </div>
+            <div class="bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl p-4 text-white">
+                <p class="text-pink-100">Colaborações</p>
+                <p class="text-3xl font-bold">27</p>
+                <p class="text-xs mt-2">Instituições</p>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="bg-white rounded-xl shadow-lg p-4 mb-6">
+            <div class="flex flex-wrap gap-3">
+                <select class="px-3 py-2 border border-gray-300 rounded-lg">
+                    <option>Todos os Anos</option>
+                    <option>2024</option>
+                    <option>2023</option>
+                    <option>2022</option>
+                </select>
+                <select class="px-3 py-2 border border-gray-300 rounded-lg">
+                    <option>Todas as Áreas</option>
+                    <option>Oncologia</option>
+                    <option>Genômica</option>
+                    <option>Imunologia</option>
+                </select>
+                <select class="px-3 py-2 border border-gray-300 rounded-lg">
+                    <option>Todos os Journals</option>
+                    <option>Nature</option>
+                    <option>Science</option>
+                    <option>NEJM</option>
+                    <option>Lancet</option>
+                </select>
+                <input type="text" placeholder="Buscar publicação..." class="flex-1 px-3 py-2 border border-gray-300 rounded-lg">
+            </div>
+        </div>
+
+        <!-- Lista de Publicações -->
+        <div class="space-y-4">
+            <!-- Publicação 1 -->
+            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+                <div class="flex justify-between items-start mb-3">
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">
+                            Comprehensive genomic profiling reveals novel biomarkers in triple-negative breast cancer
+                        </h3>
+                        <p class="text-sm text-gray-600 mb-2">
+                            Silva AC, Costa MR, Ferreira PS, et al.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">Nature Medicine</span>
+                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs rounded">IF: 82.9</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded">2024</span>
+                            <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs rounded">125 citações</span>
+                        </div>
+                        <p class="text-sm text-gray-700">
+                            Identificação de novos biomarcadores preditivos de resposta à imunoterapia em câncer de mama triplo-negativo através de análise genômica abrangente...
+                        </p>
+                    </div>
+                    <div class="flex flex-col gap-2 ml-4">
+                        <button class="text-blue-600 hover:text-blue-700">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button class="text-green-600 hover:text-green-700">
+                            <i class="fas fa-external-link-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Publicação 2 -->
+            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+                <div class="flex justify-between items-start mb-3">
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">
+                            Phase III trial of pembrolizumab plus chemotherapy in advanced NSCLC: Brazilian cohort analysis
+                        </h3>
+                        <p class="text-sm text-gray-600 mb-2">
+                            Santos JR, Almeida RC, Lima PL, et al.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">Lancet Oncology</span>
+                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs rounded">IF: 51.1</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded">2024</span>
+                            <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs rounded">87 citações</span>
+                        </div>
+                        <p class="text-sm text-gray-700">
+                            Análise da coorte brasileira do estudo fase III demonstra benefício significativo de pembrolizumabe combinado com quimioterapia...
+                        </p>
+                    </div>
+                    <div class="flex flex-col gap-2 ml-4">
+                        <button class="text-blue-600 hover:text-blue-700">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button class="text-green-600 hover:text-green-700">
+                            <i class="fas fa-external-link-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Publicação 3 -->
+            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+                <div class="flex justify-between items-start mb-3">
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">
+                            Artificial intelligence-based risk prediction model for early detection of pancreatic cancer
+                        </h3>
+                        <p class="text-sm text-gray-600 mb-2">
+                            Oliveira MM, Fressatto J, Costa DS, et al.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">JAMA Oncology</span>
+                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs rounded">IF: 33.0</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded">2024</span>
+                            <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs rounded">156 citações</span>
+                        </div>
+                        <p class="text-sm text-gray-700">
+                            Desenvolvimento e validação de modelo preditivo baseado em IA para detecção precoce de câncer pancreático utilizando dados multiômicos...
+                        </p>
+                    </div>
+                    <div class="flex flex-col gap-2 ml-4">
+                        <button class="text-blue-600 hover:text-blue-700">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button class="text-green-600 hover:text-green-700">
+                            <i class="fas fa-external-link-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+    `));K.get("/research/database",e=>e.html(`
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco de Dados de Pesquisa - REDCap</title>
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-cyan-50 via-white to-blue-50 min-h-screen">
+    <div class="max-w-7xl mx-auto p-4">
+        <!-- Header -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-gray-800">
+                    <i class="fas fa-database mr-3 text-cyan-600"></i>
+                    Banco de Dados REDCap - Pesquisa Clínica
+                </h1>
+                <button onclick="window.history.back()" class="text-gray-600 hover:text-gray-800">
+                    <i class="fas fa-arrow-left mr-2"></i>Voltar
+                </button>
+            </div>
+        </div>
+
+        <!-- Estatísticas do Banco -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl p-4 text-white">
+                <p class="text-cyan-100">Projetos Ativos</p>
+                <p class="text-3xl font-bold">42</p>
+                <p class="text-xs mt-2">15 multicêntricos</p>
+            </div>
+            <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4 text-white">
+                <p class="text-blue-100">Registros</p>
+                <p class="text-3xl font-bold">12.5K</p>
+                <p class="text-xs mt-2">+1.2K este mês</p>
+            </div>
+            <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl p-4 text-white">
+                <p class="text-indigo-100">Formulários</p>
+                <p class="text-3xl font-bold">387</p>
+                <p class="text-xs mt-2">CRFs ativos</p>
+            </div>
+            <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-4 text-white">
+                <p class="text-purple-100">Usuários</p>
+                <p class="text-3xl font-bold">156</p>
+                <p class="text-xs mt-2">Pesquisadores</p>
+            </div>
+        </div>
+
+        <!-- Projetos REDCap -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-lg font-bold mb-4">
+                    <i class="fas fa-project-diagram mr-2 text-cyan-600"></i>
+                    Projetos Principais
+                </h3>
+                <div class="space-y-3">
+                    <div class="p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition cursor-pointer">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <p class="font-semibold text-sm">KEYNOTE-522 Database</p>
+                                <p class="text-xs text-gray-500">ID: REDCap_2024_001</p>
+                            </div>
+                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs rounded">Ativo</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 text-xs">
+                            <div>
+                                <span class="text-gray-500">Registros:</span>
+                                <span class="font-semibold ml-1">245</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Forms:</span>
+                                <span class="font-semibold ml-1">28</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Completude:</span>
+                                <span class="font-semibold ml-1">87%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition cursor-pointer">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <p class="font-semibold text-sm">CheckMate-816 Registry</p>
+                                <p class="text-xs text-gray-500">ID: REDCap_2024_002</p>
+                            </div>
+                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs rounded">Ativo</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 text-xs">
+                            <div>
+                                <span class="text-gray-500">Registros:</span>
+                                <span class="font-semibold ml-1">189</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Forms:</span>
+                                <span class="font-semibold ml-1">32</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Completude:</span>
+                                <span class="font-semibold ml-1">92%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition cursor-pointer">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <p class="font-semibold text-sm">Biobank Oncology</p>
+                                <p class="text-xs text-gray-500">ID: REDCap_2023_015</p>
+                            </div>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">Coleta</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 text-xs">
+                            <div>
+                                <span class="text-gray-500">Amostras:</span>
+                                <span class="font-semibold ml-1">3,456</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Tipos:</span>
+                                <span class="font-semibold ml-1">12</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Disponível:</span>
+                                <span class="font-semibold ml-1">78%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Qualidade dos Dados -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-lg font-bold mb-4">
+                    <i class="fas fa-chart-line mr-2 text-blue-600"></i>
+                    Qualidade dos Dados
+                </h3>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-sm text-gray-700">Completude Geral</span>
+                            <span class="text-sm font-semibold">89%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-green-600 h-2 rounded-full" style="width: 89%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-sm text-gray-700">Conformidade</span>
+                            <span class="text-sm font-semibold">94%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-blue-600 h-2 rounded-full" style="width: 94%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-sm text-gray-700">Validação</span>
+                            <span class="text-sm font-semibold">91%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-indigo-600 h-2 rounded-full" style="width: 91%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-sm text-gray-700">Queries Resolvidas</span>
+                            <span class="text-sm font-semibold">78%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-yellow-600 h-2 rounded-full" style="width: 78%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ações -->
+                <div class="grid grid-cols-2 gap-3 mt-6">
+                    <button class="bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 transition text-sm">
+                        <i class="fas fa-plus mr-2"></i>Novo Projeto
+                    </button>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition text-sm">
+                        <i class="fas fa-download mr-2"></i>Exportar Dados
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ferramentas e Integrações -->
+        <div class="mt-6 bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-lg font-bold mb-4">
+                <i class="fas fa-tools mr-2 text-gray-600"></i>
+                Ferramentas e Integrações
+            </h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button class="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                    <i class="fas fa-file-import text-2xl text-cyan-600 mb-2"></i>
+                    <p class="text-sm font-semibold">Importar Dados</p>
+                </button>
+                <button class="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                    <i class="fas fa-check-double text-2xl text-green-600 mb-2"></i>
+                    <p class="text-sm font-semibold">Validação</p>
+                </button>
+                <button class="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                    <i class="fas fa-lock text-2xl text-red-600 mb-2"></i>
+                    <p class="text-sm font-semibold">Auditoria</p>
+                </button>
+                <button class="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                    <i class="fas fa-sync text-2xl text-blue-600 mb-2"></i>
+                    <p class="text-sm font-semibold">Sincronizar</p>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+    `));K.get("/research/analysis",e=>e.html(`
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análises Estatísticas - Pesquisa Clínica</title>
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"><\/script>
+</head>
+<body class="bg-gradient-to-br from-purple-50 via-white to-pink-50 min-h-screen">
+    <div class="max-w-7xl mx-auto p-4">
+        <!-- Header -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-gray-800">
+                    <i class="fas fa-chart-pie mr-3 text-purple-600"></i>
+                    Centro de Análises Estatísticas
+                </h1>
+                <button onclick="window.history.back()" class="text-gray-600 hover:text-gray-800">
+                    <i class="fas fa-arrow-left mr-2"></i>Voltar
+                </button>
+            </div>
+        </div>
+
+        <!-- Estatísticas -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-4 text-white">
+                <p class="text-purple-100">Análises em Andamento</p>
+                <p class="text-3xl font-bold">18</p>
+                <p class="text-xs mt-2">7 prioritárias</p>
+            </div>
+            <div class="bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl p-4 text-white">
+                <p class="text-pink-100">Relatórios Gerados</p>
+                <p class="text-3xl font-bold">234</p>
+                <p class="text-xs mt-2">Este ano</p>
+            </div>
+            <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl p-4 text-white">
+                <p class="text-indigo-100">P-valor Médio</p>
+                <p class="text-3xl font-bold">0.032</p>
+                <p class="text-xs mt-2">Significativo</p>
+            </div>
+            <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4 text-white">
+                <p class="text-blue-100">Power Médio</p>
+                <p class="text-3xl font-bold">87%</p>
+                <p class="text-xs mt-2">Adequado</p>
+            </div>
+        </div>
+
+        <!-- Análises Recentes e Ferramentas -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Análises Recentes -->
+            <div class="lg:col-span-2 bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-lg font-bold mb-4">
+                    <i class="fas fa-history mr-2 text-purple-600"></i>
+                    Análises Recentes
+                </h3>
+                <div class="space-y-3">
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <p class="font-semibold">Análise de Sobrevida - KEYNOTE-522</p>
+                                <p class="text-xs text-gray-500">Kaplan-Meier + Cox Regression</p>
+                            </div>
+                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs rounded">Concluído</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="text-xs text-gray-600">
+                                <span>HR: 0.72 (95% CI: 0.59-0.88)</span>
+                                <span class="ml-3">p=0.001</span>
+                            </div>
+                            <button class="text-purple-600 hover:text-purple-700 text-sm">
+                                <i class="fas fa-download mr-1"></i>Relatório
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <p class="font-semibold">Análise de Resposta - CheckMate-816</p>
+                                <p class="text-xs text-gray-500">RECIST 1.1 + Biomarkers</p>
+                            </div>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs rounded">Em Análise</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="text-xs text-gray-600">
+                                <span>ORR: 64% vs 37%</span>
+                                <span class="ml-3">p<0.001</span>
+                            </div>
+                            <div class="w-24 bg-gray-200 rounded-full h-2">
+                                <div class="bg-yellow-600 h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <p class="font-semibold">Meta-análise - Imunoterapia Adjuvante</p>
+                                <p class="text-xs text-gray-500">Random-effects model</p>
+                            </div>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">Revisão</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="text-xs text-gray-600">
+                                <span>12 estudos incluídos</span>
+                                <span class="ml-3">N=4,567</span>
+                            </div>
+                            <button class="text-purple-600 hover:text-purple-700 text-sm">
+                                <i class="fas fa-eye mr-1"></i>Ver</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráfico de Exemplo -->
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-3">Curva de Sobrevida - Exemplo</h4>
+                    <canvas id="survivalChart" height="150"></canvas>
+                </div>
+            </div>
+
+            <!-- Ferramentas Estatísticas -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-lg font-bold mb-4">
+                    <i class="fas fa-calculator mr-2 text-indigo-600"></i>
+                    Ferramentas
+                </h3>
+                <div class="space-y-3">
+                    <button class="w-full p-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg hover:from-purple-600 hover:to-purple-700 transition">
+                        <i class="fas fa-chart-line mr-2"></i>
+                        Análise de Sobrevida
+                    </button>
+                    <button class="w-full p-3 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-lg hover:from-indigo-600 hover:to-indigo-700 transition">
+                        <i class="fas fa-percentage mr-2"></i>
+                        Cálculo de Sample Size
+                    </button>
+                    <button class="w-full p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition">
+                        <i class="fas fa-balance-scale mr-2"></i>
+                        Teste de Hipóteses
+                    </button>
+                    <button class="w-full p-3 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-lg hover:from-pink-600 hover:to-pink-700 transition">
+                        <i class="fas fa-project-diagram mr-2"></i>
+                        Regressão Multivariada
+                    </button>
+                </div>
+
+                <!-- Software Disponível -->
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-3">Software Disponível</h4>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="p-2 bg-gray-50 rounded text-center">
+                            <i class="fab fa-r-project text-2xl text-blue-600"></i>
+                            <p class="text-xs mt-1">R Studio</p>
+                        </div>
+                        <div class="p-2 bg-gray-50 rounded text-center">
+                            <i class="fas fa-square-root-alt text-2xl text-green-600"></i>
+                            <p class="text-xs mt-1">SAS</p>
+                        </div>
+                        <div class="p-2 bg-gray-50 rounded text-center">
+                            <i class="fas fa-chart-bar text-2xl text-purple-600"></i>
+                            <p class="text-xs mt-1">SPSS</p>
+                        </div>
+                        <div class="p-2 bg-gray-50 rounded text-center">
+                            <i class="fab fa-python text-2xl text-yellow-600"></i>
+                            <p class="text-xs mt-1">Python</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Curva de Sobrevida
+        new Chart(document.getElementById('survivalChart'), {
+            type: 'line',
+            data: {
+                labels: [0, 6, 12, 18, 24, 30, 36],
+                datasets: [{
+                    label: 'Tratamento',
+                    data: [100, 92, 85, 78, 72, 68, 65],
+                    borderColor: 'rgb(139, 92, 246)',
+                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                    tension: 0.4
+                }, {
+                    label: 'Controle',
+                    data: [100, 88, 75, 65, 58, 52, 48],
+                    borderColor: 'rgb(239, 68, 68)',
+                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: 'Sobrevida (%)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Tempo (meses)'
+                        }
+                    }
+                }
+            }
+        });
+    <\/script>
+</body>
+</html>
+    `));K.get("/research/protocols",e=>e.html(`
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocolos de Pesquisa - CEP/CONEP</title>
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-green-50 via-white to-emerald-50 min-h-screen">
+    <div class="max-w-7xl mx-auto p-4">
+        <!-- Header -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-gray-800">
+                    <i class="fas fa-file-contract mr-3 text-green-600"></i>
+                    Protocolos de Pesquisa - Comitê de Ética
+                </h1>
+                <button onclick="window.history.back()" class="text-gray-600 hover:text-gray-800">
+                    <i class="fas fa-arrow-left mr-2"></i>Voltar
+                </button>
+            </div>
+        </div>
+
+        <!-- Estatísticas CEP -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-4 text-white">
+                <p class="text-green-100">Protocolos Ativos</p>
+                <p class="text-3xl font-bold">42</p>
+                <p class="text-xs mt-2">CEP Aprovados</p>
+            </div>
+            <div class="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl p-4 text-white">
+                <p class="text-yellow-100">Em Análise</p>
+                <p class="text-3xl font-bold">8</p>
+                <p class="text-xs mt-2">Aguardando parecer</p>
+            </div>
+            <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4 text-white">
+                <p class="text-blue-100">Emendas</p>
+                <p class="text-3xl font-bold">15</p>
+                <p class="text-xs mt-2">Pendentes</p>
+            </div>
+            <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-4 text-white">
+                <p class="text-purple-100">CONEP</p>
+                <p class="text-3xl font-bold">6</p>
+                <p class="text-xs mt-2">Aprovados</p>
+            </div>
+        </div>
+
+        <!-- Lista de Protocolos -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="bg-gradient-to-r from-green-500 to-emerald-500 p-4">
+                <h3 class="text-white font-bold text-lg">Protocolos Submetidos ao CEP</h3>
+            </div>
+            <div class="p-6">
+                <div class="space-y-4">
+                    <!-- Protocolo 1 -->
+                    <div class="border-l-4 border-green-500 pl-4 py-3">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="font-bold text-gray-800">CAAE: 45678901.2.0000.5432</h4>
+                                <p class="text-sm text-gray-600 mt-1">KEYNOTE-522: Pembrolizumabe + Quimioterapia Neoadjuvante</p>
+                                <p class="text-xs text-gray-500 mt-2">Investigador: Dr. Carlos Ferreira</p>
+                                <div class="flex gap-2 mt-2">
+                                    <span class="px-2 py-1 bg-green-100 text-green-700 text-xs rounded">Aprovado</span>
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">Multicêntrico</span>
+                                    <span class="text-xs text-gray-500">Aprovação: 15/01/2024</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <button class="text-green-600 hover:text-green-700">
+                                    <i class="fas fa-file-pdf"></i>
+                                </button>
+                                <button class="text-blue-600 hover:text-blue-700">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Protocolo 2 -->
+                    <div class="border-l-4 border-yellow-500 pl-4 py-3">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="font-bold text-gray-800">CAAE: 45678902.3.0000.5432</h4>
+                                <p class="text-sm text-gray-600 mt-1">Estudo Fase II - Novo Anticorpo Monoclonal</p>
+                                <p class="text-xs text-gray-500 mt-2">Investigador: Dra. Marina Costa</p>
+                                <div class="flex gap-2 mt-2">
+                                    <span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs rounded">Em Análise</span>
+                                    <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded">CONEP</span>
+                                    <span class="text-xs text-gray-500">Submissão: 10/01/2025</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <button class="text-yellow-600 hover:text-yellow-700">
+                                    <i class="fas fa-clock"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Protocolo 3 -->
+                    <div class="border-l-4 border-red-500 pl-4 py-3">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="font-bold text-gray-800">CAAE: 45678903.4.0000.5432</h4>
+                                <p class="text-sm text-gray-600 mt-1">Biobanking - Coleta de Amostras Biológicas</p>
+                                <p class="text-xs text-gray-500 mt-2">Investigador: Dr. Paulo Santos</p>
+                                <div class="flex gap-2 mt-2">
+                                    <span class="px-2 py-1 bg-red-100 text-red-700 text-xs rounded">Pendências</span>
+                                    <span class="text-xs text-gray-500">Parecer: 08/01/2025</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <button class="text-red-600 hover:text-red-700">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Documentos e Templates -->
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-lg font-bold mb-4">
+                    <i class="fas fa-folder-open mr-2 text-green-600"></i>
+                    Documentos Regulatórios
+                </h3>
+                <div class="space-y-2">
+                    <button class="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition flex justify-between items-center">
+                        <span class="text-sm">TCLE - Template Padrão</span>
+                        <i class="fas fa-download text-gray-500"></i>
+                    </button>
+                    <button class="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition flex justify-between items-center">
+                        <span class="text-sm">Formulário de Submissão CEP</span>
+                        <i class="fas fa-download text-gray-500"></i>
+                    </button>
+                    <button class="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition flex justify-between items-center">
+                        <span class="text-sm">Modelo de Emenda</span>
+                        <i class="fas fa-download text-gray-500"></i>
+                    </button>
+                    <button class="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition flex justify-between items-center">
+                        <span class="text-sm">Relatório de Eventos Adversos</span>
+                        <i class="fas fa-download text-gray-500"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-lg font-bold mb-4">
+                    <i class="fas fa-tasks mr-2 text-blue-600"></i>
+                    Ações Rápidas
+                </h3>
+                <div class="grid grid-cols-2 gap-3">
+                    <button class="p-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                        <i class="fas fa-plus mr-2"></i>
+                        Novo Protocolo
+                    </button>
+                    <button class="p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                        <i class="fas fa-edit mr-2"></i>
+                        Submeter Emenda
+                    </button>
+                    <button class="p-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
+                        <i class="fas fa-file-medical mr-2"></i>
+                        Relatório SAE
+                    </button>
+                    <button class="p-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition">
+                        <i class="fas fa-clock mr-2"></i>
+                        Renovação
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+    `));K.get("/research/education",e=>e.html(`
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educação e Treinamento - Pesquisa Clínica</title>
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-orange-50 via-white to-yellow-50 min-h-screen">
+    <div class="max-w-7xl mx-auto p-4">
+        <!-- Header -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-gray-800">
+                    <i class="fas fa-graduation-cap mr-3 text-orange-600"></i>
+                    Centro de Educação e Treinamento em Pesquisa
+                </h1>
+                <button onclick="window.history.back()" class="text-gray-600 hover:text-gray-800">
+                    <i class="fas fa-arrow-left mr-2"></i>Voltar
+                </button>
+            </div>
+        </div>
+
+        <!-- Estatísticas de Treinamento -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl p-4 text-white">
+                <p class="text-orange-100">Cursos Ativos</p>
+                <p class="text-3xl font-bold">24</p>
+                <p class="text-xs mt-2">8 novos este mês</p>
+            </div>
+            <div class="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl p-4 text-white">
+                <p class="text-yellow-100">Pesquisadores Treinados</p>
+                <p class="text-3xl font-bold">156</p>
+                <p class="text-xs mt-2">95% certificados</p>
+            </div>
+            <div class="bg-gradient-to-br from-red-500 to-red-600 rounded-xl p-4 text-white">
+                <p class="text-red-100">Horas de Treinamento</p>
+                <p class="text-3xl font-bold">480</p>
+                <p class="text-xs mt-2">Este ano</p>
+            </div>
+            <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-4 text-white">
+                <p class="text-green-100">Taxa Aprovação</p>
+                <p class="text-3xl font-bold">92%</p>
+                <p class="text-xs mt-2">GCP Certification</p>
+            </div>
+        </div>
+
+        <!-- Cursos e Treinamentos -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Cursos Disponíveis -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-lg font-bold mb-4">
+                    <i class="fas fa-book mr-2 text-orange-600"></i>
+                    Cursos Disponíveis
+                </h3>
+                <div class="space-y-3">
+                    <div class="p-4 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="font-bold text-gray-800">Good Clinical Practice (GCP)</h4>
+                                <p class="text-xs text-gray-600 mt-1">Certificação Internacional ICH-GCP</p>
+                            </div>
+                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs rounded">Obrigatório</span>
+                        </div>
+                        <div class="flex items-center justify-between mt-3">
+                            <div class="text-xs text-gray-500">
+                                <i class="fas fa-clock mr-1"></i>8 horas
+                                <span class="ml-3"><i class="fas fa-users mr-1"></i>45 inscritos</span>
+                            </div>
+                            <button class="text-orange-600 hover:text-orange-700 text-sm font-semibold">
+                                Inscrever-se
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="font-bold text-gray-800">REDCap Avançado</h4>
+                                <p class="text-xs text-gray-600 mt-1">Gestão de dados em pesquisa clínica</p>
+                            </div>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">Especialização</span>
+                        </div>
+                        <div class="flex items-center justify-between mt-3">
+                            <div class="text-xs text-gray-500">
+                                <i class="fas fa-clock mr-1"></i>12 horas
+                                <span class="ml-3"><i class="fas fa-users mr-1"></i>28 inscritos</span>
+                            </div>
+                            <button class="text-blue-600 hover:text-blue-700 text-sm font-semibold">
+                                Inscrever-se
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="font-bold text-gray-800">Estatística para Pesquisa Clínica</h4>
+                                <p class="text-xs text-gray-600 mt-1">R, SAS e interpretação de resultados</p>
+                            </div>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded">Avançado</span>
+                        </div>
+                        <div class="flex items-center justify-between mt-3">
+                            <div class="text-xs text-gray-500">
+                                <i class="fas fa-clock mr-1"></i>20 horas
+                                <span class="ml-3"><i class="fas fa-users mr-1"></i>15 inscritos</span>
+                            </div>
+                            <button class="text-purple-600 hover:text-purple-700 text-sm font-semibold">
+                                Inscrever-se
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendário de Treinamentos -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-lg font-bold mb-4">
+                    <i class="fas fa-calendar-alt mr-2 text-yellow-600"></i>
+                    Próximos Treinamentos
+                </h3>
+                <div class="space-y-3">
+                    <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                        <div class="text-center mr-4">
+                            <div class="text-2xl font-bold text-orange-600">20</div>
+                            <div class="text-xs text-gray-500">JAN</div>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-semibold text-sm">Workshop: Submissão CEP/CONEP</p>
+                            <p class="text-xs text-gray-500">14:00 - 17:00 | Auditório Principal</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                        <div class="text-center mr-4">
+                            <div class="text-2xl font-bold text-blue-600">22</div>
+                            <div class="text-xs text-gray-500">JAN</div>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-semibold text-sm">GCP Refresher Training</p>
+                            <p class="text-xs text-gray-500">09:00 - 12:00 | Online</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                        <div class="text-center mr-4">
+                            <div class="text-2xl font-bold text-green-600">25</div>
+                            <div class="text-xs text-gray-500">JAN</div>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-semibold text-sm">Farmacovigilância e Eventos Adversos</p>
+                            <p class="text-xs text-gray-500">13:00 - 18:00 | Sala de Treinamento</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                        <div class="text-center mr-4">
+                            <div class="text-2xl font-bold text-purple-600">28</div>
+                            <div class="text-xs text-gray-500">JAN</div>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-semibold text-sm">Journal Club: Publicações Q1</p>
+                            <p class="text-xs text-gray-500">16:00 - 17:30 | Híbrido</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recursos Educacionais -->
+        <div class="mt-6 bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-lg font-bold mb-4">
+                <i class="fas fa-book-reader mr-2 text-green-600"></i>
+                Recursos Educacionais
+            </h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button class="p-4 bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg hover:shadow-md transition">
+                    <i class="fas fa-video text-2xl text-orange-600 mb-2"></i>
+                    <p class="text-sm font-semibold">Videoaulas</p>
+                    <p class="text-xs text-gray-500">127 vídeos</p>
+                </button>
+                <button class="p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg hover:shadow-md transition">
+                    <i class="fas fa-file-pdf text-2xl text-blue-600 mb-2"></i>
+                    <p class="text-sm font-semibold">E-books</p>
+                    <p class="text-xs text-gray-500">45 materiais</p>
+                </button>
+                <button class="p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg hover:shadow-md transition">
+                    <i class="fas fa-podcast text-2xl text-purple-600 mb-2"></i>
+                    <p class="text-sm font-semibold">Podcasts</p>
+                    <p class="text-xs text-gray-500">32 episódios</p>
+                </button>
+                <button class="p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-lg hover:shadow-md transition">
+                    <i class="fas fa-certificate text-2xl text-green-600 mb-2"></i>
+                    <p class="text-sm font-semibold">Certificados</p>
+                    <p class="text-xs text-gray-500">Seus cursos</p>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+    `));var rt=Object.freeze,ta=Object.defineProperty,sa=(e,t)=>rt(ta(e,"raw",{value:rt(t||e.slice())})),nt;const aa=e=>e.html(H(nt||(nt=sa([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -6221,7 +8045,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `])),me(V("patient"))));var nt=Object.freeze,as=Object.defineProperty,ss=(e,t)=>nt(as(e,"raw",{value:nt(t||e.slice())})),lt;const is=e=>e.html(H(lt||(lt=ss([`
+  `])),ge(V("patient"))));var lt=Object.freeze,ia=Object.defineProperty,oa=(e,t)=>lt(ia(e,"raw",{value:lt(t||e.slice())})),dt;const ra=e=>e.html(H(dt||(dt=oa([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -7061,7 +8885,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `]))));var dt=Object.freeze,os=Object.defineProperty,rs=(e,t)=>dt(os(e,"raw",{value:dt(e.slice())})),ct;const ns=e=>e.html(H(ct||(ct=rs([`
+  `]))));var ct=Object.freeze,na=Object.defineProperty,la=(e,t)=>ct(na(e,"raw",{value:ct(e.slice())})),pt;const da=e=>e.html(H(pt||(pt=la([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -7457,7 +9281,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
         <\/script>
     </body>
     </html>
-  `]))));var pt=Object.freeze,ls=Object.defineProperty,ds=(e,t)=>pt(ls(e,"raw",{value:pt(e.slice())})),mt;const cs=e=>e.html(H(mt||(mt=ds([`
+  `]))));var mt=Object.freeze,ca=Object.defineProperty,pa=(e,t)=>mt(ca(e,"raw",{value:mt(e.slice())})),gt;const ma=e=>e.html(H(gt||(gt=pa([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -7823,7 +9647,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `]))));var gt=Object.freeze,ps=Object.defineProperty,ms=(e,t)=>gt(ps(e,"raw",{value:gt(e.slice())})),xt;const gs=e=>e.html(H(xt||(xt=ms([`
+  `]))));var xt=Object.freeze,ga=Object.defineProperty,xa=(e,t)=>xt(ga(e,"raw",{value:xt(e.slice())})),ut;const ua=e=>e.html(H(ut||(ut=xa([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -8127,7 +9951,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `]))));var ut=Object.freeze,xs=Object.defineProperty,us=(e,t)=>ut(xs(e,"raw",{value:ut(e.slice())})),bt;const bs=e=>e.html(H(bt||(bt=us([`
+  `]))));var bt=Object.freeze,ba=Object.defineProperty,fa=(e,t)=>bt(ba(e,"raw",{value:bt(e.slice())})),ft;const va=e=>e.html(H(ft||(ft=fa([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -8458,7 +10282,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `]))));var ft=Object.freeze,fs=Object.defineProperty,vs=(e,t)=>ft(fs(e,"raw",{value:ft(e.slice())})),vt;const hs=e=>e.html(H(vt||(vt=vs([`
+  `]))));var vt=Object.freeze,ha=Object.defineProperty,ya=(e,t)=>vt(ha(e,"raw",{value:vt(e.slice())})),ht;const wa=e=>e.html(H(ht||(ht=ya([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -8737,7 +10561,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `]))));var ht=Object.freeze,ys=Object.defineProperty,ws=(e,t)=>ht(ys(e,"raw",{value:ht(e.slice())})),yt;const Cs=e=>e.html(H(yt||(yt=ws([`
+  `]))));var yt=Object.freeze,Ca=Object.defineProperty,Aa=(e,t)=>yt(Ca(e,"raw",{value:yt(e.slice())})),wt;const Pa=e=>e.html(H(wt||(wt=Aa([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -9615,7 +11439,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
         <\/script>
     </body>
     </html>
-  `])),me(V("admin"))));new k;const As=e=>e.html(`
+  `])),ge(V("admin"))));new P;const ka=e=>e.html(`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -9920,7 +11744,7 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
         <\/script>
     </body>
     </html>
-  `);var wt=Object.freeze,Ps=Object.defineProperty,ks=(e,t)=>wt(Ps(e,"raw",{value:wt(e.slice())})),Ct;const f=new k;f.use("/api/*",qa());f.use("/static/*",Xt({root:"./public"}));f.use("/*.html",Xt({root:"./public"}));f.route("/api/patient",Me);f.route("/api/doctor",Re);f.route("/api/navigator",Le);f.route("/api/financial",De);f.route("/api/wellness",Oe);f.route("/api/research",he);f.route("/api/admin",ie);f.route("/api/ai",oe);f.route("/api/portal",Y);f.route("/",ea);f.route("/",ta);f.route("/",aa);f.route("/",sa);f.route("/",Ne);f.get("/patient-view/:id",e=>{const t=e.req.param("id");return e.redirect(`/patient-view-integrated/${t}`,301)});f.get("/portal/patient",ts);f.get("/portal/doctor",is);f.get("/portal/navigator",ns);f.get("/portal/financial",cs);f.get("/portal/wellness",gs);f.get("/portal/research",bs);f.get("/portal/admin-master",hs);f.get("/admin-master",Cs);f.get("/test-integration",As);f.get("/",e=>e.html(H(Ct||(Ct=ks([`
+  `);var Ct=Object.freeze,Ia=Object.defineProperty,ja=(e,t)=>Ct(Ia(e,"raw",{value:Ct(e.slice())})),At;const f=new P;f.use("/api/*",Vs());f.use("/static/*",es({root:"./public"}));f.use("/*.html",es({root:"./public"}));f.route("/api/patient",Me);f.route("/api/doctor",De);f.route("/api/navigator",Le);f.route("/api/financial",Ne);f.route("/api/wellness",Oe);f.route("/api/research",ye);f.route("/api/admin",oe);f.route("/api/ai",re);f.route("/api/portal",Q);f.route("/",ts);f.route("/",ss);f.route("/",as);f.route("/",is);f.route("/",Fe);f.route("/",os);f.route("/",K);f.get("/patient-view/:id",e=>{const t=e.req.param("id");return e.redirect(`/patient-view-integrated/${t}`,301)});f.get("/portal/patient",aa);f.get("/portal/doctor",ra);f.get("/portal/navigator",da);f.get("/portal/financial",ma);f.get("/portal/wellness",ua);f.get("/portal/research",va);f.get("/portal/admin-master",wa);f.get("/admin-master",Pa);f.get("/test-integration",ka);f.get("/",e=>e.html(H(At||(At=ja([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -10698,4 +12522,4 @@ var ra=Object.defineProperty;var Xe=e=>{throw TypeError(e)};var na=(e,t,a)=>t in
         document.getElementById('content').innerHTML = '<p class="p-8 text-center text-2xl text-gray-600">👆 Clique em um dos botões acima para testar as funcionalidades</p>';
     <\/script>
 </body>
-</html>`));const At=new k,Is=Object.assign({"/src/index.tsx":f});let ia=!1;for(const[,e]of Object.entries(Is))e&&(At.all("*",t=>{let a;try{a=t.executionCtx}catch{}return e.fetch(t.req.raw,t.env,a)}),At.notFound(t=>{let a;try{a=t.executionCtx}catch{}return e.fetch(t.req.raw,t.env,a)}),ia=!0);if(!ia)throw new Error("Can't import modules from ['/src/index.ts','/src/index.tsx','/app/server.ts']");export{At as default};
+</html>`));const Pt=new P,Ea=Object.assign({"/src/index.tsx":f});let rs=!1;for(const[,e]of Object.entries(Ea))e&&(Pt.all("*",t=>{let s;try{s=t.executionCtx}catch{}return e.fetch(t.req.raw,t.env,s)}),Pt.notFound(t=>{let s;try{s=t.executionCtx}catch{}return e.fetch(t.req.raw,t.env,s)}),rs=!0);if(!rs)throw new Error("Can't import modules from ['/src/index.ts','/src/index.tsx','/app/server.ts']");export{Pt as default};

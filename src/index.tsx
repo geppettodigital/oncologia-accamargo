@@ -18,6 +18,8 @@ import patientViewStandalone from './routes/patient-view-standalone'
 import patientViewIntegrated from './routes/patient-view-integrated'
 import { doctorEnhanced } from './routes/doctor-enhanced'
 import { doctorViews } from './routes/doctor-views'
+import { researchPortal } from './routes/research-portal'
+import { researchViews } from './routes/research-views'
 
 
 // Import page handlers
@@ -64,6 +66,8 @@ app.route('/', patientViewStandalone)
 app.route('/', patientViewIntegrated)
 app.route('/', doctorEnhanced)
 app.route('/', doctorViews)
+app.route('/', researchPortal)
+app.route('/', researchViews)
 
 // Redirect old patient-view URLs to new integrated view
 app.get('/patient-view/:id', (c) => {
