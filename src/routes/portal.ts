@@ -660,8 +660,9 @@ portalRoutes.get('/navigator', async (c) => {
                 if (!modal) {
                     modal = document.createElement('div');
                     modal.id = 'patient-view-modal';
-                    modal.className = 'fixed inset-0 z-50 overflow-y-auto hidden';
+                    modal.className = 'fixed inset-0 z-50 overflow-y-auto';
                     modal.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+                    modal.style.display = 'none';
                     document.body.appendChild(modal);
                 }
                 
@@ -741,7 +742,7 @@ portalRoutes.get('/navigator', async (c) => {
                 modal.innerHTML = renderPatientViewHTML(patientId, patient);
                 
                 // Mostrar modal
-                modal.classList.remove('hidden');
+                modal.style.display = 'block';
                 document.body.style.overflow = 'hidden';
                 
                 // Adicionar eventos ao modal
@@ -1043,7 +1044,7 @@ portalRoutes.get('/navigator', async (c) => {
             function closePatientView() {
                 const modal = document.getElementById('patient-view-modal');
                 if (modal) {
-                    modal.classList.add('hidden');
+                    modal.style.display = 'none';
                     document.body.style.overflow = 'auto';
                 }
             }
