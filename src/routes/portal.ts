@@ -557,6 +557,40 @@ portalRoutes.get('/navigator', async (c) => {
             function openKanbanView() {
                 document.getElementById('kanban-modal').classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
+                
+                // Inicializar eventos dos cards quando o Kanban abrir
+                setTimeout(() => {
+                    console.log('Configurando eventos do Kanban...');
+                    const kanbanCards = document.querySelectorAll('.kanban-card');
+                    console.log('Cards encontrados no Kanban:', kanbanCards.length);
+                    
+                    kanbanCards.forEach((card, index) => {
+                        card.style.cursor = 'pointer';
+                        
+                        // Remover listeners anteriores para evitar duplicação
+                        const newCard = card.cloneNode(true);
+                        card.parentNode.replaceChild(newCard, card);
+                        
+                        // Adicionar novo listener
+                        newCard.addEventListener('click', function(e) {
+                            // Ignorar cliques em botões internos
+                            if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
+                                e.stopPropagation();
+                                return;
+                            }
+                            
+                            const patientId = this.dataset.patientId || \`PAC-00\${index + 1}\`;
+                            console.log('Card clicado:', patientId);
+                            
+                            // Chamar a função openPatientView que já está definida
+                            if (typeof window.openPatientView === 'function') {
+                                window.openPatientView(patientId);
+                            } else {
+                                console.error('Função openPatientView não encontrada!');
+                            }
+                        });
+                    });
+                }, 100);
             }
             
             function closeKanbanView() {
@@ -1088,8 +1122,16 @@ portalRoutes.get('/navigator', async (c) => {
                 document.body.classList.add('navigator-portal');
                 console.log('Portal Navegador carregado com sistema integrado!');
                 
-                // Inicializar eventos dos cards do Kanban
-                initializeKanbanEvents();
+                // Garantir que as funções estejam disponíveis globalmente
+                window.openPatientView = openPatientView;
+                window.closePatientView = closePatientView;
+                window.showTab = showTab;
+                
+                console.log('Funções registradas no window:', {
+                    openPatientView: typeof window.openPatientView,
+                    closePatientView: typeof window.closePatientView,
+                    showTab: typeof window.showTab
+                });
                 
                 // Adicionar botões de ação nas linhas da tabela de pacientes se existir
                 const actionCells = document.querySelectorAll('td.patient-actions');
