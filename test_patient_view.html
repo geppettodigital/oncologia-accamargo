@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste View Paciente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        .test-button {
+            padding: 10px 20px;
+            margin: 10px;
+            background: #0891b2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .test-button:hover {
+            background: #067090;
+        }
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Teste da View Universal do Paciente</h1>
+    
+    <div class="status">
+        <h2>Status do Teste:</h2>
+        <div id="status-message">Aguardando teste...</div>
+    </div>
+    
+    <div>
+        <h2>Testar Pacientes:</h2>
+        <button class="test-button" onclick="testarPaciente('PAC-001')">Testar Maria Silva (PAC-001)</button>
+        <button class="test-button" onclick="testarPaciente('PAC-002')">Testar Ana Costa (PAC-002)</button>
+        <button class="test-button" onclick="testarPaciente('PAC-003')">Testar Carlos Mendes (PAC-003)</button>
+        <button class="test-button" onclick="testarPaciente('PAC-004')">Testar João Santos (PAC-004)</button>
+        <button class="test-button" onclick="testarPaciente('PAC-005')">Testar Pedro Oliveira (PAC-005)</button>
+        <button class="test-button" onclick="testarPaciente('PAC-006')">Testar Lucia Ferreira (PAC-006)</button>
+    </div>
+    
+    <div>
+        <h2>Navegar para o Portal:</h2>
+        <button class="test-button" onclick="window.open('https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev#navigator', '_blank')">
+            Abrir Portal do Navegador
+        </button>
+    </div>
+
+    <script>
+        function testarPaciente(patientId) {
+            const statusDiv = document.getElementById('status-message');
+            
+            try {
+                // Tentar chamar a função
+                if (typeof window.abrirViewPaciente === 'function') {
+                    window.abrirViewPaciente(patientId);
+                    statusDiv.innerHTML = `<span class="success">✓ Função abrirViewPaciente encontrada e executada para ${patientId}</span>`;
+                } else {
+                    statusDiv.innerHTML = `<span class="error">✗ Função abrirViewPaciente não encontrada no escopo global</span>
+                                          <br><br>
+                                          <strong>Solução:</strong> Por favor, acesse o Portal do Navegador primeiro e teste diretamente clicando nos cards do Kanban.`;
+                }
+            } catch (error) {
+                statusDiv.innerHTML = `<span class="error">✗ Erro ao executar: ${error.message}</span>`;
+            }
+        }
+    </script>
+</body>
+</html>

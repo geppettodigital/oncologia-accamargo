@@ -396,7 +396,7 @@ portalRoutes.get('/navigator', async (c) => {
                                     <span class="bg-purple-600 text-white px-2 py-1 rounded-full text-xs font-bold">15</span>
                                 </div>
                                 <div class="space-y-3 max-h-96 overflow-y-auto">
-                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-001">
+                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-001" onclick="window.open('/patient-view/PAC-001', '_blank')">
                                         <div class="flex items-start justify-between mb-2">
                                             <span class="font-semibold text-sm">Maria Silva</span>
                                             <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded">Prioridade</span>
@@ -410,7 +410,7 @@ portalRoutes.get('/navigator', async (c) => {
                                         </div>
                                     </div>
                                     
-                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-004">
+                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-004" onclick="window.open('/patient-view/PAC-004', '_blank')">
                                         <div class="flex items-start justify-between mb-2">
                                             <span class="font-semibold text-sm">João Santos</span>
                                             <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Normal</span>
@@ -436,7 +436,7 @@ portalRoutes.get('/navigator', async (c) => {
                                     <span class="bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-bold">28</span>
                                 </div>
                                 <div class="space-y-3 max-h-96 overflow-y-auto">
-                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-002">
+                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-002" onclick="window.open('/patient-view/PAC-002', '_blank')">
                                         <div class="flex items-start justify-between mb-2">
                                             <span class="font-semibold text-sm">Ana Costa</span>
                                             <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded">Urgente</span>
@@ -462,7 +462,7 @@ portalRoutes.get('/navigator', async (c) => {
                                     <span class="bg-green-600 text-white px-2 py-1 rounded-full text-xs font-bold">85</span>
                                 </div>
                                 <div class="space-y-3 max-h-96 overflow-y-auto">
-                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-003">
+                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-003" onclick="window.open('/patient-view/PAC-003', '_blank')">
                                         <div class="flex items-start justify-between mb-2">
                                             <span class="font-semibold text-sm">Carlos Mendes</span>
                                             <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Em dia</span>
@@ -488,7 +488,7 @@ portalRoutes.get('/navigator', async (c) => {
                                     <span class="bg-orange-600 text-white px-2 py-1 rounded-full text-xs font-bold">35</span>
                                 </div>
                                 <div class="space-y-3 max-h-96 overflow-y-auto">
-                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-006">
+                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer" data-patient-id="PAC-006" onclick="window.open('/patient-view/PAC-006', '_blank')">
                                         <div class="flex items-start justify-between mb-2">
                                             <span class="font-semibold text-sm">Lucia Ferreira</span>
                                             <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">Controle</span>
@@ -514,7 +514,7 @@ portalRoutes.get('/navigator', async (c) => {
                                     <span class="bg-teal-600 text-white px-2 py-1 rounded-full text-xs font-bold">15</span>
                                 </div>
                                 <div class="space-y-3 max-h-96 overflow-y-auto">
-                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer border-l-4 border-green-500">
+                                    <div class="kanban-card bg-white p-3 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer border-l-4 border-green-500" onclick="window.open('/patient-view/PAC-005', '_blank')">
                                         <div class="flex items-start justify-between mb-2">
                                             <span class="font-semibold text-sm">Pedro Oliveira</span>
                                             <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Sucesso</span>
@@ -552,58 +552,334 @@ portalRoutes.get('/navigator', async (c) => {
             </div>
         </div>
         
-        <!-- Script para Kanban -->
+        <!-- Script INLINE Completo para Kanban e View Universal -->
         <script>
+            // Função para abrir o Kanban
             function openKanbanView() {
                 document.getElementById('kanban-modal').classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
-                
-                // Inicializar eventos dos cards quando o Kanban abrir
-                setTimeout(() => {
-                    console.log('Configurando eventos do Kanban...');
-                    const kanbanCards = document.querySelectorAll('.kanban-card');
-                    console.log('Cards encontrados no Kanban:', kanbanCards.length);
-                    
-                    kanbanCards.forEach((card, index) => {
-                        card.style.cursor = 'pointer';
-                        
-                        // Remover listeners anteriores para evitar duplicação
-                        const newCard = card.cloneNode(true);
-                        card.parentNode.replaceChild(newCard, card);
-                        
-                        // Adicionar novo listener
-                        newCard.addEventListener('click', function(e) {
-                            // Ignorar cliques em botões internos
-                            if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
-                                e.stopPropagation();
-                                return;
-                            }
-                            
-                            const patientId = this.dataset.patientId || \`PAC-00\${index + 1}\`;
-                            console.log('Card clicado:', patientId);
-                            
-                            // Chamar a função openPatientView que já está definida
-                            if (typeof window.openPatientView === 'function') {
-                                window.openPatientView(patientId);
-                            } else {
-                                console.error('Função openPatientView não encontrada!');
-                            }
-                        });
-                    });
-                }, 100);
             }
             
+            // Função para fechar o Kanban
             function closeKanbanView() {
                 document.getElementById('kanban-modal').classList.add('hidden');
                 document.body.style.overflow = 'auto';
             }
             
-            // Fechar modal ao clicar fora
-            document.getElementById('kanban-modal')?.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeKanbanView();
+            // FUNÇÃO INLINE COMPLETA PARA ABRIR VIEW DO PACIENTE
+            window.abrirViewPaciente = function(patientId) {
+                console.log('===== FUNÇÃO abrirViewPaciente CHAMADA =====');
+                console.log('Patient ID:', patientId);
+                console.log('Criando modal...');
+                
+                // Dados dos pacientes
+                const pacientes = {
+                    'PAC-001': {
+                        nome: 'Maria Silva Santos',
+                        idade: 52,
+                        diagnostico: 'Carcinoma Ductal Invasivo - Mama',
+                        estadiamento: 'IIA (T2N0M0)',
+                        medico: 'Dr. Roberto Almeida',
+                        navegador: 'Enf. Patricia Lima',
+                        telefone: '(11) 98765-4321',
+                        email: 'maria.silva@email.com',
+                        convenio: 'Unimed Premium'
+                    },
+                    'PAC-002': {
+                        nome: 'Ana Costa',
+                        idade: 45,
+                        diagnostico: 'Carcinoma Pulmonar',
+                        estadiamento: 'IIIA',
+                        medico: 'Dr. Carlos Mendes',
+                        navegador: 'Enf. Patricia Lima',
+                        telefone: '(11) 98765-1234',
+                        email: 'ana.costa@email.com',
+                        convenio: 'SulAmérica'
+                    },
+                    'PAC-003': {
+                        nome: 'Carlos Mendes',
+                        idade: 67,
+                        diagnostico: 'Adenocarcinoma Colorretal',
+                        estadiamento: 'IIB',
+                        medico: 'Dra. Fernanda Santos',
+                        navegador: 'Enf. Patricia Lima',
+                        telefone: '(11) 98765-5678',
+                        email: 'carlos.mendes@email.com',
+                        convenio: 'Bradesco Saúde'
+                    },
+                    'PAC-004': {
+                        nome: 'João Santos',
+                        idade: 72,
+                        diagnostico: 'Carcinoma Prostático',
+                        estadiamento: 'I',
+                        medico: 'Dr. Paulo Ribeiro',
+                        navegador: 'Enf. Patricia Lima',
+                        telefone: '(11) 98765-9876',
+                        email: 'joao.santos@email.com',
+                        convenio: 'Amil'
+                    },
+                    'PAC-005': {
+                        nome: 'Pedro Oliveira',
+                        idade: 58,
+                        diagnostico: 'Linfoma Não-Hodgkin',
+                        estadiamento: 'IIIB',
+                        medico: 'Dr. André Costa',
+                        navegador: 'Enf. Patricia Lima',
+                        telefone: '(11) 98765-4567',
+                        email: 'pedro.oliveira@email.com',
+                        convenio: 'Porto Seguro'
+                    },
+                    'PAC-006': {
+                        nome: 'Lucia Ferreira',
+                        idade: 61,
+                        diagnostico: 'Carcinoma de Ovário',
+                        estadiamento: 'IC',
+                        medico: 'Dra. Paula Lima',
+                        navegador: 'Enf. Patricia Lima',
+                        telefone: '(11) 98765-7890',
+                        email: 'lucia.ferreira@email.com',
+                        convenio: 'NotreDame'
+                    }
+                };
+                
+                const paciente = pacientes[patientId] || pacientes['PAC-001'];
+                
+                // Remover modal anterior se existir
+                const modalAnterior = document.getElementById('view-paciente-modal');
+                if (modalAnterior) {
+                    modalAnterior.remove();
                 }
-            });
+                
+                // Criar modal
+                const modal = document.createElement('div');
+                modal.id = 'view-paciente-modal';
+                modal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 9999;';
+                
+                modal.innerHTML = \`
+                    <div style="background: white; border-radius: 1rem; max-width: 1200px; width: 90%; max-height: 90vh; overflow: auto; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);">
+                        <!-- Header -->
+                        <div style="background: linear-gradient(to right, #0891b2, #0e7490); color: white; padding: 1.5rem; border-radius: 1rem 1rem 0 0;">
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <div>
+                                    <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem;">
+                                        <i class="fas fa-user-injured" style="margin-right: 0.5rem;"></i>
+                                        \${paciente.nome}
+                                    </h2>
+                                    <div style="display: flex; gap: 1rem; font-size: 0.875rem; opacity: 0.9;">
+                                        <span><i class="fas fa-id-card" style="margin-right: 0.25rem;"></i> \${patientId}</span>
+                                        <span><i class="fas fa-birthday-cake" style="margin-right: 0.25rem;"></i> \${paciente.idade} anos</span>
+                                        <span><i class="fas fa-phone" style="margin-right: 0.25rem;"></i> \${paciente.telefone}</span>
+                                    </div>
+                                </div>
+                                <button onclick="document.getElementById('view-paciente-modal').remove()" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0;">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Tabs -->
+                        <div style="display: flex; gap: 0; border-bottom: 2px solid #e5e7eb; background: #f9fafb;">
+                            <button onclick="mostrarTabPaciente('geral')" id="tab-btn-geral" style="padding: 0.75rem 1.5rem; background: white; color: #0891b2; border: none; border-bottom: 2px solid #0891b2; cursor: pointer; font-weight: 600;">
+                                <i class="fas fa-chart-line" style="margin-right: 0.5rem;"></i>Visão Geral
+                            </button>
+                            <button onclick="mostrarTabPaciente('contatar')" id="tab-btn-contatar" style="padding: 0.75rem 1.5rem; background: transparent; color: #6b7280; border: none; cursor: pointer;">
+                                <i class="fas fa-address-book" style="margin-right: 0.5rem;"></i>Contatar
+                            </button>
+                            <button onclick="mostrarTabPaciente('agendar')" id="tab-btn-agendar" style="padding: 0.75rem 1.5rem; background: transparent; color: #6b7280; border: none; cursor: pointer;">
+                                <i class="fas fa-calendar-alt" style="margin-right: 0.5rem;"></i>Agendar
+                            </button>
+                            <button onclick="mostrarTabPaciente('jornada')" id="tab-btn-jornada" style="padding: 0.75rem 1.5rem; background: transparent; color: #6b7280; border: none; cursor: pointer;">
+                                <i class="fas fa-route" style="margin-right: 0.5rem;"></i>Jornada
+                            </button>
+                            <button onclick="mostrarTabPaciente('checklist')" id="tab-btn-checklist" style="padding: 0.75rem 1.5rem; background: transparent; color: #6b7280; border: none; cursor: pointer;">
+                                <i class="fas fa-tasks" style="margin-right: 0.5rem;"></i>Checklist
+                            </button>
+                            <button onclick="mostrarTabPaciente('ia')" id="tab-btn-ia" style="padding: 0.75rem 1.5rem; background: transparent; color: #6b7280; border: none; cursor: pointer;">
+                                <i class="fas fa-brain" style="margin-right: 0.5rem;"></i>IA Laura
+                            </button>
+                        </div>
+                        
+                        <!-- Conteúdo das Tabs -->
+                        <div style="padding: 1.5rem;">
+                            <!-- Tab Visão Geral -->
+                            <div id="tab-content-geral" style="display: block;">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                    <div style="background: #dbeafe; padding: 1rem; border-radius: 0.5rem;">
+                                        <h3 style="font-weight: bold; margin-bottom: 0.5rem; color: #1e40af;">
+                                            <i class="fas fa-notes-medical" style="margin-right: 0.5rem;"></i>Dados Clínicos
+                                        </h3>
+                                        <p style="margin: 0.25rem 0;"><strong>Diagnóstico:</strong> \${paciente.diagnostico}</p>
+                                        <p style="margin: 0.25rem 0;"><strong>Estadiamento:</strong> \${paciente.estadiamento}</p>
+                                        <p style="margin: 0.25rem 0;"><strong>Convênio:</strong> \${paciente.convenio}</p>
+                                        <p style="margin: 0.25rem 0;"><strong>Protocolo:</strong> NCCN Guidelines 2024</p>
+                                    </div>
+                                    <div style="background: #d1fae5; padding: 1rem; border-radius: 0.5rem;">
+                                        <h3 style="font-weight: bold; margin-bottom: 0.5rem; color: #14532d;">
+                                            <i class="fas fa-user-md" style="margin-right: 0.5rem;"></i>Equipe Médica
+                                        </h3>
+                                        <p style="margin: 0.25rem 0;"><strong>Oncologista:</strong> \${paciente.medico}</p>
+                                        <p style="margin: 0.25rem 0;"><strong>Navegador:</strong> \${paciente.navegador}</p>
+                                        <p style="margin: 0.25rem 0;"><strong>Nutricionista:</strong> Dra. Ana Paula Santos</p>
+                                        <p style="margin: 0.25rem 0;"><strong>Psicóloga:</strong> Dra. Marina Costa</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Tab Contatar -->
+                            <div id="tab-content-contatar" style="display: none;">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                    <div>
+                                        <h3 style="font-weight: bold; margin-bottom: 1rem;">Contatos do Paciente</h3>
+                                        <button style="width: 100%; padding: 0.75rem; background: #10b981; color: white; border: none; border-radius: 0.5rem; margin-bottom: 0.5rem; cursor: pointer;">
+                                            <i class="fas fa-phone" style="margin-right: 0.5rem;"></i>\${paciente.telefone}
+                                        </button>
+                                        <button style="width: 100%; padding: 0.75rem; background: #8b5cf6; color: white; border: none; border-radius: 0.5rem; cursor: pointer;">
+                                            <i class="fas fa-envelope" style="margin-right: 0.5rem;"></i>\${paciente.email}
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <h3 style="font-weight: bold; margin-bottom: 1rem;">Equipe Médica</h3>
+                                        <div style="background: #f3f4f6; padding: 1rem; border-radius: 0.5rem;">
+                                            <p style="font-weight: 600;">\${paciente.medico}</p>
+                                            <p style="font-size: 0.875rem; color: #6b7280;">Oncologista</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Tab Agendar -->
+                            <div id="tab-content-agendar" style="display: none;">
+                                <h3 style="font-weight: bold; margin-bottom: 1rem;">
+                                    <i class="fas fa-calendar-plus" style="margin-right: 0.5rem;"></i>Agendar Consulta
+                                </h3>
+                                <select style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.5rem; margin-bottom: 1rem;">
+                                    <option>Consulta Médica</option>
+                                    <option>Exame de Imagem</option>
+                                    <option>Quimioterapia</option>
+                                    <option>Radioterapia</option>
+                                </select>
+                                <input type="date" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.5rem; margin-bottom: 1rem;">
+                                <button style="width: 100%; padding: 0.75rem; background: #0891b2; color: white; border: none; border-radius: 0.5rem; cursor: pointer;">
+                                    <i class="fas fa-check" style="margin-right: 0.5rem;"></i>Confirmar Agendamento
+                                </button>
+                            </div>
+                            
+                            <!-- Tab Jornada -->
+                            <div id="tab-content-jornada" style="display: none;">
+                                <h3 style="font-weight: bold; margin-bottom: 1rem;">
+                                    <i class="fas fa-route" style="margin-right: 0.5rem;"></i>Jornada do Paciente
+                                </h3>
+                                <div style="border-left: 3px solid #0891b2; padding-left: 1rem;">
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                                            <div style="width: 2rem; height: 2rem; background: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-right: 1rem;">
+                                                <i class="fas fa-check"></i>
+                                            </div>
+                                            <div>
+                                                <strong>Diagnóstico Confirmado</strong>
+                                                <p style="font-size: 0.875rem; color: #6b7280;">10/01/2025</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="display: flex; align-items: center;">
+                                            <div style="width: 2rem; height: 2rem; background: #f59e0b; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-right: 1rem;">
+                                                <i class="fas fa-clock"></i>
+                                            </div>
+                                            <div>
+                                                <strong>Em Tratamento</strong>
+                                                <p style="font-size: 0.875rem; color: #6b7280;">Ciclo 3 de 6</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Tab Checklist -->
+                            <div id="tab-content-checklist" style="display: none;">
+                                <h3 style="font-weight: bold; margin-bottom: 1rem;">
+                                    <i class="fas fa-tasks" style="margin-right: 0.5rem;"></i>Checklist de Acompanhamento
+                                </h3>
+                                <div style="background: #f3f4f6; padding: 1rem; border-radius: 0.5rem;">
+                                    <label style="display: flex; align-items: center; margin-bottom: 0.5rem; cursor: pointer;">
+                                        <input type="checkbox" checked style="margin-right: 0.5rem;">
+                                        <span>Termo de Consentimento assinado</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; margin-bottom: 0.5rem; cursor: pointer;">
+                                        <input type="checkbox" checked style="margin-right: 0.5rem;">
+                                        <span>Exames em dia</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; cursor: pointer;">
+                                        <input type="checkbox" style="margin-right: 0.5rem;">
+                                        <span>Autorização do convênio pendente</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Tab IA -->
+                            <div id="tab-content-ia" style="display: none;">
+                                <h3 style="font-weight: bold; margin-bottom: 1rem;">
+                                    <i class="fas fa-brain" style="margin-right: 0.5rem;"></i>Análise IA Laura
+                                </h3>
+                                <div style="background: linear-gradient(to bottom right, #f3e8ff, #e9d5ff); padding: 1.5rem; border-radius: 0.5rem; text-align: center;">
+                                    <div style="font-size: 3rem; font-weight: bold; color: #7c3aed;">72</div>
+                                    <div style="color: #6b7280;">Score de Ansiedade</div>
+                                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #c084fc;">
+                                        <p style="font-weight: 600; margin-bottom: 0.5rem;">Recomendações:</p>
+                                        <ul style="text-align: left; font-size: 0.875rem;">
+                                            <li>• Intensificar contato telefônico</li>
+                                            <li>• Agendar consulta com psico-oncologia</li>
+                                            <li>• Incluir familiar nas próximas consultas</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                \`;
+                
+                document.body.appendChild(modal);
+                
+                // Tornar a view visível
+                modal.style.display = 'flex';
+            }
+            
+            // Garantir que a função está disponível globalmente
+            window.abrirViewPaciente = abrirViewPaciente;
+            
+            // Registrar a função após um pequeno delay para garantir carregamento
+            setTimeout(() => {
+                window.abrirViewPaciente = abrirViewPaciente;
+                console.log('Função abrirViewPaciente registrada no window');
+            }, 100);
+            
+            // Função para alternar tabs
+            window.mostrarTabPaciente = function(tab) {
+                // Esconder todas as tabs
+                const tabs = ['geral', 'contatar', 'agendar', 'jornada', 'checklist', 'ia'];
+                tabs.forEach(t => {
+                    const content = document.getElementById('tab-content-' + t);
+                    const btn = document.getElementById('tab-btn-' + t);
+                    if (content) content.style.display = 'none';
+                    if (btn) {
+                        btn.style.background = 'transparent';
+                        btn.style.color = '#6b7280';
+                        btn.style.borderBottom = 'none';
+                        btn.style.fontWeight = 'normal';
+                    }
+                });
+                
+                // Mostrar tab selecionada
+                const selectedContent = document.getElementById('tab-content-' + tab);
+                const selectedBtn = document.getElementById('tab-btn-' + tab);
+                if (selectedContent) selectedContent.style.display = 'block';
+                if (selectedBtn) {
+                    selectedBtn.style.background = 'white';
+                    selectedBtn.style.color = '#0891b2';
+                    selectedBtn.style.borderBottom = '2px solid #0891b2';
+                    selectedBtn.style.fontWeight = '600';
+                }
+            }
         </script>
         
         <!-- Ferramentas de Navegação - INTEGRADAS COM AS VIEWS -->

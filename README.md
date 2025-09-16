@@ -18,14 +18,16 @@ Plataforma completa de gestão oncológica integrada com LAURA Assistant, oferec
 1. **Portal do Paciente** - Auto-triagem inteligente e acompanhamento personalizado
 2. **Portal Médico** - Assistente clínico com IA e gestão integrada
 3. **Navegador de Pacientes** - Coordenação otimizada da jornada
-   - **🆕 Trilho de Atendimentos**: Visão Kanban completa da jornada
-   - **🆕 View Universal do Paciente**: Interface completa com 6 abas funcionais
-   - **🆕 Sistema Contatar**: Rede de apoio, equipe médica, contatos integrados
-   - **🆕 Sistema Agendar**: Calendário inteligente com slots disponíveis
-   - **🆕 Wiki Jornada**: Timeline interativo da jornada do paciente
-   - **🆕 Checklist Auditoria**: Sistema double-check com compliance
+   - **✅ Trilho de Atendimentos**: Visão Kanban completa da jornada
+   - **✅ View Universal do Paciente**: Totalmente funcional com clique direto nos cards
+   - **✅ Sistema Contatar**: Rede de apoio, equipe médica, contatos integrados
+   - **✅ Sistema Agendar**: Calendário inteligente com slots disponíveis
+   - **✅ Wiki Jornada**: Timeline interativo da jornada do paciente
+   - **✅ Checklist Auditoria**: Sistema double-check com compliance
    - Drag & Drop entre fases do tratamento
    - 5 colunas: Triagem → Diagnóstico → Tratamento → Acompanhamento → Alta
+   - 6 pacientes exemplo com dados completos
+   - Modal com 6 abas: Geral, Contatar, Agendar, Jornada, Checklist, IA Laura
 4. **Gestão Financeira** - Prevenção inteligente de glosas
 5. **Bem-estar Integrado** - Suporte psicológico e qualidade de vida
 6. **Pesquisa Clínica** - Recrutamento e gestão de trials
@@ -109,6 +111,31 @@ webapp/
 - **Sandbox**: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev
 - **Portal Navegador**: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev#navigator
 - **Teste Integrado**: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev/test-navigator
+
+## 📱 Como Usar a View Universal do Paciente
+
+1. **Acesse o Portal do Navegador**: 
+   - Vá para https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev#navigator
+
+2. **Abra o Kanban**:
+   - Clique no botão "Visualizar Kanban" 
+
+3. **Acesse a View Universal**:
+   - Clique em qualquer card de paciente no Kanban
+   - O modal abrirá automaticamente com 6 abas de informações
+
+4. **Navegue entre as Abas**:
+   - **Geral**: Dados cadastrais e médicos
+   - **Contatar**: Rede de apoio e equipe médica
+   - **Agendar**: Calendário de consultas e exames
+   - **Jornada**: Timeline completo do tratamento
+   - **Checklist**: Tarefas e compliance
+   - **IA Laura**: Análise preditiva e alertas
+
+5. **Funcionalidades Adicionais**:
+   - Use os 4 botões principais para ações rápidas
+   - O modal é reutilizável em todos os contextos
+   - Dados sincronizados em tempo real
 
 ### Produção (quando deployado)
 - **Principal**: https://[project-name].pages.dev

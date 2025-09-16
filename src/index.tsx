@@ -13,6 +13,8 @@ import { researchRoutes } from './routes/research'
 import { adminRoutes } from './routes/admin'
 import { aiRoutes } from './routes/ai'
 import { portalRoutes } from './routes/portal'
+import kanbanTestRoutes from './routes/kanban-test'
+import patientViewStandalone from './routes/patient-view-standalone'
 
 
 // Import page handlers
@@ -52,6 +54,10 @@ app.route('/api/research', researchRoutes)
 app.route('/api/admin', adminRoutes)
 app.route('/api/ai', aiRoutes)
 app.route('/api/portal', portalRoutes)
+
+// Mount test routes
+app.route('/', kanbanTestRoutes)
+app.route('/', patientViewStandalone)
 
 // Mount page routes
 app.get('/portal/patient', patientPage)
@@ -591,11 +597,34 @@ app.get('/test-portal-functions', (c) => {
         </div>
         
         <div class="bg-white rounded-lg shadow p-6 mb-4">
-            <h2 class="text-lg font-semibold mb-4">Teste de Abertura da View</h2>
-            <button onclick="testOpenView()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-                <i class="fas fa-user-md mr-2"></i>
-                Abrir View Universal do Paciente
-            </button>
+            <h2 class="text-lg font-semibold mb-4">Teste de Abertura da View - 6 Pacientes</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <button onclick="window.open('/patient-view/PAC-001', '_blank')" class="bg-teal-600 text-white px-4 py-3 rounded hover:bg-teal-700 text-sm">
+                    <i class="fas fa-user mr-2"></i>
+                    Maria Silva (PAC-001)
+                </button>
+                <button onclick="window.open('/patient-view/PAC-002', '_blank')" class="bg-red-600 text-white px-4 py-3 rounded hover:bg-red-700 text-sm">
+                    <i class="fas fa-user mr-2"></i>
+                    Ana Costa (PAC-002)
+                </button>
+                <button onclick="window.open('/patient-view/PAC-003', '_blank')" class="bg-blue-600 text-white px-4 py-3 rounded hover:bg-blue-700 text-sm">
+                    <i class="fas fa-user mr-2"></i>
+                    Carlos Mendes (PAC-003)
+                </button>
+                <button onclick="window.open('/patient-view/PAC-004', '_blank')" class="bg-green-600 text-white px-4 py-3 rounded hover:bg-green-700 text-sm">
+                    <i class="fas fa-user mr-2"></i>
+                    João Santos (PAC-004)
+                </button>
+                <button onclick="window.open('/patient-view/PAC-005', '_blank')" class="bg-purple-600 text-white px-4 py-3 rounded hover:bg-purple-700 text-sm">
+                    <i class="fas fa-user mr-2"></i>
+                    Pedro Oliveira (PAC-005)
+                </button>
+                <button onclick="window.open('/patient-view/PAC-006', '_blank')" class="bg-orange-600 text-white px-4 py-3 rounded hover:bg-orange-700 text-sm">
+                    <i class="fas fa-user mr-2"></i>
+                    Lucia Ferreira (PAC-006)
+                </button>
+            </div>
+            <p class="text-sm text-gray-600 mt-4">Clique em qualquer paciente para abrir a View Universal em nova aba</p>
         </div>
         
         <div class="bg-white rounded-lg shadow p-6">
