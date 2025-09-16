@@ -1,0 +1,116 @@
+/* Estilos do Trilho de Atendimentos - Kanban */
+
+.kanban-column {
+    min-height: 500px;
+    transition: all 0.3s ease;
+}
+
+.kanban-column:hover {
+    background-color: #f3f4f6;
+}
+
+.kanban-card {
+    transition: all 0.2s ease;
+    border: 1px solid #e5e7eb;
+}
+
+.kanban-card:hover {
+    transform: translateY(-2px);
+    border-color: #14b8a6;
+}
+
+.kanban-card.dragging {
+    opacity: 0.5;
+    transform: rotate(2deg);
+}
+
+.kanban-column.drag-over {
+    background-color: #f0fdfa;
+    border: 2px dashed #14b8a6;
+}
+
+/* Scrollbar customizada para as colunas */
+.kanban-column .overflow-y-auto::-webkit-scrollbar {
+    width: 6px;
+}
+
+.kanban-column .overflow-y-auto::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.kanban-column .overflow-y-auto::-webkit-scrollbar-thumb {
+    background: #14b8a6;
+    border-radius: 10px;
+}
+
+.kanban-column .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    background: #0d9488;
+}
+
+/* Animações do Modal */
+#kanban-modal {
+    animation: fadeIn 0.3s ease;
+}
+
+#kanban-modal > div > div {
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Status badges */
+.kanban-card .text-xs {
+    font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .kanban-column {
+        min-width: 280px;
+    }
+}
+
+/* Indicadores de prioridade */
+.kanban-card[data-priority="urgent"] {
+    border-left: 4px solid #ef4444;
+}
+
+.kanban-card[data-priority="high"] {
+    border-left: 4px solid #f59e0b;
+}
+
+.kanban-card[data-priority="normal"] {
+    border-left: 4px solid #10b981;
+}
+
+.kanban-card[data-priority="low"] {
+    border-left: 4px solid #6b7280;
+}
+
+/* Hover effects nos botões das cards */
+.kanban-card button {
+    transition: all 0.2s ease;
+}
+
+.kanban-card button:hover {
+    transform: scale(1.2);
+}

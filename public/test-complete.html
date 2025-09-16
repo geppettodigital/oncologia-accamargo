@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Completo - Portal do Navegador</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-8">
+        <h1 class="text-3xl font-bold mb-8 text-center">
+            <i class="fas fa-microscope text-teal-600 mr-2"></i>
+            Teste Completo do Portal do Navegador
+        </h1>
+        
+        <!-- Status Panel -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-4">Status do Sistema</h2>
+            <div id="status" class="space-y-2">
+                <p class="text-gray-600">Carregando portal...</p>
+            </div>
+        </div>
+        
+        <!-- Portal Container -->
+        <div id="main-container" class="bg-white rounded-lg shadow-lg p-6">
+            <p class="text-gray-600">Portal será carregado aqui...</p>
+        </div>
+    </div>
+    
+    <!-- Portal Loader Script -->
+    <script src="/static/portal-loader.js"></script>
+    
+    <script>
+        // Log detalhado
+        function log(message, type = 'info') {
+            console.log(`[${type.toUpperCase()}] ${message}`);
+            const statusDiv = document.getElementById('status');
+            const p = document.createElement('p');
+            p.className = type === 'error' ? 'text-red-600' : type === 'success' ? 'text-green-600' : 'text-blue-600';
+            p.innerHTML = `<i class="fas fa-${type === 'error' ? 'times' : type === 'success' ? 'check' : 'info'}-circle mr-2"></i>${message}`;
+            statusDiv.appendChild(p);
+        }
+        
+        // Carregar portal do navegador
+        async function loadNavigatorPortal() {
+            log('Iniciando carregamento do Portal do Navegador...');
+            
+            try {
+                // Buscar dados do portal
+                log('Buscando dados da API...');
+                const response = await fetch('/api/portal/navigator');
+                
+                if (!response.ok) {
+                    throw new Error(`Erro HTTP: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                log('Dados recebidos com sucesso', 'success');
+                
+                // Renderizar HTML
+                log('Renderizando portal...');
+                const container = document.getElementById('main-container');
+                container.innerHTML = data.html;
+                log('HTML renderizado', 'success');
+                
+                // Executar scripts
+                if (data.scripts && data.scripts.length > 0) {
+                    log(`Executando ${data.scripts.length} scripts...`);
+                    data.scripts.forEach((script, index) => {
+                        try {
+                            const scriptElement = document.createElement('script');
+                            scriptElement.textContent = script;
+                            document.body.appendChild(scriptElement);
+                            log(`Script ${index + 1} executado`, 'success');
+                        } catch (e) {
+                            log(`Erro no script ${index + 1}: ${e.message}`, 'error');
+                        }
+                    });
+                }
+                
+                // Aguardar e inicializar eventos
+                setTimeout(() => {
+                    log('Inicializando eventos do Kanban...');
+                    initializeKanbanEvents();
+                }, 1000);
+                
+            } catch (error) {
+                log(`Erro ao carregar portal: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+        
+        // Inicializar eventos do Kanban
+        function initializeKanbanEvents() {
+            const cards = document.querySelectorAll('.kanban-card');
+            log(`Encontrados ${cards.length} cards no Kanban`);
+            
+            if (cards.length === 0) {
+                log('Nenhum card encontrado. Tentando novamente...', 'error');
+                setTimeout(initializeKanbanEvents, 2000);
+                return;
+            }
+            
+            cards.forEach((card, index) => {
+                card.style.cursor = 'pointer';
+                card.onclick = function(e) {
+                    if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
+                        e.stopPropagation();
+                        return;
+                    }
+                    
+                    const patientId = this.dataset.patientId || `PAC-00${index + 1}`;
+                    log(`Card clicado: ${patientId}`);
+                    
+                    if (typeof window.openPatientView === 'function') {
+                        window.openPatientView(patientId);
+                        log(`View do paciente ${patientId} aberta`, 'success');
+                    } else {
+                        log('Função openPatientView não encontrada', 'error');
+                    }
+                };
+            });
+            
+            log('Eventos do Kanban inicializados com sucesso!', 'success');
+        }
+        
+        // Iniciar quando a página carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            log('DOM carregado, iniciando...');
+            loadNavigatorPortal();
+        });
+    </script>
+</body>
+</html>
