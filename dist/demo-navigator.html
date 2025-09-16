@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo - Novas Funcionalidades Navigator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8 text-center">
+            🚀 Demonstração das Novas Funcionalidades - Portal Navegador
+        </h1>
+        
+        <div class="grid grid-cols-2 gap-4 mb-8">
+            <button onclick="mostrarContatar()" class="bg-blue-500 text-white p-4 rounded-lg hover:bg-blue-600">
+                <i class="fas fa-address-book mr-2"></i>
+                1. CONTATAR - Ver Rede de Contatos
+            </button>
+            
+            <button onclick="mostrarAgendar()" class="bg-purple-500 text-white p-4 rounded-lg hover:bg-purple-600">
+                <i class="fas fa-calendar mr-2"></i>
+                2. AGENDAR - Sistema de Agendamento
+            </button>
+            
+            <button onclick="mostrarJornada()" class="bg-green-500 text-white p-4 rounded-lg hover:bg-green-600">
+                <i class="fas fa-route mr-2"></i>
+                3. JORNADA - Wiki Inteligente
+            </button>
+            
+            <button onclick="mostrarChecklist()" class="bg-indigo-500 text-white p-4 rounded-lg hover:bg-indigo-600">
+                <i class="fas fa-clipboard-check mr-2"></i>
+                4. CHECKLIST - Double-Check
+            </button>
+        </div>
+        
+        <div id="content" class="bg-white rounded-lg shadow-lg"></div>
+    </div>
+
+    <script src="/static/navigator-views.js"></script>
+    <script src="/static/navigator-views-extended.js"></script>
+    
+    <script>
+        function mostrarContatar() {
+            document.getElementById('content').innerHTML = renderContatarView('PAC-001');
+        }
+        
+        function mostrarAgendar() {
+            document.getElementById('content').innerHTML = renderAgendarView('PAC-001');
+        }
+        
+        function mostrarJornada() {
+            document.getElementById('content').innerHTML = renderJornadaView('PAC-001');
+        }
+        
+        function mostrarChecklist() {
+            document.getElementById('content').innerHTML = renderChecklistView('PAC-001');
+        }
+        
+        window.closeModal = function() {
+            document.getElementById('content').innerHTML = '';
+        }
+    </script>
+</body>
+</html>

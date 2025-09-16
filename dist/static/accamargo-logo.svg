@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 150" fill="none">
+  <!-- Logo Oficial ACCamargo Cancer Center -->
+  
+  <!-- Círculo verde com sorriso -->
+  <g id="logo-symbol">
+    <!-- Círculo principal -->
+    <circle cx="75" cy="75" r="60" fill="#2B6B47"/>
+    
+    <!-- Sorriso branco -->
+    <path d="M 45 85 Q 75 110 105 85" 
+          stroke="white" 
+          stroke-width="8" 
+          fill="none" 
+          stroke-linecap="round"/>
+  </g>
+  
+  <!-- Texto A.C.Camargo Cancer Center -->
+  <g id="logo-text" font-family="Arial, Helvetica, sans-serif">
+    <!-- A.C.Camargo -->
+    <text x="150" y="65" font-size="48" font-weight="bold" fill="#1a1a1a">
+      A.C.Camargo
+    </text>
+    
+    <!-- Cancer Center -->
+    <text x="150" y="105" font-size="38" font-weight="normal" fill="#1a1a1a">
+      Cancer Center
+    </text>
+  </g>
+</svg>

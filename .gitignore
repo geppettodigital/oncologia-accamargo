@@ -1,5 +1,5 @@
 # prod
-dist/
+# dist/ - Incluindo dist para deploy completo no GitHub
 
 # dev
 .yarn/

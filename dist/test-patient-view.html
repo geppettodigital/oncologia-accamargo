@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste - View Universal do Paciente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-bold mb-8">Teste da View Universal do Paciente</h1>
+        
+        <button onclick="testarView()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
+            <i class="fas fa-user mr-2"></i>
+            Abrir View do Paciente
+        </button>
+        
+        <div id="resultado" class="mt-8"></div>
+    </div>
+
+    <!-- Modal Container -->
+    <div id="patient-universal-modal" class="fixed inset-0 z-50 overflow-y-auto" style="display: none;"></div>
+
+    <script src="/static/patient-view-universal.js"></script>
+    
+    <script>
+        function testarView() {
+            console.log('Testando view...');
+            
+            // Verificar se a função existe
+            if (typeof openPatientUniversalView === 'function') {
+                console.log('Função encontrada! Abrindo view...');
+                openPatientUniversalView('PAC-TEST-001', 'test');
+            } else if (typeof renderPatientUniversalView === 'function') {
+                console.log('Função render encontrada! Renderizando...');
+                const content = renderPatientUniversalView('PAC-TEST-001', 'test');
+                document.getElementById('resultado').innerHTML = content;
+            } else {
+                console.error('Funções não encontradas!');
+                alert('Erro: Funções não carregadas');
+            }
+        }
+        
+        // Log inicial
+        console.log('Página carregada');
+        console.log('openPatientUniversalView existe?', typeof openPatientUniversalView);
+        console.log('renderPatientUniversalView existe?', typeof renderPatientUniversalView);
+    </script>
+</body>
+</html>

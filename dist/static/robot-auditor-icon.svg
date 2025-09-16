@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <!-- Robô Auditor IA - Ícone Laranja -->
+  <defs>
+    <linearGradient id="orangeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF8C00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF6B35;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Antena -->
+  <circle cx="12" cy="3" r="1" fill="url(#orangeGradient)"/>
+  <path d="M12 4V6" stroke="url(#orangeGradient)" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Cabeça do Robô -->
+  <rect x="7" y="6" width="10" height="8" rx="2" fill="none" stroke="url(#orangeGradient)" stroke-width="2"/>
+  
+  <!-- Olhos -->
+  <circle cx="9.5" cy="9.5" r="1.5" fill="#FF8C00"/>
+  <circle cx="14.5" cy="9.5" r="1.5" fill="#FF8C00"/>
+  
+  <!-- Boca/Display -->
+  <rect x="9" y="11.5" width="6" height="1" rx="0.5" fill="url(#orangeGradient)"/>
+  
+  <!-- Corpo -->
+  <rect x="6" y="14" width="12" height="7" rx="1" fill="none" stroke="url(#orangeGradient)" stroke-width="2"/>
+  
+  <!-- Braços -->
+  <path d="M6 16H4M18 16h2" stroke="url(#orangeGradient)" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Painel de Controle -->
+  <rect x="8" y="16" width="2" height="2" rx="0.5" fill="#FF8C00"/>
+  <rect x="11" y="16" width="2" height="2" rx="0.5" fill="#FF8C00"/>
+  <rect x="14" y="16" width="2" height="2" rx="0.5" fill="#FF8C00"/>
+</svg>
