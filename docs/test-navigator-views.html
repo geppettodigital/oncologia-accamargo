@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste - Views do Portal Navegador</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto p-8">
+        <div class="glass-effect rounded-xl shadow-2xl p-8 mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                <i class="fas fa-vial mr-3 text-indigo-600"></i>
+                Teste das Novas Views - Portal Navegador
+            </h1>
+            <p class="text-gray-600">Teste completo das funcionalidades Contatar, Agendar, Jornada e Checklist</p>
+        </div>
+
+        <!-- Grid de Botões de Teste -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- View Contatar -->
+            <div class="glass-effect rounded-xl p-6 hover:shadow-xl transition-shadow">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-address-book text-3xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Contatar</h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Visualize dados completos do paciente, rede de apoio e equipe médica
+                    </p>
+                    <button onclick="testarContatar()" 
+                            class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-play mr-2"></i>Testar View
+                    </button>
+                </div>
+            </div>
+
+            <!-- View Agendar -->
+            <div class="glass-effect rounded-xl p-6 hover:shadow-xl transition-shadow">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-calendar-alt text-3xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Agendar</h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Sistema completo de agendamento com visão de setores e médicos
+                    </p>
+                    <button onclick="testarAgendar()" 
+                            class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors">
+                        <i class="fas fa-play mr-2"></i>Testar View
+                    </button>
+                </div>
+            </div>
+
+            <!-- View Jornada -->
+            <div class="glass-effect rounded-xl p-6 hover:shadow-xl transition-shadow">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-route text-3xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Jornada</h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Wiki inteligente com mapa completo da jornada oncológica
+                    </p>
+                    <button onclick="testarJornada()" 
+                            class="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors">
+                        <i class="fas fa-play mr-2"></i>Testar View
+                    </button>
+                </div>
+            </div>
+
+            <!-- View Checklist -->
+            <div class="glass-effect rounded-xl p-6 hover:shadow-xl transition-shadow">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-clipboard-check text-3xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Checklist</h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Sistema double-check para elementos auditáveis
+                    </p>
+                    <button onclick="testarChecklist()" 
+                            class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors">
+                        <i class="fas fa-play mr-2"></i>Testar View
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Container para renderização das views -->
+        <div id="view-container" class="glass-effect rounded-xl shadow-2xl overflow-hidden" style="display: none;">
+            <!-- Conteúdo das views será renderizado aqui -->
+        </div>
+
+        <!-- Botão de Teste Completo -->
+        <div class="text-center mt-8">
+            <button onclick="testarTodasViews()" 
+                    class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-8 rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg">
+                <i class="fas fa-rocket mr-2"></i>
+                Testar Todas as Views em Sequência
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/static/navigator-views.js"></script>
+    <script src="/static/navigator-views-extended.js"></script>
+    <script src="/static/navigator-integration.js"></script>
+    
+    <script>
+        // Container de renderização
+        const viewContainer = document.getElementById('view-container');
+
+        // Função para testar view Contatar
+        function testarContatar() {
+            console.log('Testando View Contatar...');
+            viewContainer.style.display = 'block';
+            viewContainer.innerHTML = renderContatarView('PAC-TEST-001');
+            viewContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Função para testar view Agendar
+        function testarAgendar() {
+            console.log('Testando View Agendar...');
+            viewContainer.style.display = 'block';
+            viewContainer.innerHTML = renderAgendarView('PAC-TEST-001');
+            viewContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Função para testar view Jornada
+        function testarJornada() {
+            console.log('Testando View Jornada...');
+            viewContainer.style.display = 'block';
+            viewContainer.innerHTML = renderJornadaView('PAC-TEST-001');
+            viewContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Função para testar view Checklist
+        function testarChecklist() {
+            console.log('Testando View Checklist...');
+            viewContainer.style.display = 'block';
+            viewContainer.innerHTML = renderChecklistView('PAC-TEST-001');
+            viewContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Função para testar todas as views em sequência
+        async function testarTodasViews() {
+            const views = [
+                { name: 'Contatar', func: testarContatar },
+                { name: 'Agendar', func: testarAgendar },
+                { name: 'Jornada', func: testarJornada },
+                { name: 'Checklist', func: testarChecklist }
+            ];
+
+            for (const view of views) {
+                console.log(`Testando ${view.name}...`);
+                view.func();
+                await new Promise(resolve => setTimeout(resolve, 3000)); // Aguarda 3 segundos
+            }
+
+            alert('Teste completo de todas as views finalizado!');
+        }
+
+        // Override da função closeModal para o teste
+        window.closeModal = function() {
+            viewContainer.style.display = 'none';
+            viewContainer.innerHTML = '';
+        }
+
+        // Log de inicialização
+        console.log('Página de teste carregada. Views disponíveis:');
+        console.log('- renderContatarView()');
+        console.log('- renderAgendarView()');
+        console.log('- renderJornadaView()');
+        console.log('- renderChecklistView()');
+    </script>
+</body>
+</html>

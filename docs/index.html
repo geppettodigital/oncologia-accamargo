@@ -7,143 +7,199 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 min-h-screen">
-    <!-- Header -->
-    <header class="bg-white shadow-lg">
-        <div class="container mx-auto px-4 py-6">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <div class="w-12 h-12 bg-gradient-to-br from-green-600 to-teal-600 rounded-full flex items-center justify-center mr-4">
-                        <i class="fas fa-heartbeat text-white text-xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-2xl font-bold text-gray-800">PaaS Oncology 3.0</h1>
-                        <p class="text-sm text-gray-600">ACCamargo Cancer Center</p>
-                    </div>
+<body class="bg-gradient-to-br from-green-50 to-teal-50 min-h-screen">
+    <div class="container mx-auto p-8">
+        <!-- Header -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h1 class="text-4xl font-bold text-gray-800 mb-2">PaaS Oncology 3.0</h1>
+                    <p class="text-lg text-gray-600">ACCamargo Cancer Center - Portal do Navegador</p>
                 </div>
-                <a href="https://github.com/geppettodigital/oncologia-accamargo" 
-                   class="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-900 transition">
-                    <i class="fab fa-github mr-2"></i>Repositório
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-teal-600">847</div>
+                    <div class="text-sm text-gray-600">Pacientes Ativos</div>
+                </div>
+            </div>
+            
+            <!-- Botões de Acesso -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <a href="demo.html" class="bg-teal-600 text-white p-4 rounded-lg text-center hover:bg-teal-700 transition">
+                    <i class="fas fa-play-circle text-2xl mb-2"></i>
+                    <p class="font-semibold">Demo Interativa</p>
+                    <p class="text-sm opacity-90">View Universal Funcional</p>
+                </a>
+                
+                <a href="test-final.html" class="bg-blue-600 text-white p-4 rounded-lg text-center hover:bg-blue-700 transition">
+                    <i class="fas fa-vial text-2xl mb-2"></i>
+                    <p class="font-semibold">Teste Completo</p>
+                    <p class="text-sm opacity-90">Portal + API</p>
+                </a>
+                
+                <a href="https://github.com/geppettodigital/oncologia-accamargo" class="bg-gray-800 text-white p-4 rounded-lg text-center hover:bg-gray-900 transition">
+                    <i class="fab fa-github text-2xl mb-2"></i>
+                    <p class="font-semibold">Código Fonte</p>
+                    <p class="text-sm opacity-90">Repositório GitHub</p>
                 </a>
             </div>
         </div>
-    </header>
-    
-    <!-- Hero Section -->
-    <section class="container mx-auto px-4 py-12">
+        
+        <!-- Demo Cards -->
         <div class="bg-white rounded-2xl shadow-xl p-8">
-            <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">
-                Plataforma Integrada de Gestão da Jornada Oncológica com IA
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">
+                <i class="fas fa-users mr-2 text-teal-600"></i>
+                Clique em um Paciente para Ver a View Universal
             </h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-green-600">847</div>
-                    <div class="text-gray-600">Pacientes Ativos</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-blue-600">R$ 2.4M</div>
-                    <div class="text-gray-600">Glosas Evitadas</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-purple-600">97%</div>
-                    <div class="text-gray-600">Acurácia da IA</div>
-                </div>
-            </div>
-            
-            <!-- Demo Button -->
-            <div class="text-center">
-                <a href="demo.html" 
-                   class="inline-block bg-gradient-to-r from-teal-600 to-teal-700 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:from-teal-700 hover:to-teal-800 transition shadow-lg">
-                    <i class="fas fa-play-circle mr-2"></i>
-                    Demonstração Interativa
-                </a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Portals Grid -->
-    <section class="container mx-auto px-4 py-8">
-        <h3 class="text-2xl font-bold text-center mb-8 text-gray-800">Portais Disponíveis</h3>
-        
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
-                <i class="fas fa-user-injured text-3xl text-blue-600 mb-3"></i>
-                <h4 class="font-semibold text-gray-800">Portal do Paciente</h4>
-                <p class="text-sm text-gray-600 mt-1">Auto-triagem e acompanhamento</p>
-            </div>
-            
-            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
-                <i class="fas fa-user-md text-3xl text-green-600 mb-3"></i>
-                <h4 class="font-semibold text-gray-800">Portal Médico</h4>
-                <p class="text-sm text-gray-600 mt-1">Assistente clínico com IA</p>
-            </div>
-            
-            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition border-2 border-teal-500">
-                <i class="fas fa-compass text-3xl text-teal-600 mb-3"></i>
-                <h4 class="font-semibold text-gray-800">Portal do Navegador</h4>
-                <p class="text-sm text-gray-600 mt-1">
-                    <span class="text-teal-600 font-bold">NOVO!</span> View Universal integrada
-                </p>
-            </div>
-            
-            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
-                <i class="fas fa-chart-line text-3xl text-purple-600 mb-3"></i>
-                <h4 class="font-semibold text-gray-800">Portal Financeiro</h4>
-                <p class="text-sm text-gray-600 mt-1">Prevenção de glosas</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Features -->
-    <section class="container mx-auto px-4 py-8">
-        <div class="bg-white rounded-2xl shadow-xl p-8">
-            <h3 class="text-2xl font-bold mb-6 text-gray-800">
-                <i class="fas fa-star text-yellow-500 mr-2"></i>
-                Funcionalidades Principais
-            </h3>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <h4 class="font-semibold text-lg mb-3 text-teal-700">Portal do Navegador - Atualizado</h4>
-                    <ul class="space-y-2 text-gray-700">
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>View Universal do Paciente (6 abas)</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Sistema Contatar integrado</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Sistema Agendar com calendário</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Wiki Jornada com timeline</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Checklist de auditoria</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Trilho Kanban com drag & drop</li>
-                    </ul>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card PAC-001 -->
+                <div onclick="openPatientDemo('PAC-001')" class="border-2 border-gray-200 rounded-lg p-4 hover:shadow-lg transition cursor-pointer hover:border-teal-500">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-bold text-lg">Maria Silva</span>
+                        <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded">Prioridade</span>
+                    </div>
+                    <p class="text-gray-600 mb-1">CA Mama • Estadio IIA</p>
+                    <p class="text-sm text-gray-500">52 anos • Unimed</p>
+                    <div class="mt-3 text-teal-600 text-sm font-semibold">
+                        <i class="fas fa-mouse-pointer mr-1"></i> Clique para abrir
+                    </div>
                 </div>
                 
-                <div>
-                    <h4 class="font-semibold text-lg mb-3 text-purple-700">IA Laura - Ansiedade de Laura</h4>
-                    <ul class="space-y-2 text-gray-700">
-                        <li><i class="fas fa-brain text-purple-500 mr-2"></i>Análise preditiva em tempo real</li>
-                        <li><i class="fas fa-brain text-purple-500 mr-2"></i>Score de ansiedade do paciente</li>
-                        <li><i class="fas fa-brain text-purple-500 mr-2"></i>Recomendações personalizadas</li>
-                        <li><i class="fas fa-brain text-purple-500 mr-2"></i>Alertas críticos automáticos</li>
-                        <li><i class="fas fa-brain text-purple-500 mr-2"></i>Integrada em todos os portais</li>
-                    </ul>
+                <!-- Card PAC-002 -->
+                <div onclick="openPatientDemo('PAC-002')" class="border-2 border-gray-200 rounded-lg p-4 hover:shadow-lg transition cursor-pointer hover:border-teal-500">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-bold text-lg">Ana Costa</span>
+                        <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded">Urgente</span>
+                    </div>
+                    <p class="text-gray-600 mb-1">CA Pulmão • Estadio IIIA</p>
+                    <p class="text-sm text-gray-500">45 anos • SulAmérica</p>
+                    <div class="mt-3 text-teal-600 text-sm font-semibold">
+                        <i class="fas fa-mouse-pointer mr-1"></i> Clique para abrir
+                    </div>
+                </div>
+                
+                <!-- Card PAC-003 -->
+                <div onclick="openPatientDemo('PAC-003')" class="border-2 border-gray-200 rounded-lg p-4 hover:shadow-lg transition cursor-pointer hover:border-teal-500">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-bold text-lg">Carlos Mendes</span>
+                        <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Em dia</span>
+                    </div>
+                    <p class="text-gray-600 mb-1">CA Colorretal • Estadio IIB</p>
+                    <p class="text-sm text-gray-500">67 anos • Bradesco</p>
+                    <div class="mt-3 text-teal-600 text-sm font-semibold">
+                        <i class="fas fa-mouse-pointer mr-1"></i> Clique para abrir
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
     
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white mt-12 py-8">
-        <div class="container mx-auto px-4 text-center">
-            <p class="mb-2">ACCamargo Cancer Center - 70 anos transformando o cuidado oncológico no Brasil</p>
-            <p class="text-sm text-gray-400">
-                Desenvolvido por Geppetto Digital | 
-                <a href="https://github.com/geppettodigital/oncologia-accamargo" class="text-teal-400 hover:text-teal-300">
-                    GitHub
-                </a> | 
-                <a href="demo.html" class="text-teal-400 hover:text-teal-300">
-                    Demo
-                </a>
-            </p>
-        </div>
-    </footer>
+    <!-- Script Inline para Demo -->
+    <script>
+        function openPatientDemo(patientId) {
+            // Criar modal
+            let modal = document.getElementById('demo-modal');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'demo-modal';
+                modal.className = 'fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-4';
+                document.body.appendChild(modal);
+            }
+            
+            const patients = {
+                'PAC-001': {
+                    nome: 'Maria Silva Santos',
+                    idade: 52,
+                    diagnostico: 'Carcinoma Ductal Invasivo - Mama',
+                    estadiamento: 'IIA',
+                    medico: 'Dr. Roberto Almeida',
+                    navegador: 'Enf. Patricia Lima'
+                },
+                'PAC-002': {
+                    nome: 'Ana Costa',
+                    idade: 45,
+                    diagnostico: 'Carcinoma Pulmonar',
+                    estadiamento: 'IIIA',
+                    medico: 'Dr. Carlos Mendes',
+                    navegador: 'Enf. Patricia Lima'
+                },
+                'PAC-003': {
+                    nome: 'Carlos Mendes',
+                    idade: 67,
+                    diagnostico: 'Adenocarcinoma Colorretal',
+                    estadiamento: 'IIB',
+                    medico: 'Dra. Fernanda Santos',
+                    navegador: 'Enf. Patricia Lima'
+                }
+            };
+            
+            const patient = patients[patientId];
+            
+            modal.innerHTML = `
+                <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
+                    <div class="bg-gradient-to-r from-teal-600 to-teal-700 text-white p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h2 class="text-2xl font-bold mb-2">${patient.nome}</h2>
+                                <div class="flex gap-4 text-sm">
+                                    <span><i class="fas fa-id-card mr-1"></i> ${patientId}</span>
+                                    <span><i class="fas fa-birthday-cake mr-1"></i> ${patient.idade} anos</span>
+                                </div>
+                            </div>
+                            <button onclick="closeDemo()" class="text-white hover:text-gray-200">
+                                <i class="fas fa-times text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div class="bg-blue-50 rounded-lg p-4">
+                                <h3 class="font-bold text-blue-900 mb-3">
+                                    <i class="fas fa-notes-medical mr-2"></i>Dados Clínicos
+                                </h3>
+                                <p class="text-sm"><strong>Diagnóstico:</strong> ${patient.diagnostico}</p>
+                                <p class="text-sm"><strong>Estadiamento:</strong> ${patient.estadiamento}</p>
+                                <p class="text-sm"><strong>Protocolo:</strong> NCCN Guidelines 2024</p>
+                            </div>
+                            
+                            <div class="bg-green-50 rounded-lg p-4">
+                                <h3 class="font-bold text-green-900 mb-3">
+                                    <i class="fas fa-user-md mr-2"></i>Equipe Médica
+                                </h3>
+                                <p class="text-sm"><strong>Oncologista:</strong> ${patient.medico}</p>
+                                <p class="text-sm"><strong>Navegador:</strong> ${patient.navegador}</p>
+                                <p class="text-sm"><strong>Nutricionista:</strong> Dra. Ana Paula</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-center gap-4">
+                            <button onclick="alert('Função Contatar')" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                                <i class="fas fa-phone mr-2"></i>Contatar
+                            </button>
+                            <button onclick="alert('Função Agendar')" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+                                <i class="fas fa-calendar mr-2"></i>Agendar
+                            </button>
+                            <button onclick="alert('Função Jornada')" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                                <i class="fas fa-route mr-2"></i>Jornada
+                            </button>
+                            <button onclick="closeDemo()" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">
+                                <i class="fas fa-times mr-2"></i>Fechar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.display = 'flex';
+        }
+        
+        function closeDemo() {
+            const modal = document.getElementById('demo-modal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
