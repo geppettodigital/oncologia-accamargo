@@ -16,6 +16,8 @@ import { portalRoutes } from './routes/portal'
 import kanbanTestRoutes from './routes/kanban-test'
 import patientViewStandalone from './routes/patient-view-standalone'
 import patientViewIntegrated from './routes/patient-view-integrated'
+import { doctorEnhanced } from './routes/doctor-enhanced'
+import { doctorViews } from './routes/doctor-views'
 
 
 // Import page handlers
@@ -60,6 +62,8 @@ app.route('/api/portal', portalRoutes)
 app.route('/', kanbanTestRoutes)
 app.route('/', patientViewStandalone)
 app.route('/', patientViewIntegrated)
+app.route('/', doctorEnhanced)
+app.route('/', doctorViews)
 
 // Redirect old patient-view URLs to new integrated view
 app.get('/patient-view/:id', (c) => {
