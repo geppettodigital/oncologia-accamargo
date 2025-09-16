@@ -1,4 +1,4 @@
-var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in e?sa(e,t,{enumerable:!0,configurable:!0,writable:!0,value:a}):e[t]=a;var u=(e,t,a)=>ia(e,typeof t!="symbol"?t+"":t,a),Ge=(e,t,a)=>t.has(e)||Ze("Cannot "+a);var l=(e,t,a)=>(Ge(e,t,"read from private field"),a?a.call(e):t.get(e)),f=(e,t,a)=>t.has(e)?Ze("Cannot add the same private member more than once"):t instanceof WeakSet?t.add(e):t.set(e,a),g=(e,t,a,s)=>(Ge(e,t,"write to private field"),s?s.call(e,a):t.set(e,a),a),b=(e,t,a)=>(Ge(e,t,"access private method"),a);var Xe=(e,t,a,s)=>({set _(i){g(e,t,i,a)},get _(){return l(e,t,s)}});var et=(e,t,a)=>(s,i)=>{let o=-1;return r(0);async function r(d){if(d<=o)throw new Error("next() called multiple times");o=d;let n,c=!1,p;if(e[d]?(p=e[d][0][0],s.req.routeIndex=d):p=d===e.length&&i||void 0,p)try{n=await p(s,()=>r(d+1))}catch(m){if(m instanceof Error&&t)s.error=m,n=await t(m,s),c=!0;else throw m}else s.finalized===!1&&a&&(n=await a(s));return n&&(s.finalized===!1||c)&&(s.res=n),s}},oa=Symbol(),ra=async(e,t=Object.create(null))=>{const{all:a=!1,dot:s=!1}=t,o=(e instanceof $t?e.raw.headers:e.headers).get("Content-Type");return o!=null&&o.startsWith("multipart/form-data")||o!=null&&o.startsWith("application/x-www-form-urlencoded")?na(e,{all:a,dot:s}):{}};async function na(e,t){const a=await e.formData();return a?la(a,t):{}}function la(e,t){const a=Object.create(null);return e.forEach((s,i)=>{t.all||i.endsWith("[]")?da(a,i,s):a[i]=s}),t.dot&&Object.entries(a).forEach(([s,i])=>{s.includes(".")&&(ca(a,s,i),delete a[s])}),a}var da=(e,t,a)=>{e[t]!==void 0?Array.isArray(e[t])?e[t].push(a):e[t]=[e[t],a]:t.endsWith("[]")?e[t]=[a]:e[t]=a},ca=(e,t,a)=>{let s=e;const i=t.split(".");i.forEach((o,r)=>{r===i.length-1?s[o]=a:((!s[o]||typeof s[o]!="object"||Array.isArray(s[o])||s[o]instanceof File)&&(s[o]=Object.create(null)),s=s[o])})},Rt=e=>{const t=e.split("/");return t[0]===""&&t.shift(),t},pa=e=>{const{groups:t,path:a}=ma(e),s=Rt(a);return ga(s,t)},ma=e=>{const t=[];return e=e.replace(/\{[^}]+\}/g,(a,s)=>{const i=`@${s}`;return t.push([i,a]),i}),{groups:t,path:e}},ga=(e,t)=>{for(let a=t.length-1;a>=0;a--){const[s]=t[a];for(let i=e.length-1;i>=0;i--)if(e[i].includes(s)){e[i]=e[i].replace(s,t[a][1]);break}}return e},Ne={},ua=(e,t)=>{if(e==="*")return"*";const a=e.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);if(a){const s=`${e}#${t}`;return Ne[s]||(a[2]?Ne[s]=t&&t[0]!==":"&&t[0]!=="*"?[s,a[1],new RegExp(`^${a[2]}(?=/${t})`)]:[e,a[1],new RegExp(`^${a[2]}$`)]:Ne[s]=[e,a[1],!0]),Ne[s]}return null},Qe=(e,t)=>{try{return t(e)}catch{return e.replace(/(?:%[0-9A-Fa-f]{2})+/g,a=>{try{return t(a)}catch{return a}})}},xa=e=>Qe(e,decodeURI),Dt=e=>{const t=e.url,a=t.indexOf("/",t.indexOf(":")+4);let s=a;for(;s<t.length;s++){const i=t.charCodeAt(s);if(i===37){const o=t.indexOf("?",s),r=t.slice(a,o===-1?void 0:o);return xa(r.includes("%25")?r.replace(/%25/g,"%2525"):r)}else if(i===63)break}return t.slice(a,s)},fa=e=>{const t=Dt(e);return t.length>1&&t.at(-1)==="/"?t.slice(0,-1):t},de=(e,t,...a)=>(a.length&&(t=de(t,...a)),`${(e==null?void 0:e[0])==="/"?"":"/"}${e}${t==="/"?"":`${(e==null?void 0:e.at(-1))==="/"?"":"/"}${(t==null?void 0:t[0])==="/"?t.slice(1):t}`}`),Lt=e=>{if(e.charCodeAt(e.length-1)!==63||!e.includes(":"))return null;const t=e.split("/"),a=[];let s="";return t.forEach(i=>{if(i!==""&&!/\:/.test(i))s+="/"+i;else if(/\:/.test(i))if(/\?/.test(i)){a.length===0&&s===""?a.push("/"):a.push(s);const o=i.replace("?","");s+="/"+o,a.push(s)}else s+="/"+i}),a.filter((i,o,r)=>r.indexOf(i)===o)},Ue=e=>/[%+]/.test(e)?(e.indexOf("+")!==-1&&(e=e.replace(/\+/g," ")),e.indexOf("%")!==-1?Qe(e,Nt):e):e,Ot=(e,t,a)=>{let s;if(!a&&t&&!/[%+]/.test(t)){let r=e.indexOf(`?${t}`,8);for(r===-1&&(r=e.indexOf(`&${t}`,8));r!==-1;){const d=e.charCodeAt(r+t.length+1);if(d===61){const n=r+t.length+2,c=e.indexOf("&",n);return Ue(e.slice(n,c===-1?void 0:c))}else if(d==38||isNaN(d))return"";r=e.indexOf(`&${t}`,r+1)}if(s=/[%+]/.test(e),!s)return}const i={};s??(s=/[%+]/.test(e));let o=e.indexOf("?",8);for(;o!==-1;){const r=e.indexOf("&",o+1);let d=e.indexOf("=",o);d>r&&r!==-1&&(d=-1);let n=e.slice(o+1,d===-1?r===-1?void 0:r:d);if(s&&(n=Ue(n)),o=r,n==="")continue;let c;d===-1?c="":(c=e.slice(d+1,r===-1?void 0:r),s&&(c=Ue(c))),a?(i[n]&&Array.isArray(i[n])||(i[n]=[]),i[n].push(c)):i[n]??(i[n]=c)}return t?i[t]:i},ba=Ot,va=(e,t)=>Ot(e,t,!0),Nt=decodeURIComponent,tt=e=>Qe(e,Nt),ge,T,q,Bt,Ft,Je,G,At,$t=(At=class{constructor(e,t="/",a=[[]]){f(this,q);u(this,"raw");f(this,ge);f(this,T);u(this,"routeIndex",0);u(this,"path");u(this,"bodyCache",{});f(this,G,e=>{const{bodyCache:t,raw:a}=this,s=t[e];if(s)return s;const i=Object.keys(t)[0];return i?t[i].then(o=>(i==="json"&&(o=JSON.stringify(o)),new Response(o)[e]())):t[e]=a[e]()});this.raw=e,this.path=t,g(this,T,a),g(this,ge,{})}param(e){return e?b(this,q,Bt).call(this,e):b(this,q,Ft).call(this)}query(e){return ba(this.url,e)}queries(e){return va(this.url,e)}header(e){if(e)return this.raw.headers.get(e)??void 0;const t={};return this.raw.headers.forEach((a,s)=>{t[s]=a}),t}async parseBody(e){var t;return(t=this.bodyCache).parsedBody??(t.parsedBody=await ra(this,e))}json(){return l(this,G).call(this,"text").then(e=>JSON.parse(e))}text(){return l(this,G).call(this,"text")}arrayBuffer(){return l(this,G).call(this,"arrayBuffer")}blob(){return l(this,G).call(this,"blob")}formData(){return l(this,G).call(this,"formData")}addValidatedData(e,t){l(this,ge)[e]=t}valid(e){return l(this,ge)[e]}get url(){return this.raw.url}get method(){return this.raw.method}get[oa](){return l(this,T)}get matchedRoutes(){return l(this,T)[0].map(([[,e]])=>e)}get routePath(){return l(this,T)[0].map(([[,e]])=>e)[this.routeIndex].path}},ge=new WeakMap,T=new WeakMap,q=new WeakSet,Bt=function(e){const t=l(this,T)[0][this.routeIndex][1][e],a=b(this,q,Je).call(this,t);return a?/\%/.test(a)?tt(a):a:void 0},Ft=function(){const e={},t=Object.keys(l(this,T)[0][this.routeIndex][1]);for(const a of t){const s=b(this,q,Je).call(this,l(this,T)[0][this.routeIndex][1][a]);s&&typeof s=="string"&&(e[a]=/\%/.test(s)?tt(s):s)}return e},Je=function(e){return l(this,T)[1]?l(this,T)[1][e]:e},G=new WeakMap,At),qt={Stringify:1},me=(e,t)=>{const a=new String(e);return a.isEscaped=!0,a.callbacks=t,a},ha=/[&<>'"]/,ya=async(e,t)=>{let a="";t||(t=[]);const s=await Promise.all(e);for(let i=s.length-1;a+=s[i],i--,!(i<0);i--){let o=s[i];typeof o=="object"&&t.push(...o.callbacks||[]);const r=o.isEscaped;if(o=await(typeof o=="object"?o.toString():o),typeof o=="object"&&t.push(...o.callbacks||[]),o.isEscaped??r)a+=o;else{const d=[a];We(o,d),a=d[0]}}return me(a,t)},We=(e,t)=>{const a=e.search(ha);if(a===-1){t[0]+=e;return}let s,i,o=0;for(i=a;i<e.length;i++){switch(e.charCodeAt(i)){case 34:s="&quot;";break;case 39:s="&#39;";break;case 38:s="&amp;";break;case 60:s="&lt;";break;case 62:s="&gt;";break;default:continue}t[0]+=e.substring(o,i)+s,o=i+1}t[0]+=e.substring(o,i)},wa=e=>{const t=e.callbacks;if(!(t!=null&&t.length))return e;const a=[e],s={};return t.forEach(i=>i({phase:qt.Stringify,buffer:a,context:s})),a[0]},Ht=async(e,t,a,s,i)=>{typeof e=="object"&&!(e instanceof String)&&(e instanceof Promise||(e=e.toString()),e instanceof Promise&&(e=await e));const o=e.callbacks;return o!=null&&o.length?(i?i[0]+=e:i=[e],Promise.all(o.map(d=>d({phase:t,buffer:i,context:s}))).then(d=>Promise.all(d.filter(Boolean).map(n=>Ht(n,t,!1,s,i))).then(()=>i[0]))):Promise.resolve(e)},Ca="text/plain; charset=UTF-8",_e=(e,t)=>({"Content-Type":e,...t}),ke,Ie,N,ue,$,j,je,xe,fe,X,Se,Ee,U,ce,Pt,Aa=(Pt=class{constructor(e,t){f(this,U);f(this,ke);f(this,Ie);u(this,"env",{});f(this,N);u(this,"finalized",!1);u(this,"error");f(this,ue);f(this,$);f(this,j);f(this,je);f(this,xe);f(this,fe);f(this,X);f(this,Se);f(this,Ee);u(this,"render",(...e)=>(l(this,xe)??g(this,xe,t=>this.html(t)),l(this,xe).call(this,...e)));u(this,"setLayout",e=>g(this,je,e));u(this,"getLayout",()=>l(this,je));u(this,"setRenderer",e=>{g(this,xe,e)});u(this,"header",(e,t,a)=>{this.finalized&&g(this,j,new Response(l(this,j).body,l(this,j)));const s=l(this,j)?l(this,j).headers:l(this,X)??g(this,X,new Headers);t===void 0?s.delete(e):a!=null&&a.append?s.append(e,t):s.set(e,t)});u(this,"status",e=>{g(this,ue,e)});u(this,"set",(e,t)=>{l(this,N)??g(this,N,new Map),l(this,N).set(e,t)});u(this,"get",e=>l(this,N)?l(this,N).get(e):void 0);u(this,"newResponse",(...e)=>b(this,U,ce).call(this,...e));u(this,"body",(e,t,a)=>b(this,U,ce).call(this,e,t,a));u(this,"text",(e,t,a)=>!l(this,X)&&!l(this,ue)&&!t&&!a&&!this.finalized?new Response(e):b(this,U,ce).call(this,e,t,_e(Ca,a)));u(this,"json",(e,t,a)=>b(this,U,ce).call(this,JSON.stringify(e),t,_e("application/json",a)));u(this,"html",(e,t,a)=>{const s=i=>b(this,U,ce).call(this,i,t,_e("text/html; charset=UTF-8",a));return typeof e=="object"?Ht(e,qt.Stringify,!1,{}).then(s):s(e)});u(this,"redirect",(e,t)=>{const a=String(e);return this.header("Location",/[^\x00-\xFF]/.test(a)?encodeURI(a):a),this.newResponse(null,t??302)});u(this,"notFound",()=>(l(this,fe)??g(this,fe,()=>new Response),l(this,fe).call(this,this)));g(this,ke,e),t&&(g(this,$,t.executionCtx),this.env=t.env,g(this,fe,t.notFoundHandler),g(this,Ee,t.path),g(this,Se,t.matchResult))}get req(){return l(this,Ie)??g(this,Ie,new $t(l(this,ke),l(this,Ee),l(this,Se))),l(this,Ie)}get event(){if(l(this,$)&&"respondWith"in l(this,$))return l(this,$);throw Error("This context has no FetchEvent")}get executionCtx(){if(l(this,$))return l(this,$);throw Error("This context has no ExecutionContext")}get res(){return l(this,j)||g(this,j,new Response(null,{headers:l(this,X)??g(this,X,new Headers)}))}set res(e){if(l(this,j)&&e){e=new Response(e.body,e);for(const[t,a]of l(this,j).headers.entries())if(t!=="content-type")if(t==="set-cookie"){const s=l(this,j).headers.getSetCookie();e.headers.delete("set-cookie");for(const i of s)e.headers.append("set-cookie",i)}else e.headers.set(t,a)}g(this,j,e),this.finalized=!0}get var(){return l(this,N)?Object.fromEntries(l(this,N)):{}}},ke=new WeakMap,Ie=new WeakMap,N=new WeakMap,ue=new WeakMap,$=new WeakMap,j=new WeakMap,je=new WeakMap,xe=new WeakMap,fe=new WeakMap,X=new WeakMap,Se=new WeakMap,Ee=new WeakMap,U=new WeakSet,ce=function(e,t,a){const s=l(this,j)?new Headers(l(this,j).headers):l(this,X)??new Headers;if(typeof t=="object"&&"headers"in t){const o=t.headers instanceof Headers?t.headers:new Headers(t.headers);for(const[r,d]of o)r.toLowerCase()==="set-cookie"?s.append(r,d):s.set(r,d)}if(a)for(const[o,r]of Object.entries(a))if(typeof r=="string")s.set(o,r);else{s.delete(o);for(const d of r)s.append(o,d)}const i=typeof t=="number"?t:(t==null?void 0:t.status)??l(this,ue);return new Response(e,{status:i,headers:s})},Pt),C="ALL",Pa="all",ka=["get","post","put","delete","options","patch"],Vt="Can not add a route since the matcher is already built.",zt=class extends Error{},Ia="__COMPOSED_HANDLER",ja=e=>e.text("404 Not Found",404),at=(e,t)=>{if("getResponse"in e){const a=e.getResponse();return t.newResponse(a.body,a)}return console.error(e),t.text("Internal Server Error",500)},M,A,Ut,R,Y,$e,Be,kt,Gt=(kt=class{constructor(t={}){f(this,A);u(this,"get");u(this,"post");u(this,"put");u(this,"delete");u(this,"options");u(this,"patch");u(this,"all");u(this,"on");u(this,"use");u(this,"router");u(this,"getPath");u(this,"_basePath","/");f(this,M,"/");u(this,"routes",[]);f(this,R,ja);u(this,"errorHandler",at);u(this,"onError",t=>(this.errorHandler=t,this));u(this,"notFound",t=>(g(this,R,t),this));u(this,"fetch",(t,...a)=>b(this,A,Be).call(this,t,a[1],a[0],t.method));u(this,"request",(t,a,s,i)=>t instanceof Request?this.fetch(a?new Request(t,a):t,s,i):(t=t.toString(),this.fetch(new Request(/^https?:\/\//.test(t)?t:`http://localhost${de("/",t)}`,a),s,i)));u(this,"fire",()=>{addEventListener("fetch",t=>{t.respondWith(b(this,A,Be).call(this,t.request,t,void 0,t.request.method))})});[...ka,Pa].forEach(o=>{this[o]=(r,...d)=>(typeof r=="string"?g(this,M,r):b(this,A,Y).call(this,o,l(this,M),r),d.forEach(n=>{b(this,A,Y).call(this,o,l(this,M),n)}),this)}),this.on=(o,r,...d)=>{for(const n of[r].flat()){g(this,M,n);for(const c of[o].flat())d.map(p=>{b(this,A,Y).call(this,c.toUpperCase(),l(this,M),p)})}return this},this.use=(o,...r)=>(typeof o=="string"?g(this,M,o):(g(this,M,"*"),r.unshift(o)),r.forEach(d=>{b(this,A,Y).call(this,C,l(this,M),d)}),this);const{strict:s,...i}=t;Object.assign(this,i),this.getPath=s??!0?t.getPath??Dt:fa}route(t,a){const s=this.basePath(t);return a.routes.map(i=>{var r;let o;a.errorHandler===at?o=i.handler:(o=async(d,n)=>(await et([],a.errorHandler)(d,()=>i.handler(d,n))).res,o[Ia]=i.handler),b(r=s,A,Y).call(r,i.method,i.path,o)}),this}basePath(t){const a=b(this,A,Ut).call(this);return a._basePath=de(this._basePath,t),a}mount(t,a,s){let i,o;s&&(typeof s=="function"?o=s:(o=s.optionHandler,s.replaceRequest===!1?i=n=>n:i=s.replaceRequest));const r=o?n=>{const c=o(n);return Array.isArray(c)?c:[c]}:n=>{let c;try{c=n.executionCtx}catch{}return[n.env,c]};i||(i=(()=>{const n=de(this._basePath,t),c=n==="/"?0:n.length;return p=>{const m=new URL(p.url);return m.pathname=m.pathname.slice(c)||"/",new Request(m,p)}})());const d=async(n,c)=>{const p=await a(i(n.req.raw),...r(n));if(p)return p;await c()};return b(this,A,Y).call(this,C,de(t,"*"),d),this}},M=new WeakMap,A=new WeakSet,Ut=function(){const t=new Gt({router:this.router,getPath:this.getPath});return t.errorHandler=this.errorHandler,g(t,R,l(this,R)),t.routes=this.routes,t},R=new WeakMap,Y=function(t,a,s){t=t.toUpperCase(),a=de(this._basePath,a);const i={basePath:this._basePath,path:a,method:t,handler:s};this.router.add(t,a,[s,i]),this.routes.push(i)},$e=function(t,a){if(t instanceof Error)return this.errorHandler(t,a);throw t},Be=function(t,a,s,i){if(i==="HEAD")return(async()=>new Response(null,await b(this,A,Be).call(this,t,a,s,"GET")))();const o=this.getPath(t,{env:s}),r=this.router.match(i,o),d=new Aa(t,{path:o,matchResult:r,env:s,executionCtx:a,notFoundHandler:l(this,R)});if(r[0].length===1){let c;try{c=r[0][0][0][0](d,async()=>{d.res=await l(this,R).call(this,d)})}catch(p){return b(this,A,$e).call(this,p,d)}return c instanceof Promise?c.then(p=>p||(d.finalized?d.res:l(this,R).call(this,d))).catch(p=>b(this,A,$e).call(this,p,d)):c??l(this,R).call(this,d)}const n=et(r[0],this.errorHandler,l(this,R));return(async()=>{try{const c=await n(d);if(!c.finalized)throw new Error("Context is not finalized. Did you forget to return a Response object or `await next()`?");return c.res}catch(c){return b(this,A,$e).call(this,c,d)}})()},kt),qe="[^/]+",Ae=".*",Pe="(?:|/.*)",pe=Symbol(),Sa=new Set(".\\+*[^]$()");function Ea(e,t){return e.length===1?t.length===1?e<t?-1:1:-1:t.length===1||e===Ae||e===Pe?1:t===Ae||t===Pe?-1:e===qe?1:t===qe?-1:e.length===t.length?e<t?-1:1:t.length-e.length}var ee,te,D,It,Ke=(It=class{constructor(){f(this,ee);f(this,te);f(this,D,Object.create(null))}insert(t,a,s,i,o){if(t.length===0){if(l(this,ee)!==void 0)throw pe;if(o)return;g(this,ee,a);return}const[r,...d]=t,n=r==="*"?d.length===0?["","",Ae]:["","",qe]:r==="/*"?["","",Pe]:r.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);let c;if(n){const p=n[1];let m=n[2]||qe;if(p&&n[2]&&(m===".*"||(m=m.replace(/^\((?!\?:)(?=[^)]+\)$)/,"(?:"),/\((?!\?:)/.test(m))))throw pe;if(c=l(this,D)[m],!c){if(Object.keys(l(this,D)).some(x=>x!==Ae&&x!==Pe))throw pe;if(o)return;c=l(this,D)[m]=new Ke,p!==""&&g(c,te,i.varIndex++)}!o&&p!==""&&s.push([p,l(c,te)])}else if(c=l(this,D)[r],!c){if(Object.keys(l(this,D)).some(p=>p.length>1&&p!==Ae&&p!==Pe))throw pe;if(o)return;c=l(this,D)[r]=new Ke}c.insert(d,a,s,i,o)}buildRegExpStr(){const a=Object.keys(l(this,D)).sort(Ea).map(s=>{const i=l(this,D)[s];return(typeof l(i,te)=="number"?`(${s})@${l(i,te)}`:Sa.has(s)?`\\${s}`:s)+i.buildRegExpStr()});return typeof l(this,ee)=="number"&&a.unshift(`#${l(this,ee)}`),a.length===0?"":a.length===1?a[0]:"(?:"+a.join("|")+")"}},ee=new WeakMap,te=new WeakMap,D=new WeakMap,It),He,Te,jt,Ta=(jt=class{constructor(){f(this,He,{varIndex:0});f(this,Te,new Ke)}insert(e,t,a){const s=[],i=[];for(let r=0;;){let d=!1;if(e=e.replace(/\{[^}]+\}/g,n=>{const c=`@\\${r}`;return i[r]=[c,n],r++,d=!0,c}),!d)break}const o=e.match(/(?::[^\/]+)|(?:\/\*$)|./g)||[];for(let r=i.length-1;r>=0;r--){const[d]=i[r];for(let n=o.length-1;n>=0;n--)if(o[n].indexOf(d)!==-1){o[n]=o[n].replace(d,i[r][1]);break}}return l(this,Te).insert(o,t,s,l(this,He),a),s}buildRegExp(){let e=l(this,Te).buildRegExpStr();if(e==="")return[/^$/,[],[]];let t=0;const a=[],s=[];return e=e.replace(/#(\d+)|@(\d+)|\.\*\$/g,(i,o,r)=>o!==void 0?(a[++t]=Number(o),"$()"):(r!==void 0&&(s[Number(r)]=++t),"")),[new RegExp(`^${e}`),a,s]}},He=new WeakMap,Te=new WeakMap,jt),_t=[],Ma=[/^$/,[],Object.create(null)],Fe=Object.create(null);function Jt(e){return Fe[e]??(Fe[e]=new RegExp(e==="*"?"":`^${e.replace(/\/\*$|([.\\+*[^\]$()])/g,(t,a)=>a?`\\${a}`:"(?:|/.*)")}$`))}function Ra(){Fe=Object.create(null)}function Da(e){var c;const t=new Ta,a=[];if(e.length===0)return Ma;const s=e.map(p=>[!/\*|\/:/.test(p[0]),...p]).sort(([p,m],[x,w])=>p?1:x?-1:m.length-w.length),i=Object.create(null);for(let p=0,m=-1,x=s.length;p<x;p++){const[w,S,h]=s[p];w?i[S]=[h.map(([I])=>[I,Object.create(null)]),_t]:m++;let y;try{y=t.insert(S,m,w)}catch(I){throw I===pe?new zt(S):I}w||(a[m]=h.map(([I,ne])=>{const ye=Object.create(null);for(ne-=1;ne>=0;ne--){const[L,Ve]=y[ne];ye[L]=Ve}return[I,ye]}))}const[o,r,d]=t.buildRegExp();for(let p=0,m=a.length;p<m;p++)for(let x=0,w=a[p].length;x<w;x++){const S=(c=a[p][x])==null?void 0:c[1];if(!S)continue;const h=Object.keys(S);for(let y=0,I=h.length;y<I;y++)S[h[y]]=d[S[h[y]]]}const n=[];for(const p in r)n[p]=a[r[p]];return[o,n,i]}function le(e,t){if(e){for(const a of Object.keys(e).sort((s,i)=>i.length-s.length))if(Jt(a).test(t))return[...e[a]]}}var _,J,ve,Wt,Kt,St,La=(St=class{constructor(){f(this,ve);u(this,"name","RegExpRouter");f(this,_);f(this,J);g(this,_,{[C]:Object.create(null)}),g(this,J,{[C]:Object.create(null)})}add(e,t,a){var d;const s=l(this,_),i=l(this,J);if(!s||!i)throw new Error(Vt);s[e]||[s,i].forEach(n=>{n[e]=Object.create(null),Object.keys(n[C]).forEach(c=>{n[e][c]=[...n[C][c]]})}),t==="/*"&&(t="*");const o=(t.match(/\/:/g)||[]).length;if(/\*$/.test(t)){const n=Jt(t);e===C?Object.keys(s).forEach(c=>{var p;(p=s[c])[t]||(p[t]=le(s[c],t)||le(s[C],t)||[])}):(d=s[e])[t]||(d[t]=le(s[e],t)||le(s[C],t)||[]),Object.keys(s).forEach(c=>{(e===C||e===c)&&Object.keys(s[c]).forEach(p=>{n.test(p)&&s[c][p].push([a,o])})}),Object.keys(i).forEach(c=>{(e===C||e===c)&&Object.keys(i[c]).forEach(p=>n.test(p)&&i[c][p].push([a,o]))});return}const r=Lt(t)||[t];for(let n=0,c=r.length;n<c;n++){const p=r[n];Object.keys(i).forEach(m=>{var x;(e===C||e===m)&&((x=i[m])[p]||(x[p]=[...le(s[m],p)||le(s[C],p)||[]]),i[m][p].push([a,o-c+n+1]))})}}match(e,t){Ra();const a=b(this,ve,Wt).call(this);return this.match=(s,i)=>{const o=a[s]||a[C],r=o[2][i];if(r)return r;const d=i.match(o[0]);if(!d)return[[],_t];const n=d.indexOf("",1);return[o[1][n],d]},this.match(e,t)}},_=new WeakMap,J=new WeakMap,ve=new WeakSet,Wt=function(){const e=Object.create(null);return Object.keys(l(this,J)).concat(Object.keys(l(this,_))).forEach(t=>{e[t]||(e[t]=b(this,ve,Kt).call(this,t))}),g(this,_,g(this,J,void 0)),e},Kt=function(e){const t=[];let a=e===C;return[l(this,_),l(this,J)].forEach(s=>{const i=s[e]?Object.keys(s[e]).map(o=>[o,s[e][o]]):[];i.length!==0?(a||(a=!0),t.push(...i)):e!==C&&t.push(...Object.keys(s[C]).map(o=>[o,s[C][o]]))}),a?Da(t):null},St),W,B,Et,Oa=(Et=class{constructor(e){u(this,"name","SmartRouter");f(this,W,[]);f(this,B,[]);g(this,W,e.routers)}add(e,t,a){if(!l(this,B))throw new Error(Vt);l(this,B).push([e,t,a])}match(e,t){if(!l(this,B))throw new Error("Fatal error");const a=l(this,W),s=l(this,B),i=a.length;let o=0,r;for(;o<i;o++){const d=a[o];try{for(let n=0,c=s.length;n<c;n++)d.add(...s[n]);r=d.match(e,t)}catch(n){if(n instanceof zt)continue;throw n}this.match=d.match.bind(d),g(this,W,[d]),g(this,B,void 0);break}if(o===i)throw new Error("Fatal error");return this.name=`SmartRouter + ${this.activeRouter.name}`,r}get activeRouter(){if(l(this,B)||l(this,W).length!==1)throw new Error("No active router has been determined yet.");return l(this,W)[0]}},W=new WeakMap,B=new WeakMap,Et),Ce=Object.create(null),K,k,ae,be,P,F,Z,Tt,Qt=(Tt=class{constructor(e,t,a){f(this,F);f(this,K);f(this,k);f(this,ae);f(this,be,0);f(this,P,Ce);if(g(this,k,a||Object.create(null)),g(this,K,[]),e&&t){const s=Object.create(null);s[e]={handler:t,possibleKeys:[],score:0},g(this,K,[s])}g(this,ae,[])}insert(e,t,a){g(this,be,++Xe(this,be)._);let s=this;const i=pa(t),o=[];for(let r=0,d=i.length;r<d;r++){const n=i[r],c=i[r+1],p=ua(n,c),m=Array.isArray(p)?p[0]:n;if(m in l(s,k)){s=l(s,k)[m],p&&o.push(p[1]);continue}l(s,k)[m]=new Qt,p&&(l(s,ae).push(p),o.push(p[1])),s=l(s,k)[m]}return l(s,K).push({[e]:{handler:a,possibleKeys:o.filter((r,d,n)=>n.indexOf(r)===d),score:l(this,be)}}),s}search(e,t){var d;const a=[];g(this,P,Ce);let i=[this];const o=Rt(t),r=[];for(let n=0,c=o.length;n<c;n++){const p=o[n],m=n===c-1,x=[];for(let w=0,S=i.length;w<S;w++){const h=i[w],y=l(h,k)[p];y&&(g(y,P,l(h,P)),m?(l(y,k)["*"]&&a.push(...b(this,F,Z).call(this,l(y,k)["*"],e,l(h,P))),a.push(...b(this,F,Z).call(this,y,e,l(h,P)))):x.push(y));for(let I=0,ne=l(h,ae).length;I<ne;I++){const ye=l(h,ae)[I],L=l(h,P)===Ce?{}:{...l(h,P)};if(ye==="*"){const z=l(h,k)["*"];z&&(a.push(...b(this,F,Z).call(this,z,e,l(h,P))),g(z,P,L),x.push(z));continue}const[Ve,Ye,we]=ye;if(!p&&!(we instanceof RegExp))continue;const O=l(h,k)[Ve],aa=o.slice(n).join("/");if(we instanceof RegExp){const z=we.exec(aa);if(z){if(L[Ye]=z[0],a.push(...b(this,F,Z).call(this,O,e,l(h,P),L)),Object.keys(l(O,k)).length){g(O,P,L);const ze=((d=z[0].match(/\//))==null?void 0:d.length)??0;(r[ze]||(r[ze]=[])).push(O)}continue}}(we===!0||we.test(p))&&(L[Ye]=p,m?(a.push(...b(this,F,Z).call(this,O,e,L,l(h,P))),l(O,k)["*"]&&a.push(...b(this,F,Z).call(this,l(O,k)["*"],e,L,l(h,P)))):(g(O,P,L),x.push(O)))}}i=x.concat(r.shift()??[])}return a.length>1&&a.sort((n,c)=>n.score-c.score),[a.map(({handler:n,params:c})=>[n,c])]}},K=new WeakMap,k=new WeakMap,ae=new WeakMap,be=new WeakMap,P=new WeakMap,F=new WeakSet,Z=function(e,t,a,s){const i=[];for(let o=0,r=l(e,K).length;o<r;o++){const d=l(e,K)[o],n=d[t]||d[C],c={};if(n!==void 0&&(n.params=Object.create(null),i.push(n),a!==Ce||s&&s!==Ce))for(let p=0,m=n.possibleKeys.length;p<m;p++){const x=n.possibleKeys[p],w=c[n.score];n.params[x]=s!=null&&s[x]&&!w?s[x]:a[x]??(s==null?void 0:s[x]),c[n.score]=!0}}return i},Tt),se,Mt,Na=(Mt=class{constructor(){u(this,"name","TrieRouter");f(this,se);g(this,se,new Qt)}add(e,t,a){const s=Lt(t);if(s){for(let i=0,o=s.length;i<o;i++)l(this,se).insert(e,s[i],a);return}l(this,se).insert(e,t,a)}match(e,t){return l(this,se).search(e,t)}},se=new WeakMap,Mt),E=class extends Gt{constructor(e={}){super(e),this.router=e.router??new Oa({routers:[new La,new Na]})}},$a=e=>{const a={...{origin:"*",allowMethods:["GET","HEAD","PUT","POST","DELETE","PATCH"],allowHeaders:[],exposeHeaders:[]},...e},s=(o=>typeof o=="string"?o==="*"?()=>o:r=>o===r?r:null:typeof o=="function"?o:r=>o.includes(r)?r:null)(a.origin),i=(o=>typeof o=="function"?o:Array.isArray(o)?()=>o:()=>[])(a.allowMethods);return async function(r,d){var p;function n(m,x){r.res.headers.set(m,x)}const c=await s(r.req.header("origin")||"",r);if(c&&n("Access-Control-Allow-Origin",c),a.origin!=="*"){const m=r.req.header("Vary");m?n("Vary",m):n("Vary","Origin")}if(a.credentials&&n("Access-Control-Allow-Credentials","true"),(p=a.exposeHeaders)!=null&&p.length&&n("Access-Control-Expose-Headers",a.exposeHeaders.join(",")),r.req.method==="OPTIONS"){a.maxAge!=null&&n("Access-Control-Max-Age",a.maxAge.toString());const m=await i(r.req.header("origin")||"",r);m.length&&n("Access-Control-Allow-Methods",m.join(","));let x=a.allowHeaders;if(!(x!=null&&x.length)){const w=r.req.header("Access-Control-Request-Headers");w&&(x=w.split(/\s*,\s*/))}return x!=null&&x.length&&(n("Access-Control-Allow-Headers",x.join(",")),r.res.headers.append("Vary","Access-Control-Request-Headers")),r.res.headers.delete("Content-Length"),r.res.headers.delete("Content-Type"),new Response(null,{headers:r.res.headers,status:204,statusText:"No Content"})}await d()}},Ba=/^\s*(?:text\/(?!event-stream(?:[;\s]|$))[^;\s]+|application\/(?:javascript|json|xml|xml-dtd|ecmascript|dart|postscript|rtf|tar|toml|vnd\.dart|vnd\.ms-fontobject|vnd\.ms-opentype|wasm|x-httpd-php|x-javascript|x-ns-proxy-autoconfig|x-sh|x-tar|x-virtualbox-hdd|x-virtualbox-ova|x-virtualbox-ovf|x-virtualbox-vbox|x-virtualbox-vdi|x-virtualbox-vhd|x-virtualbox-vmdk|x-www-form-urlencoded)|font\/(?:otf|ttf)|image\/(?:bmp|vnd\.adobe\.photoshop|vnd\.microsoft\.icon|vnd\.ms-dds|x-icon|x-ms-bmp)|message\/rfc822|model\/gltf-binary|x-shader\/x-fragment|x-shader\/x-vertex|[^;\s]+?\+(?:json|text|xml|yaml))(?:[;\s]|$)/i,st=(e,t=qa)=>{const a=/\.([a-zA-Z0-9]+?)$/,s=e.match(a);if(!s)return;let i=t[s[1]];return i&&i.startsWith("text")&&(i+="; charset=utf-8"),i},Fa={aac:"audio/aac",avi:"video/x-msvideo",avif:"image/avif",av1:"video/av1",bin:"application/octet-stream",bmp:"image/bmp",css:"text/css",csv:"text/csv",eot:"application/vnd.ms-fontobject",epub:"application/epub+zip",gif:"image/gif",gz:"application/gzip",htm:"text/html",html:"text/html",ico:"image/x-icon",ics:"text/calendar",jpeg:"image/jpeg",jpg:"image/jpeg",js:"text/javascript",json:"application/json",jsonld:"application/ld+json",map:"application/json",mid:"audio/x-midi",midi:"audio/x-midi",mjs:"text/javascript",mp3:"audio/mpeg",mp4:"video/mp4",mpeg:"video/mpeg",oga:"audio/ogg",ogv:"video/ogg",ogx:"application/ogg",opus:"audio/opus",otf:"font/otf",pdf:"application/pdf",png:"image/png",rtf:"application/rtf",svg:"image/svg+xml",tif:"image/tiff",tiff:"image/tiff",ts:"video/mp2t",ttf:"font/ttf",txt:"text/plain",wasm:"application/wasm",webm:"video/webm",weba:"audio/webm",webmanifest:"application/manifest+json",webp:"image/webp",woff:"font/woff",woff2:"font/woff2",xhtml:"application/xhtml+xml",xml:"application/xml",zip:"application/zip","3gp":"video/3gpp","3g2":"video/3gpp2",gltf:"model/gltf+json",glb:"model/gltf-binary"},qa=Fa,Ha=(...e)=>{let t=e.filter(i=>i!=="").join("/");t=t.replace(new RegExp("(?<=\\/)\\/+","g"),"");const a=t.split("/"),s=[];for(const i of a)i===".."&&s.length>0&&s.at(-1)!==".."?s.pop():i!=="."&&s.push(i);return s.join("/")||"."},Yt={br:".br",zstd:".zst",gzip:".gz"},Va=Object.keys(Yt),za="index.html",Ga=e=>{const t=e.root??"./",a=e.path,s=e.join??Ha;return async(i,o)=>{var p,m,x,w;if(i.finalized)return o();let r;if(e.path)r=e.path;else try{if(r=decodeURIComponent(i.req.path),/(?:^|[\/\\])\.\.(?:$|[\/\\])/.test(r))throw new Error}catch{return await((p=e.onNotFound)==null?void 0:p.call(e,i.req.path,i)),o()}let d=s(t,!a&&e.rewriteRequestPath?e.rewriteRequestPath(r):r);e.isDir&&await e.isDir(d)&&(d=s(d,za));const n=e.getContent;let c=await n(d,i);if(c instanceof Response)return i.newResponse(c.body,c);if(c){const S=e.mimes&&st(d,e.mimes)||st(d);if(i.header("Content-Type",S||"application/octet-stream"),e.precompressed&&(!S||Ba.test(S))){const h=new Set((m=i.req.header("Accept-Encoding"))==null?void 0:m.split(",").map(y=>y.trim()));for(const y of Va){if(!h.has(y))continue;const I=await n(d+Yt[y],i);if(I){c=I,i.header("Content-Encoding",y),i.header("Vary","Accept-Encoding",{append:!0});break}}}return await((x=e.onFound)==null?void 0:x.call(e,d,i)),i.body(c)}await((w=e.onNotFound)==null?void 0:w.call(e,d,i)),await o()}},Ua=async(e,t)=>{let a;t&&t.manifest?typeof t.manifest=="string"?a=JSON.parse(t.manifest):a=t.manifest:typeof __STATIC_CONTENT_MANIFEST=="string"?a=JSON.parse(__STATIC_CONTENT_MANIFEST):a=__STATIC_CONTENT_MANIFEST;let s;t&&t.namespace?s=t.namespace:s=__STATIC_CONTENT;const i=a[e]||e;if(!i)return null;const o=await s.get(i,{type:"stream"});return o||null},_a=e=>async function(a,s){return Ga({...e,getContent:async o=>Ua(o,{manifest:e.manifest,namespace:e.namespace?e.namespace:a.env?a.env.__STATIC_CONTENT:void 0})})(a,s)},Zt=e=>_a(e),H=(e,...t)=>{const a=[""];for(let s=0,i=e.length-1;s<i;s++){a[0]+=e[s];const o=Array.isArray(t[s])?t[s].flat(1/0):[t[s]];for(let r=0,d=o.length;r<d;r++){const n=o[r];if(typeof n=="string")We(n,a);else if(typeof n=="number")a[0]+=n;else{if(typeof n=="boolean"||n===null||n===void 0)continue;if(typeof n=="object"&&n.isEscaped)if(n.callbacks)a.unshift("",n);else{const c=n.toString();c instanceof Promise?a.unshift("",c):a[0]+=c}else n instanceof Promise?a.unshift("",n):We(n.toString(),a)}}}return a[0]+=e.at(-1),a.length===1?"callbacks"in a?me(wa(me(a[0],a.callbacks))):me(a[0]):ya(a,a.callbacks)};const Me=new E;Me.get("/profile/:id",async e=>{const t=e.req.param("id");return e.json({id:t,name:"João Silva",diagnosis:"Em tratamento",nextAppointment:"2024-02-15",treatmentStage:"Quimioterapia"})});Me.post("/symptoms",async e=>(await e.req.json(),e.json({success:!0,message:"Sintomas registrados com sucesso",aiRecommendation:"Monitoramento contínuo recomendado"})));Me.get("/journey/:id",async e=>{const t=e.req.param("id");return e.json({patientId:t,stages:[{date:"2024-01-01",event:"Diagnóstico inicial",status:"completed"},{date:"2024-01-15",event:"Início do tratamento",status:"completed"},{date:"2024-02-01",event:"Primeira sessão de quimioterapia",status:"in-progress"},{date:"2024-03-01",event:"Avaliação de resposta",status:"pending"}]})});Me.post("/triage",async e=>{const t=await e.req.json(),{symptoms:a,age:s,gender:i,history:o}=t,r=a.includes("dor intensa")?"high":"medium";return e.json({urgencyLevel:r,recommendation:r==="high"?"Procure atendimento médico imediato":"Agende uma consulta com seu médico",suggestedSpecialty:"Oncologia",estimatedWaitTime:r==="high"?"0-2 horas":"1-3 dias"})});const Re=new E;Re.get("/patients",async e=>e.json({patients:[{id:"1",name:"João Silva",age:55,diagnosis:"Câncer de Pulmão",stage:"IIIa",lastVisit:"2024-01-28",nextAppointment:"2024-02-15",riskScore:.7,alertLevel:"medium"},{id:"2",name:"Maria Santos",age:42,diagnosis:"Câncer de Mama",stage:"IIb",lastVisit:"2024-01-25",nextAppointment:"2024-02-10",riskScore:.4,alertLevel:"low"}]}));Re.post("/ai-assistant",async e=>{const t=await e.req.json(),{query:a,patientContext:s,type:i}=t;let o="";return i==="treatment-recommendation"?o=`Baseado no perfil do paciente e diretrizes atuais:
+var ia=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var oa=(e,t,a)=>t in e?ia(e,t,{enumerable:!0,configurable:!0,writable:!0,value:a}):e[t]=a;var u=(e,t,a)=>oa(e,typeof t!="symbol"?t+"":t,a),Ge=(e,t,a)=>t.has(e)||Ze("Cannot "+a);var l=(e,t,a)=>(Ge(e,t,"read from private field"),a?a.call(e):t.get(e)),f=(e,t,a)=>t.has(e)?Ze("Cannot add the same private member more than once"):t instanceof WeakSet?t.add(e):t.set(e,a),g=(e,t,a,s)=>(Ge(e,t,"write to private field"),s?s.call(e,a):t.set(e,a),a),v=(e,t,a)=>(Ge(e,t,"access private method"),a);var Xe=(e,t,a,s)=>({set _(i){g(e,t,i,a)},get _(){return l(e,t,s)}});var et=(e,t,a)=>(s,i)=>{let o=-1;return r(0);async function r(d){if(d<=o)throw new Error("next() called multiple times");o=d;let n,c=!1,p;if(e[d]?(p=e[d][0][0],s.req.routeIndex=d):p=d===e.length&&i||void 0,p)try{n=await p(s,()=>r(d+1))}catch(m){if(m instanceof Error&&t)s.error=m,n=await t(m,s),c=!0;else throw m}else s.finalized===!1&&a&&(n=await a(s));return n&&(s.finalized===!1||c)&&(s.res=n),s}},ra=Symbol(),na=async(e,t=Object.create(null))=>{const{all:a=!1,dot:s=!1}=t,o=(e instanceof $t?e.raw.headers:e.headers).get("Content-Type");return o!=null&&o.startsWith("multipart/form-data")||o!=null&&o.startsWith("application/x-www-form-urlencoded")?la(e,{all:a,dot:s}):{}};async function la(e,t){const a=await e.formData();return a?da(a,t):{}}function da(e,t){const a=Object.create(null);return e.forEach((s,i)=>{t.all||i.endsWith("[]")?ca(a,i,s):a[i]=s}),t.dot&&Object.entries(a).forEach(([s,i])=>{s.includes(".")&&(pa(a,s,i),delete a[s])}),a}var ca=(e,t,a)=>{e[t]!==void 0?Array.isArray(e[t])?e[t].push(a):e[t]=[e[t],a]:t.endsWith("[]")?e[t]=[a]:e[t]=a},pa=(e,t,a)=>{let s=e;const i=t.split(".");i.forEach((o,r)=>{r===i.length-1?s[o]=a:((!s[o]||typeof s[o]!="object"||Array.isArray(s[o])||s[o]instanceof File)&&(s[o]=Object.create(null)),s=s[o])})},Rt=e=>{const t=e.split("/");return t[0]===""&&t.shift(),t},ma=e=>{const{groups:t,path:a}=ga(e),s=Rt(a);return ua(s,t)},ga=e=>{const t=[];return e=e.replace(/\{[^}]+\}/g,(a,s)=>{const i=`@${s}`;return t.push([i,a]),i}),{groups:t,path:e}},ua=(e,t)=>{for(let a=t.length-1;a>=0;a--){const[s]=t[a];for(let i=e.length-1;i>=0;i--)if(e[i].includes(s)){e[i]=e[i].replace(s,t[a][1]);break}}return e},Oe={},xa=(e,t)=>{if(e==="*")return"*";const a=e.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);if(a){const s=`${e}#${t}`;return Oe[s]||(a[2]?Oe[s]=t&&t[0]!==":"&&t[0]!=="*"?[s,a[1],new RegExp(`^${a[2]}(?=/${t})`)]:[e,a[1],new RegExp(`^${a[2]}$`)]:Oe[s]=[e,a[1],!0]),Oe[s]}return null},Ke=(e,t)=>{try{return t(e)}catch{return e.replace(/(?:%[0-9A-Fa-f]{2})+/g,a=>{try{return t(a)}catch{return a}})}},fa=e=>Ke(e,decodeURI),Dt=e=>{const t=e.url,a=t.indexOf("/",t.indexOf(":")+4);let s=a;for(;s<t.length;s++){const i=t.charCodeAt(s);if(i===37){const o=t.indexOf("?",s),r=t.slice(a,o===-1?void 0:o);return fa(r.includes("%25")?r.replace(/%25/g,"%2525"):r)}else if(i===63)break}return t.slice(a,s)},ba=e=>{const t=Dt(e);return t.length>1&&t.at(-1)==="/"?t.slice(0,-1):t},de=(e,t,...a)=>(a.length&&(t=de(t,...a)),`${(e==null?void 0:e[0])==="/"?"":"/"}${e}${t==="/"?"":`${(e==null?void 0:e.at(-1))==="/"?"":"/"}${(t==null?void 0:t[0])==="/"?t.slice(1):t}`}`),Lt=e=>{if(e.charCodeAt(e.length-1)!==63||!e.includes(":"))return null;const t=e.split("/"),a=[];let s="";return t.forEach(i=>{if(i!==""&&!/\:/.test(i))s+="/"+i;else if(/\:/.test(i))if(/\?/.test(i)){a.length===0&&s===""?a.push("/"):a.push(s);const o=i.replace("?","");s+="/"+o,a.push(s)}else s+="/"+i}),a.filter((i,o,r)=>r.indexOf(i)===o)},Ue=e=>/[%+]/.test(e)?(e.indexOf("+")!==-1&&(e=e.replace(/\+/g," ")),e.indexOf("%")!==-1?Ke(e,Ot):e):e,Nt=(e,t,a)=>{let s;if(!a&&t&&!/[%+]/.test(t)){let r=e.indexOf(`?${t}`,8);for(r===-1&&(r=e.indexOf(`&${t}`,8));r!==-1;){const d=e.charCodeAt(r+t.length+1);if(d===61){const n=r+t.length+2,c=e.indexOf("&",n);return Ue(e.slice(n,c===-1?void 0:c))}else if(d==38||isNaN(d))return"";r=e.indexOf(`&${t}`,r+1)}if(s=/[%+]/.test(e),!s)return}const i={};s??(s=/[%+]/.test(e));let o=e.indexOf("?",8);for(;o!==-1;){const r=e.indexOf("&",o+1);let d=e.indexOf("=",o);d>r&&r!==-1&&(d=-1);let n=e.slice(o+1,d===-1?r===-1?void 0:r:d);if(s&&(n=Ue(n)),o=r,n==="")continue;let c;d===-1?c="":(c=e.slice(d+1,r===-1?void 0:r),s&&(c=Ue(c))),a?(i[n]&&Array.isArray(i[n])||(i[n]=[]),i[n].push(c)):i[n]??(i[n]=c)}return t?i[t]:i},va=Nt,ha=(e,t)=>Nt(e,t,!0),Ot=decodeURIComponent,tt=e=>Ke(e,Ot),ge,T,q,Bt,Ft,Je,G,At,$t=(At=class{constructor(e,t="/",a=[[]]){f(this,q);u(this,"raw");f(this,ge);f(this,T);u(this,"routeIndex",0);u(this,"path");u(this,"bodyCache",{});f(this,G,e=>{const{bodyCache:t,raw:a}=this,s=t[e];if(s)return s;const i=Object.keys(t)[0];return i?t[i].then(o=>(i==="json"&&(o=JSON.stringify(o)),new Response(o)[e]())):t[e]=a[e]()});this.raw=e,this.path=t,g(this,T,a),g(this,ge,{})}param(e){return e?v(this,q,Bt).call(this,e):v(this,q,Ft).call(this)}query(e){return va(this.url,e)}queries(e){return ha(this.url,e)}header(e){if(e)return this.raw.headers.get(e)??void 0;const t={};return this.raw.headers.forEach((a,s)=>{t[s]=a}),t}async parseBody(e){var t;return(t=this.bodyCache).parsedBody??(t.parsedBody=await na(this,e))}json(){return l(this,G).call(this,"text").then(e=>JSON.parse(e))}text(){return l(this,G).call(this,"text")}arrayBuffer(){return l(this,G).call(this,"arrayBuffer")}blob(){return l(this,G).call(this,"blob")}formData(){return l(this,G).call(this,"formData")}addValidatedData(e,t){l(this,ge)[e]=t}valid(e){return l(this,ge)[e]}get url(){return this.raw.url}get method(){return this.raw.method}get[ra](){return l(this,T)}get matchedRoutes(){return l(this,T)[0].map(([[,e]])=>e)}get routePath(){return l(this,T)[0].map(([[,e]])=>e)[this.routeIndex].path}},ge=new WeakMap,T=new WeakMap,q=new WeakSet,Bt=function(e){const t=l(this,T)[0][this.routeIndex][1][e],a=v(this,q,Je).call(this,t);return a?/\%/.test(a)?tt(a):a:void 0},Ft=function(){const e={},t=Object.keys(l(this,T)[0][this.routeIndex][1]);for(const a of t){const s=v(this,q,Je).call(this,l(this,T)[0][this.routeIndex][1][a]);s&&typeof s=="string"&&(e[a]=/\%/.test(s)?tt(s):s)}return e},Je=function(e){return l(this,T)[1]?l(this,T)[1][e]:e},G=new WeakMap,At),qt={Stringify:1},me=(e,t)=>{const a=new String(e);return a.isEscaped=!0,a.callbacks=t,a},ya=/[&<>'"]/,wa=async(e,t)=>{let a="";t||(t=[]);const s=await Promise.all(e);for(let i=s.length-1;a+=s[i],i--,!(i<0);i--){let o=s[i];typeof o=="object"&&t.push(...o.callbacks||[]);const r=o.isEscaped;if(o=await(typeof o=="object"?o.toString():o),typeof o=="object"&&t.push(...o.callbacks||[]),o.isEscaped??r)a+=o;else{const d=[a];We(o,d),a=d[0]}}return me(a,t)},We=(e,t)=>{const a=e.search(ya);if(a===-1){t[0]+=e;return}let s,i,o=0;for(i=a;i<e.length;i++){switch(e.charCodeAt(i)){case 34:s="&quot;";break;case 39:s="&#39;";break;case 38:s="&amp;";break;case 60:s="&lt;";break;case 62:s="&gt;";break;default:continue}t[0]+=e.substring(o,i)+s,o=i+1}t[0]+=e.substring(o,i)},Ca=e=>{const t=e.callbacks;if(!(t!=null&&t.length))return e;const a=[e],s={};return t.forEach(i=>i({phase:qt.Stringify,buffer:a,context:s})),a[0]},Ht=async(e,t,a,s,i)=>{typeof e=="object"&&!(e instanceof String)&&(e instanceof Promise||(e=e.toString()),e instanceof Promise&&(e=await e));const o=e.callbacks;return o!=null&&o.length?(i?i[0]+=e:i=[e],Promise.all(o.map(d=>d({phase:t,buffer:i,context:s}))).then(d=>Promise.all(d.filter(Boolean).map(n=>Ht(n,t,!1,s,i))).then(()=>i[0]))):Promise.resolve(e)},Aa="text/plain; charset=UTF-8",_e=(e,t)=>({"Content-Type":e,...t}),ke,Ie,O,ue,$,j,je,xe,fe,X,Se,Ee,U,ce,Pt,Pa=(Pt=class{constructor(e,t){f(this,U);f(this,ke);f(this,Ie);u(this,"env",{});f(this,O);u(this,"finalized",!1);u(this,"error");f(this,ue);f(this,$);f(this,j);f(this,je);f(this,xe);f(this,fe);f(this,X);f(this,Se);f(this,Ee);u(this,"render",(...e)=>(l(this,xe)??g(this,xe,t=>this.html(t)),l(this,xe).call(this,...e)));u(this,"setLayout",e=>g(this,je,e));u(this,"getLayout",()=>l(this,je));u(this,"setRenderer",e=>{g(this,xe,e)});u(this,"header",(e,t,a)=>{this.finalized&&g(this,j,new Response(l(this,j).body,l(this,j)));const s=l(this,j)?l(this,j).headers:l(this,X)??g(this,X,new Headers);t===void 0?s.delete(e):a!=null&&a.append?s.append(e,t):s.set(e,t)});u(this,"status",e=>{g(this,ue,e)});u(this,"set",(e,t)=>{l(this,O)??g(this,O,new Map),l(this,O).set(e,t)});u(this,"get",e=>l(this,O)?l(this,O).get(e):void 0);u(this,"newResponse",(...e)=>v(this,U,ce).call(this,...e));u(this,"body",(e,t,a)=>v(this,U,ce).call(this,e,t,a));u(this,"text",(e,t,a)=>!l(this,X)&&!l(this,ue)&&!t&&!a&&!this.finalized?new Response(e):v(this,U,ce).call(this,e,t,_e(Aa,a)));u(this,"json",(e,t,a)=>v(this,U,ce).call(this,JSON.stringify(e),t,_e("application/json",a)));u(this,"html",(e,t,a)=>{const s=i=>v(this,U,ce).call(this,i,t,_e("text/html; charset=UTF-8",a));return typeof e=="object"?Ht(e,qt.Stringify,!1,{}).then(s):s(e)});u(this,"redirect",(e,t)=>{const a=String(e);return this.header("Location",/[^\x00-\xFF]/.test(a)?encodeURI(a):a),this.newResponse(null,t??302)});u(this,"notFound",()=>(l(this,fe)??g(this,fe,()=>new Response),l(this,fe).call(this,this)));g(this,ke,e),t&&(g(this,$,t.executionCtx),this.env=t.env,g(this,fe,t.notFoundHandler),g(this,Ee,t.path),g(this,Se,t.matchResult))}get req(){return l(this,Ie)??g(this,Ie,new $t(l(this,ke),l(this,Ee),l(this,Se))),l(this,Ie)}get event(){if(l(this,$)&&"respondWith"in l(this,$))return l(this,$);throw Error("This context has no FetchEvent")}get executionCtx(){if(l(this,$))return l(this,$);throw Error("This context has no ExecutionContext")}get res(){return l(this,j)||g(this,j,new Response(null,{headers:l(this,X)??g(this,X,new Headers)}))}set res(e){if(l(this,j)&&e){e=new Response(e.body,e);for(const[t,a]of l(this,j).headers.entries())if(t!=="content-type")if(t==="set-cookie"){const s=l(this,j).headers.getSetCookie();e.headers.delete("set-cookie");for(const i of s)e.headers.append("set-cookie",i)}else e.headers.set(t,a)}g(this,j,e),this.finalized=!0}get var(){return l(this,O)?Object.fromEntries(l(this,O)):{}}},ke=new WeakMap,Ie=new WeakMap,O=new WeakMap,ue=new WeakMap,$=new WeakMap,j=new WeakMap,je=new WeakMap,xe=new WeakMap,fe=new WeakMap,X=new WeakMap,Se=new WeakMap,Ee=new WeakMap,U=new WeakSet,ce=function(e,t,a){const s=l(this,j)?new Headers(l(this,j).headers):l(this,X)??new Headers;if(typeof t=="object"&&"headers"in t){const o=t.headers instanceof Headers?t.headers:new Headers(t.headers);for(const[r,d]of o)r.toLowerCase()==="set-cookie"?s.append(r,d):s.set(r,d)}if(a)for(const[o,r]of Object.entries(a))if(typeof r=="string")s.set(o,r);else{s.delete(o);for(const d of r)s.append(o,d)}const i=typeof t=="number"?t:(t==null?void 0:t.status)??l(this,ue);return new Response(e,{status:i,headers:s})},Pt),C="ALL",ka="all",Ia=["get","post","put","delete","options","patch"],Vt="Can not add a route since the matcher is already built.",zt=class extends Error{},ja="__COMPOSED_HANDLER",Sa=e=>e.text("404 Not Found",404),at=(e,t)=>{if("getResponse"in e){const a=e.getResponse();return t.newResponse(a.body,a)}return console.error(e),t.text("Internal Server Error",500)},M,A,Ut,R,Y,$e,Be,kt,Gt=(kt=class{constructor(t={}){f(this,A);u(this,"get");u(this,"post");u(this,"put");u(this,"delete");u(this,"options");u(this,"patch");u(this,"all");u(this,"on");u(this,"use");u(this,"router");u(this,"getPath");u(this,"_basePath","/");f(this,M,"/");u(this,"routes",[]);f(this,R,Sa);u(this,"errorHandler",at);u(this,"onError",t=>(this.errorHandler=t,this));u(this,"notFound",t=>(g(this,R,t),this));u(this,"fetch",(t,...a)=>v(this,A,Be).call(this,t,a[1],a[0],t.method));u(this,"request",(t,a,s,i)=>t instanceof Request?this.fetch(a?new Request(t,a):t,s,i):(t=t.toString(),this.fetch(new Request(/^https?:\/\//.test(t)?t:`http://localhost${de("/",t)}`,a),s,i)));u(this,"fire",()=>{addEventListener("fetch",t=>{t.respondWith(v(this,A,Be).call(this,t.request,t,void 0,t.request.method))})});[...Ia,ka].forEach(o=>{this[o]=(r,...d)=>(typeof r=="string"?g(this,M,r):v(this,A,Y).call(this,o,l(this,M),r),d.forEach(n=>{v(this,A,Y).call(this,o,l(this,M),n)}),this)}),this.on=(o,r,...d)=>{for(const n of[r].flat()){g(this,M,n);for(const c of[o].flat())d.map(p=>{v(this,A,Y).call(this,c.toUpperCase(),l(this,M),p)})}return this},this.use=(o,...r)=>(typeof o=="string"?g(this,M,o):(g(this,M,"*"),r.unshift(o)),r.forEach(d=>{v(this,A,Y).call(this,C,l(this,M),d)}),this);const{strict:s,...i}=t;Object.assign(this,i),this.getPath=s??!0?t.getPath??Dt:ba}route(t,a){const s=this.basePath(t);return a.routes.map(i=>{var r;let o;a.errorHandler===at?o=i.handler:(o=async(d,n)=>(await et([],a.errorHandler)(d,()=>i.handler(d,n))).res,o[ja]=i.handler),v(r=s,A,Y).call(r,i.method,i.path,o)}),this}basePath(t){const a=v(this,A,Ut).call(this);return a._basePath=de(this._basePath,t),a}mount(t,a,s){let i,o;s&&(typeof s=="function"?o=s:(o=s.optionHandler,s.replaceRequest===!1?i=n=>n:i=s.replaceRequest));const r=o?n=>{const c=o(n);return Array.isArray(c)?c:[c]}:n=>{let c;try{c=n.executionCtx}catch{}return[n.env,c]};i||(i=(()=>{const n=de(this._basePath,t),c=n==="/"?0:n.length;return p=>{const m=new URL(p.url);return m.pathname=m.pathname.slice(c)||"/",new Request(m,p)}})());const d=async(n,c)=>{const p=await a(i(n.req.raw),...r(n));if(p)return p;await c()};return v(this,A,Y).call(this,C,de(t,"*"),d),this}},M=new WeakMap,A=new WeakSet,Ut=function(){const t=new Gt({router:this.router,getPath:this.getPath});return t.errorHandler=this.errorHandler,g(t,R,l(this,R)),t.routes=this.routes,t},R=new WeakMap,Y=function(t,a,s){t=t.toUpperCase(),a=de(this._basePath,a);const i={basePath:this._basePath,path:a,method:t,handler:s};this.router.add(t,a,[s,i]),this.routes.push(i)},$e=function(t,a){if(t instanceof Error)return this.errorHandler(t,a);throw t},Be=function(t,a,s,i){if(i==="HEAD")return(async()=>new Response(null,await v(this,A,Be).call(this,t,a,s,"GET")))();const o=this.getPath(t,{env:s}),r=this.router.match(i,o),d=new Pa(t,{path:o,matchResult:r,env:s,executionCtx:a,notFoundHandler:l(this,R)});if(r[0].length===1){let c;try{c=r[0][0][0][0](d,async()=>{d.res=await l(this,R).call(this,d)})}catch(p){return v(this,A,$e).call(this,p,d)}return c instanceof Promise?c.then(p=>p||(d.finalized?d.res:l(this,R).call(this,d))).catch(p=>v(this,A,$e).call(this,p,d)):c??l(this,R).call(this,d)}const n=et(r[0],this.errorHandler,l(this,R));return(async()=>{try{const c=await n(d);if(!c.finalized)throw new Error("Context is not finalized. Did you forget to return a Response object or `await next()`?");return c.res}catch(c){return v(this,A,$e).call(this,c,d)}})()},kt),qe="[^/]+",Ae=".*",Pe="(?:|/.*)",pe=Symbol(),Ea=new Set(".\\+*[^]$()");function Ta(e,t){return e.length===1?t.length===1?e<t?-1:1:-1:t.length===1||e===Ae||e===Pe?1:t===Ae||t===Pe?-1:e===qe?1:t===qe?-1:e.length===t.length?e<t?-1:1:t.length-e.length}var ee,te,D,It,Qe=(It=class{constructor(){f(this,ee);f(this,te);f(this,D,Object.create(null))}insert(t,a,s,i,o){if(t.length===0){if(l(this,ee)!==void 0)throw pe;if(o)return;g(this,ee,a);return}const[r,...d]=t,n=r==="*"?d.length===0?["","",Ae]:["","",qe]:r==="/*"?["","",Pe]:r.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);let c;if(n){const p=n[1];let m=n[2]||qe;if(p&&n[2]&&(m===".*"||(m=m.replace(/^\((?!\?:)(?=[^)]+\)$)/,"(?:"),/\((?!\?:)/.test(m))))throw pe;if(c=l(this,D)[m],!c){if(Object.keys(l(this,D)).some(x=>x!==Ae&&x!==Pe))throw pe;if(o)return;c=l(this,D)[m]=new Qe,p!==""&&g(c,te,i.varIndex++)}!o&&p!==""&&s.push([p,l(c,te)])}else if(c=l(this,D)[r],!c){if(Object.keys(l(this,D)).some(p=>p.length>1&&p!==Ae&&p!==Pe))throw pe;if(o)return;c=l(this,D)[r]=new Qe}c.insert(d,a,s,i,o)}buildRegExpStr(){const a=Object.keys(l(this,D)).sort(Ta).map(s=>{const i=l(this,D)[s];return(typeof l(i,te)=="number"?`(${s})@${l(i,te)}`:Ea.has(s)?`\\${s}`:s)+i.buildRegExpStr()});return typeof l(this,ee)=="number"&&a.unshift(`#${l(this,ee)}`),a.length===0?"":a.length===1?a[0]:"(?:"+a.join("|")+")"}},ee=new WeakMap,te=new WeakMap,D=new WeakMap,It),He,Te,jt,Ma=(jt=class{constructor(){f(this,He,{varIndex:0});f(this,Te,new Qe)}insert(e,t,a){const s=[],i=[];for(let r=0;;){let d=!1;if(e=e.replace(/\{[^}]+\}/g,n=>{const c=`@\\${r}`;return i[r]=[c,n],r++,d=!0,c}),!d)break}const o=e.match(/(?::[^\/]+)|(?:\/\*$)|./g)||[];for(let r=i.length-1;r>=0;r--){const[d]=i[r];for(let n=o.length-1;n>=0;n--)if(o[n].indexOf(d)!==-1){o[n]=o[n].replace(d,i[r][1]);break}}return l(this,Te).insert(o,t,s,l(this,He),a),s}buildRegExp(){let e=l(this,Te).buildRegExpStr();if(e==="")return[/^$/,[],[]];let t=0;const a=[],s=[];return e=e.replace(/#(\d+)|@(\d+)|\.\*\$/g,(i,o,r)=>o!==void 0?(a[++t]=Number(o),"$()"):(r!==void 0&&(s[Number(r)]=++t),"")),[new RegExp(`^${e}`),a,s]}},He=new WeakMap,Te=new WeakMap,jt),_t=[],Ra=[/^$/,[],Object.create(null)],Fe=Object.create(null);function Jt(e){return Fe[e]??(Fe[e]=new RegExp(e==="*"?"":`^${e.replace(/\/\*$|([.\\+*[^\]$()])/g,(t,a)=>a?`\\${a}`:"(?:|/.*)")}$`))}function Da(){Fe=Object.create(null)}function La(e){var c;const t=new Ma,a=[];if(e.length===0)return Ra;const s=e.map(p=>[!/\*|\/:/.test(p[0]),...p]).sort(([p,m],[x,w])=>p?1:x?-1:m.length-w.length),i=Object.create(null);for(let p=0,m=-1,x=s.length;p<x;p++){const[w,E,h]=s[p];w?i[E]=[h.map(([I])=>[I,Object.create(null)]),_t]:m++;let y;try{y=t.insert(E,m,w)}catch(I){throw I===pe?new zt(E):I}w||(a[m]=h.map(([I,ne])=>{const ye=Object.create(null);for(ne-=1;ne>=0;ne--){const[L,Ve]=y[ne];ye[L]=Ve}return[I,ye]}))}const[o,r,d]=t.buildRegExp();for(let p=0,m=a.length;p<m;p++)for(let x=0,w=a[p].length;x<w;x++){const E=(c=a[p][x])==null?void 0:c[1];if(!E)continue;const h=Object.keys(E);for(let y=0,I=h.length;y<I;y++)E[h[y]]=d[E[h[y]]]}const n=[];for(const p in r)n[p]=a[r[p]];return[o,n,i]}function le(e,t){if(e){for(const a of Object.keys(e).sort((s,i)=>i.length-s.length))if(Jt(a).test(t))return[...e[a]]}}var _,J,ve,Wt,Qt,St,Na=(St=class{constructor(){f(this,ve);u(this,"name","RegExpRouter");f(this,_);f(this,J);g(this,_,{[C]:Object.create(null)}),g(this,J,{[C]:Object.create(null)})}add(e,t,a){var d;const s=l(this,_),i=l(this,J);if(!s||!i)throw new Error(Vt);s[e]||[s,i].forEach(n=>{n[e]=Object.create(null),Object.keys(n[C]).forEach(c=>{n[e][c]=[...n[C][c]]})}),t==="/*"&&(t="*");const o=(t.match(/\/:/g)||[]).length;if(/\*$/.test(t)){const n=Jt(t);e===C?Object.keys(s).forEach(c=>{var p;(p=s[c])[t]||(p[t]=le(s[c],t)||le(s[C],t)||[])}):(d=s[e])[t]||(d[t]=le(s[e],t)||le(s[C],t)||[]),Object.keys(s).forEach(c=>{(e===C||e===c)&&Object.keys(s[c]).forEach(p=>{n.test(p)&&s[c][p].push([a,o])})}),Object.keys(i).forEach(c=>{(e===C||e===c)&&Object.keys(i[c]).forEach(p=>n.test(p)&&i[c][p].push([a,o]))});return}const r=Lt(t)||[t];for(let n=0,c=r.length;n<c;n++){const p=r[n];Object.keys(i).forEach(m=>{var x;(e===C||e===m)&&((x=i[m])[p]||(x[p]=[...le(s[m],p)||le(s[C],p)||[]]),i[m][p].push([a,o-c+n+1]))})}}match(e,t){Da();const a=v(this,ve,Wt).call(this);return this.match=(s,i)=>{const o=a[s]||a[C],r=o[2][i];if(r)return r;const d=i.match(o[0]);if(!d)return[[],_t];const n=d.indexOf("",1);return[o[1][n],d]},this.match(e,t)}},_=new WeakMap,J=new WeakMap,ve=new WeakSet,Wt=function(){const e=Object.create(null);return Object.keys(l(this,J)).concat(Object.keys(l(this,_))).forEach(t=>{e[t]||(e[t]=v(this,ve,Qt).call(this,t))}),g(this,_,g(this,J,void 0)),e},Qt=function(e){const t=[];let a=e===C;return[l(this,_),l(this,J)].forEach(s=>{const i=s[e]?Object.keys(s[e]).map(o=>[o,s[e][o]]):[];i.length!==0?(a||(a=!0),t.push(...i)):e!==C&&t.push(...Object.keys(s[C]).map(o=>[o,s[C][o]]))}),a?La(t):null},St),W,B,Et,Oa=(Et=class{constructor(e){u(this,"name","SmartRouter");f(this,W,[]);f(this,B,[]);g(this,W,e.routers)}add(e,t,a){if(!l(this,B))throw new Error(Vt);l(this,B).push([e,t,a])}match(e,t){if(!l(this,B))throw new Error("Fatal error");const a=l(this,W),s=l(this,B),i=a.length;let o=0,r;for(;o<i;o++){const d=a[o];try{for(let n=0,c=s.length;n<c;n++)d.add(...s[n]);r=d.match(e,t)}catch(n){if(n instanceof zt)continue;throw n}this.match=d.match.bind(d),g(this,W,[d]),g(this,B,void 0);break}if(o===i)throw new Error("Fatal error");return this.name=`SmartRouter + ${this.activeRouter.name}`,r}get activeRouter(){if(l(this,B)||l(this,W).length!==1)throw new Error("No active router has been determined yet.");return l(this,W)[0]}},W=new WeakMap,B=new WeakMap,Et),Ce=Object.create(null),Q,k,ae,be,P,F,Z,Tt,Kt=(Tt=class{constructor(e,t,a){f(this,F);f(this,Q);f(this,k);f(this,ae);f(this,be,0);f(this,P,Ce);if(g(this,k,a||Object.create(null)),g(this,Q,[]),e&&t){const s=Object.create(null);s[e]={handler:t,possibleKeys:[],score:0},g(this,Q,[s])}g(this,ae,[])}insert(e,t,a){g(this,be,++Xe(this,be)._);let s=this;const i=ma(t),o=[];for(let r=0,d=i.length;r<d;r++){const n=i[r],c=i[r+1],p=xa(n,c),m=Array.isArray(p)?p[0]:n;if(m in l(s,k)){s=l(s,k)[m],p&&o.push(p[1]);continue}l(s,k)[m]=new Kt,p&&(l(s,ae).push(p),o.push(p[1])),s=l(s,k)[m]}return l(s,Q).push({[e]:{handler:a,possibleKeys:o.filter((r,d,n)=>n.indexOf(r)===d),score:l(this,be)}}),s}search(e,t){var d;const a=[];g(this,P,Ce);let i=[this];const o=Rt(t),r=[];for(let n=0,c=o.length;n<c;n++){const p=o[n],m=n===c-1,x=[];for(let w=0,E=i.length;w<E;w++){const h=i[w],y=l(h,k)[p];y&&(g(y,P,l(h,P)),m?(l(y,k)["*"]&&a.push(...v(this,F,Z).call(this,l(y,k)["*"],e,l(h,P))),a.push(...v(this,F,Z).call(this,y,e,l(h,P)))):x.push(y));for(let I=0,ne=l(h,ae).length;I<ne;I++){const ye=l(h,ae)[I],L=l(h,P)===Ce?{}:{...l(h,P)};if(ye==="*"){const z=l(h,k)["*"];z&&(a.push(...v(this,F,Z).call(this,z,e,l(h,P))),g(z,P,L),x.push(z));continue}const[Ve,Ye,we]=ye;if(!p&&!(we instanceof RegExp))continue;const N=l(h,k)[Ve],sa=o.slice(n).join("/");if(we instanceof RegExp){const z=we.exec(sa);if(z){if(L[Ye]=z[0],a.push(...v(this,F,Z).call(this,N,e,l(h,P),L)),Object.keys(l(N,k)).length){g(N,P,L);const ze=((d=z[0].match(/\//))==null?void 0:d.length)??0;(r[ze]||(r[ze]=[])).push(N)}continue}}(we===!0||we.test(p))&&(L[Ye]=p,m?(a.push(...v(this,F,Z).call(this,N,e,L,l(h,P))),l(N,k)["*"]&&a.push(...v(this,F,Z).call(this,l(N,k)["*"],e,L,l(h,P)))):(g(N,P,L),x.push(N)))}}i=x.concat(r.shift()??[])}return a.length>1&&a.sort((n,c)=>n.score-c.score),[a.map(({handler:n,params:c})=>[n,c])]}},Q=new WeakMap,k=new WeakMap,ae=new WeakMap,be=new WeakMap,P=new WeakMap,F=new WeakSet,Z=function(e,t,a,s){const i=[];for(let o=0,r=l(e,Q).length;o<r;o++){const d=l(e,Q)[o],n=d[t]||d[C],c={};if(n!==void 0&&(n.params=Object.create(null),i.push(n),a!==Ce||s&&s!==Ce))for(let p=0,m=n.possibleKeys.length;p<m;p++){const x=n.possibleKeys[p],w=c[n.score];n.params[x]=s!=null&&s[x]&&!w?s[x]:a[x]??(s==null?void 0:s[x]),c[n.score]=!0}}return i},Tt),se,Mt,$a=(Mt=class{constructor(){u(this,"name","TrieRouter");f(this,se);g(this,se,new Kt)}add(e,t,a){const s=Lt(t);if(s){for(let i=0,o=s.length;i<o;i++)l(this,se).insert(e,s[i],a);return}l(this,se).insert(e,t,a)}match(e,t){return l(this,se).search(e,t)}},se=new WeakMap,Mt),S=class extends Gt{constructor(e={}){super(e),this.router=e.router??new Oa({routers:[new Na,new $a]})}},Ba=e=>{const a={...{origin:"*",allowMethods:["GET","HEAD","PUT","POST","DELETE","PATCH"],allowHeaders:[],exposeHeaders:[]},...e},s=(o=>typeof o=="string"?o==="*"?()=>o:r=>o===r?r:null:typeof o=="function"?o:r=>o.includes(r)?r:null)(a.origin),i=(o=>typeof o=="function"?o:Array.isArray(o)?()=>o:()=>[])(a.allowMethods);return async function(r,d){var p;function n(m,x){r.res.headers.set(m,x)}const c=await s(r.req.header("origin")||"",r);if(c&&n("Access-Control-Allow-Origin",c),a.origin!=="*"){const m=r.req.header("Vary");m?n("Vary",m):n("Vary","Origin")}if(a.credentials&&n("Access-Control-Allow-Credentials","true"),(p=a.exposeHeaders)!=null&&p.length&&n("Access-Control-Expose-Headers",a.exposeHeaders.join(",")),r.req.method==="OPTIONS"){a.maxAge!=null&&n("Access-Control-Max-Age",a.maxAge.toString());const m=await i(r.req.header("origin")||"",r);m.length&&n("Access-Control-Allow-Methods",m.join(","));let x=a.allowHeaders;if(!(x!=null&&x.length)){const w=r.req.header("Access-Control-Request-Headers");w&&(x=w.split(/\s*,\s*/))}return x!=null&&x.length&&(n("Access-Control-Allow-Headers",x.join(",")),r.res.headers.append("Vary","Access-Control-Request-Headers")),r.res.headers.delete("Content-Length"),r.res.headers.delete("Content-Type"),new Response(null,{headers:r.res.headers,status:204,statusText:"No Content"})}await d()}},Fa=/^\s*(?:text\/(?!event-stream(?:[;\s]|$))[^;\s]+|application\/(?:javascript|json|xml|xml-dtd|ecmascript|dart|postscript|rtf|tar|toml|vnd\.dart|vnd\.ms-fontobject|vnd\.ms-opentype|wasm|x-httpd-php|x-javascript|x-ns-proxy-autoconfig|x-sh|x-tar|x-virtualbox-hdd|x-virtualbox-ova|x-virtualbox-ovf|x-virtualbox-vbox|x-virtualbox-vdi|x-virtualbox-vhd|x-virtualbox-vmdk|x-www-form-urlencoded)|font\/(?:otf|ttf)|image\/(?:bmp|vnd\.adobe\.photoshop|vnd\.microsoft\.icon|vnd\.ms-dds|x-icon|x-ms-bmp)|message\/rfc822|model\/gltf-binary|x-shader\/x-fragment|x-shader\/x-vertex|[^;\s]+?\+(?:json|text|xml|yaml))(?:[;\s]|$)/i,st=(e,t=Ha)=>{const a=/\.([a-zA-Z0-9]+?)$/,s=e.match(a);if(!s)return;let i=t[s[1]];return i&&i.startsWith("text")&&(i+="; charset=utf-8"),i},qa={aac:"audio/aac",avi:"video/x-msvideo",avif:"image/avif",av1:"video/av1",bin:"application/octet-stream",bmp:"image/bmp",css:"text/css",csv:"text/csv",eot:"application/vnd.ms-fontobject",epub:"application/epub+zip",gif:"image/gif",gz:"application/gzip",htm:"text/html",html:"text/html",ico:"image/x-icon",ics:"text/calendar",jpeg:"image/jpeg",jpg:"image/jpeg",js:"text/javascript",json:"application/json",jsonld:"application/ld+json",map:"application/json",mid:"audio/x-midi",midi:"audio/x-midi",mjs:"text/javascript",mp3:"audio/mpeg",mp4:"video/mp4",mpeg:"video/mpeg",oga:"audio/ogg",ogv:"video/ogg",ogx:"application/ogg",opus:"audio/opus",otf:"font/otf",pdf:"application/pdf",png:"image/png",rtf:"application/rtf",svg:"image/svg+xml",tif:"image/tiff",tiff:"image/tiff",ts:"video/mp2t",ttf:"font/ttf",txt:"text/plain",wasm:"application/wasm",webm:"video/webm",weba:"audio/webm",webmanifest:"application/manifest+json",webp:"image/webp",woff:"font/woff",woff2:"font/woff2",xhtml:"application/xhtml+xml",xml:"application/xml",zip:"application/zip","3gp":"video/3gpp","3g2":"video/3gpp2",gltf:"model/gltf+json",glb:"model/gltf-binary"},Ha=qa,Va=(...e)=>{let t=e.filter(i=>i!=="").join("/");t=t.replace(new RegExp("(?<=\\/)\\/+","g"),"");const a=t.split("/"),s=[];for(const i of a)i===".."&&s.length>0&&s.at(-1)!==".."?s.pop():i!=="."&&s.push(i);return s.join("/")||"."},Yt={br:".br",zstd:".zst",gzip:".gz"},za=Object.keys(Yt),Ga="index.html",Ua=e=>{const t=e.root??"./",a=e.path,s=e.join??Va;return async(i,o)=>{var p,m,x,w;if(i.finalized)return o();let r;if(e.path)r=e.path;else try{if(r=decodeURIComponent(i.req.path),/(?:^|[\/\\])\.\.(?:$|[\/\\])/.test(r))throw new Error}catch{return await((p=e.onNotFound)==null?void 0:p.call(e,i.req.path,i)),o()}let d=s(t,!a&&e.rewriteRequestPath?e.rewriteRequestPath(r):r);e.isDir&&await e.isDir(d)&&(d=s(d,Ga));const n=e.getContent;let c=await n(d,i);if(c instanceof Response)return i.newResponse(c.body,c);if(c){const E=e.mimes&&st(d,e.mimes)||st(d);if(i.header("Content-Type",E||"application/octet-stream"),e.precompressed&&(!E||Fa.test(E))){const h=new Set((m=i.req.header("Accept-Encoding"))==null?void 0:m.split(",").map(y=>y.trim()));for(const y of za){if(!h.has(y))continue;const I=await n(d+Yt[y],i);if(I){c=I,i.header("Content-Encoding",y),i.header("Vary","Accept-Encoding",{append:!0});break}}}return await((x=e.onFound)==null?void 0:x.call(e,d,i)),i.body(c)}await((w=e.onNotFound)==null?void 0:w.call(e,d,i)),await o()}},_a=async(e,t)=>{let a;t&&t.manifest?typeof t.manifest=="string"?a=JSON.parse(t.manifest):a=t.manifest:typeof __STATIC_CONTENT_MANIFEST=="string"?a=JSON.parse(__STATIC_CONTENT_MANIFEST):a=__STATIC_CONTENT_MANIFEST;let s;t&&t.namespace?s=t.namespace:s=__STATIC_CONTENT;const i=a[e]||e;if(!i)return null;const o=await s.get(i,{type:"stream"});return o||null},Ja=e=>async function(a,s){return Ua({...e,getContent:async o=>_a(o,{manifest:e.manifest,namespace:e.namespace?e.namespace:a.env?a.env.__STATIC_CONTENT:void 0})})(a,s)},Zt=e=>Ja(e),H=(e,...t)=>{const a=[""];for(let s=0,i=e.length-1;s<i;s++){a[0]+=e[s];const o=Array.isArray(t[s])?t[s].flat(1/0):[t[s]];for(let r=0,d=o.length;r<d;r++){const n=o[r];if(typeof n=="string")We(n,a);else if(typeof n=="number")a[0]+=n;else{if(typeof n=="boolean"||n===null||n===void 0)continue;if(typeof n=="object"&&n.isEscaped)if(n.callbacks)a.unshift("",n);else{const c=n.toString();c instanceof Promise?a.unshift("",c):a[0]+=c}else n instanceof Promise?a.unshift("",n):We(n.toString(),a)}}}return a[0]+=e.at(-1),a.length===1?"callbacks"in a?me(Ca(me(a[0],a.callbacks))):me(a[0]):wa(a,a.callbacks)};const Me=new S;Me.get("/profile/:id",async e=>{const t=e.req.param("id");return e.json({id:t,name:"João Silva",diagnosis:"Em tratamento",nextAppointment:"2024-02-15",treatmentStage:"Quimioterapia"})});Me.post("/symptoms",async e=>(await e.req.json(),e.json({success:!0,message:"Sintomas registrados com sucesso",aiRecommendation:"Monitoramento contínuo recomendado"})));Me.get("/journey/:id",async e=>{const t=e.req.param("id");return e.json({patientId:t,stages:[{date:"2024-01-01",event:"Diagnóstico inicial",status:"completed"},{date:"2024-01-15",event:"Início do tratamento",status:"completed"},{date:"2024-02-01",event:"Primeira sessão de quimioterapia",status:"in-progress"},{date:"2024-03-01",event:"Avaliação de resposta",status:"pending"}]})});Me.post("/triage",async e=>{const t=await e.req.json(),{symptoms:a,age:s,gender:i,history:o}=t,r=a.includes("dor intensa")?"high":"medium";return e.json({urgencyLevel:r,recommendation:r==="high"?"Procure atendimento médico imediato":"Agende uma consulta com seu médico",suggestedSpecialty:"Oncologia",estimatedWaitTime:r==="high"?"0-2 horas":"1-3 dias"})});const Re=new S;Re.get("/patients",async e=>e.json({patients:[{id:"1",name:"João Silva",age:55,diagnosis:"Câncer de Pulmão",stage:"IIIa",lastVisit:"2024-01-28",nextAppointment:"2024-02-15",riskScore:.7,alertLevel:"medium"},{id:"2",name:"Maria Santos",age:42,diagnosis:"Câncer de Mama",stage:"IIb",lastVisit:"2024-01-25",nextAppointment:"2024-02-10",riskScore:.4,alertLevel:"low"}]}));Re.post("/ai-assistant",async e=>{const t=await e.req.json(),{query:a,patientContext:s,type:i}=t;let o="";return i==="treatment-recommendation"?o=`Baseado no perfil do paciente e diretrizes atuais:
     1. Considerar esquema FOLFIRINOX para pacientes com bom performance status
     2. Avaliar função hepática e renal antes do início
     3. Monitorar toxicidade hematológica semanalmente
@@ -7,9 +7,9 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
     - Baixo risco de interação entre os medicamentos listados
     - Atenção especial para função renal
     - Ajuste de dose pode ser necessário para pacientes idosos`:o=`Processando consulta: ${a}
-    Análise baseada em evidências científicas e protocolos institucionais.`,e.json({response:o,confidence:.92,references:["NCCN Guidelines 2024","ASCO Clinical Practice Guidelines","UpToDate Oncology"],timestamp:new Date().toISOString()})});Re.get("/patient/:id/360",async e=>{const t=e.req.param("id");return e.json({patientId:t,demographics:{name:"João Silva",age:55,gender:"M",bloodType:"O+"},clinicalHistory:{diagnosis:"Adenocarcinoma de pulmão",diagnosisDate:"2023-10-15",stage:"IIIa",mutations:["EGFR+","ALK-"],comorbidities:["Hipertensão","Diabetes tipo 2"]},currentTreatment:{protocol:"Carboplatin + Pemetrexed",cycle:3,startDate:"2024-01-01",response:"Partial response",sideEffects:["Náusea grau 2","Fadiga grau 1"]},labResults:{lastUpdate:"2024-01-28",hemoglobin:11.2,neutrophils:3.5,platelets:180,creatinine:1.1},imaging:{lastCT:"2024-01-20",findings:"Redução de 30% na massa tumoral primária"},psychosocial:{anxietyScore:6,depressionScore:4,socialSupport:"Good",financialConcerns:!0}})});Re.post("/decision-support",async e=>{const t=await e.req.json(),{patientId:a,clinicalQuestion:s}=t;return e.json({recommendations:[{priority:"high",recommendation:"Considerar redução de dose devido a toxicidade",evidence:"Grade A",rationale:"Neutropenia grau 3 recorrente"},{priority:"medium",recommendation:"Adicionar G-CSF profilático",evidence:"Grade B",rationale:"Prevenção de neutropenia febril"}],alternativeOptions:["Mudança para esquema com menor toxicidade hematológica","Considerar terapia alvo se mutação presente"],riskAssessment:{treatmentFailure:.15,severeAdverseEvents:.25,qualityOfLife:.7}})});const De=new E;De.get("/dashboard",async e=>e.json({summary:{totalPatients:156,inTreatment:89,waitingAppointment:34,pendingExams:23,criticalAlerts:10},bottlenecks:[{type:"exam_scheduling",severity:"high",affectedPatients:15,averageDelay:"5 days",recommendation:"Aumentar slots de ressonância magnética"},{type:"authorization_pending",severity:"medium",affectedPatients:8,averageDelay:"3 days",recommendation:"Contatar convênios para agilização"}],patientFlow:[{stage:"Triagem",count:12,avgTime:"2 horas"},{stage:"Diagnóstico",count:28,avgTime:"5 dias"},{stage:"Tratamento",count:89,avgTime:"3 meses"},{stage:"Acompanhamento",count:27,avgTime:"Contínuo"}]}));De.get("/journey-status/:patientId",async e=>{const t=e.req.param("patientId");return e.json({patientId:t,currentStage:"treatment",timeline:[{date:"2024-01-01",event:"Primeira consulta",status:"completed",responsible:"Dr. Silva"},{date:"2024-01-05",event:"Exames solicitados",status:"completed",responsible:"Navegador Ana"},{date:"2024-01-10",event:"Biópsia realizada",status:"completed",responsible:"Dr. Santos"},{date:"2024-01-15",event:"Início quimioterapia",status:"in-progress",responsible:"Equipe Oncologia"},{date:"2024-02-15",event:"Avaliação de resposta",status:"scheduled",responsible:"Dr. Silva"}],alerts:[{type:"appointment_reminder",message:"Consulta em 3 dias",priority:"medium"}],nextSteps:["Completar ciclo de quimioterapia","Agendar exame de controle","Avaliar necessidade de radioterapia"]})});De.post("/coordinate-care",async e=>{const t=await e.req.json(),{patientId:a,action:s,details:i}=t;let o={success:!0,actionTaken:s,timestamp:new Date().toISOString()};switch(s){case"schedule_appointment":o={...o,appointmentDate:"2024-02-20",department:i.department,doctor:i.doctor};break;case"expedite_exam":o={...o,examType:i.examType,newDate:"2024-02-05",previousDate:"2024-02-15"};break;case"contact_insurance":o={...o,insuranceCompany:i.company,authorizationNumber:"AUTH-2024-0123",status:"approved"};break}return e.json(o)});De.get("/alerts",async e=>e.json({alerts:[{id:"1",patientId:"P001",patientName:"João Silva",type:"missed_appointment",message:"Paciente faltou à consulta de 28/01",priority:"high",timestamp:"2024-01-28T14:00:00Z",suggestedAction:"Contatar paciente e reagendar"},{id:"2",patientId:"P002",patientName:"Maria Santos",type:"exam_delay",message:"Tomografia agendada há mais de 7 dias",priority:"medium",timestamp:"2024-01-27T10:00:00Z",suggestedAction:"Verificar disponibilidade de horários alternativos"},{id:"3",patientId:"P003",patientName:"Pedro Costa",type:"insurance_pending",message:"Autorização de quimioterapia pendente há 5 dias",priority:"high",timestamp:"2024-01-26T09:00:00Z",suggestedAction:"Contatar convênio urgentemente"}],summary:{total:15,high:5,medium:7,low:3}}));const Le=new E;Le.get("/dashboard",async e=>e.json({summary:{totalRevenue:25e5,totalCosts:18e5,profit:7e5,profitMargin:28,glosasEvitadas:15e4,glosasRate:2.5},monthlyMetrics:[{month:"Janeiro 2024",revenue:85e4,costs:6e5,glosas:15e3,glosasEvitadas:45e3},{month:"Dezembro 2023",revenue:82e4,costs:58e4,glosas:2e4,glosasEvitadas:38e3}],glosasAnalysis:{totalGlosas:35e3,mainReasons:[{reason:"Documentação incompleta",count:45,value:15e3,percentage:42.8},{reason:"Código incorreto",count:30,value:1e4,percentage:28.5},{reason:"Autorização expirada",count:20,value:7e3,percentage:20},{reason:"Procedimento não coberto",count:10,value:3e3,percentage:8.7}]},costCenters:[{department:"Oncologia",budget:8e5,spent:65e4,percentage:81.25},{department:"Radioterapia",budget:5e5,spent:42e4,percentage:84},{department:"Cirurgia",budget:3e5,spent:25e4,percentage:83.33},{department:"Diagnóstico",budget:2e5,spent:18e4,percentage:90}]}));Le.post("/predict-glosa",async e=>{const t=await e.req.json(),{procedure:a,diagnosis:s,insurance:i,documentation:o}=t;let r=.2,d=[];return o.includes("laudo_completo")||(r+=.3,d.push({factor:"Laudo médico incompleto",impact:"high",recommendation:"Solicitar laudo detalhado com CID e justificativa clínica"})),o.includes("autorizacao_previa")||(r+=.25,d.push({factor:"Autorização prévia ausente",impact:"high",recommendation:"Obter autorização antes do procedimento"})),a.complexity==="high"&&!o.includes("segunda_opiniao")&&(r+=.15,d.push({factor:"Segunda opinião não documentada",impact:"medium",recommendation:"Incluir parecer de especialista"})),e.json({riskScore:Math.min(r,1),riskLevel:r>.7?"high":r>.4?"medium":"low",estimatedGlosaValue:r*(a.value||1e4),risks:d,preventiveActions:["Revisar toda documentação antes do envio","Confirmar cobertura com o convênio","Garantir que todos os códigos estejam corretos","Manter registro fotográfico quando aplicável"],confidence:.87})});Le.get("/revenue-analysis",async e=>e.json({byInsurance:[{name:"SUS",revenue:8e5,percentage:32,avgTicket:2500,paymentDelay:45},{name:"Unimed",revenue:6e5,percentage:24,avgTicket:5e3,paymentDelay:30},{name:"SulAmérica",revenue:45e4,percentage:18,avgTicket:4500,paymentDelay:25},{name:"Bradesco Saúde",revenue:4e5,percentage:16,avgTicket:4e3,paymentDelay:28},{name:"Particular",revenue:25e4,percentage:10,avgTicket:8e3,paymentDelay:0}],byProcedure:[{procedure:"Quimioterapia",revenue:9e5,count:180,avgValue:5e3},{procedure:"Radioterapia",revenue:6e5,count:120,avgValue:5e3},{procedure:"Cirurgia Oncológica",revenue:5e5,count:50,avgValue:1e4},{procedure:"Consultas",revenue:3e5,count:1e3,avgValue:300},{procedure:"Exames",revenue:2e5,count:400,avgValue:500}]}));Le.get("/optimization-suggestions",async e=>e.json({suggestions:[{area:"Medicamentos",currentCost:3e5,potentialSaving:45e3,recommendation:"Negociar compra em volume com fornecedores",priority:"high",implementation:"immediate"},{area:"Exames Laboratoriais",currentCost:15e4,potentialSaving:22500,recommendation:"Implementar protocolos para evitar exames desnecessários",priority:"medium",implementation:"1-2 months"},{area:"Gestão de Leitos",currentCost:2e5,potentialSaving:3e4,recommendation:"Otimizar tempo de permanência com navegação de pacientes",priority:"high",implementation:"2-3 months"},{area:"Energia e Utilidades",currentCost:5e4,potentialSaving:7500,recommendation:"Implementar medidas de eficiência energética",priority:"low",implementation:"3-6 months"}],totalPotentialSaving:105e3,estimatedROI:3.5,implementationCost:3e4}));const Oe=new E;Oe.get("/profile/:patientId",async e=>{const t=e.req.param("patientId");return e.json({patientId:t,wellnessScore:72,mentalHealth:{anxietyLevel:5,depressionScore:3,stressLevel:6,lastAssessment:"2024-01-25",trend:"improving"},physicalWellbeing:{painLevel:4,fatigueLevel:5,sleepQuality:6,appetiteLevel:7,mobilityScore:8},socialSupport:{familySupport:"strong",friendsNetwork:"moderate",supportGroupParticipation:!0,communityEngagement:"active"},emotionalNeeds:[{need:"Medo do futuro",severity:"moderate",addressed:!0,intervention:"Sessões de terapia cognitivo-comportamental"},{need:"Preocupação com família",severity:"high",addressed:!1,intervention:"Terapia familiar recomendada"}],interventions:[{date:"2024-01-20",type:"Consulta psicológica",professional:"Dra. Ana Costa",outcome:"Melhora no manejo da ansiedade"},{date:"2024-01-22",type:"Grupo de apoio",professional:"Equipe multidisciplinar",outcome:"Paciente relatou sentir-se acolhido"}]})});Oe.post("/mental-health-screening",async e=>{const t=await e.req.json(),{patientId:a,responses:s}=t;let i=0,o=0;s.forEach(n=>{n.category==="anxiety"?i+=n.value:n.category==="depression"&&(o+=n.value)});const r=i>15?"severe":i>10?"moderate":i>5?"mild":"minimal",d=o>20?"severe":o>15?"moderately severe":o>10?"moderate":o>5?"mild":"minimal";return e.json({patientId:a,screeningDate:new Date().toISOString(),results:{anxiety:{score:i,severity:r,requiresIntervention:i>10},depression:{score:o,severity:d,requiresIntervention:o>10}},recommendations:[i>10&&"Encaminhar para psiquiatra",o>10&&"Iniciar psicoterapia",(i>5||o>5)&&"Monitoramento semanal","Manter grupo de apoio"].filter(Boolean),alertLevel:i>15||o>20?"high":i>10||o>15?"medium":"low"})});Oe.post("/predict-crisis",async e=>{const t=await e.req.json(),{patientId:a,recentEvents:s,symptoms:i,socialFactors:o}=t;let r=.2;return s.includes("loss")&&(r+=.2),s.includes("treatment_failure")&&(r+=.25),i.includes("hopelessness")&&(r+=.3),i.includes("isolation")&&(r+=.15),o.support==="weak"&&(r+=.2),o.financialStress&&(r+=.15),o.support==="strong"&&(r-=.1),o.activeInTherapy&&(r-=.15),r=Math.max(0,Math.min(1,r)),e.json({patientId:a,riskScore:r,riskLevel:r>.7?"high":r>.4?"medium":"low",timeframe:r>.7?"24-48 hours":r>.4?"1 week":"1 month",interventions:[r>.7&&{priority:"immediate",action:"Contato imediato com psiquiatra",responsible:"Equipe de plantão"},r>.4&&{priority:"urgent",action:"Agendar consulta em 48h",responsible:"Psicólogo responsável"},{priority:"routine",action:"Intensificar monitoramento",responsible:"Equipe de enfermagem"}].filter(Boolean),monitoringPlan:{frequency:r>.7?"daily":r>.4?"twice weekly":"weekly",method:"Phone check-in and mood tracking",duration:"2 weeks with reassessment"}})});Oe.get("/support-groups/:patientId",async e=>(e.req.param("patientId"),e.json({recommendedGroups:[{id:"G001",name:"Grupo de Apoio - Câncer de Mama",type:"disease-specific",meetingFrequency:"Semanal",nextMeeting:"2024-02-05 14:00",location:"Sala 201 - Ala B",facilitator:"Psic. Maria Silva",currentMembers:12,matchScore:.95},{id:"G002",name:"Mindfulness e Meditação",type:"wellness",meetingFrequency:"2x por semana",nextMeeting:"2024-02-03 10:00",location:"Espaço Bem-Estar",facilitator:"Terapeuta João Santos",currentMembers:8,matchScore:.82},{id:"G003",name:"Família e Cuidadores",type:"family-support",meetingFrequency:"Quinzenal",nextMeeting:"2024-02-10 16:00",location:"Auditório Principal",facilitator:"Assistente Social Ana Costa",currentMembers:20,matchScore:.78}],activeParticipation:[{groupId:"G001",joinedDate:"2024-01-01",attendance:"100%",engagement:"high"}]})));const he=new E;he.get("/dashboard",async e=>e.json({activeStudies:12,totalPatients:456,dataPoints:125e4,insights:89,studies:[{id:"ST001",title:"Eficácia da Imunoterapia em Câncer de Pulmão Avançado",phase:"III",enrolledPatients:85,targetEnrollment:100,startDate:"2023-06-01",estimatedCompletion:"2025-06-01",status:"recruiting"},{id:"ST002",title:"Biomarcadores Preditivos de Resposta à Quimioterapia",phase:"II",enrolledPatients:45,targetEnrollment:50,startDate:"2023-09-01",estimatedCompletion:"2024-09-01",status:"active"},{id:"ST003",title:"Qualidade de Vida Pós-Tratamento Radioterápico",phase:"Observational",enrolledPatients:120,targetEnrollment:150,startDate:"2023-03-01",estimatedCompletion:"2024-12-01",status:"recruiting"}],recentInsights:[{date:"2024-01-28",type:"correlation",finding:"Correlação positiva entre níveis de IL-6 e resposta à imunoterapia",significance:"p < 0.001",impact:"high"},{date:"2024-01-25",type:"pattern",finding:"Padrão de toxicidade identificado em pacientes > 65 anos",significance:"p = 0.023",impact:"medium"}]}));he.post("/analyze-cohort",async e=>{const t=await e.req.json(),{criteria:a,analysisType:s,variables:i}=t;return e.json({cohortSize:145,demographics:{meanAge:58.3,genderDistribution:{male:.52,female:.48},stageDistribution:{I:.15,II:.25,III:.35,IV:.25}},outcomes:{overallSurvival:{median:24.5,oneYear:.82,twoYear:.65,fiveYear:.45},progressionFreeSurvival:{median:11.2,sixMonth:.68,oneYear:.45},responseRate:{completeResponse:.12,partialResponse:.38,stableDisease:.3,progressiveDisease:.2}},correlations:[{variable1:"Age",variable2:"Treatment Response",coefficient:-.23,pValue:.042,interpretation:"Idade negativamente correlacionada com resposta"},{variable1:"Biomarker X",variable2:"Survival",coefficient:.56,pValue:.001,interpretation:"Forte correlação positiva com sobrevida"}],statisticalTests:{chiSquare:{value:15.23,df:3,pValue:.0016,significant:!0},logRankTest:{value:8.45,pValue:.0037,significant:!0}}})});he.get("/opportunities",async e=>e.json({dataGaps:[{area:"Toxicidade tardia em radioterapia",patientCount:230,dataCompleteness:.45,priority:"high",potentialImpact:"Melhor manejo de efeitos colaterais de longo prazo"},{area:"Marcadores genéticos em câncer colorretal",patientCount:156,dataCompleteness:.62,priority:"medium",potentialImpact:"Personalização do tratamento"}],emergingPatterns:[{pattern:"Aumento de resposta em combinação terapêutica específica",confidence:.87,patientsAffected:45,recommendation:"Considerar estudo prospectivo"},{pattern:"Subgrupo com resistência primária identificado",confidence:.92,patientsAffected:28,recommendation:"Investigar mecanismos moleculares"}],eligiblePatients:{forClinicalTrials:89,forObservationalStudies:234,forRegistries:456},collaborationOpportunities:[{institution:"Instituto Nacional do Câncer",area:"Genômica do câncer",status:"in-discussion"},{institution:"Harvard Medical School",area:"Imunoterapia",status:"proposal-submitted"}]}));he.post("/generate-hypothesis",async e=>{const t=await e.req.json(),{dataSource:a,variables:s,context:i}=t;return e.json({hypotheses:[{id:"H001",statement:"Pacientes com expressão elevada de PD-L1 e baixa carga mutacional apresentam melhor resposta à combinação de imunoterapia com quimioterapia",confidence:.78,supportingData:{nPatients:67,observedEffect:.42,pValue:.023},suggestedStudyDesign:"Randomized controlled trial com estratificação por biomarcadores",estimatedSampleSize:150,primaryEndpoint:"Progression-free survival"},{id:"H002",statement:"A administração de probióticos durante quimioterapia reduz incidência de mucosite severa",confidence:.65,supportingData:{nPatients:34,observedEffect:.31,pValue:.048},suggestedStudyDesign:"Double-blind placebo-controlled trial",estimatedSampleSize:100,primaryEndpoint:"Incidence of grade 3-4 mucositis"}],dataQuality:{completeness:.82,consistency:.91,timeliness:.88},recommendations:["Coletar dados adicionais de microbioma","Padronizar avaliação de toxicidade","Implementar coleta prospectiva de PROs"]})});he.post("/export-data",async e=>{const t=await e.req.json(),{studyId:a,variables:s,format:i,filters:o}=t;return e.json({exportId:"EXP-2024-0128-001",status:"processing",recordsCount:234,variables:s.length,anonymizationLevel:"full",format:i||"csv",estimatedSize:"15.2 MB",expirationDate:"2024-02-28",downloadUrl:"/api/research/download/EXP-2024-0128-001",auditLog:{requestedBy:"Dr. Research",requestDate:new Date().toISOString(),purpose:"Clinical trial analysis",ethicsApproval:"CEP-2024-001"}})});const ie=new E;ie.get("/system-health",async e=>e.json({status:"healthy",uptime:"45 days 12:34:56",timestamp:new Date().toISOString(),services:{database:{status:"operational",latency:12,connections:45,maxConnections:100},aiEngine:{status:"operational",activeModels:8,requestsPerMinute:234,avgResponseTime:145},storage:{status:"operational",used:"234 GB",total:"1 TB",percentage:23.4},cache:{status:"operational",hitRate:.89,memory:"512 MB",entries:12456}},performance:{cpu:45,memory:67,disk:23,network:{in:"125 Mbps",out:"89 Mbps"}},alerts:[{level:"warning",service:"database",message:"Connection pool reaching 80% capacity",timestamp:"2024-01-28T10:30:00Z"}]}));ie.get("/metrics",async e=>e.json({users:{total:523,active:412,newThisMonth:45,byRole:{patients:234,doctors:56,nurses:78,administrators:12,researchers:8,navigators:34,support:89,financial:12}},usage:{dailyActiveUsers:389,weeklyActiveUsers:456,monthlyActiveUsers:512,avgSessionDuration:"24 minutes",pageViews:{today:12456,week:78234,month:312456}},aiUsage:{totalRequests:45678,byType:{clinicalAssistant:12345,triage:8934,glosasPrediction:5678,emotionalRisk:3456,researchAnalysis:2345},avgConfidence:.87,feedbackScore:4.2},dataQuality:{completeness:.92,accuracy:.95,timeliness:.88,consistency:.91,validity:.94},compliance:{lgpdCompliance:!0,dataRetention:"compliant",auditLogsEnabled:!0,encryptionStatus:"AES-256",lastSecurityAudit:"2024-01-15",nextAudit:"2024-02-15"}}));ie.get("/users",async e=>e.json({users:[{id:"U001",name:"Dr. João Silva",email:"joao.silva@hospital.com",role:"doctor",department:"Oncologia",status:"active",lastLogin:"2024-01-28T09:15:00Z",created:"2023-06-01T10:00:00Z"},{id:"U002",name:"Maria Santos",email:"maria.santos@hospital.com",role:"nurse",department:"Navegação",status:"active",lastLogin:"2024-01-28T08:30:00Z",created:"2023-07-15T14:00:00Z"}],total:523,page:1,pageSize:20}));ie.get("/audit-logs",async e=>e.json({logs:[{id:"LOG001",timestamp:"2024-01-28T11:30:00Z",user:"Dr. João Silva",action:"VIEW_PATIENT_RECORD",resource:"Patient ID: P123",ip:"192.168.1.100",result:"success"},{id:"LOG002",timestamp:"2024-01-28T11:25:00Z",user:"Maria Santos",action:"UPDATE_APPOINTMENT",resource:"Appointment ID: A456",ip:"192.168.1.101",result:"success"},{id:"LOG003",timestamp:"2024-01-28T11:20:00Z",user:"System",action:"AI_PREDICTION",resource:"Glosas Risk Analysis",ip:"internal",result:"success",metadata:{confidence:.89,processingTime:"145ms"}}],filters:{dateRange:"last-24-hours",actions:"all",users:"all",results:"all"},total:12456,page:1,pageSize:50}));ie.get("/configuration",async e=>e.json({general:{institutionName:"ACCamargo Cancer Center",timezone:"America/Sao_Paulo",language:"pt-BR",dateFormat:"DD/MM/YYYY",currency:"BRL"},ai:{models:{clinical:{name:"clinical-assistant-v2",version:"2.1.0",lastUpdate:"2024-01-15",accuracy:.92},triage:{name:"auto-triage-v1",version:"1.5.0",lastUpdate:"2024-01-10",accuracy:.88},financial:{name:"glosas-predictor-v3",version:"3.0.1",lastUpdate:"2024-01-20",accuracy:.87}},thresholds:{confidenceMinimum:.75,alertThreshold:.85,autoApprovalThreshold:.95}},integration:{ehr:{system:"Custom EHR",status:"connected",lastSync:"2024-01-28T11:00:00Z"},laboratory:{system:"LabSystem Pro",status:"connected",lastSync:"2024-01-28T10:45:00Z"},imaging:{system:"PACS System",status:"connected",lastSync:"2024-01-28T10:30:00Z"}},security:{passwordPolicy:{minLength:12,requireSpecialChar:!0,requireNumber:!0,requireUppercase:!0,expirationDays:90},sessionTimeout:30,mfaRequired:!0,ipWhitelist:["192.168.0.0/16"]}}));ie.get("/ai-performance",async e=>e.json({models:[{name:"Clinical Assistant",performance:{accuracy:.92,precision:.89,recall:.91,f1Score:.9,auc:.94},usage:{requestsToday:1234,avgResponseTime:145,errorRate:.02},feedback:{positive:456,negative:23,neutral:89,avgRating:4.3},lastRetrained:"2024-01-15",nextRetraining:"2024-02-15"},{name:"Glosas Predictor",performance:{accuracy:.87,precision:.85,recall:.88,f1Score:.86,auc:.91},usage:{requestsToday:567,avgResponseTime:89,errorRate:.01},financialImpact:{glosasPrevenidas:145,valorEconomizado:45e4},lastRetrained:"2024-01-10",nextRetraining:"2024-02-10"}],training:{datasetSize:125e3,lastUpdate:"2024-01-20",validationAccuracy:.89,crossValidationFolds:5},alerts:[{model:"Emotional Risk Detector",issue:"Performance degradation detected",metric:"accuracy",current:.72,threshold:.75,recommendation:"Immediate retraining required"}]}));const oe=new E;oe.post("/prompt-engineering",async e=>{const t=await e.req.json(),{userInput:a,context:s,persona:i,intent:o}=t,r={original:a,enhanced:`[Context: ${s}] [Role: ${i}] [Intent: ${o}] ${a}`,templates:[{name:"clinical-query",prompt:`Como médico oncologista experiente, analise o seguinte caso: ${a}. 
+    Análise baseada em evidências científicas e protocolos institucionais.`,e.json({response:o,confidence:.92,references:["NCCN Guidelines 2024","ASCO Clinical Practice Guidelines","UpToDate Oncology"],timestamp:new Date().toISOString()})});Re.get("/patient/:id/360",async e=>{const t=e.req.param("id");return e.json({patientId:t,demographics:{name:"João Silva",age:55,gender:"M",bloodType:"O+"},clinicalHistory:{diagnosis:"Adenocarcinoma de pulmão",diagnosisDate:"2023-10-15",stage:"IIIa",mutations:["EGFR+","ALK-"],comorbidities:["Hipertensão","Diabetes tipo 2"]},currentTreatment:{protocol:"Carboplatin + Pemetrexed",cycle:3,startDate:"2024-01-01",response:"Partial response",sideEffects:["Náusea grau 2","Fadiga grau 1"]},labResults:{lastUpdate:"2024-01-28",hemoglobin:11.2,neutrophils:3.5,platelets:180,creatinine:1.1},imaging:{lastCT:"2024-01-20",findings:"Redução de 30% na massa tumoral primária"},psychosocial:{anxietyScore:6,depressionScore:4,socialSupport:"Good",financialConcerns:!0}})});Re.post("/decision-support",async e=>{const t=await e.req.json(),{patientId:a,clinicalQuestion:s}=t;return e.json({recommendations:[{priority:"high",recommendation:"Considerar redução de dose devido a toxicidade",evidence:"Grade A",rationale:"Neutropenia grau 3 recorrente"},{priority:"medium",recommendation:"Adicionar G-CSF profilático",evidence:"Grade B",rationale:"Prevenção de neutropenia febril"}],alternativeOptions:["Mudança para esquema com menor toxicidade hematológica","Considerar terapia alvo se mutação presente"],riskAssessment:{treatmentFailure:.15,severeAdverseEvents:.25,qualityOfLife:.7}})});const De=new S;De.get("/dashboard",async e=>e.json({summary:{totalPatients:156,inTreatment:89,waitingAppointment:34,pendingExams:23,criticalAlerts:10},bottlenecks:[{type:"exam_scheduling",severity:"high",affectedPatients:15,averageDelay:"5 days",recommendation:"Aumentar slots de ressonância magnética"},{type:"authorization_pending",severity:"medium",affectedPatients:8,averageDelay:"3 days",recommendation:"Contatar convênios para agilização"}],patientFlow:[{stage:"Triagem",count:12,avgTime:"2 horas"},{stage:"Diagnóstico",count:28,avgTime:"5 dias"},{stage:"Tratamento",count:89,avgTime:"3 meses"},{stage:"Acompanhamento",count:27,avgTime:"Contínuo"}]}));De.get("/journey-status/:patientId",async e=>{const t=e.req.param("patientId");return e.json({patientId:t,currentStage:"treatment",timeline:[{date:"2024-01-01",event:"Primeira consulta",status:"completed",responsible:"Dr. Silva"},{date:"2024-01-05",event:"Exames solicitados",status:"completed",responsible:"Navegador Ana"},{date:"2024-01-10",event:"Biópsia realizada",status:"completed",responsible:"Dr. Santos"},{date:"2024-01-15",event:"Início quimioterapia",status:"in-progress",responsible:"Equipe Oncologia"},{date:"2024-02-15",event:"Avaliação de resposta",status:"scheduled",responsible:"Dr. Silva"}],alerts:[{type:"appointment_reminder",message:"Consulta em 3 dias",priority:"medium"}],nextSteps:["Completar ciclo de quimioterapia","Agendar exame de controle","Avaliar necessidade de radioterapia"]})});De.post("/coordinate-care",async e=>{const t=await e.req.json(),{patientId:a,action:s,details:i}=t;let o={success:!0,actionTaken:s,timestamp:new Date().toISOString()};switch(s){case"schedule_appointment":o={...o,appointmentDate:"2024-02-20",department:i.department,doctor:i.doctor};break;case"expedite_exam":o={...o,examType:i.examType,newDate:"2024-02-05",previousDate:"2024-02-15"};break;case"contact_insurance":o={...o,insuranceCompany:i.company,authorizationNumber:"AUTH-2024-0123",status:"approved"};break}return e.json(o)});De.get("/alerts",async e=>e.json({alerts:[{id:"1",patientId:"P001",patientName:"João Silva",type:"missed_appointment",message:"Paciente faltou à consulta de 28/01",priority:"high",timestamp:"2024-01-28T14:00:00Z",suggestedAction:"Contatar paciente e reagendar"},{id:"2",patientId:"P002",patientName:"Maria Santos",type:"exam_delay",message:"Tomografia agendada há mais de 7 dias",priority:"medium",timestamp:"2024-01-27T10:00:00Z",suggestedAction:"Verificar disponibilidade de horários alternativos"},{id:"3",patientId:"P003",patientName:"Pedro Costa",type:"insurance_pending",message:"Autorização de quimioterapia pendente há 5 dias",priority:"high",timestamp:"2024-01-26T09:00:00Z",suggestedAction:"Contatar convênio urgentemente"}],summary:{total:15,high:5,medium:7,low:3}}));const Le=new S;Le.get("/dashboard",async e=>e.json({summary:{totalRevenue:25e5,totalCosts:18e5,profit:7e5,profitMargin:28,glosasEvitadas:15e4,glosasRate:2.5},monthlyMetrics:[{month:"Janeiro 2024",revenue:85e4,costs:6e5,glosas:15e3,glosasEvitadas:45e3},{month:"Dezembro 2023",revenue:82e4,costs:58e4,glosas:2e4,glosasEvitadas:38e3}],glosasAnalysis:{totalGlosas:35e3,mainReasons:[{reason:"Documentação incompleta",count:45,value:15e3,percentage:42.8},{reason:"Código incorreto",count:30,value:1e4,percentage:28.5},{reason:"Autorização expirada",count:20,value:7e3,percentage:20},{reason:"Procedimento não coberto",count:10,value:3e3,percentage:8.7}]},costCenters:[{department:"Oncologia",budget:8e5,spent:65e4,percentage:81.25},{department:"Radioterapia",budget:5e5,spent:42e4,percentage:84},{department:"Cirurgia",budget:3e5,spent:25e4,percentage:83.33},{department:"Diagnóstico",budget:2e5,spent:18e4,percentage:90}]}));Le.post("/predict-glosa",async e=>{const t=await e.req.json(),{procedure:a,diagnosis:s,insurance:i,documentation:o}=t;let r=.2,d=[];return o.includes("laudo_completo")||(r+=.3,d.push({factor:"Laudo médico incompleto",impact:"high",recommendation:"Solicitar laudo detalhado com CID e justificativa clínica"})),o.includes("autorizacao_previa")||(r+=.25,d.push({factor:"Autorização prévia ausente",impact:"high",recommendation:"Obter autorização antes do procedimento"})),a.complexity==="high"&&!o.includes("segunda_opiniao")&&(r+=.15,d.push({factor:"Segunda opinião não documentada",impact:"medium",recommendation:"Incluir parecer de especialista"})),e.json({riskScore:Math.min(r,1),riskLevel:r>.7?"high":r>.4?"medium":"low",estimatedGlosaValue:r*(a.value||1e4),risks:d,preventiveActions:["Revisar toda documentação antes do envio","Confirmar cobertura com o convênio","Garantir que todos os códigos estejam corretos","Manter registro fotográfico quando aplicável"],confidence:.87})});Le.get("/revenue-analysis",async e=>e.json({byInsurance:[{name:"SUS",revenue:8e5,percentage:32,avgTicket:2500,paymentDelay:45},{name:"Unimed",revenue:6e5,percentage:24,avgTicket:5e3,paymentDelay:30},{name:"SulAmérica",revenue:45e4,percentage:18,avgTicket:4500,paymentDelay:25},{name:"Bradesco Saúde",revenue:4e5,percentage:16,avgTicket:4e3,paymentDelay:28},{name:"Particular",revenue:25e4,percentage:10,avgTicket:8e3,paymentDelay:0}],byProcedure:[{procedure:"Quimioterapia",revenue:9e5,count:180,avgValue:5e3},{procedure:"Radioterapia",revenue:6e5,count:120,avgValue:5e3},{procedure:"Cirurgia Oncológica",revenue:5e5,count:50,avgValue:1e4},{procedure:"Consultas",revenue:3e5,count:1e3,avgValue:300},{procedure:"Exames",revenue:2e5,count:400,avgValue:500}]}));Le.get("/optimization-suggestions",async e=>e.json({suggestions:[{area:"Medicamentos",currentCost:3e5,potentialSaving:45e3,recommendation:"Negociar compra em volume com fornecedores",priority:"high",implementation:"immediate"},{area:"Exames Laboratoriais",currentCost:15e4,potentialSaving:22500,recommendation:"Implementar protocolos para evitar exames desnecessários",priority:"medium",implementation:"1-2 months"},{area:"Gestão de Leitos",currentCost:2e5,potentialSaving:3e4,recommendation:"Otimizar tempo de permanência com navegação de pacientes",priority:"high",implementation:"2-3 months"},{area:"Energia e Utilidades",currentCost:5e4,potentialSaving:7500,recommendation:"Implementar medidas de eficiência energética",priority:"low",implementation:"3-6 months"}],totalPotentialSaving:105e3,estimatedROI:3.5,implementationCost:3e4}));const Ne=new S;Ne.get("/profile/:patientId",async e=>{const t=e.req.param("patientId");return e.json({patientId:t,wellnessScore:72,mentalHealth:{anxietyLevel:5,depressionScore:3,stressLevel:6,lastAssessment:"2024-01-25",trend:"improving"},physicalWellbeing:{painLevel:4,fatigueLevel:5,sleepQuality:6,appetiteLevel:7,mobilityScore:8},socialSupport:{familySupport:"strong",friendsNetwork:"moderate",supportGroupParticipation:!0,communityEngagement:"active"},emotionalNeeds:[{need:"Medo do futuro",severity:"moderate",addressed:!0,intervention:"Sessões de terapia cognitivo-comportamental"},{need:"Preocupação com família",severity:"high",addressed:!1,intervention:"Terapia familiar recomendada"}],interventions:[{date:"2024-01-20",type:"Consulta psicológica",professional:"Dra. Ana Costa",outcome:"Melhora no manejo da ansiedade"},{date:"2024-01-22",type:"Grupo de apoio",professional:"Equipe multidisciplinar",outcome:"Paciente relatou sentir-se acolhido"}]})});Ne.post("/mental-health-screening",async e=>{const t=await e.req.json(),{patientId:a,responses:s}=t;let i=0,o=0;s.forEach(n=>{n.category==="anxiety"?i+=n.value:n.category==="depression"&&(o+=n.value)});const r=i>15?"severe":i>10?"moderate":i>5?"mild":"minimal",d=o>20?"severe":o>15?"moderately severe":o>10?"moderate":o>5?"mild":"minimal";return e.json({patientId:a,screeningDate:new Date().toISOString(),results:{anxiety:{score:i,severity:r,requiresIntervention:i>10},depression:{score:o,severity:d,requiresIntervention:o>10}},recommendations:[i>10&&"Encaminhar para psiquiatra",o>10&&"Iniciar psicoterapia",(i>5||o>5)&&"Monitoramento semanal","Manter grupo de apoio"].filter(Boolean),alertLevel:i>15||o>20?"high":i>10||o>15?"medium":"low"})});Ne.post("/predict-crisis",async e=>{const t=await e.req.json(),{patientId:a,recentEvents:s,symptoms:i,socialFactors:o}=t;let r=.2;return s.includes("loss")&&(r+=.2),s.includes("treatment_failure")&&(r+=.25),i.includes("hopelessness")&&(r+=.3),i.includes("isolation")&&(r+=.15),o.support==="weak"&&(r+=.2),o.financialStress&&(r+=.15),o.support==="strong"&&(r-=.1),o.activeInTherapy&&(r-=.15),r=Math.max(0,Math.min(1,r)),e.json({patientId:a,riskScore:r,riskLevel:r>.7?"high":r>.4?"medium":"low",timeframe:r>.7?"24-48 hours":r>.4?"1 week":"1 month",interventions:[r>.7&&{priority:"immediate",action:"Contato imediato com psiquiatra",responsible:"Equipe de plantão"},r>.4&&{priority:"urgent",action:"Agendar consulta em 48h",responsible:"Psicólogo responsável"},{priority:"routine",action:"Intensificar monitoramento",responsible:"Equipe de enfermagem"}].filter(Boolean),monitoringPlan:{frequency:r>.7?"daily":r>.4?"twice weekly":"weekly",method:"Phone check-in and mood tracking",duration:"2 weeks with reassessment"}})});Ne.get("/support-groups/:patientId",async e=>(e.req.param("patientId"),e.json({recommendedGroups:[{id:"G001",name:"Grupo de Apoio - Câncer de Mama",type:"disease-specific",meetingFrequency:"Semanal",nextMeeting:"2024-02-05 14:00",location:"Sala 201 - Ala B",facilitator:"Psic. Maria Silva",currentMembers:12,matchScore:.95},{id:"G002",name:"Mindfulness e Meditação",type:"wellness",meetingFrequency:"2x por semana",nextMeeting:"2024-02-03 10:00",location:"Espaço Bem-Estar",facilitator:"Terapeuta João Santos",currentMembers:8,matchScore:.82},{id:"G003",name:"Família e Cuidadores",type:"family-support",meetingFrequency:"Quinzenal",nextMeeting:"2024-02-10 16:00",location:"Auditório Principal",facilitator:"Assistente Social Ana Costa",currentMembers:20,matchScore:.78}],activeParticipation:[{groupId:"G001",joinedDate:"2024-01-01",attendance:"100%",engagement:"high"}]})));const he=new S;he.get("/dashboard",async e=>e.json({activeStudies:12,totalPatients:456,dataPoints:125e4,insights:89,studies:[{id:"ST001",title:"Eficácia da Imunoterapia em Câncer de Pulmão Avançado",phase:"III",enrolledPatients:85,targetEnrollment:100,startDate:"2023-06-01",estimatedCompletion:"2025-06-01",status:"recruiting"},{id:"ST002",title:"Biomarcadores Preditivos de Resposta à Quimioterapia",phase:"II",enrolledPatients:45,targetEnrollment:50,startDate:"2023-09-01",estimatedCompletion:"2024-09-01",status:"active"},{id:"ST003",title:"Qualidade de Vida Pós-Tratamento Radioterápico",phase:"Observational",enrolledPatients:120,targetEnrollment:150,startDate:"2023-03-01",estimatedCompletion:"2024-12-01",status:"recruiting"}],recentInsights:[{date:"2024-01-28",type:"correlation",finding:"Correlação positiva entre níveis de IL-6 e resposta à imunoterapia",significance:"p < 0.001",impact:"high"},{date:"2024-01-25",type:"pattern",finding:"Padrão de toxicidade identificado em pacientes > 65 anos",significance:"p = 0.023",impact:"medium"}]}));he.post("/analyze-cohort",async e=>{const t=await e.req.json(),{criteria:a,analysisType:s,variables:i}=t;return e.json({cohortSize:145,demographics:{meanAge:58.3,genderDistribution:{male:.52,female:.48},stageDistribution:{I:.15,II:.25,III:.35,IV:.25}},outcomes:{overallSurvival:{median:24.5,oneYear:.82,twoYear:.65,fiveYear:.45},progressionFreeSurvival:{median:11.2,sixMonth:.68,oneYear:.45},responseRate:{completeResponse:.12,partialResponse:.38,stableDisease:.3,progressiveDisease:.2}},correlations:[{variable1:"Age",variable2:"Treatment Response",coefficient:-.23,pValue:.042,interpretation:"Idade negativamente correlacionada com resposta"},{variable1:"Biomarker X",variable2:"Survival",coefficient:.56,pValue:.001,interpretation:"Forte correlação positiva com sobrevida"}],statisticalTests:{chiSquare:{value:15.23,df:3,pValue:.0016,significant:!0},logRankTest:{value:8.45,pValue:.0037,significant:!0}}})});he.get("/opportunities",async e=>e.json({dataGaps:[{area:"Toxicidade tardia em radioterapia",patientCount:230,dataCompleteness:.45,priority:"high",potentialImpact:"Melhor manejo de efeitos colaterais de longo prazo"},{area:"Marcadores genéticos em câncer colorretal",patientCount:156,dataCompleteness:.62,priority:"medium",potentialImpact:"Personalização do tratamento"}],emergingPatterns:[{pattern:"Aumento de resposta em combinação terapêutica específica",confidence:.87,patientsAffected:45,recommendation:"Considerar estudo prospectivo"},{pattern:"Subgrupo com resistência primária identificado",confidence:.92,patientsAffected:28,recommendation:"Investigar mecanismos moleculares"}],eligiblePatients:{forClinicalTrials:89,forObservationalStudies:234,forRegistries:456},collaborationOpportunities:[{institution:"Instituto Nacional do Câncer",area:"Genômica do câncer",status:"in-discussion"},{institution:"Harvard Medical School",area:"Imunoterapia",status:"proposal-submitted"}]}));he.post("/generate-hypothesis",async e=>{const t=await e.req.json(),{dataSource:a,variables:s,context:i}=t;return e.json({hypotheses:[{id:"H001",statement:"Pacientes com expressão elevada de PD-L1 e baixa carga mutacional apresentam melhor resposta à combinação de imunoterapia com quimioterapia",confidence:.78,supportingData:{nPatients:67,observedEffect:.42,pValue:.023},suggestedStudyDesign:"Randomized controlled trial com estratificação por biomarcadores",estimatedSampleSize:150,primaryEndpoint:"Progression-free survival"},{id:"H002",statement:"A administração de probióticos durante quimioterapia reduz incidência de mucosite severa",confidence:.65,supportingData:{nPatients:34,observedEffect:.31,pValue:.048},suggestedStudyDesign:"Double-blind placebo-controlled trial",estimatedSampleSize:100,primaryEndpoint:"Incidence of grade 3-4 mucositis"}],dataQuality:{completeness:.82,consistency:.91,timeliness:.88},recommendations:["Coletar dados adicionais de microbioma","Padronizar avaliação de toxicidade","Implementar coleta prospectiva de PROs"]})});he.post("/export-data",async e=>{const t=await e.req.json(),{studyId:a,variables:s,format:i,filters:o}=t;return e.json({exportId:"EXP-2024-0128-001",status:"processing",recordsCount:234,variables:s.length,anonymizationLevel:"full",format:i||"csv",estimatedSize:"15.2 MB",expirationDate:"2024-02-28",downloadUrl:"/api/research/download/EXP-2024-0128-001",auditLog:{requestedBy:"Dr. Research",requestDate:new Date().toISOString(),purpose:"Clinical trial analysis",ethicsApproval:"CEP-2024-001"}})});const ie=new S;ie.get("/system-health",async e=>e.json({status:"healthy",uptime:"45 days 12:34:56",timestamp:new Date().toISOString(),services:{database:{status:"operational",latency:12,connections:45,maxConnections:100},aiEngine:{status:"operational",activeModels:8,requestsPerMinute:234,avgResponseTime:145},storage:{status:"operational",used:"234 GB",total:"1 TB",percentage:23.4},cache:{status:"operational",hitRate:.89,memory:"512 MB",entries:12456}},performance:{cpu:45,memory:67,disk:23,network:{in:"125 Mbps",out:"89 Mbps"}},alerts:[{level:"warning",service:"database",message:"Connection pool reaching 80% capacity",timestamp:"2024-01-28T10:30:00Z"}]}));ie.get("/metrics",async e=>e.json({users:{total:523,active:412,newThisMonth:45,byRole:{patients:234,doctors:56,nurses:78,administrators:12,researchers:8,navigators:34,support:89,financial:12}},usage:{dailyActiveUsers:389,weeklyActiveUsers:456,monthlyActiveUsers:512,avgSessionDuration:"24 minutes",pageViews:{today:12456,week:78234,month:312456}},aiUsage:{totalRequests:45678,byType:{clinicalAssistant:12345,triage:8934,glosasPrediction:5678,emotionalRisk:3456,researchAnalysis:2345},avgConfidence:.87,feedbackScore:4.2},dataQuality:{completeness:.92,accuracy:.95,timeliness:.88,consistency:.91,validity:.94},compliance:{lgpdCompliance:!0,dataRetention:"compliant",auditLogsEnabled:!0,encryptionStatus:"AES-256",lastSecurityAudit:"2024-01-15",nextAudit:"2024-02-15"}}));ie.get("/users",async e=>e.json({users:[{id:"U001",name:"Dr. João Silva",email:"joao.silva@hospital.com",role:"doctor",department:"Oncologia",status:"active",lastLogin:"2024-01-28T09:15:00Z",created:"2023-06-01T10:00:00Z"},{id:"U002",name:"Maria Santos",email:"maria.santos@hospital.com",role:"nurse",department:"Navegação",status:"active",lastLogin:"2024-01-28T08:30:00Z",created:"2023-07-15T14:00:00Z"}],total:523,page:1,pageSize:20}));ie.get("/audit-logs",async e=>e.json({logs:[{id:"LOG001",timestamp:"2024-01-28T11:30:00Z",user:"Dr. João Silva",action:"VIEW_PATIENT_RECORD",resource:"Patient ID: P123",ip:"192.168.1.100",result:"success"},{id:"LOG002",timestamp:"2024-01-28T11:25:00Z",user:"Maria Santos",action:"UPDATE_APPOINTMENT",resource:"Appointment ID: A456",ip:"192.168.1.101",result:"success"},{id:"LOG003",timestamp:"2024-01-28T11:20:00Z",user:"System",action:"AI_PREDICTION",resource:"Glosas Risk Analysis",ip:"internal",result:"success",metadata:{confidence:.89,processingTime:"145ms"}}],filters:{dateRange:"last-24-hours",actions:"all",users:"all",results:"all"},total:12456,page:1,pageSize:50}));ie.get("/configuration",async e=>e.json({general:{institutionName:"ACCamargo Cancer Center",timezone:"America/Sao_Paulo",language:"pt-BR",dateFormat:"DD/MM/YYYY",currency:"BRL"},ai:{models:{clinical:{name:"clinical-assistant-v2",version:"2.1.0",lastUpdate:"2024-01-15",accuracy:.92},triage:{name:"auto-triage-v1",version:"1.5.0",lastUpdate:"2024-01-10",accuracy:.88},financial:{name:"glosas-predictor-v3",version:"3.0.1",lastUpdate:"2024-01-20",accuracy:.87}},thresholds:{confidenceMinimum:.75,alertThreshold:.85,autoApprovalThreshold:.95}},integration:{ehr:{system:"Custom EHR",status:"connected",lastSync:"2024-01-28T11:00:00Z"},laboratory:{system:"LabSystem Pro",status:"connected",lastSync:"2024-01-28T10:45:00Z"},imaging:{system:"PACS System",status:"connected",lastSync:"2024-01-28T10:30:00Z"}},security:{passwordPolicy:{minLength:12,requireSpecialChar:!0,requireNumber:!0,requireUppercase:!0,expirationDays:90},sessionTimeout:30,mfaRequired:!0,ipWhitelist:["192.168.0.0/16"]}}));ie.get("/ai-performance",async e=>e.json({models:[{name:"Clinical Assistant",performance:{accuracy:.92,precision:.89,recall:.91,f1Score:.9,auc:.94},usage:{requestsToday:1234,avgResponseTime:145,errorRate:.02},feedback:{positive:456,negative:23,neutral:89,avgRating:4.3},lastRetrained:"2024-01-15",nextRetraining:"2024-02-15"},{name:"Glosas Predictor",performance:{accuracy:.87,precision:.85,recall:.88,f1Score:.86,auc:.91},usage:{requestsToday:567,avgResponseTime:89,errorRate:.01},financialImpact:{glosasPrevenidas:145,valorEconomizado:45e4},lastRetrained:"2024-01-10",nextRetraining:"2024-02-10"}],training:{datasetSize:125e3,lastUpdate:"2024-01-20",validationAccuracy:.89,crossValidationFolds:5},alerts:[{model:"Emotional Risk Detector",issue:"Performance degradation detected",metric:"accuracy",current:.72,threshold:.75,recommendation:"Immediate retraining required"}]}));const oe=new S;oe.post("/prompt-engineering",async e=>{const t=await e.req.json(),{userInput:a,context:s,persona:i,intent:o}=t,r={original:a,enhanced:`[Context: ${s}] [Role: ${i}] [Intent: ${o}] ${a}`,templates:[{name:"clinical-query",prompt:`Como médico oncologista experiente, analise o seguinte caso: ${a}. 
                  Considere as diretrizes atuais da NCCN e forneça recomendações baseadas em evidências.`},{name:"patient-communication",prompt:`Explique de forma clara e empática para o paciente: ${a}. 
-                 Use linguagem acessível e ofereça suporte emocional.`}],confidence:.92,suggestedModel:"clinical-gpt-4"};return e.json(r)});oe.post("/servo-mechanisms",async e=>{const t=await e.req.json(),{trigger:a,data:s,actionType:i}=t,o={"glosa-prevention":{triggered:!0,actions:[{type:"document-review",status:"completed",finding:"Missing procedure justification",correction:"Added clinical justification to record"},{type:"code-validation",status:"completed",finding:"Incorrect procedure code",correction:"Updated to correct ICD-10 code"}],prevented:!0,estimatedSaving:15e3},"appointment-optimization":{triggered:!0,actions:[{type:"schedule-analysis",finding:"Conflict detected",resolution:"Rescheduled to available slot"},{type:"resource-allocation",finding:"Equipment available",resolution:"Reserved MRI machine for patient"}],optimized:!0,timeSaved:"3 days"},"fatigue-alert":{triggered:!0,actions:[{type:"risk-assessment",score:.78,level:"high"},{type:"notification",sent_to:["psychologist","nurse","doctor"],priority:"urgent"},{type:"intervention-scheduled",appointment:"2024-02-01 10:00",professional:"Psic. Ana Costa"}]}};return e.json({servoId:`SERVO-${Date.now()}`,trigger:a,actionType:i,result:o[i]||{triggered:!1,reason:"Unknown action type"},timestamp:new Date().toISOString(),feedback_required:!0})});oe.post("/auto-triage",async e=>{const t=await e.req.json(),{message:a,sessionId:s,patientInfo:i}=t,o=a.toLowerCase();let r="low",d="",n=[];return o.includes("dor")&&(o.includes("forte")||o.includes("intensa"))?(r="high",d="Procure atendimento médico imediato no pronto-socorro",n=["Há quanto tempo sente esta dor?","A dor piora com algum movimento?"]):o.includes("febre")||o.includes("sangramento")?(r="medium",d="Agende consulta para hoje ou amanhã",n=["Qual sua temperatura?","Está tomando alguma medicação?"]):(r="low",d="Agende consulta de rotina com seu médico",n=["Há outros sintomas?","Isso interfere em suas atividades diárias?"]),e.json({sessionId:s,response:{message:`Entendo sua preocupação. ${d}`,urgency:r,questions:n,suggestedDepartment:"Oncologia",estimatedWaitTime:r==="high"?"Imediato":r==="medium"?"24-48h":"3-5 dias"},analysis:{detectedSymptoms:["dor","desconforto"],confidence:.85,requiresHumanReview:r==="high"}})});oe.post("/summarize-report",async e=>{const t=await e.req.json(),{reportText:a,reportType:s}=t,i={reportType:s,keyFindings:["Massa tumoral de 3.2cm no lobo superior direito","Sem evidência de metástases","Linfonodos mediastinais dentro dos limites normais"],diagnosis:"Adenocarcinoma pulmonar estadio IB",recommendations:["Ressecção cirúrgica recomendada","Avaliar necessidade de quimioterapia adjuvante","PET-CT de controle em 3 meses"],urgency:"moderate",extractedData:{tumorSize:"3.2cm",location:"Lobo superior direito",stage:"IB",biomarkers:{EGFR:"negative",ALK:"negative","PD-L1":"15%"}},confidence:.91};return e.json(i)});oe.post("/predict-risk",async e=>{const t=await e.req.json(),{patientId:a,riskType:s,clinicalData:i}=t,r={recurrence:{risk:.23,timeframe:"2 years",factors:[{factor:"Stage",weight:.3,value:"IIIA"},{factor:"Age",weight:.2,value:"65"},{factor:"Biomarkers",weight:.5,value:"EGFR+"}],recommendations:["Intensificar seguimento","Considerar terapia adjuvante estendida","Monitorar marcadores tumorais mensalmente"]},depression:{risk:.67,timeframe:"1 month",factors:[{factor:"Previous history",weight:.4,value:"Yes"},{factor:"Social support",weight:.3,value:"Low"},{factor:"Treatment phase",weight:.3,value:"Active chemo"}],recommendations:["Iniciar acompanhamento psicológico","Avaliar necessidade de medicação","Incluir em grupo de apoio"]},"treatment-adherence":{risk:.31,timeframe:"3 months",factors:[{factor:"Side effects",weight:.35,value:"Moderate"},{factor:"Distance from hospital",weight:.25,value:"50km"},{factor:"Financial situation",weight:.4,value:"Challenging"}],recommendations:["Implementar programa de navegação intensiva","Avaliar suporte financeiro","Considerar telemedicina para follow-ups"]}}[s]||{risk:0,error:"Unknown risk type"};return e.json({patientId:a,riskType:s,prediction:r,modelVersion:"2.1.0",timestamp:new Date().toISOString(),requiresClinicalValidation:r.risk>.7})});oe.post("/feedback",async e=>{const t=await e.req.json(),{predictionId:a,feedback:s,userId:i,comments:o}=t;return e.json({feedbackId:`FB-${Date.now()}`,status:"recorded",impact:s==="positive"?"reinforcement":"adjustment",modelUpdate:{scheduled:!0,nextRetraining:"2024-02-15",expectedImprovement:.02},message:"Obrigado pelo feedback. Sua contribuição ajuda a melhorar nosso sistema.",aggregatedFeedback:{total:1234,positive:1089,negative:145,accuracy:.88}})});const V=(e,t)=>{const a=Ja(e);return`
+                 Use linguagem acessível e ofereça suporte emocional.`}],confidence:.92,suggestedModel:"clinical-gpt-4"};return e.json(r)});oe.post("/servo-mechanisms",async e=>{const t=await e.req.json(),{trigger:a,data:s,actionType:i}=t,o={"glosa-prevention":{triggered:!0,actions:[{type:"document-review",status:"completed",finding:"Missing procedure justification",correction:"Added clinical justification to record"},{type:"code-validation",status:"completed",finding:"Incorrect procedure code",correction:"Updated to correct ICD-10 code"}],prevented:!0,estimatedSaving:15e3},"appointment-optimization":{triggered:!0,actions:[{type:"schedule-analysis",finding:"Conflict detected",resolution:"Rescheduled to available slot"},{type:"resource-allocation",finding:"Equipment available",resolution:"Reserved MRI machine for patient"}],optimized:!0,timeSaved:"3 days"},"fatigue-alert":{triggered:!0,actions:[{type:"risk-assessment",score:.78,level:"high"},{type:"notification",sent_to:["psychologist","nurse","doctor"],priority:"urgent"},{type:"intervention-scheduled",appointment:"2024-02-01 10:00",professional:"Psic. Ana Costa"}]}};return e.json({servoId:`SERVO-${Date.now()}`,trigger:a,actionType:i,result:o[i]||{triggered:!1,reason:"Unknown action type"},timestamp:new Date().toISOString(),feedback_required:!0})});oe.post("/auto-triage",async e=>{const t=await e.req.json(),{message:a,sessionId:s,patientInfo:i}=t,o=a.toLowerCase();let r="low",d="",n=[];return o.includes("dor")&&(o.includes("forte")||o.includes("intensa"))?(r="high",d="Procure atendimento médico imediato no pronto-socorro",n=["Há quanto tempo sente esta dor?","A dor piora com algum movimento?"]):o.includes("febre")||o.includes("sangramento")?(r="medium",d="Agende consulta para hoje ou amanhã",n=["Qual sua temperatura?","Está tomando alguma medicação?"]):(r="low",d="Agende consulta de rotina com seu médico",n=["Há outros sintomas?","Isso interfere em suas atividades diárias?"]),e.json({sessionId:s,response:{message:`Entendo sua preocupação. ${d}`,urgency:r,questions:n,suggestedDepartment:"Oncologia",estimatedWaitTime:r==="high"?"Imediato":r==="medium"?"24-48h":"3-5 dias"},analysis:{detectedSymptoms:["dor","desconforto"],confidence:.85,requiresHumanReview:r==="high"}})});oe.post("/summarize-report",async e=>{const t=await e.req.json(),{reportText:a,reportType:s}=t,i={reportType:s,keyFindings:["Massa tumoral de 3.2cm no lobo superior direito","Sem evidência de metástases","Linfonodos mediastinais dentro dos limites normais"],diagnosis:"Adenocarcinoma pulmonar estadio IB",recommendations:["Ressecção cirúrgica recomendada","Avaliar necessidade de quimioterapia adjuvante","PET-CT de controle em 3 meses"],urgency:"moderate",extractedData:{tumorSize:"3.2cm",location:"Lobo superior direito",stage:"IB",biomarkers:{EGFR:"negative",ALK:"negative","PD-L1":"15%"}},confidence:.91};return e.json(i)});oe.post("/predict-risk",async e=>{const t=await e.req.json(),{patientId:a,riskType:s,clinicalData:i}=t,r={recurrence:{risk:.23,timeframe:"2 years",factors:[{factor:"Stage",weight:.3,value:"IIIA"},{factor:"Age",weight:.2,value:"65"},{factor:"Biomarkers",weight:.5,value:"EGFR+"}],recommendations:["Intensificar seguimento","Considerar terapia adjuvante estendida","Monitorar marcadores tumorais mensalmente"]},depression:{risk:.67,timeframe:"1 month",factors:[{factor:"Previous history",weight:.4,value:"Yes"},{factor:"Social support",weight:.3,value:"Low"},{factor:"Treatment phase",weight:.3,value:"Active chemo"}],recommendations:["Iniciar acompanhamento psicológico","Avaliar necessidade de medicação","Incluir em grupo de apoio"]},"treatment-adherence":{risk:.31,timeframe:"3 months",factors:[{factor:"Side effects",weight:.35,value:"Moderate"},{factor:"Distance from hospital",weight:.25,value:"50km"},{factor:"Financial situation",weight:.4,value:"Challenging"}],recommendations:["Implementar programa de navegação intensiva","Avaliar suporte financeiro","Considerar telemedicina para follow-ups"]}}[s]||{risk:0,error:"Unknown risk type"};return e.json({patientId:a,riskType:s,prediction:r,modelVersion:"2.1.0",timestamp:new Date().toISOString(),requiresClinicalValidation:r.risk>.7})});oe.post("/feedback",async e=>{const t=await e.req.json(),{predictionId:a,feedback:s,userId:i,comments:o}=t;return e.json({feedbackId:`FB-${Date.now()}`,status:"recorded",impact:s==="positive"?"reinforcement":"adjustment",modelUpdate:{scheduled:!0,nextRetraining:"2024-02-15",expectedImprovement:.02},message:"Obrigado pelo feedback. Sua contribuição ajuda a melhorar nosso sistema.",aggregatedFeedback:{total:1234,positive:1089,negative:145,accuracy:.88}})});const V=(e,t)=>{const a=Wa(e);return`
     <!-- Ansiedade de Laura -->
     <div id="ai-concerns-container" class="ai-concerns-dashboard glass-effect rounded-2xl p-6 mb-8 border border-orange-200/50 transition-all duration-500">
       <!-- Header com ícone animado e botão de recolher -->
@@ -564,7 +564,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
         // Removido o gráfico comparativo antigo - agora existe apenas no Master Admin como componente separado
       });
     <\/script>
-  `};function Ja(e,t){const a={patient:{subtitle:"Monitoramento preditivo da sua jornada oncológica",mainAlerts:[{id:"pa1",icon:"fas fa-calendar-exclamation",title:"Consulta Próxima",description:"Exame de controle em 3 dias",timeframe:"3 dias",impact:"Alto",severity:"high"},{id:"pa2",icon:"fas fa-pills",title:"Medicação",description:"Estoque baixo de Tamoxifeno",timeframe:"5 dias",impact:"Médio",severity:"medium"},{id:"pa3",icon:"fas fa-heartbeat",title:"Bem-estar",description:"Sessão psicológica recomendada",timeframe:"Preventivo",impact:"Preventivo",severity:"low"}],metrics:[{icon:"fas fa-user-check",value:"92%",label:"Adesão",trend:"stable",prediction:"Mantendo padrão"},{icon:"fas fa-calendar-check",value:"3/5",label:"Consultas",trend:"up",prediction:"2 agendamentos pendentes"},{icon:"fas fa-heart",value:"Bom",label:"Estado Geral",trend:"stable",prediction:"Estável"},{icon:"fas fa-flask",value:"2",label:"Exames Pendentes",trend:"down",prediction:"Agendar esta semana"}],recommendations:[{id:"rec1",action:"Agendar coleta de sangue para hemograma",reason:"Controle mensal do tratamento",priority:"high"},{id:"rec2",action:"Renovar receita de medicação contínua",reason:"Estoque termina em 5 dias",priority:"medium"},{id:"rec3",action:"Participar do grupo de apoio quinta-feira",reason:"Melhoria no bem-estar emocional",priority:"low"}]},doctor:{subtitle:"Alertas preditivos e insights clínicos dos seus pacientes",mainAlerts:[{id:"doc1",icon:"fas fa-exclamation-triangle",title:"Paciente Crítico",description:"João Silva - Risco de neutropenia",timeframe:"Imediato",impact:"Crítico",severity:"high"},{id:"doc2",icon:"fas fa-user-clock",title:"Atrasos Recorrentes",description:"5 pacientes com baixa adesão",timeframe:"Esta semana",impact:"Alto",severity:"medium"},{id:"doc3",icon:"fas fa-microscope",title:"Resultados Pendentes",description:"12 laudos aguardando revisão",timeframe:"24h",impact:"Médio",severity:"medium"}],metrics:[{icon:"fas fa-users",value:"47",label:"Pacientes Ativos",trend:"up",prediction:"+3 esta semana"},{icon:"fas fa-procedures",value:"8",label:"Internados",trend:"stable",prediction:"2 altas previstas"},{icon:"fas fa-clipboard-check",value:"89%",label:"Protocolos OK",trend:"down",prediction:"3 revisões urgentes"},{icon:"fas fa-chart-line",value:"94%",label:"Taxa Sucesso",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"drec1",action:"Revisar protocolo do paciente João Silva imediatamente",reason:"Sinais preditivos de complicação detectados",priority:"high"},{id:"drec2",action:"Agendar reunião multidisciplinar para casos complexos",reason:"3 pacientes necessitam revisão de conduta",priority:"medium"},{id:"drec3",action:"Atualizar protocolos de quimioterapia",reason:"Novas diretrizes publicadas esta semana",priority:"low"}]},navigator:{subtitle:"Coordenação inteligente e otimização da jornada dos pacientes",mainAlerts:[{id:"nav1",icon:"fas fa-exclamation-circle",title:"Pacientes Urgentes",description:"5 pacientes necessitam intervenção imediata",timeframe:"Agora",impact:"Crítico",severity:"high"},{id:"nav2",icon:"fas fa-clock",title:"Atrasos Detectados",description:"12 pacientes com atraso em exames",timeframe:"Hoje",impact:"Alto",severity:"medium"},{id:"nav3",icon:"fas fa-route",title:"Otimização de Rotas",description:"3 jornadas podem ser aceleradas",timeframe:"Esta semana",impact:"Médio",severity:"low"}],metrics:[{icon:"fas fa-users",value:"178",label:"Em Navegação",trend:"up",prediction:"+12 novos hoje"},{icon:"fas fa-tasks",value:"46",label:"Tarefas Pendentes",trend:"down",prediction:"23 urgentes"},{icon:"fas fa-percentage",value:"87%",label:"Taxa Adesão",trend:"stable",prediction:"Meta: 90%"},{icon:"fas fa-star",value:"92%",label:"Satisfação",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"navrec1",action:"Contatar pacientes com exames atrasados imediatamente",reason:"Prevenir abandono de tratamento",priority:"high"},{id:"navrec2",action:"Reorganizar agendamentos da próxima semana",reason:"Otimizar utilização de recursos",priority:"medium"},{id:"navrec3",action:"Atualizar protocolos de navegação",reason:"Novas diretrizes disponíveis",priority:"low"}]},financial:{subtitle:"Inteligência artificial para prevenção de glosas e otimização financeira",mainAlerts:[{id:"fin1",icon:"fas fa-exclamation-triangle",title:"Risco de Glosa Detectado",description:"15 contas com inconsistências identificadas",timeframe:"Urgente",impact:"R$ 127.000",severity:"high"},{id:"fin2",icon:"fas fa-file-invoice-dollar",title:"Faturamento Pendente",description:"42 procedimentos aguardando cobrança",timeframe:"Hoje",impact:"R$ 89.000",severity:"medium"},{id:"fin3",icon:"fas fa-chart-line",title:"Oportunidade de Melhoria",description:"Redução de 12% em glosas possível",timeframe:"Este mês",impact:"R$ 45.000",severity:"low"}],metrics:[{icon:"fas fa-shield-alt",value:"R$ 2.4M",label:"Glosas Evitadas",trend:"up",prediction:"+R$ 180K este mês"},{icon:"fas fa-percentage",value:"98.5%",label:"Taxa Aprovação",trend:"up",prediction:"Meta: 99%"},{icon:"fas fa-robot",value:"1,247",label:"Auditorias IA",trend:"up",prediction:"+89 hoje"},{icon:"fas fa-dollar-sign",value:"R$ 18.3M",label:"Faturamento Mês",trend:"stable",prediction:"Projeção: R$ 19M"}],recommendations:[{id:"finrec1",action:"Revisar 15 contas com alto risco de glosa imediatamente",reason:"IA detectou inconsistências em documentação e codificação",priority:"high"},{id:"finrec2",action:"Implementar checklist automático para procedimentos complexos",reason:"Redução de 30% em glosas prevista",priority:"medium"},{id:"finrec3",action:"Treinar equipe em novas diretrizes TUSS/TISS",reason:"Atualização normativa este mês",priority:"low"}]},wellness:{subtitle:"Monitoramento emocional e suporte psicossocial inteligente",mainAlerts:[{id:"well1",icon:"fas fa-heart-broken",title:"Pacientes em Risco",description:"8 pacientes com sinais de depressão severa",timeframe:"Imediato",impact:"Crítico",severity:"high"},{id:"well2",icon:"fas fa-users",title:"Grupos de Apoio",description:"3 grupos precisam de moderação",timeframe:"Hoje",impact:"Alto",severity:"medium"},{id:"well3",icon:"fas fa-calendar-check",title:"Sessões Agendadas",description:"24 atendimentos psicológicos esta semana",timeframe:"Semana",impact:"Normal",severity:"low"}],metrics:[{icon:"fas fa-smile",value:"73%",label:"Bem-Estar Geral",trend:"up",prediction:"Melhora gradual"},{icon:"fas fa-users",value:"234",label:"Pacientes Ativos",trend:"up",prediction:"+18 esta semana"},{icon:"fas fa-brain",value:"156",label:"Sessões Realizadas",trend:"stable",prediction:"24 agendadas"},{icon:"fas fa-hands-helping",value:"89%",label:"Satisfação",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"wellrec1",action:"Contatar 8 pacientes identificados com risco emocional elevado",reason:"Prevenção de crises e abandono de tratamento",priority:"high"},{id:"wellrec2",action:"Expandir horários de grupos de apoio online",reason:"Alta demanda detectada nos horários noturnos",priority:"medium"},{id:"wellrec3",action:"Implementar programa de mindfulness semanal",reason:"Evidências de redução de 40% em ansiedade",priority:"low"}]},research:{subtitle:"Análise preditiva para pesquisa clínica e recrutamento inteligente",mainAlerts:[{id:"res1",icon:"fas fa-vial",title:"Recrutamento Urgente",description:"Estudo ONCO-2024 precisa de 12 pacientes",timeframe:"2 semanas",impact:"Alto",severity:"high"},{id:"res2",icon:"fas fa-chart-bar",title:"Dados Incompletos",description:"38 CRFs pendentes de revisão",timeframe:"Esta semana",impact:"Médio",severity:"medium"},{id:"res3",icon:"fas fa-file-medical-alt",title:"Publicação Pronta",description:"3 artigos prontos para submissão",timeframe:"Este mês",impact:"Positivo",severity:"low"}],metrics:[{icon:"fas fa-flask",value:"24",label:"Estudos Ativos",trend:"up",prediction:"+2 iniciando"},{icon:"fas fa-users",value:"1,847",label:"Participantes",trend:"up",prediction:"+67 este mês"},{icon:"fas fa-percentage",value:"94%",label:"Taxa Retenção",trend:"stable",prediction:"Meta: 95%"},{icon:"fas fa-trophy",value:"42",label:"Publicações 2024",trend:"up",prediction:"15 com IF>5"}],recommendations:[{id:"resrec1",action:"Ativar protocolo de recrutamento acelerado para ONCO-2024",reason:"IA identificou 28 pacientes elegíveis no banco de dados",priority:"high"},{id:"resrec2",action:"Automatizar coleta de dados do REDCap",reason:"Redução de 60% no tempo de preenchimento de CRFs",priority:"medium"},{id:"resrec3",action:"Submeter artigos para journals de alto impacto",reason:"Janela de submissão favorável este mês",priority:"low"}]},admin:{subtitle:"Monitoramento preditivo de sistema e gestão inteligente de plataforma",mainAlerts:[{id:"adm1",icon:"fas fa-server",title:"Carga Crítica Detectada",description:"CPU 78% - Escalonamento automático ativado",timeframe:"Agora",impact:"Sistema",severity:"high"},{id:"adm2",icon:"fas fa-exclamation-circle",title:"Anomalias de Segurança",description:"3 tentativas de acesso suspeitas bloqueadas",timeframe:"Última hora",impact:"Segurança",severity:"medium"},{id:"adm3",icon:"fas fa-sync-alt",title:"Sincronização Pendente",description:"HIS/RIS com delay de 5 minutos",timeframe:"Contínuo",impact:"Integração",severity:"low"}],metrics:[{icon:"fas fa-server",value:"99.98%",label:"Uptime Sistema",trend:"stable",prediction:"SLA garantido"},{icon:"fas fa-tachometer-alt",value:"12ms",label:"Latência Edge",trend:"down",prediction:"Otimizado"},{icon:"fas fa-shield-alt",value:"100%",label:"Compliance",trend:"stable",prediction:"LGPD/ISO OK"},{icon:"fas fa-database",value:"523MB",label:"Database D1",trend:"up",prediction:"78% capacity"}],recommendations:[{id:"admrec1",action:"Implementar auto-scaling para Workers em horário de pico",reason:"Previsão de aumento de 40% na carga às 14h",priority:"high"},{id:"admrec2",action:"Atualizar certificados SSL antes do vencimento",reason:"3 certificados expiram em 15 dias",priority:"medium"},{id:"admrec3",action:"Revisar logs de segurança da última semana",reason:"Auditoria mensal de compliance",priority:"low"}]},default:{subtitle:"Monitoramento inteligente e preditivo",mainAlerts:[],metrics:[],recommendations:[]}};return a[e]||a.default}const Q=new E;function re(e,t,a){return`
+  `};function Wa(e,t){const a={patient:{subtitle:"Monitoramento preditivo da sua jornada oncológica",mainAlerts:[{id:"pa1",icon:"fas fa-calendar-exclamation",title:"Consulta Próxima",description:"Exame de controle em 3 dias",timeframe:"3 dias",impact:"Alto",severity:"high"},{id:"pa2",icon:"fas fa-pills",title:"Medicação",description:"Estoque baixo de Tamoxifeno",timeframe:"5 dias",impact:"Médio",severity:"medium"},{id:"pa3",icon:"fas fa-heartbeat",title:"Bem-estar",description:"Sessão psicológica recomendada",timeframe:"Preventivo",impact:"Preventivo",severity:"low"}],metrics:[{icon:"fas fa-user-check",value:"92%",label:"Adesão",trend:"stable",prediction:"Mantendo padrão"},{icon:"fas fa-calendar-check",value:"3/5",label:"Consultas",trend:"up",prediction:"2 agendamentos pendentes"},{icon:"fas fa-heart",value:"Bom",label:"Estado Geral",trend:"stable",prediction:"Estável"},{icon:"fas fa-flask",value:"2",label:"Exames Pendentes",trend:"down",prediction:"Agendar esta semana"}],recommendations:[{id:"rec1",action:"Agendar coleta de sangue para hemograma",reason:"Controle mensal do tratamento",priority:"high"},{id:"rec2",action:"Renovar receita de medicação contínua",reason:"Estoque termina em 5 dias",priority:"medium"},{id:"rec3",action:"Participar do grupo de apoio quinta-feira",reason:"Melhoria no bem-estar emocional",priority:"low"}]},doctor:{subtitle:"Alertas preditivos e insights clínicos dos seus pacientes",mainAlerts:[{id:"doc1",icon:"fas fa-exclamation-triangle",title:"Paciente Crítico",description:"João Silva - Risco de neutropenia",timeframe:"Imediato",impact:"Crítico",severity:"high"},{id:"doc2",icon:"fas fa-user-clock",title:"Atrasos Recorrentes",description:"5 pacientes com baixa adesão",timeframe:"Esta semana",impact:"Alto",severity:"medium"},{id:"doc3",icon:"fas fa-microscope",title:"Resultados Pendentes",description:"12 laudos aguardando revisão",timeframe:"24h",impact:"Médio",severity:"medium"}],metrics:[{icon:"fas fa-users",value:"47",label:"Pacientes Ativos",trend:"up",prediction:"+3 esta semana"},{icon:"fas fa-procedures",value:"8",label:"Internados",trend:"stable",prediction:"2 altas previstas"},{icon:"fas fa-clipboard-check",value:"89%",label:"Protocolos OK",trend:"down",prediction:"3 revisões urgentes"},{icon:"fas fa-chart-line",value:"94%",label:"Taxa Sucesso",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"drec1",action:"Revisar protocolo do paciente João Silva imediatamente",reason:"Sinais preditivos de complicação detectados",priority:"high"},{id:"drec2",action:"Agendar reunião multidisciplinar para casos complexos",reason:"3 pacientes necessitam revisão de conduta",priority:"medium"},{id:"drec3",action:"Atualizar protocolos de quimioterapia",reason:"Novas diretrizes publicadas esta semana",priority:"low"}]},navigator:{subtitle:"Coordenação inteligente e otimização da jornada dos pacientes",mainAlerts:[{id:"nav1",icon:"fas fa-exclamation-circle",title:"Pacientes Urgentes",description:"5 pacientes necessitam intervenção imediata",timeframe:"Agora",impact:"Crítico",severity:"high"},{id:"nav2",icon:"fas fa-clock",title:"Atrasos Detectados",description:"12 pacientes com atraso em exames",timeframe:"Hoje",impact:"Alto",severity:"medium"},{id:"nav3",icon:"fas fa-route",title:"Otimização de Rotas",description:"3 jornadas podem ser aceleradas",timeframe:"Esta semana",impact:"Médio",severity:"low"}],metrics:[{icon:"fas fa-users",value:"178",label:"Em Navegação",trend:"up",prediction:"+12 novos hoje"},{icon:"fas fa-tasks",value:"46",label:"Tarefas Pendentes",trend:"down",prediction:"23 urgentes"},{icon:"fas fa-percentage",value:"87%",label:"Taxa Adesão",trend:"stable",prediction:"Meta: 90%"},{icon:"fas fa-star",value:"92%",label:"Satisfação",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"navrec1",action:"Contatar pacientes com exames atrasados imediatamente",reason:"Prevenir abandono de tratamento",priority:"high"},{id:"navrec2",action:"Reorganizar agendamentos da próxima semana",reason:"Otimizar utilização de recursos",priority:"medium"},{id:"navrec3",action:"Atualizar protocolos de navegação",reason:"Novas diretrizes disponíveis",priority:"low"}]},financial:{subtitle:"Inteligência artificial para prevenção de glosas e otimização financeira",mainAlerts:[{id:"fin1",icon:"fas fa-exclamation-triangle",title:"Risco de Glosa Detectado",description:"15 contas com inconsistências identificadas",timeframe:"Urgente",impact:"R$ 127.000",severity:"high"},{id:"fin2",icon:"fas fa-file-invoice-dollar",title:"Faturamento Pendente",description:"42 procedimentos aguardando cobrança",timeframe:"Hoje",impact:"R$ 89.000",severity:"medium"},{id:"fin3",icon:"fas fa-chart-line",title:"Oportunidade de Melhoria",description:"Redução de 12% em glosas possível",timeframe:"Este mês",impact:"R$ 45.000",severity:"low"}],metrics:[{icon:"fas fa-shield-alt",value:"R$ 2.4M",label:"Glosas Evitadas",trend:"up",prediction:"+R$ 180K este mês"},{icon:"fas fa-percentage",value:"98.5%",label:"Taxa Aprovação",trend:"up",prediction:"Meta: 99%"},{icon:"fas fa-robot",value:"1,247",label:"Auditorias IA",trend:"up",prediction:"+89 hoje"},{icon:"fas fa-dollar-sign",value:"R$ 18.3M",label:"Faturamento Mês",trend:"stable",prediction:"Projeção: R$ 19M"}],recommendations:[{id:"finrec1",action:"Revisar 15 contas com alto risco de glosa imediatamente",reason:"IA detectou inconsistências em documentação e codificação",priority:"high"},{id:"finrec2",action:"Implementar checklist automático para procedimentos complexos",reason:"Redução de 30% em glosas prevista",priority:"medium"},{id:"finrec3",action:"Treinar equipe em novas diretrizes TUSS/TISS",reason:"Atualização normativa este mês",priority:"low"}]},wellness:{subtitle:"Monitoramento emocional e suporte psicossocial inteligente",mainAlerts:[{id:"well1",icon:"fas fa-heart-broken",title:"Pacientes em Risco",description:"8 pacientes com sinais de depressão severa",timeframe:"Imediato",impact:"Crítico",severity:"high"},{id:"well2",icon:"fas fa-users",title:"Grupos de Apoio",description:"3 grupos precisam de moderação",timeframe:"Hoje",impact:"Alto",severity:"medium"},{id:"well3",icon:"fas fa-calendar-check",title:"Sessões Agendadas",description:"24 atendimentos psicológicos esta semana",timeframe:"Semana",impact:"Normal",severity:"low"}],metrics:[{icon:"fas fa-smile",value:"73%",label:"Bem-Estar Geral",trend:"up",prediction:"Melhora gradual"},{icon:"fas fa-users",value:"234",label:"Pacientes Ativos",trend:"up",prediction:"+18 esta semana"},{icon:"fas fa-brain",value:"156",label:"Sessões Realizadas",trend:"stable",prediction:"24 agendadas"},{icon:"fas fa-hands-helping",value:"89%",label:"Satisfação",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"wellrec1",action:"Contatar 8 pacientes identificados com risco emocional elevado",reason:"Prevenção de crises e abandono de tratamento",priority:"high"},{id:"wellrec2",action:"Expandir horários de grupos de apoio online",reason:"Alta demanda detectada nos horários noturnos",priority:"medium"},{id:"wellrec3",action:"Implementar programa de mindfulness semanal",reason:"Evidências de redução de 40% em ansiedade",priority:"low"}]},research:{subtitle:"Análise preditiva para pesquisa clínica e recrutamento inteligente",mainAlerts:[{id:"res1",icon:"fas fa-vial",title:"Recrutamento Urgente",description:"Estudo ONCO-2024 precisa de 12 pacientes",timeframe:"2 semanas",impact:"Alto",severity:"high"},{id:"res2",icon:"fas fa-chart-bar",title:"Dados Incompletos",description:"38 CRFs pendentes de revisão",timeframe:"Esta semana",impact:"Médio",severity:"medium"},{id:"res3",icon:"fas fa-file-medical-alt",title:"Publicação Pronta",description:"3 artigos prontos para submissão",timeframe:"Este mês",impact:"Positivo",severity:"low"}],metrics:[{icon:"fas fa-flask",value:"24",label:"Estudos Ativos",trend:"up",prediction:"+2 iniciando"},{icon:"fas fa-users",value:"1,847",label:"Participantes",trend:"up",prediction:"+67 este mês"},{icon:"fas fa-percentage",value:"94%",label:"Taxa Retenção",trend:"stable",prediction:"Meta: 95%"},{icon:"fas fa-trophy",value:"42",label:"Publicações 2024",trend:"up",prediction:"15 com IF>5"}],recommendations:[{id:"resrec1",action:"Ativar protocolo de recrutamento acelerado para ONCO-2024",reason:"IA identificou 28 pacientes elegíveis no banco de dados",priority:"high"},{id:"resrec2",action:"Automatizar coleta de dados do REDCap",reason:"Redução de 60% no tempo de preenchimento de CRFs",priority:"medium"},{id:"resrec3",action:"Submeter artigos para journals de alto impacto",reason:"Janela de submissão favorável este mês",priority:"low"}]},admin:{subtitle:"Monitoramento preditivo de sistema e gestão inteligente de plataforma",mainAlerts:[{id:"adm1",icon:"fas fa-server",title:"Carga Crítica Detectada",description:"CPU 78% - Escalonamento automático ativado",timeframe:"Agora",impact:"Sistema",severity:"high"},{id:"adm2",icon:"fas fa-exclamation-circle",title:"Anomalias de Segurança",description:"3 tentativas de acesso suspeitas bloqueadas",timeframe:"Última hora",impact:"Segurança",severity:"medium"},{id:"adm3",icon:"fas fa-sync-alt",title:"Sincronização Pendente",description:"HIS/RIS com delay de 5 minutos",timeframe:"Contínuo",impact:"Integração",severity:"low"}],metrics:[{icon:"fas fa-server",value:"99.98%",label:"Uptime Sistema",trend:"stable",prediction:"SLA garantido"},{icon:"fas fa-tachometer-alt",value:"12ms",label:"Latência Edge",trend:"down",prediction:"Otimizado"},{icon:"fas fa-shield-alt",value:"100%",label:"Compliance",trend:"stable",prediction:"LGPD/ISO OK"},{icon:"fas fa-database",value:"523MB",label:"Database D1",trend:"up",prediction:"78% capacity"}],recommendations:[{id:"admrec1",action:"Implementar auto-scaling para Workers em horário de pico",reason:"Previsão de aumento de 40% na carga às 14h",priority:"high"},{id:"admrec2",action:"Atualizar certificados SSL antes do vencimento",reason:"3 certificados expiram em 15 dias",priority:"medium"},{id:"admrec3",action:"Revisar logs de segurança da última semana",reason:"Auditoria mensal de compliance",priority:"low"}]},default:{subtitle:"Monitoramento inteligente e preditivo",mainAlerts:[],metrics:[],recommendations:[]}};return a[e]||a.default}const K=new S;function re(e,t,a){return`
         <div class="portal-container min-h-screen bg-gradient-to-br from-gray-50 via-green-50/30 to-emerald-50/20">
             <!-- Portal Header -->
             <div class="glass-effect shadow-lg border-b border-gray-100 mb-8">
@@ -591,7 +591,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
                 ${a}
             </div>
         </div>
-    `}Q.get("/patient",async e=>{const t=`
+    `}K.get("/patient",async e=>{const t=`
         <!-- Métricas em 3 Colunas -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <!-- Coluna 1: Próximos Compromissos -->
@@ -706,7 +706,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
                 <p class="text-sm text-gray-600 mt-1">Central de dúvidas</p>
             </button>
         </div>
-    `;return e.json({html:re("patient","Portal do Paciente",t),scripts:[]})});Q.get("/doctor",async e=>{const t=`
+    `;return e.json({html:re("patient","Portal do Paciente",t),scripts:[]})});K.get("/doctor",async e=>{const t=`
         <!-- Dashboard Médico -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <!-- Pacientes do Dia -->
@@ -798,7 +798,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
                 <p class="text-sm text-gray-600 mt-1">Suporte à decisão</p>
             </button>
         </div>
-    `;return e.json({html:re("doctor","Portal Médico",t),scripts:[]})});Q.get("/navigator",async e=>{const a=`
+    `;return e.json({html:re("doctor","Portal Médico",t),scripts:[]})});K.get("/navigator",async e=>{const a=`
         <!-- Dashboard Navegador -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <!-- Pacientes em Navegação com Botão Trilho -->
@@ -1956,7 +1956,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
                     \`;
                 });
             });
-            `]})});Q.get("/financial",async e=>{const t=`
+            `]})});K.get("/financial",async e=>{const t=`
         <!-- Métricas Financeiras -->
         <div class="bg-gradient-to-r from-green-600 to-green-700 rounded-xl shadow-xl p-8 text-white mb-8">
             <h2 class="text-2xl font-bold mb-6">
@@ -2008,7 +2008,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
                 <p class="text-sm text-gray-600 mt-1">Previsões e alertas</p>
             </button>
         </div>
-    `;return e.json({html:re("financial","Gestão Financeira",t),scripts:[]})});Q.get("/wellness",async e=>{const t=`
+    `;return e.json({html:re("financial","Gestão Financeira",t),scripts:[]})});K.get("/wellness",async e=>{const t=`
         <!-- Dashboard de Bem-Estar -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <!-- Estado Emocional -->
@@ -2098,7 +2098,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
                 <p class="text-sm text-gray-600 mt-1">Registro emocional</p>
             </button>
         </div>
-    `;return e.json({html:re("wellness","Bem-Estar e Apoio",t),scripts:[]})});Q.get("/research",async e=>{const t=`
+    `;return e.json({html:re("wellness","Bem-Estar e Apoio",t),scripts:[]})});K.get("/research",async e=>{const t=`
         <!-- Dashboard de Pesquisa -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <!-- Estudos Ativos -->
@@ -2192,7 +2192,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
                 <p class="text-sm text-gray-600 mt-1">Cursos e treinamentos</p>
             </button>
         </div>
-    `;return e.json({html:re("research","Pesquisa Clínica",t),scripts:[]})});Q.get("/admin",async e=>{const t=`
+    `;return e.json({html:re("research","Pesquisa Clínica",t),scripts:[]})});K.get("/admin",async e=>{const t=`
         <!-- Dashboard Master Admin -->
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
             <!-- Métricas Críticas do Sistema -->
@@ -2370,7 +2370,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
                 <p class="text-sm text-gray-600 mt-1">Config & Deploy</p>
             </button>
         </div>
-    `;return e.json({html:re("admin","Master Administrator",t),scripts:[]})});const Xt=new E;Xt.get("/kanban-test",e=>e.html(`
+    `;return e.json({html:re("admin","Master Administrator",t),scripts:[]})});const Xt=new S;Xt.get("/kanban-test",e=>e.html(`
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -2776,7 +2776,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
     <\/script>
 </body>
 </html>
-    `));const ea=new E,Wa={"PAC-001":{nome:"Maria Silva Santos",idade:52,diagnostico:"Carcinoma Ductal Invasivo - Mama",estadiamento:"IIA (T2N0M0)",medico:"Dr. Roberto Almeida",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4321",email:"maria.silva@email.com",convenio:"Unimed Premium",proximaConsulta:"25/01/2025 - 14:30",cicloTratamento:"2/6",risco:35},"PAC-002":{nome:"Ana Costa",idade:45,diagnostico:"Carcinoma Pulmonar",estadiamento:"IIIA",medico:"Dr. Carlos Santos",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4322",email:"ana.costa@email.com",convenio:"SulAmérica",proximaConsulta:"28/01/2025 - 10:00",cicloTratamento:"4/8",risco:45},"PAC-003":{nome:"Carlos Mendes",idade:58,diagnostico:"Linfoma de Hodgkin",estadiamento:"IIB",medico:"Dra. Marina Costa",navegador:"Enf. João Silva",telefone:"(11) 98765-4323",email:"carlos.mendes@email.com",convenio:"Bradesco Saúde",proximaConsulta:"20/01/2025 - 15:00",cicloTratamento:"3/6",risco:25},"PAC-004":{nome:"João Santos",idade:67,diagnostico:"Carcinoma de Próstata",estadiamento:"I",medico:"Dr. Paulo Ferreira",navegador:"Enf. Ana Rodrigues",telefone:"(11) 98765-4324",email:"joao.santos@email.com",convenio:"Amil",proximaConsulta:"22/01/2025 - 09:00",cicloTratamento:"1/4",risco:15},"PAC-005":{nome:"Pedro Oliveira",idade:49,diagnostico:"Melanoma",estadiamento:"IIA",medico:"Dra. Lucia Martins",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4325",email:"pedro.oliveira@email.com",convenio:"Porto Seguro",proximaConsulta:"Tratamento Concluído",cicloTratamento:"Completo",risco:10},"PAC-006":{nome:"Lucia Ferreira",idade:55,diagnostico:"Carcinoma Colorretal",estadiamento:"IIIC",medico:"Dr. Roberto Almeida",navegador:"Enf. João Silva",telefone:"(11) 98765-4326",email:"lucia.ferreira@email.com",convenio:"Unimed",proximaConsulta:"25/01/2025 - 11:00",cicloTratamento:"Pós-cirúrgico",risco:30}};ea.get("/patient-view/:id",e=>{const t=e.req.param("id"),a=Wa[t];return a?e.html(`
+    `));const ea=new S,Qa={"PAC-001":{nome:"Maria Silva Santos",idade:52,diagnostico:"Carcinoma Ductal Invasivo - Mama",estadiamento:"IIA (T2N0M0)",medico:"Dr. Roberto Almeida",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4321",email:"maria.silva@email.com",convenio:"Unimed Premium",proximaConsulta:"25/01/2025 - 14:30",cicloTratamento:"2/6",risco:35},"PAC-002":{nome:"Ana Costa",idade:45,diagnostico:"Carcinoma Pulmonar",estadiamento:"IIIA",medico:"Dr. Carlos Santos",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4322",email:"ana.costa@email.com",convenio:"SulAmérica",proximaConsulta:"28/01/2025 - 10:00",cicloTratamento:"4/8",risco:45},"PAC-003":{nome:"Carlos Mendes",idade:58,diagnostico:"Linfoma de Hodgkin",estadiamento:"IIB",medico:"Dra. Marina Costa",navegador:"Enf. João Silva",telefone:"(11) 98765-4323",email:"carlos.mendes@email.com",convenio:"Bradesco Saúde",proximaConsulta:"20/01/2025 - 15:00",cicloTratamento:"3/6",risco:25},"PAC-004":{nome:"João Santos",idade:67,diagnostico:"Carcinoma de Próstata",estadiamento:"I",medico:"Dr. Paulo Ferreira",navegador:"Enf. Ana Rodrigues",telefone:"(11) 98765-4324",email:"joao.santos@email.com",convenio:"Amil",proximaConsulta:"22/01/2025 - 09:00",cicloTratamento:"1/4",risco:15},"PAC-005":{nome:"Pedro Oliveira",idade:49,diagnostico:"Melanoma",estadiamento:"IIA",medico:"Dra. Lucia Martins",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4325",email:"pedro.oliveira@email.com",convenio:"Porto Seguro",proximaConsulta:"Tratamento Concluído",cicloTratamento:"Completo",risco:10},"PAC-006":{nome:"Lucia Ferreira",idade:55,diagnostico:"Carcinoma Colorretal",estadiamento:"IIIC",medico:"Dr. Roberto Almeida",navegador:"Enf. João Silva",telefone:"(11) 98765-4326",email:"lucia.ferreira@email.com",convenio:"Unimed",proximaConsulta:"25/01/2025 - 11:00",cicloTratamento:"Pós-cirúrgico",risco:30}};ea.get("/patient-view/:id",e=>{const t=e.req.param("id"),a=Qa[t];return a?e.html(`
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -3096,7 +3096,811 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
                 </div>
             </body>
             </html>
-        `)});var it=Object.freeze,Ka=Object.defineProperty,Qa=(e,t)=>it(Ka(e,"raw",{value:it(t||e.slice())})),ot;const Ya=e=>e.html(H(ot||(ot=Qa([`
+        `)});const ta=new S,Ka={"PAC-001":{nome:"Maria Silva Santos",idade:52,diagnostico:"Carcinoma Ductal Invasivo - Mama",estadiamento:"IIA (T2N0M0)",medico:"Dr. Roberto Almeida",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4321",email:"maria.silva@email.com",convenio:"Unimed Premium",proximaConsulta:"25/01/2025 - 14:30",cicloTratamento:"2/6",risco:35,foto:"https://ui-avatars.com/api/?name=Maria+Silva&background=EC4899&color=fff",dataInicio:"10/01/2025",fase:"Tratamento Ativo"},"PAC-002":{nome:"Ana Costa",idade:45,diagnostico:"Carcinoma Pulmonar",estadiamento:"IIIA",medico:"Dr. Carlos Santos",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4322",email:"ana.costa@email.com",convenio:"SulAmérica",proximaConsulta:"28/01/2025 - 10:00",cicloTratamento:"4/8",risco:45,foto:"https://ui-avatars.com/api/?name=Ana+Costa&background=F59E0B&color=fff",dataInicio:"05/01/2025",fase:"Quimioterapia"},"PAC-003":{nome:"Carlos Mendes",idade:58,diagnostico:"Linfoma de Hodgkin",estadiamento:"IIB",medico:"Dra. Marina Costa",navegador:"Enf. João Silva",telefone:"(11) 98765-4323",email:"carlos.mendes@email.com",convenio:"Bradesco Saúde",proximaConsulta:"20/01/2025 - 15:00",cicloTratamento:"3/6",risco:25,foto:"https://ui-avatars.com/api/?name=Carlos+Mendes&background=3B82F6&color=fff",dataInicio:"15/12/2024",fase:"Tratamento Combinado"},"PAC-004":{nome:"João Santos",idade:67,diagnostico:"Carcinoma de Próstata",estadiamento:"I",medico:"Dr. Paulo Ferreira",navegador:"Enf. Ana Rodrigues",telefone:"(11) 98765-4324",email:"joao.santos@email.com",convenio:"Amil",proximaConsulta:"22/01/2025 - 09:00",cicloTratamento:"1/4",risco:15,foto:"https://ui-avatars.com/api/?name=João+Santos&background=10B981&color=fff",dataInicio:"08/01/2025",fase:"Início do Tratamento"},"PAC-005":{nome:"Pedro Oliveira",idade:49,diagnostico:"Melanoma",estadiamento:"IIA",medico:"Dra. Lucia Martins",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4325",email:"pedro.oliveira@email.com",convenio:"Porto Seguro",proximaConsulta:"Acompanhamento Trimestral",cicloTratamento:"Completo",risco:10,foto:"https://ui-avatars.com/api/?name=Pedro+Oliveira&background=8B5CF6&color=fff",dataInicio:"01/10/2024",fase:"Remissão - Acompanhamento"},"PAC-006":{nome:"Lucia Ferreira",idade:55,diagnostico:"Carcinoma Colorretal",estadiamento:"IIIC",medico:"Dr. Roberto Almeida",navegador:"Enf. João Silva",telefone:"(11) 98765-4326",email:"lucia.ferreira@email.com",convenio:"Unimed",proximaConsulta:"25/01/2025 - 11:00",cicloTratamento:"Pós-cirúrgico",risco:30,foto:"https://ui-avatars.com/api/?name=Lucia+Ferreira&background=EF4444&color=fff",dataInicio:"20/12/2024",fase:"Recuperação Pós-Cirúrgica"}};ta.get("/patient-view-integrated/:id",e=>{const t=e.req.param("id"),a=Ka[t];return a?e.html(`
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${a.nome} - View Integrada</title>
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"><\/script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .tab-active {
+            background: white;
+            color: #0891b2;
+            border-bottom: 2px solid #0891b2;
+        }
+        .contact-card {
+            transition: all 0.3s ease;
+        }
+        .contact-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -8px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-teal-50 to-blue-50 min-h-screen">
+    <div class="container mx-auto p-4 max-w-7xl">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-teal-600 to-teal-700 text-white p-6 rounded-t-2xl shadow-xl">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold">
+                        <i class="fas fa-hospital-user mr-3"></i>
+                        View Integrada do Paciente
+                    </h1>
+                    <p class="text-teal-100 mt-2 text-lg">${a.nome} - ${t}</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-teal-100">Navegador: ${a.navegador}</p>
+                    <p class="text-teal-100">Médico: ${a.medico}</p>
+                    <p class="text-xs text-teal-200 mt-1">Fase: ${a.fase}</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tabs Navigation -->
+        <div class="bg-white px-6 py-3 shadow-lg flex space-x-1 overflow-x-auto">
+            <button onclick="showTab('geral')" id="tab-btn-geral" class="tab-btn px-4 py-2 rounded-t-lg font-medium transition-all tab-active">
+                <i class="fas fa-info-circle mr-2"></i>Geral
+            </button>
+            <button onclick="showTab('contatar')" id="tab-btn-contatar" class="tab-btn px-4 py-2 rounded-t-lg font-medium text-gray-600 hover:text-teal-600 transition-all">
+                <i class="fas fa-address-book mr-2"></i>Contatar
+            </button>
+            <button onclick="showTab('agendar')" id="tab-btn-agendar" class="tab-btn px-4 py-2 rounded-t-lg font-medium text-gray-600 hover:text-teal-600 transition-all">
+                <i class="fas fa-calendar-alt mr-2"></i>Agendar
+            </button>
+            <button onclick="showTab('jornada')" id="tab-btn-jornada" class="tab-btn px-4 py-2 rounded-t-lg font-medium text-gray-600 hover:text-teal-600 transition-all">
+                <i class="fas fa-route mr-2"></i>Jornada
+            </button>
+            <button onclick="showTab('checklist')" id="tab-btn-checklist" class="tab-btn px-4 py-2 rounded-t-lg font-medium text-gray-600 hover:text-teal-600 transition-all">
+                <i class="fas fa-clipboard-check mr-2"></i>Checklist
+            </button>
+            <button onclick="showTab('ia')" id="tab-btn-ia" class="tab-btn px-4 py-2 rounded-t-lg font-medium text-gray-600 hover:text-teal-600 transition-all">
+                <i class="fas fa-brain mr-2"></i>IA LAURA
+            </button>
+        </div>
+        
+        <!-- Content Area -->
+        <div class="bg-white p-6 rounded-b-2xl shadow-xl">
+            <!-- Tab Geral -->
+            <div id="tab-geral" class="tab-content">
+                <div class="flex items-start gap-6 mb-6">
+                    <img src="${a.foto}" alt="${a.nome}" class="w-24 h-24 rounded-full shadow-lg">
+                    <div class="flex-1">
+                        <h2 class="text-2xl font-bold text-gray-800">${a.nome}</h2>
+                        <p class="text-gray-600">${a.idade} anos • ${a.convenio}</p>
+                        <p class="text-sm text-teal-600 mt-1">Início do Tratamento: ${a.dataInicio}</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass-effect p-6 rounded-xl border border-gray-200">
+                        <h3 class="font-bold text-xl text-gray-800 mb-4">
+                            <i class="fas fa-user mr-2 text-teal-600"></i>Dados Pessoais
+                        </h3>
+                        <div class="space-y-3">
+                            <p><strong>Nome:</strong> ${a.nome}</p>
+                            <p><strong>Idade:</strong> ${a.idade} anos</p>
+                            <p><strong>Telefone:</strong> ${a.telefone}</p>
+                            <p><strong>Email:</strong> ${a.email}</p>
+                            <p><strong>Convênio:</strong> ${a.convenio}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-effect p-6 rounded-xl border border-gray-200">
+                        <h3 class="font-bold text-xl text-gray-800 mb-4">
+                            <i class="fas fa-notes-medical mr-2 text-teal-600"></i>Dados Clínicos
+                        </h3>
+                        <div class="space-y-3">
+                            <p><strong>Diagnóstico:</strong> ${a.diagnostico}</p>
+                            <p><strong>Estadiamento:</strong> ${a.estadiamento}</p>
+                            <p><strong>Médico Responsável:</strong> ${a.medico}</p>
+                            <p><strong>Navegador:</strong> ${a.navegador}</p>
+                            <p><strong>Ciclo de Tratamento:</strong> ${a.cicloTratamento}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tab Contatar - Estilo do Portal Navegador -->
+            <div id="tab-contatar" class="tab-content hidden">
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">
+                        <i class="fas fa-users mr-3 text-teal-600"></i>
+                        Rede Completa de Contatos
+                    </h3>
+                    <p class="text-gray-600">Gestão integrada de toda a rede de apoio do paciente</p>
+                </div>
+                
+                <!-- Rede de Apoio -->
+                <div class="mb-8">
+                    <h4 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                        <i class="fas fa-heart mr-2 text-red-500"></i>
+                        Rede de Apoio Familiar
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="contact-card bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-xl border border-green-200">
+                            <div class="flex items-start gap-3">
+                                <img src="https://ui-avatars.com/api/?name=João+Silva&background=10B981&color=fff" 
+                                     class="w-12 h-12 rounded-full">
+                                <div class="flex-1">
+                                    <h5 class="font-semibold text-gray-800">João Silva Santos</h5>
+                                    <p class="text-sm text-gray-600">Esposo</p>
+                                    <p class="text-xs text-green-600 mt-1">Disponibilidade: Integral</p>
+                                    <div class="flex gap-2 mt-2">
+                                        <button class="text-green-600 hover:text-green-700">
+                                            <i class="fas fa-phone"></i>
+                                        </button>
+                                        <button class="text-blue-600 hover:text-blue-700">
+                                            <i class="fas fa-envelope"></i>
+                                        </button>
+                                        <button class="text-green-600 hover:text-green-700">
+                                            <i class="fab fa-whatsapp"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-card bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-xl border border-blue-200">
+                            <div class="flex items-start gap-3">
+                                <img src="https://ui-avatars.com/api/?name=Ana+Silva&background=3B82F6&color=fff" 
+                                     class="w-12 h-12 rounded-full">
+                                <div class="flex-1">
+                                    <h5 class="font-semibold text-gray-800">Ana Silva</h5>
+                                    <p class="text-sm text-gray-600">Filha</p>
+                                    <p class="text-xs text-blue-600 mt-1">Disponibilidade: Fins de semana</p>
+                                    <div class="flex gap-2 mt-2">
+                                        <button class="text-green-600 hover:text-green-700">
+                                            <i class="fas fa-phone"></i>
+                                        </button>
+                                        <button class="text-blue-600 hover:text-blue-700">
+                                            <i class="fas fa-envelope"></i>
+                                        </button>
+                                        <button class="text-green-600 hover:text-green-700">
+                                            <i class="fab fa-whatsapp"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-card bg-gradient-to-br from-orange-50 to-orange-100 p-4 rounded-xl border border-orange-200">
+                            <div class="flex items-start gap-3">
+                                <img src="https://ui-avatars.com/api/?name=Marcia+Oliveira&background=F59E0B&color=fff" 
+                                     class="w-12 h-12 rounded-full">
+                                <div class="flex-1">
+                                    <h5 class="font-semibold text-gray-800">Márcia Oliveira</h5>
+                                    <p class="text-sm text-gray-600">Cuidadora Profissional</p>
+                                    <p class="text-xs text-orange-600 mt-1">Disponibilidade: Seg-Sex</p>
+                                    <div class="flex gap-2 mt-2">
+                                        <button class="text-green-600 hover:text-green-700">
+                                            <i class="fas fa-phone"></i>
+                                        </button>
+                                        <button class="text-blue-600 hover:text-blue-700">
+                                            <i class="fas fa-envelope"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Equipe Médica -->
+                <div>
+                    <h4 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                        <i class="fas fa-user-md mr-2 text-blue-500"></i>
+                        Equipe Médica Multidisciplinar
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-gradient-to-r from-indigo-50 to-purple-50 p-5 rounded-xl border border-indigo-200">
+                            <div class="flex items-start gap-4">
+                                <img src="https://ui-avatars.com/api/?name=Dr+Roberto&background=6366F1&color=fff" 
+                                     class="w-14 h-14 rounded-full">
+                                <div class="flex-1">
+                                    <h5 class="font-semibold text-lg text-gray-800">${a.medico}</h5>
+                                    <p class="text-sm text-gray-600">Oncologia • CRM-SP 123456</p>
+                                    <p class="text-xs text-indigo-600 mt-1">Torre A - Sala 302</p>
+                                    <p class="text-xs text-gray-500">Seg, Qua, Sex - 08h às 12h</p>
+                                    <div class="mt-3 flex gap-3">
+                                        <button class="bg-indigo-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-indigo-700">
+                                            <i class="fas fa-phone mr-1"></i>Ligar
+                                        </button>
+                                        <button class="bg-purple-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-purple-700">
+                                            <i class="fas fa-envelope mr-1"></i>Email
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-pink-50 to-rose-50 p-5 rounded-xl border border-pink-200">
+                            <div class="flex items-start gap-4">
+                                <img src="https://ui-avatars.com/api/?name=Enf+Patricia&background=EC4899&color=fff" 
+                                     class="w-14 h-14 rounded-full">
+                                <div class="flex-1">
+                                    <h5 class="font-semibold text-lg text-gray-800">${a.navegador}</h5>
+                                    <p class="text-sm text-gray-600">Navegação de Pacientes</p>
+                                    <p class="text-xs text-pink-600 mt-1">Central de Navegação</p>
+                                    <p class="text-xs text-gray-500">Seg-Sex - 08h às 17h</p>
+                                    <div class="mt-3 flex gap-3">
+                                        <button class="bg-pink-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-pink-700">
+                                            <i class="fas fa-phone mr-1"></i>Ligar
+                                        </button>
+                                        <button class="bg-green-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-green-700">
+                                            <i class="fab fa-whatsapp mr-1"></i>WhatsApp
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tab Agendar - Estilo do Portal Navegador -->
+            <div id="tab-agendar" class="tab-content hidden">
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">
+                        <i class="fas fa-calendar-alt mr-3 text-purple-600"></i>
+                        Sistema Inteligente de Agendamentos
+                    </h3>
+                    <p class="text-gray-600">Gestão completa de consultas, exames e procedimentos</p>
+                </div>
+                
+                <!-- Próximos Agendamentos -->
+                <div class="mb-8">
+                    <h4 class="text-lg font-semibold text-gray-700 mb-4">Próximos Compromissos</h4>
+                    <div class="space-y-3">
+                        <div class="bg-gradient-to-r from-purple-50 to-indigo-50 p-4 rounded-xl border-l-4 border-purple-500">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-semibold text-lg text-gray-800">Consulta de Retorno</p>
+                                    <p class="text-sm text-gray-600">${a.medico}</p>
+                                    <p class="text-sm text-purple-600 mt-1">
+                                        <i class="far fa-calendar mr-1"></i>${a.proximaConsulta}
+                                    </p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">
+                                        <i class="fas fa-bell"></i> Lembrete
+                                    </button>
+                                    <button class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700">
+                                        <i class="fas fa-sync"></i> Reagendar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-blue-50 to-cyan-50 p-4 rounded-xl border-l-4 border-blue-500">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-semibold text-lg text-gray-800">Exame de Imagem</p>
+                                    <p class="text-sm text-gray-600">Tomografia Computadorizada</p>
+                                    <p class="text-sm text-blue-600 mt-1">
+                                        <i class="far fa-calendar mr-1"></i>30/01/2025 - 08:00
+                                    </p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                        <i class="fas fa-map-marker-alt"></i> Local
+                                    </button>
+                                    <button class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700">
+                                        <i class="fas fa-file-alt"></i> Preparação
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Calendário Visual -->
+                <div class="bg-gray-50 p-6 rounded-xl">
+                    <h4 class="text-lg font-semibold text-gray-700 mb-4">Visão do Mês</h4>
+                    <div class="grid grid-cols-7 gap-1">
+                        <div class="text-center text-sm font-semibold text-gray-600 p-2">Dom</div>
+                        <div class="text-center text-sm font-semibold text-gray-600 p-2">Seg</div>
+                        <div class="text-center text-sm font-semibold text-gray-600 p-2">Ter</div>
+                        <div class="text-center text-sm font-semibold text-gray-600 p-2">Qua</div>
+                        <div class="text-center text-sm font-semibold text-gray-600 p-2">Qui</div>
+                        <div class="text-center text-sm font-semibold text-gray-600 p-2">Sex</div>
+                        <div class="text-center text-sm font-semibold text-gray-600 p-2">Sáb</div>
+                        
+                        <!-- Dias do mês (simplificado) -->
+                        ${Array.from({length:31},(s,i)=>{const o=i+1,r=o===25||o===28||o===30;return`
+                                <div class="text-center p-2 ${r?"bg-purple-100 rounded-lg":"hover:bg-gray-100"} cursor-pointer">
+                                    <span class="${r?"font-bold text-purple-600":"text-gray-700"}">${o}</span>
+                                    ${r?'<div class="w-1 h-1 bg-purple-600 rounded-full mx-auto mt-1"></div>':""}
+                                </div>
+                            `}).join("")}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tab Jornada - Estilo do Portal Navegador -->
+            <div id="tab-jornada" class="tab-content hidden">
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">
+                        <i class="fas fa-route mr-3 text-green-600"></i>
+                        Jornada Completa do Paciente
+                    </h3>
+                    <p class="text-gray-600">Wiki inteligente com histórico detalhado do tratamento</p>
+                </div>
+                
+                <!-- Timeline -->
+                <div class="relative">
+                    <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+                    
+                    <div class="space-y-6">
+                        <!-- Evento 1 -->
+                        <div class="relative flex items-start ml-10">
+                            <div class="timeline-dot border-teal-600 bg-teal-600"></div>
+                            <div class="flex-1 bg-gradient-to-r from-teal-50 to-cyan-50 p-4 rounded-xl ml-6">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-semibold text-lg text-gray-800">Diagnóstico Inicial</h4>
+                                    <span class="text-sm text-teal-600">${a.dataInicio}</span>
+                                </div>
+                                <p class="text-gray-600">${a.diagnostico} - ${a.estadiamento}</p>
+                                <div class="mt-3 flex gap-2">
+                                    <span class="bg-teal-100 text-teal-700 px-2 py-1 rounded-lg text-xs">Biópsia</span>
+                                    <span class="bg-teal-100 text-teal-700 px-2 py-1 rounded-lg text-xs">Estadiamento</span>
+                                    <span class="bg-teal-100 text-teal-700 px-2 py-1 rounded-lg text-xs">MDT</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Evento 2 -->
+                        <div class="relative flex items-start ml-10">
+                            <div class="timeline-dot border-blue-600 bg-blue-600"></div>
+                            <div class="flex-1 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-xl ml-6">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-semibold text-lg text-gray-800">Início do Tratamento</h4>
+                                    <span class="text-sm text-blue-600">15/01/2025</span>
+                                </div>
+                                <p class="text-gray-600">Protocolo ${a.cicloTratamento}</p>
+                                <div class="mt-3">
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-600 h-2 rounded-full" style="width: 33%"></div>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1">Progresso do tratamento</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Evento 3 -->
+                        <div class="relative flex items-start ml-10">
+                            <div class="timeline-dot border-green-600 bg-green-600"></div>
+                            <div class="flex-1 bg-gradient-to-r from-green-50 to-emerald-50 p-4 rounded-xl ml-6">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-semibold text-lg text-gray-800">Avaliação Intermediária</h4>
+                                    <span class="text-sm text-green-600">Agendada</span>
+                                </div>
+                                <p class="text-gray-600">Resposta parcial ao tratamento</p>
+                                <div class="mt-3 flex gap-3">
+                                    <button class="bg-green-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-green-700">
+                                        <i class="fas fa-file-medical mr-1"></i>Ver Relatório
+                                    </button>
+                                    <button class="bg-blue-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-blue-700">
+                                        <i class="fas fa-images mr-1"></i>Exames
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Próximos Passos -->
+                        <div class="relative flex items-start ml-10">
+                            <div class="timeline-dot border-gray-400 bg-white"></div>
+                            <div class="flex-1 bg-gradient-to-r from-gray-50 to-gray-100 p-4 rounded-xl ml-6 opacity-75">
+                                <h4 class="font-semibold text-lg text-gray-600">Próximos Marcos</h4>
+                                <ul class="text-sm text-gray-500 mt-2 space-y-1">
+                                    <li>• Conclusão do ciclo atual</li>
+                                    <li>• Reavaliação com imagem</li>
+                                    <li>• Decisão terapêutica MDT</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tab Checklist - Estilo do Portal Navegador -->
+            <div id="tab-checklist" class="tab-content hidden">
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">
+                        <i class="fas fa-clipboard-check mr-3 text-indigo-600"></i>
+                        Sistema de Checklist e Auditoria
+                    </h3>
+                    <p class="text-gray-600">Double-check para garantia de qualidade e conformidade</p>
+                </div>
+                
+                <!-- Categorias de Checklist -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Documentação -->
+                    <div class="bg-gradient-to-br from-indigo-50 to-blue-50 p-5 rounded-xl">
+                        <h4 class="font-semibold text-lg text-indigo-800 mb-4">
+                            <i class="fas fa-file-alt mr-2"></i>Documentação
+                        </h4>
+                        <div class="space-y-3">
+                            <label class="flex items-center p-3 bg-white rounded-lg hover:bg-indigo-50 cursor-pointer">
+                                <input type="checkbox" checked class="mr-3 w-5 h-5 text-indigo-600">
+                                <span class="flex-1">Termo de Consentimento</span>
+                                <span class="text-sm text-green-600">✓ Assinado</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg hover:bg-indigo-50 cursor-pointer">
+                                <input type="checkbox" checked class="mr-3 w-5 h-5 text-indigo-600">
+                                <span class="flex-1">Autorização do Convênio</span>
+                                <span class="text-sm text-green-600">✓ Aprovado</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg hover:bg-indigo-50 cursor-pointer">
+                                <input type="checkbox" class="mr-3 w-5 h-5 text-indigo-600">
+                                <span class="flex-1">Relatório Médico Atualizado</span>
+                                <span class="text-sm text-orange-600">Pendente</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Procedimentos -->
+                    <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-5 rounded-xl">
+                        <h4 class="font-semibold text-lg text-green-800 mb-4">
+                            <i class="fas fa-procedures mr-2"></i>Procedimentos
+                        </h4>
+                        <div class="space-y-3">
+                            <label class="flex items-center p-3 bg-white rounded-lg hover:bg-green-50 cursor-pointer">
+                                <input type="checkbox" checked class="mr-3 w-5 h-5 text-green-600">
+                                <span class="flex-1">Jejum Confirmado</span>
+                                <span class="text-sm text-green-600">✓ OK</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg hover:bg-green-50 cursor-pointer">
+                                <input type="checkbox" checked class="mr-3 w-5 h-5 text-green-600">
+                                <span class="flex-1">Medicação Pré-Procedimento</span>
+                                <span class="text-sm text-green-600">✓ Administrada</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg hover:bg-green-50 cursor-pointer">
+                                <input type="checkbox" class="mr-3 w-5 h-5 text-green-600">
+                                <span class="flex-1">Acompanhante Presente</span>
+                                <span class="text-sm text-orange-600">Confirmar</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Métricas de Conformidade -->
+                <div class="mt-6 bg-gradient-to-r from-purple-100 to-indigo-100 p-6 rounded-xl">
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div>
+                            <p class="text-3xl font-bold text-purple-700">85%</p>
+                            <p class="text-sm text-gray-600">Conformidade Geral</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-green-700">12/15</p>
+                            <p class="text-sm text-gray-600">Itens Completos</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-blue-700">A+</p>
+                            <p class="text-sm text-gray-600">Score de Qualidade</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tab IA LAURA - Melhorada com mais funcionalidades -->
+            <div id="tab-ia" class="tab-content hidden">
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">
+                        <i class="fas fa-brain mr-3 text-purple-600"></i>
+                        Inteligência Artificial LAURA - Análise Preditiva Avançada
+                    </h3>
+                    <p class="text-gray-600">Sistema cognitivo de predição e suporte à decisão clínica</p>
+                </div>
+                
+                <!-- Painel Principal de Risco -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-gradient-to-br from-purple-100 to-pink-100 p-6 rounded-xl">
+                        <h4 class="font-semibold text-purple-900 mb-3">Risco de Não Adesão</h4>
+                        <div class="relative">
+                            <svg class="w-32 h-32 mx-auto">
+                                <circle cx="64" cy="64" r="60" stroke="#e5e7eb" stroke-width="8" fill="none"/>
+                                <circle cx="64" cy="64" r="60" stroke="#8b5cf6" stroke-width="8" fill="none"
+                                        stroke-dasharray="${a.risco*3.77} 377"
+                                        stroke-dashoffset="0"
+                                        transform="rotate(-90 64 64)"/>
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span class="text-3xl font-bold text-purple-700">${a.risco}%</span>
+                            </div>
+                        </div>
+                        <p class="text-center text-sm text-purple-700 mt-2">
+                            ${a.risco<30?"Baixo Risco":a.risco<60?"Risco Moderado":"Alto Risco"}
+                        </p>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-blue-100 to-cyan-100 p-6 rounded-xl">
+                        <h4 class="font-semibold text-blue-900 mb-3">Probabilidade de Complicações</h4>
+                        <div class="space-y-2">
+                            <div>
+                                <div class="flex justify-between text-sm">
+                                    <span>Neutropenia</span>
+                                    <span class="font-bold">18%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-blue-600 h-2 rounded-full" style="width: 18%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm">
+                                    <span>Náusea/Vômito</span>
+                                    <span class="font-bold">42%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-yellow-600 h-2 rounded-full" style="width: 42%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm">
+                                    <span>Fadiga Severa</span>
+                                    <span class="font-bold">65%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-orange-600 h-2 rounded-full" style="width: 65%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-green-100 to-emerald-100 p-6 rounded-xl">
+                        <h4 class="font-semibold text-green-900 mb-3">Resposta ao Tratamento</h4>
+                        <canvas id="responseChart" width="200" height="150"></canvas>
+                        <p class="text-center text-sm text-green-700 mt-2">Tendência Positiva</p>
+                    </div>
+                </div>
+                
+                <!-- Alertas Preditivos -->
+                <div class="bg-gradient-to-r from-red-50 to-orange-50 p-6 rounded-xl mb-6">
+                    <h4 class="font-semibold text-red-800 mb-4">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>Alertas Preditivos LAURA
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-lg border-l-4 border-red-500">
+                            <div class="flex items-start">
+                                <i class="fas fa-heartbeat text-red-500 mr-3 mt-1"></i>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Risco Cardiovascular Elevado</p>
+                                    <p class="text-sm text-gray-600 mt-1">Monitorar PA e FC durante quimioterapia</p>
+                                    <p class="text-xs text-red-600 mt-2">Probabilidade: 72% • Janela: 48-72h</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg border-l-4 border-orange-500">
+                            <div class="flex items-start">
+                                <i class="fas fa-calendar-times text-orange-500 mr-3 mt-1"></i>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Possível Falta na Próxima Consulta</p>
+                                    <p class="text-sm text-gray-600 mt-1">Reforçar contato 24h antes</p>
+                                    <p class="text-xs text-orange-600 mt-2">Probabilidade: 45% • Ação: Preventiva</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recomendações da IA -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-xl">
+                        <h4 class="font-semibold text-indigo-800 mb-4">
+                            <i class="fas fa-robot mr-2"></i>Recomendações Personalizadas
+                        </h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                <div>
+                                    <p class="font-medium">Intensificar Suporte Psicológico</p>
+                                    <p class="text-sm text-gray-600">Score de ansiedade: 7/10</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                <div>
+                                    <p class="font-medium">Ajustar Antiemético Profilático</p>
+                                    <p class="text-sm text-gray-600">Base: Histórico de náusea</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                <div>
+                                    <p class="font-medium">Incluir Familiar nas Consultas</p>
+                                    <p class="text-sm text-gray-600">Melhora adesão em 35%</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-teal-50 to-cyan-50 p-6 rounded-xl">
+                        <h4 class="font-semibold text-teal-800 mb-4">
+                            <i class="fas fa-chart-line mr-2"></i>Métricas de Performance
+                        </h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm">Acurácia Preditiva</span>
+                                <span class="font-bold text-teal-700">94.3%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm">Eventos Prevenidos</span>
+                                <span class="font-bold text-green-700">12</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm">Tempo Médio de Alerta</span>
+                                <span class="font-bold text-blue-700">8.5h antes</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm">Score de Confiança</span>
+                                <span class="font-bold text-purple-700">92%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Análise Temporal -->
+                <div class="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-xl">
+                    <h4 class="font-semibold text-gray-800 mb-4">
+                        <i class="fas fa-history mr-2"></i>Evolução Temporal do Risco
+                    </h4>
+                    <canvas id="timelineChart" width="800" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer Actions -->
+        <div class="bg-white mt-4 p-4 rounded-xl shadow-lg flex justify-between items-center">
+            <button onclick="window.print()" class="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700 transition">
+                <i class="fas fa-print mr-2"></i>Imprimir
+            </button>
+            <div class="flex gap-2">
+                <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                    <i class="fas fa-share mr-2"></i>Compartilhar
+                </button>
+                <button onclick="window.close()" class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">
+                    <i class="fas fa-times mr-2"></i>Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('tab-active', 'text-teal-600');
+                btn.classList.add('text-gray-600');
+            });
+            
+            // Show selected tab
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+            
+            // Add active class to selected button
+            const activeBtn = document.getElementById('tab-btn-' + tabName);
+            activeBtn.classList.add('tab-active', 'text-teal-600');
+            activeBtn.classList.remove('text-gray-600');
+            
+            // Initialize charts if IA tab
+            if (tabName === 'ia') {
+                setTimeout(initCharts, 100);
+            }
+        }
+        
+        function initCharts() {
+            // Response Chart
+            const responseCtx = document.getElementById('responseChart');
+            if (responseCtx && !responseCtx.chartInstance) {
+                responseCtx.chartInstance = new Chart(responseCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4', 'Sem 5', 'Sem 6'],
+                        datasets: [{
+                            label: 'Resposta',
+                            data: [20, 35, 45, 60, 72, 85],
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Timeline Chart
+            const timelineCtx = document.getElementById('timelineChart');
+            if (timelineCtx && !timelineCtx.chartInstance) {
+                timelineCtx.chartInstance = new Chart(timelineCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan 10', 'Jan 12', 'Jan 14', 'Jan 16', 'Jan 18', 'Jan 20'],
+                        datasets: [
+                            {
+                                label: 'Risco Não Adesão',
+                                data: [45, 42, 38, 35, 35, 33],
+                                borderColor: '#8b5cf6',
+                                backgroundColor: 'rgba(139, 92, 246, 0.1)'
+                            },
+                            {
+                                label: 'Risco Complicações',
+                                data: [30, 32, 28, 25, 22, 20],
+                                borderColor: '#ef4444',
+                                backgroundColor: 'rgba(239, 68, 68, 0.1)'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { 
+                                position: 'bottom'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    <\/script>
+</body>
+</html>
+    `):e.html(`
+            <!DOCTYPE html>
+            <html lang="pt-BR">
+            <head>
+                <meta charset="UTF-8">
+                <title>Paciente não encontrado</title>
+                <script src="https://cdn.tailwindcss.com"><\/script>
+            </head>
+            <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h1 class="text-2xl font-bold text-red-600">Paciente não encontrado</h1>
+                    <p class="mt-2">ID: ${t}</p>
+                    <a href="/" class="mt-4 inline-block text-blue-600 hover:underline">Voltar ao início</a>
+                </div>
+            </body>
+            </html>
+        `)});var it=Object.freeze,Ya=Object.defineProperty,Za=(e,t)=>it(Ya(e,"raw",{value:it(t||e.slice())})),ot;const Xa=e=>e.html(H(ot||(ot=Za([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -4516,7 +5320,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `])),me(V("patient"))));var rt=Object.freeze,Za=Object.defineProperty,Xa=(e,t)=>rt(Za(e,"raw",{value:rt(t||e.slice())})),nt;const es=e=>e.html(H(nt||(nt=Xa([`
+  `])),me(V("patient"))));var rt=Object.freeze,es=Object.defineProperty,ts=(e,t)=>rt(es(e,"raw",{value:rt(t||e.slice())})),nt;const as=e=>e.html(H(nt||(nt=ts([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -5356,7 +6160,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `]))));var lt=Object.freeze,ts=Object.defineProperty,as=(e,t)=>lt(ts(e,"raw",{value:lt(e.slice())})),dt;const ss=e=>e.html(H(dt||(dt=as([`
+  `]))));var lt=Object.freeze,ss=Object.defineProperty,is=(e,t)=>lt(ss(e,"raw",{value:lt(e.slice())})),dt;const os=e=>e.html(H(dt||(dt=is([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -5752,7 +6556,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
         <\/script>
     </body>
     </html>
-  `]))));var ct=Object.freeze,is=Object.defineProperty,os=(e,t)=>ct(is(e,"raw",{value:ct(e.slice())})),pt;const rs=e=>e.html(H(pt||(pt=os([`
+  `]))));var ct=Object.freeze,rs=Object.defineProperty,ns=(e,t)=>ct(rs(e,"raw",{value:ct(e.slice())})),pt;const ls=e=>e.html(H(pt||(pt=ns([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -6118,7 +6922,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `]))));var mt=Object.freeze,ns=Object.defineProperty,ls=(e,t)=>mt(ns(e,"raw",{value:mt(e.slice())})),gt;const ds=e=>e.html(H(gt||(gt=ls([`
+  `]))));var mt=Object.freeze,ds=Object.defineProperty,cs=(e,t)=>mt(ds(e,"raw",{value:mt(e.slice())})),gt;const ps=e=>e.html(H(gt||(gt=cs([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -6422,7 +7226,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `]))));var ut=Object.freeze,cs=Object.defineProperty,ps=(e,t)=>ut(cs(e,"raw",{value:ut(e.slice())})),xt;const ms=e=>e.html(H(xt||(xt=ps([`
+  `]))));var ut=Object.freeze,ms=Object.defineProperty,gs=(e,t)=>ut(ms(e,"raw",{value:ut(e.slice())})),xt;const us=e=>e.html(H(xt||(xt=gs([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -6753,7 +7557,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `]))));var ft=Object.freeze,gs=Object.defineProperty,us=(e,t)=>ft(gs(e,"raw",{value:ft(e.slice())})),bt;const xs=e=>e.html(H(bt||(bt=us([`
+  `]))));var ft=Object.freeze,xs=Object.defineProperty,fs=(e,t)=>ft(xs(e,"raw",{value:ft(e.slice())})),bt;const bs=e=>e.html(H(bt||(bt=fs([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -7032,7 +7836,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `]))));var vt=Object.freeze,fs=Object.defineProperty,bs=(e,t)=>vt(fs(e,"raw",{value:vt(e.slice())})),ht;const vs=e=>e.html(H(ht||(ht=bs([`
+  `]))));var vt=Object.freeze,vs=Object.defineProperty,hs=(e,t)=>vt(vs(e,"raw",{value:vt(e.slice())})),ht;const ys=e=>e.html(H(ht||(ht=hs([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -7910,7 +8714,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
         <\/script>
     </body>
     </html>
-  `])),me(V("admin"))));new E;const hs=e=>e.html(`
+  `])),me(V("admin"))));new S;const ws=e=>e.html(`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -8215,7 +9019,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
         <\/script>
     </body>
     </html>
-  `);var yt=Object.freeze,ys=Object.defineProperty,ws=(e,t)=>yt(ys(e,"raw",{value:yt(e.slice())})),wt;const v=new E;v.use("/api/*",$a());v.use("/static/*",Zt({root:"./public"}));v.use("/*.html",Zt({root:"./public"}));v.route("/api/patient",Me);v.route("/api/doctor",Re);v.route("/api/navigator",De);v.route("/api/financial",Le);v.route("/api/wellness",Oe);v.route("/api/research",he);v.route("/api/admin",ie);v.route("/api/ai",oe);v.route("/api/portal",Q);v.route("/",Xt);v.route("/",ea);v.get("/portal/patient",Ya);v.get("/portal/doctor",es);v.get("/portal/navigator",ss);v.get("/portal/financial",rs);v.get("/portal/wellness",ds);v.get("/portal/research",ms);v.get("/portal/admin-master",xs);v.get("/admin-master",vs);v.get("/test-integration",hs);v.get("/",e=>e.html(H(wt||(wt=ws([`
+  `);var yt=Object.freeze,Cs=Object.defineProperty,As=(e,t)=>yt(Cs(e,"raw",{value:yt(e.slice())})),wt;const b=new S;b.use("/api/*",Ba());b.use("/static/*",Zt({root:"./public"}));b.use("/*.html",Zt({root:"./public"}));b.route("/api/patient",Me);b.route("/api/doctor",Re);b.route("/api/navigator",De);b.route("/api/financial",Le);b.route("/api/wellness",Ne);b.route("/api/research",he);b.route("/api/admin",ie);b.route("/api/ai",oe);b.route("/api/portal",K);b.route("/",Xt);b.route("/",ea);b.route("/",ta);b.get("/patient-view/:id",e=>{const t=e.req.param("id");return e.redirect(`/patient-view-integrated/${t}`,301)});b.get("/portal/patient",Xa);b.get("/portal/doctor",as);b.get("/portal/navigator",os);b.get("/portal/financial",ls);b.get("/portal/wellness",ps);b.get("/portal/research",us);b.get("/portal/admin-master",bs);b.get("/admin-master",ys);b.get("/test-integration",ws);b.get("/",e=>e.html(H(wt||(wt=As([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -8656,7 +9460,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
     <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `])),new Date().toLocaleDateString("pt-BR"))));v.get("/api/health",e=>e.json({status:"healthy",service:"Plataforma Oncológica",version:"1.0.0",timestamp:new Date().toISOString()}));v.get("/test-navigator",e=>e.html(`<!DOCTYPE html>
+  `])),new Date().toLocaleDateString("pt-BR"))));b.get("/api/health",e=>e.json({status:"healthy",service:"Plataforma Oncológica",version:"1.0.0",timestamp:new Date().toISOString()}));b.get("/test-navigator",e=>e.html(`<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -8699,7 +9503,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
         </div>
     </div>
 </body>
-</html>`));v.get("/test-portal-functions",e=>e.html(`<!DOCTYPE html>
+</html>`));b.get("/test-portal-functions",e=>e.html(`<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -8844,7 +9648,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
         });
     <\/script>
 </body>
-</html>`));v.get("/test-patient-view",e=>e.html(`<!DOCTYPE html>
+</html>`));b.get("/test-patient-view",e=>e.html(`<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -8915,7 +9719,7 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
         });
     <\/script>
 </body>
-</html>`));v.get("/demo-navigator",e=>e.html(`<!DOCTYPE html>
+</html>`));b.get("/demo-navigator",e=>e.html(`<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -8989,4 +9793,4 @@ var sa=Object.defineProperty;var Ze=e=>{throw TypeError(e)};var ia=(e,t,a)=>t in
         document.getElementById('content').innerHTML = '<p class="p-8 text-center text-2xl text-gray-600">👆 Clique em um dos botões acima para testar as funcionalidades</p>';
     <\/script>
 </body>
-</html>`));const Ct=new E,Cs=Object.assign({"/src/index.tsx":v});let ta=!1;for(const[,e]of Object.entries(Cs))e&&(Ct.all("*",t=>{let a;try{a=t.executionCtx}catch{}return e.fetch(t.req.raw,t.env,a)}),Ct.notFound(t=>{let a;try{a=t.executionCtx}catch{}return e.fetch(t.req.raw,t.env,a)}),ta=!0);if(!ta)throw new Error("Can't import modules from ['/src/index.ts','/src/index.tsx','/app/server.ts']");export{Ct as default};
+</html>`));const Ct=new S,Ps=Object.assign({"/src/index.tsx":b});let aa=!1;for(const[,e]of Object.entries(Ps))e&&(Ct.all("*",t=>{let a;try{a=t.executionCtx}catch{}return e.fetch(t.req.raw,t.env,a)}),Ct.notFound(t=>{let a;try{a=t.executionCtx}catch{}return e.fetch(t.req.raw,t.env,a)}),aa=!0);if(!aa)throw new Error("Can't import modules from ['/src/index.ts','/src/index.tsx','/app/server.ts']");export{Ct as default};
