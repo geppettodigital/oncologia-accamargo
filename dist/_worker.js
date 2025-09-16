@@ -1,4 +1,4 @@
-var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in e?rs(e,t,{enumerable:!0,configurable:!0,writable:!0,value:s}):e[t]=s;var x=(e,t,s)=>ns(e,typeof t!="symbol"?t+"":t,s),_e=(e,t,s)=>t.has(e)||et("Cannot "+s);var l=(e,t,s)=>(_e(e,t,"read from private field"),s?s.call(e):t.get(e)),b=(e,t,s)=>t.has(e)?et("Cannot add the same private member more than once"):t instanceof WeakSet?t.add(e):t.set(e,s),g=(e,t,s,a)=>(_e(e,t,"write to private field"),a?a.call(e,s):t.set(e,s),s),f=(e,t,s)=>(_e(e,t,"access private method"),s);var tt=(e,t,s,a)=>({set _(i){g(e,t,i,s)},get _(){return l(e,t,a)}});var st=(e,t,s)=>(a,i)=>{let o=-1;return r(0);async function r(d){if(d<=o)throw new Error("next() called multiple times");o=d;let n,c=!1,p;if(e[d]?(p=e[d][0][0],a.req.routeIndex=d):p=d===e.length&&i||void 0,p)try{n=await p(a,()=>r(d+1))}catch(m){if(m instanceof Error&&t)a.error=m,n=await t(m,a),c=!0;else throw m}else a.finalized===!1&&s&&(n=await s(a));return n&&(a.finalized===!1||c)&&(a.res=n),a}},ls=Symbol(),ds=async(e,t=Object.create(null))=>{const{all:s=!1,dot:a=!1}=t,o=(e instanceof Bt?e.raw.headers:e.headers).get("Content-Type");return o!=null&&o.startsWith("multipart/form-data")||o!=null&&o.startsWith("application/x-www-form-urlencoded")?cs(e,{all:s,dot:a}):{}};async function cs(e,t){const s=await e.formData();return s?ps(s,t):{}}function ps(e,t){const s=Object.create(null);return e.forEach((a,i)=>{t.all||i.endsWith("[]")?ms(s,i,a):s[i]=a}),t.dot&&Object.entries(s).forEach(([a,i])=>{a.includes(".")&&(gs(s,a,i),delete s[a])}),s}var ms=(e,t,s)=>{e[t]!==void 0?Array.isArray(e[t])?e[t].push(s):e[t]=[e[t],s]:t.endsWith("[]")?e[t]=[s]:e[t]=s},gs=(e,t,s)=>{let a=e;const i=t.split(".");i.forEach((o,r)=>{r===i.length-1?a[o]=s:((!a[o]||typeof a[o]!="object"||Array.isArray(a[o])||a[o]instanceof File)&&(a[o]=Object.create(null)),a=a[o])})},Rt=e=>{const t=e.split("/");return t[0]===""&&t.shift(),t},xs=e=>{const{groups:t,path:s}=us(e),a=Rt(s);return bs(a,t)},us=e=>{const t=[];return e=e.replace(/\{[^}]+\}/g,(s,a)=>{const i=`@${a}`;return t.push([i,s]),i}),{groups:t,path:e}},bs=(e,t)=>{for(let s=t.length-1;s>=0;s--){const[a]=t[s];for(let i=e.length-1;i>=0;i--)if(e[i].includes(a)){e[i]=e[i].replace(a,t[s][1]);break}}return e},Fe={},vs=(e,t)=>{if(e==="*")return"*";const s=e.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);if(s){const a=`${e}#${t}`;return Fe[a]||(s[2]?Fe[a]=t&&t[0]!==":"&&t[0]!=="*"?[a,s[1],new RegExp(`^${s[2]}(?=/${t})`)]:[e,s[1],new RegExp(`^${s[2]}$`)]:Fe[a]=[e,s[1],!0]),Fe[a]}return null},Ze=(e,t)=>{try{return t(e)}catch{return e.replace(/(?:%[0-9A-Fa-f]{2})+/g,s=>{try{return t(s)}catch{return s}})}},fs=e=>Ze(e,decodeURI),Dt=e=>{const t=e.url,s=t.indexOf("/",t.indexOf(":")+4);let a=s;for(;a<t.length;a++){const i=t.charCodeAt(a);if(i===37){const o=t.indexOf("?",a),r=t.slice(s,o===-1?void 0:o);return fs(r.includes("%25")?r.replace(/%25/g,"%2525"):r)}else if(i===63)break}return t.slice(s,a)},hs=e=>{const t=Dt(e);return t.length>1&&t.at(-1)==="/"?t.slice(0,-1):t},ce=(e,t,...s)=>(s.length&&(t=ce(t,...s)),`${(e==null?void 0:e[0])==="/"?"":"/"}${e}${t==="/"?"":`${(e==null?void 0:e.at(-1))==="/"?"":"/"}${(t==null?void 0:t[0])==="/"?t.slice(1):t}`}`),Lt=e=>{if(e.charCodeAt(e.length-1)!==63||!e.includes(":"))return null;const t=e.split("/"),s=[];let a="";return t.forEach(i=>{if(i!==""&&!/\:/.test(i))a+="/"+i;else if(/\:/.test(i))if(/\?/.test(i)){s.length===0&&a===""?s.push("/"):s.push(a);const o=i.replace("?","");a+="/"+o,s.push(a)}else a+="/"+i}),s.filter((i,o,r)=>r.indexOf(i)===o)},Je=e=>/[%+]/.test(e)?(e.indexOf("+")!==-1&&(e=e.replace(/\+/g," ")),e.indexOf("%")!==-1?Ze(e,Ot):e):e,Nt=(e,t,s)=>{let a;if(!s&&t&&!/[%+]/.test(t)){let r=e.indexOf(`?${t}`,8);for(r===-1&&(r=e.indexOf(`&${t}`,8));r!==-1;){const d=e.charCodeAt(r+t.length+1);if(d===61){const n=r+t.length+2,c=e.indexOf("&",n);return Je(e.slice(n,c===-1?void 0:c))}else if(d==38||isNaN(d))return"";r=e.indexOf(`&${t}`,r+1)}if(a=/[%+]/.test(e),!a)return}const i={};a??(a=/[%+]/.test(e));let o=e.indexOf("?",8);for(;o!==-1;){const r=e.indexOf("&",o+1);let d=e.indexOf("=",o);d>r&&r!==-1&&(d=-1);let n=e.slice(o+1,d===-1?r===-1?void 0:r:d);if(a&&(n=Je(n)),o=r,n==="")continue;let c;d===-1?c="":(c=e.slice(d+1,r===-1?void 0:r),a&&(c=Je(c))),s?(i[n]&&Array.isArray(i[n])||(i[n]=[]),i[n].push(c)):i[n]??(i[n]=c)}return t?i[t]:i},ys=Nt,ws=(e,t)=>Nt(e,t,!0),Ot=decodeURIComponent,at=e=>Ze(e,Ot),xe,T,q,Ft,$t,We,z,At,Bt=(At=class{constructor(e,t="/",s=[[]]){b(this,q);x(this,"raw");b(this,xe);b(this,T);x(this,"routeIndex",0);x(this,"path");x(this,"bodyCache",{});b(this,z,e=>{const{bodyCache:t,raw:s}=this,a=t[e];if(a)return a;const i=Object.keys(t)[0];return i?t[i].then(o=>(i==="json"&&(o=JSON.stringify(o)),new Response(o)[e]())):t[e]=s[e]()});this.raw=e,this.path=t,g(this,T,s),g(this,xe,{})}param(e){return e?f(this,q,Ft).call(this,e):f(this,q,$t).call(this)}query(e){return ys(this.url,e)}queries(e){return ws(this.url,e)}header(e){if(e)return this.raw.headers.get(e)??void 0;const t={};return this.raw.headers.forEach((s,a)=>{t[a]=s}),t}async parseBody(e){var t;return(t=this.bodyCache).parsedBody??(t.parsedBody=await ds(this,e))}json(){return l(this,z).call(this,"text").then(e=>JSON.parse(e))}text(){return l(this,z).call(this,"text")}arrayBuffer(){return l(this,z).call(this,"arrayBuffer")}blob(){return l(this,z).call(this,"blob")}formData(){return l(this,z).call(this,"formData")}addValidatedData(e,t){l(this,xe)[e]=t}valid(e){return l(this,xe)[e]}get url(){return this.raw.url}get method(){return this.raw.method}get[ls](){return l(this,T)}get matchedRoutes(){return l(this,T)[0].map(([[,e]])=>e)}get routePath(){return l(this,T)[0].map(([[,e]])=>e)[this.routeIndex].path}},xe=new WeakMap,T=new WeakMap,q=new WeakSet,Ft=function(e){const t=l(this,T)[0][this.routeIndex][1][e],s=f(this,q,We).call(this,t);return s?/\%/.test(s)?at(s):s:void 0},$t=function(){const e={},t=Object.keys(l(this,T)[0][this.routeIndex][1]);for(const s of t){const a=f(this,q,We).call(this,l(this,T)[0][this.routeIndex][1][s]);a&&typeof a=="string"&&(e[s]=/\%/.test(a)?at(a):a)}return e},We=function(e){return l(this,T)[1]?l(this,T)[1][e]:e},z=new WeakMap,At),qt={Stringify:1},ge=(e,t)=>{const s=new String(e);return s.isEscaped=!0,s.callbacks=t,s},Cs=/[&<>'"]/,As=async(e,t)=>{let s="";t||(t=[]);const a=await Promise.all(e);for(let i=a.length-1;s+=a[i],i--,!(i<0);i--){let o=a[i];typeof o=="object"&&t.push(...o.callbacks||[]);const r=o.isEscaped;if(o=await(typeof o=="object"?o.toString():o),typeof o=="object"&&t.push(...o.callbacks||[]),o.isEscaped??r)s+=o;else{const d=[s];Qe(o,d),s=d[0]}}return ge(s,t)},Qe=(e,t)=>{const s=e.search(Cs);if(s===-1){t[0]+=e;return}let a,i,o=0;for(i=s;i<e.length;i++){switch(e.charCodeAt(i)){case 34:a="&quot;";break;case 39:a="&#39;";break;case 38:a="&amp;";break;case 60:a="&lt;";break;case 62:a="&gt;";break;default:continue}t[0]+=e.substring(o,i)+a,o=i+1}t[0]+=e.substring(o,i)},Ps=e=>{const t=e.callbacks;if(!(t!=null&&t.length))return e;const s=[e],a={};return t.forEach(i=>i({phase:qt.Stringify,buffer:s,context:a})),s[0]},Ht=async(e,t,s,a,i)=>{typeof e=="object"&&!(e instanceof String)&&(e instanceof Promise||(e=e.toString()),e instanceof Promise&&(e=await e));const o=e.callbacks;return o!=null&&o.length?(i?i[0]+=e:i=[e],Promise.all(o.map(d=>d({phase:t,buffer:i,context:a}))).then(d=>Promise.all(d.filter(Boolean).map(n=>Ht(n,t,!1,a,i))).then(()=>i[0]))):Promise.resolve(e)},ks="text/plain; charset=UTF-8",Ke=(e,t)=>({"Content-Type":e,...t}),Ie,je,O,ue,B,S,Se,be,ve,ee,Ee,Te,G,pe,Pt,Is=(Pt=class{constructor(e,t){b(this,G);b(this,Ie);b(this,je);x(this,"env",{});b(this,O);x(this,"finalized",!1);x(this,"error");b(this,ue);b(this,B);b(this,S);b(this,Se);b(this,be);b(this,ve);b(this,ee);b(this,Ee);b(this,Te);x(this,"render",(...e)=>(l(this,be)??g(this,be,t=>this.html(t)),l(this,be).call(this,...e)));x(this,"setLayout",e=>g(this,Se,e));x(this,"getLayout",()=>l(this,Se));x(this,"setRenderer",e=>{g(this,be,e)});x(this,"header",(e,t,s)=>{this.finalized&&g(this,S,new Response(l(this,S).body,l(this,S)));const a=l(this,S)?l(this,S).headers:l(this,ee)??g(this,ee,new Headers);t===void 0?a.delete(e):s!=null&&s.append?a.append(e,t):a.set(e,t)});x(this,"status",e=>{g(this,ue,e)});x(this,"set",(e,t)=>{l(this,O)??g(this,O,new Map),l(this,O).set(e,t)});x(this,"get",e=>l(this,O)?l(this,O).get(e):void 0);x(this,"newResponse",(...e)=>f(this,G,pe).call(this,...e));x(this,"body",(e,t,s)=>f(this,G,pe).call(this,e,t,s));x(this,"text",(e,t,s)=>!l(this,ee)&&!l(this,ue)&&!t&&!s&&!this.finalized?new Response(e):f(this,G,pe).call(this,e,t,Ke(ks,s)));x(this,"json",(e,t,s)=>f(this,G,pe).call(this,JSON.stringify(e),t,Ke("application/json",s)));x(this,"html",(e,t,s)=>{const a=i=>f(this,G,pe).call(this,i,t,Ke("text/html; charset=UTF-8",s));return typeof e=="object"?Ht(e,qt.Stringify,!1,{}).then(a):a(e)});x(this,"redirect",(e,t)=>{const s=String(e);return this.header("Location",/[^\x00-\xFF]/.test(s)?encodeURI(s):s),this.newResponse(null,t??302)});x(this,"notFound",()=>(l(this,ve)??g(this,ve,()=>new Response),l(this,ve).call(this,this)));g(this,Ie,e),t&&(g(this,B,t.executionCtx),this.env=t.env,g(this,ve,t.notFoundHandler),g(this,Te,t.path),g(this,Ee,t.matchResult))}get req(){return l(this,je)??g(this,je,new Bt(l(this,Ie),l(this,Te),l(this,Ee))),l(this,je)}get event(){if(l(this,B)&&"respondWith"in l(this,B))return l(this,B);throw Error("This context has no FetchEvent")}get executionCtx(){if(l(this,B))return l(this,B);throw Error("This context has no ExecutionContext")}get res(){return l(this,S)||g(this,S,new Response(null,{headers:l(this,ee)??g(this,ee,new Headers)}))}set res(e){if(l(this,S)&&e){e=new Response(e.body,e);for(const[t,s]of l(this,S).headers.entries())if(t!=="content-type")if(t==="set-cookie"){const a=l(this,S).headers.getSetCookie();e.headers.delete("set-cookie");for(const i of a)e.headers.append("set-cookie",i)}else e.headers.set(t,s)}g(this,S,e),this.finalized=!0}get var(){return l(this,O)?Object.fromEntries(l(this,O)):{}}},Ie=new WeakMap,je=new WeakMap,O=new WeakMap,ue=new WeakMap,B=new WeakMap,S=new WeakMap,Se=new WeakMap,be=new WeakMap,ve=new WeakMap,ee=new WeakMap,Ee=new WeakMap,Te=new WeakMap,G=new WeakSet,pe=function(e,t,s){const a=l(this,S)?new Headers(l(this,S).headers):l(this,ee)??new Headers;if(typeof t=="object"&&"headers"in t){const o=t.headers instanceof Headers?t.headers:new Headers(t.headers);for(const[r,d]of o)r.toLowerCase()==="set-cookie"?a.append(r,d):a.set(r,d)}if(s)for(const[o,r]of Object.entries(s))if(typeof r=="string")a.set(o,r);else{a.delete(o);for(const d of r)a.append(o,d)}const i=typeof t=="number"?t:(t==null?void 0:t.status)??l(this,ue);return new Response(e,{status:i,headers:a})},Pt),C="ALL",js="all",Ss=["get","post","put","delete","options","patch"],Vt="Can not add a route since the matcher is already built.",zt=class extends Error{},Es="__COMPOSED_HANDLER",Ts=e=>e.text("404 Not Found",404),it=(e,t)=>{if("getResponse"in e){const s=e.getResponse();return t.newResponse(s.body,s)}return console.error(e),t.text("Internal Server Error",500)},M,A,Ut,R,Z,$e,qe,kt,Gt=(kt=class{constructor(t={}){b(this,A);x(this,"get");x(this,"post");x(this,"put");x(this,"delete");x(this,"options");x(this,"patch");x(this,"all");x(this,"on");x(this,"use");x(this,"router");x(this,"getPath");x(this,"_basePath","/");b(this,M,"/");x(this,"routes",[]);b(this,R,Ts);x(this,"errorHandler",it);x(this,"onError",t=>(this.errorHandler=t,this));x(this,"notFound",t=>(g(this,R,t),this));x(this,"fetch",(t,...s)=>f(this,A,qe).call(this,t,s[1],s[0],t.method));x(this,"request",(t,s,a,i)=>t instanceof Request?this.fetch(s?new Request(t,s):t,a,i):(t=t.toString(),this.fetch(new Request(/^https?:\/\//.test(t)?t:`http://localhost${ce("/",t)}`,s),a,i)));x(this,"fire",()=>{addEventListener("fetch",t=>{t.respondWith(f(this,A,qe).call(this,t.request,t,void 0,t.request.method))})});[...Ss,js].forEach(o=>{this[o]=(r,...d)=>(typeof r=="string"?g(this,M,r):f(this,A,Z).call(this,o,l(this,M),r),d.forEach(n=>{f(this,A,Z).call(this,o,l(this,M),n)}),this)}),this.on=(o,r,...d)=>{for(const n of[r].flat()){g(this,M,n);for(const c of[o].flat())d.map(p=>{f(this,A,Z).call(this,c.toUpperCase(),l(this,M),p)})}return this},this.use=(o,...r)=>(typeof o=="string"?g(this,M,o):(g(this,M,"*"),r.unshift(o)),r.forEach(d=>{f(this,A,Z).call(this,C,l(this,M),d)}),this);const{strict:a,...i}=t;Object.assign(this,i),this.getPath=a??!0?t.getPath??Dt:hs}route(t,s){const a=this.basePath(t);return s.routes.map(i=>{var r;let o;s.errorHandler===it?o=i.handler:(o=async(d,n)=>(await st([],s.errorHandler)(d,()=>i.handler(d,n))).res,o[Es]=i.handler),f(r=a,A,Z).call(r,i.method,i.path,o)}),this}basePath(t){const s=f(this,A,Ut).call(this);return s._basePath=ce(this._basePath,t),s}mount(t,s,a){let i,o;a&&(typeof a=="function"?o=a:(o=a.optionHandler,a.replaceRequest===!1?i=n=>n:i=a.replaceRequest));const r=o?n=>{const c=o(n);return Array.isArray(c)?c:[c]}:n=>{let c;try{c=n.executionCtx}catch{}return[n.env,c]};i||(i=(()=>{const n=ce(this._basePath,t),c=n==="/"?0:n.length;return p=>{const m=new URL(p.url);return m.pathname=m.pathname.slice(c)||"/",new Request(m,p)}})());const d=async(n,c)=>{const p=await s(i(n.req.raw),...r(n));if(p)return p;await c()};return f(this,A,Z).call(this,C,ce(t,"*"),d),this}},M=new WeakMap,A=new WeakSet,Ut=function(){const t=new Gt({router:this.router,getPath:this.getPath});return t.errorHandler=this.errorHandler,g(t,R,l(this,R)),t.routes=this.routes,t},R=new WeakMap,Z=function(t,s,a){t=t.toUpperCase(),s=ce(this._basePath,s);const i={basePath:this._basePath,path:s,method:t,handler:a};this.router.add(t,s,[a,i]),this.routes.push(i)},$e=function(t,s){if(t instanceof Error)return this.errorHandler(t,s);throw t},qe=function(t,s,a,i){if(i==="HEAD")return(async()=>new Response(null,await f(this,A,qe).call(this,t,s,a,"GET")))();const o=this.getPath(t,{env:a}),r=this.router.match(i,o),d=new Is(t,{path:o,matchResult:r,env:a,executionCtx:s,notFoundHandler:l(this,R)});if(r[0].length===1){let c;try{c=r[0][0][0][0](d,async()=>{d.res=await l(this,R).call(this,d)})}catch(p){return f(this,A,$e).call(this,p,d)}return c instanceof Promise?c.then(p=>p||(d.finalized?d.res:l(this,R).call(this,d))).catch(p=>f(this,A,$e).call(this,p,d)):c??l(this,R).call(this,d)}const n=st(r[0],this.errorHandler,l(this,R));return(async()=>{try{const c=await n(d);if(!c.finalized)throw new Error("Context is not finalized. Did you forget to return a Response object or `await next()`?");return c.res}catch(c){return f(this,A,$e).call(this,c,d)}})()},kt),Ve="[^/]+",Pe=".*",ke="(?:|/.*)",me=Symbol(),Ms=new Set(".\\+*[^]$()");function Rs(e,t){return e.length===1?t.length===1?e<t?-1:1:-1:t.length===1||e===Pe||e===ke?1:t===Pe||t===ke?-1:e===Ve?1:t===Ve?-1:e.length===t.length?e<t?-1:1:t.length-e.length}var te,se,D,It,Ye=(It=class{constructor(){b(this,te);b(this,se);b(this,D,Object.create(null))}insert(t,s,a,i,o){if(t.length===0){if(l(this,te)!==void 0)throw me;if(o)return;g(this,te,s);return}const[r,...d]=t,n=r==="*"?d.length===0?["","",Pe]:["","",Ve]:r==="/*"?["","",ke]:r.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);let c;if(n){const p=n[1];let m=n[2]||Ve;if(p&&n[2]&&(m===".*"||(m=m.replace(/^\((?!\?:)(?=[^)]+\)$)/,"(?:"),/\((?!\?:)/.test(m))))throw me;if(c=l(this,D)[m],!c){if(Object.keys(l(this,D)).some(u=>u!==Pe&&u!==ke))throw me;if(o)return;c=l(this,D)[m]=new Ye,p!==""&&g(c,se,i.varIndex++)}!o&&p!==""&&a.push([p,l(c,se)])}else if(c=l(this,D)[r],!c){if(Object.keys(l(this,D)).some(p=>p.length>1&&p!==Pe&&p!==ke))throw me;if(o)return;c=l(this,D)[r]=new Ye}c.insert(d,s,a,i,o)}buildRegExpStr(){const s=Object.keys(l(this,D)).sort(Rs).map(a=>{const i=l(this,D)[a];return(typeof l(i,se)=="number"?`(${a})@${l(i,se)}`:Ms.has(a)?`\\${a}`:a)+i.buildRegExpStr()});return typeof l(this,te)=="number"&&s.unshift(`#${l(this,te)}`),s.length===0?"":s.length===1?s[0]:"(?:"+s.join("|")+")"}},te=new WeakMap,se=new WeakMap,D=new WeakMap,It),ze,Me,jt,Ds=(jt=class{constructor(){b(this,ze,{varIndex:0});b(this,Me,new Ye)}insert(e,t,s){const a=[],i=[];for(let r=0;;){let d=!1;if(e=e.replace(/\{[^}]+\}/g,n=>{const c=`@\\${r}`;return i[r]=[c,n],r++,d=!0,c}),!d)break}const o=e.match(/(?::[^\/]+)|(?:\/\*$)|./g)||[];for(let r=i.length-1;r>=0;r--){const[d]=i[r];for(let n=o.length-1;n>=0;n--)if(o[n].indexOf(d)!==-1){o[n]=o[n].replace(d,i[r][1]);break}}return l(this,Me).insert(o,t,a,l(this,ze),s),a}buildRegExp(){let e=l(this,Me).buildRegExpStr();if(e==="")return[/^$/,[],[]];let t=0;const s=[],a=[];return e=e.replace(/#(\d+)|@(\d+)|\.\*\$/g,(i,o,r)=>o!==void 0?(s[++t]=Number(o),"$()"):(r!==void 0&&(a[Number(r)]=++t),"")),[new RegExp(`^${e}`),s,a]}},ze=new WeakMap,Me=new WeakMap,jt),_t=[],Ls=[/^$/,[],Object.create(null)],He=Object.create(null);function Jt(e){return He[e]??(He[e]=new RegExp(e==="*"?"":`^${e.replace(/\/\*$|([.\\+*[^\]$()])/g,(t,s)=>s?`\\${s}`:"(?:|/.*)")}$`))}function Ns(){He=Object.create(null)}function Os(e){var c;const t=new Ds,s=[];if(e.length===0)return Ls;const a=e.map(p=>[!/\*|\/:/.test(p[0]),...p]).sort(([p,m],[u,w])=>p?1:u?-1:m.length-w.length),i=Object.create(null);for(let p=0,m=-1,u=a.length;p<u;p++){const[w,E,h]=a[p];w?i[E]=[h.map(([j])=>[j,Object.create(null)]),_t]:m++;let y;try{y=t.insert(E,m,w)}catch(j){throw j===me?new zt(E):j}w||(s[m]=h.map(([j,le])=>{const we=Object.create(null);for(le-=1;le>=0;le--){const[L,Ge]=y[le];we[L]=Ge}return[j,we]}))}const[o,r,d]=t.buildRegExp();for(let p=0,m=s.length;p<m;p++)for(let u=0,w=s[p].length;u<w;u++){const E=(c=s[p][u])==null?void 0:c[1];if(!E)continue;const h=Object.keys(E);for(let y=0,j=h.length;y<j;y++)E[h[y]]=d[E[h[y]]]}const n=[];for(const p in r)n[p]=s[r[p]];return[o,n,i]}function de(e,t){if(e){for(const s of Object.keys(e).sort((a,i)=>i.length-a.length))if(Jt(s).test(t))return[...e[s]]}}var U,_,he,Kt,Wt,St,Bs=(St=class{constructor(){b(this,he);x(this,"name","RegExpRouter");b(this,U);b(this,_);g(this,U,{[C]:Object.create(null)}),g(this,_,{[C]:Object.create(null)})}add(e,t,s){var d;const a=l(this,U),i=l(this,_);if(!a||!i)throw new Error(Vt);a[e]||[a,i].forEach(n=>{n[e]=Object.create(null),Object.keys(n[C]).forEach(c=>{n[e][c]=[...n[C][c]]})}),t==="/*"&&(t="*");const o=(t.match(/\/:/g)||[]).length;if(/\*$/.test(t)){const n=Jt(t);e===C?Object.keys(a).forEach(c=>{var p;(p=a[c])[t]||(p[t]=de(a[c],t)||de(a[C],t)||[])}):(d=a[e])[t]||(d[t]=de(a[e],t)||de(a[C],t)||[]),Object.keys(a).forEach(c=>{(e===C||e===c)&&Object.keys(a[c]).forEach(p=>{n.test(p)&&a[c][p].push([s,o])})}),Object.keys(i).forEach(c=>{(e===C||e===c)&&Object.keys(i[c]).forEach(p=>n.test(p)&&i[c][p].push([s,o]))});return}const r=Lt(t)||[t];for(let n=0,c=r.length;n<c;n++){const p=r[n];Object.keys(i).forEach(m=>{var u;(e===C||e===m)&&((u=i[m])[p]||(u[p]=[...de(a[m],p)||de(a[C],p)||[]]),i[m][p].push([s,o-c+n+1]))})}}match(e,t){Ns();const s=f(this,he,Kt).call(this);return this.match=(a,i)=>{const o=s[a]||s[C],r=o[2][i];if(r)return r;const d=i.match(o[0]);if(!d)return[[],_t];const n=d.indexOf("",1);return[o[1][n],d]},this.match(e,t)}},U=new WeakMap,_=new WeakMap,he=new WeakSet,Kt=function(){const e=Object.create(null);return Object.keys(l(this,_)).concat(Object.keys(l(this,U))).forEach(t=>{e[t]||(e[t]=f(this,he,Wt).call(this,t))}),g(this,U,g(this,_,void 0)),e},Wt=function(e){const t=[];let s=e===C;return[l(this,U),l(this,_)].forEach(a=>{const i=a[e]?Object.keys(a[e]).map(o=>[o,a[e][o]]):[];i.length!==0?(s||(s=!0),t.push(...i)):e!==C&&t.push(...Object.keys(a[C]).map(o=>[o,a[C][o]]))}),s?Os(t):null},St),J,F,Et,Fs=(Et=class{constructor(e){x(this,"name","SmartRouter");b(this,J,[]);b(this,F,[]);g(this,J,e.routers)}add(e,t,s){if(!l(this,F))throw new Error(Vt);l(this,F).push([e,t,s])}match(e,t){if(!l(this,F))throw new Error("Fatal error");const s=l(this,J),a=l(this,F),i=s.length;let o=0,r;for(;o<i;o++){const d=s[o];try{for(let n=0,c=a.length;n<c;n++)d.add(...a[n]);r=d.match(e,t)}catch(n){if(n instanceof zt)continue;throw n}this.match=d.match.bind(d),g(this,J,[d]),g(this,F,void 0);break}if(o===i)throw new Error("Fatal error");return this.name=`SmartRouter + ${this.activeRouter.name}`,r}get activeRouter(){if(l(this,F)||l(this,J).length!==1)throw new Error("No active router has been determined yet.");return l(this,J)[0]}},J=new WeakMap,F=new WeakMap,Et),Ae=Object.create(null),K,I,ae,fe,k,$,X,Tt,Qt=(Tt=class{constructor(e,t,s){b(this,$);b(this,K);b(this,I);b(this,ae);b(this,fe,0);b(this,k,Ae);if(g(this,I,s||Object.create(null)),g(this,K,[]),e&&t){const a=Object.create(null);a[e]={handler:t,possibleKeys:[],score:0},g(this,K,[a])}g(this,ae,[])}insert(e,t,s){g(this,fe,++tt(this,fe)._);let a=this;const i=xs(t),o=[];for(let r=0,d=i.length;r<d;r++){const n=i[r],c=i[r+1],p=vs(n,c),m=Array.isArray(p)?p[0]:n;if(m in l(a,I)){a=l(a,I)[m],p&&o.push(p[1]);continue}l(a,I)[m]=new Qt,p&&(l(a,ae).push(p),o.push(p[1])),a=l(a,I)[m]}return l(a,K).push({[e]:{handler:s,possibleKeys:o.filter((r,d,n)=>n.indexOf(r)===d),score:l(this,fe)}}),a}search(e,t){var d;const s=[];g(this,k,Ae);let i=[this];const o=Rt(t),r=[];for(let n=0,c=o.length;n<c;n++){const p=o[n],m=n===c-1,u=[];for(let w=0,E=i.length;w<E;w++){const h=i[w],y=l(h,I)[p];y&&(g(y,k,l(h,k)),m?(l(y,I)["*"]&&s.push(...f(this,$,X).call(this,l(y,I)["*"],e,l(h,k))),s.push(...f(this,$,X).call(this,y,e,l(h,k)))):u.push(y));for(let j=0,le=l(h,ae).length;j<le;j++){const we=l(h,ae)[j],L=l(h,k)===Ae?{}:{...l(h,k)};if(we==="*"){const V=l(h,I)["*"];V&&(s.push(...f(this,$,X).call(this,V,e,l(h,k))),g(V,k,L),u.push(V));continue}const[Ge,Xe,Ce]=we;if(!p&&!(Ce instanceof RegExp))continue;const N=l(h,I)[Ge],os=o.slice(n).join("/");if(Ce instanceof RegExp){const V=Ce.exec(os);if(V){if(L[Xe]=V[0],s.push(...f(this,$,X).call(this,N,e,l(h,k),L)),Object.keys(l(N,I)).length){g(N,k,L);const Ue=((d=V[0].match(/\//))==null?void 0:d.length)??0;(r[Ue]||(r[Ue]=[])).push(N)}continue}}(Ce===!0||Ce.test(p))&&(L[Xe]=p,m?(s.push(...f(this,$,X).call(this,N,e,L,l(h,k))),l(N,I)["*"]&&s.push(...f(this,$,X).call(this,l(N,I)["*"],e,L,l(h,k)))):(g(N,k,L),u.push(N)))}}i=u.concat(r.shift()??[])}return s.length>1&&s.sort((n,c)=>n.score-c.score),[s.map(({handler:n,params:c})=>[n,c])]}},K=new WeakMap,I=new WeakMap,ae=new WeakMap,fe=new WeakMap,k=new WeakMap,$=new WeakSet,X=function(e,t,s,a){const i=[];for(let o=0,r=l(e,K).length;o<r;o++){const d=l(e,K)[o],n=d[t]||d[C],c={};if(n!==void 0&&(n.params=Object.create(null),i.push(n),s!==Ae||a&&a!==Ae))for(let p=0,m=n.possibleKeys.length;p<m;p++){const u=n.possibleKeys[p],w=c[n.score];n.params[u]=a!=null&&a[u]&&!w?a[u]:s[u]??(a==null?void 0:a[u]),c[n.score]=!0}}return i},Tt),ie,Mt,$s=(Mt=class{constructor(){x(this,"name","TrieRouter");b(this,ie);g(this,ie,new Qt)}add(e,t,s){const a=Lt(t);if(a){for(let i=0,o=a.length;i<o;i++)l(this,ie).insert(e,a[i],s);return}l(this,ie).insert(e,t,s)}match(e,t){return l(this,ie).search(e,t)}},ie=new WeakMap,Mt),P=class extends Gt{constructor(e={}){super(e),this.router=e.router??new Fs({routers:[new Bs,new $s]})}},qs=e=>{const s={...{origin:"*",allowMethods:["GET","HEAD","PUT","POST","DELETE","PATCH"],allowHeaders:[],exposeHeaders:[]},...e},a=(o=>typeof o=="string"?o==="*"?()=>o:r=>o===r?r:null:typeof o=="function"?o:r=>o.includes(r)?r:null)(s.origin),i=(o=>typeof o=="function"?o:Array.isArray(o)?()=>o:()=>[])(s.allowMethods);return async function(r,d){var p;function n(m,u){r.res.headers.set(m,u)}const c=await a(r.req.header("origin")||"",r);if(c&&n("Access-Control-Allow-Origin",c),s.origin!=="*"){const m=r.req.header("Vary");m?n("Vary",m):n("Vary","Origin")}if(s.credentials&&n("Access-Control-Allow-Credentials","true"),(p=s.exposeHeaders)!=null&&p.length&&n("Access-Control-Expose-Headers",s.exposeHeaders.join(",")),r.req.method==="OPTIONS"){s.maxAge!=null&&n("Access-Control-Max-Age",s.maxAge.toString());const m=await i(r.req.header("origin")||"",r);m.length&&n("Access-Control-Allow-Methods",m.join(","));let u=s.allowHeaders;if(!(u!=null&&u.length)){const w=r.req.header("Access-Control-Request-Headers");w&&(u=w.split(/\s*,\s*/))}return u!=null&&u.length&&(n("Access-Control-Allow-Headers",u.join(",")),r.res.headers.append("Vary","Access-Control-Request-Headers")),r.res.headers.delete("Content-Length"),r.res.headers.delete("Content-Type"),new Response(null,{headers:r.res.headers,status:204,statusText:"No Content"})}await d()}},Hs=/^\s*(?:text\/(?!event-stream(?:[;\s]|$))[^;\s]+|application\/(?:javascript|json|xml|xml-dtd|ecmascript|dart|postscript|rtf|tar|toml|vnd\.dart|vnd\.ms-fontobject|vnd\.ms-opentype|wasm|x-httpd-php|x-javascript|x-ns-proxy-autoconfig|x-sh|x-tar|x-virtualbox-hdd|x-virtualbox-ova|x-virtualbox-ovf|x-virtualbox-vbox|x-virtualbox-vdi|x-virtualbox-vhd|x-virtualbox-vmdk|x-www-form-urlencoded)|font\/(?:otf|ttf)|image\/(?:bmp|vnd\.adobe\.photoshop|vnd\.microsoft\.icon|vnd\.ms-dds|x-icon|x-ms-bmp)|message\/rfc822|model\/gltf-binary|x-shader\/x-fragment|x-shader\/x-vertex|[^;\s]+?\+(?:json|text|xml|yaml))(?:[;\s]|$)/i,ot=(e,t=zs)=>{const s=/\.([a-zA-Z0-9]+?)$/,a=e.match(s);if(!a)return;let i=t[a[1]];return i&&i.startsWith("text")&&(i+="; charset=utf-8"),i},Vs={aac:"audio/aac",avi:"video/x-msvideo",avif:"image/avif",av1:"video/av1",bin:"application/octet-stream",bmp:"image/bmp",css:"text/css",csv:"text/csv",eot:"application/vnd.ms-fontobject",epub:"application/epub+zip",gif:"image/gif",gz:"application/gzip",htm:"text/html",html:"text/html",ico:"image/x-icon",ics:"text/calendar",jpeg:"image/jpeg",jpg:"image/jpeg",js:"text/javascript",json:"application/json",jsonld:"application/ld+json",map:"application/json",mid:"audio/x-midi",midi:"audio/x-midi",mjs:"text/javascript",mp3:"audio/mpeg",mp4:"video/mp4",mpeg:"video/mpeg",oga:"audio/ogg",ogv:"video/ogg",ogx:"application/ogg",opus:"audio/opus",otf:"font/otf",pdf:"application/pdf",png:"image/png",rtf:"application/rtf",svg:"image/svg+xml",tif:"image/tiff",tiff:"image/tiff",ts:"video/mp2t",ttf:"font/ttf",txt:"text/plain",wasm:"application/wasm",webm:"video/webm",weba:"audio/webm",webmanifest:"application/manifest+json",webp:"image/webp",woff:"font/woff",woff2:"font/woff2",xhtml:"application/xhtml+xml",xml:"application/xml",zip:"application/zip","3gp":"video/3gpp","3g2":"video/3gpp2",gltf:"model/gltf+json",glb:"model/gltf-binary"},zs=Vs,Gs=(...e)=>{let t=e.filter(i=>i!=="").join("/");t=t.replace(new RegExp("(?<=\\/)\\/+","g"),"");const s=t.split("/"),a=[];for(const i of s)i===".."&&a.length>0&&a.at(-1)!==".."?a.pop():i!=="."&&a.push(i);return a.join("/")||"."},Yt={br:".br",zstd:".zst",gzip:".gz"},Us=Object.keys(Yt),_s="index.html",Js=e=>{const t=e.root??"./",s=e.path,a=e.join??Gs;return async(i,o)=>{var p,m,u,w;if(i.finalized)return o();let r;if(e.path)r=e.path;else try{if(r=decodeURIComponent(i.req.path),/(?:^|[\/\\])\.\.(?:$|[\/\\])/.test(r))throw new Error}catch{return await((p=e.onNotFound)==null?void 0:p.call(e,i.req.path,i)),o()}let d=a(t,!s&&e.rewriteRequestPath?e.rewriteRequestPath(r):r);e.isDir&&await e.isDir(d)&&(d=a(d,_s));const n=e.getContent;let c=await n(d,i);if(c instanceof Response)return i.newResponse(c.body,c);if(c){const E=e.mimes&&ot(d,e.mimes)||ot(d);if(i.header("Content-Type",E||"application/octet-stream"),e.precompressed&&(!E||Hs.test(E))){const h=new Set((m=i.req.header("Accept-Encoding"))==null?void 0:m.split(",").map(y=>y.trim()));for(const y of Us){if(!h.has(y))continue;const j=await n(d+Yt[y],i);if(j){c=j,i.header("Content-Encoding",y),i.header("Vary","Accept-Encoding",{append:!0});break}}}return await((u=e.onFound)==null?void 0:u.call(e,d,i)),i.body(c)}await((w=e.onNotFound)==null?void 0:w.call(e,d,i)),await o()}},Ks=async(e,t)=>{let s;t&&t.manifest?typeof t.manifest=="string"?s=JSON.parse(t.manifest):s=t.manifest:typeof __STATIC_CONTENT_MANIFEST=="string"?s=JSON.parse(__STATIC_CONTENT_MANIFEST):s=__STATIC_CONTENT_MANIFEST;let a;t&&t.namespace?a=t.namespace:a=__STATIC_CONTENT;const i=s[e]||e;if(!i)return null;const o=await a.get(i,{type:"stream"});return o||null},Ws=e=>async function(s,a){return Js({...e,getContent:async o=>Ks(o,{manifest:e.manifest,namespace:e.namespace?e.namespace:s.env?s.env.__STATIC_CONTENT:void 0})})(s,a)},Zt=e=>Ws(e),W=(e,...t)=>{const s=[""];for(let a=0,i=e.length-1;a<i;a++){s[0]+=e[a];const o=Array.isArray(t[a])?t[a].flat(1/0):[t[a]];for(let r=0,d=o.length;r<d;r++){const n=o[r];if(typeof n=="string")Qe(n,s);else if(typeof n=="number")s[0]+=n;else{if(typeof n=="boolean"||n===null||n===void 0)continue;if(typeof n=="object"&&n.isEscaped)if(n.callbacks)s.unshift("",n);else{const c=n.toString();c instanceof Promise?s.unshift("",c):s[0]+=c}else n instanceof Promise?s.unshift("",n):Qe(n.toString(),s)}}}return s[0]+=e.at(-1),s.length===1?"callbacks"in s?ge(Ps(ge(s[0],s.callbacks))):ge(s[0]):As(s,s.callbacks)};const Re=new P;Re.get("/profile/:id",async e=>{const t=e.req.param("id");return e.json({id:t,name:"João Silva",diagnosis:"Em tratamento",nextAppointment:"2024-02-15",treatmentStage:"Quimioterapia"})});Re.post("/symptoms",async e=>(await e.req.json(),e.json({success:!0,message:"Sintomas registrados com sucesso",aiRecommendation:"Monitoramento contínuo recomendado"})));Re.get("/journey/:id",async e=>{const t=e.req.param("id");return e.json({patientId:t,stages:[{date:"2024-01-01",event:"Diagnóstico inicial",status:"completed"},{date:"2024-01-15",event:"Início do tratamento",status:"completed"},{date:"2024-02-01",event:"Primeira sessão de quimioterapia",status:"in-progress"},{date:"2024-03-01",event:"Avaliação de resposta",status:"pending"}]})});Re.post("/triage",async e=>{const t=await e.req.json(),{symptoms:s,age:a,gender:i,history:o}=t,r=s.includes("dor intensa")?"high":"medium";return e.json({urgencyLevel:r,recommendation:r==="high"?"Procure atendimento médico imediato":"Agende uma consulta com seu médico",suggestedSpecialty:"Oncologia",estimatedWaitTime:r==="high"?"0-2 horas":"1-3 dias"})});const De=new P;De.get("/patients",async e=>e.json({patients:[{id:"1",name:"João Silva",age:55,diagnosis:"Câncer de Pulmão",stage:"IIIa",lastVisit:"2024-01-28",nextAppointment:"2024-02-15",riskScore:.7,alertLevel:"medium"},{id:"2",name:"Maria Santos",age:42,diagnosis:"Câncer de Mama",stage:"IIb",lastVisit:"2024-01-25",nextAppointment:"2024-02-10",riskScore:.4,alertLevel:"low"}]}));De.post("/ai-assistant",async e=>{const t=await e.req.json(),{query:s,patientContext:a,type:i}=t;let o="";return i==="treatment-recommendation"?o=`Baseado no perfil do paciente e diretrizes atuais:
+var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in e?rs(e,t,{enumerable:!0,configurable:!0,writable:!0,value:s}):e[t]=s;var x=(e,t,s)=>ns(e,typeof t!="symbol"?t+"":t,s),_e=(e,t,s)=>t.has(e)||et("Cannot "+s);var l=(e,t,s)=>(_e(e,t,"read from private field"),s?s.call(e):t.get(e)),b=(e,t,s)=>t.has(e)?et("Cannot add the same private member more than once"):t instanceof WeakSet?t.add(e):t.set(e,s),g=(e,t,s,a)=>(_e(e,t,"write to private field"),a?a.call(e,s):t.set(e,s),s),f=(e,t,s)=>(_e(e,t,"access private method"),s);var tt=(e,t,s,a)=>({set _(i){g(e,t,i,s)},get _(){return l(e,t,a)}});var st=(e,t,s)=>(a,i)=>{let o=-1;return r(0);async function r(d){if(d<=o)throw new Error("next() called multiple times");o=d;let n,c=!1,p;if(e[d]?(p=e[d][0][0],a.req.routeIndex=d):p=d===e.length&&i||void 0,p)try{n=await p(a,()=>r(d+1))}catch(m){if(m instanceof Error&&t)a.error=m,n=await t(m,a),c=!0;else throw m}else a.finalized===!1&&s&&(n=await s(a));return n&&(a.finalized===!1||c)&&(a.res=n),a}},ls=Symbol(),ds=async(e,t=Object.create(null))=>{const{all:s=!1,dot:a=!1}=t,o=(e instanceof Bt?e.raw.headers:e.headers).get("Content-Type");return o!=null&&o.startsWith("multipart/form-data")||o!=null&&o.startsWith("application/x-www-form-urlencoded")?cs(e,{all:s,dot:a}):{}};async function cs(e,t){const s=await e.formData();return s?ps(s,t):{}}function ps(e,t){const s=Object.create(null);return e.forEach((a,i)=>{t.all||i.endsWith("[]")?ms(s,i,a):s[i]=a}),t.dot&&Object.entries(s).forEach(([a,i])=>{a.includes(".")&&(gs(s,a,i),delete s[a])}),s}var ms=(e,t,s)=>{e[t]!==void 0?Array.isArray(e[t])?e[t].push(s):e[t]=[e[t],s]:t.endsWith("[]")?e[t]=[s]:e[t]=s},gs=(e,t,s)=>{let a=e;const i=t.split(".");i.forEach((o,r)=>{r===i.length-1?a[o]=s:((!a[o]||typeof a[o]!="object"||Array.isArray(a[o])||a[o]instanceof File)&&(a[o]=Object.create(null)),a=a[o])})},Rt=e=>{const t=e.split("/");return t[0]===""&&t.shift(),t},xs=e=>{const{groups:t,path:s}=us(e),a=Rt(s);return bs(a,t)},us=e=>{const t=[];return e=e.replace(/\{[^}]+\}/g,(s,a)=>{const i=`@${a}`;return t.push([i,s]),i}),{groups:t,path:e}},bs=(e,t)=>{for(let s=t.length-1;s>=0;s--){const[a]=t[s];for(let i=e.length-1;i>=0;i--)if(e[i].includes(a)){e[i]=e[i].replace(a,t[s][1]);break}}return e},Fe={},vs=(e,t)=>{if(e==="*")return"*";const s=e.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);if(s){const a=`${e}#${t}`;return Fe[a]||(s[2]?Fe[a]=t&&t[0]!==":"&&t[0]!=="*"?[a,s[1],new RegExp(`^${s[2]}(?=/${t})`)]:[e,s[1],new RegExp(`^${s[2]}$`)]:Fe[a]=[e,s[1],!0]),Fe[a]}return null},Ze=(e,t)=>{try{return t(e)}catch{return e.replace(/(?:%[0-9A-Fa-f]{2})+/g,s=>{try{return t(s)}catch{return s}})}},fs=e=>Ze(e,decodeURI),Dt=e=>{const t=e.url,s=t.indexOf("/",t.indexOf(":")+4);let a=s;for(;a<t.length;a++){const i=t.charCodeAt(a);if(i===37){const o=t.indexOf("?",a),r=t.slice(s,o===-1?void 0:o);return fs(r.includes("%25")?r.replace(/%25/g,"%2525"):r)}else if(i===63)break}return t.slice(s,a)},hs=e=>{const t=Dt(e);return t.length>1&&t.at(-1)==="/"?t.slice(0,-1):t},ce=(e,t,...s)=>(s.length&&(t=ce(t,...s)),`${(e==null?void 0:e[0])==="/"?"":"/"}${e}${t==="/"?"":`${(e==null?void 0:e.at(-1))==="/"?"":"/"}${(t==null?void 0:t[0])==="/"?t.slice(1):t}`}`),Lt=e=>{if(e.charCodeAt(e.length-1)!==63||!e.includes(":"))return null;const t=e.split("/"),s=[];let a="";return t.forEach(i=>{if(i!==""&&!/\:/.test(i))a+="/"+i;else if(/\:/.test(i))if(/\?/.test(i)){s.length===0&&a===""?s.push("/"):s.push(a);const o=i.replace("?","");a+="/"+o,s.push(a)}else a+="/"+i}),s.filter((i,o,r)=>r.indexOf(i)===o)},Je=e=>/[%+]/.test(e)?(e.indexOf("+")!==-1&&(e=e.replace(/\+/g," ")),e.indexOf("%")!==-1?Ze(e,Ot):e):e,Nt=(e,t,s)=>{let a;if(!s&&t&&!/[%+]/.test(t)){let r=e.indexOf(`?${t}`,8);for(r===-1&&(r=e.indexOf(`&${t}`,8));r!==-1;){const d=e.charCodeAt(r+t.length+1);if(d===61){const n=r+t.length+2,c=e.indexOf("&",n);return Je(e.slice(n,c===-1?void 0:c))}else if(d==38||isNaN(d))return"";r=e.indexOf(`&${t}`,r+1)}if(a=/[%+]/.test(e),!a)return}const i={};a??(a=/[%+]/.test(e));let o=e.indexOf("?",8);for(;o!==-1;){const r=e.indexOf("&",o+1);let d=e.indexOf("=",o);d>r&&r!==-1&&(d=-1);let n=e.slice(o+1,d===-1?r===-1?void 0:r:d);if(a&&(n=Je(n)),o=r,n==="")continue;let c;d===-1?c="":(c=e.slice(d+1,r===-1?void 0:r),a&&(c=Je(c))),s?(i[n]&&Array.isArray(i[n])||(i[n]=[]),i[n].push(c)):i[n]??(i[n]=c)}return t?i[t]:i},ys=Nt,ws=(e,t)=>Nt(e,t,!0),Ot=decodeURIComponent,at=e=>Ze(e,Ot),xe,T,q,Ft,$t,Ke,z,At,Bt=(At=class{constructor(e,t="/",s=[[]]){b(this,q);x(this,"raw");b(this,xe);b(this,T);x(this,"routeIndex",0);x(this,"path");x(this,"bodyCache",{});b(this,z,e=>{const{bodyCache:t,raw:s}=this,a=t[e];if(a)return a;const i=Object.keys(t)[0];return i?t[i].then(o=>(i==="json"&&(o=JSON.stringify(o)),new Response(o)[e]())):t[e]=s[e]()});this.raw=e,this.path=t,g(this,T,s),g(this,xe,{})}param(e){return e?f(this,q,Ft).call(this,e):f(this,q,$t).call(this)}query(e){return ys(this.url,e)}queries(e){return ws(this.url,e)}header(e){if(e)return this.raw.headers.get(e)??void 0;const t={};return this.raw.headers.forEach((s,a)=>{t[a]=s}),t}async parseBody(e){var t;return(t=this.bodyCache).parsedBody??(t.parsedBody=await ds(this,e))}json(){return l(this,z).call(this,"text").then(e=>JSON.parse(e))}text(){return l(this,z).call(this,"text")}arrayBuffer(){return l(this,z).call(this,"arrayBuffer")}blob(){return l(this,z).call(this,"blob")}formData(){return l(this,z).call(this,"formData")}addValidatedData(e,t){l(this,xe)[e]=t}valid(e){return l(this,xe)[e]}get url(){return this.raw.url}get method(){return this.raw.method}get[ls](){return l(this,T)}get matchedRoutes(){return l(this,T)[0].map(([[,e]])=>e)}get routePath(){return l(this,T)[0].map(([[,e]])=>e)[this.routeIndex].path}},xe=new WeakMap,T=new WeakMap,q=new WeakSet,Ft=function(e){const t=l(this,T)[0][this.routeIndex][1][e],s=f(this,q,Ke).call(this,t);return s?/\%/.test(s)?at(s):s:void 0},$t=function(){const e={},t=Object.keys(l(this,T)[0][this.routeIndex][1]);for(const s of t){const a=f(this,q,Ke).call(this,l(this,T)[0][this.routeIndex][1][s]);a&&typeof a=="string"&&(e[s]=/\%/.test(a)?at(a):a)}return e},Ke=function(e){return l(this,T)[1]?l(this,T)[1][e]:e},z=new WeakMap,At),qt={Stringify:1},ge=(e,t)=>{const s=new String(e);return s.isEscaped=!0,s.callbacks=t,s},Cs=/[&<>'"]/,As=async(e,t)=>{let s="";t||(t=[]);const a=await Promise.all(e);for(let i=a.length-1;s+=a[i],i--,!(i<0);i--){let o=a[i];typeof o=="object"&&t.push(...o.callbacks||[]);const r=o.isEscaped;if(o=await(typeof o=="object"?o.toString():o),typeof o=="object"&&t.push(...o.callbacks||[]),o.isEscaped??r)s+=o;else{const d=[s];Qe(o,d),s=d[0]}}return ge(s,t)},Qe=(e,t)=>{const s=e.search(Cs);if(s===-1){t[0]+=e;return}let a,i,o=0;for(i=s;i<e.length;i++){switch(e.charCodeAt(i)){case 34:a="&quot;";break;case 39:a="&#39;";break;case 38:a="&amp;";break;case 60:a="&lt;";break;case 62:a="&gt;";break;default:continue}t[0]+=e.substring(o,i)+a,o=i+1}t[0]+=e.substring(o,i)},Ps=e=>{const t=e.callbacks;if(!(t!=null&&t.length))return e;const s=[e],a={};return t.forEach(i=>i({phase:qt.Stringify,buffer:s,context:a})),s[0]},Ht=async(e,t,s,a,i)=>{typeof e=="object"&&!(e instanceof String)&&(e instanceof Promise||(e=e.toString()),e instanceof Promise&&(e=await e));const o=e.callbacks;return o!=null&&o.length?(i?i[0]+=e:i=[e],Promise.all(o.map(d=>d({phase:t,buffer:i,context:a}))).then(d=>Promise.all(d.filter(Boolean).map(n=>Ht(n,t,!1,a,i))).then(()=>i[0]))):Promise.resolve(e)},ks="text/plain; charset=UTF-8",We=(e,t)=>({"Content-Type":e,...t}),Ie,je,O,ue,B,S,Se,be,ve,ee,Ee,Te,G,pe,Pt,Is=(Pt=class{constructor(e,t){b(this,G);b(this,Ie);b(this,je);x(this,"env",{});b(this,O);x(this,"finalized",!1);x(this,"error");b(this,ue);b(this,B);b(this,S);b(this,Se);b(this,be);b(this,ve);b(this,ee);b(this,Ee);b(this,Te);x(this,"render",(...e)=>(l(this,be)??g(this,be,t=>this.html(t)),l(this,be).call(this,...e)));x(this,"setLayout",e=>g(this,Se,e));x(this,"getLayout",()=>l(this,Se));x(this,"setRenderer",e=>{g(this,be,e)});x(this,"header",(e,t,s)=>{this.finalized&&g(this,S,new Response(l(this,S).body,l(this,S)));const a=l(this,S)?l(this,S).headers:l(this,ee)??g(this,ee,new Headers);t===void 0?a.delete(e):s!=null&&s.append?a.append(e,t):a.set(e,t)});x(this,"status",e=>{g(this,ue,e)});x(this,"set",(e,t)=>{l(this,O)??g(this,O,new Map),l(this,O).set(e,t)});x(this,"get",e=>l(this,O)?l(this,O).get(e):void 0);x(this,"newResponse",(...e)=>f(this,G,pe).call(this,...e));x(this,"body",(e,t,s)=>f(this,G,pe).call(this,e,t,s));x(this,"text",(e,t,s)=>!l(this,ee)&&!l(this,ue)&&!t&&!s&&!this.finalized?new Response(e):f(this,G,pe).call(this,e,t,We(ks,s)));x(this,"json",(e,t,s)=>f(this,G,pe).call(this,JSON.stringify(e),t,We("application/json",s)));x(this,"html",(e,t,s)=>{const a=i=>f(this,G,pe).call(this,i,t,We("text/html; charset=UTF-8",s));return typeof e=="object"?Ht(e,qt.Stringify,!1,{}).then(a):a(e)});x(this,"redirect",(e,t)=>{const s=String(e);return this.header("Location",/[^\x00-\xFF]/.test(s)?encodeURI(s):s),this.newResponse(null,t??302)});x(this,"notFound",()=>(l(this,ve)??g(this,ve,()=>new Response),l(this,ve).call(this,this)));g(this,Ie,e),t&&(g(this,B,t.executionCtx),this.env=t.env,g(this,ve,t.notFoundHandler),g(this,Te,t.path),g(this,Ee,t.matchResult))}get req(){return l(this,je)??g(this,je,new Bt(l(this,Ie),l(this,Te),l(this,Ee))),l(this,je)}get event(){if(l(this,B)&&"respondWith"in l(this,B))return l(this,B);throw Error("This context has no FetchEvent")}get executionCtx(){if(l(this,B))return l(this,B);throw Error("This context has no ExecutionContext")}get res(){return l(this,S)||g(this,S,new Response(null,{headers:l(this,ee)??g(this,ee,new Headers)}))}set res(e){if(l(this,S)&&e){e=new Response(e.body,e);for(const[t,s]of l(this,S).headers.entries())if(t!=="content-type")if(t==="set-cookie"){const a=l(this,S).headers.getSetCookie();e.headers.delete("set-cookie");for(const i of a)e.headers.append("set-cookie",i)}else e.headers.set(t,s)}g(this,S,e),this.finalized=!0}get var(){return l(this,O)?Object.fromEntries(l(this,O)):{}}},Ie=new WeakMap,je=new WeakMap,O=new WeakMap,ue=new WeakMap,B=new WeakMap,S=new WeakMap,Se=new WeakMap,be=new WeakMap,ve=new WeakMap,ee=new WeakMap,Ee=new WeakMap,Te=new WeakMap,G=new WeakSet,pe=function(e,t,s){const a=l(this,S)?new Headers(l(this,S).headers):l(this,ee)??new Headers;if(typeof t=="object"&&"headers"in t){const o=t.headers instanceof Headers?t.headers:new Headers(t.headers);for(const[r,d]of o)r.toLowerCase()==="set-cookie"?a.append(r,d):a.set(r,d)}if(s)for(const[o,r]of Object.entries(s))if(typeof r=="string")a.set(o,r);else{a.delete(o);for(const d of r)a.append(o,d)}const i=typeof t=="number"?t:(t==null?void 0:t.status)??l(this,ue);return new Response(e,{status:i,headers:a})},Pt),C="ALL",js="all",Ss=["get","post","put","delete","options","patch"],Vt="Can not add a route since the matcher is already built.",zt=class extends Error{},Es="__COMPOSED_HANDLER",Ts=e=>e.text("404 Not Found",404),it=(e,t)=>{if("getResponse"in e){const s=e.getResponse();return t.newResponse(s.body,s)}return console.error(e),t.text("Internal Server Error",500)},M,A,Ut,R,Z,$e,qe,kt,Gt=(kt=class{constructor(t={}){b(this,A);x(this,"get");x(this,"post");x(this,"put");x(this,"delete");x(this,"options");x(this,"patch");x(this,"all");x(this,"on");x(this,"use");x(this,"router");x(this,"getPath");x(this,"_basePath","/");b(this,M,"/");x(this,"routes",[]);b(this,R,Ts);x(this,"errorHandler",it);x(this,"onError",t=>(this.errorHandler=t,this));x(this,"notFound",t=>(g(this,R,t),this));x(this,"fetch",(t,...s)=>f(this,A,qe).call(this,t,s[1],s[0],t.method));x(this,"request",(t,s,a,i)=>t instanceof Request?this.fetch(s?new Request(t,s):t,a,i):(t=t.toString(),this.fetch(new Request(/^https?:\/\//.test(t)?t:`http://localhost${ce("/",t)}`,s),a,i)));x(this,"fire",()=>{addEventListener("fetch",t=>{t.respondWith(f(this,A,qe).call(this,t.request,t,void 0,t.request.method))})});[...Ss,js].forEach(o=>{this[o]=(r,...d)=>(typeof r=="string"?g(this,M,r):f(this,A,Z).call(this,o,l(this,M),r),d.forEach(n=>{f(this,A,Z).call(this,o,l(this,M),n)}),this)}),this.on=(o,r,...d)=>{for(const n of[r].flat()){g(this,M,n);for(const c of[o].flat())d.map(p=>{f(this,A,Z).call(this,c.toUpperCase(),l(this,M),p)})}return this},this.use=(o,...r)=>(typeof o=="string"?g(this,M,o):(g(this,M,"*"),r.unshift(o)),r.forEach(d=>{f(this,A,Z).call(this,C,l(this,M),d)}),this);const{strict:a,...i}=t;Object.assign(this,i),this.getPath=a??!0?t.getPath??Dt:hs}route(t,s){const a=this.basePath(t);return s.routes.map(i=>{var r;let o;s.errorHandler===it?o=i.handler:(o=async(d,n)=>(await st([],s.errorHandler)(d,()=>i.handler(d,n))).res,o[Es]=i.handler),f(r=a,A,Z).call(r,i.method,i.path,o)}),this}basePath(t){const s=f(this,A,Ut).call(this);return s._basePath=ce(this._basePath,t),s}mount(t,s,a){let i,o;a&&(typeof a=="function"?o=a:(o=a.optionHandler,a.replaceRequest===!1?i=n=>n:i=a.replaceRequest));const r=o?n=>{const c=o(n);return Array.isArray(c)?c:[c]}:n=>{let c;try{c=n.executionCtx}catch{}return[n.env,c]};i||(i=(()=>{const n=ce(this._basePath,t),c=n==="/"?0:n.length;return p=>{const m=new URL(p.url);return m.pathname=m.pathname.slice(c)||"/",new Request(m,p)}})());const d=async(n,c)=>{const p=await s(i(n.req.raw),...r(n));if(p)return p;await c()};return f(this,A,Z).call(this,C,ce(t,"*"),d),this}},M=new WeakMap,A=new WeakSet,Ut=function(){const t=new Gt({router:this.router,getPath:this.getPath});return t.errorHandler=this.errorHandler,g(t,R,l(this,R)),t.routes=this.routes,t},R=new WeakMap,Z=function(t,s,a){t=t.toUpperCase(),s=ce(this._basePath,s);const i={basePath:this._basePath,path:s,method:t,handler:a};this.router.add(t,s,[a,i]),this.routes.push(i)},$e=function(t,s){if(t instanceof Error)return this.errorHandler(t,s);throw t},qe=function(t,s,a,i){if(i==="HEAD")return(async()=>new Response(null,await f(this,A,qe).call(this,t,s,a,"GET")))();const o=this.getPath(t,{env:a}),r=this.router.match(i,o),d=new Is(t,{path:o,matchResult:r,env:a,executionCtx:s,notFoundHandler:l(this,R)});if(r[0].length===1){let c;try{c=r[0][0][0][0](d,async()=>{d.res=await l(this,R).call(this,d)})}catch(p){return f(this,A,$e).call(this,p,d)}return c instanceof Promise?c.then(p=>p||(d.finalized?d.res:l(this,R).call(this,d))).catch(p=>f(this,A,$e).call(this,p,d)):c??l(this,R).call(this,d)}const n=st(r[0],this.errorHandler,l(this,R));return(async()=>{try{const c=await n(d);if(!c.finalized)throw new Error("Context is not finalized. Did you forget to return a Response object or `await next()`?");return c.res}catch(c){return f(this,A,$e).call(this,c,d)}})()},kt),Ve="[^/]+",Pe=".*",ke="(?:|/.*)",me=Symbol(),Ms=new Set(".\\+*[^]$()");function Rs(e,t){return e.length===1?t.length===1?e<t?-1:1:-1:t.length===1||e===Pe||e===ke?1:t===Pe||t===ke?-1:e===Ve?1:t===Ve?-1:e.length===t.length?e<t?-1:1:t.length-e.length}var te,se,D,It,Ye=(It=class{constructor(){b(this,te);b(this,se);b(this,D,Object.create(null))}insert(t,s,a,i,o){if(t.length===0){if(l(this,te)!==void 0)throw me;if(o)return;g(this,te,s);return}const[r,...d]=t,n=r==="*"?d.length===0?["","",Pe]:["","",Ve]:r==="/*"?["","",ke]:r.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);let c;if(n){const p=n[1];let m=n[2]||Ve;if(p&&n[2]&&(m===".*"||(m=m.replace(/^\((?!\?:)(?=[^)]+\)$)/,"(?:"),/\((?!\?:)/.test(m))))throw me;if(c=l(this,D)[m],!c){if(Object.keys(l(this,D)).some(u=>u!==Pe&&u!==ke))throw me;if(o)return;c=l(this,D)[m]=new Ye,p!==""&&g(c,se,i.varIndex++)}!o&&p!==""&&a.push([p,l(c,se)])}else if(c=l(this,D)[r],!c){if(Object.keys(l(this,D)).some(p=>p.length>1&&p!==Pe&&p!==ke))throw me;if(o)return;c=l(this,D)[r]=new Ye}c.insert(d,s,a,i,o)}buildRegExpStr(){const s=Object.keys(l(this,D)).sort(Rs).map(a=>{const i=l(this,D)[a];return(typeof l(i,se)=="number"?`(${a})@${l(i,se)}`:Ms.has(a)?`\\${a}`:a)+i.buildRegExpStr()});return typeof l(this,te)=="number"&&s.unshift(`#${l(this,te)}`),s.length===0?"":s.length===1?s[0]:"(?:"+s.join("|")+")"}},te=new WeakMap,se=new WeakMap,D=new WeakMap,It),ze,Me,jt,Ds=(jt=class{constructor(){b(this,ze,{varIndex:0});b(this,Me,new Ye)}insert(e,t,s){const a=[],i=[];for(let r=0;;){let d=!1;if(e=e.replace(/\{[^}]+\}/g,n=>{const c=`@\\${r}`;return i[r]=[c,n],r++,d=!0,c}),!d)break}const o=e.match(/(?::[^\/]+)|(?:\/\*$)|./g)||[];for(let r=i.length-1;r>=0;r--){const[d]=i[r];for(let n=o.length-1;n>=0;n--)if(o[n].indexOf(d)!==-1){o[n]=o[n].replace(d,i[r][1]);break}}return l(this,Me).insert(o,t,a,l(this,ze),s),a}buildRegExp(){let e=l(this,Me).buildRegExpStr();if(e==="")return[/^$/,[],[]];let t=0;const s=[],a=[];return e=e.replace(/#(\d+)|@(\d+)|\.\*\$/g,(i,o,r)=>o!==void 0?(s[++t]=Number(o),"$()"):(r!==void 0&&(a[Number(r)]=++t),"")),[new RegExp(`^${e}`),s,a]}},ze=new WeakMap,Me=new WeakMap,jt),_t=[],Ls=[/^$/,[],Object.create(null)],He=Object.create(null);function Jt(e){return He[e]??(He[e]=new RegExp(e==="*"?"":`^${e.replace(/\/\*$|([.\\+*[^\]$()])/g,(t,s)=>s?`\\${s}`:"(?:|/.*)")}$`))}function Ns(){He=Object.create(null)}function Os(e){var c;const t=new Ds,s=[];if(e.length===0)return Ls;const a=e.map(p=>[!/\*|\/:/.test(p[0]),...p]).sort(([p,m],[u,w])=>p?1:u?-1:m.length-w.length),i=Object.create(null);for(let p=0,m=-1,u=a.length;p<u;p++){const[w,E,h]=a[p];w?i[E]=[h.map(([j])=>[j,Object.create(null)]),_t]:m++;let y;try{y=t.insert(E,m,w)}catch(j){throw j===me?new zt(E):j}w||(s[m]=h.map(([j,le])=>{const we=Object.create(null);for(le-=1;le>=0;le--){const[L,Ge]=y[le];we[L]=Ge}return[j,we]}))}const[o,r,d]=t.buildRegExp();for(let p=0,m=s.length;p<m;p++)for(let u=0,w=s[p].length;u<w;u++){const E=(c=s[p][u])==null?void 0:c[1];if(!E)continue;const h=Object.keys(E);for(let y=0,j=h.length;y<j;y++)E[h[y]]=d[E[h[y]]]}const n=[];for(const p in r)n[p]=s[r[p]];return[o,n,i]}function de(e,t){if(e){for(const s of Object.keys(e).sort((a,i)=>i.length-a.length))if(Jt(s).test(t))return[...e[s]]}}var U,_,he,Wt,Kt,St,Bs=(St=class{constructor(){b(this,he);x(this,"name","RegExpRouter");b(this,U);b(this,_);g(this,U,{[C]:Object.create(null)}),g(this,_,{[C]:Object.create(null)})}add(e,t,s){var d;const a=l(this,U),i=l(this,_);if(!a||!i)throw new Error(Vt);a[e]||[a,i].forEach(n=>{n[e]=Object.create(null),Object.keys(n[C]).forEach(c=>{n[e][c]=[...n[C][c]]})}),t==="/*"&&(t="*");const o=(t.match(/\/:/g)||[]).length;if(/\*$/.test(t)){const n=Jt(t);e===C?Object.keys(a).forEach(c=>{var p;(p=a[c])[t]||(p[t]=de(a[c],t)||de(a[C],t)||[])}):(d=a[e])[t]||(d[t]=de(a[e],t)||de(a[C],t)||[]),Object.keys(a).forEach(c=>{(e===C||e===c)&&Object.keys(a[c]).forEach(p=>{n.test(p)&&a[c][p].push([s,o])})}),Object.keys(i).forEach(c=>{(e===C||e===c)&&Object.keys(i[c]).forEach(p=>n.test(p)&&i[c][p].push([s,o]))});return}const r=Lt(t)||[t];for(let n=0,c=r.length;n<c;n++){const p=r[n];Object.keys(i).forEach(m=>{var u;(e===C||e===m)&&((u=i[m])[p]||(u[p]=[...de(a[m],p)||de(a[C],p)||[]]),i[m][p].push([s,o-c+n+1]))})}}match(e,t){Ns();const s=f(this,he,Wt).call(this);return this.match=(a,i)=>{const o=s[a]||s[C],r=o[2][i];if(r)return r;const d=i.match(o[0]);if(!d)return[[],_t];const n=d.indexOf("",1);return[o[1][n],d]},this.match(e,t)}},U=new WeakMap,_=new WeakMap,he=new WeakSet,Wt=function(){const e=Object.create(null);return Object.keys(l(this,_)).concat(Object.keys(l(this,U))).forEach(t=>{e[t]||(e[t]=f(this,he,Kt).call(this,t))}),g(this,U,g(this,_,void 0)),e},Kt=function(e){const t=[];let s=e===C;return[l(this,U),l(this,_)].forEach(a=>{const i=a[e]?Object.keys(a[e]).map(o=>[o,a[e][o]]):[];i.length!==0?(s||(s=!0),t.push(...i)):e!==C&&t.push(...Object.keys(a[C]).map(o=>[o,a[C][o]]))}),s?Os(t):null},St),J,F,Et,Fs=(Et=class{constructor(e){x(this,"name","SmartRouter");b(this,J,[]);b(this,F,[]);g(this,J,e.routers)}add(e,t,s){if(!l(this,F))throw new Error(Vt);l(this,F).push([e,t,s])}match(e,t){if(!l(this,F))throw new Error("Fatal error");const s=l(this,J),a=l(this,F),i=s.length;let o=0,r;for(;o<i;o++){const d=s[o];try{for(let n=0,c=a.length;n<c;n++)d.add(...a[n]);r=d.match(e,t)}catch(n){if(n instanceof zt)continue;throw n}this.match=d.match.bind(d),g(this,J,[d]),g(this,F,void 0);break}if(o===i)throw new Error("Fatal error");return this.name=`SmartRouter + ${this.activeRouter.name}`,r}get activeRouter(){if(l(this,F)||l(this,J).length!==1)throw new Error("No active router has been determined yet.");return l(this,J)[0]}},J=new WeakMap,F=new WeakMap,Et),Ae=Object.create(null),W,I,ae,fe,k,$,X,Tt,Qt=(Tt=class{constructor(e,t,s){b(this,$);b(this,W);b(this,I);b(this,ae);b(this,fe,0);b(this,k,Ae);if(g(this,I,s||Object.create(null)),g(this,W,[]),e&&t){const a=Object.create(null);a[e]={handler:t,possibleKeys:[],score:0},g(this,W,[a])}g(this,ae,[])}insert(e,t,s){g(this,fe,++tt(this,fe)._);let a=this;const i=xs(t),o=[];for(let r=0,d=i.length;r<d;r++){const n=i[r],c=i[r+1],p=vs(n,c),m=Array.isArray(p)?p[0]:n;if(m in l(a,I)){a=l(a,I)[m],p&&o.push(p[1]);continue}l(a,I)[m]=new Qt,p&&(l(a,ae).push(p),o.push(p[1])),a=l(a,I)[m]}return l(a,W).push({[e]:{handler:s,possibleKeys:o.filter((r,d,n)=>n.indexOf(r)===d),score:l(this,fe)}}),a}search(e,t){var d;const s=[];g(this,k,Ae);let i=[this];const o=Rt(t),r=[];for(let n=0,c=o.length;n<c;n++){const p=o[n],m=n===c-1,u=[];for(let w=0,E=i.length;w<E;w++){const h=i[w],y=l(h,I)[p];y&&(g(y,k,l(h,k)),m?(l(y,I)["*"]&&s.push(...f(this,$,X).call(this,l(y,I)["*"],e,l(h,k))),s.push(...f(this,$,X).call(this,y,e,l(h,k)))):u.push(y));for(let j=0,le=l(h,ae).length;j<le;j++){const we=l(h,ae)[j],L=l(h,k)===Ae?{}:{...l(h,k)};if(we==="*"){const V=l(h,I)["*"];V&&(s.push(...f(this,$,X).call(this,V,e,l(h,k))),g(V,k,L),u.push(V));continue}const[Ge,Xe,Ce]=we;if(!p&&!(Ce instanceof RegExp))continue;const N=l(h,I)[Ge],os=o.slice(n).join("/");if(Ce instanceof RegExp){const V=Ce.exec(os);if(V){if(L[Xe]=V[0],s.push(...f(this,$,X).call(this,N,e,l(h,k),L)),Object.keys(l(N,I)).length){g(N,k,L);const Ue=((d=V[0].match(/\//))==null?void 0:d.length)??0;(r[Ue]||(r[Ue]=[])).push(N)}continue}}(Ce===!0||Ce.test(p))&&(L[Xe]=p,m?(s.push(...f(this,$,X).call(this,N,e,L,l(h,k))),l(N,I)["*"]&&s.push(...f(this,$,X).call(this,l(N,I)["*"],e,L,l(h,k)))):(g(N,k,L),u.push(N)))}}i=u.concat(r.shift()??[])}return s.length>1&&s.sort((n,c)=>n.score-c.score),[s.map(({handler:n,params:c})=>[n,c])]}},W=new WeakMap,I=new WeakMap,ae=new WeakMap,fe=new WeakMap,k=new WeakMap,$=new WeakSet,X=function(e,t,s,a){const i=[];for(let o=0,r=l(e,W).length;o<r;o++){const d=l(e,W)[o],n=d[t]||d[C],c={};if(n!==void 0&&(n.params=Object.create(null),i.push(n),s!==Ae||a&&a!==Ae))for(let p=0,m=n.possibleKeys.length;p<m;p++){const u=n.possibleKeys[p],w=c[n.score];n.params[u]=a!=null&&a[u]&&!w?a[u]:s[u]??(a==null?void 0:a[u]),c[n.score]=!0}}return i},Tt),ie,Mt,$s=(Mt=class{constructor(){x(this,"name","TrieRouter");b(this,ie);g(this,ie,new Qt)}add(e,t,s){const a=Lt(t);if(a){for(let i=0,o=a.length;i<o;i++)l(this,ie).insert(e,a[i],s);return}l(this,ie).insert(e,t,s)}match(e,t){return l(this,ie).search(e,t)}},ie=new WeakMap,Mt),P=class extends Gt{constructor(e={}){super(e),this.router=e.router??new Fs({routers:[new Bs,new $s]})}},qs=e=>{const s={...{origin:"*",allowMethods:["GET","HEAD","PUT","POST","DELETE","PATCH"],allowHeaders:[],exposeHeaders:[]},...e},a=(o=>typeof o=="string"?o==="*"?()=>o:r=>o===r?r:null:typeof o=="function"?o:r=>o.includes(r)?r:null)(s.origin),i=(o=>typeof o=="function"?o:Array.isArray(o)?()=>o:()=>[])(s.allowMethods);return async function(r,d){var p;function n(m,u){r.res.headers.set(m,u)}const c=await a(r.req.header("origin")||"",r);if(c&&n("Access-Control-Allow-Origin",c),s.origin!=="*"){const m=r.req.header("Vary");m?n("Vary",m):n("Vary","Origin")}if(s.credentials&&n("Access-Control-Allow-Credentials","true"),(p=s.exposeHeaders)!=null&&p.length&&n("Access-Control-Expose-Headers",s.exposeHeaders.join(",")),r.req.method==="OPTIONS"){s.maxAge!=null&&n("Access-Control-Max-Age",s.maxAge.toString());const m=await i(r.req.header("origin")||"",r);m.length&&n("Access-Control-Allow-Methods",m.join(","));let u=s.allowHeaders;if(!(u!=null&&u.length)){const w=r.req.header("Access-Control-Request-Headers");w&&(u=w.split(/\s*,\s*/))}return u!=null&&u.length&&(n("Access-Control-Allow-Headers",u.join(",")),r.res.headers.append("Vary","Access-Control-Request-Headers")),r.res.headers.delete("Content-Length"),r.res.headers.delete("Content-Type"),new Response(null,{headers:r.res.headers,status:204,statusText:"No Content"})}await d()}},Hs=/^\s*(?:text\/(?!event-stream(?:[;\s]|$))[^;\s]+|application\/(?:javascript|json|xml|xml-dtd|ecmascript|dart|postscript|rtf|tar|toml|vnd\.dart|vnd\.ms-fontobject|vnd\.ms-opentype|wasm|x-httpd-php|x-javascript|x-ns-proxy-autoconfig|x-sh|x-tar|x-virtualbox-hdd|x-virtualbox-ova|x-virtualbox-ovf|x-virtualbox-vbox|x-virtualbox-vdi|x-virtualbox-vhd|x-virtualbox-vmdk|x-www-form-urlencoded)|font\/(?:otf|ttf)|image\/(?:bmp|vnd\.adobe\.photoshop|vnd\.microsoft\.icon|vnd\.ms-dds|x-icon|x-ms-bmp)|message\/rfc822|model\/gltf-binary|x-shader\/x-fragment|x-shader\/x-vertex|[^;\s]+?\+(?:json|text|xml|yaml))(?:[;\s]|$)/i,ot=(e,t=zs)=>{const s=/\.([a-zA-Z0-9]+?)$/,a=e.match(s);if(!a)return;let i=t[a[1]];return i&&i.startsWith("text")&&(i+="; charset=utf-8"),i},Vs={aac:"audio/aac",avi:"video/x-msvideo",avif:"image/avif",av1:"video/av1",bin:"application/octet-stream",bmp:"image/bmp",css:"text/css",csv:"text/csv",eot:"application/vnd.ms-fontobject",epub:"application/epub+zip",gif:"image/gif",gz:"application/gzip",htm:"text/html",html:"text/html",ico:"image/x-icon",ics:"text/calendar",jpeg:"image/jpeg",jpg:"image/jpeg",js:"text/javascript",json:"application/json",jsonld:"application/ld+json",map:"application/json",mid:"audio/x-midi",midi:"audio/x-midi",mjs:"text/javascript",mp3:"audio/mpeg",mp4:"video/mp4",mpeg:"video/mpeg",oga:"audio/ogg",ogv:"video/ogg",ogx:"application/ogg",opus:"audio/opus",otf:"font/otf",pdf:"application/pdf",png:"image/png",rtf:"application/rtf",svg:"image/svg+xml",tif:"image/tiff",tiff:"image/tiff",ts:"video/mp2t",ttf:"font/ttf",txt:"text/plain",wasm:"application/wasm",webm:"video/webm",weba:"audio/webm",webmanifest:"application/manifest+json",webp:"image/webp",woff:"font/woff",woff2:"font/woff2",xhtml:"application/xhtml+xml",xml:"application/xml",zip:"application/zip","3gp":"video/3gpp","3g2":"video/3gpp2",gltf:"model/gltf+json",glb:"model/gltf-binary"},zs=Vs,Gs=(...e)=>{let t=e.filter(i=>i!=="").join("/");t=t.replace(new RegExp("(?<=\\/)\\/+","g"),"");const s=t.split("/"),a=[];for(const i of s)i===".."&&a.length>0&&a.at(-1)!==".."?a.pop():i!=="."&&a.push(i);return a.join("/")||"."},Yt={br:".br",zstd:".zst",gzip:".gz"},Us=Object.keys(Yt),_s="index.html",Js=e=>{const t=e.root??"./",s=e.path,a=e.join??Gs;return async(i,o)=>{var p,m,u,w;if(i.finalized)return o();let r;if(e.path)r=e.path;else try{if(r=decodeURIComponent(i.req.path),/(?:^|[\/\\])\.\.(?:$|[\/\\])/.test(r))throw new Error}catch{return await((p=e.onNotFound)==null?void 0:p.call(e,i.req.path,i)),o()}let d=a(t,!s&&e.rewriteRequestPath?e.rewriteRequestPath(r):r);e.isDir&&await e.isDir(d)&&(d=a(d,_s));const n=e.getContent;let c=await n(d,i);if(c instanceof Response)return i.newResponse(c.body,c);if(c){const E=e.mimes&&ot(d,e.mimes)||ot(d);if(i.header("Content-Type",E||"application/octet-stream"),e.precompressed&&(!E||Hs.test(E))){const h=new Set((m=i.req.header("Accept-Encoding"))==null?void 0:m.split(",").map(y=>y.trim()));for(const y of Us){if(!h.has(y))continue;const j=await n(d+Yt[y],i);if(j){c=j,i.header("Content-Encoding",y),i.header("Vary","Accept-Encoding",{append:!0});break}}}return await((u=e.onFound)==null?void 0:u.call(e,d,i)),i.body(c)}await((w=e.onNotFound)==null?void 0:w.call(e,d,i)),await o()}},Ws=async(e,t)=>{let s;t&&t.manifest?typeof t.manifest=="string"?s=JSON.parse(t.manifest):s=t.manifest:typeof __STATIC_CONTENT_MANIFEST=="string"?s=JSON.parse(__STATIC_CONTENT_MANIFEST):s=__STATIC_CONTENT_MANIFEST;let a;t&&t.namespace?a=t.namespace:a=__STATIC_CONTENT;const i=s[e]||e;if(!i)return null;const o=await a.get(i,{type:"stream"});return o||null},Ks=e=>async function(s,a){return Js({...e,getContent:async o=>Ws(o,{manifest:e.manifest,namespace:e.namespace?e.namespace:s.env?s.env.__STATIC_CONTENT:void 0})})(s,a)},Zt=e=>Ks(e),K=(e,...t)=>{const s=[""];for(let a=0,i=e.length-1;a<i;a++){s[0]+=e[a];const o=Array.isArray(t[a])?t[a].flat(1/0):[t[a]];for(let r=0,d=o.length;r<d;r++){const n=o[r];if(typeof n=="string")Qe(n,s);else if(typeof n=="number")s[0]+=n;else{if(typeof n=="boolean"||n===null||n===void 0)continue;if(typeof n=="object"&&n.isEscaped)if(n.callbacks)s.unshift("",n);else{const c=n.toString();c instanceof Promise?s.unshift("",c):s[0]+=c}else n instanceof Promise?s.unshift("",n):Qe(n.toString(),s)}}}return s[0]+=e.at(-1),s.length===1?"callbacks"in s?ge(Ps(ge(s[0],s.callbacks))):ge(s[0]):As(s,s.callbacks)};const Re=new P;Re.get("/profile/:id",async e=>{const t=e.req.param("id");return e.json({id:t,name:"João Silva",diagnosis:"Em tratamento",nextAppointment:"2024-02-15",treatmentStage:"Quimioterapia"})});Re.post("/symptoms",async e=>(await e.req.json(),e.json({success:!0,message:"Sintomas registrados com sucesso",aiRecommendation:"Monitoramento contínuo recomendado"})));Re.get("/journey/:id",async e=>{const t=e.req.param("id");return e.json({patientId:t,stages:[{date:"2024-01-01",event:"Diagnóstico inicial",status:"completed"},{date:"2024-01-15",event:"Início do tratamento",status:"completed"},{date:"2024-02-01",event:"Primeira sessão de quimioterapia",status:"in-progress"},{date:"2024-03-01",event:"Avaliação de resposta",status:"pending"}]})});Re.post("/triage",async e=>{const t=await e.req.json(),{symptoms:s,age:a,gender:i,history:o}=t,r=s.includes("dor intensa")?"high":"medium";return e.json({urgencyLevel:r,recommendation:r==="high"?"Procure atendimento médico imediato":"Agende uma consulta com seu médico",suggestedSpecialty:"Oncologia",estimatedWaitTime:r==="high"?"0-2 horas":"1-3 dias"})});const De=new P;De.get("/patients",async e=>e.json({patients:[{id:"1",name:"João Silva",age:55,diagnosis:"Câncer de Pulmão",stage:"IIIa",lastVisit:"2024-01-28",nextAppointment:"2024-02-15",riskScore:.7,alertLevel:"medium"},{id:"2",name:"Maria Santos",age:42,diagnosis:"Câncer de Mama",stage:"IIb",lastVisit:"2024-01-25",nextAppointment:"2024-02-10",riskScore:.4,alertLevel:"low"}]}));De.post("/ai-assistant",async e=>{const t=await e.req.json(),{query:s,patientContext:a,type:i}=t;let o="";return i==="treatment-recommendation"?o=`Baseado no perfil do paciente e diretrizes atuais:
     1. Considerar esquema FOLFIRINOX para pacientes com bom performance status
     2. Avaliar função hepática e renal antes do início
     3. Monitorar toxicidade hematológica semanalmente
@@ -2009,96 +2009,321 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
             </button>
         </div>
     `;return e.json({html:ne("financial","Gestão Financeira",t),scripts:[]})});Q.get("/wellness",async e=>{const t=`
-        <!-- Dashboard de Bem-Estar -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-            <!-- Estado Emocional -->
-            <div class="bg-white rounded-xl shadow-lg p-6">
-                <h3 class="text-lg font-bold text-gray-800 mb-4">
-                    <i class="fas fa-smile text-cyan-600 mr-2"></i>
-                    Estado Emocional Geral
-                </h3>
-                <div class="text-center py-4">
-                    <div class="text-5xl mb-3">😊</div>
-                    <p class="text-lg font-semibold text-gray-700">Estável</p>
-                    <p class="text-sm text-gray-600 mt-2">Última avaliação: Hoje, 10:30</p>
+        <!-- Welcome Message -->
+        <div class="bg-gradient-to-r from-pink-400 to-purple-500 rounded-xl p-6 text-white mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-bold mb-2">Centro de Bem-Estar e Suporte Emocional</h1>
+                    <p class="opacity-90">"Um corpo doente precisa de uma mente saudável para potencializar sua cura"</p>
                 </div>
+                <img src="/static/accamargo-icon.svg" alt="ACCamargo Logo" class="w-20 h-20 opacity-50">
             </div>
-            
-            <!-- Atividades de Apoio -->
-            <div class="bg-white rounded-xl shadow-lg p-6">
-                <h3 class="text-lg font-bold text-gray-800 mb-4">
-                    <i class="fas fa-hands-helping text-purple-600 mr-2"></i>
-                    Atividades Hoje
-                </h3>
-                <div class="space-y-3">
-                    <div class="flex items-center justify-between p-2 bg-purple-50 rounded">
-                        <span class="text-sm text-gray-700">Grupo de Apoio</span>
-                        <span class="text-xs text-purple-600 font-semibold">14:00</span>
-                    </div>
-                    <div class="flex items-center justify-between p-2 bg-cyan-50 rounded">
-                        <span class="text-sm text-gray-700">Yoga Terapêutica</span>
-                        <span class="text-xs text-cyan-600 font-semibold">16:00</span>
-                    </div>
-                    <div class="flex items-center justify-between p-2 bg-green-50 rounded">
-                        <span class="text-sm text-gray-700">Meditação Guiada</span>
-                        <span class="text-xs text-green-600 font-semibold">18:00</span>
+        </div>
+
+        <!-- Emotional Health Alerts -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg">
+                <div class="flex items-center">
+                    <i class="fas fa-exclamation-triangle text-red-600 text-xl mr-3"></i>
+                    <div>
+                        <p class="font-semibold text-red-800">Atenção Urgente</p>
+                        <p class="text-2xl font-bold text-red-600">3 pacientes</p>
+                        <p class="text-xs text-gray-600">Risco alto de crise emocional</p>
                     </div>
                 </div>
             </div>
             
-            <!-- Recursos Disponíveis -->
-            <div class="bg-white rounded-xl shadow-lg p-6">
-                <h3 class="text-lg font-bold text-gray-800 mb-4">
-                    <i class="fas fa-book-open text-green-600 mr-2"></i>
-                    Recursos de Apoio
-                </h3>
-                <div class="space-y-3">
-                    <button class="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors">
-                        <i class="fas fa-video text-blue-600 mr-2"></i>
-                        <span class="text-sm font-medium">Vídeos Educativos</span>
-                    </button>
-                    <button class="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors">
-                        <i class="fas fa-headphones text-purple-600 mr-2"></i>
-                        <span class="text-sm font-medium">Áudios Relaxantes</span>
-                    </button>
-                    <button class="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors">
-                        <i class="fas fa-file-alt text-green-600 mr-2"></i>
-                        <span class="text-sm font-medium">Guias e Artigos</span>
-                    </button>
+            <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-lg">
+                <div class="flex items-center">
+                    <i class="fas fa-eye text-yellow-600 text-xl mr-3"></i>
+                    <div>
+                        <p class="font-semibold text-yellow-800">Monitoramento</p>
+                        <p class="text-2xl font-bold text-yellow-700">12 pacientes</p>
+                        <p class="text-xs text-gray-600">Necessitam acompanhamento</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-lg">
+                <div class="flex items-center">
+                    <i class="fas fa-heart text-green-600 text-xl mr-3"></i>
+                    <div>
+                        <p class="font-semibold text-green-800">Bem-Estar</p>
+                        <p class="text-2xl font-bold text-green-600">85%</p>
+                        <p class="text-xs text-gray-600">Taxa de satisfação</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Ansiedade de Laura - Versão Bem-Estar -->
-        ${H("wellness")}
-        
-        <!-- Ferramentas de Bem-Estar -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
-            <button class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                <i class="fas fa-user-friends text-3xl text-cyan-600 mb-3"></i>
-                <h4 class="font-semibold text-gray-800">Grupos</h4>
-                <p class="text-sm text-gray-600 mt-1">Participar de grupos</p>
-            </button>
-            
-            <button class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                <i class="fas fa-brain text-3xl text-purple-600 mb-3"></i>
-                <h4 class="font-semibold text-gray-800">Psicologia</h4>
-                <p class="text-sm text-gray-600 mt-1">Agendar sessão</p>
-            </button>
-            
-            <button class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                <i class="fas fa-spa text-3xl text-green-600 mb-3"></i>
-                <h4 class="font-semibold text-gray-800">Terapias</h4>
-                <p class="text-sm text-gray-600 mt-1">Práticas integrativas</p>
-            </button>
-            
-            <button class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                <i class="fas fa-journal-whills text-3xl text-orange-600 mb-3"></i>
-                <h4 class="font-semibold text-gray-800">Diário</h4>
-                <p class="text-sm text-gray-600 mt-1">Registro emocional</p>
-            </button>
+        <!-- Main Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- High Risk Patients -->
+            <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+                <h3 class="font-bold text-gray-800 mb-4">
+                    <i class="fas fa-user-friends text-purple-600 mr-2"></i>
+                    Pacientes em Acompanhamento Intensivo
+                </h3>
+                
+                <div class="space-y-3">
+                    <div class="border rounded-lg p-3 bg-red-50">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <p class="font-semibold">João Silva</p>
+                                <p class="text-sm text-gray-600">Depressão: 8/10 | Ansiedade: 9/10</p>
+                                <div class="mt-2">
+                                    <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded">
+                                        <i class="fas fa-brain"></i> Ideação suicida
+                                    </span>
+                                    <span class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded ml-1">
+                                        <i class="fas fa-calendar"></i> Sessão hoje 14h
+                                    </span>
+                                </div>
+                            </div>
+                            <button class="text-red-600 hover:text-red-700">
+                                <i class="fas fa-phone"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="border rounded-lg p-3 bg-yellow-50">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <p class="font-semibold">Maria Santos</p>
+                                <p class="text-sm text-gray-600">Depressão: 6/10 | Ansiedade: 7/10</p>
+                                <div class="mt-2">
+                                    <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded">
+                                        <i class="fas fa-moon"></i> Insônia severa
+                                    </span>
+                                </div>
+                            </div>
+                            <button class="text-green-600 hover:text-green-700">
+                                <i class="fas fa-comment"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support Groups -->
+            <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+                <h3 class="font-bold text-gray-800 mb-4">
+                    <i class="fas fa-users text-teal-600 mr-2"></i>
+                    Grupos de Apoio Ativos
+                </h3>
+                
+                <div class="space-y-3">
+                    <div class="border rounded-lg p-3 hover:bg-gray-50">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-semibold text-purple-700">Grupo Mama</p>
+                                <p class="text-sm text-gray-600">12 participantes</p>
+                                <p class="text-xs text-gray-500 mt-1">
+                                    <i class="fas fa-clock"></i> Próximo: Quinta 14h
+                                </p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-2xl font-bold text-purple-700">92%</div>
+                                <p class="text-xs text-gray-600">Satisfação</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border rounded-lg p-3 hover:bg-gray-50">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-semibold text-blue-700">Mindfulness</p>
+                                <p class="text-sm text-gray-600">8 participantes</p>
+                                <p class="text-xs text-gray-500 mt-1">
+                                    <i class="fas fa-clock"></i> Diário às 10h
+                                </p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-2xl font-bold text-blue-700">88%</div>
+                                <p class="text-xs text-gray-600">Adesão</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border rounded-lg p-3 hover:bg-gray-50">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-semibold text-pink-700">Família & Cuidadores</p>
+                                <p class="text-sm text-gray-600">20 participantes</p>
+                                <p class="text-xs text-gray-500 mt-1">
+                                    <i class="fas fa-clock"></i> Sábado 10h
+                                </p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-2xl font-bold text-pink-700">95%</div>
+                                <p class="text-xs text-gray-600">Satisfação</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    `;return e.json({html:ne("wellness","Bem-Estar e Apoio",t),scripts:[]})});Q.get("/research",async e=>{const t=`
+
+        <!-- Trilho de Atendimentos - Replicado do Portal Navegador -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">
+                <i class="fas fa-stream text-purple-600 mr-2"></i>
+                Trilho de Atendimentos
+            </h3>
+            
+            <!-- Kanban Board Completo -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <!-- Coluna Triagem -->
+                <div class="bg-gray-100 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-gray-700">Triagem</h3>
+                        <span class="bg-purple-600 text-white text-xs px-2 py-1 rounded-full">12</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="bg-white p-3 rounded shadow-sm border-l-4 border-purple-600 cursor-pointer hover:shadow-md transition-all">
+                            <p class="font-semibold text-sm">Ana Silva</p>
+                            <p class="text-xs text-gray-600">Depressão pós-diagnóstico</p>
+                            <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded mt-1 inline-block">
+                                <i class="fas fa-clock"></i> Prioridade
+                            </span>
+                        </div>
+                        <div class="bg-white p-3 rounded shadow-sm cursor-pointer hover:shadow-md transition-all">
+                            <p class="font-semibold text-sm">Carlos Mendes</p>
+                            <p class="text-xs text-gray-600">Ansiedade inicial</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna Diagnóstico -->
+                <div class="bg-gray-100 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-gray-700">Diagnóstico</h3>
+                        <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded-full">8</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="bg-white p-3 rounded shadow-sm border-l-4 border-blue-500 cursor-pointer hover:shadow-md transition-all">
+                            <p class="font-semibold text-sm">João Pedro</p>
+                            <p class="text-xs text-gray-600">Avaliação psicológica</p>
+                            <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded mt-1 inline-block">
+                                <i class="fas fa-brain"></i> Em teste
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna Tratamento -->
+                <div class="bg-gray-100 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-gray-700">Tratamento</h3>
+                        <span class="bg-green-600 text-white text-xs px-2 py-1 rounded-full">45</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="bg-white p-3 rounded shadow-sm cursor-pointer hover:shadow-md transition-all">
+                            <p class="font-semibold text-sm">Roberto Lima</p>
+                            <p class="text-xs text-gray-600">Terapia CBT - Sessão 3/12</p>
+                            <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                                <div class="bg-green-600 h-2 rounded-full" style="width: 25%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna Acompanhamento -->
+                <div class="bg-gray-100 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-gray-700">Acompanhamento</h3>
+                        <span class="bg-yellow-600 text-white text-xs px-2 py-1 rounded-full">23</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="bg-white p-3 rounded shadow-sm cursor-pointer hover:shadow-md transition-all">
+                            <p class="font-semibold text-sm">Paulo Santos</p>
+                            <p class="text-xs text-gray-600">Check-in mensal</p>
+                            <span class="text-xs bg-green-100 text-green-700 px-1 py-0.5 rounded">Estável</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna Alta -->
+                <div class="bg-gray-100 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-gray-700">Alta</h3>
+                        <span class="bg-green-700 text-white text-xs px-2 py-1 rounded-full">15</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="bg-white p-3 rounded shadow-sm border-l-4 border-green-600 cursor-pointer hover:shadow-md transition-all">
+                            <p class="font-semibold text-sm">Felipe Costa</p>
+                            <p class="text-xs text-gray-600">Alta programada</p>
+                            <span class="text-xs bg-green-100 text-green-700 px-1 py-0.5 rounded">
+                                <i class="fas fa-check"></i> Recuperado
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botões de Ações Rápidas -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">
+                <i class="fas fa-hand-holding-heart text-pink-600 mr-2"></i>
+                Recursos de Bem-estar
+            </h3>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <button onclick="showWellnessContent('grupos')" class="p-4 bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-lg hover:shadow-lg transition-all">
+                    <i class="fas fa-users text-2xl mb-2"></i>
+                    <p class="font-semibold">Grupos</p>
+                    <p class="text-xs opacity-90">Apoio coletivo</p>
+                </button>
+                
+                <button onclick="showWellnessContent('psicologia')" class="p-4 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg hover:shadow-lg transition-all">
+                    <i class="fas fa-brain text-2xl mb-2"></i>
+                    <p class="font-semibold">Psicologia</p>
+                    <p class="text-xs opacity-90">Atendimento individual</p>
+                </button>
+                
+                <button onclick="showWellnessContent('terapias')" class="p-4 bg-gradient-to-br from-green-500 to-green-600 text-white rounded-lg hover:shadow-lg transition-all">
+                    <i class="fas fa-spa text-2xl mb-2"></i>
+                    <p class="font-semibold">Terapias</p>
+                    <p class="text-xs opacity-90">Integrativas</p>
+                </button>
+                
+                <button onclick="showWellnessContent('diario')" class="p-4 bg-gradient-to-br from-pink-500 to-pink-600 text-white rounded-lg hover:shadow-lg transition-all">
+                    <i class="fas fa-book text-2xl mb-2"></i>
+                    <p class="font-semibold">Diário</p>
+                    <p class="text-xs opacity-90">Registro emocional</p>
+                </button>
+            </div>
+            
+            <!-- Área de Conteúdo Dinâmico -->
+            <div id="wellnessContent" class="hidden">
+                <!-- O conteúdo será inserido dinamicamente aqui -->
+            </div>
+        </div>
+
+        ${H("wellness")}
+    `;return e.json({html:ne("wellness","Bem-Estar e Apoio",t),scripts:[`
+            // Função para mostrar conteúdo dinâmico dos botões
+            window.showWellnessContent = function(type) {
+                const contentDiv = document.getElementById('wellnessContent');
+                if (!contentDiv) return;
+                
+                contentDiv.classList.remove('hidden');
+                
+                const contents = {
+                    grupos: '<div class="bg-purple-50 rounded-lg p-6"><h4 class="text-lg font-bold text-purple-800 mb-4"><i class="fas fa-users mr-2"></i>Grupos de Apoio Disponíveis</h4><p>Conteúdo dos grupos...</p></div>',
+                    psicologia: '<div class="bg-blue-50 rounded-lg p-6"><h4 class="text-lg font-bold text-blue-800 mb-4"><i class="fas fa-brain mr-2"></i>Serviços de Psicologia</h4><p>Conteúdo de psicologia...</p></div>',
+                    terapias: '<div class="bg-green-50 rounded-lg p-6"><h4 class="text-lg font-bold text-green-800 mb-4"><i class="fas fa-spa mr-2"></i>Terapias Integrativas</h4><p>Conteúdo de terapias...</p></div>',
+                    diario: '<div class="bg-pink-50 rounded-lg p-6"><h4 class="text-lg font-bold text-pink-800 mb-4"><i class="fas fa-book mr-2"></i>Diário Emocional</h4><p>Conteúdo do diário...</p></div>'
+                };
+                
+                const content = contents[type];
+                if (content) {
+                    contentDiv.innerHTML = content;
+                    contentDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }
+        `]})});Q.get("/research",async e=>{const t=`
         <!-- Dashboard de Pesquisa -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <!-- Estudos Ativos -->
@@ -6756,7 +6981,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
     </div>
 </body>
 </html>
-    `));var rt=Object.freeze,Xs=Object.defineProperty,ea=(e,t)=>rt(Xs(e,"raw",{value:rt(t||e.slice())})),nt;const ta=e=>e.html(W(nt||(nt=ea([`
+    `));var rt=Object.freeze,Xs=Object.defineProperty,ea=(e,t)=>rt(Xs(e,"raw",{value:rt(t||e.slice())})),nt;const ta=e=>e.html(K(nt||(nt=ea([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -8176,7 +8401,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `])),ge(H("patient"))));var lt=Object.freeze,sa=Object.defineProperty,aa=(e,t)=>lt(sa(e,"raw",{value:lt(t||e.slice())})),dt;const ia=e=>e.html(W(dt||(dt=aa([`
+  `])),ge(H("patient"))));var lt=Object.freeze,sa=Object.defineProperty,aa=(e,t)=>lt(sa(e,"raw",{value:lt(t||e.slice())})),dt;const ia=e=>e.html(K(dt||(dt=aa([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -9016,7 +9241,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `]))));var ct=Object.freeze,oa=Object.defineProperty,ra=(e,t)=>ct(oa(e,"raw",{value:ct(e.slice())})),pt;const na=e=>e.html(W(pt||(pt=ra([`
+  `]))));var ct=Object.freeze,oa=Object.defineProperty,ra=(e,t)=>ct(oa(e,"raw",{value:ct(e.slice())})),pt;const na=e=>e.html(K(pt||(pt=ra([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -9412,7 +9637,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         <\/script>
     </body>
     </html>
-  `]))));var mt=Object.freeze,la=Object.defineProperty,da=(e,t)=>mt(la(e,"raw",{value:mt(e.slice())})),gt;const ca=e=>e.html(W(gt||(gt=da([`
+  `]))));var mt=Object.freeze,la=Object.defineProperty,da=(e,t)=>mt(la(e,"raw",{value:mt(e.slice())})),gt;const ca=e=>e.html(K(gt||(gt=da([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -9778,7 +10003,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `]))));var xt=Object.freeze,pa=Object.defineProperty,ma=(e,t)=>xt(pa(e,"raw",{value:xt(t||e.slice())})),ut;const ga=e=>e.html(W(ut||(ut=ma([`
+  `]))));var xt=Object.freeze,pa=Object.defineProperty,ma=(e,t)=>xt(pa(e,"raw",{value:xt(t||e.slice())})),ut;const ga=e=>e.html(K(ut||(ut=ma([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -11398,7 +11623,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         <\/script>
     </body>
     </html>
-  `])))),xa=e=>e.redirect("/research-portal");var bt=Object.freeze,ua=Object.defineProperty,ba=(e,t)=>bt(ua(e,"raw",{value:bt(e.slice())})),vt;const va=e=>e.html(W(vt||(vt=ba([`
+  `])))),xa=e=>e.redirect("/research-portal");var bt=Object.freeze,ua=Object.defineProperty,ba=(e,t)=>bt(ua(e,"raw",{value:bt(e.slice())})),vt;const va=e=>e.html(K(vt||(vt=ba([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -11677,7 +11902,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `]))));var ft=Object.freeze,fa=Object.defineProperty,ha=(e,t)=>ft(fa(e,"raw",{value:ft(e.slice())})),ht;const ya=e=>e.html(W(ht||(ht=ha([`
+  `]))));var ft=Object.freeze,fa=Object.defineProperty,ha=(e,t)=>ft(fa(e,"raw",{value:ft(e.slice())})),ht;const ya=e=>e.html(K(ht||(ht=ha([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -12860,7 +13085,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         <\/script>
     </body>
     </html>
-  `);var yt=Object.freeze,Ca=Object.defineProperty,Aa=(e,t)=>yt(Ca(e,"raw",{value:yt(e.slice())})),wt;const v=new P;v.use("/api/*",qs());v.use("/static/*",Zt({root:"./public"}));v.use("/*.html",Zt({root:"./public"}));v.route("/api/patient",Re);v.route("/api/doctor",De);v.route("/api/navigator",Le);v.route("/api/financial",Ne);v.route("/api/wellness",Oe);v.route("/api/research",ye);v.route("/api/admin",oe);v.route("/api/ai",re);v.route("/api/portal",Q);v.route("/",Xt);v.route("/",es);v.route("/",ts);v.route("/",ss);v.route("/",Be);v.route("/",as);v.route("/",Y);v.get("/patient-view/:id",e=>{const t=e.req.param("id");return e.redirect(`/patient-view-integrated/${t}`,301)});v.get("/portal/patient",ta);v.get("/portal/doctor",ia);v.get("/portal/navigator",na);v.get("/portal/financial",ca);v.get("/portal/wellness",ga);v.get("/portal/research",xa);v.get("/portal/admin-master",va);v.get("/admin-master",ya);v.get("/test-integration",wa);v.get("/",e=>e.html(W(wt||(wt=Aa([`
+  `);var yt=Object.freeze,Ca=Object.defineProperty,Aa=(e,t)=>yt(Ca(e,"raw",{value:yt(e.slice())})),wt;const v=new P;v.use("/api/*",qs());v.use("/static/*",Zt({root:"./public"}));v.use("/*.html",Zt({root:"./public"}));v.route("/api/patient",Re);v.route("/api/doctor",De);v.route("/api/navigator",Le);v.route("/api/financial",Ne);v.route("/api/wellness",Oe);v.route("/api/research",ye);v.route("/api/admin",oe);v.route("/api/ai",re);v.route("/api/portal",Q);v.route("/",Xt);v.route("/",es);v.route("/",ts);v.route("/",ss);v.route("/",Be);v.route("/",as);v.route("/",Y);v.get("/patient-view/:id",e=>{const t=e.req.param("id");return e.redirect(`/patient-view-integrated/${t}`,301)});v.get("/portal/patient",ta);v.get("/portal/doctor",ia);v.get("/portal/navigator",na);v.get("/portal/financial",ca);v.get("/portal/wellness",ga);v.get("/portal/research",xa);v.get("/portal/admin-master",va);v.get("/admin-master",ya);v.get("/test-integration",wa);v.get("/",e=>e.html(K(wt||(wt=Aa([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
