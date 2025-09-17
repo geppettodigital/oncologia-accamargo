@@ -564,262 +564,306 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         // Removido o gráfico comparativo antigo - agora existe apenas no Master Admin como componente separado
       });
     <\/script>
-  `};function Ws(e,t){const s={patient:{subtitle:"Monitoramento preditivo da sua jornada oncológica",mainAlerts:[{id:"pa1",icon:"fas fa-calendar-exclamation",title:"Consulta Próxima",description:"Exame de controle em 3 dias",timeframe:"3 dias",impact:"Alto",severity:"high"},{id:"pa2",icon:"fas fa-pills",title:"Medicação",description:"Estoque baixo de Tamoxifeno",timeframe:"5 dias",impact:"Médio",severity:"medium"},{id:"pa3",icon:"fas fa-heartbeat",title:"Bem-estar",description:"Sessão psicológica recomendada",timeframe:"Preventivo",impact:"Preventivo",severity:"low"}],metrics:[{icon:"fas fa-user-check",value:"92%",label:"Adesão",trend:"stable",prediction:"Mantendo padrão"},{icon:"fas fa-calendar-check",value:"3/5",label:"Consultas",trend:"up",prediction:"2 agendamentos pendentes"},{icon:"fas fa-heart",value:"Bom",label:"Estado Geral",trend:"stable",prediction:"Estável"},{icon:"fas fa-flask",value:"2",label:"Exames Pendentes",trend:"down",prediction:"Agendar esta semana"}],recommendations:[{id:"rec1",action:"Agendar coleta de sangue para hemograma",reason:"Controle mensal do tratamento",priority:"high"},{id:"rec2",action:"Renovar receita de medicação contínua",reason:"Estoque termina em 5 dias",priority:"medium"},{id:"rec3",action:"Participar do grupo de apoio quinta-feira",reason:"Melhoria no bem-estar emocional",priority:"low"}]},doctor:{subtitle:"Alertas preditivos e insights clínicos dos seus pacientes",mainAlerts:[{id:"doc1",icon:"fas fa-exclamation-triangle",title:"Paciente Crítico",description:"João Silva - Risco de neutropenia",timeframe:"Imediato",impact:"Crítico",severity:"high"},{id:"doc2",icon:"fas fa-user-clock",title:"Atrasos Recorrentes",description:"5 pacientes com baixa adesão",timeframe:"Esta semana",impact:"Alto",severity:"medium"},{id:"doc3",icon:"fas fa-microscope",title:"Resultados Pendentes",description:"12 laudos aguardando revisão",timeframe:"24h",impact:"Médio",severity:"medium"}],metrics:[{icon:"fas fa-users",value:"47",label:"Pacientes Ativos",trend:"up",prediction:"+3 esta semana"},{icon:"fas fa-procedures",value:"8",label:"Internados",trend:"stable",prediction:"2 altas previstas"},{icon:"fas fa-clipboard-check",value:"89%",label:"Protocolos OK",trend:"down",prediction:"3 revisões urgentes"},{icon:"fas fa-chart-line",value:"94%",label:"Taxa Sucesso",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"drec1",action:"Revisar protocolo do paciente João Silva imediatamente",reason:"Sinais preditivos de complicação detectados",priority:"high"},{id:"drec2",action:"Agendar reunião multidisciplinar para casos complexos",reason:"3 pacientes necessitam revisão de conduta",priority:"medium"},{id:"drec3",action:"Atualizar protocolos de quimioterapia",reason:"Novas diretrizes publicadas esta semana",priority:"low"}]},navigator:{subtitle:"Coordenação inteligente e otimização da jornada dos pacientes",mainAlerts:[{id:"nav1",icon:"fas fa-exclamation-circle",title:"Pacientes Urgentes",description:"5 pacientes necessitam intervenção imediata",timeframe:"Agora",impact:"Crítico",severity:"high"},{id:"nav2",icon:"fas fa-clock",title:"Atrasos Detectados",description:"12 pacientes com atraso em exames",timeframe:"Hoje",impact:"Alto",severity:"medium"},{id:"nav3",icon:"fas fa-route",title:"Otimização de Rotas",description:"3 jornadas podem ser aceleradas",timeframe:"Esta semana",impact:"Médio",severity:"low"}],metrics:[{icon:"fas fa-users",value:"178",label:"Em Navegação",trend:"up",prediction:"+12 novos hoje"},{icon:"fas fa-tasks",value:"46",label:"Tarefas Pendentes",trend:"down",prediction:"23 urgentes"},{icon:"fas fa-percentage",value:"87%",label:"Taxa Adesão",trend:"stable",prediction:"Meta: 90%"},{icon:"fas fa-star",value:"92%",label:"Satisfação",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"navrec1",action:"Contatar pacientes com exames atrasados imediatamente",reason:"Prevenir abandono de tratamento",priority:"high"},{id:"navrec2",action:"Reorganizar agendamentos da próxima semana",reason:"Otimizar utilização de recursos",priority:"medium"},{id:"navrec3",action:"Atualizar protocolos de navegação",reason:"Novas diretrizes disponíveis",priority:"low"}]},financial:{subtitle:"Inteligência artificial para prevenção de glosas e otimização financeira",mainAlerts:[{id:"fin1",icon:"fas fa-exclamation-triangle",title:"Risco de Glosa Detectado",description:"15 contas com inconsistências identificadas",timeframe:"Urgente",impact:"R$ 127.000",severity:"high"},{id:"fin2",icon:"fas fa-file-invoice-dollar",title:"Faturamento Pendente",description:"42 procedimentos aguardando cobrança",timeframe:"Hoje",impact:"R$ 89.000",severity:"medium"},{id:"fin3",icon:"fas fa-chart-line",title:"Oportunidade de Melhoria",description:"Redução de 12% em glosas possível",timeframe:"Este mês",impact:"R$ 45.000",severity:"low"}],metrics:[{icon:"fas fa-shield-alt",value:"R$ 2.4M",label:"Glosas Evitadas",trend:"up",prediction:"+R$ 180K este mês"},{icon:"fas fa-percentage",value:"98.5%",label:"Taxa Aprovação",trend:"up",prediction:"Meta: 99%"},{icon:"fas fa-robot",value:"1,247",label:"Auditorias IA",trend:"up",prediction:"+89 hoje"},{icon:"fas fa-dollar-sign",value:"R$ 18.3M",label:"Faturamento Mês",trend:"stable",prediction:"Projeção: R$ 19M"}],recommendations:[{id:"finrec1",action:"Revisar 15 contas com alto risco de glosa imediatamente",reason:"IA detectou inconsistências em documentação e codificação",priority:"high"},{id:"finrec2",action:"Implementar checklist automático para procedimentos complexos",reason:"Redução de 30% em glosas prevista",priority:"medium"},{id:"finrec3",action:"Treinar equipe em novas diretrizes TUSS/TISS",reason:"Atualização normativa este mês",priority:"low"}]},wellness:{subtitle:"Monitoramento emocional e suporte psicossocial inteligente",mainAlerts:[{id:"well1",icon:"fas fa-heart-broken",title:"Pacientes em Risco",description:"8 pacientes com sinais de depressão severa",timeframe:"Imediato",impact:"Crítico",severity:"high"},{id:"well2",icon:"fas fa-users",title:"Grupos de Apoio",description:"3 grupos precisam de moderação",timeframe:"Hoje",impact:"Alto",severity:"medium"},{id:"well3",icon:"fas fa-calendar-check",title:"Sessões Agendadas",description:"24 atendimentos psicológicos esta semana",timeframe:"Semana",impact:"Normal",severity:"low"}],metrics:[{icon:"fas fa-smile",value:"73%",label:"Bem-Estar Geral",trend:"up",prediction:"Melhora gradual"},{icon:"fas fa-users",value:"234",label:"Pacientes Ativos",trend:"up",prediction:"+18 esta semana"},{icon:"fas fa-brain",value:"156",label:"Sessões Realizadas",trend:"stable",prediction:"24 agendadas"},{icon:"fas fa-hands-helping",value:"89%",label:"Satisfação",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"wellrec1",action:"Contatar 8 pacientes identificados com risco emocional elevado",reason:"Prevenção de crises e abandono de tratamento",priority:"high"},{id:"wellrec2",action:"Expandir horários de grupos de apoio online",reason:"Alta demanda detectada nos horários noturnos",priority:"medium"},{id:"wellrec3",action:"Implementar programa de mindfulness semanal",reason:"Evidências de redução de 40% em ansiedade",priority:"low"}]},research:{subtitle:"Análise preditiva para pesquisa clínica e recrutamento inteligente",mainAlerts:[{id:"res1",icon:"fas fa-vial",title:"Recrutamento Urgente",description:"Estudo ONCO-2024 precisa de 12 pacientes",timeframe:"2 semanas",impact:"Alto",severity:"high"},{id:"res2",icon:"fas fa-chart-bar",title:"Dados Incompletos",description:"38 CRFs pendentes de revisão",timeframe:"Esta semana",impact:"Médio",severity:"medium"},{id:"res3",icon:"fas fa-file-medical-alt",title:"Publicação Pronta",description:"3 artigos prontos para submissão",timeframe:"Este mês",impact:"Positivo",severity:"low"}],metrics:[{icon:"fas fa-flask",value:"24",label:"Estudos Ativos",trend:"up",prediction:"+2 iniciando"},{icon:"fas fa-users",value:"1,847",label:"Participantes",trend:"up",prediction:"+67 este mês"},{icon:"fas fa-percentage",value:"94%",label:"Taxa Retenção",trend:"stable",prediction:"Meta: 95%"},{icon:"fas fa-trophy",value:"42",label:"Publicações 2024",trend:"up",prediction:"15 com IF>5"}],recommendations:[{id:"resrec1",action:"Ativar protocolo de recrutamento acelerado para ONCO-2024",reason:"IA identificou 28 pacientes elegíveis no banco de dados",priority:"high"},{id:"resrec2",action:"Automatizar coleta de dados do REDCap",reason:"Redução de 60% no tempo de preenchimento de CRFs",priority:"medium"},{id:"resrec3",action:"Submeter artigos para journals de alto impacto",reason:"Janela de submissão favorável este mês",priority:"low"}]},admin:{subtitle:"Monitoramento preditivo de sistema e gestão inteligente de plataforma",mainAlerts:[{id:"adm1",icon:"fas fa-server",title:"Carga Crítica Detectada",description:"CPU 78% - Escalonamento automático ativado",timeframe:"Agora",impact:"Sistema",severity:"high"},{id:"adm2",icon:"fas fa-exclamation-circle",title:"Anomalias de Segurança",description:"3 tentativas de acesso suspeitas bloqueadas",timeframe:"Última hora",impact:"Segurança",severity:"medium"},{id:"adm3",icon:"fas fa-sync-alt",title:"Sincronização Pendente",description:"HIS/RIS com delay de 5 minutos",timeframe:"Contínuo",impact:"Integração",severity:"low"}],metrics:[{icon:"fas fa-server",value:"99.98%",label:"Uptime Sistema",trend:"stable",prediction:"SLA garantido"},{icon:"fas fa-tachometer-alt",value:"12ms",label:"Latência Edge",trend:"down",prediction:"Otimizado"},{icon:"fas fa-shield-alt",value:"100%",label:"Compliance",trend:"stable",prediction:"LGPD/ISO OK"},{icon:"fas fa-database",value:"523MB",label:"Database D1",trend:"up",prediction:"78% capacity"}],recommendations:[{id:"admrec1",action:"Implementar auto-scaling para Workers em horário de pico",reason:"Previsão de aumento de 40% na carga às 14h",priority:"high"},{id:"admrec2",action:"Atualizar certificados SSL antes do vencimento",reason:"3 certificados expiram em 15 dias",priority:"medium"},{id:"admrec3",action:"Revisar logs de segurança da última semana",reason:"Auditoria mensal de compliance",priority:"low"}]},default:{subtitle:"Monitoramento inteligente e preditivo",mainAlerts:[],metrics:[],recommendations:[]}};return s[e]||s.default}const Ys=()=>{const e=`
+  `};function Ws(e,t){const s={patient:{subtitle:"Monitoramento preditivo da sua jornada oncológica",mainAlerts:[{id:"pa1",icon:"fas fa-calendar-exclamation",title:"Consulta Próxima",description:"Exame de controle em 3 dias",timeframe:"3 dias",impact:"Alto",severity:"high"},{id:"pa2",icon:"fas fa-pills",title:"Medicação",description:"Estoque baixo de Tamoxifeno",timeframe:"5 dias",impact:"Médio",severity:"medium"},{id:"pa3",icon:"fas fa-heartbeat",title:"Bem-estar",description:"Sessão psicológica recomendada",timeframe:"Preventivo",impact:"Preventivo",severity:"low"}],metrics:[{icon:"fas fa-user-check",value:"92%",label:"Adesão",trend:"stable",prediction:"Mantendo padrão"},{icon:"fas fa-calendar-check",value:"3/5",label:"Consultas",trend:"up",prediction:"2 agendamentos pendentes"},{icon:"fas fa-heart",value:"Bom",label:"Estado Geral",trend:"stable",prediction:"Estável"},{icon:"fas fa-flask",value:"2",label:"Exames Pendentes",trend:"down",prediction:"Agendar esta semana"}],recommendations:[{id:"rec1",action:"Agendar coleta de sangue para hemograma",reason:"Controle mensal do tratamento",priority:"high"},{id:"rec2",action:"Renovar receita de medicação contínua",reason:"Estoque termina em 5 dias",priority:"medium"},{id:"rec3",action:"Participar do grupo de apoio quinta-feira",reason:"Melhoria no bem-estar emocional",priority:"low"}]},doctor:{subtitle:"Alertas preditivos e insights clínicos dos seus pacientes",mainAlerts:[{id:"doc1",icon:"fas fa-exclamation-triangle",title:"Paciente Crítico",description:"João Silva - Risco de neutropenia",timeframe:"Imediato",impact:"Crítico",severity:"high"},{id:"doc2",icon:"fas fa-user-clock",title:"Atrasos Recorrentes",description:"5 pacientes com baixa adesão",timeframe:"Esta semana",impact:"Alto",severity:"medium"},{id:"doc3",icon:"fas fa-microscope",title:"Resultados Pendentes",description:"12 laudos aguardando revisão",timeframe:"24h",impact:"Médio",severity:"medium"}],metrics:[{icon:"fas fa-users",value:"47",label:"Pacientes Ativos",trend:"up",prediction:"+3 esta semana"},{icon:"fas fa-procedures",value:"8",label:"Internados",trend:"stable",prediction:"2 altas previstas"},{icon:"fas fa-clipboard-check",value:"89%",label:"Protocolos OK",trend:"down",prediction:"3 revisões urgentes"},{icon:"fas fa-chart-line",value:"94%",label:"Taxa Sucesso",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"drec1",action:"Revisar protocolo do paciente João Silva imediatamente",reason:"Sinais preditivos de complicação detectados",priority:"high"},{id:"drec2",action:"Agendar reunião multidisciplinar para casos complexos",reason:"3 pacientes necessitam revisão de conduta",priority:"medium"},{id:"drec3",action:"Atualizar protocolos de quimioterapia",reason:"Novas diretrizes publicadas esta semana",priority:"low"}]},navigator:{subtitle:"Coordenação inteligente e otimização da jornada dos pacientes",mainAlerts:[{id:"nav1",icon:"fas fa-exclamation-circle",title:"Pacientes Urgentes",description:"5 pacientes necessitam intervenção imediata",timeframe:"Agora",impact:"Crítico",severity:"high"},{id:"nav2",icon:"fas fa-clock",title:"Atrasos Detectados",description:"12 pacientes com atraso em exames",timeframe:"Hoje",impact:"Alto",severity:"medium"},{id:"nav3",icon:"fas fa-route",title:"Otimização de Rotas",description:"3 jornadas podem ser aceleradas",timeframe:"Esta semana",impact:"Médio",severity:"low"}],metrics:[{icon:"fas fa-users",value:"178",label:"Em Navegação",trend:"up",prediction:"+12 novos hoje"},{icon:"fas fa-tasks",value:"46",label:"Tarefas Pendentes",trend:"down",prediction:"23 urgentes"},{icon:"fas fa-percentage",value:"87%",label:"Taxa Adesão",trend:"stable",prediction:"Meta: 90%"},{icon:"fas fa-star",value:"92%",label:"Satisfação",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"navrec1",action:"Contatar pacientes com exames atrasados imediatamente",reason:"Prevenir abandono de tratamento",priority:"high"},{id:"navrec2",action:"Reorganizar agendamentos da próxima semana",reason:"Otimizar utilização de recursos",priority:"medium"},{id:"navrec3",action:"Atualizar protocolos de navegação",reason:"Novas diretrizes disponíveis",priority:"low"}]},financial:{subtitle:"Inteligência artificial para prevenção de glosas e otimização financeira",mainAlerts:[{id:"fin1",icon:"fas fa-exclamation-triangle",title:"Risco de Glosa Detectado",description:"15 contas com inconsistências identificadas",timeframe:"Urgente",impact:"R$ 127.000",severity:"high"},{id:"fin2",icon:"fas fa-file-invoice-dollar",title:"Faturamento Pendente",description:"42 procedimentos aguardando cobrança",timeframe:"Hoje",impact:"R$ 89.000",severity:"medium"},{id:"fin3",icon:"fas fa-chart-line",title:"Oportunidade de Melhoria",description:"Redução de 12% em glosas possível",timeframe:"Este mês",impact:"R$ 45.000",severity:"low"}],metrics:[{icon:"fas fa-shield-alt",value:"R$ 2.4M",label:"Glosas Evitadas",trend:"up",prediction:"+R$ 180K este mês"},{icon:"fas fa-percentage",value:"98.5%",label:"Taxa Aprovação",trend:"up",prediction:"Meta: 99%"},{icon:"fas fa-robot",value:"1,247",label:"Auditorias IA",trend:"up",prediction:"+89 hoje"},{icon:"fas fa-dollar-sign",value:"R$ 18.3M",label:"Faturamento Mês",trend:"stable",prediction:"Projeção: R$ 19M"}],recommendations:[{id:"finrec1",action:"Revisar 15 contas com alto risco de glosa imediatamente",reason:"IA detectou inconsistências em documentação e codificação",priority:"high"},{id:"finrec2",action:"Implementar checklist automático para procedimentos complexos",reason:"Redução de 30% em glosas prevista",priority:"medium"},{id:"finrec3",action:"Treinar equipe em novas diretrizes TUSS/TISS",reason:"Atualização normativa este mês",priority:"low"}]},wellness:{subtitle:"Monitoramento emocional e suporte psicossocial inteligente",mainAlerts:[{id:"well1",icon:"fas fa-heart-broken",title:"Pacientes em Risco",description:"8 pacientes com sinais de depressão severa",timeframe:"Imediato",impact:"Crítico",severity:"high"},{id:"well2",icon:"fas fa-users",title:"Grupos de Apoio",description:"3 grupos precisam de moderação",timeframe:"Hoje",impact:"Alto",severity:"medium"},{id:"well3",icon:"fas fa-calendar-check",title:"Sessões Agendadas",description:"24 atendimentos psicológicos esta semana",timeframe:"Semana",impact:"Normal",severity:"low"}],metrics:[{icon:"fas fa-smile",value:"73%",label:"Bem-Estar Geral",trend:"up",prediction:"Melhora gradual"},{icon:"fas fa-users",value:"234",label:"Pacientes Ativos",trend:"up",prediction:"+18 esta semana"},{icon:"fas fa-brain",value:"156",label:"Sessões Realizadas",trend:"stable",prediction:"24 agendadas"},{icon:"fas fa-hands-helping",value:"89%",label:"Satisfação",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"wellrec1",action:"Contatar 8 pacientes identificados com risco emocional elevado",reason:"Prevenção de crises e abandono de tratamento",priority:"high"},{id:"wellrec2",action:"Expandir horários de grupos de apoio online",reason:"Alta demanda detectada nos horários noturnos",priority:"medium"},{id:"wellrec3",action:"Implementar programa de mindfulness semanal",reason:"Evidências de redução de 40% em ansiedade",priority:"low"}]},research:{subtitle:"Análise preditiva para pesquisa clínica e recrutamento inteligente",mainAlerts:[{id:"res1",icon:"fas fa-vial",title:"Recrutamento Urgente",description:"Estudo ONCO-2024 precisa de 12 pacientes",timeframe:"2 semanas",impact:"Alto",severity:"high"},{id:"res2",icon:"fas fa-chart-bar",title:"Dados Incompletos",description:"38 CRFs pendentes de revisão",timeframe:"Esta semana",impact:"Médio",severity:"medium"},{id:"res3",icon:"fas fa-file-medical-alt",title:"Publicação Pronta",description:"3 artigos prontos para submissão",timeframe:"Este mês",impact:"Positivo",severity:"low"}],metrics:[{icon:"fas fa-flask",value:"24",label:"Estudos Ativos",trend:"up",prediction:"+2 iniciando"},{icon:"fas fa-users",value:"1,847",label:"Participantes",trend:"up",prediction:"+67 este mês"},{icon:"fas fa-percentage",value:"94%",label:"Taxa Retenção",trend:"stable",prediction:"Meta: 95%"},{icon:"fas fa-trophy",value:"42",label:"Publicações 2024",trend:"up",prediction:"15 com IF>5"}],recommendations:[{id:"resrec1",action:"Ativar protocolo de recrutamento acelerado para ONCO-2024",reason:"IA identificou 28 pacientes elegíveis no banco de dados",priority:"high"},{id:"resrec2",action:"Automatizar coleta de dados do REDCap",reason:"Redução de 60% no tempo de preenchimento de CRFs",priority:"medium"},{id:"resrec3",action:"Submeter artigos para journals de alto impacto",reason:"Janela de submissão favorável este mês",priority:"low"}]},admin:{subtitle:"Monitoramento preditivo de sistema e gestão inteligente de plataforma",mainAlerts:[{id:"adm1",icon:"fas fa-server",title:"Carga Crítica Detectada",description:"CPU 78% - Escalonamento automático ativado",timeframe:"Agora",impact:"Sistema",severity:"high"},{id:"adm2",icon:"fas fa-exclamation-circle",title:"Anomalias de Segurança",description:"3 tentativas de acesso suspeitas bloqueadas",timeframe:"Última hora",impact:"Segurança",severity:"medium"},{id:"adm3",icon:"fas fa-sync-alt",title:"Sincronização Pendente",description:"HIS/RIS com delay de 5 minutos",timeframe:"Contínuo",impact:"Integração",severity:"low"}],metrics:[{icon:"fas fa-server",value:"99.98%",label:"Uptime Sistema",trend:"stable",prediction:"SLA garantido"},{icon:"fas fa-tachometer-alt",value:"12ms",label:"Latência Edge",trend:"down",prediction:"Otimizado"},{icon:"fas fa-shield-alt",value:"100%",label:"Compliance",trend:"stable",prediction:"LGPD/ISO OK"},{icon:"fas fa-database",value:"523MB",label:"Database D1",trend:"up",prediction:"78% capacity"}],recommendations:[{id:"admrec1",action:"Implementar auto-scaling para Workers em horário de pico",reason:"Previsão de aumento de 40% na carga às 14h",priority:"high"},{id:"admrec2",action:"Atualizar certificados SSL antes do vencimento",reason:"3 certificados expiram em 15 dias",priority:"medium"},{id:"admrec3",action:"Revisar logs de segurança da última semana",reason:"Auditoria mensal de compliance",priority:"low"}]},default:{subtitle:"Monitoramento inteligente e preditivo",mainAlerts:[],metrics:[],recommendations:[]}};return s[e]||s.default}function Ys(){return`
         <!-- Portal Financeiro LAURA - Sistema Preditivo de Gestão -->
-        <div class="bg-gradient-to-br from-gray-50 via-white to-gray-50 min-h-screen">
-            <!-- Header Premium -->
-            <div class="glass-premium p-6 mb-8 border-b border-gray-100">
-                <div class="flex justify-between items-center">
-                    <div class="flex items-center gap-4">
-                        <button onclick="goBack()" class="text-gray-600 hover:text-gray-800 transition-colors">
-                            <i class="fas fa-arrow-left text-xl"></i>
-                        </button>
-                        <div>
-                            <h1 class="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
-                                Portal de Gestão Financeira LAURA
-                            </h1>
-                            <p class="text-gray-600 mt-1">Sistema Preditivo de Análise de Riscos Financeiros</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <span class="px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full text-sm font-semibold shadow-lg">
-                            <i class="fas fa-shield-check mr-2"></i>IA Ativa
-                        </span>
-                        <button class="px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all">
-                            <i class="fas fa-download mr-2"></i>Exportar
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- KPIs Premium Row -->
-            <div class="px-6 mb-8">
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
-                    <!-- Glosas Identificadas -->
-                    <div class="kpi-card-premium rounded-xl p-6 relative overflow-hidden cursor-pointer" onclick="showExtratoKPI('glosas_identificadas')">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-red-500/10 to-transparent rounded-full -mr-16 -mt-16"></div>
-                        <div class="relative">
-                            <div class="flex justify-between items-start mb-3">
-                                <div class="p-3 bg-gradient-to-br from-red-500 to-red-600 rounded-xl shadow-lg">
-                                    <i class="fas fa-exclamation-triangle text-white text-xl"></i>
-                                </div>
-                                <button class="text-gray-400 hover:text-gray-600" onclick="event.stopPropagation(); showExtratoKPI('glosas_identificadas')">
-                                    <i class="fas fa-file-alt"></i>
-                                </button>
-                            </div>
-                            <div class="text-3xl font-bold text-gray-800 mb-1">R$ 485.7K</div>
-                            <div class="text-sm text-gray-600 font-medium">Glosas Identificadas</div>
-                            <div class="text-xs text-red-600 font-semibold mt-2">
-                                <i class="fas fa-arrow-up mr-1"></i>12.3% vs mês anterior
+        <div id="financial-portal-container" class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/20">
+            <!-- Professional Header -->
+            <div class="glass-premium sticky top-0 z-40 border-b border-gray-200/50 bg-white/95 backdrop-blur-xl">
+                <div class="container mx-auto px-4 py-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <button onclick="goBack()" class="p-2 hover:bg-gray-100/80 rounded-xl transition-all">
+                                <i class="fas fa-arrow-left text-gray-700"></i>
+                            </button>
+                            <div>
+                                <h1 class="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                                    Portal de Gestão Financeira LAURA
+                                </h1>
+                                <p class="text-sm text-gray-500 font-medium">Sistema Inteligente de Análise Preditiva</p>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Glosas Revertidas -->
-                    <div class="kpi-card-premium rounded-xl p-6 relative overflow-hidden cursor-pointer" onclick="showExtratoKPI('glosas_revertidas')">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-500/10 to-transparent rounded-full -mr-16 -mt-16"></div>
-                        <div class="relative">
-                            <div class="flex justify-between items-start mb-3">
-                                <div class="p-3 bg-gradient-to-br from-green-500 to-green-600 rounded-xl shadow-lg">
-                                    <i class="fas fa-check-circle text-white text-xl"></i>
-                                </div>
-                                <button class="text-gray-400 hover:text-gray-600" onclick="event.stopPropagation(); showExtratoKPI('glosas_revertidas')">
-                                    <i class="fas fa-file-alt"></i>
-                                </button>
-                            </div>
-                            <div class="text-3xl font-bold text-gray-800 mb-1">R$ 367.2K</div>
-                            <div class="text-sm text-gray-600 font-medium">Glosas Revertidas</div>
-                            <div class="text-xs text-green-600 font-semibold mt-2">
-                                <i class="fas fa-arrow-up mr-1"></i>75.6% taxa reversão
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- ROI Otimização -->
-                    <div class="kpi-card-premium rounded-xl p-6 relative overflow-hidden cursor-pointer" onclick="showExtratoKPI('roi_otimizacao')">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/10 to-transparent rounded-full -mr-16 -mt-16"></div>
-                        <div class="relative">
-                            <div class="flex justify-between items-start mb-3">
-                                <div class="p-3 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg">
-                                    <i class="fas fa-chart-line text-white text-xl"></i>
-                                </div>
-                                <button class="text-gray-400 hover:text-gray-600" onclick="event.stopPropagation(); showExtratoKPI('roi_otimizacao')">
-                                    <i class="fas fa-file-alt"></i>
-                                </button>
-                            </div>
-                            <div class="text-3xl font-bold text-gray-800 mb-1">287%</div>
-                            <div class="text-sm text-gray-600 font-medium">ROI Otimização</div>
-                            <div class="text-xs text-blue-600 font-semibold mt-2">
-                                <i class="fas fa-trophy mr-1"></i>Meta superada
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Tempo Médio Reversão -->
-                    <div class="kpi-card-premium rounded-xl p-6 relative overflow-hidden cursor-pointer" onclick="showExtratoKPI('tempo_reversao')">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500/10 to-transparent rounded-full -mr-16 -mt-16"></div>
-                        <div class="relative">
-                            <div class="flex justify-between items-start mb-3">
-                                <div class="p-3 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl shadow-lg">
-                                    <i class="fas fa-clock text-white text-xl"></i>
-                                </div>
-                                <button class="text-gray-400 hover:text-gray-600" onclick="event.stopPropagation(); showExtratoKPI('tempo_reversao')">
-                                    <i class="fas fa-file-alt"></i>
-                                </button>
-                            </div>
-                            <div class="text-3xl font-bold text-gray-800 mb-1">4.2 dias</div>
-                            <div class="text-sm text-gray-600 font-medium">Tempo Médio Reversão</div>
-                            <div class="text-xs text-purple-600 font-semibold mt-2">
-                                <i class="fas fa-arrow-down mr-1"></i>Redução de 2.1 dias
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Controle OPME -->
-                    <div class="kpi-card-premium rounded-xl p-6 relative overflow-hidden cursor-pointer" onclick="showExtratoKPI('controle_opme')">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-500/10 to-transparent rounded-full -mr-16 -mt-16"></div>
-                        <div class="relative">
-                            <div class="flex justify-between items-start mb-3">
-                                <div class="p-3 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl shadow-lg">
-                                    <i class="fas fa-microscope text-white text-xl"></i>
-                                </div>
-                                <button class="text-gray-400 hover:text-gray-600" onclick="event.stopPropagation(); showExtratoKPI('controle_opme')">
-                                    <i class="fas fa-file-alt"></i>
-                                </button>
-                            </div>
-                            <div class="text-3xl font-bold text-gray-800 mb-1">98.7%</div>
-                            <div class="text-sm text-gray-600 font-medium">Controle OPME</div>
-                            <div class="text-xs text-amber-600 font-semibold mt-2">
-                                <i class="fas fa-shield-alt mr-1"></i>Compliance total
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Main Content Grid -->
-            <div class="px-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Left Column -->
-                <div class="lg:col-span-2 space-y-6">
-                    <!-- Dashboard Analytics -->
-                    <div class="bg-white rounded-xl shadow-lg p-6">
-                        <h3 class="text-lg font-bold text-gray-800 mb-4">Dashboard de Análise Preditiva</h3>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4">
-                                <canvas id="glosasTrendChart" width="200" height="150"></canvas>
-                            </div>
-                            <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4">
-                                <canvas id="reversaoChart" width="200" height="150"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Controle OPME em Tempo Real -->
-                    <div class="bg-white rounded-xl shadow-lg p-6">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-lg font-bold text-gray-800">Controle OPME em Tempo Real</h3>
-                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">
-                                <i class="fas fa-circle text-green-500 mr-1" style="font-size: 8px;"></i>
-                                Monitorando
+                        <div class="flex items-center space-x-3">
+                            <span class="status-badge-success px-4 py-2 rounded-full text-white text-sm font-semibold animate-pulse">
+                                <i class="fas fa-brain mr-2"></i>IA LAURA Ativa
                             </span>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full">
-                                <thead>
-                                    <tr class="border-b border-gray-200">
-                                        <th class="text-left py-3 text-sm font-semibold text-gray-700">Material</th>
-                                        <th class="text-left py-3 text-sm font-semibold text-gray-700">Fornecedor</th>
-                                        <th class="text-left py-3 text-sm font-semibold text-gray-700">Valor</th>
-                                        <th class="text-left py-3 text-sm font-semibold text-gray-700">Status</th>
-                                        <th class="text-center py-3 text-sm font-semibold text-gray-700">Ação</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${["Stent Coronário","Prótese de Quadril","Marca-passo","Válvula Cardíaca","Prótese de Joelho"].map((s,a)=>`
-                                    <tr class="border-b border-gray-100 hover:bg-gray-50">
-                                        <td class="py-3 text-sm">${s}</td>
-                                        <td class="py-3 text-sm text-gray-600">${["MedTech Inc","OrthoLife","CardioTech","ValveMed","JointPro"][a]}</td>
-                                        <td class="py-3 text-sm font-semibold">R$ ${[12.45,28.9,45.2,67.8,34.5][a].toFixed(2)}0</td>
-                                        <td class="py-3">
-                                            <span class="px-2 py-1 ${a%3===0?"bg-yellow-100 text-yellow-700":"bg-green-100 text-green-700"} rounded-full text-xs">
-                                                ${a%3===0?"Análise":"Aprovado"}
-                                            </span>
-                                        </td>
-                                        <td class="py-3 text-center">
-                                            <button onclick="showOPMEDetail('${["ST","PQ","MP","VC","PJ"][a]}-2024-00${a+1}')" class="text-blue-600 hover:text-blue-800">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    `).join("")}
-                                </tbody>
-                            </table>
+                            <button onclick="exportarRelatorio()" class="bg-white border border-gray-200 px-4 py-2 rounded-lg hover:bg-gray-50 transition-all">
+                                <i class="fas fa-download mr-2"></i>Exportar
+                            </button>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Right Column -->
-                <div class="space-y-6">
-                    <!-- Jornadas em Risco -->
-                    <div class="bg-white rounded-xl shadow-lg p-6">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-lg font-bold text-gray-800">Jornadas em Risco</h3>
-                            <button onclick="showJornadasRisco()" class="text-blue-600 text-sm hover:underline">Ver Todos</button>
-                        </div>
-                        <div class="space-y-3">
-                            ${[{nome:"Maria Silva",id:"45123",risco:87,nivel:"alto",cor:"red"},{nome:"João Santos",id:"45124",risco:65,nivel:"medio",cor:"yellow"},{nome:"Ana Costa",id:"45125",risco:45,nivel:"baixo",cor:"green"}].map(s=>`
-                            <div class="p-3 bg-${s.cor}-50 border-l-4 border-${s.cor}-500 rounded-lg">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <p class="font-semibold text-gray-800">${s.nome}</p>
-                                        <p class="text-xs text-gray-600">ID: #${s.id}</p>
-                                    </div>
-                                    <span class="px-2 py-1 bg-${s.cor}-100 text-${s.cor}-700 rounded-full text-xs font-bold">${s.risco}%</span>
-                                </div>
-                                <p class="text-sm text-gray-700 mt-1">${s.nivel==="alto"?"Alto risco de glosa":s.nivel==="medio"?"Documentação pendente":"Monitoramento preventivo"}</p>
-                            </div>
-                            `).join("")}
-                        </div>
+            <!-- KPIs Premium Dashboard -->
+            <div class="container mx-auto px-4 py-6">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
+                    ${Zs()}
+                </div>
+
+                <!-- Main Content Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Left Column - 2 cols -->
+                    <div class="lg:col-span-2 space-y-6">
+                        ${Xs()}
+                        ${ea()}
+                        ${ta()}
                     </div>
 
-                    <!-- Alertas LAURA -->
-                    <div class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl shadow-lg p-6 text-white">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mr-3">
-                                <i class="fas fa-brain text-2xl"></i>
+                    <!-- Right Column - 1 col -->
+                    <div class="space-y-6">
+                        ${sa()}
+                        ${aa()}
+                        ${ia()}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modals -->
+            ${oa()}
+        </div>
+
+        <style>
+            ${ma()}
+        </style>
+    `}function Zs(){return[{id:"glosas_identificadas",icon:"fa-exclamation-triangle",color:"red",value:"R$ 485.7K",label:"Glosas Identificadas",trend:"+12.3% vs mês anterior",trendIcon:"fa-arrow-up",trendColor:"red"},{id:"glosas_revertidas",icon:"fa-check-circle",color:"green",value:"R$ 367.2K",label:"Glosas Revertidas",trend:"75.6% taxa reversão",trendIcon:"fa-arrow-up",trendColor:"green"},{id:"roi_otimizacao",icon:"fa-chart-line",color:"blue",value:"287%",label:"ROI Otimização",trend:"Meta superada",trendIcon:"fa-trophy",trendColor:"blue"},{id:"tempo_reversao",icon:"fa-clock",color:"purple",value:"4.2 dias",label:"Tempo Médio Reversão",trend:"Redução de 2.1 dias",trendIcon:"fa-arrow-down",trendColor:"purple"},{id:"controle_opme",icon:"fa-microscope",color:"amber",value:"98.7%",label:"Controle OPME",trend:"Compliance total",trendIcon:"fa-shield-alt",trendColor:"amber"}].map(t=>`
+        <div class="kpi-card-premium rounded-xl p-6 bg-white shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer" onclick="showExtratoKPI('${t.id}')">
+            <div class="relative">
+                <div class="flex justify-between items-start mb-3">
+                    <div class="p-3 bg-gradient-to-br from-${t.color}-500 to-${t.color}-600 rounded-xl shadow-lg">
+                        <i class="fas ${t.icon} text-white text-xl"></i>
+                    </div>
+                    <button class="text-gray-400 hover:text-gray-600" onclick="event.stopPropagation(); showExtratoKPI('${t.id}')">
+                        <i class="fas fa-file-alt"></i>
+                    </button>
+                </div>
+                <div class="text-3xl font-bold text-gray-800 mb-1">${t.value}</div>
+                <div class="text-sm text-gray-600 font-medium">${t.label}</div>
+                <div class="text-xs text-${t.trendColor}-600 font-semibold mt-2">
+                    <i class="fas ${t.trendIcon} mr-1"></i>${t.trend}
+                </div>
+            </div>
+        </div>
+    `).join("")}function Xs(){return`
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-lg font-bold text-gray-800 mb-4">Dashboard de Análise Preditiva</h3>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="chart-container">
+                    <canvas id="glosasTrendChart" width="300" height="200"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="reversaoChart" width="300" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    `}function ea(){return`
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-gray-800">Controle OPME em Tempo Real</h3>
+                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">
+                    <i class="fas fa-circle text-green-500 mr-1" style="font-size: 8px;"></i>
+                    Monitorando
+                </span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b border-gray-200">
+                            <th class="text-left py-3 text-sm font-semibold text-gray-700">Material</th>
+                            <th class="text-left py-3 text-sm font-semibold text-gray-700">Fornecedor</th>
+                            <th class="text-left py-3 text-sm font-semibold text-gray-700">Valor</th>
+                            <th class="text-left py-3 text-sm font-semibold text-gray-700">Status</th>
+                            <th class="text-center py-3 text-sm font-semibold text-gray-700">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${[{material:"Stent Coronário",fornecedor:"MedTech Inc",valor:"R$ 12.450",status:"Análise",statusColor:"yellow",code:"ST-2024-001"},{material:"Prótese de Quadril",fornecedor:"OrthoLife",valor:"R$ 28.900",status:"Aprovado",statusColor:"green",code:"PQ-2024-002"},{material:"Marca-passo",fornecedor:"CardioTech",valor:"R$ 45.200",status:"Análise",statusColor:"yellow",code:"MP-2024-003"},{material:"Válvula Cardíaca",fornecedor:"ValveMed",valor:"R$ 67.800",status:"Aprovado",statusColor:"green",code:"VC-2024-004"},{material:"Prótese de Joelho",fornecedor:"JointPro",valor:"R$ 34.500",status:"Pendente",statusColor:"red",code:"PJ-2024-005"}].map(t=>`
+                        <tr class="border-b border-gray-100 hover:bg-gray-50 data-table-row">
+                            <td class="py-3 text-sm">${t.material}</td>
+                            <td class="py-3 text-sm text-gray-600">${t.fornecedor}</td>
+                            <td class="py-3 text-sm font-semibold">${t.valor}</td>
+                            <td class="py-3">
+                                <span class="px-2 py-1 bg-${t.statusColor}-100 text-${t.statusColor}-700 rounded-full text-xs">
+                                    ${t.status}
+                                </span>
+                            </td>
+                            <td class="py-3 text-center">
+                                <button onclick="showOPMEDetail('${t.code}')" class="text-blue-600 hover:text-blue-800">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        `).join("")}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `}function ta(){return`
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl shadow-lg p-6 commercial-card">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-gray-800">
+                    <i class="fas fa-briefcase mr-2 text-blue-600"></i>
+                    Dossiê Comercial - Negociação com Operadoras
+                </h3>
+                <button onclick="showDossierComercial()" class="text-blue-600 hover:text-blue-800">
+                    <i class="fas fa-expand"></i>
+                </button>
+            </div>
+            <div class="grid grid-cols-3 gap-4">
+                <div class="bg-white/80 backdrop-blur rounded-lg p-3">
+                    <p class="text-xs text-gray-600 mb-1">Taxa Aprovação</p>
+                    <p class="text-xl font-bold text-blue-700">92.5%</p>
+                    <p class="text-xs text-green-600 mt-1">↑ 3.2% este mês</p>
+                </div>
+                <div class="bg-white/80 backdrop-blur rounded-lg p-3">
+                    <p class="text-xs text-gray-600 mb-1">Tempo Médio</p>
+                    <p class="text-xl font-bold text-blue-700">3.8 dias</p>
+                    <p class="text-xs text-green-600 mt-1">↓ 1.2 dias</p>
+                </div>
+                <div class="bg-white/80 backdrop-blur rounded-lg p-3">
+                    <p class="text-xs text-gray-600 mb-1">Valor Negociado</p>
+                    <p class="text-xl font-bold text-blue-700">R$ 2.4M</p>
+                    <p class="text-xs text-green-600 mt-1">↑ R$ 450K</p>
+                </div>
+            </div>
+            <div class="mt-4 p-3 bg-white/60 rounded-lg">
+                <p class="text-sm font-semibold text-gray-800 mb-2">Principais Operadoras</p>
+                <div class="space-y-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-700">Unimed</span>
+                        <div class="flex items-center gap-2">
+                            <div class="w-24 bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 95%"></div>
                             </div>
-                            <h3 class="text-lg font-bold">Alertas LAURA Finance AI</h3>
+                            <span class="text-xs font-bold text-green-600">95%</span>
                         </div>
-                        <div class="space-y-3">
-                            <div class="p-3 bg-white/10 rounded-lg backdrop-blur">
-                                <p class="text-sm font-semibold mb-1">⚠️ Padrão Detectado</p>
-                                <p class="text-xs opacity-90">15 casos com alta probabilidade de glosa por documentação incompleta</p>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-700">SulAmérica</span>
+                        <div class="flex items-center gap-2">
+                            <div class="w-24 bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 88%"></div>
                             </div>
-                            <div class="p-3 bg-white/10 rounded-lg backdrop-blur">
-                                <p class="text-sm font-semibold mb-1">💡 Oportunidade</p>
-                                <p class="text-xs opacity-90">Potencial economia de R$ 127.5K com revisão preventiva</p>
+                            <span class="text-xs font-bold text-green-600">88%</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-700">Bradesco Saúde</span>
+                        <div class="flex items-center gap-2">
+                            <div class="w-24 bg-gray-200 rounded-full h-2">
+                                <div class="bg-yellow-500 h-2 rounded-full" style="width: 76%"></div>
                             </div>
-                            <div class="p-3 bg-white/10 rounded-lg backdrop-blur">
-                                <p class="text-sm font-semibold mb-1">📈 Tendência</p>
-                                <p class="text-xs opacity-90">Aumento de 8% na taxa de reversão com novo protocolo</p>
-                            </div>
+                            <span class="text-xs font-bold text-yellow-600">76%</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Modals -->
-        ${Zs()}
-
-        <style>
-            ${ta()}
-        </style>
-    `,t=[sa()];return{html:e,scripts:t}};function Zs(){return`
-        <!-- Modal: Jornadas em Risco -->
-        <div id="modalJornadasRisco" class="fixed inset-0 z-50 hidden">
-            <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeModal('modalJornadasRisco')"></div>
-            <div class="absolute inset-4 md:inset-8 bg-white rounded-2xl shadow-2xl overflow-hidden">
+    `}function sa(){return`
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-gray-800">Jornadas em Risco</h3>
+                <button onclick="showJornadasRisco()" class="text-blue-600 text-sm hover:underline">Ver Todos</button>
+            </div>
+            <div class="space-y-3">
+                <div class="p-3 bg-red-50 border-l-4 border-red-500 rounded-lg">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="font-semibold text-gray-800">Maria Silva</p>
+                            <p class="text-xs text-gray-600">ID: #45123</p>
+                        </div>
+                        <span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-bold risk-indicator">87%</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mt-1">Alto risco de glosa - Quimioterapia</p>
+                </div>
+                <div class="p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded-lg">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="font-semibold text-gray-800">João Santos</p>
+                            <p class="text-xs text-gray-600">ID: #45124</p>
+                        </div>
+                        <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold">65%</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mt-1">Documentação pendente - Cirurgia</p>
+                </div>
+                <div class="p-3 bg-green-50 border-l-4 border-green-500 rounded-lg">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="font-semibold text-gray-800">Ana Costa</p>
+                            <p class="text-xs text-gray-600">ID: #45125</p>
+                        </div>
+                        <span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">35%</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mt-1">Monitoramento preventivo</p>
+                </div>
+            </div>
+        </div>
+    `}function aa(){return`
+        <div class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl shadow-lg p-6 text-white">
+            <div class="flex items-center mb-4">
+                <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mr-3 pulse-dot">
+                    <i class="fas fa-brain text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-bold">Alertas LAURA Finance AI</h3>
+            </div>
+            <div class="space-y-3">
+                <div class="p-3 bg-white/10 rounded-lg backdrop-blur">
+                    <p class="text-sm font-semibold mb-1">⚠️ Padrão Detectado</p>
+                    <p class="text-xs opacity-90">15 casos com alta probabilidade de glosa por documentação incompleta</p>
+                </div>
+                <div class="p-3 bg-white/10 rounded-lg backdrop-blur">
+                    <p class="text-sm font-semibold mb-1">💡 Oportunidade</p>
+                    <p class="text-xs opacity-90">Potencial economia de R$ 127.5K com revisão preventiva</p>
+                </div>
+                <div class="p-3 bg-white/10 rounded-lg backdrop-blur">
+                    <p class="text-sm font-semibold mb-1">📈 Tendência</p>
+                    <p class="text-xs opacity-90">Aumento de 8% na taxa de reversão com novo protocolo</p>
+                </div>
+            </div>
+        </div>
+    `}function ia(){return`
+        <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl shadow-lg p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-gray-800">
+                    <i class="fas fa-exclamation-circle mr-2 text-amber-600"></i>
+                    Fornecedores Críticos
+                </h3>
+                <button onclick="showFornecedoresCriticos()" class="text-amber-600 hover:text-amber-800">
+                    <i class="fas fa-expand"></i>
+                </button>
+            </div>
+            <div class="space-y-3">
+                <div class="p-3 bg-white/70 backdrop-blur rounded-lg border-l-3 border-amber-500">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="font-semibold text-gray-800">MedTech Inc</p>
+                            <p class="text-xs text-gray-600">234 materiais - R$ 2.8M</p>
+                        </div>
+                        <span class="text-amber-600 font-bold">⚠️</span>
+                    </div>
+                    <p class="text-xs text-amber-700 mt-1">Atraso médio: 3.2 dias</p>
+                </div>
+                <div class="p-3 bg-white/70 backdrop-blur rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="font-semibold text-gray-800">CardioTech</p>
+                            <p class="text-xs text-gray-600">156 materiais - R$ 3.2M</p>
+                        </div>
+                        <span class="text-green-600">✓</span>
+                    </div>
+                    <p class="text-xs text-green-700 mt-1">Performance: 99.5%</p>
+                </div>
+            </div>
+        </div>
+    `}function oa(){return`
+        ${ra()}
+        ${na()}
+        ${ca()}
+        ${pa()}
+        ${xa()}
+    `}function ra(){return`
+        <div id="modalJornadasRisco" class="fixed inset-0 z-50 hidden modal-backdrop">
+            <div class="absolute inset-0" onclick="closeModal('modalJornadasRisco')"></div>
+            <div class="absolute inset-4 md:inset-8 bg-white rounded-2xl shadow-2xl overflow-hidden modal-content animate-fade-up">
                 <div class="h-full flex flex-col">
                     <div class="bg-gradient-to-r from-red-600 to-red-700 p-6 text-white">
                         <div class="flex justify-between items-center">
@@ -829,61 +873,21 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
                             </button>
                         </div>
                         <div class="mt-4 flex gap-2">
-                            <button onclick="filterRisco('all')" class="px-4 py-2 bg-white/20 rounded-lg hover:bg-white/30">Todos</button>
-                            <button onclick="filterRisco('alto')" class="px-4 py-2 bg-red-800/50 rounded-lg hover:bg-red-800/70">Alto Risco</button>
-                            <button onclick="filterRisco('medio')" class="px-4 py-2 bg-yellow-600/50 rounded-lg hover:bg-yellow-600/70">Médio Risco</button>
-                            <button onclick="filterRisco('baixo')" class="px-4 py-2 bg-green-600/50 rounded-lg hover:bg-green-600/70">Baixo Risco</button>
+                            <button onclick="filterRisco('all')" class="px-4 py-2 bg-white/20 rounded-lg hover:bg-white/30">Todos (31)</button>
+                            <button onclick="filterRisco('alto')" class="px-4 py-2 bg-red-800/50 rounded-lg hover:bg-red-800/70">Alto Risco (10)</button>
+                            <button onclick="filterRisco('medio')" class="px-4 py-2 bg-yellow-600/50 rounded-lg hover:bg-yellow-600/70">Médio Risco (10)</button>
+                            <button onclick="filterRisco('baixo')" class="px-4 py-2 bg-green-600/50 rounded-lg hover:bg-green-600/70">Baixo Risco (11)</button>
                         </div>
                     </div>
                     <div class="flex-1 overflow-y-auto p-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            ${Xs()}
+                            ${la()}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Modal: OPME Detail -->
-        <div id="modalOPMEDetail" class="fixed inset-0 z-50 hidden">
-            <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeModal('modalOPMEDetail')"></div>
-            <div class="absolute inset-8 md:inset-16 bg-white rounded-2xl shadow-2xl overflow-hidden max-w-4xl mx-auto">
-                <div class="h-full flex flex-col">
-                    <div class="bg-gradient-to-r from-amber-600 to-amber-700 p-6 text-white">
-                        <div class="flex justify-between items-center">
-                            <h2 class="text-2xl font-bold">Detalhes OPME - Visão Completa</h2>
-                            <button onclick="closeModal('modalOPMEDetail')" class="text-white/80 hover:text-white">
-                                <i class="fas fa-times text-2xl"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="flex-1 overflow-y-auto p-6">
-                        ${ea()}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal: KPI Extratos -->
-        <div id="modalKPIExtrato" class="fixed inset-0 z-50 hidden">
-            <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeModal('modalKPIExtrato')"></div>
-            <div class="absolute inset-4 md:inset-8 bg-white rounded-2xl shadow-2xl overflow-hidden">
-                <div class="h-full flex flex-col">
-                    <div id="modalKPIExtratoHeader" class="bg-gradient-to-r from-blue-600 to-blue-700 p-6 text-white">
-                        <div class="flex justify-between items-center">
-                            <h2 id="modalKPIExtratoTitle" class="text-2xl font-bold">Extrato Detalhado</h2>
-                            <button onclick="closeModal('modalKPIExtrato')" class="text-white/80 hover:text-white">
-                                <i class="fas fa-times text-2xl"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div id="modalKPIExtratoContent" class="flex-1 overflow-y-auto p-6">
-                        <!-- Content will be dynamically inserted here -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    `}function Xs(){return[...Array.from({length:10},(t,s)=>({nome:["Maria Silva","João Santos","Ana Costa","Pedro Lima","Julia Ferreira","Carlos Mendes","Patricia Souza","Roberto Alves","Fernanda Cruz","Miguel Torres"][s],id:`4512${s}`,risco:85+Math.floor(Math.random()*15),nivel:"alto",diagnostico:["CA Mama","CA Pulmão","CA Colorretal","CA Próstata","Leucemia","CA Gástrico","Linfoma","CA Ovário","CA Pâncreas","Mieloma"][s],tempo:`${3+s} meses`,alerta:"Documentação incompleta - Alto risco de glosa"})),...Array.from({length:10},(t,s)=>({nome:["Lucas Oliveira","Beatriz Lima","André Castro","Sofia Rocha","Gabriel Melo","Isabella Santos","Thiago Costa","Laura Barbosa","Rafael Dias","Camila Nunes"][s],id:`4513${s}`,risco:60+Math.floor(Math.random()*15),nivel:"medio",diagnostico:["CA Tireoide","CA Rim","CA Bexiga","CA Endométrio","CA Fígado","Melanoma","CA Esôfago","CA Cérebro","Sarcoma","CA Testículo"][s],tempo:`${2+s} meses`,alerta:"Autorização pendente - Risco moderado"})),...Array.from({length:11},(t,s)=>({nome:["Diego Martins","Amanda Vieira","Felipe Correia","Mariana Gomes","Bruno Cardoso","Leticia Pinto","Rodrigo Cunha","Natalia Freitas","Eduardo Machado","Juliana Ramos","Henrique Moreira"][s],id:`4514${s}`,risco:30+Math.floor(Math.random()*15),nivel:"baixo",diagnostico:["CA Pele","CA in situ","Tumor Benigno","Pré-cancer","Displasia","Adenoma","Papiloma","Lipoma","Fibroma","Cisto","Pólipo"][s],tempo:`${1+Math.floor(s/2)} meses`,alerta:"Monitoramento preventivo - Baixo risco"}))].map(t=>`
+    `}function la(){return[{nome:"Maria Silva",id:"45123",risco:87,nivel:"alto",diagnostico:"CA Mama",tempo:"3 meses"},{nome:"João Santos",id:"45124",risco:92,nivel:"alto",diagnostico:"CA Pulmão",tempo:"4 meses"},{nome:"Ana Costa",id:"45125",risco:88,nivel:"alto",diagnostico:"CA Colorretal",tempo:"2 meses"},{nome:"Pedro Lima",id:"45126",risco:95,nivel:"alto",diagnostico:"CA Próstata",tempo:"5 meses"},{nome:"Julia Ferreira",id:"45127",risco:90,nivel:"alto",diagnostico:"Leucemia",tempo:"6 meses"},{nome:"Carlos Mendes",id:"45128",risco:86,nivel:"alto",diagnostico:"CA Gástrico",tempo:"3 meses"},{nome:"Patricia Souza",id:"45129",risco:93,nivel:"alto",diagnostico:"Linfoma",tempo:"4 meses"},{nome:"Roberto Alves",id:"45130",risco:89,nivel:"alto",diagnostico:"CA Ovário",tempo:"2 meses"},{nome:"Fernanda Cruz",id:"45131",risco:91,nivel:"alto",diagnostico:"CA Pâncreas",tempo:"5 meses"},{nome:"Miguel Torres",id:"45132",risco:85,nivel:"alto",diagnostico:"Mieloma",tempo:"3 meses"},{nome:"Lucas Oliveira",id:"45133",risco:65,nivel:"medio",diagnostico:"CA Tireoide",tempo:"2 meses"},{nome:"Beatriz Lima",id:"45134",risco:72,nivel:"medio",diagnostico:"CA Rim",tempo:"3 meses"},{nome:"André Castro",id:"45135",risco:68,nivel:"medio",diagnostico:"CA Bexiga",tempo:"4 meses"},{nome:"Sofia Rocha",id:"45136",risco:70,nivel:"medio",diagnostico:"CA Endométrio",tempo:"2 meses"},{nome:"Gabriel Melo",id:"45137",risco:73,nivel:"medio",diagnostico:"CA Fígado",tempo:"5 meses"},{nome:"Isabella Santos",id:"45138",risco:67,nivel:"medio",diagnostico:"Melanoma",tempo:"3 meses"},{nome:"Thiago Costa",id:"45139",risco:71,nivel:"medio",diagnostico:"CA Esôfago",tempo:"4 meses"},{nome:"Laura Barbosa",id:"45140",risco:69,nivel:"medio",diagnostico:"CA Cérebro",tempo:"2 meses"},{nome:"Rafael Dias",id:"45141",risco:74,nivel:"medio",diagnostico:"Sarcoma",tempo:"3 meses"},{nome:"Camila Nunes",id:"45142",risco:66,nivel:"medio",diagnostico:"CA Testículo",tempo:"2 meses"},{nome:"Diego Martins",id:"45143",risco:35,nivel:"baixo",diagnostico:"CA Pele",tempo:"1 mês"},{nome:"Amanda Vieira",id:"45144",risco:42,nivel:"baixo",diagnostico:"CA in situ",tempo:"2 meses"},{nome:"Felipe Correia",id:"45145",risco:38,nivel:"baixo",diagnostico:"Tumor Benigno",tempo:"1 mês"},{nome:"Mariana Gomes",id:"45146",risco:40,nivel:"baixo",diagnostico:"Pré-cancer",tempo:"3 meses"},{nome:"Bruno Cardoso",id:"45147",risco:37,nivel:"baixo",diagnostico:"Displasia",tempo:"2 meses"},{nome:"Leticia Pinto",id:"45148",risco:43,nivel:"baixo",diagnostico:"Adenoma",tempo:"1 mês"},{nome:"Rodrigo Cunha",id:"45149",risco:36,nivel:"baixo",diagnostico:"Papiloma",tempo:"2 meses"},{nome:"Natalia Freitas",id:"45150",risco:41,nivel:"baixo",diagnostico:"Lipoma",tempo:"1 mês"},{nome:"Eduardo Machado",id:"45151",risco:39,nivel:"baixo",diagnostico:"Fibroma",tempo:"3 meses"},{nome:"Juliana Ramos",id:"45152",risco:44,nivel:"baixo",diagnostico:"Cisto",tempo:"2 meses"},{nome:"Henrique Moreira",id:"45153",risco:34,nivel:"baixo",diagnostico:"Pólipo",tempo:"1 mês"}].map(t=>`
         <div class="p-4 ${t.nivel==="alto"?"bg-red-50 border-l-4 border-red-500":t.nivel==="medio"?"bg-yellow-50 border-l-4 border-yellow-500":"bg-green-50 border-l-4 border-green-500"} rounded-lg hover:shadow-lg transition-all patient-risk-card" data-risk="${t.nivel}">
             <div class="flex justify-between items-start mb-2">
                 <div>
@@ -898,11 +902,31 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
             <p class="text-xs text-gray-600 mt-1">Em tratamento: ${t.tempo}</p>
             <div class="mt-2 pt-2 border-t ${t.nivel==="alto"?"border-red-200":t.nivel==="medio"?"border-yellow-200":"border-green-200"}">
                 <p class="text-xs ${t.nivel==="alto"?"text-red-700":t.nivel==="medio"?"text-yellow-700":"text-green-700"} font-medium">
-                    <i class="fas fa-exclamation-circle mr-1"></i>${t.alerta}
+                    <i class="fas fa-exclamation-circle mr-1"></i>
+                    ${t.nivel==="alto"?"Documentação incompleta - Alto risco de glosa":t.nivel==="medio"?"Autorização pendente - Risco moderado":"Monitoramento preventivo - Baixo risco"}
                 </p>
             </div>
         </div>
-    `).join("")}function ea(){return`
+    `).join("")}function na(){return`
+        <div id="modalOPMEDetail" class="fixed inset-0 z-50 hidden modal-backdrop">
+            <div class="absolute inset-0" onclick="closeModal('modalOPMEDetail')"></div>
+            <div class="absolute inset-8 md:inset-16 bg-white rounded-2xl shadow-2xl overflow-hidden max-w-4xl mx-auto modal-content animate-slide-in">
+                <div class="h-full flex flex-col">
+                    <div class="bg-gradient-to-r from-amber-600 to-amber-700 p-6 text-white">
+                        <div class="flex justify-between items-center">
+                            <h2 class="text-2xl font-bold">Detalhes OPME - Visão Completa</h2>
+                            <button onclick="closeModal('modalOPMEDetail')" class="text-white/80 hover:text-white">
+                                <i class="fas fa-times text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex-1 overflow-y-auto p-6">
+                        ${da()}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `}function da(){return`
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
                 <h3 class="font-bold text-gray-800 mb-3">Informações do Material</h3>
@@ -924,7 +948,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
                     <p class="text-sm"><span class="font-semibold">Idade:</span> 62 anos</p>
                     <p class="text-sm"><span class="font-semibold">Procedimento:</span> Angioplastia Coronariana</p>
                     <p class="text-sm"><span class="font-semibold">CID:</span> I25.1 - Doença aterosclerótica do coração</p>
-                    <p class="text-sm"><span class="font-semibold">Médico Solicitante:</span> Dr. Carlos Eduardo Santos - CRM 12345</p>
+                    <p class="text-sm"><span class="font-semibold">Médico:</span> Dr. Carlos Eduardo Santos - CRM 12345</p>
                     <p class="text-sm"><span class="font-semibold">Data Prevista:</span> 20/01/2025</p>
                 </div>
             </div>
@@ -936,7 +960,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
                 <p class="text-sm text-gray-700 leading-relaxed">
                     Paciente masculino, 62 anos, portador de doença arterial coronariana com lesão crítica de 90% em artéria descendente anterior (ADA) proximal, 
                     documentada por cateterismo cardíaco realizado em 10/01/2025. Apresenta angina instável classe III (CCS), com episódios diários de dor precordial 
-                    aos mínimos esforços, refratária ao tratamento medicamentoso otimizado. 
+                    aos mínimos esforços, refratária ao tratamento medicamentoso otimizado.
                 </p>
                 <p class="text-sm text-gray-700 leading-relaxed mt-2">
                     O stent farmacológico é indicado devido ao alto risco de reestenose considerando: diabetes mellitus tipo 2, lesão longa (>20mm), 
@@ -995,17 +1019,158 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
                 <i class="fas fa-check mr-2"></i>Aprovar Material
             </button>
         </div>
-    `}function ta(){return`
+    `}function ca(){return`
+        <div id="modalKPIExtrato" class="fixed inset-0 z-50 hidden modal-backdrop">
+            <div class="absolute inset-0" onclick="closeModal('modalKPIExtrato')"></div>
+            <div class="absolute inset-4 md:inset-8 bg-white rounded-2xl shadow-2xl overflow-hidden modal-content">
+                <div class="h-full flex flex-col">
+                    <div id="modalKPIExtratoHeader" class="bg-gradient-to-r from-blue-600 to-blue-700 p-6 text-white">
+                        <div class="flex justify-between items-center">
+                            <h2 id="modalKPIExtratoTitle" class="text-2xl font-bold">Extrato Detalhado</h2>
+                            <button onclick="closeModal('modalKPIExtrato')" class="text-white/80 hover:text-white">
+                                <i class="fas fa-times text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="modalKPIExtratoContent" class="flex-1 overflow-y-auto p-6">
+                        <!-- Content will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    `}function pa(){return`
+        <div id="modalDossierComercial" class="fixed inset-0 z-50 hidden modal-backdrop">
+            <div class="absolute inset-0" onclick="closeModal('modalDossierComercial')"></div>
+            <div class="absolute inset-4 md:inset-8 bg-white rounded-2xl shadow-2xl overflow-hidden modal-content">
+                <div class="h-full flex flex-col">
+                    <div class="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 text-white">
+                        <div class="flex justify-between items-center">
+                            <h2 class="text-2xl font-bold">Dossiê Comercial - Análise Completa</h2>
+                            <button onclick="closeModal('modalDossierComercial')" class="text-white/80 hover:text-white">
+                                <i class="fas fa-times text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex-1 overflow-y-auto p-6">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            <div class="lg:col-span-2">
+                                <h3 class="font-bold text-gray-800 mb-4">Análise de Performance por Operadora</h3>
+                                <div class="space-y-4">
+                                    ${["Unimed","SulAmérica","Bradesco Saúde","Amil","Porto Seguro"].map((e,t)=>{const s=[95,88,76,82,91][t],a=[1.2,.9,.7,.8,.6][t];return`
+                                        <div class="p-4 bg-gray-50 rounded-lg">
+                                            <div class="flex justify-between items-start mb-2">
+                                                <h4 class="font-semibold text-gray-800">${e}</h4>
+                                                <span class="px-2 py-1 ${s>=90?"bg-green-100 text-green-700":s>=80?"bg-yellow-100 text-yellow-700":"bg-red-100 text-red-700"} rounded-full text-xs font-bold">
+                                                    ${s}% aprovação
+                                                </span>
+                                            </div>
+                                            <div class="grid grid-cols-3 gap-3 text-sm">
+                                                <div>
+                                                    <p class="text-gray-600">Volume Negociado</p>
+                                                    <p class="font-bold">R$ ${a}M</p>
+                                                </div>
+                                                <div>
+                                                    <p class="text-gray-600">Tempo Médio</p>
+                                                    <p class="font-bold">${(5-t*.5).toFixed(1)} dias</p>
+                                                </div>
+                                                <div>
+                                                    <p class="text-gray-600">Glosas</p>
+                                                    <p class="font-bold text-red-600">${(100-s).toFixed(1)}%</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        `}).join("")}
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800 mb-4">Métricas de Negociação</h3>
+                                <div class="space-y-3">
+                                    <div class="p-4 bg-blue-50 rounded-lg">
+                                        <p class="text-sm text-gray-600">Taxa Média de Aprovação</p>
+                                        <p class="text-2xl font-bold text-blue-700">86.4%</p>
+                                        <p class="text-xs text-green-600 mt-1">↑ 3.2% este mês</p>
+                                    </div>
+                                    <div class="p-4 bg-green-50 rounded-lg">
+                                        <p class="text-sm text-gray-600">Economia Gerada</p>
+                                        <p class="text-2xl font-bold text-green-700">R$ 2.4M</p>
+                                        <p class="text-xs text-green-600 mt-1">↑ R$ 450K vs anterior</p>
+                                    </div>
+                                    <div class="p-4 bg-purple-50 rounded-lg">
+                                        <p class="text-sm text-gray-600">Tempo Médio Resposta</p>
+                                        <p class="text-2xl font-bold text-purple-700">3.8 dias</p>
+                                        <p class="text-xs text-green-600 mt-1">↓ 1.2 dias</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `}function xa(){return`
+        <div id="modalFornecedoresCriticos" class="fixed inset-0 z-50 hidden modal-backdrop">
+            <div class="absolute inset-0" onclick="closeModal('modalFornecedoresCriticos')"></div>
+            <div class="absolute inset-4 md:inset-8 bg-white rounded-2xl shadow-2xl overflow-hidden modal-content">
+                <div class="h-full flex flex-col">
+                    <div class="bg-gradient-to-r from-amber-600 to-orange-600 p-6 text-white">
+                        <div class="flex justify-between items-center">
+                            <h2 class="text-2xl font-bold">Fornecedores Críticos - Análise Detalhada</h2>
+                            <button onclick="closeModal('modalFornecedoresCriticos')" class="text-white/80 hover:text-white">
+                                <i class="fas fa-times text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex-1 overflow-y-auto p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            ${["MedTech Inc","OrthoLife","CardioTech","ValveMed","JointPro"].map((e,t)=>{const s=t<2?"critico":"normal";return`
+                                <div class="p-4 ${s==="critico"?"bg-red-50 border-l-4 border-red-500":"bg-gray-50"} rounded-lg">
+                                    <div class="flex justify-between items-start mb-3">
+                                        <h3 class="font-bold text-gray-800">${e}</h3>
+                                        ${s==="critico"?'<span class="text-red-600 text-xl">⚠️</span>':'<span class="text-green-600">✓</span>'}
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-3 text-sm">
+                                        <div>
+                                            <p class="text-gray-600">Volume Total</p>
+                                            <p class="font-bold">R$ ${(2.8-t*.3).toFixed(1)}M</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-600">Materiais</p>
+                                            <p class="font-bold">${234-t*20}</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-600">Compliance</p>
+                                            <p class="font-bold ${s==="critico"?"text-red-600":"text-green-600"}">${99-t*.5}%</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-600">Atraso Médio</p>
+                                            <p class="font-bold ${s==="critico"?"text-red-600":""}">${s==="critico"?`${3.2-t*.5} dias`:"Em dia"}</p>
+                                        </div>
+                                    </div>
+                                    ${s==="critico"?`
+                                    <div class="mt-3 pt-3 border-t border-red-200">
+                                        <p class="text-xs text-red-700">
+                                            <i class="fas fa-exclamation-triangle mr-1"></i>
+                                            Ação necessária: Reunião de alinhamento agendada
+                                        </p>
+                                    </div>
+                                    `:""}
+                                </div>
+                                `}).join("")}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `}function ma(){return`
         .glass-premium {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
         }
         
         .kpi-card-premium {
-            background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
-            border: 1px solid rgba(0, 0, 0, 0.04);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
@@ -1025,84 +1190,72 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
             left: 100%;
         }
         
-        .kpi-card-premium:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.15);
+        .status-badge-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
         }
-    `}function sa(){return`
-        // Initialize Charts
-        function initFinancialCharts() {
-            // Glosas Trend Chart
-            const ctx1 = document.getElementById('glosasTrendChart')?.getContext('2d');
-            if (ctx1) {
-                new Chart(ctx1, {
-                    type: 'line',
-                    data: {
-                        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
-                        datasets: [{
-                            label: 'Glosas Identificadas',
-                            data: [320, 380, 420, 390, 450, 486],
-                            borderColor: 'rgb(239, 68, 68)',
-                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                            tension: 0.4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    callback: function(value) {
-                                        return 'R$ ' + value + 'K';
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-
-            // Reversao Chart
-            const ctx2 = document.getElementById('reversaoChart')?.getContext('2d');
-            if (ctx2) {
-                new Chart(ctx2, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
-                        datasets: [{
-                            label: 'Taxa de Reversão',
-                            data: [65, 70, 72, 68, 74, 76],
-                            backgroundColor: 'rgba(34, 197, 94, 0.8)'
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                max: 100,
-                                ticks: {
-                                    callback: function(value) {
-                                        return value + '%';
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
+        
+        .modal-backdrop {
+            backdrop-filter: blur(8px);
         }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+            box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.3);
+        }
+        
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .animate-fade-up { animation: fadeInUp 0.6s ease-out; }
+        .animate-slide-in { animation: slideInRight 0.5s ease-out; }
+        
+        .pulse-dot {
+            animation: pulse-dot 2s infinite;
+        }
+        
+        @keyframes pulse-dot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+        }
+        
+        .risk-indicator::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite;
+        }
+        
+        .chart-container {
+            background: linear-gradient(135deg, rgba(249, 250, 251, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        
+        .data-table-row:hover {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.05) 0%, rgba(59, 130, 246, 0.02) 100%);
+        }
+        
+        .commercial-card {
+            border-left: 4px solid #0ea5e9;
+        }
+    `}function ga(){return`
+        // Portal Financeiro LAURA - Scripts
+        console.log('Inicializando Portal Financeiro LAURA...');
 
-        // Modal Functions
+        // Modal Control Functions
         window.showJornadasRisco = function() {
             document.getElementById('modalJornadasRisco').classList.remove('hidden');
         }
@@ -1115,6 +1268,14 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
             document.getElementById('modalOPMEDetail').classList.remove('hidden');
         }
 
+        window.showDossierComercial = function() {
+            document.getElementById('modalDossierComercial').classList.remove('hidden');
+        }
+
+        window.showFornecedoresCriticos = function() {
+            document.getElementById('modalFornecedoresCriticos').classList.remove('hidden');
+        }
+
         window.showExtratoKPI = function(type) {
             const modal = document.getElementById('modalKPIExtrato');
             const header = document.getElementById('modalKPIExtratoHeader');
@@ -1125,27 +1286,27 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
                 'glosas_identificadas': {
                     title: 'Extrato de Glosas Identificadas',
                     color: 'from-red-600 to-red-700',
-                    content: generateGlosasIdentificadasContent()
+                    content: generateGlosasIdentificadasExtrato()
                 },
                 'glosas_revertidas': {
                     title: 'Extrato de Glosas Revertidas',
                     color: 'from-green-600 to-green-700',
-                    content: generateGlosasRevertidasContent()
+                    content: generateGlosasRevertidasExtrato()
                 },
                 'roi_otimizacao': {
                     title: 'ROI de Otimização',
                     color: 'from-blue-600 to-blue-700',
-                    content: generateROIContent()
+                    content: generateROIExtrato()
                 },
                 'tempo_reversao': {
                     title: 'Tempo Médio de Reversão',
                     color: 'from-purple-600 to-purple-700',
-                    content: generateTempoReversaoContent()
+                    content: generateTempoReversaoExtrato()
                 },
                 'controle_opme': {
                     title: 'Controle OPME',
                     color: 'from-amber-600 to-amber-700',
-                    content: generateControleOPMEContent()
+                    content: generateControleOPMEExtrato()
                 }
             };
             
@@ -1155,95 +1316,12 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
                 header.className = 'bg-gradient-to-r ' + extrato.color + ' p-6 text-white';
                 content.innerHTML = extrato.content;
                 modal.classList.remove('hidden');
+                
+                // Initialize specific charts if needed
+                if (type === 'roi_otimizacao' || type === 'tempo_reversao') {
+                    setTimeout(() => initExtratoCharts(type), 100);
+                }
             }
-        }
-
-        function generateGlosasIdentificadasContent() {
-            return '<div class="space-y-4">' +
-                '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">' +
-                '<div class="bg-red-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Total Identificado</p><p class="text-2xl font-bold text-red-600">R$ 485.700</p></div>' +
-                '<div class="bg-red-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Casos</p><p class="text-2xl font-bold text-red-600">127</p></div>' +
-                '<div class="bg-red-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Taxa Crescimento</p><p class="text-2xl font-bold text-red-600">+12.3%</p></div>' +
-                '</div>' +
-                '<table class="w-full"><thead><tr class="border-b"><th class="text-left py-2">Código</th><th class="text-left py-2">Paciente</th><th class="text-left py-2">Valor</th><th class="text-left py-2">Motivo</th><th class="text-left py-2">Status</th></tr></thead>' +
-                '<tbody>' +
-                '<tr class="border-b"><td class="py-2">GL-2024-001</td><td class="py-2">Maria Silva</td><td class="py-2 font-semibold">R$ 12.450</td><td class="py-2">Doc. Incompleta</td><td class="py-2"><span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs">Pendente</span></td></tr>' +
-                '<tr class="border-b"><td class="py-2">GL-2024-002</td><td class="py-2">João Santos</td><td class="py-2 font-semibold">R$ 8.900</td><td class="py-2">Código Incorreto</td><td class="py-2"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs">Revisão</span></td></tr>' +
-                '<tr class="border-b"><td class="py-2">GL-2024-003</td><td class="py-2">Ana Costa</td><td class="py-2 font-semibold">R$ 15.200</td><td class="py-2">Autorização Vencida</td><td class="py-2"><span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs">Pendente</span></td></tr>' +
-                '<tr class="border-b"><td class="py-2">GL-2024-004</td><td class="py-2">Pedro Lima</td><td class="py-2 font-semibold">R$ 6.780</td><td class="py-2">Duplicidade</td><td class="py-2"><span class="px-2 py-1 bg-orange-100 text-orange-700 rounded-full text-xs">Análise</span></td></tr>' +
-                '<tr class="border-b"><td class="py-2">GL-2024-005</td><td class="py-2">Julia Ferreira</td><td class="py-2 font-semibold">R$ 22.100</td><td class="py-2">Falta Laudo</td><td class="py-2"><span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs">Pendente</span></td></tr>' +
-                '</tbody></table></div>';
-        }
-
-        function generateGlosasRevertidasContent() {
-            return '<div class="space-y-4">' +
-                '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">' +
-                '<div class="bg-green-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Total Revertido</p><p class="text-2xl font-bold text-green-600">R$ 367.200</p></div>' +
-                '<div class="bg-green-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Casos Revertidos</p><p class="text-2xl font-bold text-green-600">96</p></div>' +
-                '<div class="bg-green-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Taxa Sucesso</p><p class="text-2xl font-bold text-green-600">75.6%</p></div>' +
-                '</div>' +
-                '<table class="w-full"><thead><tr class="border-b"><th class="text-left py-2">Código</th><th class="text-left py-2">Paciente</th><th class="text-left py-2">Valor</th><th class="text-left py-2">Data Reversão</th><th class="text-left py-2">Tempo</th></tr></thead>' +
-                '<tbody>' +
-                '<tr class="border-b"><td class="py-2">RV-2024-001</td><td class="py-2">Ana Costa</td><td class="py-2 font-semibold text-green-600">R$ 15.200</td><td class="py-2">10/01/2025</td><td class="py-2">3 dias</td></tr>' +
-                '<tr class="border-b"><td class="py-2">RV-2024-002</td><td class="py-2">Pedro Lima</td><td class="py-2 font-semibold text-green-600">R$ 9.800</td><td class="py-2">12/01/2025</td><td class="py-2">5 dias</td></tr>' +
-                '<tr class="border-b"><td class="py-2">RV-2024-003</td><td class="py-2">Carlos Mendes</td><td class="py-2 font-semibold text-green-600">R$ 18.450</td><td class="py-2">13/01/2025</td><td class="py-2">2 dias</td></tr>' +
-                '<tr class="border-b"><td class="py-2">RV-2024-004</td><td class="py-2">Patricia Souza</td><td class="py-2 font-semibold text-green-600">R$ 7.320</td><td class="py-2">14/01/2025</td><td class="py-2">4 dias</td></tr>' +
-                '<tr class="border-b"><td class="py-2">RV-2024-005</td><td class="py-2">Roberto Alves</td><td class="py-2 font-semibold text-green-600">R$ 25.600</td><td class="py-2">15/01/2025</td><td class="py-2">6 dias</td></tr>' +
-                '</tbody></table></div>';
-        }
-
-        function generateROIContent() {
-            return '<div class="space-y-4">' +
-                '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">' +
-                '<div class="bg-blue-50 p-4 rounded-lg"><p class="text-sm text-gray-600">ROI Total</p><p class="text-2xl font-bold text-blue-600">287%</p></div>' +
-                '<div class="bg-blue-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Economia Gerada</p><p class="text-2xl font-bold text-blue-600">R$ 2.4M</p></div>' +
-                '<div class="bg-blue-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Investimento</p><p class="text-2xl font-bold text-blue-600">R$ 836K</p></div>' +
-                '</div>' +
-                '<div class="bg-gray-50 p-4 rounded-lg">' +
-                '<h4 class="font-bold text-gray-800 mb-3">Breakdown de Economias</h4>' +
-                '<div class="space-y-2">' +
-                '<div class="flex justify-between items-center py-2 border-b"><span>Prevenção de Glosas</span><span class="font-bold text-green-600">R$ 1.2M</span></div>' +
-                '<div class="flex justify-between items-center py-2 border-b"><span>Otimização OPME</span><span class="font-bold text-green-600">R$ 680K</span></div>' +
-                '<div class="flex justify-between items-center py-2 border-b"><span>Redução Retrabalho</span><span class="font-bold text-green-600">R$ 320K</span></div>' +
-                '<div class="flex justify-between items-center py-2 border-b"><span>Agilidade Processos</span><span class="font-bold text-green-600">R$ 200K</span></div>' +
-                '</div></div></div>';
-        }
-
-        function generateTempoReversaoContent() {
-            return '<div class="space-y-4">' +
-                '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">' +
-                '<div class="bg-purple-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Tempo Médio</p><p class="text-2xl font-bold text-purple-600">4.2 dias</p></div>' +
-                '<div class="bg-purple-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Melhor Tempo</p><p class="text-2xl font-bold text-purple-600">1 dia</p></div>' +
-                '<div class="bg-purple-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Redução</p><p class="text-2xl font-bold text-purple-600">-2.1 dias</p></div>' +
-                '</div>' +
-                '<div class="bg-gray-50 p-4 rounded-lg">' +
-                '<h4 class="font-bold text-gray-800 mb-3">Evolução Temporal</h4>' +
-                '<table class="w-full"><thead><tr class="border-b"><th class="text-left py-2">Mês</th><th class="text-left py-2">Tempo Médio</th><th class="text-left py-2">Variação</th></tr></thead>' +
-                '<tbody>' +
-                '<tr class="border-b"><td class="py-2">Janeiro</td><td class="py-2">6.3 dias</td><td class="py-2 text-red-600">Base</td></tr>' +
-                '<tr class="border-b"><td class="py-2">Fevereiro</td><td class="py-2">5.8 dias</td><td class="py-2 text-green-600">-0.5 dias</td></tr>' +
-                '<tr class="border-b"><td class="py-2">Março</td><td class="py-2">5.2 dias</td><td class="py-2 text-green-600">-0.6 dias</td></tr>' +
-                '<tr class="border-b"><td class="py-2">Abril</td><td class="py-2">4.9 dias</td><td class="py-2 text-green-600">-0.3 dias</td></tr>' +
-                '<tr class="border-b"><td class="py-2">Maio</td><td class="py-2">4.5 dias</td><td class="py-2 text-green-600">-0.4 dias</td></tr>' +
-                '<tr class="border-b"><td class="py-2">Junho</td><td class="py-2 font-bold">4.2 dias</td><td class="py-2 text-green-600 font-bold">-0.3 dias</td></tr>' +
-                '</tbody></table></div></div>';
-        }
-
-        function generateControleOPMEContent() {
-            return '<div class="space-y-4">' +
-                '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">' +
-                '<div class="bg-amber-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Compliance</p><p class="text-2xl font-bold text-amber-600">98.7%</p></div>' +
-                '<div class="bg-amber-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Materiais Analisados</p><p class="text-2xl font-bold text-amber-600">1.247</p></div>' +
-                '<div class="bg-amber-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Economia</p><p class="text-2xl font-bold text-amber-600">R$ 892K</p></div>' +
-                '</div>' +
-                '<table class="w-full"><thead><tr class="border-b"><th class="text-left py-2">Fornecedor</th><th class="text-left py-2">Materiais</th><th class="text-left py-2">Valor Total</th><th class="text-left py-2">Compliance</th></tr></thead>' +
-                '<tbody>' +
-                '<tr class="border-b"><td class="py-2">MedTech Inc</td><td class="py-2">234</td><td class="py-2 font-semibold">R$ 2.8M</td><td class="py-2"><span class="text-green-600 font-bold">99.2%</span></td></tr>' +
-                '<tr class="border-b"><td class="py-2">OrthoLife</td><td class="py-2">189</td><td class="py-2 font-semibold">R$ 1.9M</td><td class="py-2"><span class="text-green-600 font-bold">98.4%</span></td></tr>' +
-                '<tr class="border-b"><td class="py-2">CardioTech</td><td class="py-2">156</td><td class="py-2 font-semibold">R$ 3.2M</td><td class="py-2"><span class="text-green-600 font-bold">99.5%</span></td></tr>' +
-                '<tr class="border-b"><td class="py-2">ValveMed</td><td class="py-2">98</td><td class="py-2 font-semibold">R$ 4.1M</td><td class="py-2"><span class="text-yellow-600 font-bold">97.8%</span></td></tr>' +
-                '<tr class="border-b"><td class="py-2">JointPro</td><td class="py-2">145</td><td class="py-2 font-semibold">R$ 1.5M</td><td class="py-2"><span class="text-green-600 font-bold">98.9%</span></td></tr>' +
-                '</tbody></table></div>';
         }
 
         window.closeModal = function(modalId) {
@@ -1261,8 +1339,235 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
             });
         }
 
-        // Initialize charts on load
-        setTimeout(initFinancialCharts, 100);
+        window.exportarRelatorio = function() {
+            alert('Gerando relatório completo do Portal Financeiro LAURA...');
+        }
+
+        // Content Generators for KPI Extratos
+        function generateGlosasIdentificadasExtrato() {
+            return '<div class="space-y-4">' +
+                '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">' +
+                '<div class="bg-red-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Total Identificado</p><p class="text-2xl font-bold text-red-600">R$ 485.700</p></div>' +
+                '<div class="bg-red-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Casos</p><p class="text-2xl font-bold text-red-600">127</p></div>' +
+                '<div class="bg-red-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Taxa Crescimento</p><p class="text-2xl font-bold text-red-600">+12.3%</p></div>' +
+                '</div>' +
+                '<h4 class="font-bold text-gray-800">Detalhamento por Caso</h4>' +
+                '<table class="w-full"><thead><tr class="border-b"><th class="text-left py-2">Código</th><th class="text-left py-2">Paciente</th><th class="text-left py-2">Valor</th><th class="text-left py-2">Motivo</th><th class="text-left py-2">Status</th></tr></thead>' +
+                '<tbody>' +
+                '<tr class="border-b"><td class="py-2">GL-2024-001</td><td class="py-2">Maria Silva</td><td class="py-2 font-semibold">R$ 12.450</td><td class="py-2">Doc. Incompleta</td><td class="py-2"><span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs">Pendente</span></td></tr>' +
+                '<tr class="border-b"><td class="py-2">GL-2024-002</td><td class="py-2">João Santos</td><td class="py-2 font-semibold">R$ 8.900</td><td class="py-2">Código Incorreto</td><td class="py-2"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs">Revisão</span></td></tr>' +
+                '<tr class="border-b"><td class="py-2">GL-2024-003</td><td class="py-2">Ana Costa</td><td class="py-2 font-semibold">R$ 15.200</td><td class="py-2">Autorização Vencida</td><td class="py-2"><span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs">Pendente</span></td></tr>' +
+                '<tr class="border-b"><td class="py-2">GL-2024-004</td><td class="py-2">Pedro Lima</td><td class="py-2 font-semibold">R$ 6.780</td><td class="py-2">Duplicidade</td><td class="py-2"><span class="px-2 py-1 bg-orange-100 text-orange-700 rounded-full text-xs">Análise</span></td></tr>' +
+                '<tr class="border-b"><td class="py-2">GL-2024-005</td><td class="py-2">Julia Ferreira</td><td class="py-2 font-semibold">R$ 22.100</td><td class="py-2">Falta Laudo</td><td class="py-2"><span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs">Pendente</span></td></tr>' +
+                '</tbody></table></div>';
+        }
+
+        function generateGlosasRevertidasExtrato() {
+            return '<div class="space-y-4">' +
+                '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">' +
+                '<div class="bg-green-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Total Revertido</p><p class="text-2xl font-bold text-green-600">R$ 367.200</p></div>' +
+                '<div class="bg-green-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Casos Revertidos</p><p class="text-2xl font-bold text-green-600">96</p></div>' +
+                '<div class="bg-green-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Taxa Sucesso</p><p class="text-2xl font-bold text-green-600">75.6%</p></div>' +
+                '</div>' +
+                '<h4 class="font-bold text-gray-800">Histórico de Reversões</h4>' +
+                '<table class="w-full"><thead><tr class="border-b"><th class="text-left py-2">Código</th><th class="text-left py-2">Paciente</th><th class="text-left py-2">Valor</th><th class="text-left py-2">Data Reversão</th><th class="text-left py-2">Tempo</th></tr></thead>' +
+                '<tbody>' +
+                '<tr class="border-b"><td class="py-2">RV-2024-001</td><td class="py-2">Ana Costa</td><td class="py-2 font-semibold text-green-600">R$ 15.200</td><td class="py-2">10/01/2025</td><td class="py-2">3 dias</td></tr>' +
+                '<tr class="border-b"><td class="py-2">RV-2024-002</td><td class="py-2">Pedro Lima</td><td class="py-2 font-semibold text-green-600">R$ 9.800</td><td class="py-2">12/01/2025</td><td class="py-2">5 dias</td></tr>' +
+                '<tr class="border-b"><td class="py-2">RV-2024-003</td><td class="py-2">Carlos Mendes</td><td class="py-2 font-semibold text-green-600">R$ 18.450</td><td class="py-2">13/01/2025</td><td class="py-2">2 dias</td></tr>' +
+                '</tbody></table></div>';
+        }
+
+        function generateROIExtrato() {
+            return '<div class="space-y-4">' +
+                '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">' +
+                '<div class="bg-blue-50 p-4 rounded-lg"><p class="text-sm text-gray-600">ROI Total</p><p class="text-2xl font-bold text-blue-600">287%</p></div>' +
+                '<div class="bg-blue-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Economia Gerada</p><p class="text-2xl font-bold text-blue-600">R$ 2.4M</p></div>' +
+                '<div class="bg-blue-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Investimento</p><p class="text-2xl font-bold text-blue-600">R$ 836K</p></div>' +
+                '</div>' +
+                '<div class="bg-gray-50 p-4 rounded-lg">' +
+                '<h4 class="font-bold text-gray-800 mb-3">Breakdown de Economias</h4>' +
+                '<div class="space-y-2">' +
+                '<div class="flex justify-between items-center py-2 border-b"><span>Prevenção de Glosas</span><span class="font-bold text-green-600">R$ 1.2M</span></div>' +
+                '<div class="flex justify-between items-center py-2 border-b"><span>Otimização OPME</span><span class="font-bold text-green-600">R$ 680K</span></div>' +
+                '<div class="flex justify-between items-center py-2 border-b"><span>Redução Retrabalho</span><span class="font-bold text-green-600">R$ 320K</span></div>' +
+                '<div class="flex justify-between items-center py-2 border-b"><span>Agilidade Processos</span><span class="font-bold text-green-600">R$ 200K</span></div>' +
+                '</div>' +
+                '<div class="mt-4"><canvas id="roiChart" width="400" height="200"></canvas></div>' +
+                '</div></div>';
+        }
+
+        function generateTempoReversaoExtrato() {
+            return '<div class="space-y-4">' +
+                '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">' +
+                '<div class="bg-purple-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Tempo Médio</p><p class="text-2xl font-bold text-purple-600">4.2 dias</p></div>' +
+                '<div class="bg-purple-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Melhor Tempo</p><p class="text-2xl font-bold text-purple-600">1 dia</p></div>' +
+                '<div class="bg-purple-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Redução</p><p class="text-2xl font-bold text-purple-600">-2.1 dias</p></div>' +
+                '</div>' +
+                '<div class="bg-gray-50 p-4 rounded-lg">' +
+                '<h4 class="font-bold text-gray-800 mb-3">Evolução Temporal</h4>' +
+                '<table class="w-full"><thead><tr class="border-b"><th class="text-left py-2">Mês</th><th class="text-left py-2">Tempo Médio</th><th class="text-left py-2">Variação</th></tr></thead>' +
+                '<tbody>' +
+                '<tr class="border-b"><td class="py-2">Janeiro</td><td class="py-2">6.3 dias</td><td class="py-2 text-red-600">Base</td></tr>' +
+                '<tr class="border-b"><td class="py-2">Fevereiro</td><td class="py-2">5.8 dias</td><td class="py-2 text-green-600">-0.5 dias</td></tr>' +
+                '<tr class="border-b"><td class="py-2">Março</td><td class="py-2">5.2 dias</td><td class="py-2 text-green-600">-0.6 dias</td></tr>' +
+                '<tr class="border-b"><td class="py-2">Abril</td><td class="py-2">4.9 dias</td><td class="py-2 text-green-600">-0.3 dias</td></tr>' +
+                '<tr class="border-b"><td class="py-2">Maio</td><td class="py-2">4.5 dias</td><td class="py-2 text-green-600">-0.4 dias</td></tr>' +
+                '<tr class="border-b"><td class="py-2">Junho</td><td class="py-2 font-bold">4.2 dias</td><td class="py-2 text-green-600 font-bold">-0.3 dias</td></tr>' +
+                '</tbody></table>' +
+                '<div class="mt-4"><canvas id="tempoChart" width="400" height="200"></canvas></div>' +
+                '</div></div>';
+        }
+
+        function generateControleOPMEExtrato() {
+            return '<div class="space-y-4">' +
+                '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">' +
+                '<div class="bg-amber-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Compliance</p><p class="text-2xl font-bold text-amber-600">98.7%</p></div>' +
+                '<div class="bg-amber-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Materiais Analisados</p><p class="text-2xl font-bold text-amber-600">1.247</p></div>' +
+                '<div class="bg-amber-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Economia</p><p class="text-2xl font-bold text-amber-600">R$ 892K</p></div>' +
+                '</div>' +
+                '<h4 class="font-bold text-gray-800">Análise por Fornecedor</h4>' +
+                '<table class="w-full"><thead><tr class="border-b"><th class="text-left py-2">Fornecedor</th><th class="text-left py-2">Materiais</th><th class="text-left py-2">Valor Total</th><th class="text-left py-2">Compliance</th></tr></thead>' +
+                '<tbody>' +
+                '<tr class="border-b"><td class="py-2">MedTech Inc</td><td class="py-2">234</td><td class="py-2 font-semibold">R$ 2.8M</td><td class="py-2"><span class="text-green-600 font-bold">99.2%</span></td></tr>' +
+                '<tr class="border-b"><td class="py-2">OrthoLife</td><td class="py-2">189</td><td class="py-2 font-semibold">R$ 1.9M</td><td class="py-2"><span class="text-green-600 font-bold">98.4%</span></td></tr>' +
+                '<tr class="border-b"><td class="py-2">CardioTech</td><td class="py-2">156</td><td class="py-2 font-semibold">R$ 3.2M</td><td class="py-2"><span class="text-green-600 font-bold">99.5%</span></td></tr>' +
+                '<tr class="border-b"><td class="py-2">ValveMed</td><td class="py-2">98</td><td class="py-2 font-semibold">R$ 4.1M</td><td class="py-2"><span class="text-yellow-600 font-bold">97.8%</span></td></tr>' +
+                '</tbody></table></div>';
+        }
+
+        function initExtratoCharts(type) {
+            if (type === 'roi_otimizacao') {
+                const ctx = document.getElementById('roiChart');
+                if (ctx && ctx.getContext && typeof Chart !== 'undefined') {
+                    new Chart(ctx.getContext('2d'), {
+                        type: 'line',
+                        data: {
+                            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                            datasets: [{
+                                label: 'ROI Acumulado (%)',
+                                data: [120, 180, 220, 250, 270, 287],
+                                borderColor: 'rgb(59, 130, 246)',
+                                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                                tension: 0.4,
+                                fill: true
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false
+                        }
+                    });
+                }
+            } else if (type === 'tempo_reversao') {
+                const ctx = document.getElementById('tempoChart');
+                if (ctx && ctx.getContext && typeof Chart !== 'undefined') {
+                    new Chart(ctx.getContext('2d'), {
+                        type: 'bar',
+                        data: {
+                            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                            datasets: [{
+                                label: 'Tempo Médio (dias)',
+                                data: [6.3, 5.8, 5.2, 4.9, 4.5, 4.2],
+                                backgroundColor: 'rgba(147, 51, 234, 0.8)'
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false
+                        }
+                    });
+                }
+            }
+        }
+
+        // Initialize Charts
+        function initFinancialCharts() {
+            // Glosas Trend Chart
+            const ctx1 = document.getElementById('glosasTrendChart');
+            if (ctx1 && ctx1.getContext && typeof Chart !== 'undefined') {
+                new Chart(ctx1.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                        datasets: [{
+                            label: 'Glosas Identificadas (R$ mil)',
+                            data: [320, 380, 420, 390, 450, 486],
+                            borderColor: 'rgb(239, 68, 68)',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: true }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return 'R$ ' + value + 'K';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Reversao Chart
+            const ctx2 = document.getElementById('reversaoChart');
+            if (ctx2 && ctx2.getContext && typeof Chart !== 'undefined') {
+                new Chart(ctx2.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                        datasets: [{
+                            label: 'Taxa de Reversão (%)',
+                            data: [65, 70, 72, 68, 74, 76],
+                            backgroundColor: 'rgba(34, 197, 94, 0.8)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: true }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Initialize on load
+        if (typeof Chart !== 'undefined') {
+            setTimeout(initFinancialCharts, 100);
+        } else {
+            // Load Chart.js if not available
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+            script.onload = function() {
+                setTimeout(initFinancialCharts, 100);
+            };
+            document.head.appendChild(script);
+        }
+
+        console.log('Portal Financeiro LAURA carregado com sucesso!');
     `}const W=new P;function ye(e,t,s){return`
         <div class="portal-container min-h-screen bg-gradient-to-br from-gray-50 via-green-50/30 to-emerald-50/20">
             <!-- Portal Header -->
@@ -2655,7 +2960,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
                     \`;
                 });
             });
-            `]})});W.get("/financial",async e=>{const{html:t,scripts:s}=Ys();return e.json({html:t,scripts:s})});W.get("/wellness",async e=>{const t=`
+            `]})});W.get("/financial",async e=>{const t=Ys(),s=[ga()];return e.json({html:t,scripts:s})});W.get("/wellness",async e=>{const t=`
         <!-- Welcome Message -->
         <div class="bg-gradient-to-r from-pink-400 to-purple-500 rounded-xl p-6 text-white mb-8">
             <div class="flex items-center justify-between">
@@ -3648,7 +3953,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
     <\/script>
 </body>
 </html>
-    `));const es=new P,aa={"PAC-001":{nome:"Maria Silva Santos",idade:52,diagnostico:"Carcinoma Ductal Invasivo - Mama",estadiamento:"IIA (T2N0M0)",medico:"Dr. Roberto Almeida",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4321",email:"maria.silva@email.com",convenio:"Unimed Premium",proximaConsulta:"25/01/2025 - 14:30",cicloTratamento:"2/6",risco:35},"PAC-002":{nome:"Ana Costa",idade:45,diagnostico:"Carcinoma Pulmonar",estadiamento:"IIIA",medico:"Dr. Carlos Santos",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4322",email:"ana.costa@email.com",convenio:"SulAmérica",proximaConsulta:"28/01/2025 - 10:00",cicloTratamento:"4/8",risco:45},"PAC-003":{nome:"Carlos Mendes",idade:58,diagnostico:"Linfoma de Hodgkin",estadiamento:"IIB",medico:"Dra. Marina Costa",navegador:"Enf. João Silva",telefone:"(11) 98765-4323",email:"carlos.mendes@email.com",convenio:"Bradesco Saúde",proximaConsulta:"20/01/2025 - 15:00",cicloTratamento:"3/6",risco:25},"PAC-004":{nome:"João Santos",idade:67,diagnostico:"Carcinoma de Próstata",estadiamento:"I",medico:"Dr. Paulo Ferreira",navegador:"Enf. Ana Rodrigues",telefone:"(11) 98765-4324",email:"joao.santos@email.com",convenio:"Amil",proximaConsulta:"22/01/2025 - 09:00",cicloTratamento:"1/4",risco:15},"PAC-005":{nome:"Pedro Oliveira",idade:49,diagnostico:"Melanoma",estadiamento:"IIA",medico:"Dra. Lucia Martins",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4325",email:"pedro.oliveira@email.com",convenio:"Porto Seguro",proximaConsulta:"Tratamento Concluído",cicloTratamento:"Completo",risco:10},"PAC-006":{nome:"Lucia Ferreira",idade:55,diagnostico:"Carcinoma Colorretal",estadiamento:"IIIC",medico:"Dr. Roberto Almeida",navegador:"Enf. João Silva",telefone:"(11) 98765-4326",email:"lucia.ferreira@email.com",convenio:"Unimed",proximaConsulta:"25/01/2025 - 11:00",cicloTratamento:"Pós-cirúrgico",risco:30}};es.get("/patient-view/:id",e=>{const t=e.req.param("id"),s=aa[t];return s?e.html(`
+    `));const es=new P,ba={"PAC-001":{nome:"Maria Silva Santos",idade:52,diagnostico:"Carcinoma Ductal Invasivo - Mama",estadiamento:"IIA (T2N0M0)",medico:"Dr. Roberto Almeida",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4321",email:"maria.silva@email.com",convenio:"Unimed Premium",proximaConsulta:"25/01/2025 - 14:30",cicloTratamento:"2/6",risco:35},"PAC-002":{nome:"Ana Costa",idade:45,diagnostico:"Carcinoma Pulmonar",estadiamento:"IIIA",medico:"Dr. Carlos Santos",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4322",email:"ana.costa@email.com",convenio:"SulAmérica",proximaConsulta:"28/01/2025 - 10:00",cicloTratamento:"4/8",risco:45},"PAC-003":{nome:"Carlos Mendes",idade:58,diagnostico:"Linfoma de Hodgkin",estadiamento:"IIB",medico:"Dra. Marina Costa",navegador:"Enf. João Silva",telefone:"(11) 98765-4323",email:"carlos.mendes@email.com",convenio:"Bradesco Saúde",proximaConsulta:"20/01/2025 - 15:00",cicloTratamento:"3/6",risco:25},"PAC-004":{nome:"João Santos",idade:67,diagnostico:"Carcinoma de Próstata",estadiamento:"I",medico:"Dr. Paulo Ferreira",navegador:"Enf. Ana Rodrigues",telefone:"(11) 98765-4324",email:"joao.santos@email.com",convenio:"Amil",proximaConsulta:"22/01/2025 - 09:00",cicloTratamento:"1/4",risco:15},"PAC-005":{nome:"Pedro Oliveira",idade:49,diagnostico:"Melanoma",estadiamento:"IIA",medico:"Dra. Lucia Martins",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4325",email:"pedro.oliveira@email.com",convenio:"Porto Seguro",proximaConsulta:"Tratamento Concluído",cicloTratamento:"Completo",risco:10},"PAC-006":{nome:"Lucia Ferreira",idade:55,diagnostico:"Carcinoma Colorretal",estadiamento:"IIIC",medico:"Dr. Roberto Almeida",navegador:"Enf. João Silva",telefone:"(11) 98765-4326",email:"lucia.ferreira@email.com",convenio:"Unimed",proximaConsulta:"25/01/2025 - 11:00",cicloTratamento:"Pós-cirúrgico",risco:30}};es.get("/patient-view/:id",e=>{const t=e.req.param("id"),s=ba[t];return s?e.html(`
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -3968,7 +4273,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
                 </div>
             </body>
             </html>
-        `)});const ts=new P,ia={"PAC-001":{nome:"Maria Silva Santos",idade:52,diagnostico:"Carcinoma Ductal Invasivo - Mama",estadiamento:"IIA (T2N0M0)",medico:"Dr. Roberto Almeida",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4321",email:"maria.silva@email.com",convenio:"Unimed Premium",proximaConsulta:"25/01/2025 - 14:30",cicloTratamento:"2/6",risco:35,foto:"https://ui-avatars.com/api/?name=Maria+Silva&background=EC4899&color=fff",dataInicio:"10/01/2025",fase:"Tratamento Ativo"},"PAC-002":{nome:"Ana Costa",idade:45,diagnostico:"Carcinoma Pulmonar",estadiamento:"IIIA",medico:"Dr. Carlos Santos",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4322",email:"ana.costa@email.com",convenio:"SulAmérica",proximaConsulta:"28/01/2025 - 10:00",cicloTratamento:"4/8",risco:45,foto:"https://ui-avatars.com/api/?name=Ana+Costa&background=F59E0B&color=fff",dataInicio:"05/01/2025",fase:"Quimioterapia"},"PAC-003":{nome:"Carlos Mendes",idade:58,diagnostico:"Linfoma de Hodgkin",estadiamento:"IIB",medico:"Dra. Marina Costa",navegador:"Enf. João Silva",telefone:"(11) 98765-4323",email:"carlos.mendes@email.com",convenio:"Bradesco Saúde",proximaConsulta:"20/01/2025 - 15:00",cicloTratamento:"3/6",risco:25,foto:"https://ui-avatars.com/api/?name=Carlos+Mendes&background=3B82F6&color=fff",dataInicio:"15/12/2024",fase:"Tratamento Combinado"},"PAC-004":{nome:"João Santos",idade:67,diagnostico:"Carcinoma de Próstata",estadiamento:"I",medico:"Dr. Paulo Ferreira",navegador:"Enf. Ana Rodrigues",telefone:"(11) 98765-4324",email:"joao.santos@email.com",convenio:"Amil",proximaConsulta:"22/01/2025 - 09:00",cicloTratamento:"1/4",risco:15,foto:"https://ui-avatars.com/api/?name=João+Santos&background=10B981&color=fff",dataInicio:"08/01/2025",fase:"Início do Tratamento"},"PAC-005":{nome:"Pedro Oliveira",idade:49,diagnostico:"Melanoma",estadiamento:"IIA",medico:"Dra. Lucia Martins",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4325",email:"pedro.oliveira@email.com",convenio:"Porto Seguro",proximaConsulta:"Acompanhamento Trimestral",cicloTratamento:"Completo",risco:10,foto:"https://ui-avatars.com/api/?name=Pedro+Oliveira&background=8B5CF6&color=fff",dataInicio:"01/10/2024",fase:"Remissão - Acompanhamento"},"PAC-006":{nome:"Lucia Ferreira",idade:55,diagnostico:"Carcinoma Colorretal",estadiamento:"IIIC",medico:"Dr. Roberto Almeida",navegador:"Enf. João Silva",telefone:"(11) 98765-4326",email:"lucia.ferreira@email.com",convenio:"Unimed",proximaConsulta:"25/01/2025 - 11:00",cicloTratamento:"Pós-cirúrgico",risco:30,foto:"https://ui-avatars.com/api/?name=Lucia+Ferreira&background=EF4444&color=fff",dataInicio:"20/12/2024",fase:"Recuperação Pós-Cirúrgica"}};ts.get("/patient-view-integrated/:id",e=>{const t=e.req.param("id"),s=ia[t];return s?e.html(`
+        `)});const ts=new P,ua={"PAC-001":{nome:"Maria Silva Santos",idade:52,diagnostico:"Carcinoma Ductal Invasivo - Mama",estadiamento:"IIA (T2N0M0)",medico:"Dr. Roberto Almeida",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4321",email:"maria.silva@email.com",convenio:"Unimed Premium",proximaConsulta:"25/01/2025 - 14:30",cicloTratamento:"2/6",risco:35,foto:"https://ui-avatars.com/api/?name=Maria+Silva&background=EC4899&color=fff",dataInicio:"10/01/2025",fase:"Tratamento Ativo"},"PAC-002":{nome:"Ana Costa",idade:45,diagnostico:"Carcinoma Pulmonar",estadiamento:"IIIA",medico:"Dr. Carlos Santos",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4322",email:"ana.costa@email.com",convenio:"SulAmérica",proximaConsulta:"28/01/2025 - 10:00",cicloTratamento:"4/8",risco:45,foto:"https://ui-avatars.com/api/?name=Ana+Costa&background=F59E0B&color=fff",dataInicio:"05/01/2025",fase:"Quimioterapia"},"PAC-003":{nome:"Carlos Mendes",idade:58,diagnostico:"Linfoma de Hodgkin",estadiamento:"IIB",medico:"Dra. Marina Costa",navegador:"Enf. João Silva",telefone:"(11) 98765-4323",email:"carlos.mendes@email.com",convenio:"Bradesco Saúde",proximaConsulta:"20/01/2025 - 15:00",cicloTratamento:"3/6",risco:25,foto:"https://ui-avatars.com/api/?name=Carlos+Mendes&background=3B82F6&color=fff",dataInicio:"15/12/2024",fase:"Tratamento Combinado"},"PAC-004":{nome:"João Santos",idade:67,diagnostico:"Carcinoma de Próstata",estadiamento:"I",medico:"Dr. Paulo Ferreira",navegador:"Enf. Ana Rodrigues",telefone:"(11) 98765-4324",email:"joao.santos@email.com",convenio:"Amil",proximaConsulta:"22/01/2025 - 09:00",cicloTratamento:"1/4",risco:15,foto:"https://ui-avatars.com/api/?name=João+Santos&background=10B981&color=fff",dataInicio:"08/01/2025",fase:"Início do Tratamento"},"PAC-005":{nome:"Pedro Oliveira",idade:49,diagnostico:"Melanoma",estadiamento:"IIA",medico:"Dra. Lucia Martins",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4325",email:"pedro.oliveira@email.com",convenio:"Porto Seguro",proximaConsulta:"Acompanhamento Trimestral",cicloTratamento:"Completo",risco:10,foto:"https://ui-avatars.com/api/?name=Pedro+Oliveira&background=8B5CF6&color=fff",dataInicio:"01/10/2024",fase:"Remissão - Acompanhamento"},"PAC-006":{nome:"Lucia Ferreira",idade:55,diagnostico:"Carcinoma Colorretal",estadiamento:"IIIC",medico:"Dr. Roberto Almeida",navegador:"Enf. João Silva",telefone:"(11) 98765-4326",email:"lucia.ferreira@email.com",convenio:"Unimed",proximaConsulta:"25/01/2025 - 11:00",cicloTratamento:"Pós-cirúrgico",risco:30,foto:"https://ui-avatars.com/api/?name=Lucia+Ferreira&background=EF4444&color=fff",dataInicio:"20/12/2024",fase:"Recuperação Pós-Cirúrgica"}};ts.get("/patient-view-integrated/:id",e=>{const t=e.req.param("id"),s=ua[t];return s?e.html(`
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -7628,7 +7933,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
     </div>
 </body>
 </html>
-    `));var rt=Object.freeze,oa=Object.defineProperty,ra=(e,t)=>rt(oa(e,"raw",{value:rt(t||e.slice())})),lt;const la=e=>e.html(_(lt||(lt=ra([`
+    `));var rt=Object.freeze,va=Object.defineProperty,fa=(e,t)=>rt(va(e,"raw",{value:rt(t||e.slice())})),lt;const ha=e=>e.html(_(lt||(lt=fa([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -9048,7 +9353,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `])),xe(Q("patient"))));var nt=Object.freeze,na=Object.defineProperty,da=(e,t)=>nt(na(e,"raw",{value:nt(t||e.slice())})),dt;const ca=e=>e.html(_(dt||(dt=da([`
+  `])),xe(Q("patient"))));var nt=Object.freeze,ya=Object.defineProperty,wa=(e,t)=>nt(ya(e,"raw",{value:nt(t||e.slice())})),dt;const Ca=e=>e.html(_(dt||(dt=wa([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -9888,7 +10193,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `]))));var ct=Object.freeze,pa=Object.defineProperty,xa=(e,t)=>ct(pa(e,"raw",{value:ct(e.slice())})),pt;const ma=e=>e.html(_(pt||(pt=xa([`
+  `]))));var ct=Object.freeze,Aa=Object.defineProperty,Pa=(e,t)=>ct(Aa(e,"raw",{value:ct(e.slice())})),pt;const ka=e=>e.html(_(pt||(pt=Pa([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -10284,7 +10589,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         <\/script>
     </body>
     </html>
-  `]))));var xt=Object.freeze,ga=Object.defineProperty,ba=(e,t)=>xt(ga(e,"raw",{value:xt(t||e.slice())})),mt;const ua=e=>e.html(_(mt||(mt=ba([`
+  `]))));var xt=Object.freeze,ja=Object.defineProperty,Ia=(e,t)=>xt(ja(e,"raw",{value:xt(t||e.slice())})),mt;const Ea=e=>e.html(_(mt||(mt=Ia([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -15420,7 +15725,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         <\/script>
     </body>
     </html>
-  `]))));var gt=Object.freeze,va=Object.defineProperty,fa=(e,t)=>gt(va(e,"raw",{value:gt(t||e.slice())})),bt;const ha=e=>e.html(_(bt||(bt=fa([`
+  `]))));var gt=Object.freeze,Ra=Object.defineProperty,Ma=(e,t)=>gt(Ra(e,"raw",{value:gt(t||e.slice())})),bt;const Sa=e=>e.html(_(bt||(bt=Ma([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -17040,7 +17345,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         <\/script>
     </body>
     </html>
-  `])))),ya=e=>e.redirect("/research-portal");var ut=Object.freeze,wa=Object.defineProperty,Ca=(e,t)=>ut(wa(e,"raw",{value:ut(e.slice())})),vt;const Aa=e=>e.html(_(vt||(vt=Ca([`
+  `])))),Ta=e=>e.redirect("/research-portal");var ut=Object.freeze,Da=Object.defineProperty,La=(e,t)=>ut(Da(e,"raw",{value:ut(e.slice())})),vt;const Oa=e=>e.html(_(vt||(vt=La([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -17319,7 +17624,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `]))));var ft=Object.freeze,Pa=Object.defineProperty,ka=(e,t)=>ft(Pa(e,"raw",{value:ft(e.slice())})),ht;const ja=e=>e.html(_(ht||(ht=ka([`
+  `]))));var ft=Object.freeze,$a=Object.defineProperty,Ba=(e,t)=>ft($a(e,"raw",{value:ft(e.slice())})),ht;const Fa=e=>e.html(_(ht||(ht=Ba([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -18197,7 +18502,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         <\/script>
     </body>
     </html>
-  `])),xe(Q("admin"))));new P;const Ia=e=>e.html(`
+  `])),xe(Q("admin"))));new P;const Na=e=>e.html(`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -18502,7 +18807,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         <\/script>
     </body>
     </html>
-  `);var yt=Object.freeze,Ea=Object.defineProperty,Ra=(e,t)=>yt(Ea(e,"raw",{value:yt(e.slice())})),wt;const v=new P;v.use("/api/*",zs());v.use("/static/*",Zt({root:"./public"}));v.use("/*.html",Zt({root:"./public"}));v.route("/api/patient",Te);v.route("/api/doctor",De);v.route("/api/navigator",Le);v.route("/api/financial",Oe);v.route("/api/wellness",$e);v.route("/api/research",he);v.route("/api/admin",oe);v.route("/api/ai",re);v.route("/api/portal",W);v.route("/",Xt);v.route("/",es);v.route("/",ts);v.route("/",ss);v.route("/",Be);v.route("/",as);v.route("/",Y);v.get("/patient-view/:id",e=>{const t=e.req.param("id");return e.redirect(`/patient-view-integrated/${t}`,301)});v.get("/portal/patient",la);v.get("/portal/doctor",ca);v.get("/portal/navigator",ma);v.get("/portal/financial",ua);v.get("/portal/wellness",ha);v.get("/portal/research",ya);v.get("/portal/admin-master",Aa);v.get("/admin-master",ja);v.get("/test-integration",Ia);v.get("/",e=>e.html(_(wt||(wt=Ra([`
+  `);var yt=Object.freeze,za=Object.defineProperty,Va=(e,t)=>yt(za(e,"raw",{value:yt(e.slice())})),wt;const v=new P;v.use("/api/*",zs());v.use("/static/*",Zt({root:"./public"}));v.use("/*.html",Zt({root:"./public"}));v.route("/api/patient",Te);v.route("/api/doctor",De);v.route("/api/navigator",Le);v.route("/api/financial",Oe);v.route("/api/wellness",$e);v.route("/api/research",he);v.route("/api/admin",oe);v.route("/api/ai",re);v.route("/api/portal",W);v.route("/",Xt);v.route("/",es);v.route("/",ts);v.route("/",ss);v.route("/",Be);v.route("/",as);v.route("/",Y);v.get("/patient-view/:id",e=>{const t=e.req.param("id");return e.redirect(`/patient-view-integrated/${t}`,301)});v.get("/portal/patient",ha);v.get("/portal/doctor",Ca);v.get("/portal/navigator",ka);v.get("/portal/financial",Ea);v.get("/portal/wellness",Sa);v.get("/portal/research",Ta);v.get("/portal/admin-master",Oa);v.get("/admin-master",Fa);v.get("/test-integration",Na);v.get("/",e=>e.html(_(wt||(wt=Va([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -19281,4 +19586,4 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         document.getElementById('content').innerHTML = '<p class="p-8 text-center text-2xl text-gray-600">👆 Clique em um dos botões acima para testar as funcionalidades</p>';
     <\/script>
 </body>
-</html>`));const Ct=new P,Ma=Object.assign({"/src/index.tsx":v});let is=!1;for(const[,e]of Object.entries(Ma))e&&(Ct.all("*",t=>{let s;try{s=t.executionCtx}catch{}return e.fetch(t.req.raw,t.env,s)}),Ct.notFound(t=>{let s;try{s=t.executionCtx}catch{}return e.fetch(t.req.raw,t.env,s)}),is=!0);if(!is)throw new Error("Can't import modules from ['/src/index.ts','/src/index.tsx','/app/server.ts']");export{Ct as default};
+</html>`));const Ct=new P,qa=Object.assign({"/src/index.tsx":v});let is=!1;for(const[,e]of Object.entries(qa))e&&(Ct.all("*",t=>{let s;try{s=t.executionCtx}catch{}return e.fetch(t.req.raw,t.env,s)}),Ct.notFound(t=>{let s;try{s=t.executionCtx}catch{}return e.fetch(t.req.raw,t.env,s)}),is=!0);if(!is)throw new Error("Can't import modules from ['/src/index.ts','/src/index.tsx','/app/server.ts']");export{Ct as default};

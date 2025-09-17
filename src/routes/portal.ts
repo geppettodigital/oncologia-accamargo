@@ -1,6 +1,7 @@
 import { Hono } from 'hono'
 import { aiConcernsHTML } from '../components/ai-concerns-enhanced'
 import { financialPortalContent } from './portal-financial-integrated'
+import { generateFinancialPortalHTML, generateFinancialPortalScripts } from '../components/financial-portal-complete'
 
 const portalRoutes = new Hono()
 
@@ -1438,9 +1439,11 @@ portalRoutes.get('/navigator', async (c) => {
 
 // Portal Financeiro
 portalRoutes.get('/financial', async (c) => {
-    // Retornar o conteúdo completo do Portal Financeiro LAURA para carregamento dinâmico
-    // Este conteúdo é idêntico ao servido em /portal/financial
-    const { html, scripts } = financialPortalContent();
+    // Retornar o conteúdo COMPLETO do Portal Financeiro LAURA para carregamento dinâmico
+    // Este conteúdo é IDÊNTICO ao servido em /portal/financial
+    const html = generateFinancialPortalHTML();
+    const scripts = [generateFinancialPortalScripts()];
+    
     return c.json({
         html: html,
         scripts: scripts
