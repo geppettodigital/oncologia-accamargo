@@ -1437,64 +1437,8 @@ portalRoutes.get('/navigator', async (c) => {
 
 // Portal Financeiro
 portalRoutes.get('/financial', async (c) => {
-    const content = `
-        <!-- Métricas Financeiras -->
-        <div class="bg-gradient-to-r from-green-600 to-green-700 rounded-xl shadow-xl p-8 text-white mb-8">
-            <h2 class="text-2xl font-bold mb-6">
-                <i class="fas fa-shield-alt mr-3"></i>
-                Proteção Financeira com IA
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="text-center">
-                    <div class="text-4xl font-bold mb-2">R$ 2.4M</div>
-                    <div class="text-green-200">Glosas Evitadas</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-4xl font-bold mb-2">98.5%</div>
-                    <div class="text-green-200">Taxa de Aprovação</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-4xl font-bold mb-2">1,247</div>
-                    <div class="text-green-200">Auditorias Automáticas</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Ansiedade de Laura - Versão Financeira -->
-        ${aiConcernsHTML('financial')}
-        
-        <!-- Ferramentas Financeiras -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
-            <button class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                <i class="fas fa-file-invoice-dollar text-3xl text-green-600 mb-3"></i>
-                <h4 class="font-semibold text-gray-800">Faturamento</h4>
-                <p class="text-sm text-gray-600 mt-1">Gestão de contas</p>
-            </button>
-            
-            <button class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                <i class="fas fa-search-dollar text-3xl text-blue-600 mb-3"></i>
-                <h4 class="font-semibold text-gray-800">Auditoria</h4>
-                <p class="text-sm text-gray-600 mt-1">Análise preventiva</p>
-            </button>
-            
-            <button class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                <i class="fas fa-chart-pie text-3xl text-purple-600 mb-3"></i>
-                <h4 class="font-semibold text-gray-800">Relatórios</h4>
-                <p class="text-sm text-gray-600 mt-1">Dashboards gerenciais</p>
-            </button>
-            
-            <button class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                <i class="fas fa-robot text-3xl text-orange-600 mb-3"></i>
-                <h4 class="font-semibold text-gray-800">IA Financeira</h4>
-                <p class="text-sm text-gray-600 mt-1">Previsões e alertas</p>
-            </button>
-        </div>
-    `;
-    
-    return c.json({
-        html: generatePortalHTML('financial', 'Gestão Financeira', content),
-        scripts: []
-    });
+    // Redirecionar para a versão completa do Portal Financeiro
+    return c.redirect('/portal/financial');
 });
 
 // Portal Bem-Estar
