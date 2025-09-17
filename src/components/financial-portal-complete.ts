@@ -864,231 +864,147 @@ export function generateFinancialPortalScripts(): string {
         // Portal Financeiro LAURA - Scripts
         console.log('Inicializando Portal Financeiro LAURA...');
 
-        // Modal Control Functions
-        window.showJornadasRisco = function() {
-            document.getElementById('modalJornadasRisco').classList.remove('hidden');
-        }
-
-        window.showOPMEDetail = function(code) {
-            const codeElement = document.getElementById('opme-code');
-            if (codeElement) {
-                codeElement.textContent = code;
-            }
-            document.getElementById('modalOPMEDetail').classList.remove('hidden');
-        }
-
-        window.showDossierComercial = function() {
-            document.getElementById('modalDossierComercial').classList.remove('hidden');
-        }
-
-        window.showFornecedoresCriticos = function() {
-            document.getElementById('modalFornecedoresCriticos').classList.remove('hidden');
-        }
-
-        window.showExtratoKPI = function(type) {
-            const modal = document.getElementById('modalKPIExtrato');
-            const header = document.getElementById('modalKPIExtratoHeader');
-            const title = document.getElementById('modalKPIExtratoTitle');
-            const content = document.getElementById('modalKPIExtratoContent');
-            
-            const extratos = {
-                'glosas_identificadas': {
-                    title: 'Extrato de Glosas Identificadas',
-                    color: 'from-red-600 to-red-700',
-                    content: generateGlosasIdentificadasExtrato()
-                },
-                'glosas_revertidas': {
-                    title: 'Extrato de Glosas Revertidas',
-                    color: 'from-green-600 to-green-700',
-                    content: generateGlosasRevertidasExtrato()
-                },
-                'roi_otimizacao': {
-                    title: 'ROI de Otimização',
-                    color: 'from-blue-600 to-blue-700',
-                    content: generateROIExtrato()
-                },
-                'tempo_reversao': {
-                    title: 'Tempo Médio de Reversão',
-                    color: 'from-purple-600 to-purple-700',
-                    content: generateTempoReversaoExtrato()
-                },
-                'controle_opme': {
-                    title: 'Controle OPME',
-                    color: 'from-amber-600 to-amber-700',
-                    content: generateControleOPMEExtrato()
+        // Carregar script externo com funções globais
+        (function() {
+            const script = document.createElement('script');
+            script.src = '/static/financial-portal-functions.js';
+            script.onload = function() {
+                console.log('Funções do Portal Financeiro carregadas com sucesso!');
+                // Verificar se as funções foram carregadas
+                if (window.showJornadasRisco && window.showOPMEDetail && window.showExtratoKPI) {
+                    console.log('✅ Todas as funções de modal estão disponíveis');
+                } else {
+                    console.error('❌ Algumas funções de modal não foram carregadas');
                 }
             };
+            script.onerror = function() {
+                console.error('Erro ao carregar script de funções do Portal Financeiro');
+                // Fallback: definir funções inline caso o script externo falhe
+                defineModalFunctions();
+            };
+            document.head.appendChild(script);
+        })();
+
+        // Função de fallback para definir as funções caso o script externo falhe
+        function defineModalFunctions() {
+            console.log('Definindo funções de modal como fallback...');
             
-            const extrato = extratos[type];
-            if (extrato) {
-                title.textContent = extrato.title;
-                header.className = 'bg-gradient-to-r ' + extrato.color + ' p-6 text-white';
-                content.innerHTML = extrato.content;
-                modal.classList.remove('hidden');
-                
-                // Initialize specific charts if needed
-                if (type === 'roi_otimizacao' || type === 'tempo_reversao') {
-                    setTimeout(() => initExtratoCharts(type), 100);
-                }
-            }
-        }
-
-        window.closeModal = function(modalId) {
-            document.getElementById(modalId).classList.add('hidden');
-        }
-
-        window.filterRisco = function(nivel) {
-            const cards = document.querySelectorAll('.patient-risk-card');
-            cards.forEach(card => {
-                if (nivel === 'all') {
-                    card.style.display = 'block';
+            window.showJornadasRisco = function() {
+                console.log('Abrindo modal Jornadas em Risco (fallback)');
+                const modal = document.getElementById('modalJornadasRisco');
+                if (modal) {
+                    modal.classList.remove('hidden');
                 } else {
-                    card.style.display = card.dataset.risk === nivel ? 'block' : 'none';
-                }
-            });
-        }
-
-        window.exportarRelatorio = function() {
-            alert('Gerando relatório completo do Portal Financeiro LAURA...');
-        }
-
-        // Content Generators for KPI Extratos
-        function generateGlosasIdentificadasExtrato() {
-            return '<div class="space-y-4">' +
-                '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">' +
-                '<div class="bg-red-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Total Identificado</p><p class="text-2xl font-bold text-red-600">R$ 485.700</p></div>' +
-                '<div class="bg-red-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Casos</p><p class="text-2xl font-bold text-red-600">127</p></div>' +
-                '<div class="bg-red-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Taxa Crescimento</p><p class="text-2xl font-bold text-red-600">+12.3%</p></div>' +
-                '</div>' +
-                '<h4 class="font-bold text-gray-800">Detalhamento por Caso</h4>' +
-                '<table class="w-full"><thead><tr class="border-b"><th class="text-left py-2">Código</th><th class="text-left py-2">Paciente</th><th class="text-left py-2">Valor</th><th class="text-left py-2">Motivo</th><th class="text-left py-2">Status</th></tr></thead>' +
-                '<tbody>' +
-                '<tr class="border-b"><td class="py-2">GL-2024-001</td><td class="py-2">Maria Silva</td><td class="py-2 font-semibold">R$ 12.450</td><td class="py-2">Doc. Incompleta</td><td class="py-2"><span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs">Pendente</span></td></tr>' +
-                '<tr class="border-b"><td class="py-2">GL-2024-002</td><td class="py-2">João Santos</td><td class="py-2 font-semibold">R$ 8.900</td><td class="py-2">Código Incorreto</td><td class="py-2"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs">Revisão</span></td></tr>' +
-                '<tr class="border-b"><td class="py-2">GL-2024-003</td><td class="py-2">Ana Costa</td><td class="py-2 font-semibold">R$ 15.200</td><td class="py-2">Autorização Vencida</td><td class="py-2"><span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs">Pendente</span></td></tr>' +
-                '<tr class="border-b"><td class="py-2">GL-2024-004</td><td class="py-2">Pedro Lima</td><td class="py-2 font-semibold">R$ 6.780</td><td class="py-2">Duplicidade</td><td class="py-2"><span class="px-2 py-1 bg-orange-100 text-orange-700 rounded-full text-xs">Análise</span></td></tr>' +
-                '<tr class="border-b"><td class="py-2">GL-2024-005</td><td class="py-2">Julia Ferreira</td><td class="py-2 font-semibold">R$ 22.100</td><td class="py-2">Falta Laudo</td><td class="py-2"><span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs">Pendente</span></td></tr>' +
-                '</tbody></table></div>';
-        }
-
-        function generateGlosasRevertidasExtrato() {
-            return '<div class="space-y-4">' +
-                '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">' +
-                '<div class="bg-green-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Total Revertido</p><p class="text-2xl font-bold text-green-600">R$ 367.200</p></div>' +
-                '<div class="bg-green-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Casos Revertidos</p><p class="text-2xl font-bold text-green-600">96</p></div>' +
-                '<div class="bg-green-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Taxa Sucesso</p><p class="text-2xl font-bold text-green-600">75.6%</p></div>' +
-                '</div>' +
-                '<h4 class="font-bold text-gray-800">Histórico de Reversões</h4>' +
-                '<table class="w-full"><thead><tr class="border-b"><th class="text-left py-2">Código</th><th class="text-left py-2">Paciente</th><th class="text-left py-2">Valor</th><th class="text-left py-2">Data Reversão</th><th class="text-left py-2">Tempo</th></tr></thead>' +
-                '<tbody>' +
-                '<tr class="border-b"><td class="py-2">RV-2024-001</td><td class="py-2">Ana Costa</td><td class="py-2 font-semibold text-green-600">R$ 15.200</td><td class="py-2">10/01/2025</td><td class="py-2">3 dias</td></tr>' +
-                '<tr class="border-b"><td class="py-2">RV-2024-002</td><td class="py-2">Pedro Lima</td><td class="py-2 font-semibold text-green-600">R$ 9.800</td><td class="py-2">12/01/2025</td><td class="py-2">5 dias</td></tr>' +
-                '<tr class="border-b"><td class="py-2">RV-2024-003</td><td class="py-2">Carlos Mendes</td><td class="py-2 font-semibold text-green-600">R$ 18.450</td><td class="py-2">13/01/2025</td><td class="py-2">2 dias</td></tr>' +
-                '</tbody></table></div>';
-        }
-
-        function generateROIExtrato() {
-            return '<div class="space-y-4">' +
-                '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">' +
-                '<div class="bg-blue-50 p-4 rounded-lg"><p class="text-sm text-gray-600">ROI Total</p><p class="text-2xl font-bold text-blue-600">287%</p></div>' +
-                '<div class="bg-blue-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Economia Gerada</p><p class="text-2xl font-bold text-blue-600">R$ 2.4M</p></div>' +
-                '<div class="bg-blue-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Investimento</p><p class="text-2xl font-bold text-blue-600">R$ 836K</p></div>' +
-                '</div>' +
-                '<div class="bg-gray-50 p-4 rounded-lg">' +
-                '<h4 class="font-bold text-gray-800 mb-3">Breakdown de Economias</h4>' +
-                '<div class="space-y-2">' +
-                '<div class="flex justify-between items-center py-2 border-b"><span>Prevenção de Glosas</span><span class="font-bold text-green-600">R$ 1.2M</span></div>' +
-                '<div class="flex justify-between items-center py-2 border-b"><span>Otimização OPME</span><span class="font-bold text-green-600">R$ 680K</span></div>' +
-                '<div class="flex justify-between items-center py-2 border-b"><span>Redução Retrabalho</span><span class="font-bold text-green-600">R$ 320K</span></div>' +
-                '<div class="flex justify-between items-center py-2 border-b"><span>Agilidade Processos</span><span class="font-bold text-green-600">R$ 200K</span></div>' +
-                '</div>' +
-                '<div class="mt-4"><canvas id="roiChart" width="400" height="200"></canvas></div>' +
-                '</div></div>';
-        }
-
-        function generateTempoReversaoExtrato() {
-            return '<div class="space-y-4">' +
-                '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">' +
-                '<div class="bg-purple-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Tempo Médio</p><p class="text-2xl font-bold text-purple-600">4.2 dias</p></div>' +
-                '<div class="bg-purple-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Melhor Tempo</p><p class="text-2xl font-bold text-purple-600">1 dia</p></div>' +
-                '<div class="bg-purple-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Redução</p><p class="text-2xl font-bold text-purple-600">-2.1 dias</p></div>' +
-                '</div>' +
-                '<div class="bg-gray-50 p-4 rounded-lg">' +
-                '<h4 class="font-bold text-gray-800 mb-3">Evolução Temporal</h4>' +
-                '<table class="w-full"><thead><tr class="border-b"><th class="text-left py-2">Mês</th><th class="text-left py-2">Tempo Médio</th><th class="text-left py-2">Variação</th></tr></thead>' +
-                '<tbody>' +
-                '<tr class="border-b"><td class="py-2">Janeiro</td><td class="py-2">6.3 dias</td><td class="py-2 text-red-600">Base</td></tr>' +
-                '<tr class="border-b"><td class="py-2">Fevereiro</td><td class="py-2">5.8 dias</td><td class="py-2 text-green-600">-0.5 dias</td></tr>' +
-                '<tr class="border-b"><td class="py-2">Março</td><td class="py-2">5.2 dias</td><td class="py-2 text-green-600">-0.6 dias</td></tr>' +
-                '<tr class="border-b"><td class="py-2">Abril</td><td class="py-2">4.9 dias</td><td class="py-2 text-green-600">-0.3 dias</td></tr>' +
-                '<tr class="border-b"><td class="py-2">Maio</td><td class="py-2">4.5 dias</td><td class="py-2 text-green-600">-0.4 dias</td></tr>' +
-                '<tr class="border-b"><td class="py-2">Junho</td><td class="py-2 font-bold">4.2 dias</td><td class="py-2 text-green-600 font-bold">-0.3 dias</td></tr>' +
-                '</tbody></table>' +
-                '<div class="mt-4"><canvas id="tempoChart" width="400" height="200"></canvas></div>' +
-                '</div></div>';
-        }
-
-        function generateControleOPMEExtrato() {
-            return '<div class="space-y-4">' +
-                '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">' +
-                '<div class="bg-amber-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Compliance</p><p class="text-2xl font-bold text-amber-600">98.7%</p></div>' +
-                '<div class="bg-amber-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Materiais Analisados</p><p class="text-2xl font-bold text-amber-600">1.247</p></div>' +
-                '<div class="bg-amber-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Economia</p><p class="text-2xl font-bold text-amber-600">R$ 892K</p></div>' +
-                '</div>' +
-                '<h4 class="font-bold text-gray-800">Análise por Fornecedor</h4>' +
-                '<table class="w-full"><thead><tr class="border-b"><th class="text-left py-2">Fornecedor</th><th class="text-left py-2">Materiais</th><th class="text-left py-2">Valor Total</th><th class="text-left py-2">Compliance</th></tr></thead>' +
-                '<tbody>' +
-                '<tr class="border-b"><td class="py-2">MedTech Inc</td><td class="py-2">234</td><td class="py-2 font-semibold">R$ 2.8M</td><td class="py-2"><span class="text-green-600 font-bold">99.2%</span></td></tr>' +
-                '<tr class="border-b"><td class="py-2">OrthoLife</td><td class="py-2">189</td><td class="py-2 font-semibold">R$ 1.9M</td><td class="py-2"><span class="text-green-600 font-bold">98.4%</span></td></tr>' +
-                '<tr class="border-b"><td class="py-2">CardioTech</td><td class="py-2">156</td><td class="py-2 font-semibold">R$ 3.2M</td><td class="py-2"><span class="text-green-600 font-bold">99.5%</span></td></tr>' +
-                '<tr class="border-b"><td class="py-2">ValveMed</td><td class="py-2">98</td><td class="py-2 font-semibold">R$ 4.1M</td><td class="py-2"><span class="text-yellow-600 font-bold">97.8%</span></td></tr>' +
-                '</tbody></table></div>';
-        }
-
-        function initExtratoCharts(type) {
-            if (type === 'roi_otimizacao') {
-                const ctx = document.getElementById('roiChart');
-                if (ctx && ctx.getContext && typeof Chart !== 'undefined') {
-                    new Chart(ctx.getContext('2d'), {
-                        type: 'line',
-                        data: {
-                            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
-                            datasets: [{
-                                label: 'ROI Acumulado (%)',
-                                data: [120, 180, 220, 250, 270, 287],
-                                borderColor: 'rgb(59, 130, 246)',
-                                backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                                tension: 0.4,
-                                fill: true
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false
-                        }
-                    });
-                }
-            } else if (type === 'tempo_reversao') {
-                const ctx = document.getElementById('tempoChart');
-                if (ctx && ctx.getContext && typeof Chart !== 'undefined') {
-                    new Chart(ctx.getContext('2d'), {
-                        type: 'bar',
-                        data: {
-                            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
-                            datasets: [{
-                                label: 'Tempo Médio (dias)',
-                                data: [6.3, 5.8, 5.2, 4.9, 4.5, 4.2],
-                                backgroundColor: 'rgba(147, 51, 234, 0.8)'
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false
-                        }
-                    });
+                    alert('Modal Jornadas em Risco não encontrado');
                 }
             }
+
+            window.showOPMEDetail = function(code) {
+                console.log('Abrindo modal OPME Detail para código:', code, '(fallback)');
+                const codeElement = document.getElementById('opme-code');
+                if (codeElement) {
+                    codeElement.textContent = code;
+                }
+                const modal = document.getElementById('modalOPMEDetail');
+                if (modal) {
+                    modal.classList.remove('hidden');
+                } else {
+                    alert('Modal OPME Detail não encontrado');
+                }
+            }
+
+            window.showDossierComercial = function() {
+                const modal = document.getElementById('modalDossierComercial');
+                if (modal) modal.classList.remove('hidden');
+            }
+
+            window.showFornecedoresCriticos = function() {
+                const modal = document.getElementById('modalFornecedoresCriticos');
+                if (modal) modal.classList.remove('hidden');
+            }
+
+            window.showExtratoKPI = function(type) {
+                console.log('Abrindo extrato KPI:', type, '(fallback)');
+                const modal = document.getElementById('modalKPIExtrato');
+                const header = document.getElementById('modalKPIExtratoHeader');
+                const title = document.getElementById('modalKPIExtratoTitle');
+                const content = document.getElementById('modalKPIExtratoContent');
+                
+                const extratos = {
+                    'glosas_identificadas': {
+                        title: 'Extrato de Glosas Identificadas',
+                        color: 'from-red-600 to-red-700',
+                        content: '<div>Carregando extrato de glosas identificadas...</div>'
+                    },
+                    'glosas_revertidas': {
+                        title: 'Extrato de Glosas Revertidas',
+                        color: 'from-green-600 to-green-700',
+                        content: '<div>Carregando extrato de glosas revertidas...</div>'
+                    },
+                    'roi_otimizacao': {
+                        title: 'ROI de Otimização',
+                        color: 'from-blue-600 to-blue-700',
+                        content: '<div>Carregando extrato de ROI...</div>'
+                    },
+                    'tempo_reversao': {
+                        title: 'Tempo Médio de Reversão',
+                        color: 'from-purple-600 to-purple-700',
+                        content: '<div>Carregando extrato de tempo de reversão...</div>'
+                    },
+                    'controle_opme': {
+                        title: 'Controle OPME',
+                        color: 'from-amber-600 to-amber-700',
+                        content: '<div>Carregando extrato de controle OPME...</div>'
+                    }
+                };
+                
+                const extrato = extratos[type];
+                if (extrato && modal && header && title && content) {
+                    title.textContent = extrato.title;
+                    header.className = 'bg-gradient-to-r ' + extrato.color + ' p-6 text-white';
+                    content.innerHTML = extrato.content;
+                    modal.classList.remove('hidden');
+                    
+                    // Chamar função do script externo para gerar conteúdo real
+                    if (window.generateKPIExtratoContent) {
+                        content.innerHTML = window.generateKPIExtratoContent(type);
+                    }
+                } else {
+                    alert('Modal de extrato KPI não encontrado para tipo: ' + type);
+                }
+            }
+
+            window.closeModal = function(modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) modal.classList.add('hidden');
+            }
+
+            window.filterRisco = function(nivel) {
+                const cards = document.querySelectorAll('.patient-risk-card');
+                cards.forEach(card => {
+                    if (nivel === 'all') {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = card.dataset.risk === nivel ? 'block' : 'none';
+                    }
+                });
+            }
+
+            window.exportarRelatorio = function() {
+                alert('Gerando relatório completo do Portal Financeiro LAURA...');
+            }
         }
+
+        // As funções de geração de conteúdo dos extratos KPI foram movidas para o script externo
+        // /static/financial-portal-functions.js para garantir escopo global
+
+        // Adicionar listener para verificar se os botões estão funcionando
+        document.addEventListener('click', function(e) {
+            // Log para debug de cliques em botões
+            if (e.target && e.target.onclick) {
+                console.log('Botão clicado:', e.target.textContent, 'Função:', e.target.onclick.toString().substring(0, 50));
+            }
+        });
 
         // Initialize Charts
         function initFinancialCharts() {
