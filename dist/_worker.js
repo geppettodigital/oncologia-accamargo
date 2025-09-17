@@ -1,4 +1,4 @@
-var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in e?rs(e,t,{enumerable:!0,configurable:!0,writable:!0,value:s}):e[t]=s;var x=(e,t,s)=>ns(e,typeof t!="symbol"?t+"":t,s),_e=(e,t,s)=>t.has(e)||et("Cannot "+s);var l=(e,t,s)=>(_e(e,t,"read from private field"),s?s.call(e):t.get(e)),b=(e,t,s)=>t.has(e)?et("Cannot add the same private member more than once"):t instanceof WeakSet?t.add(e):t.set(e,s),g=(e,t,s,a)=>(_e(e,t,"write to private field"),a?a.call(e,s):t.set(e,s),s),f=(e,t,s)=>(_e(e,t,"access private method"),s);var tt=(e,t,s,a)=>({set _(i){g(e,t,i,s)},get _(){return l(e,t,a)}});var st=(e,t,s)=>(a,i)=>{let o=-1;return r(0);async function r(d){if(d<=o)throw new Error("next() called multiple times");o=d;let n,c=!1,p;if(e[d]?(p=e[d][0][0],a.req.routeIndex=d):p=d===e.length&&i||void 0,p)try{n=await p(a,()=>r(d+1))}catch(m){if(m instanceof Error&&t)a.error=m,n=await t(m,a),c=!0;else throw m}else a.finalized===!1&&s&&(n=await s(a));return n&&(a.finalized===!1||c)&&(a.res=n),a}},ls=Symbol(),ds=async(e,t=Object.create(null))=>{const{all:s=!1,dot:a=!1}=t,o=(e instanceof Bt?e.raw.headers:e.headers).get("Content-Type");return o!=null&&o.startsWith("multipart/form-data")||o!=null&&o.startsWith("application/x-www-form-urlencoded")?cs(e,{all:s,dot:a}):{}};async function cs(e,t){const s=await e.formData();return s?ps(s,t):{}}function ps(e,t){const s=Object.create(null);return e.forEach((a,i)=>{t.all||i.endsWith("[]")?ms(s,i,a):s[i]=a}),t.dot&&Object.entries(s).forEach(([a,i])=>{a.includes(".")&&(gs(s,a,i),delete s[a])}),s}var ms=(e,t,s)=>{e[t]!==void 0?Array.isArray(e[t])?e[t].push(s):e[t]=[e[t],s]:t.endsWith("[]")?e[t]=[s]:e[t]=s},gs=(e,t,s)=>{let a=e;const i=t.split(".");i.forEach((o,r)=>{r===i.length-1?a[o]=s:((!a[o]||typeof a[o]!="object"||Array.isArray(a[o])||a[o]instanceof File)&&(a[o]=Object.create(null)),a=a[o])})},Rt=e=>{const t=e.split("/");return t[0]===""&&t.shift(),t},xs=e=>{const{groups:t,path:s}=us(e),a=Rt(s);return bs(a,t)},us=e=>{const t=[];return e=e.replace(/\{[^}]+\}/g,(s,a)=>{const i=`@${a}`;return t.push([i,s]),i}),{groups:t,path:e}},bs=(e,t)=>{for(let s=t.length-1;s>=0;s--){const[a]=t[s];for(let i=e.length-1;i>=0;i--)if(e[i].includes(a)){e[i]=e[i].replace(a,t[s][1]);break}}return e},Fe={},vs=(e,t)=>{if(e==="*")return"*";const s=e.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);if(s){const a=`${e}#${t}`;return Fe[a]||(s[2]?Fe[a]=t&&t[0]!==":"&&t[0]!=="*"?[a,s[1],new RegExp(`^${s[2]}(?=/${t})`)]:[e,s[1],new RegExp(`^${s[2]}$`)]:Fe[a]=[e,s[1],!0]),Fe[a]}return null},Ze=(e,t)=>{try{return t(e)}catch{return e.replace(/(?:%[0-9A-Fa-f]{2})+/g,s=>{try{return t(s)}catch{return s}})}},fs=e=>Ze(e,decodeURI),Dt=e=>{const t=e.url,s=t.indexOf("/",t.indexOf(":")+4);let a=s;for(;a<t.length;a++){const i=t.charCodeAt(a);if(i===37){const o=t.indexOf("?",a),r=t.slice(s,o===-1?void 0:o);return fs(r.includes("%25")?r.replace(/%25/g,"%2525"):r)}else if(i===63)break}return t.slice(s,a)},hs=e=>{const t=Dt(e);return t.length>1&&t.at(-1)==="/"?t.slice(0,-1):t},ce=(e,t,...s)=>(s.length&&(t=ce(t,...s)),`${(e==null?void 0:e[0])==="/"?"":"/"}${e}${t==="/"?"":`${(e==null?void 0:e.at(-1))==="/"?"":"/"}${(t==null?void 0:t[0])==="/"?t.slice(1):t}`}`),Lt=e=>{if(e.charCodeAt(e.length-1)!==63||!e.includes(":"))return null;const t=e.split("/"),s=[];let a="";return t.forEach(i=>{if(i!==""&&!/\:/.test(i))a+="/"+i;else if(/\:/.test(i))if(/\?/.test(i)){s.length===0&&a===""?s.push("/"):s.push(a);const o=i.replace("?","");a+="/"+o,s.push(a)}else a+="/"+i}),s.filter((i,o,r)=>r.indexOf(i)===o)},Je=e=>/[%+]/.test(e)?(e.indexOf("+")!==-1&&(e=e.replace(/\+/g," ")),e.indexOf("%")!==-1?Ze(e,Nt):e):e,Ot=(e,t,s)=>{let a;if(!s&&t&&!/[%+]/.test(t)){let r=e.indexOf(`?${t}`,8);for(r===-1&&(r=e.indexOf(`&${t}`,8));r!==-1;){const d=e.charCodeAt(r+t.length+1);if(d===61){const n=r+t.length+2,c=e.indexOf("&",n);return Je(e.slice(n,c===-1?void 0:c))}else if(d==38||isNaN(d))return"";r=e.indexOf(`&${t}`,r+1)}if(a=/[%+]/.test(e),!a)return}const i={};a??(a=/[%+]/.test(e));let o=e.indexOf("?",8);for(;o!==-1;){const r=e.indexOf("&",o+1);let d=e.indexOf("=",o);d>r&&r!==-1&&(d=-1);let n=e.slice(o+1,d===-1?r===-1?void 0:r:d);if(a&&(n=Je(n)),o=r,n==="")continue;let c;d===-1?c="":(c=e.slice(d+1,r===-1?void 0:r),a&&(c=Je(c))),s?(i[n]&&Array.isArray(i[n])||(i[n]=[]),i[n].push(c)):i[n]??(i[n]=c)}return t?i[t]:i},ys=Ot,ws=(e,t)=>Ot(e,t,!0),Nt=decodeURIComponent,at=e=>Ze(e,Nt),xe,T,q,Ft,$t,We,z,At,Bt=(At=class{constructor(e,t="/",s=[[]]){b(this,q);x(this,"raw");b(this,xe);b(this,T);x(this,"routeIndex",0);x(this,"path");x(this,"bodyCache",{});b(this,z,e=>{const{bodyCache:t,raw:s}=this,a=t[e];if(a)return a;const i=Object.keys(t)[0];return i?t[i].then(o=>(i==="json"&&(o=JSON.stringify(o)),new Response(o)[e]())):t[e]=s[e]()});this.raw=e,this.path=t,g(this,T,s),g(this,xe,{})}param(e){return e?f(this,q,Ft).call(this,e):f(this,q,$t).call(this)}query(e){return ys(this.url,e)}queries(e){return ws(this.url,e)}header(e){if(e)return this.raw.headers.get(e)??void 0;const t={};return this.raw.headers.forEach((s,a)=>{t[a]=s}),t}async parseBody(e){var t;return(t=this.bodyCache).parsedBody??(t.parsedBody=await ds(this,e))}json(){return l(this,z).call(this,"text").then(e=>JSON.parse(e))}text(){return l(this,z).call(this,"text")}arrayBuffer(){return l(this,z).call(this,"arrayBuffer")}blob(){return l(this,z).call(this,"blob")}formData(){return l(this,z).call(this,"formData")}addValidatedData(e,t){l(this,xe)[e]=t}valid(e){return l(this,xe)[e]}get url(){return this.raw.url}get method(){return this.raw.method}get[ls](){return l(this,T)}get matchedRoutes(){return l(this,T)[0].map(([[,e]])=>e)}get routePath(){return l(this,T)[0].map(([[,e]])=>e)[this.routeIndex].path}},xe=new WeakMap,T=new WeakMap,q=new WeakSet,Ft=function(e){const t=l(this,T)[0][this.routeIndex][1][e],s=f(this,q,We).call(this,t);return s?/\%/.test(s)?at(s):s:void 0},$t=function(){const e={},t=Object.keys(l(this,T)[0][this.routeIndex][1]);for(const s of t){const a=f(this,q,We).call(this,l(this,T)[0][this.routeIndex][1][s]);a&&typeof a=="string"&&(e[s]=/\%/.test(a)?at(a):a)}return e},We=function(e){return l(this,T)[1]?l(this,T)[1][e]:e},z=new WeakMap,At),qt={Stringify:1},ge=(e,t)=>{const s=new String(e);return s.isEscaped=!0,s.callbacks=t,s},Cs=/[&<>'"]/,As=async(e,t)=>{let s="";t||(t=[]);const a=await Promise.all(e);for(let i=a.length-1;s+=a[i],i--,!(i<0);i--){let o=a[i];typeof o=="object"&&t.push(...o.callbacks||[]);const r=o.isEscaped;if(o=await(typeof o=="object"?o.toString():o),typeof o=="object"&&t.push(...o.callbacks||[]),o.isEscaped??r)s+=o;else{const d=[s];Qe(o,d),s=d[0]}}return ge(s,t)},Qe=(e,t)=>{const s=e.search(Cs);if(s===-1){t[0]+=e;return}let a,i,o=0;for(i=s;i<e.length;i++){switch(e.charCodeAt(i)){case 34:a="&quot;";break;case 39:a="&#39;";break;case 38:a="&amp;";break;case 60:a="&lt;";break;case 62:a="&gt;";break;default:continue}t[0]+=e.substring(o,i)+a,o=i+1}t[0]+=e.substring(o,i)},Ps=e=>{const t=e.callbacks;if(!(t!=null&&t.length))return e;const s=[e],a={};return t.forEach(i=>i({phase:qt.Stringify,buffer:s,context:a})),s[0]},Ht=async(e,t,s,a,i)=>{typeof e=="object"&&!(e instanceof String)&&(e instanceof Promise||(e=e.toString()),e instanceof Promise&&(e=await e));const o=e.callbacks;return o!=null&&o.length?(i?i[0]+=e:i=[e],Promise.all(o.map(d=>d({phase:t,buffer:i,context:a}))).then(d=>Promise.all(d.filter(Boolean).map(n=>Ht(n,t,!1,a,i))).then(()=>i[0]))):Promise.resolve(e)},ks="text/plain; charset=UTF-8",Ke=(e,t)=>({"Content-Type":e,...t}),Ie,je,N,ue,B,S,Se,be,ve,ee,Ee,Te,G,pe,Pt,Is=(Pt=class{constructor(e,t){b(this,G);b(this,Ie);b(this,je);x(this,"env",{});b(this,N);x(this,"finalized",!1);x(this,"error");b(this,ue);b(this,B);b(this,S);b(this,Se);b(this,be);b(this,ve);b(this,ee);b(this,Ee);b(this,Te);x(this,"render",(...e)=>(l(this,be)??g(this,be,t=>this.html(t)),l(this,be).call(this,...e)));x(this,"setLayout",e=>g(this,Se,e));x(this,"getLayout",()=>l(this,Se));x(this,"setRenderer",e=>{g(this,be,e)});x(this,"header",(e,t,s)=>{this.finalized&&g(this,S,new Response(l(this,S).body,l(this,S)));const a=l(this,S)?l(this,S).headers:l(this,ee)??g(this,ee,new Headers);t===void 0?a.delete(e):s!=null&&s.append?a.append(e,t):a.set(e,t)});x(this,"status",e=>{g(this,ue,e)});x(this,"set",(e,t)=>{l(this,N)??g(this,N,new Map),l(this,N).set(e,t)});x(this,"get",e=>l(this,N)?l(this,N).get(e):void 0);x(this,"newResponse",(...e)=>f(this,G,pe).call(this,...e));x(this,"body",(e,t,s)=>f(this,G,pe).call(this,e,t,s));x(this,"text",(e,t,s)=>!l(this,ee)&&!l(this,ue)&&!t&&!s&&!this.finalized?new Response(e):f(this,G,pe).call(this,e,t,Ke(ks,s)));x(this,"json",(e,t,s)=>f(this,G,pe).call(this,JSON.stringify(e),t,Ke("application/json",s)));x(this,"html",(e,t,s)=>{const a=i=>f(this,G,pe).call(this,i,t,Ke("text/html; charset=UTF-8",s));return typeof e=="object"?Ht(e,qt.Stringify,!1,{}).then(a):a(e)});x(this,"redirect",(e,t)=>{const s=String(e);return this.header("Location",/[^\x00-\xFF]/.test(s)?encodeURI(s):s),this.newResponse(null,t??302)});x(this,"notFound",()=>(l(this,ve)??g(this,ve,()=>new Response),l(this,ve).call(this,this)));g(this,Ie,e),t&&(g(this,B,t.executionCtx),this.env=t.env,g(this,ve,t.notFoundHandler),g(this,Te,t.path),g(this,Ee,t.matchResult))}get req(){return l(this,je)??g(this,je,new Bt(l(this,Ie),l(this,Te),l(this,Ee))),l(this,je)}get event(){if(l(this,B)&&"respondWith"in l(this,B))return l(this,B);throw Error("This context has no FetchEvent")}get executionCtx(){if(l(this,B))return l(this,B);throw Error("This context has no ExecutionContext")}get res(){return l(this,S)||g(this,S,new Response(null,{headers:l(this,ee)??g(this,ee,new Headers)}))}set res(e){if(l(this,S)&&e){e=new Response(e.body,e);for(const[t,s]of l(this,S).headers.entries())if(t!=="content-type")if(t==="set-cookie"){const a=l(this,S).headers.getSetCookie();e.headers.delete("set-cookie");for(const i of a)e.headers.append("set-cookie",i)}else e.headers.set(t,s)}g(this,S,e),this.finalized=!0}get var(){return l(this,N)?Object.fromEntries(l(this,N)):{}}},Ie=new WeakMap,je=new WeakMap,N=new WeakMap,ue=new WeakMap,B=new WeakMap,S=new WeakMap,Se=new WeakMap,be=new WeakMap,ve=new WeakMap,ee=new WeakMap,Ee=new WeakMap,Te=new WeakMap,G=new WeakSet,pe=function(e,t,s){const a=l(this,S)?new Headers(l(this,S).headers):l(this,ee)??new Headers;if(typeof t=="object"&&"headers"in t){const o=t.headers instanceof Headers?t.headers:new Headers(t.headers);for(const[r,d]of o)r.toLowerCase()==="set-cookie"?a.append(r,d):a.set(r,d)}if(s)for(const[o,r]of Object.entries(s))if(typeof r=="string")a.set(o,r);else{a.delete(o);for(const d of r)a.append(o,d)}const i=typeof t=="number"?t:(t==null?void 0:t.status)??l(this,ue);return new Response(e,{status:i,headers:a})},Pt),C="ALL",js="all",Ss=["get","post","put","delete","options","patch"],Vt="Can not add a route since the matcher is already built.",zt=class extends Error{},Es="__COMPOSED_HANDLER",Ts=e=>e.text("404 Not Found",404),it=(e,t)=>{if("getResponse"in e){const s=e.getResponse();return t.newResponse(s.body,s)}return console.error(e),t.text("Internal Server Error",500)},M,A,Ut,R,Z,$e,qe,kt,Gt=(kt=class{constructor(t={}){b(this,A);x(this,"get");x(this,"post");x(this,"put");x(this,"delete");x(this,"options");x(this,"patch");x(this,"all");x(this,"on");x(this,"use");x(this,"router");x(this,"getPath");x(this,"_basePath","/");b(this,M,"/");x(this,"routes",[]);b(this,R,Ts);x(this,"errorHandler",it);x(this,"onError",t=>(this.errorHandler=t,this));x(this,"notFound",t=>(g(this,R,t),this));x(this,"fetch",(t,...s)=>f(this,A,qe).call(this,t,s[1],s[0],t.method));x(this,"request",(t,s,a,i)=>t instanceof Request?this.fetch(s?new Request(t,s):t,a,i):(t=t.toString(),this.fetch(new Request(/^https?:\/\//.test(t)?t:`http://localhost${ce("/",t)}`,s),a,i)));x(this,"fire",()=>{addEventListener("fetch",t=>{t.respondWith(f(this,A,qe).call(this,t.request,t,void 0,t.request.method))})});[...Ss,js].forEach(o=>{this[o]=(r,...d)=>(typeof r=="string"?g(this,M,r):f(this,A,Z).call(this,o,l(this,M),r),d.forEach(n=>{f(this,A,Z).call(this,o,l(this,M),n)}),this)}),this.on=(o,r,...d)=>{for(const n of[r].flat()){g(this,M,n);for(const c of[o].flat())d.map(p=>{f(this,A,Z).call(this,c.toUpperCase(),l(this,M),p)})}return this},this.use=(o,...r)=>(typeof o=="string"?g(this,M,o):(g(this,M,"*"),r.unshift(o)),r.forEach(d=>{f(this,A,Z).call(this,C,l(this,M),d)}),this);const{strict:a,...i}=t;Object.assign(this,i),this.getPath=a??!0?t.getPath??Dt:hs}route(t,s){const a=this.basePath(t);return s.routes.map(i=>{var r;let o;s.errorHandler===it?o=i.handler:(o=async(d,n)=>(await st([],s.errorHandler)(d,()=>i.handler(d,n))).res,o[Es]=i.handler),f(r=a,A,Z).call(r,i.method,i.path,o)}),this}basePath(t){const s=f(this,A,Ut).call(this);return s._basePath=ce(this._basePath,t),s}mount(t,s,a){let i,o;a&&(typeof a=="function"?o=a:(o=a.optionHandler,a.replaceRequest===!1?i=n=>n:i=a.replaceRequest));const r=o?n=>{const c=o(n);return Array.isArray(c)?c:[c]}:n=>{let c;try{c=n.executionCtx}catch{}return[n.env,c]};i||(i=(()=>{const n=ce(this._basePath,t),c=n==="/"?0:n.length;return p=>{const m=new URL(p.url);return m.pathname=m.pathname.slice(c)||"/",new Request(m,p)}})());const d=async(n,c)=>{const p=await s(i(n.req.raw),...r(n));if(p)return p;await c()};return f(this,A,Z).call(this,C,ce(t,"*"),d),this}},M=new WeakMap,A=new WeakSet,Ut=function(){const t=new Gt({router:this.router,getPath:this.getPath});return t.errorHandler=this.errorHandler,g(t,R,l(this,R)),t.routes=this.routes,t},R=new WeakMap,Z=function(t,s,a){t=t.toUpperCase(),s=ce(this._basePath,s);const i={basePath:this._basePath,path:s,method:t,handler:a};this.router.add(t,s,[a,i]),this.routes.push(i)},$e=function(t,s){if(t instanceof Error)return this.errorHandler(t,s);throw t},qe=function(t,s,a,i){if(i==="HEAD")return(async()=>new Response(null,await f(this,A,qe).call(this,t,s,a,"GET")))();const o=this.getPath(t,{env:a}),r=this.router.match(i,o),d=new Is(t,{path:o,matchResult:r,env:a,executionCtx:s,notFoundHandler:l(this,R)});if(r[0].length===1){let c;try{c=r[0][0][0][0](d,async()=>{d.res=await l(this,R).call(this,d)})}catch(p){return f(this,A,$e).call(this,p,d)}return c instanceof Promise?c.then(p=>p||(d.finalized?d.res:l(this,R).call(this,d))).catch(p=>f(this,A,$e).call(this,p,d)):c??l(this,R).call(this,d)}const n=st(r[0],this.errorHandler,l(this,R));return(async()=>{try{const c=await n(d);if(!c.finalized)throw new Error("Context is not finalized. Did you forget to return a Response object or `await next()`?");return c.res}catch(c){return f(this,A,$e).call(this,c,d)}})()},kt),Ve="[^/]+",Pe=".*",ke="(?:|/.*)",me=Symbol(),Ms=new Set(".\\+*[^]$()");function Rs(e,t){return e.length===1?t.length===1?e<t?-1:1:-1:t.length===1||e===Pe||e===ke?1:t===Pe||t===ke?-1:e===Ve?1:t===Ve?-1:e.length===t.length?e<t?-1:1:t.length-e.length}var te,se,D,It,Ye=(It=class{constructor(){b(this,te);b(this,se);b(this,D,Object.create(null))}insert(t,s,a,i,o){if(t.length===0){if(l(this,te)!==void 0)throw me;if(o)return;g(this,te,s);return}const[r,...d]=t,n=r==="*"?d.length===0?["","",Pe]:["","",Ve]:r==="/*"?["","",ke]:r.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);let c;if(n){const p=n[1];let m=n[2]||Ve;if(p&&n[2]&&(m===".*"||(m=m.replace(/^\((?!\?:)(?=[^)]+\)$)/,"(?:"),/\((?!\?:)/.test(m))))throw me;if(c=l(this,D)[m],!c){if(Object.keys(l(this,D)).some(u=>u!==Pe&&u!==ke))throw me;if(o)return;c=l(this,D)[m]=new Ye,p!==""&&g(c,se,i.varIndex++)}!o&&p!==""&&a.push([p,l(c,se)])}else if(c=l(this,D)[r],!c){if(Object.keys(l(this,D)).some(p=>p.length>1&&p!==Pe&&p!==ke))throw me;if(o)return;c=l(this,D)[r]=new Ye}c.insert(d,s,a,i,o)}buildRegExpStr(){const s=Object.keys(l(this,D)).sort(Rs).map(a=>{const i=l(this,D)[a];return(typeof l(i,se)=="number"?`(${a})@${l(i,se)}`:Ms.has(a)?`\\${a}`:a)+i.buildRegExpStr()});return typeof l(this,te)=="number"&&s.unshift(`#${l(this,te)}`),s.length===0?"":s.length===1?s[0]:"(?:"+s.join("|")+")"}},te=new WeakMap,se=new WeakMap,D=new WeakMap,It),ze,Me,jt,Ds=(jt=class{constructor(){b(this,ze,{varIndex:0});b(this,Me,new Ye)}insert(e,t,s){const a=[],i=[];for(let r=0;;){let d=!1;if(e=e.replace(/\{[^}]+\}/g,n=>{const c=`@\\${r}`;return i[r]=[c,n],r++,d=!0,c}),!d)break}const o=e.match(/(?::[^\/]+)|(?:\/\*$)|./g)||[];for(let r=i.length-1;r>=0;r--){const[d]=i[r];for(let n=o.length-1;n>=0;n--)if(o[n].indexOf(d)!==-1){o[n]=o[n].replace(d,i[r][1]);break}}return l(this,Me).insert(o,t,a,l(this,ze),s),a}buildRegExp(){let e=l(this,Me).buildRegExpStr();if(e==="")return[/^$/,[],[]];let t=0;const s=[],a=[];return e=e.replace(/#(\d+)|@(\d+)|\.\*\$/g,(i,o,r)=>o!==void 0?(s[++t]=Number(o),"$()"):(r!==void 0&&(a[Number(r)]=++t),"")),[new RegExp(`^${e}`),s,a]}},ze=new WeakMap,Me=new WeakMap,jt),_t=[],Ls=[/^$/,[],Object.create(null)],He=Object.create(null);function Jt(e){return He[e]??(He[e]=new RegExp(e==="*"?"":`^${e.replace(/\/\*$|([.\\+*[^\]$()])/g,(t,s)=>s?`\\${s}`:"(?:|/.*)")}$`))}function Os(){He=Object.create(null)}function Ns(e){var c;const t=new Ds,s=[];if(e.length===0)return Ls;const a=e.map(p=>[!/\*|\/:/.test(p[0]),...p]).sort(([p,m],[u,w])=>p?1:u?-1:m.length-w.length),i=Object.create(null);for(let p=0,m=-1,u=a.length;p<u;p++){const[w,E,h]=a[p];w?i[E]=[h.map(([j])=>[j,Object.create(null)]),_t]:m++;let y;try{y=t.insert(E,m,w)}catch(j){throw j===me?new zt(E):j}w||(s[m]=h.map(([j,le])=>{const we=Object.create(null);for(le-=1;le>=0;le--){const[L,Ge]=y[le];we[L]=Ge}return[j,we]}))}const[o,r,d]=t.buildRegExp();for(let p=0,m=s.length;p<m;p++)for(let u=0,w=s[p].length;u<w;u++){const E=(c=s[p][u])==null?void 0:c[1];if(!E)continue;const h=Object.keys(E);for(let y=0,j=h.length;y<j;y++)E[h[y]]=d[E[h[y]]]}const n=[];for(const p in r)n[p]=s[r[p]];return[o,n,i]}function de(e,t){if(e){for(const s of Object.keys(e).sort((a,i)=>i.length-a.length))if(Jt(s).test(t))return[...e[s]]}}var U,_,he,Kt,Wt,St,Bs=(St=class{constructor(){b(this,he);x(this,"name","RegExpRouter");b(this,U);b(this,_);g(this,U,{[C]:Object.create(null)}),g(this,_,{[C]:Object.create(null)})}add(e,t,s){var d;const a=l(this,U),i=l(this,_);if(!a||!i)throw new Error(Vt);a[e]||[a,i].forEach(n=>{n[e]=Object.create(null),Object.keys(n[C]).forEach(c=>{n[e][c]=[...n[C][c]]})}),t==="/*"&&(t="*");const o=(t.match(/\/:/g)||[]).length;if(/\*$/.test(t)){const n=Jt(t);e===C?Object.keys(a).forEach(c=>{var p;(p=a[c])[t]||(p[t]=de(a[c],t)||de(a[C],t)||[])}):(d=a[e])[t]||(d[t]=de(a[e],t)||de(a[C],t)||[]),Object.keys(a).forEach(c=>{(e===C||e===c)&&Object.keys(a[c]).forEach(p=>{n.test(p)&&a[c][p].push([s,o])})}),Object.keys(i).forEach(c=>{(e===C||e===c)&&Object.keys(i[c]).forEach(p=>n.test(p)&&i[c][p].push([s,o]))});return}const r=Lt(t)||[t];for(let n=0,c=r.length;n<c;n++){const p=r[n];Object.keys(i).forEach(m=>{var u;(e===C||e===m)&&((u=i[m])[p]||(u[p]=[...de(a[m],p)||de(a[C],p)||[]]),i[m][p].push([s,o-c+n+1]))})}}match(e,t){Os();const s=f(this,he,Kt).call(this);return this.match=(a,i)=>{const o=s[a]||s[C],r=o[2][i];if(r)return r;const d=i.match(o[0]);if(!d)return[[],_t];const n=d.indexOf("",1);return[o[1][n],d]},this.match(e,t)}},U=new WeakMap,_=new WeakMap,he=new WeakSet,Kt=function(){const e=Object.create(null);return Object.keys(l(this,_)).concat(Object.keys(l(this,U))).forEach(t=>{e[t]||(e[t]=f(this,he,Wt).call(this,t))}),g(this,U,g(this,_,void 0)),e},Wt=function(e){const t=[];let s=e===C;return[l(this,U),l(this,_)].forEach(a=>{const i=a[e]?Object.keys(a[e]).map(o=>[o,a[e][o]]):[];i.length!==0?(s||(s=!0),t.push(...i)):e!==C&&t.push(...Object.keys(a[C]).map(o=>[o,a[C][o]]))}),s?Ns(t):null},St),J,F,Et,Fs=(Et=class{constructor(e){x(this,"name","SmartRouter");b(this,J,[]);b(this,F,[]);g(this,J,e.routers)}add(e,t,s){if(!l(this,F))throw new Error(Vt);l(this,F).push([e,t,s])}match(e,t){if(!l(this,F))throw new Error("Fatal error");const s=l(this,J),a=l(this,F),i=s.length;let o=0,r;for(;o<i;o++){const d=s[o];try{for(let n=0,c=a.length;n<c;n++)d.add(...a[n]);r=d.match(e,t)}catch(n){if(n instanceof zt)continue;throw n}this.match=d.match.bind(d),g(this,J,[d]),g(this,F,void 0);break}if(o===i)throw new Error("Fatal error");return this.name=`SmartRouter + ${this.activeRouter.name}`,r}get activeRouter(){if(l(this,F)||l(this,J).length!==1)throw new Error("No active router has been determined yet.");return l(this,J)[0]}},J=new WeakMap,F=new WeakMap,Et),Ae=Object.create(null),K,I,ae,fe,k,$,X,Tt,Qt=(Tt=class{constructor(e,t,s){b(this,$);b(this,K);b(this,I);b(this,ae);b(this,fe,0);b(this,k,Ae);if(g(this,I,s||Object.create(null)),g(this,K,[]),e&&t){const a=Object.create(null);a[e]={handler:t,possibleKeys:[],score:0},g(this,K,[a])}g(this,ae,[])}insert(e,t,s){g(this,fe,++tt(this,fe)._);let a=this;const i=xs(t),o=[];for(let r=0,d=i.length;r<d;r++){const n=i[r],c=i[r+1],p=vs(n,c),m=Array.isArray(p)?p[0]:n;if(m in l(a,I)){a=l(a,I)[m],p&&o.push(p[1]);continue}l(a,I)[m]=new Qt,p&&(l(a,ae).push(p),o.push(p[1])),a=l(a,I)[m]}return l(a,K).push({[e]:{handler:s,possibleKeys:o.filter((r,d,n)=>n.indexOf(r)===d),score:l(this,fe)}}),a}search(e,t){var d;const s=[];g(this,k,Ae);let i=[this];const o=Rt(t),r=[];for(let n=0,c=o.length;n<c;n++){const p=o[n],m=n===c-1,u=[];for(let w=0,E=i.length;w<E;w++){const h=i[w],y=l(h,I)[p];y&&(g(y,k,l(h,k)),m?(l(y,I)["*"]&&s.push(...f(this,$,X).call(this,l(y,I)["*"],e,l(h,k))),s.push(...f(this,$,X).call(this,y,e,l(h,k)))):u.push(y));for(let j=0,le=l(h,ae).length;j<le;j++){const we=l(h,ae)[j],L=l(h,k)===Ae?{}:{...l(h,k)};if(we==="*"){const V=l(h,I)["*"];V&&(s.push(...f(this,$,X).call(this,V,e,l(h,k))),g(V,k,L),u.push(V));continue}const[Ge,Xe,Ce]=we;if(!p&&!(Ce instanceof RegExp))continue;const O=l(h,I)[Ge],os=o.slice(n).join("/");if(Ce instanceof RegExp){const V=Ce.exec(os);if(V){if(L[Xe]=V[0],s.push(...f(this,$,X).call(this,O,e,l(h,k),L)),Object.keys(l(O,I)).length){g(O,k,L);const Ue=((d=V[0].match(/\//))==null?void 0:d.length)??0;(r[Ue]||(r[Ue]=[])).push(O)}continue}}(Ce===!0||Ce.test(p))&&(L[Xe]=p,m?(s.push(...f(this,$,X).call(this,O,e,L,l(h,k))),l(O,I)["*"]&&s.push(...f(this,$,X).call(this,l(O,I)["*"],e,L,l(h,k)))):(g(O,k,L),u.push(O)))}}i=u.concat(r.shift()??[])}return s.length>1&&s.sort((n,c)=>n.score-c.score),[s.map(({handler:n,params:c})=>[n,c])]}},K=new WeakMap,I=new WeakMap,ae=new WeakMap,fe=new WeakMap,k=new WeakMap,$=new WeakSet,X=function(e,t,s,a){const i=[];for(let o=0,r=l(e,K).length;o<r;o++){const d=l(e,K)[o],n=d[t]||d[C],c={};if(n!==void 0&&(n.params=Object.create(null),i.push(n),s!==Ae||a&&a!==Ae))for(let p=0,m=n.possibleKeys.length;p<m;p++){const u=n.possibleKeys[p],w=c[n.score];n.params[u]=a!=null&&a[u]&&!w?a[u]:s[u]??(a==null?void 0:a[u]),c[n.score]=!0}}return i},Tt),ie,Mt,$s=(Mt=class{constructor(){x(this,"name","TrieRouter");b(this,ie);g(this,ie,new Qt)}add(e,t,s){const a=Lt(t);if(a){for(let i=0,o=a.length;i<o;i++)l(this,ie).insert(e,a[i],s);return}l(this,ie).insert(e,t,s)}match(e,t){return l(this,ie).search(e,t)}},ie=new WeakMap,Mt),P=class extends Gt{constructor(e={}){super(e),this.router=e.router??new Fs({routers:[new Bs,new $s]})}},qs=e=>{const s={...{origin:"*",allowMethods:["GET","HEAD","PUT","POST","DELETE","PATCH"],allowHeaders:[],exposeHeaders:[]},...e},a=(o=>typeof o=="string"?o==="*"?()=>o:r=>o===r?r:null:typeof o=="function"?o:r=>o.includes(r)?r:null)(s.origin),i=(o=>typeof o=="function"?o:Array.isArray(o)?()=>o:()=>[])(s.allowMethods);return async function(r,d){var p;function n(m,u){r.res.headers.set(m,u)}const c=await a(r.req.header("origin")||"",r);if(c&&n("Access-Control-Allow-Origin",c),s.origin!=="*"){const m=r.req.header("Vary");m?n("Vary",m):n("Vary","Origin")}if(s.credentials&&n("Access-Control-Allow-Credentials","true"),(p=s.exposeHeaders)!=null&&p.length&&n("Access-Control-Expose-Headers",s.exposeHeaders.join(",")),r.req.method==="OPTIONS"){s.maxAge!=null&&n("Access-Control-Max-Age",s.maxAge.toString());const m=await i(r.req.header("origin")||"",r);m.length&&n("Access-Control-Allow-Methods",m.join(","));let u=s.allowHeaders;if(!(u!=null&&u.length)){const w=r.req.header("Access-Control-Request-Headers");w&&(u=w.split(/\s*,\s*/))}return u!=null&&u.length&&(n("Access-Control-Allow-Headers",u.join(",")),r.res.headers.append("Vary","Access-Control-Request-Headers")),r.res.headers.delete("Content-Length"),r.res.headers.delete("Content-Type"),new Response(null,{headers:r.res.headers,status:204,statusText:"No Content"})}await d()}},Hs=/^\s*(?:text\/(?!event-stream(?:[;\s]|$))[^;\s]+|application\/(?:javascript|json|xml|xml-dtd|ecmascript|dart|postscript|rtf|tar|toml|vnd\.dart|vnd\.ms-fontobject|vnd\.ms-opentype|wasm|x-httpd-php|x-javascript|x-ns-proxy-autoconfig|x-sh|x-tar|x-virtualbox-hdd|x-virtualbox-ova|x-virtualbox-ovf|x-virtualbox-vbox|x-virtualbox-vdi|x-virtualbox-vhd|x-virtualbox-vmdk|x-www-form-urlencoded)|font\/(?:otf|ttf)|image\/(?:bmp|vnd\.adobe\.photoshop|vnd\.microsoft\.icon|vnd\.ms-dds|x-icon|x-ms-bmp)|message\/rfc822|model\/gltf-binary|x-shader\/x-fragment|x-shader\/x-vertex|[^;\s]+?\+(?:json|text|xml|yaml))(?:[;\s]|$)/i,ot=(e,t=zs)=>{const s=/\.([a-zA-Z0-9]+?)$/,a=e.match(s);if(!a)return;let i=t[a[1]];return i&&i.startsWith("text")&&(i+="; charset=utf-8"),i},Vs={aac:"audio/aac",avi:"video/x-msvideo",avif:"image/avif",av1:"video/av1",bin:"application/octet-stream",bmp:"image/bmp",css:"text/css",csv:"text/csv",eot:"application/vnd.ms-fontobject",epub:"application/epub+zip",gif:"image/gif",gz:"application/gzip",htm:"text/html",html:"text/html",ico:"image/x-icon",ics:"text/calendar",jpeg:"image/jpeg",jpg:"image/jpeg",js:"text/javascript",json:"application/json",jsonld:"application/ld+json",map:"application/json",mid:"audio/x-midi",midi:"audio/x-midi",mjs:"text/javascript",mp3:"audio/mpeg",mp4:"video/mp4",mpeg:"video/mpeg",oga:"audio/ogg",ogv:"video/ogg",ogx:"application/ogg",opus:"audio/opus",otf:"font/otf",pdf:"application/pdf",png:"image/png",rtf:"application/rtf",svg:"image/svg+xml",tif:"image/tiff",tiff:"image/tiff",ts:"video/mp2t",ttf:"font/ttf",txt:"text/plain",wasm:"application/wasm",webm:"video/webm",weba:"audio/webm",webmanifest:"application/manifest+json",webp:"image/webp",woff:"font/woff",woff2:"font/woff2",xhtml:"application/xhtml+xml",xml:"application/xml",zip:"application/zip","3gp":"video/3gpp","3g2":"video/3gpp2",gltf:"model/gltf+json",glb:"model/gltf-binary"},zs=Vs,Gs=(...e)=>{let t=e.filter(i=>i!=="").join("/");t=t.replace(new RegExp("(?<=\\/)\\/+","g"),"");const s=t.split("/"),a=[];for(const i of s)i===".."&&a.length>0&&a.at(-1)!==".."?a.pop():i!=="."&&a.push(i);return a.join("/")||"."},Yt={br:".br",zstd:".zst",gzip:".gz"},Us=Object.keys(Yt),_s="index.html",Js=e=>{const t=e.root??"./",s=e.path,a=e.join??Gs;return async(i,o)=>{var p,m,u,w;if(i.finalized)return o();let r;if(e.path)r=e.path;else try{if(r=decodeURIComponent(i.req.path),/(?:^|[\/\\])\.\.(?:$|[\/\\])/.test(r))throw new Error}catch{return await((p=e.onNotFound)==null?void 0:p.call(e,i.req.path,i)),o()}let d=a(t,!s&&e.rewriteRequestPath?e.rewriteRequestPath(r):r);e.isDir&&await e.isDir(d)&&(d=a(d,_s));const n=e.getContent;let c=await n(d,i);if(c instanceof Response)return i.newResponse(c.body,c);if(c){const E=e.mimes&&ot(d,e.mimes)||ot(d);if(i.header("Content-Type",E||"application/octet-stream"),e.precompressed&&(!E||Hs.test(E))){const h=new Set((m=i.req.header("Accept-Encoding"))==null?void 0:m.split(",").map(y=>y.trim()));for(const y of Us){if(!h.has(y))continue;const j=await n(d+Yt[y],i);if(j){c=j,i.header("Content-Encoding",y),i.header("Vary","Accept-Encoding",{append:!0});break}}}return await((u=e.onFound)==null?void 0:u.call(e,d,i)),i.body(c)}await((w=e.onNotFound)==null?void 0:w.call(e,d,i)),await o()}},Ks=async(e,t)=>{let s;t&&t.manifest?typeof t.manifest=="string"?s=JSON.parse(t.manifest):s=t.manifest:typeof __STATIC_CONTENT_MANIFEST=="string"?s=JSON.parse(__STATIC_CONTENT_MANIFEST):s=__STATIC_CONTENT_MANIFEST;let a;t&&t.namespace?a=t.namespace:a=__STATIC_CONTENT;const i=s[e]||e;if(!i)return null;const o=await a.get(i,{type:"stream"});return o||null},Ws=e=>async function(s,a){return Js({...e,getContent:async o=>Ks(o,{manifest:e.manifest,namespace:e.namespace?e.namespace:s.env?s.env.__STATIC_CONTENT:void 0})})(s,a)},Zt=e=>Ws(e),W=(e,...t)=>{const s=[""];for(let a=0,i=e.length-1;a<i;a++){s[0]+=e[a];const o=Array.isArray(t[a])?t[a].flat(1/0):[t[a]];for(let r=0,d=o.length;r<d;r++){const n=o[r];if(typeof n=="string")Qe(n,s);else if(typeof n=="number")s[0]+=n;else{if(typeof n=="boolean"||n===null||n===void 0)continue;if(typeof n=="object"&&n.isEscaped)if(n.callbacks)s.unshift("",n);else{const c=n.toString();c instanceof Promise?s.unshift("",c):s[0]+=c}else n instanceof Promise?s.unshift("",n):Qe(n.toString(),s)}}}return s[0]+=e.at(-1),s.length===1?"callbacks"in s?ge(Ps(ge(s[0],s.callbacks))):ge(s[0]):As(s,s.callbacks)};const Re=new P;Re.get("/profile/:id",async e=>{const t=e.req.param("id");return e.json({id:t,name:"João Silva",diagnosis:"Em tratamento",nextAppointment:"2024-02-15",treatmentStage:"Quimioterapia"})});Re.post("/symptoms",async e=>(await e.req.json(),e.json({success:!0,message:"Sintomas registrados com sucesso",aiRecommendation:"Monitoramento contínuo recomendado"})));Re.get("/journey/:id",async e=>{const t=e.req.param("id");return e.json({patientId:t,stages:[{date:"2024-01-01",event:"Diagnóstico inicial",status:"completed"},{date:"2024-01-15",event:"Início do tratamento",status:"completed"},{date:"2024-02-01",event:"Primeira sessão de quimioterapia",status:"in-progress"},{date:"2024-03-01",event:"Avaliação de resposta",status:"pending"}]})});Re.post("/triage",async e=>{const t=await e.req.json(),{symptoms:s,age:a,gender:i,history:o}=t,r=s.includes("dor intensa")?"high":"medium";return e.json({urgencyLevel:r,recommendation:r==="high"?"Procure atendimento médico imediato":"Agende uma consulta com seu médico",suggestedSpecialty:"Oncologia",estimatedWaitTime:r==="high"?"0-2 horas":"1-3 dias"})});const De=new P;De.get("/patients",async e=>e.json({patients:[{id:"1",name:"João Silva",age:55,diagnosis:"Câncer de Pulmão",stage:"IIIa",lastVisit:"2024-01-28",nextAppointment:"2024-02-15",riskScore:.7,alertLevel:"medium"},{id:"2",name:"Maria Santos",age:42,diagnosis:"Câncer de Mama",stage:"IIb",lastVisit:"2024-01-25",nextAppointment:"2024-02-10",riskScore:.4,alertLevel:"low"}]}));De.post("/ai-assistant",async e=>{const t=await e.req.json(),{query:s,patientContext:a,type:i}=t;let o="";return i==="treatment-recommendation"?o=`Baseado no perfil do paciente e diretrizes atuais:
+var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in e?rs(e,t,{enumerable:!0,configurable:!0,writable:!0,value:s}):e[t]=s;var g=(e,t,s)=>ls(e,typeof t!="symbol"?t+"":t,s),Je=(e,t,s)=>t.has(e)||et("Cannot "+s);var n=(e,t,s)=>(Je(e,t,"read from private field"),s?s.call(e):t.get(e)),u=(e,t,s)=>t.has(e)?et("Cannot add the same private member more than once"):t instanceof WeakSet?t.add(e):t.set(e,s),m=(e,t,s,a)=>(Je(e,t,"write to private field"),a?a.call(e,s):t.set(e,s),s),f=(e,t,s)=>(Je(e,t,"access private method"),s);var tt=(e,t,s,a)=>({set _(i){m(e,t,i,s)},get _(){return n(e,t,a)}});var st=(e,t,s)=>(a,i)=>{let o=-1;return r(0);async function r(d){if(d<=o)throw new Error("next() called multiple times");o=d;let l,c=!1,p;if(e[d]?(p=e[d][0][0],a.req.routeIndex=d):p=d===e.length&&i||void 0,p)try{l=await p(a,()=>r(d+1))}catch(x){if(x instanceof Error&&t)a.error=x,l=await t(x,a),c=!0;else throw x}else a.finalized===!1&&s&&(l=await s(a));return l&&(a.finalized===!1||c)&&(a.res=l),a}},ns=Symbol(),ds=async(e,t=Object.create(null))=>{const{all:s=!1,dot:a=!1}=t,o=(e instanceof Bt?e.raw.headers:e.headers).get("Content-Type");return o!=null&&o.startsWith("multipart/form-data")||o!=null&&o.startsWith("application/x-www-form-urlencoded")?cs(e,{all:s,dot:a}):{}};async function cs(e,t){const s=await e.formData();return s?ps(s,t):{}}function ps(e,t){const s=Object.create(null);return e.forEach((a,i)=>{t.all||i.endsWith("[]")?xs(s,i,a):s[i]=a}),t.dot&&Object.entries(s).forEach(([a,i])=>{a.includes(".")&&(ms(s,a,i),delete s[a])}),s}var xs=(e,t,s)=>{e[t]!==void 0?Array.isArray(e[t])?e[t].push(s):e[t]=[e[t],s]:t.endsWith("[]")?e[t]=[s]:e[t]=s},ms=(e,t,s)=>{let a=e;const i=t.split(".");i.forEach((o,r)=>{r===i.length-1?a[o]=s:((!a[o]||typeof a[o]!="object"||Array.isArray(a[o])||a[o]instanceof File)&&(a[o]=Object.create(null)),a=a[o])})},Tt=e=>{const t=e.split("/");return t[0]===""&&t.shift(),t},gs=e=>{const{groups:t,path:s}=bs(e),a=Tt(s);return us(a,t)},bs=e=>{const t=[];return e=e.replace(/\{[^}]+\}/g,(s,a)=>{const i=`@${a}`;return t.push([i,s]),i}),{groups:t,path:e}},us=(e,t)=>{for(let s=t.length-1;s>=0;s--){const[a]=t[s];for(let i=e.length-1;i>=0;i--)if(e[i].includes(a)){e[i]=e[i].replace(a,t[s][1]);break}}return e},Ne={},vs=(e,t)=>{if(e==="*")return"*";const s=e.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);if(s){const a=`${e}#${t}`;return Ne[a]||(s[2]?Ne[a]=t&&t[0]!==":"&&t[0]!=="*"?[a,s[1],new RegExp(`^${s[2]}(?=/${t})`)]:[e,s[1],new RegExp(`^${s[2]}$`)]:Ne[a]=[e,s[1],!0]),Ne[a]}return null},Ze=(e,t)=>{try{return t(e)}catch{return e.replace(/(?:%[0-9A-Fa-f]{2})+/g,s=>{try{return t(s)}catch{return s}})}},fs=e=>Ze(e,decodeURI),Dt=e=>{const t=e.url,s=t.indexOf("/",t.indexOf(":")+4);let a=s;for(;a<t.length;a++){const i=t.charCodeAt(a);if(i===37){const o=t.indexOf("?",a),r=t.slice(s,o===-1?void 0:o);return fs(r.includes("%25")?r.replace(/%25/g,"%2525"):r)}else if(i===63)break}return t.slice(s,a)},hs=e=>{const t=Dt(e);return t.length>1&&t.at(-1)==="/"?t.slice(0,-1):t},ce=(e,t,...s)=>(s.length&&(t=ce(t,...s)),`${(e==null?void 0:e[0])==="/"?"":"/"}${e}${t==="/"?"":`${(e==null?void 0:e.at(-1))==="/"?"":"/"}${(t==null?void 0:t[0])==="/"?t.slice(1):t}`}`),Lt=e=>{if(e.charCodeAt(e.length-1)!==63||!e.includes(":"))return null;const t=e.split("/"),s=[];let a="";return t.forEach(i=>{if(i!==""&&!/\:/.test(i))a+="/"+i;else if(/\:/.test(i))if(/\?/.test(i)){s.length===0&&a===""?s.push("/"):s.push(a);const o=i.replace("?","");a+="/"+o,s.push(a)}else a+="/"+i}),s.filter((i,o,r)=>r.indexOf(i)===o)},Ke=e=>/[%+]/.test(e)?(e.indexOf("+")!==-1&&(e=e.replace(/\+/g," ")),e.indexOf("%")!==-1?Ze(e,$t):e):e,Ot=(e,t,s)=>{let a;if(!s&&t&&!/[%+]/.test(t)){let r=e.indexOf(`?${t}`,8);for(r===-1&&(r=e.indexOf(`&${t}`,8));r!==-1;){const d=e.charCodeAt(r+t.length+1);if(d===61){const l=r+t.length+2,c=e.indexOf("&",l);return Ke(e.slice(l,c===-1?void 0:c))}else if(d==38||isNaN(d))return"";r=e.indexOf(`&${t}`,r+1)}if(a=/[%+]/.test(e),!a)return}const i={};a??(a=/[%+]/.test(e));let o=e.indexOf("?",8);for(;o!==-1;){const r=e.indexOf("&",o+1);let d=e.indexOf("=",o);d>r&&r!==-1&&(d=-1);let l=e.slice(o+1,d===-1?r===-1?void 0:r:d);if(a&&(l=Ke(l)),o=r,l==="")continue;let c;d===-1?c="":(c=e.slice(d+1,r===-1?void 0:r),a&&(c=Ke(c))),s?(i[l]&&Array.isArray(i[l])||(i[l]=[]),i[l].push(c)):i[l]??(i[l]=c)}return t?i[t]:i},ys=Ot,ws=(e,t)=>Ot(e,t,!0),$t=decodeURIComponent,at=e=>Ze(e,$t),ge,S,z,Nt,Ft,Qe,V,At,Bt=(At=class{constructor(e,t="/",s=[[]]){u(this,z);g(this,"raw");u(this,ge);u(this,S);g(this,"routeIndex",0);g(this,"path");g(this,"bodyCache",{});u(this,V,e=>{const{bodyCache:t,raw:s}=this,a=t[e];if(a)return a;const i=Object.keys(t)[0];return i?t[i].then(o=>(i==="json"&&(o=JSON.stringify(o)),new Response(o)[e]())):t[e]=s[e]()});this.raw=e,this.path=t,m(this,S,s),m(this,ge,{})}param(e){return e?f(this,z,Nt).call(this,e):f(this,z,Ft).call(this)}query(e){return ys(this.url,e)}queries(e){return ws(this.url,e)}header(e){if(e)return this.raw.headers.get(e)??void 0;const t={};return this.raw.headers.forEach((s,a)=>{t[a]=s}),t}async parseBody(e){var t;return(t=this.bodyCache).parsedBody??(t.parsedBody=await ds(this,e))}json(){return n(this,V).call(this,"text").then(e=>JSON.parse(e))}text(){return n(this,V).call(this,"text")}arrayBuffer(){return n(this,V).call(this,"arrayBuffer")}blob(){return n(this,V).call(this,"blob")}formData(){return n(this,V).call(this,"formData")}addValidatedData(e,t){n(this,ge)[e]=t}valid(e){return n(this,ge)[e]}get url(){return this.raw.url}get method(){return this.raw.method}get[ns](){return n(this,S)}get matchedRoutes(){return n(this,S)[0].map(([[,e]])=>e)}get routePath(){return n(this,S)[0].map(([[,e]])=>e)[this.routeIndex].path}},ge=new WeakMap,S=new WeakMap,z=new WeakSet,Nt=function(e){const t=n(this,S)[0][this.routeIndex][1][e],s=f(this,z,Qe).call(this,t);return s?/\%/.test(s)?at(s):s:void 0},Ft=function(){const e={},t=Object.keys(n(this,S)[0][this.routeIndex][1]);for(const s of t){const a=f(this,z,Qe).call(this,n(this,S)[0][this.routeIndex][1][s]);a&&typeof a=="string"&&(e[s]=/\%/.test(a)?at(a):a)}return e},Qe=function(e){return n(this,S)[1]?n(this,S)[1][e]:e},V=new WeakMap,At),zt={Stringify:1},me=(e,t)=>{const s=new String(e);return s.isEscaped=!0,s.callbacks=t,s},Cs=/[&<>'"]/,As=async(e,t)=>{let s="";t||(t=[]);const a=await Promise.all(e);for(let i=a.length-1;s+=a[i],i--,!(i<0);i--){let o=a[i];typeof o=="object"&&t.push(...o.callbacks||[]);const r=o.isEscaped;if(o=await(typeof o=="object"?o.toString():o),typeof o=="object"&&t.push(...o.callbacks||[]),o.isEscaped??r)s+=o;else{const d=[s];We(o,d),s=d[0]}}return me(s,t)},We=(e,t)=>{const s=e.search(Cs);if(s===-1){t[0]+=e;return}let a,i,o=0;for(i=s;i<e.length;i++){switch(e.charCodeAt(i)){case 34:a="&quot;";break;case 39:a="&#39;";break;case 38:a="&amp;";break;case 60:a="&lt;";break;case 62:a="&gt;";break;default:continue}t[0]+=e.substring(o,i)+a,o=i+1}t[0]+=e.substring(o,i)},Ps=e=>{const t=e.callbacks;if(!(t!=null&&t.length))return e;const s=[e],a={};return t.forEach(i=>i({phase:zt.Stringify,buffer:s,context:a})),s[0]},qt=async(e,t,s,a,i)=>{typeof e=="object"&&!(e instanceof String)&&(e instanceof Promise||(e=e.toString()),e instanceof Promise&&(e=await e));const o=e.callbacks;return o!=null&&o.length?(i?i[0]+=e:i=[e],Promise.all(o.map(d=>d({phase:t,buffer:i,context:a}))).then(d=>Promise.all(d.filter(Boolean).map(l=>qt(l,t,!1,a,i))).then(()=>i[0]))):Promise.resolve(e)},ks="text/plain; charset=UTF-8",_e=(e,t)=>({"Content-Type":e,...t}),je,Ie,$,be,B,E,Ee,ue,ve,ee,Re,Se,G,pe,Pt,js=(Pt=class{constructor(e,t){u(this,G);u(this,je);u(this,Ie);g(this,"env",{});u(this,$);g(this,"finalized",!1);g(this,"error");u(this,be);u(this,B);u(this,E);u(this,Ee);u(this,ue);u(this,ve);u(this,ee);u(this,Re);u(this,Se);g(this,"render",(...e)=>(n(this,ue)??m(this,ue,t=>this.html(t)),n(this,ue).call(this,...e)));g(this,"setLayout",e=>m(this,Ee,e));g(this,"getLayout",()=>n(this,Ee));g(this,"setRenderer",e=>{m(this,ue,e)});g(this,"header",(e,t,s)=>{this.finalized&&m(this,E,new Response(n(this,E).body,n(this,E)));const a=n(this,E)?n(this,E).headers:n(this,ee)??m(this,ee,new Headers);t===void 0?a.delete(e):s!=null&&s.append?a.append(e,t):a.set(e,t)});g(this,"status",e=>{m(this,be,e)});g(this,"set",(e,t)=>{n(this,$)??m(this,$,new Map),n(this,$).set(e,t)});g(this,"get",e=>n(this,$)?n(this,$).get(e):void 0);g(this,"newResponse",(...e)=>f(this,G,pe).call(this,...e));g(this,"body",(e,t,s)=>f(this,G,pe).call(this,e,t,s));g(this,"text",(e,t,s)=>!n(this,ee)&&!n(this,be)&&!t&&!s&&!this.finalized?new Response(e):f(this,G,pe).call(this,e,t,_e(ks,s)));g(this,"json",(e,t,s)=>f(this,G,pe).call(this,JSON.stringify(e),t,_e("application/json",s)));g(this,"html",(e,t,s)=>{const a=i=>f(this,G,pe).call(this,i,t,_e("text/html; charset=UTF-8",s));return typeof e=="object"?qt(e,zt.Stringify,!1,{}).then(a):a(e)});g(this,"redirect",(e,t)=>{const s=String(e);return this.header("Location",/[^\x00-\xFF]/.test(s)?encodeURI(s):s),this.newResponse(null,t??302)});g(this,"notFound",()=>(n(this,ve)??m(this,ve,()=>new Response),n(this,ve).call(this,this)));m(this,je,e),t&&(m(this,B,t.executionCtx),this.env=t.env,m(this,ve,t.notFoundHandler),m(this,Se,t.path),m(this,Re,t.matchResult))}get req(){return n(this,Ie)??m(this,Ie,new Bt(n(this,je),n(this,Se),n(this,Re))),n(this,Ie)}get event(){if(n(this,B)&&"respondWith"in n(this,B))return n(this,B);throw Error("This context has no FetchEvent")}get executionCtx(){if(n(this,B))return n(this,B);throw Error("This context has no ExecutionContext")}get res(){return n(this,E)||m(this,E,new Response(null,{headers:n(this,ee)??m(this,ee,new Headers)}))}set res(e){if(n(this,E)&&e){e=new Response(e.body,e);for(const[t,s]of n(this,E).headers.entries())if(t!=="content-type")if(t==="set-cookie"){const a=n(this,E).headers.getSetCookie();e.headers.delete("set-cookie");for(const i of a)e.headers.append("set-cookie",i)}else e.headers.set(t,s)}m(this,E,e),this.finalized=!0}get var(){return n(this,$)?Object.fromEntries(n(this,$)):{}}},je=new WeakMap,Ie=new WeakMap,$=new WeakMap,be=new WeakMap,B=new WeakMap,E=new WeakMap,Ee=new WeakMap,ue=new WeakMap,ve=new WeakMap,ee=new WeakMap,Re=new WeakMap,Se=new WeakMap,G=new WeakSet,pe=function(e,t,s){const a=n(this,E)?new Headers(n(this,E).headers):n(this,ee)??new Headers;if(typeof t=="object"&&"headers"in t){const o=t.headers instanceof Headers?t.headers:new Headers(t.headers);for(const[r,d]of o)r.toLowerCase()==="set-cookie"?a.append(r,d):a.set(r,d)}if(s)for(const[o,r]of Object.entries(s))if(typeof r=="string")a.set(o,r);else{a.delete(o);for(const d of r)a.append(o,d)}const i=typeof t=="number"?t:(t==null?void 0:t.status)??n(this,be);return new Response(e,{status:i,headers:a})},Pt),C="ALL",Is="all",Es=["get","post","put","delete","options","patch"],Ht="Can not add a route since the matcher is already built.",Vt=class extends Error{},Rs="__COMPOSED_HANDLER",Ss=e=>e.text("404 Not Found",404),it=(e,t)=>{if("getResponse"in e){const s=e.getResponse();return t.newResponse(s.body,s)}return console.error(e),t.text("Internal Server Error",500)},M,A,Ut,T,Z,Fe,ze,kt,Gt=(kt=class{constructor(t={}){u(this,A);g(this,"get");g(this,"post");g(this,"put");g(this,"delete");g(this,"options");g(this,"patch");g(this,"all");g(this,"on");g(this,"use");g(this,"router");g(this,"getPath");g(this,"_basePath","/");u(this,M,"/");g(this,"routes",[]);u(this,T,Ss);g(this,"errorHandler",it);g(this,"onError",t=>(this.errorHandler=t,this));g(this,"notFound",t=>(m(this,T,t),this));g(this,"fetch",(t,...s)=>f(this,A,ze).call(this,t,s[1],s[0],t.method));g(this,"request",(t,s,a,i)=>t instanceof Request?this.fetch(s?new Request(t,s):t,a,i):(t=t.toString(),this.fetch(new Request(/^https?:\/\//.test(t)?t:`http://localhost${ce("/",t)}`,s),a,i)));g(this,"fire",()=>{addEventListener("fetch",t=>{t.respondWith(f(this,A,ze).call(this,t.request,t,void 0,t.request.method))})});[...Es,Is].forEach(o=>{this[o]=(r,...d)=>(typeof r=="string"?m(this,M,r):f(this,A,Z).call(this,o,n(this,M),r),d.forEach(l=>{f(this,A,Z).call(this,o,n(this,M),l)}),this)}),this.on=(o,r,...d)=>{for(const l of[r].flat()){m(this,M,l);for(const c of[o].flat())d.map(p=>{f(this,A,Z).call(this,c.toUpperCase(),n(this,M),p)})}return this},this.use=(o,...r)=>(typeof o=="string"?m(this,M,o):(m(this,M,"*"),r.unshift(o)),r.forEach(d=>{f(this,A,Z).call(this,C,n(this,M),d)}),this);const{strict:a,...i}=t;Object.assign(this,i),this.getPath=a??!0?t.getPath??Dt:hs}route(t,s){const a=this.basePath(t);return s.routes.map(i=>{var r;let o;s.errorHandler===it?o=i.handler:(o=async(d,l)=>(await st([],s.errorHandler)(d,()=>i.handler(d,l))).res,o[Rs]=i.handler),f(r=a,A,Z).call(r,i.method,i.path,o)}),this}basePath(t){const s=f(this,A,Ut).call(this);return s._basePath=ce(this._basePath,t),s}mount(t,s,a){let i,o;a&&(typeof a=="function"?o=a:(o=a.optionHandler,a.replaceRequest===!1?i=l=>l:i=a.replaceRequest));const r=o?l=>{const c=o(l);return Array.isArray(c)?c:[c]}:l=>{let c;try{c=l.executionCtx}catch{}return[l.env,c]};i||(i=(()=>{const l=ce(this._basePath,t),c=l==="/"?0:l.length;return p=>{const x=new URL(p.url);return x.pathname=x.pathname.slice(c)||"/",new Request(x,p)}})());const d=async(l,c)=>{const p=await s(i(l.req.raw),...r(l));if(p)return p;await c()};return f(this,A,Z).call(this,C,ce(t,"*"),d),this}},M=new WeakMap,A=new WeakSet,Ut=function(){const t=new Gt({router:this.router,getPath:this.getPath});return t.errorHandler=this.errorHandler,m(t,T,n(this,T)),t.routes=this.routes,t},T=new WeakMap,Z=function(t,s,a){t=t.toUpperCase(),s=ce(this._basePath,s);const i={basePath:this._basePath,path:s,method:t,handler:a};this.router.add(t,s,[a,i]),this.routes.push(i)},Fe=function(t,s){if(t instanceof Error)return this.errorHandler(t,s);throw t},ze=function(t,s,a,i){if(i==="HEAD")return(async()=>new Response(null,await f(this,A,ze).call(this,t,s,a,"GET")))();const o=this.getPath(t,{env:a}),r=this.router.match(i,o),d=new js(t,{path:o,matchResult:r,env:a,executionCtx:s,notFoundHandler:n(this,T)});if(r[0].length===1){let c;try{c=r[0][0][0][0](d,async()=>{d.res=await n(this,T).call(this,d)})}catch(p){return f(this,A,Fe).call(this,p,d)}return c instanceof Promise?c.then(p=>p||(d.finalized?d.res:n(this,T).call(this,d))).catch(p=>f(this,A,Fe).call(this,p,d)):c??n(this,T).call(this,d)}const l=st(r[0],this.errorHandler,n(this,T));return(async()=>{try{const c=await l(d);if(!c.finalized)throw new Error("Context is not finalized. Did you forget to return a Response object or `await next()`?");return c.res}catch(c){return f(this,A,Fe).call(this,c,d)}})()},kt),He="[^/]+",Pe=".*",ke="(?:|/.*)",xe=Symbol(),Ms=new Set(".\\+*[^]$()");function Ts(e,t){return e.length===1?t.length===1?e<t?-1:1:-1:t.length===1||e===Pe||e===ke?1:t===Pe||t===ke?-1:e===He?1:t===He?-1:e.length===t.length?e<t?-1:1:t.length-e.length}var te,se,D,jt,Ye=(jt=class{constructor(){u(this,te);u(this,se);u(this,D,Object.create(null))}insert(t,s,a,i,o){if(t.length===0){if(n(this,te)!==void 0)throw xe;if(o)return;m(this,te,s);return}const[r,...d]=t,l=r==="*"?d.length===0?["","",Pe]:["","",He]:r==="/*"?["","",ke]:r.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);let c;if(l){const p=l[1];let x=l[2]||He;if(p&&l[2]&&(x===".*"||(x=x.replace(/^\((?!\?:)(?=[^)]+\)$)/,"(?:"),/\((?!\?:)/.test(x))))throw xe;if(c=n(this,D)[x],!c){if(Object.keys(n(this,D)).some(b=>b!==Pe&&b!==ke))throw xe;if(o)return;c=n(this,D)[x]=new Ye,p!==""&&m(c,se,i.varIndex++)}!o&&p!==""&&a.push([p,n(c,se)])}else if(c=n(this,D)[r],!c){if(Object.keys(n(this,D)).some(p=>p.length>1&&p!==Pe&&p!==ke))throw xe;if(o)return;c=n(this,D)[r]=new Ye}c.insert(d,s,a,i,o)}buildRegExpStr(){const s=Object.keys(n(this,D)).sort(Ts).map(a=>{const i=n(this,D)[a];return(typeof n(i,se)=="number"?`(${a})@${n(i,se)}`:Ms.has(a)?`\\${a}`:a)+i.buildRegExpStr()});return typeof n(this,te)=="number"&&s.unshift(`#${n(this,te)}`),s.length===0?"":s.length===1?s[0]:"(?:"+s.join("|")+")"}},te=new WeakMap,se=new WeakMap,D=new WeakMap,jt),Ve,Me,It,Ds=(It=class{constructor(){u(this,Ve,{varIndex:0});u(this,Me,new Ye)}insert(e,t,s){const a=[],i=[];for(let r=0;;){let d=!1;if(e=e.replace(/\{[^}]+\}/g,l=>{const c=`@\\${r}`;return i[r]=[c,l],r++,d=!0,c}),!d)break}const o=e.match(/(?::[^\/]+)|(?:\/\*$)|./g)||[];for(let r=i.length-1;r>=0;r--){const[d]=i[r];for(let l=o.length-1;l>=0;l--)if(o[l].indexOf(d)!==-1){o[l]=o[l].replace(d,i[r][1]);break}}return n(this,Me).insert(o,t,a,n(this,Ve),s),a}buildRegExp(){let e=n(this,Me).buildRegExpStr();if(e==="")return[/^$/,[],[]];let t=0;const s=[],a=[];return e=e.replace(/#(\d+)|@(\d+)|\.\*\$/g,(i,o,r)=>o!==void 0?(s[++t]=Number(o),"$()"):(r!==void 0&&(a[Number(r)]=++t),"")),[new RegExp(`^${e}`),s,a]}},Ve=new WeakMap,Me=new WeakMap,It),Jt=[],Ls=[/^$/,[],Object.create(null)],qe=Object.create(null);function Kt(e){return qe[e]??(qe[e]=new RegExp(e==="*"?"":`^${e.replace(/\/\*$|([.\\+*[^\]$()])/g,(t,s)=>s?`\\${s}`:"(?:|/.*)")}$`))}function Os(){qe=Object.create(null)}function $s(e){var c;const t=new Ds,s=[];if(e.length===0)return Ls;const a=e.map(p=>[!/\*|\/:/.test(p[0]),...p]).sort(([p,x],[b,w])=>p?1:b?-1:x.length-w.length),i=Object.create(null);for(let p=0,x=-1,b=a.length;p<b;p++){const[w,R,h]=a[p];w?i[R]=[h.map(([I])=>[I,Object.create(null)]),Jt]:x++;let y;try{y=t.insert(R,x,w)}catch(I){throw I===xe?new Vt(R):I}w||(s[x]=h.map(([I,ne])=>{const we=Object.create(null);for(ne-=1;ne>=0;ne--){const[L,Ge]=y[ne];we[L]=Ge}return[I,we]}))}const[o,r,d]=t.buildRegExp();for(let p=0,x=s.length;p<x;p++)for(let b=0,w=s[p].length;b<w;b++){const R=(c=s[p][b])==null?void 0:c[1];if(!R)continue;const h=Object.keys(R);for(let y=0,I=h.length;y<I;y++)R[h[y]]=d[R[h[y]]]}const l=[];for(const p in r)l[p]=s[r[p]];return[o,l,i]}function de(e,t){if(e){for(const s of Object.keys(e).sort((a,i)=>i.length-a.length))if(Kt(s).test(t))return[...e[s]]}}var U,J,he,_t,Qt,Et,Bs=(Et=class{constructor(){u(this,he);g(this,"name","RegExpRouter");u(this,U);u(this,J);m(this,U,{[C]:Object.create(null)}),m(this,J,{[C]:Object.create(null)})}add(e,t,s){var d;const a=n(this,U),i=n(this,J);if(!a||!i)throw new Error(Ht);a[e]||[a,i].forEach(l=>{l[e]=Object.create(null),Object.keys(l[C]).forEach(c=>{l[e][c]=[...l[C][c]]})}),t==="/*"&&(t="*");const o=(t.match(/\/:/g)||[]).length;if(/\*$/.test(t)){const l=Kt(t);e===C?Object.keys(a).forEach(c=>{var p;(p=a[c])[t]||(p[t]=de(a[c],t)||de(a[C],t)||[])}):(d=a[e])[t]||(d[t]=de(a[e],t)||de(a[C],t)||[]),Object.keys(a).forEach(c=>{(e===C||e===c)&&Object.keys(a[c]).forEach(p=>{l.test(p)&&a[c][p].push([s,o])})}),Object.keys(i).forEach(c=>{(e===C||e===c)&&Object.keys(i[c]).forEach(p=>l.test(p)&&i[c][p].push([s,o]))});return}const r=Lt(t)||[t];for(let l=0,c=r.length;l<c;l++){const p=r[l];Object.keys(i).forEach(x=>{var b;(e===C||e===x)&&((b=i[x])[p]||(b[p]=[...de(a[x],p)||de(a[C],p)||[]]),i[x][p].push([s,o-c+l+1]))})}}match(e,t){Os();const s=f(this,he,_t).call(this);return this.match=(a,i)=>{const o=s[a]||s[C],r=o[2][i];if(r)return r;const d=i.match(o[0]);if(!d)return[[],Jt];const l=d.indexOf("",1);return[o[1][l],d]},this.match(e,t)}},U=new WeakMap,J=new WeakMap,he=new WeakSet,_t=function(){const e=Object.create(null);return Object.keys(n(this,J)).concat(Object.keys(n(this,U))).forEach(t=>{e[t]||(e[t]=f(this,he,Qt).call(this,t))}),m(this,U,m(this,J,void 0)),e},Qt=function(e){const t=[];let s=e===C;return[n(this,U),n(this,J)].forEach(a=>{const i=a[e]?Object.keys(a[e]).map(o=>[o,a[e][o]]):[];i.length!==0?(s||(s=!0),t.push(...i)):e!==C&&t.push(...Object.keys(a[C]).map(o=>[o,a[C][o]]))}),s?$s(t):null},Et),K,N,Rt,Ns=(Rt=class{constructor(e){g(this,"name","SmartRouter");u(this,K,[]);u(this,N,[]);m(this,K,e.routers)}add(e,t,s){if(!n(this,N))throw new Error(Ht);n(this,N).push([e,t,s])}match(e,t){if(!n(this,N))throw new Error("Fatal error");const s=n(this,K),a=n(this,N),i=s.length;let o=0,r;for(;o<i;o++){const d=s[o];try{for(let l=0,c=a.length;l<c;l++)d.add(...a[l]);r=d.match(e,t)}catch(l){if(l instanceof Vt)continue;throw l}this.match=d.match.bind(d),m(this,K,[d]),m(this,N,void 0);break}if(o===i)throw new Error("Fatal error");return this.name=`SmartRouter + ${this.activeRouter.name}`,r}get activeRouter(){if(n(this,N)||n(this,K).length!==1)throw new Error("No active router has been determined yet.");return n(this,K)[0]}},K=new WeakMap,N=new WeakMap,Rt),Ae=Object.create(null),_,j,ae,fe,k,F,X,St,Wt=(St=class{constructor(e,t,s){u(this,F);u(this,_);u(this,j);u(this,ae);u(this,fe,0);u(this,k,Ae);if(m(this,j,s||Object.create(null)),m(this,_,[]),e&&t){const a=Object.create(null);a[e]={handler:t,possibleKeys:[],score:0},m(this,_,[a])}m(this,ae,[])}insert(e,t,s){m(this,fe,++tt(this,fe)._);let a=this;const i=gs(t),o=[];for(let r=0,d=i.length;r<d;r++){const l=i[r],c=i[r+1],p=vs(l,c),x=Array.isArray(p)?p[0]:l;if(x in n(a,j)){a=n(a,j)[x],p&&o.push(p[1]);continue}n(a,j)[x]=new Wt,p&&(n(a,ae).push(p),o.push(p[1])),a=n(a,j)[x]}return n(a,_).push({[e]:{handler:s,possibleKeys:o.filter((r,d,l)=>l.indexOf(r)===d),score:n(this,fe)}}),a}search(e,t){var d;const s=[];m(this,k,Ae);let i=[this];const o=Tt(t),r=[];for(let l=0,c=o.length;l<c;l++){const p=o[l],x=l===c-1,b=[];for(let w=0,R=i.length;w<R;w++){const h=i[w],y=n(h,j)[p];y&&(m(y,k,n(h,k)),x?(n(y,j)["*"]&&s.push(...f(this,F,X).call(this,n(y,j)["*"],e,n(h,k))),s.push(...f(this,F,X).call(this,y,e,n(h,k)))):b.push(y));for(let I=0,ne=n(h,ae).length;I<ne;I++){const we=n(h,ae)[I],L=n(h,k)===Ae?{}:{...n(h,k)};if(we==="*"){const H=n(h,j)["*"];H&&(s.push(...f(this,F,X).call(this,H,e,n(h,k))),m(H,k,L),b.push(H));continue}const[Ge,Xe,Ce]=we;if(!p&&!(Ce instanceof RegExp))continue;const O=n(h,j)[Ge],os=o.slice(l).join("/");if(Ce instanceof RegExp){const H=Ce.exec(os);if(H){if(L[Xe]=H[0],s.push(...f(this,F,X).call(this,O,e,n(h,k),L)),Object.keys(n(O,j)).length){m(O,k,L);const Ue=((d=H[0].match(/\//))==null?void 0:d.length)??0;(r[Ue]||(r[Ue]=[])).push(O)}continue}}(Ce===!0||Ce.test(p))&&(L[Xe]=p,x?(s.push(...f(this,F,X).call(this,O,e,L,n(h,k))),n(O,j)["*"]&&s.push(...f(this,F,X).call(this,n(O,j)["*"],e,L,n(h,k)))):(m(O,k,L),b.push(O)))}}i=b.concat(r.shift()??[])}return s.length>1&&s.sort((l,c)=>l.score-c.score),[s.map(({handler:l,params:c})=>[l,c])]}},_=new WeakMap,j=new WeakMap,ae=new WeakMap,fe=new WeakMap,k=new WeakMap,F=new WeakSet,X=function(e,t,s,a){const i=[];for(let o=0,r=n(e,_).length;o<r;o++){const d=n(e,_)[o],l=d[t]||d[C],c={};if(l!==void 0&&(l.params=Object.create(null),i.push(l),s!==Ae||a&&a!==Ae))for(let p=0,x=l.possibleKeys.length;p<x;p++){const b=l.possibleKeys[p],w=c[l.score];l.params[b]=a!=null&&a[b]&&!w?a[b]:s[b]??(a==null?void 0:a[b]),c[l.score]=!0}}return i},St),ie,Mt,Fs=(Mt=class{constructor(){g(this,"name","TrieRouter");u(this,ie);m(this,ie,new Wt)}add(e,t,s){const a=Lt(t);if(a){for(let i=0,o=a.length;i<o;i++)n(this,ie).insert(e,a[i],s);return}n(this,ie).insert(e,t,s)}match(e,t){return n(this,ie).search(e,t)}},ie=new WeakMap,Mt),P=class extends Gt{constructor(e={}){super(e),this.router=e.router??new Ns({routers:[new Bs,new Fs]})}},zs=e=>{const s={...{origin:"*",allowMethods:["GET","HEAD","PUT","POST","DELETE","PATCH"],allowHeaders:[],exposeHeaders:[]},...e},a=(o=>typeof o=="string"?o==="*"?()=>o:r=>o===r?r:null:typeof o=="function"?o:r=>o.includes(r)?r:null)(s.origin),i=(o=>typeof o=="function"?o:Array.isArray(o)?()=>o:()=>[])(s.allowMethods);return async function(r,d){var p;function l(x,b){r.res.headers.set(x,b)}const c=await a(r.req.header("origin")||"",r);if(c&&l("Access-Control-Allow-Origin",c),s.origin!=="*"){const x=r.req.header("Vary");x?l("Vary",x):l("Vary","Origin")}if(s.credentials&&l("Access-Control-Allow-Credentials","true"),(p=s.exposeHeaders)!=null&&p.length&&l("Access-Control-Expose-Headers",s.exposeHeaders.join(",")),r.req.method==="OPTIONS"){s.maxAge!=null&&l("Access-Control-Max-Age",s.maxAge.toString());const x=await i(r.req.header("origin")||"",r);x.length&&l("Access-Control-Allow-Methods",x.join(","));let b=s.allowHeaders;if(!(b!=null&&b.length)){const w=r.req.header("Access-Control-Request-Headers");w&&(b=w.split(/\s*,\s*/))}return b!=null&&b.length&&(l("Access-Control-Allow-Headers",b.join(",")),r.res.headers.append("Vary","Access-Control-Request-Headers")),r.res.headers.delete("Content-Length"),r.res.headers.delete("Content-Type"),new Response(null,{headers:r.res.headers,status:204,statusText:"No Content"})}await d()}},qs=/^\s*(?:text\/(?!event-stream(?:[;\s]|$))[^;\s]+|application\/(?:javascript|json|xml|xml-dtd|ecmascript|dart|postscript|rtf|tar|toml|vnd\.dart|vnd\.ms-fontobject|vnd\.ms-opentype|wasm|x-httpd-php|x-javascript|x-ns-proxy-autoconfig|x-sh|x-tar|x-virtualbox-hdd|x-virtualbox-ova|x-virtualbox-ovf|x-virtualbox-vbox|x-virtualbox-vdi|x-virtualbox-vhd|x-virtualbox-vmdk|x-www-form-urlencoded)|font\/(?:otf|ttf)|image\/(?:bmp|vnd\.adobe\.photoshop|vnd\.microsoft\.icon|vnd\.ms-dds|x-icon|x-ms-bmp)|message\/rfc822|model\/gltf-binary|x-shader\/x-fragment|x-shader\/x-vertex|[^;\s]+?\+(?:json|text|xml|yaml))(?:[;\s]|$)/i,ot=(e,t=Vs)=>{const s=/\.([a-zA-Z0-9]+?)$/,a=e.match(s);if(!a)return;let i=t[a[1]];return i&&i.startsWith("text")&&(i+="; charset=utf-8"),i},Hs={aac:"audio/aac",avi:"video/x-msvideo",avif:"image/avif",av1:"video/av1",bin:"application/octet-stream",bmp:"image/bmp",css:"text/css",csv:"text/csv",eot:"application/vnd.ms-fontobject",epub:"application/epub+zip",gif:"image/gif",gz:"application/gzip",htm:"text/html",html:"text/html",ico:"image/x-icon",ics:"text/calendar",jpeg:"image/jpeg",jpg:"image/jpeg",js:"text/javascript",json:"application/json",jsonld:"application/ld+json",map:"application/json",mid:"audio/x-midi",midi:"audio/x-midi",mjs:"text/javascript",mp3:"audio/mpeg",mp4:"video/mp4",mpeg:"video/mpeg",oga:"audio/ogg",ogv:"video/ogg",ogx:"application/ogg",opus:"audio/opus",otf:"font/otf",pdf:"application/pdf",png:"image/png",rtf:"application/rtf",svg:"image/svg+xml",tif:"image/tiff",tiff:"image/tiff",ts:"video/mp2t",ttf:"font/ttf",txt:"text/plain",wasm:"application/wasm",webm:"video/webm",weba:"audio/webm",webmanifest:"application/manifest+json",webp:"image/webp",woff:"font/woff",woff2:"font/woff2",xhtml:"application/xhtml+xml",xml:"application/xml",zip:"application/zip","3gp":"video/3gpp","3g2":"video/3gpp2",gltf:"model/gltf+json",glb:"model/gltf-binary"},Vs=Hs,Gs=(...e)=>{let t=e.filter(i=>i!=="").join("/");t=t.replace(new RegExp("(?<=\\/)\\/+","g"),"");const s=t.split("/"),a=[];for(const i of s)i===".."&&a.length>0&&a.at(-1)!==".."?a.pop():i!=="."&&a.push(i);return a.join("/")||"."},Yt={br:".br",zstd:".zst",gzip:".gz"},Us=Object.keys(Yt),Js="index.html",Ks=e=>{const t=e.root??"./",s=e.path,a=e.join??Gs;return async(i,o)=>{var p,x,b,w;if(i.finalized)return o();let r;if(e.path)r=e.path;else try{if(r=decodeURIComponent(i.req.path),/(?:^|[\/\\])\.\.(?:$|[\/\\])/.test(r))throw new Error}catch{return await((p=e.onNotFound)==null?void 0:p.call(e,i.req.path,i)),o()}let d=a(t,!s&&e.rewriteRequestPath?e.rewriteRequestPath(r):r);e.isDir&&await e.isDir(d)&&(d=a(d,Js));const l=e.getContent;let c=await l(d,i);if(c instanceof Response)return i.newResponse(c.body,c);if(c){const R=e.mimes&&ot(d,e.mimes)||ot(d);if(i.header("Content-Type",R||"application/octet-stream"),e.precompressed&&(!R||qs.test(R))){const h=new Set((x=i.req.header("Accept-Encoding"))==null?void 0:x.split(",").map(y=>y.trim()));for(const y of Us){if(!h.has(y))continue;const I=await l(d+Yt[y],i);if(I){c=I,i.header("Content-Encoding",y),i.header("Vary","Accept-Encoding",{append:!0});break}}}return await((b=e.onFound)==null?void 0:b.call(e,d,i)),i.body(c)}await((w=e.onNotFound)==null?void 0:w.call(e,d,i)),await o()}},_s=async(e,t)=>{let s;t&&t.manifest?typeof t.manifest=="string"?s=JSON.parse(t.manifest):s=t.manifest:typeof __STATIC_CONTENT_MANIFEST=="string"?s=JSON.parse(__STATIC_CONTENT_MANIFEST):s=__STATIC_CONTENT_MANIFEST;let a;t&&t.namespace?a=t.namespace:a=__STATIC_CONTENT;const i=s[e]||e;if(!i)return null;const o=await a.get(i,{type:"stream"});return o||null},Qs=e=>async function(s,a){return Ks({...e,getContent:async o=>_s(o,{manifest:e.manifest,namespace:e.namespace?e.namespace:s.env?s.env.__STATIC_CONTENT:void 0})})(s,a)},Zt=e=>Qs(e),Q=(e,...t)=>{const s=[""];for(let a=0,i=e.length-1;a<i;a++){s[0]+=e[a];const o=Array.isArray(t[a])?t[a].flat(1/0):[t[a]];for(let r=0,d=o.length;r<d;r++){const l=o[r];if(typeof l=="string")We(l,s);else if(typeof l=="number")s[0]+=l;else{if(typeof l=="boolean"||l===null||l===void 0)continue;if(typeof l=="object"&&l.isEscaped)if(l.callbacks)s.unshift("",l);else{const c=l.toString();c instanceof Promise?s.unshift("",c):s[0]+=c}else l instanceof Promise?s.unshift("",l):We(l.toString(),s)}}}return s[0]+=e.at(-1),s.length===1?"callbacks"in s?me(Ps(me(s[0],s.callbacks))):me(s[0]):As(s,s.callbacks)};const Te=new P;Te.get("/profile/:id",async e=>{const t=e.req.param("id");return e.json({id:t,name:"João Silva",diagnosis:"Em tratamento",nextAppointment:"2024-02-15",treatmentStage:"Quimioterapia"})});Te.post("/symptoms",async e=>(await e.req.json(),e.json({success:!0,message:"Sintomas registrados com sucesso",aiRecommendation:"Monitoramento contínuo recomendado"})));Te.get("/journey/:id",async e=>{const t=e.req.param("id");return e.json({patientId:t,stages:[{date:"2024-01-01",event:"Diagnóstico inicial",status:"completed"},{date:"2024-01-15",event:"Início do tratamento",status:"completed"},{date:"2024-02-01",event:"Primeira sessão de quimioterapia",status:"in-progress"},{date:"2024-03-01",event:"Avaliação de resposta",status:"pending"}]})});Te.post("/triage",async e=>{const t=await e.req.json(),{symptoms:s,age:a,gender:i,history:o}=t,r=s.includes("dor intensa")?"high":"medium";return e.json({urgencyLevel:r,recommendation:r==="high"?"Procure atendimento médico imediato":"Agende uma consulta com seu médico",suggestedSpecialty:"Oncologia",estimatedWaitTime:r==="high"?"0-2 horas":"1-3 dias"})});const De=new P;De.get("/patients",async e=>e.json({patients:[{id:"1",name:"João Silva",age:55,diagnosis:"Câncer de Pulmão",stage:"IIIa",lastVisit:"2024-01-28",nextAppointment:"2024-02-15",riskScore:.7,alertLevel:"medium"},{id:"2",name:"Maria Santos",age:42,diagnosis:"Câncer de Mama",stage:"IIb",lastVisit:"2024-01-25",nextAppointment:"2024-02-10",riskScore:.4,alertLevel:"low"}]}));De.post("/ai-assistant",async e=>{const t=await e.req.json(),{query:s,patientContext:a,type:i}=t;let o="";return i==="treatment-recommendation"?o=`Baseado no perfil do paciente e diretrizes atuais:
     1. Considerar esquema FOLFIRINOX para pacientes com bom performance status
     2. Avaliar função hepática e renal antes do início
     3. Monitorar toxicidade hematológica semanalmente
@@ -7,9 +7,9 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
     - Baixo risco de interação entre os medicamentos listados
     - Atenção especial para função renal
     - Ajuste de dose pode ser necessário para pacientes idosos`:o=`Processando consulta: ${s}
-    Análise baseada em evidências científicas e protocolos institucionais.`,e.json({response:o,confidence:.92,references:["NCCN Guidelines 2024","ASCO Clinical Practice Guidelines","UpToDate Oncology"],timestamp:new Date().toISOString()})});De.get("/patient/:id/360",async e=>{const t=e.req.param("id");return e.json({patientId:t,demographics:{name:"João Silva",age:55,gender:"M",bloodType:"O+"},clinicalHistory:{diagnosis:"Adenocarcinoma de pulmão",diagnosisDate:"2023-10-15",stage:"IIIa",mutations:["EGFR+","ALK-"],comorbidities:["Hipertensão","Diabetes tipo 2"]},currentTreatment:{protocol:"Carboplatin + Pemetrexed",cycle:3,startDate:"2024-01-01",response:"Partial response",sideEffects:["Náusea grau 2","Fadiga grau 1"]},labResults:{lastUpdate:"2024-01-28",hemoglobin:11.2,neutrophils:3.5,platelets:180,creatinine:1.1},imaging:{lastCT:"2024-01-20",findings:"Redução de 30% na massa tumoral primária"},psychosocial:{anxietyScore:6,depressionScore:4,socialSupport:"Good",financialConcerns:!0}})});De.post("/decision-support",async e=>{const t=await e.req.json(),{patientId:s,clinicalQuestion:a}=t;return e.json({recommendations:[{priority:"high",recommendation:"Considerar redução de dose devido a toxicidade",evidence:"Grade A",rationale:"Neutropenia grau 3 recorrente"},{priority:"medium",recommendation:"Adicionar G-CSF profilático",evidence:"Grade B",rationale:"Prevenção de neutropenia febril"}],alternativeOptions:["Mudança para esquema com menor toxicidade hematológica","Considerar terapia alvo se mutação presente"],riskAssessment:{treatmentFailure:.15,severeAdverseEvents:.25,qualityOfLife:.7}})});const Le=new P;Le.get("/dashboard",async e=>e.json({summary:{totalPatients:156,inTreatment:89,waitingAppointment:34,pendingExams:23,criticalAlerts:10},bottlenecks:[{type:"exam_scheduling",severity:"high",affectedPatients:15,averageDelay:"5 days",recommendation:"Aumentar slots de ressonância magnética"},{type:"authorization_pending",severity:"medium",affectedPatients:8,averageDelay:"3 days",recommendation:"Contatar convênios para agilização"}],patientFlow:[{stage:"Triagem",count:12,avgTime:"2 horas"},{stage:"Diagnóstico",count:28,avgTime:"5 dias"},{stage:"Tratamento",count:89,avgTime:"3 meses"},{stage:"Acompanhamento",count:27,avgTime:"Contínuo"}]}));Le.get("/journey-status/:patientId",async e=>{const t=e.req.param("patientId");return e.json({patientId:t,currentStage:"treatment",timeline:[{date:"2024-01-01",event:"Primeira consulta",status:"completed",responsible:"Dr. Silva"},{date:"2024-01-05",event:"Exames solicitados",status:"completed",responsible:"Navegador Ana"},{date:"2024-01-10",event:"Biópsia realizada",status:"completed",responsible:"Dr. Santos"},{date:"2024-01-15",event:"Início quimioterapia",status:"in-progress",responsible:"Equipe Oncologia"},{date:"2024-02-15",event:"Avaliação de resposta",status:"scheduled",responsible:"Dr. Silva"}],alerts:[{type:"appointment_reminder",message:"Consulta em 3 dias",priority:"medium"}],nextSteps:["Completar ciclo de quimioterapia","Agendar exame de controle","Avaliar necessidade de radioterapia"]})});Le.post("/coordinate-care",async e=>{const t=await e.req.json(),{patientId:s,action:a,details:i}=t;let o={success:!0,actionTaken:a,timestamp:new Date().toISOString()};switch(a){case"schedule_appointment":o={...o,appointmentDate:"2024-02-20",department:i.department,doctor:i.doctor};break;case"expedite_exam":o={...o,examType:i.examType,newDate:"2024-02-05",previousDate:"2024-02-15"};break;case"contact_insurance":o={...o,insuranceCompany:i.company,authorizationNumber:"AUTH-2024-0123",status:"approved"};break}return e.json(o)});Le.get("/alerts",async e=>e.json({alerts:[{id:"1",patientId:"P001",patientName:"João Silva",type:"missed_appointment",message:"Paciente faltou à consulta de 28/01",priority:"high",timestamp:"2024-01-28T14:00:00Z",suggestedAction:"Contatar paciente e reagendar"},{id:"2",patientId:"P002",patientName:"Maria Santos",type:"exam_delay",message:"Tomografia agendada há mais de 7 dias",priority:"medium",timestamp:"2024-01-27T10:00:00Z",suggestedAction:"Verificar disponibilidade de horários alternativos"},{id:"3",patientId:"P003",patientName:"Pedro Costa",type:"insurance_pending",message:"Autorização de quimioterapia pendente há 5 dias",priority:"high",timestamp:"2024-01-26T09:00:00Z",suggestedAction:"Contatar convênio urgentemente"}],summary:{total:15,high:5,medium:7,low:3}}));const Oe=new P;Oe.get("/dashboard",async e=>e.json({summary:{totalRevenue:25e5,totalCosts:18e5,profit:7e5,profitMargin:28,glosasEvitadas:15e4,glosasRate:2.5},monthlyMetrics:[{month:"Janeiro 2024",revenue:85e4,costs:6e5,glosas:15e3,glosasEvitadas:45e3},{month:"Dezembro 2023",revenue:82e4,costs:58e4,glosas:2e4,glosasEvitadas:38e3}],glosasAnalysis:{totalGlosas:35e3,mainReasons:[{reason:"Documentação incompleta",count:45,value:15e3,percentage:42.8},{reason:"Código incorreto",count:30,value:1e4,percentage:28.5},{reason:"Autorização expirada",count:20,value:7e3,percentage:20},{reason:"Procedimento não coberto",count:10,value:3e3,percentage:8.7}]},costCenters:[{department:"Oncologia",budget:8e5,spent:65e4,percentage:81.25},{department:"Radioterapia",budget:5e5,spent:42e4,percentage:84},{department:"Cirurgia",budget:3e5,spent:25e4,percentage:83.33},{department:"Diagnóstico",budget:2e5,spent:18e4,percentage:90}]}));Oe.post("/predict-glosa",async e=>{const t=await e.req.json(),{procedure:s,diagnosis:a,insurance:i,documentation:o}=t;let r=.2,d=[];return o.includes("laudo_completo")||(r+=.3,d.push({factor:"Laudo médico incompleto",impact:"high",recommendation:"Solicitar laudo detalhado com CID e justificativa clínica"})),o.includes("autorizacao_previa")||(r+=.25,d.push({factor:"Autorização prévia ausente",impact:"high",recommendation:"Obter autorização antes do procedimento"})),s.complexity==="high"&&!o.includes("segunda_opiniao")&&(r+=.15,d.push({factor:"Segunda opinião não documentada",impact:"medium",recommendation:"Incluir parecer de especialista"})),e.json({riskScore:Math.min(r,1),riskLevel:r>.7?"high":r>.4?"medium":"low",estimatedGlosaValue:r*(s.value||1e4),risks:d,preventiveActions:["Revisar toda documentação antes do envio","Confirmar cobertura com o convênio","Garantir que todos os códigos estejam corretos","Manter registro fotográfico quando aplicável"],confidence:.87})});Oe.get("/revenue-analysis",async e=>e.json({byInsurance:[{name:"SUS",revenue:8e5,percentage:32,avgTicket:2500,paymentDelay:45},{name:"Unimed",revenue:6e5,percentage:24,avgTicket:5e3,paymentDelay:30},{name:"SulAmérica",revenue:45e4,percentage:18,avgTicket:4500,paymentDelay:25},{name:"Bradesco Saúde",revenue:4e5,percentage:16,avgTicket:4e3,paymentDelay:28},{name:"Particular",revenue:25e4,percentage:10,avgTicket:8e3,paymentDelay:0}],byProcedure:[{procedure:"Quimioterapia",revenue:9e5,count:180,avgValue:5e3},{procedure:"Radioterapia",revenue:6e5,count:120,avgValue:5e3},{procedure:"Cirurgia Oncológica",revenue:5e5,count:50,avgValue:1e4},{procedure:"Consultas",revenue:3e5,count:1e3,avgValue:300},{procedure:"Exames",revenue:2e5,count:400,avgValue:500}]}));Oe.get("/optimization-suggestions",async e=>e.json({suggestions:[{area:"Medicamentos",currentCost:3e5,potentialSaving:45e3,recommendation:"Negociar compra em volume com fornecedores",priority:"high",implementation:"immediate"},{area:"Exames Laboratoriais",currentCost:15e4,potentialSaving:22500,recommendation:"Implementar protocolos para evitar exames desnecessários",priority:"medium",implementation:"1-2 months"},{area:"Gestão de Leitos",currentCost:2e5,potentialSaving:3e4,recommendation:"Otimizar tempo de permanência com navegação de pacientes",priority:"high",implementation:"2-3 months"},{area:"Energia e Utilidades",currentCost:5e4,potentialSaving:7500,recommendation:"Implementar medidas de eficiência energética",priority:"low",implementation:"3-6 months"}],totalPotentialSaving:105e3,estimatedROI:3.5,implementationCost:3e4}));const Ne=new P;Ne.get("/profile/:patientId",async e=>{const t=e.req.param("patientId");return e.json({patientId:t,wellnessScore:72,mentalHealth:{anxietyLevel:5,depressionScore:3,stressLevel:6,lastAssessment:"2024-01-25",trend:"improving"},physicalWellbeing:{painLevel:4,fatigueLevel:5,sleepQuality:6,appetiteLevel:7,mobilityScore:8},socialSupport:{familySupport:"strong",friendsNetwork:"moderate",supportGroupParticipation:!0,communityEngagement:"active"},emotionalNeeds:[{need:"Medo do futuro",severity:"moderate",addressed:!0,intervention:"Sessões de terapia cognitivo-comportamental"},{need:"Preocupação com família",severity:"high",addressed:!1,intervention:"Terapia familiar recomendada"}],interventions:[{date:"2024-01-20",type:"Consulta psicológica",professional:"Dra. Ana Costa",outcome:"Melhora no manejo da ansiedade"},{date:"2024-01-22",type:"Grupo de apoio",professional:"Equipe multidisciplinar",outcome:"Paciente relatou sentir-se acolhido"}]})});Ne.post("/mental-health-screening",async e=>{const t=await e.req.json(),{patientId:s,responses:a}=t;let i=0,o=0;a.forEach(n=>{n.category==="anxiety"?i+=n.value:n.category==="depression"&&(o+=n.value)});const r=i>15?"severe":i>10?"moderate":i>5?"mild":"minimal",d=o>20?"severe":o>15?"moderately severe":o>10?"moderate":o>5?"mild":"minimal";return e.json({patientId:s,screeningDate:new Date().toISOString(),results:{anxiety:{score:i,severity:r,requiresIntervention:i>10},depression:{score:o,severity:d,requiresIntervention:o>10}},recommendations:[i>10&&"Encaminhar para psiquiatra",o>10&&"Iniciar psicoterapia",(i>5||o>5)&&"Monitoramento semanal","Manter grupo de apoio"].filter(Boolean),alertLevel:i>15||o>20?"high":i>10||o>15?"medium":"low"})});Ne.post("/predict-crisis",async e=>{const t=await e.req.json(),{patientId:s,recentEvents:a,symptoms:i,socialFactors:o}=t;let r=.2;return a.includes("loss")&&(r+=.2),a.includes("treatment_failure")&&(r+=.25),i.includes("hopelessness")&&(r+=.3),i.includes("isolation")&&(r+=.15),o.support==="weak"&&(r+=.2),o.financialStress&&(r+=.15),o.support==="strong"&&(r-=.1),o.activeInTherapy&&(r-=.15),r=Math.max(0,Math.min(1,r)),e.json({patientId:s,riskScore:r,riskLevel:r>.7?"high":r>.4?"medium":"low",timeframe:r>.7?"24-48 hours":r>.4?"1 week":"1 month",interventions:[r>.7&&{priority:"immediate",action:"Contato imediato com psiquiatra",responsible:"Equipe de plantão"},r>.4&&{priority:"urgent",action:"Agendar consulta em 48h",responsible:"Psicólogo responsável"},{priority:"routine",action:"Intensificar monitoramento",responsible:"Equipe de enfermagem"}].filter(Boolean),monitoringPlan:{frequency:r>.7?"daily":r>.4?"twice weekly":"weekly",method:"Phone check-in and mood tracking",duration:"2 weeks with reassessment"}})});Ne.get("/support-groups/:patientId",async e=>(e.req.param("patientId"),e.json({recommendedGroups:[{id:"G001",name:"Grupo de Apoio - Câncer de Mama",type:"disease-specific",meetingFrequency:"Semanal",nextMeeting:"2024-02-05 14:00",location:"Sala 201 - Ala B",facilitator:"Psic. Maria Silva",currentMembers:12,matchScore:.95},{id:"G002",name:"Mindfulness e Meditação",type:"wellness",meetingFrequency:"2x por semana",nextMeeting:"2024-02-03 10:00",location:"Espaço Bem-Estar",facilitator:"Terapeuta João Santos",currentMembers:8,matchScore:.82},{id:"G003",name:"Família e Cuidadores",type:"family-support",meetingFrequency:"Quinzenal",nextMeeting:"2024-02-10 16:00",location:"Auditório Principal",facilitator:"Assistente Social Ana Costa",currentMembers:20,matchScore:.78}],activeParticipation:[{groupId:"G001",joinedDate:"2024-01-01",attendance:"100%",engagement:"high"}]})));const ye=new P;ye.get("/dashboard",async e=>e.json({activeStudies:12,totalPatients:456,dataPoints:125e4,insights:89,studies:[{id:"ST001",title:"Eficácia da Imunoterapia em Câncer de Pulmão Avançado",phase:"III",enrolledPatients:85,targetEnrollment:100,startDate:"2023-06-01",estimatedCompletion:"2025-06-01",status:"recruiting"},{id:"ST002",title:"Biomarcadores Preditivos de Resposta à Quimioterapia",phase:"II",enrolledPatients:45,targetEnrollment:50,startDate:"2023-09-01",estimatedCompletion:"2024-09-01",status:"active"},{id:"ST003",title:"Qualidade de Vida Pós-Tratamento Radioterápico",phase:"Observational",enrolledPatients:120,targetEnrollment:150,startDate:"2023-03-01",estimatedCompletion:"2024-12-01",status:"recruiting"}],recentInsights:[{date:"2024-01-28",type:"correlation",finding:"Correlação positiva entre níveis de IL-6 e resposta à imunoterapia",significance:"p < 0.001",impact:"high"},{date:"2024-01-25",type:"pattern",finding:"Padrão de toxicidade identificado em pacientes > 65 anos",significance:"p = 0.023",impact:"medium"}]}));ye.post("/analyze-cohort",async e=>{const t=await e.req.json(),{criteria:s,analysisType:a,variables:i}=t;return e.json({cohortSize:145,demographics:{meanAge:58.3,genderDistribution:{male:.52,female:.48},stageDistribution:{I:.15,II:.25,III:.35,IV:.25}},outcomes:{overallSurvival:{median:24.5,oneYear:.82,twoYear:.65,fiveYear:.45},progressionFreeSurvival:{median:11.2,sixMonth:.68,oneYear:.45},responseRate:{completeResponse:.12,partialResponse:.38,stableDisease:.3,progressiveDisease:.2}},correlations:[{variable1:"Age",variable2:"Treatment Response",coefficient:-.23,pValue:.042,interpretation:"Idade negativamente correlacionada com resposta"},{variable1:"Biomarker X",variable2:"Survival",coefficient:.56,pValue:.001,interpretation:"Forte correlação positiva com sobrevida"}],statisticalTests:{chiSquare:{value:15.23,df:3,pValue:.0016,significant:!0},logRankTest:{value:8.45,pValue:.0037,significant:!0}}})});ye.get("/opportunities",async e=>e.json({dataGaps:[{area:"Toxicidade tardia em radioterapia",patientCount:230,dataCompleteness:.45,priority:"high",potentialImpact:"Melhor manejo de efeitos colaterais de longo prazo"},{area:"Marcadores genéticos em câncer colorretal",patientCount:156,dataCompleteness:.62,priority:"medium",potentialImpact:"Personalização do tratamento"}],emergingPatterns:[{pattern:"Aumento de resposta em combinação terapêutica específica",confidence:.87,patientsAffected:45,recommendation:"Considerar estudo prospectivo"},{pattern:"Subgrupo com resistência primária identificado",confidence:.92,patientsAffected:28,recommendation:"Investigar mecanismos moleculares"}],eligiblePatients:{forClinicalTrials:89,forObservationalStudies:234,forRegistries:456},collaborationOpportunities:[{institution:"Instituto Nacional do Câncer",area:"Genômica do câncer",status:"in-discussion"},{institution:"Harvard Medical School",area:"Imunoterapia",status:"proposal-submitted"}]}));ye.post("/generate-hypothesis",async e=>{const t=await e.req.json(),{dataSource:s,variables:a,context:i}=t;return e.json({hypotheses:[{id:"H001",statement:"Pacientes com expressão elevada de PD-L1 e baixa carga mutacional apresentam melhor resposta à combinação de imunoterapia com quimioterapia",confidence:.78,supportingData:{nPatients:67,observedEffect:.42,pValue:.023},suggestedStudyDesign:"Randomized controlled trial com estratificação por biomarcadores",estimatedSampleSize:150,primaryEndpoint:"Progression-free survival"},{id:"H002",statement:"A administração de probióticos durante quimioterapia reduz incidência de mucosite severa",confidence:.65,supportingData:{nPatients:34,observedEffect:.31,pValue:.048},suggestedStudyDesign:"Double-blind placebo-controlled trial",estimatedSampleSize:100,primaryEndpoint:"Incidence of grade 3-4 mucositis"}],dataQuality:{completeness:.82,consistency:.91,timeliness:.88},recommendations:["Coletar dados adicionais de microbioma","Padronizar avaliação de toxicidade","Implementar coleta prospectiva de PROs"]})});ye.post("/export-data",async e=>{const t=await e.req.json(),{studyId:s,variables:a,format:i,filters:o}=t;return e.json({exportId:"EXP-2024-0128-001",status:"processing",recordsCount:234,variables:a.length,anonymizationLevel:"full",format:i||"csv",estimatedSize:"15.2 MB",expirationDate:"2024-02-28",downloadUrl:"/api/research/download/EXP-2024-0128-001",auditLog:{requestedBy:"Dr. Research",requestDate:new Date().toISOString(),purpose:"Clinical trial analysis",ethicsApproval:"CEP-2024-001"}})});const oe=new P;oe.get("/system-health",async e=>e.json({status:"healthy",uptime:"45 days 12:34:56",timestamp:new Date().toISOString(),services:{database:{status:"operational",latency:12,connections:45,maxConnections:100},aiEngine:{status:"operational",activeModels:8,requestsPerMinute:234,avgResponseTime:145},storage:{status:"operational",used:"234 GB",total:"1 TB",percentage:23.4},cache:{status:"operational",hitRate:.89,memory:"512 MB",entries:12456}},performance:{cpu:45,memory:67,disk:23,network:{in:"125 Mbps",out:"89 Mbps"}},alerts:[{level:"warning",service:"database",message:"Connection pool reaching 80% capacity",timestamp:"2024-01-28T10:30:00Z"}]}));oe.get("/metrics",async e=>e.json({users:{total:523,active:412,newThisMonth:45,byRole:{patients:234,doctors:56,nurses:78,administrators:12,researchers:8,navigators:34,support:89,financial:12}},usage:{dailyActiveUsers:389,weeklyActiveUsers:456,monthlyActiveUsers:512,avgSessionDuration:"24 minutes",pageViews:{today:12456,week:78234,month:312456}},aiUsage:{totalRequests:45678,byType:{clinicalAssistant:12345,triage:8934,glosasPrediction:5678,emotionalRisk:3456,researchAnalysis:2345},avgConfidence:.87,feedbackScore:4.2},dataQuality:{completeness:.92,accuracy:.95,timeliness:.88,consistency:.91,validity:.94},compliance:{lgpdCompliance:!0,dataRetention:"compliant",auditLogsEnabled:!0,encryptionStatus:"AES-256",lastSecurityAudit:"2024-01-15",nextAudit:"2024-02-15"}}));oe.get("/users",async e=>e.json({users:[{id:"U001",name:"Dr. João Silva",email:"joao.silva@hospital.com",role:"doctor",department:"Oncologia",status:"active",lastLogin:"2024-01-28T09:15:00Z",created:"2023-06-01T10:00:00Z"},{id:"U002",name:"Maria Santos",email:"maria.santos@hospital.com",role:"nurse",department:"Navegação",status:"active",lastLogin:"2024-01-28T08:30:00Z",created:"2023-07-15T14:00:00Z"}],total:523,page:1,pageSize:20}));oe.get("/audit-logs",async e=>e.json({logs:[{id:"LOG001",timestamp:"2024-01-28T11:30:00Z",user:"Dr. João Silva",action:"VIEW_PATIENT_RECORD",resource:"Patient ID: P123",ip:"192.168.1.100",result:"success"},{id:"LOG002",timestamp:"2024-01-28T11:25:00Z",user:"Maria Santos",action:"UPDATE_APPOINTMENT",resource:"Appointment ID: A456",ip:"192.168.1.101",result:"success"},{id:"LOG003",timestamp:"2024-01-28T11:20:00Z",user:"System",action:"AI_PREDICTION",resource:"Glosas Risk Analysis",ip:"internal",result:"success",metadata:{confidence:.89,processingTime:"145ms"}}],filters:{dateRange:"last-24-hours",actions:"all",users:"all",results:"all"},total:12456,page:1,pageSize:50}));oe.get("/configuration",async e=>e.json({general:{institutionName:"ACCamargo Cancer Center",timezone:"America/Sao_Paulo",language:"pt-BR",dateFormat:"DD/MM/YYYY",currency:"BRL"},ai:{models:{clinical:{name:"clinical-assistant-v2",version:"2.1.0",lastUpdate:"2024-01-15",accuracy:.92},triage:{name:"auto-triage-v1",version:"1.5.0",lastUpdate:"2024-01-10",accuracy:.88},financial:{name:"glosas-predictor-v3",version:"3.0.1",lastUpdate:"2024-01-20",accuracy:.87}},thresholds:{confidenceMinimum:.75,alertThreshold:.85,autoApprovalThreshold:.95}},integration:{ehr:{system:"Custom EHR",status:"connected",lastSync:"2024-01-28T11:00:00Z"},laboratory:{system:"LabSystem Pro",status:"connected",lastSync:"2024-01-28T10:45:00Z"},imaging:{system:"PACS System",status:"connected",lastSync:"2024-01-28T10:30:00Z"}},security:{passwordPolicy:{minLength:12,requireSpecialChar:!0,requireNumber:!0,requireUppercase:!0,expirationDays:90},sessionTimeout:30,mfaRequired:!0,ipWhitelist:["192.168.0.0/16"]}}));oe.get("/ai-performance",async e=>e.json({models:[{name:"Clinical Assistant",performance:{accuracy:.92,precision:.89,recall:.91,f1Score:.9,auc:.94},usage:{requestsToday:1234,avgResponseTime:145,errorRate:.02},feedback:{positive:456,negative:23,neutral:89,avgRating:4.3},lastRetrained:"2024-01-15",nextRetraining:"2024-02-15"},{name:"Glosas Predictor",performance:{accuracy:.87,precision:.85,recall:.88,f1Score:.86,auc:.91},usage:{requestsToday:567,avgResponseTime:89,errorRate:.01},financialImpact:{glosasPrevenidas:145,valorEconomizado:45e4},lastRetrained:"2024-01-10",nextRetraining:"2024-02-10"}],training:{datasetSize:125e3,lastUpdate:"2024-01-20",validationAccuracy:.89,crossValidationFolds:5},alerts:[{model:"Emotional Risk Detector",issue:"Performance degradation detected",metric:"accuracy",current:.72,threshold:.75,recommendation:"Immediate retraining required"}]}));const re=new P;re.post("/prompt-engineering",async e=>{const t=await e.req.json(),{userInput:s,context:a,persona:i,intent:o}=t,r={original:s,enhanced:`[Context: ${a}] [Role: ${i}] [Intent: ${o}] ${s}`,templates:[{name:"clinical-query",prompt:`Como médico oncologista experiente, analise o seguinte caso: ${s}. 
+    Análise baseada em evidências científicas e protocolos institucionais.`,e.json({response:o,confidence:.92,references:["NCCN Guidelines 2024","ASCO Clinical Practice Guidelines","UpToDate Oncology"],timestamp:new Date().toISOString()})});De.get("/patient/:id/360",async e=>{const t=e.req.param("id");return e.json({patientId:t,demographics:{name:"João Silva",age:55,gender:"M",bloodType:"O+"},clinicalHistory:{diagnosis:"Adenocarcinoma de pulmão",diagnosisDate:"2023-10-15",stage:"IIIa",mutations:["EGFR+","ALK-"],comorbidities:["Hipertensão","Diabetes tipo 2"]},currentTreatment:{protocol:"Carboplatin + Pemetrexed",cycle:3,startDate:"2024-01-01",response:"Partial response",sideEffects:["Náusea grau 2","Fadiga grau 1"]},labResults:{lastUpdate:"2024-01-28",hemoglobin:11.2,neutrophils:3.5,platelets:180,creatinine:1.1},imaging:{lastCT:"2024-01-20",findings:"Redução de 30% na massa tumoral primária"},psychosocial:{anxietyScore:6,depressionScore:4,socialSupport:"Good",financialConcerns:!0}})});De.post("/decision-support",async e=>{const t=await e.req.json(),{patientId:s,clinicalQuestion:a}=t;return e.json({recommendations:[{priority:"high",recommendation:"Considerar redução de dose devido a toxicidade",evidence:"Grade A",rationale:"Neutropenia grau 3 recorrente"},{priority:"medium",recommendation:"Adicionar G-CSF profilático",evidence:"Grade B",rationale:"Prevenção de neutropenia febril"}],alternativeOptions:["Mudança para esquema com menor toxicidade hematológica","Considerar terapia alvo se mutação presente"],riskAssessment:{treatmentFailure:.15,severeAdverseEvents:.25,qualityOfLife:.7}})});const Le=new P;Le.get("/dashboard",async e=>e.json({summary:{totalPatients:156,inTreatment:89,waitingAppointment:34,pendingExams:23,criticalAlerts:10},bottlenecks:[{type:"exam_scheduling",severity:"high",affectedPatients:15,averageDelay:"5 days",recommendation:"Aumentar slots de ressonância magnética"},{type:"authorization_pending",severity:"medium",affectedPatients:8,averageDelay:"3 days",recommendation:"Contatar convênios para agilização"}],patientFlow:[{stage:"Triagem",count:12,avgTime:"2 horas"},{stage:"Diagnóstico",count:28,avgTime:"5 dias"},{stage:"Tratamento",count:89,avgTime:"3 meses"},{stage:"Acompanhamento",count:27,avgTime:"Contínuo"}]}));Le.get("/journey-status/:patientId",async e=>{const t=e.req.param("patientId");return e.json({patientId:t,currentStage:"treatment",timeline:[{date:"2024-01-01",event:"Primeira consulta",status:"completed",responsible:"Dr. Silva"},{date:"2024-01-05",event:"Exames solicitados",status:"completed",responsible:"Navegador Ana"},{date:"2024-01-10",event:"Biópsia realizada",status:"completed",responsible:"Dr. Santos"},{date:"2024-01-15",event:"Início quimioterapia",status:"in-progress",responsible:"Equipe Oncologia"},{date:"2024-02-15",event:"Avaliação de resposta",status:"scheduled",responsible:"Dr. Silva"}],alerts:[{type:"appointment_reminder",message:"Consulta em 3 dias",priority:"medium"}],nextSteps:["Completar ciclo de quimioterapia","Agendar exame de controle","Avaliar necessidade de radioterapia"]})});Le.post("/coordinate-care",async e=>{const t=await e.req.json(),{patientId:s,action:a,details:i}=t;let o={success:!0,actionTaken:a,timestamp:new Date().toISOString()};switch(a){case"schedule_appointment":o={...o,appointmentDate:"2024-02-20",department:i.department,doctor:i.doctor};break;case"expedite_exam":o={...o,examType:i.examType,newDate:"2024-02-05",previousDate:"2024-02-15"};break;case"contact_insurance":o={...o,insuranceCompany:i.company,authorizationNumber:"AUTH-2024-0123",status:"approved"};break}return e.json(o)});Le.get("/alerts",async e=>e.json({alerts:[{id:"1",patientId:"P001",patientName:"João Silva",type:"missed_appointment",message:"Paciente faltou à consulta de 28/01",priority:"high",timestamp:"2024-01-28T14:00:00Z",suggestedAction:"Contatar paciente e reagendar"},{id:"2",patientId:"P002",patientName:"Maria Santos",type:"exam_delay",message:"Tomografia agendada há mais de 7 dias",priority:"medium",timestamp:"2024-01-27T10:00:00Z",suggestedAction:"Verificar disponibilidade de horários alternativos"},{id:"3",patientId:"P003",patientName:"Pedro Costa",type:"insurance_pending",message:"Autorização de quimioterapia pendente há 5 dias",priority:"high",timestamp:"2024-01-26T09:00:00Z",suggestedAction:"Contatar convênio urgentemente"}],summary:{total:15,high:5,medium:7,low:3}}));const Oe=new P;Oe.get("/dashboard",async e=>e.json({summary:{totalRevenue:25e5,totalCosts:18e5,profit:7e5,profitMargin:28,glosasEvitadas:15e4,glosasRate:2.5},monthlyMetrics:[{month:"Janeiro 2024",revenue:85e4,costs:6e5,glosas:15e3,glosasEvitadas:45e3},{month:"Dezembro 2023",revenue:82e4,costs:58e4,glosas:2e4,glosasEvitadas:38e3}],glosasAnalysis:{totalGlosas:35e3,mainReasons:[{reason:"Documentação incompleta",count:45,value:15e3,percentage:42.8},{reason:"Código incorreto",count:30,value:1e4,percentage:28.5},{reason:"Autorização expirada",count:20,value:7e3,percentage:20},{reason:"Procedimento não coberto",count:10,value:3e3,percentage:8.7}]},costCenters:[{department:"Oncologia",budget:8e5,spent:65e4,percentage:81.25},{department:"Radioterapia",budget:5e5,spent:42e4,percentage:84},{department:"Cirurgia",budget:3e5,spent:25e4,percentage:83.33},{department:"Diagnóstico",budget:2e5,spent:18e4,percentage:90}]}));Oe.post("/predict-glosa",async e=>{const t=await e.req.json(),{procedure:s,diagnosis:a,insurance:i,documentation:o}=t;let r=.2,d=[];return o.includes("laudo_completo")||(r+=.3,d.push({factor:"Laudo médico incompleto",impact:"high",recommendation:"Solicitar laudo detalhado com CID e justificativa clínica"})),o.includes("autorizacao_previa")||(r+=.25,d.push({factor:"Autorização prévia ausente",impact:"high",recommendation:"Obter autorização antes do procedimento"})),s.complexity==="high"&&!o.includes("segunda_opiniao")&&(r+=.15,d.push({factor:"Segunda opinião não documentada",impact:"medium",recommendation:"Incluir parecer de especialista"})),e.json({riskScore:Math.min(r,1),riskLevel:r>.7?"high":r>.4?"medium":"low",estimatedGlosaValue:r*(s.value||1e4),risks:d,preventiveActions:["Revisar toda documentação antes do envio","Confirmar cobertura com o convênio","Garantir que todos os códigos estejam corretos","Manter registro fotográfico quando aplicável"],confidence:.87})});Oe.get("/revenue-analysis",async e=>e.json({byInsurance:[{name:"SUS",revenue:8e5,percentage:32,avgTicket:2500,paymentDelay:45},{name:"Unimed",revenue:6e5,percentage:24,avgTicket:5e3,paymentDelay:30},{name:"SulAmérica",revenue:45e4,percentage:18,avgTicket:4500,paymentDelay:25},{name:"Bradesco Saúde",revenue:4e5,percentage:16,avgTicket:4e3,paymentDelay:28},{name:"Particular",revenue:25e4,percentage:10,avgTicket:8e3,paymentDelay:0}],byProcedure:[{procedure:"Quimioterapia",revenue:9e5,count:180,avgValue:5e3},{procedure:"Radioterapia",revenue:6e5,count:120,avgValue:5e3},{procedure:"Cirurgia Oncológica",revenue:5e5,count:50,avgValue:1e4},{procedure:"Consultas",revenue:3e5,count:1e3,avgValue:300},{procedure:"Exames",revenue:2e5,count:400,avgValue:500}]}));Oe.get("/optimization-suggestions",async e=>e.json({suggestions:[{area:"Medicamentos",currentCost:3e5,potentialSaving:45e3,recommendation:"Negociar compra em volume com fornecedores",priority:"high",implementation:"immediate"},{area:"Exames Laboratoriais",currentCost:15e4,potentialSaving:22500,recommendation:"Implementar protocolos para evitar exames desnecessários",priority:"medium",implementation:"1-2 months"},{area:"Gestão de Leitos",currentCost:2e5,potentialSaving:3e4,recommendation:"Otimizar tempo de permanência com navegação de pacientes",priority:"high",implementation:"2-3 months"},{area:"Energia e Utilidades",currentCost:5e4,potentialSaving:7500,recommendation:"Implementar medidas de eficiência energética",priority:"low",implementation:"3-6 months"}],totalPotentialSaving:105e3,estimatedROI:3.5,implementationCost:3e4}));const $e=new P;$e.get("/profile/:patientId",async e=>{const t=e.req.param("patientId");return e.json({patientId:t,wellnessScore:72,mentalHealth:{anxietyLevel:5,depressionScore:3,stressLevel:6,lastAssessment:"2024-01-25",trend:"improving"},physicalWellbeing:{painLevel:4,fatigueLevel:5,sleepQuality:6,appetiteLevel:7,mobilityScore:8},socialSupport:{familySupport:"strong",friendsNetwork:"moderate",supportGroupParticipation:!0,communityEngagement:"active"},emotionalNeeds:[{need:"Medo do futuro",severity:"moderate",addressed:!0,intervention:"Sessões de terapia cognitivo-comportamental"},{need:"Preocupação com família",severity:"high",addressed:!1,intervention:"Terapia familiar recomendada"}],interventions:[{date:"2024-01-20",type:"Consulta psicológica",professional:"Dra. Ana Costa",outcome:"Melhora no manejo da ansiedade"},{date:"2024-01-22",type:"Grupo de apoio",professional:"Equipe multidisciplinar",outcome:"Paciente relatou sentir-se acolhido"}]})});$e.post("/mental-health-screening",async e=>{const t=await e.req.json(),{patientId:s,responses:a}=t;let i=0,o=0;a.forEach(l=>{l.category==="anxiety"?i+=l.value:l.category==="depression"&&(o+=l.value)});const r=i>15?"severe":i>10?"moderate":i>5?"mild":"minimal",d=o>20?"severe":o>15?"moderately severe":o>10?"moderate":o>5?"mild":"minimal";return e.json({patientId:s,screeningDate:new Date().toISOString(),results:{anxiety:{score:i,severity:r,requiresIntervention:i>10},depression:{score:o,severity:d,requiresIntervention:o>10}},recommendations:[i>10&&"Encaminhar para psiquiatra",o>10&&"Iniciar psicoterapia",(i>5||o>5)&&"Monitoramento semanal","Manter grupo de apoio"].filter(Boolean),alertLevel:i>15||o>20?"high":i>10||o>15?"medium":"low"})});$e.post("/predict-crisis",async e=>{const t=await e.req.json(),{patientId:s,recentEvents:a,symptoms:i,socialFactors:o}=t;let r=.2;return a.includes("loss")&&(r+=.2),a.includes("treatment_failure")&&(r+=.25),i.includes("hopelessness")&&(r+=.3),i.includes("isolation")&&(r+=.15),o.support==="weak"&&(r+=.2),o.financialStress&&(r+=.15),o.support==="strong"&&(r-=.1),o.activeInTherapy&&(r-=.15),r=Math.max(0,Math.min(1,r)),e.json({patientId:s,riskScore:r,riskLevel:r>.7?"high":r>.4?"medium":"low",timeframe:r>.7?"24-48 hours":r>.4?"1 week":"1 month",interventions:[r>.7&&{priority:"immediate",action:"Contato imediato com psiquiatra",responsible:"Equipe de plantão"},r>.4&&{priority:"urgent",action:"Agendar consulta em 48h",responsible:"Psicólogo responsável"},{priority:"routine",action:"Intensificar monitoramento",responsible:"Equipe de enfermagem"}].filter(Boolean),monitoringPlan:{frequency:r>.7?"daily":r>.4?"twice weekly":"weekly",method:"Phone check-in and mood tracking",duration:"2 weeks with reassessment"}})});$e.get("/support-groups/:patientId",async e=>(e.req.param("patientId"),e.json({recommendedGroups:[{id:"G001",name:"Grupo de Apoio - Câncer de Mama",type:"disease-specific",meetingFrequency:"Semanal",nextMeeting:"2024-02-05 14:00",location:"Sala 201 - Ala B",facilitator:"Psic. Maria Silva",currentMembers:12,matchScore:.95},{id:"G002",name:"Mindfulness e Meditação",type:"wellness",meetingFrequency:"2x por semana",nextMeeting:"2024-02-03 10:00",location:"Espaço Bem-Estar",facilitator:"Terapeuta João Santos",currentMembers:8,matchScore:.82},{id:"G003",name:"Família e Cuidadores",type:"family-support",meetingFrequency:"Quinzenal",nextMeeting:"2024-02-10 16:00",location:"Auditório Principal",facilitator:"Assistente Social Ana Costa",currentMembers:20,matchScore:.78}],activeParticipation:[{groupId:"G001",joinedDate:"2024-01-01",attendance:"100%",engagement:"high"}]})));const ye=new P;ye.get("/dashboard",async e=>e.json({activeStudies:12,totalPatients:456,dataPoints:125e4,insights:89,studies:[{id:"ST001",title:"Eficácia da Imunoterapia em Câncer de Pulmão Avançado",phase:"III",enrolledPatients:85,targetEnrollment:100,startDate:"2023-06-01",estimatedCompletion:"2025-06-01",status:"recruiting"},{id:"ST002",title:"Biomarcadores Preditivos de Resposta à Quimioterapia",phase:"II",enrolledPatients:45,targetEnrollment:50,startDate:"2023-09-01",estimatedCompletion:"2024-09-01",status:"active"},{id:"ST003",title:"Qualidade de Vida Pós-Tratamento Radioterápico",phase:"Observational",enrolledPatients:120,targetEnrollment:150,startDate:"2023-03-01",estimatedCompletion:"2024-12-01",status:"recruiting"}],recentInsights:[{date:"2024-01-28",type:"correlation",finding:"Correlação positiva entre níveis de IL-6 e resposta à imunoterapia",significance:"p < 0.001",impact:"high"},{date:"2024-01-25",type:"pattern",finding:"Padrão de toxicidade identificado em pacientes > 65 anos",significance:"p = 0.023",impact:"medium"}]}));ye.post("/analyze-cohort",async e=>{const t=await e.req.json(),{criteria:s,analysisType:a,variables:i}=t;return e.json({cohortSize:145,demographics:{meanAge:58.3,genderDistribution:{male:.52,female:.48},stageDistribution:{I:.15,II:.25,III:.35,IV:.25}},outcomes:{overallSurvival:{median:24.5,oneYear:.82,twoYear:.65,fiveYear:.45},progressionFreeSurvival:{median:11.2,sixMonth:.68,oneYear:.45},responseRate:{completeResponse:.12,partialResponse:.38,stableDisease:.3,progressiveDisease:.2}},correlations:[{variable1:"Age",variable2:"Treatment Response",coefficient:-.23,pValue:.042,interpretation:"Idade negativamente correlacionada com resposta"},{variable1:"Biomarker X",variable2:"Survival",coefficient:.56,pValue:.001,interpretation:"Forte correlação positiva com sobrevida"}],statisticalTests:{chiSquare:{value:15.23,df:3,pValue:.0016,significant:!0},logRankTest:{value:8.45,pValue:.0037,significant:!0}}})});ye.get("/opportunities",async e=>e.json({dataGaps:[{area:"Toxicidade tardia em radioterapia",patientCount:230,dataCompleteness:.45,priority:"high",potentialImpact:"Melhor manejo de efeitos colaterais de longo prazo"},{area:"Marcadores genéticos em câncer colorretal",patientCount:156,dataCompleteness:.62,priority:"medium",potentialImpact:"Personalização do tratamento"}],emergingPatterns:[{pattern:"Aumento de resposta em combinação terapêutica específica",confidence:.87,patientsAffected:45,recommendation:"Considerar estudo prospectivo"},{pattern:"Subgrupo com resistência primária identificado",confidence:.92,patientsAffected:28,recommendation:"Investigar mecanismos moleculares"}],eligiblePatients:{forClinicalTrials:89,forObservationalStudies:234,forRegistries:456},collaborationOpportunities:[{institution:"Instituto Nacional do Câncer",area:"Genômica do câncer",status:"in-discussion"},{institution:"Harvard Medical School",area:"Imunoterapia",status:"proposal-submitted"}]}));ye.post("/generate-hypothesis",async e=>{const t=await e.req.json(),{dataSource:s,variables:a,context:i}=t;return e.json({hypotheses:[{id:"H001",statement:"Pacientes com expressão elevada de PD-L1 e baixa carga mutacional apresentam melhor resposta à combinação de imunoterapia com quimioterapia",confidence:.78,supportingData:{nPatients:67,observedEffect:.42,pValue:.023},suggestedStudyDesign:"Randomized controlled trial com estratificação por biomarcadores",estimatedSampleSize:150,primaryEndpoint:"Progression-free survival"},{id:"H002",statement:"A administração de probióticos durante quimioterapia reduz incidência de mucosite severa",confidence:.65,supportingData:{nPatients:34,observedEffect:.31,pValue:.048},suggestedStudyDesign:"Double-blind placebo-controlled trial",estimatedSampleSize:100,primaryEndpoint:"Incidence of grade 3-4 mucositis"}],dataQuality:{completeness:.82,consistency:.91,timeliness:.88},recommendations:["Coletar dados adicionais de microbioma","Padronizar avaliação de toxicidade","Implementar coleta prospectiva de PROs"]})});ye.post("/export-data",async e=>{const t=await e.req.json(),{studyId:s,variables:a,format:i,filters:o}=t;return e.json({exportId:"EXP-2024-0128-001",status:"processing",recordsCount:234,variables:a.length,anonymizationLevel:"full",format:i||"csv",estimatedSize:"15.2 MB",expirationDate:"2024-02-28",downloadUrl:"/api/research/download/EXP-2024-0128-001",auditLog:{requestedBy:"Dr. Research",requestDate:new Date().toISOString(),purpose:"Clinical trial analysis",ethicsApproval:"CEP-2024-001"}})});const oe=new P;oe.get("/system-health",async e=>e.json({status:"healthy",uptime:"45 days 12:34:56",timestamp:new Date().toISOString(),services:{database:{status:"operational",latency:12,connections:45,maxConnections:100},aiEngine:{status:"operational",activeModels:8,requestsPerMinute:234,avgResponseTime:145},storage:{status:"operational",used:"234 GB",total:"1 TB",percentage:23.4},cache:{status:"operational",hitRate:.89,memory:"512 MB",entries:12456}},performance:{cpu:45,memory:67,disk:23,network:{in:"125 Mbps",out:"89 Mbps"}},alerts:[{level:"warning",service:"database",message:"Connection pool reaching 80% capacity",timestamp:"2024-01-28T10:30:00Z"}]}));oe.get("/metrics",async e=>e.json({users:{total:523,active:412,newThisMonth:45,byRole:{patients:234,doctors:56,nurses:78,administrators:12,researchers:8,navigators:34,support:89,financial:12}},usage:{dailyActiveUsers:389,weeklyActiveUsers:456,monthlyActiveUsers:512,avgSessionDuration:"24 minutes",pageViews:{today:12456,week:78234,month:312456}},aiUsage:{totalRequests:45678,byType:{clinicalAssistant:12345,triage:8934,glosasPrediction:5678,emotionalRisk:3456,researchAnalysis:2345},avgConfidence:.87,feedbackScore:4.2},dataQuality:{completeness:.92,accuracy:.95,timeliness:.88,consistency:.91,validity:.94},compliance:{lgpdCompliance:!0,dataRetention:"compliant",auditLogsEnabled:!0,encryptionStatus:"AES-256",lastSecurityAudit:"2024-01-15",nextAudit:"2024-02-15"}}));oe.get("/users",async e=>e.json({users:[{id:"U001",name:"Dr. João Silva",email:"joao.silva@hospital.com",role:"doctor",department:"Oncologia",status:"active",lastLogin:"2024-01-28T09:15:00Z",created:"2023-06-01T10:00:00Z"},{id:"U002",name:"Maria Santos",email:"maria.santos@hospital.com",role:"nurse",department:"Navegação",status:"active",lastLogin:"2024-01-28T08:30:00Z",created:"2023-07-15T14:00:00Z"}],total:523,page:1,pageSize:20}));oe.get("/audit-logs",async e=>e.json({logs:[{id:"LOG001",timestamp:"2024-01-28T11:30:00Z",user:"Dr. João Silva",action:"VIEW_PATIENT_RECORD",resource:"Patient ID: P123",ip:"192.168.1.100",result:"success"},{id:"LOG002",timestamp:"2024-01-28T11:25:00Z",user:"Maria Santos",action:"UPDATE_APPOINTMENT",resource:"Appointment ID: A456",ip:"192.168.1.101",result:"success"},{id:"LOG003",timestamp:"2024-01-28T11:20:00Z",user:"System",action:"AI_PREDICTION",resource:"Glosas Risk Analysis",ip:"internal",result:"success",metadata:{confidence:.89,processingTime:"145ms"}}],filters:{dateRange:"last-24-hours",actions:"all",users:"all",results:"all"},total:12456,page:1,pageSize:50}));oe.get("/configuration",async e=>e.json({general:{institutionName:"ACCamargo Cancer Center",timezone:"America/Sao_Paulo",language:"pt-BR",dateFormat:"DD/MM/YYYY",currency:"BRL"},ai:{models:{clinical:{name:"clinical-assistant-v2",version:"2.1.0",lastUpdate:"2024-01-15",accuracy:.92},triage:{name:"auto-triage-v1",version:"1.5.0",lastUpdate:"2024-01-10",accuracy:.88},financial:{name:"glosas-predictor-v3",version:"3.0.1",lastUpdate:"2024-01-20",accuracy:.87}},thresholds:{confidenceMinimum:.75,alertThreshold:.85,autoApprovalThreshold:.95}},integration:{ehr:{system:"Custom EHR",status:"connected",lastSync:"2024-01-28T11:00:00Z"},laboratory:{system:"LabSystem Pro",status:"connected",lastSync:"2024-01-28T10:45:00Z"},imaging:{system:"PACS System",status:"connected",lastSync:"2024-01-28T10:30:00Z"}},security:{passwordPolicy:{minLength:12,requireSpecialChar:!0,requireNumber:!0,requireUppercase:!0,expirationDays:90},sessionTimeout:30,mfaRequired:!0,ipWhitelist:["192.168.0.0/16"]}}));oe.get("/ai-performance",async e=>e.json({models:[{name:"Clinical Assistant",performance:{accuracy:.92,precision:.89,recall:.91,f1Score:.9,auc:.94},usage:{requestsToday:1234,avgResponseTime:145,errorRate:.02},feedback:{positive:456,negative:23,neutral:89,avgRating:4.3},lastRetrained:"2024-01-15",nextRetraining:"2024-02-15"},{name:"Glosas Predictor",performance:{accuracy:.87,precision:.85,recall:.88,f1Score:.86,auc:.91},usage:{requestsToday:567,avgResponseTime:89,errorRate:.01},financialImpact:{glosasPrevenidas:145,valorEconomizado:45e4},lastRetrained:"2024-01-10",nextRetraining:"2024-02-10"}],training:{datasetSize:125e3,lastUpdate:"2024-01-20",validationAccuracy:.89,crossValidationFolds:5},alerts:[{model:"Emotional Risk Detector",issue:"Performance degradation detected",metric:"accuracy",current:.72,threshold:.75,recommendation:"Immediate retraining required"}]}));const re=new P;re.post("/prompt-engineering",async e=>{const t=await e.req.json(),{userInput:s,context:a,persona:i,intent:o}=t,r={original:s,enhanced:`[Context: ${a}] [Role: ${i}] [Intent: ${o}] ${s}`,templates:[{name:"clinical-query",prompt:`Como médico oncologista experiente, analise o seguinte caso: ${s}. 
                  Considere as diretrizes atuais da NCCN e forneça recomendações baseadas em evidências.`},{name:"patient-communication",prompt:`Explique de forma clara e empática para o paciente: ${s}. 
-                 Use linguagem acessível e ofereça suporte emocional.`}],confidence:.92,suggestedModel:"clinical-gpt-4"};return e.json(r)});re.post("/servo-mechanisms",async e=>{const t=await e.req.json(),{trigger:s,data:a,actionType:i}=t,o={"glosa-prevention":{triggered:!0,actions:[{type:"document-review",status:"completed",finding:"Missing procedure justification",correction:"Added clinical justification to record"},{type:"code-validation",status:"completed",finding:"Incorrect procedure code",correction:"Updated to correct ICD-10 code"}],prevented:!0,estimatedSaving:15e3},"appointment-optimization":{triggered:!0,actions:[{type:"schedule-analysis",finding:"Conflict detected",resolution:"Rescheduled to available slot"},{type:"resource-allocation",finding:"Equipment available",resolution:"Reserved MRI machine for patient"}],optimized:!0,timeSaved:"3 days"},"fatigue-alert":{triggered:!0,actions:[{type:"risk-assessment",score:.78,level:"high"},{type:"notification",sent_to:["psychologist","nurse","doctor"],priority:"urgent"},{type:"intervention-scheduled",appointment:"2024-02-01 10:00",professional:"Psic. Ana Costa"}]}};return e.json({servoId:`SERVO-${Date.now()}`,trigger:s,actionType:i,result:o[i]||{triggered:!1,reason:"Unknown action type"},timestamp:new Date().toISOString(),feedback_required:!0})});re.post("/auto-triage",async e=>{const t=await e.req.json(),{message:s,sessionId:a,patientInfo:i}=t,o=s.toLowerCase();let r="low",d="",n=[];return o.includes("dor")&&(o.includes("forte")||o.includes("intensa"))?(r="high",d="Procure atendimento médico imediato no pronto-socorro",n=["Há quanto tempo sente esta dor?","A dor piora com algum movimento?"]):o.includes("febre")||o.includes("sangramento")?(r="medium",d="Agende consulta para hoje ou amanhã",n=["Qual sua temperatura?","Está tomando alguma medicação?"]):(r="low",d="Agende consulta de rotina com seu médico",n=["Há outros sintomas?","Isso interfere em suas atividades diárias?"]),e.json({sessionId:a,response:{message:`Entendo sua preocupação. ${d}`,urgency:r,questions:n,suggestedDepartment:"Oncologia",estimatedWaitTime:r==="high"?"Imediato":r==="medium"?"24-48h":"3-5 dias"},analysis:{detectedSymptoms:["dor","desconforto"],confidence:.85,requiresHumanReview:r==="high"}})});re.post("/summarize-report",async e=>{const t=await e.req.json(),{reportText:s,reportType:a}=t,i={reportType:a,keyFindings:["Massa tumoral de 3.2cm no lobo superior direito","Sem evidência de metástases","Linfonodos mediastinais dentro dos limites normais"],diagnosis:"Adenocarcinoma pulmonar estadio IB",recommendations:["Ressecção cirúrgica recomendada","Avaliar necessidade de quimioterapia adjuvante","PET-CT de controle em 3 meses"],urgency:"moderate",extractedData:{tumorSize:"3.2cm",location:"Lobo superior direito",stage:"IB",biomarkers:{EGFR:"negative",ALK:"negative","PD-L1":"15%"}},confidence:.91};return e.json(i)});re.post("/predict-risk",async e=>{const t=await e.req.json(),{patientId:s,riskType:a,clinicalData:i}=t,r={recurrence:{risk:.23,timeframe:"2 years",factors:[{factor:"Stage",weight:.3,value:"IIIA"},{factor:"Age",weight:.2,value:"65"},{factor:"Biomarkers",weight:.5,value:"EGFR+"}],recommendations:["Intensificar seguimento","Considerar terapia adjuvante estendida","Monitorar marcadores tumorais mensalmente"]},depression:{risk:.67,timeframe:"1 month",factors:[{factor:"Previous history",weight:.4,value:"Yes"},{factor:"Social support",weight:.3,value:"Low"},{factor:"Treatment phase",weight:.3,value:"Active chemo"}],recommendations:["Iniciar acompanhamento psicológico","Avaliar necessidade de medicação","Incluir em grupo de apoio"]},"treatment-adherence":{risk:.31,timeframe:"3 months",factors:[{factor:"Side effects",weight:.35,value:"Moderate"},{factor:"Distance from hospital",weight:.25,value:"50km"},{factor:"Financial situation",weight:.4,value:"Challenging"}],recommendations:["Implementar programa de navegação intensiva","Avaliar suporte financeiro","Considerar telemedicina para follow-ups"]}}[a]||{risk:0,error:"Unknown risk type"};return e.json({patientId:s,riskType:a,prediction:r,modelVersion:"2.1.0",timestamp:new Date().toISOString(),requiresClinicalValidation:r.risk>.7})});re.post("/feedback",async e=>{const t=await e.req.json(),{predictionId:s,feedback:a,userId:i,comments:o}=t;return e.json({feedbackId:`FB-${Date.now()}`,status:"recorded",impact:a==="positive"?"reinforcement":"adjustment",modelUpdate:{scheduled:!0,nextRetraining:"2024-02-15",expectedImprovement:.02},message:"Obrigado pelo feedback. Sua contribuição ajuda a melhorar nosso sistema.",aggregatedFeedback:{total:1234,positive:1089,negative:145,accuracy:.88}})});const H=(e,t)=>{const s=Qs(e);return`
+                 Use linguagem acessível e ofereça suporte emocional.`}],confidence:.92,suggestedModel:"clinical-gpt-4"};return e.json(r)});re.post("/servo-mechanisms",async e=>{const t=await e.req.json(),{trigger:s,data:a,actionType:i}=t,o={"glosa-prevention":{triggered:!0,actions:[{type:"document-review",status:"completed",finding:"Missing procedure justification",correction:"Added clinical justification to record"},{type:"code-validation",status:"completed",finding:"Incorrect procedure code",correction:"Updated to correct ICD-10 code"}],prevented:!0,estimatedSaving:15e3},"appointment-optimization":{triggered:!0,actions:[{type:"schedule-analysis",finding:"Conflict detected",resolution:"Rescheduled to available slot"},{type:"resource-allocation",finding:"Equipment available",resolution:"Reserved MRI machine for patient"}],optimized:!0,timeSaved:"3 days"},"fatigue-alert":{triggered:!0,actions:[{type:"risk-assessment",score:.78,level:"high"},{type:"notification",sent_to:["psychologist","nurse","doctor"],priority:"urgent"},{type:"intervention-scheduled",appointment:"2024-02-01 10:00",professional:"Psic. Ana Costa"}]}};return e.json({servoId:`SERVO-${Date.now()}`,trigger:s,actionType:i,result:o[i]||{triggered:!1,reason:"Unknown action type"},timestamp:new Date().toISOString(),feedback_required:!0})});re.post("/auto-triage",async e=>{const t=await e.req.json(),{message:s,sessionId:a,patientInfo:i}=t,o=s.toLowerCase();let r="low",d="",l=[];return o.includes("dor")&&(o.includes("forte")||o.includes("intensa"))?(r="high",d="Procure atendimento médico imediato no pronto-socorro",l=["Há quanto tempo sente esta dor?","A dor piora com algum movimento?"]):o.includes("febre")||o.includes("sangramento")?(r="medium",d="Agende consulta para hoje ou amanhã",l=["Qual sua temperatura?","Está tomando alguma medicação?"]):(r="low",d="Agende consulta de rotina com seu médico",l=["Há outros sintomas?","Isso interfere em suas atividades diárias?"]),e.json({sessionId:a,response:{message:`Entendo sua preocupação. ${d}`,urgency:r,questions:l,suggestedDepartment:"Oncologia",estimatedWaitTime:r==="high"?"Imediato":r==="medium"?"24-48h":"3-5 dias"},analysis:{detectedSymptoms:["dor","desconforto"],confidence:.85,requiresHumanReview:r==="high"}})});re.post("/summarize-report",async e=>{const t=await e.req.json(),{reportText:s,reportType:a}=t,i={reportType:a,keyFindings:["Massa tumoral de 3.2cm no lobo superior direito","Sem evidência de metástases","Linfonodos mediastinais dentro dos limites normais"],diagnosis:"Adenocarcinoma pulmonar estadio IB",recommendations:["Ressecção cirúrgica recomendada","Avaliar necessidade de quimioterapia adjuvante","PET-CT de controle em 3 meses"],urgency:"moderate",extractedData:{tumorSize:"3.2cm",location:"Lobo superior direito",stage:"IB",biomarkers:{EGFR:"negative",ALK:"negative","PD-L1":"15%"}},confidence:.91};return e.json(i)});re.post("/predict-risk",async e=>{const t=await e.req.json(),{patientId:s,riskType:a,clinicalData:i}=t,r={recurrence:{risk:.23,timeframe:"2 years",factors:[{factor:"Stage",weight:.3,value:"IIIA"},{factor:"Age",weight:.2,value:"65"},{factor:"Biomarkers",weight:.5,value:"EGFR+"}],recommendations:["Intensificar seguimento","Considerar terapia adjuvante estendida","Monitorar marcadores tumorais mensalmente"]},depression:{risk:.67,timeframe:"1 month",factors:[{factor:"Previous history",weight:.4,value:"Yes"},{factor:"Social support",weight:.3,value:"Low"},{factor:"Treatment phase",weight:.3,value:"Active chemo"}],recommendations:["Iniciar acompanhamento psicológico","Avaliar necessidade de medicação","Incluir em grupo de apoio"]},"treatment-adherence":{risk:.31,timeframe:"3 months",factors:[{factor:"Side effects",weight:.35,value:"Moderate"},{factor:"Distance from hospital",weight:.25,value:"50km"},{factor:"Financial situation",weight:.4,value:"Challenging"}],recommendations:["Implementar programa de navegação intensiva","Avaliar suporte financeiro","Considerar telemedicina para follow-ups"]}}[a]||{risk:0,error:"Unknown risk type"};return e.json({patientId:s,riskType:a,prediction:r,modelVersion:"2.1.0",timestamp:new Date().toISOString(),requiresClinicalValidation:r.risk>.7})});re.post("/feedback",async e=>{const t=await e.req.json(),{predictionId:s,feedback:a,userId:i,comments:o}=t;return e.json({feedbackId:`FB-${Date.now()}`,status:"recorded",impact:a==="positive"?"reinforcement":"adjustment",modelUpdate:{scheduled:!0,nextRetraining:"2024-02-15",expectedImprovement:.02},message:"Obrigado pelo feedback. Sua contribuição ajuda a melhorar nosso sistema.",aggregatedFeedback:{total:1234,positive:1089,negative:145,accuracy:.88}})});const q=(e,t)=>{const s=Ws(e);return`
     <!-- Ansiedade de Laura -->
     <div id="ai-concerns-container" class="ai-concerns-dashboard glass-effect rounded-2xl p-6 mb-8 border border-orange-200/50 transition-all duration-500">
       <!-- Header com ícone animado e botão de recolher -->
@@ -564,7 +564,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         // Removido o gráfico comparativo antigo - agora existe apenas no Master Admin como componente separado
       });
     <\/script>
-  `};function Qs(e,t){const s={patient:{subtitle:"Monitoramento preditivo da sua jornada oncológica",mainAlerts:[{id:"pa1",icon:"fas fa-calendar-exclamation",title:"Consulta Próxima",description:"Exame de controle em 3 dias",timeframe:"3 dias",impact:"Alto",severity:"high"},{id:"pa2",icon:"fas fa-pills",title:"Medicação",description:"Estoque baixo de Tamoxifeno",timeframe:"5 dias",impact:"Médio",severity:"medium"},{id:"pa3",icon:"fas fa-heartbeat",title:"Bem-estar",description:"Sessão psicológica recomendada",timeframe:"Preventivo",impact:"Preventivo",severity:"low"}],metrics:[{icon:"fas fa-user-check",value:"92%",label:"Adesão",trend:"stable",prediction:"Mantendo padrão"},{icon:"fas fa-calendar-check",value:"3/5",label:"Consultas",trend:"up",prediction:"2 agendamentos pendentes"},{icon:"fas fa-heart",value:"Bom",label:"Estado Geral",trend:"stable",prediction:"Estável"},{icon:"fas fa-flask",value:"2",label:"Exames Pendentes",trend:"down",prediction:"Agendar esta semana"}],recommendations:[{id:"rec1",action:"Agendar coleta de sangue para hemograma",reason:"Controle mensal do tratamento",priority:"high"},{id:"rec2",action:"Renovar receita de medicação contínua",reason:"Estoque termina em 5 dias",priority:"medium"},{id:"rec3",action:"Participar do grupo de apoio quinta-feira",reason:"Melhoria no bem-estar emocional",priority:"low"}]},doctor:{subtitle:"Alertas preditivos e insights clínicos dos seus pacientes",mainAlerts:[{id:"doc1",icon:"fas fa-exclamation-triangle",title:"Paciente Crítico",description:"João Silva - Risco de neutropenia",timeframe:"Imediato",impact:"Crítico",severity:"high"},{id:"doc2",icon:"fas fa-user-clock",title:"Atrasos Recorrentes",description:"5 pacientes com baixa adesão",timeframe:"Esta semana",impact:"Alto",severity:"medium"},{id:"doc3",icon:"fas fa-microscope",title:"Resultados Pendentes",description:"12 laudos aguardando revisão",timeframe:"24h",impact:"Médio",severity:"medium"}],metrics:[{icon:"fas fa-users",value:"47",label:"Pacientes Ativos",trend:"up",prediction:"+3 esta semana"},{icon:"fas fa-procedures",value:"8",label:"Internados",trend:"stable",prediction:"2 altas previstas"},{icon:"fas fa-clipboard-check",value:"89%",label:"Protocolos OK",trend:"down",prediction:"3 revisões urgentes"},{icon:"fas fa-chart-line",value:"94%",label:"Taxa Sucesso",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"drec1",action:"Revisar protocolo do paciente João Silva imediatamente",reason:"Sinais preditivos de complicação detectados",priority:"high"},{id:"drec2",action:"Agendar reunião multidisciplinar para casos complexos",reason:"3 pacientes necessitam revisão de conduta",priority:"medium"},{id:"drec3",action:"Atualizar protocolos de quimioterapia",reason:"Novas diretrizes publicadas esta semana",priority:"low"}]},navigator:{subtitle:"Coordenação inteligente e otimização da jornada dos pacientes",mainAlerts:[{id:"nav1",icon:"fas fa-exclamation-circle",title:"Pacientes Urgentes",description:"5 pacientes necessitam intervenção imediata",timeframe:"Agora",impact:"Crítico",severity:"high"},{id:"nav2",icon:"fas fa-clock",title:"Atrasos Detectados",description:"12 pacientes com atraso em exames",timeframe:"Hoje",impact:"Alto",severity:"medium"},{id:"nav3",icon:"fas fa-route",title:"Otimização de Rotas",description:"3 jornadas podem ser aceleradas",timeframe:"Esta semana",impact:"Médio",severity:"low"}],metrics:[{icon:"fas fa-users",value:"178",label:"Em Navegação",trend:"up",prediction:"+12 novos hoje"},{icon:"fas fa-tasks",value:"46",label:"Tarefas Pendentes",trend:"down",prediction:"23 urgentes"},{icon:"fas fa-percentage",value:"87%",label:"Taxa Adesão",trend:"stable",prediction:"Meta: 90%"},{icon:"fas fa-star",value:"92%",label:"Satisfação",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"navrec1",action:"Contatar pacientes com exames atrasados imediatamente",reason:"Prevenir abandono de tratamento",priority:"high"},{id:"navrec2",action:"Reorganizar agendamentos da próxima semana",reason:"Otimizar utilização de recursos",priority:"medium"},{id:"navrec3",action:"Atualizar protocolos de navegação",reason:"Novas diretrizes disponíveis",priority:"low"}]},financial:{subtitle:"Inteligência artificial para prevenção de glosas e otimização financeira",mainAlerts:[{id:"fin1",icon:"fas fa-exclamation-triangle",title:"Risco de Glosa Detectado",description:"15 contas com inconsistências identificadas",timeframe:"Urgente",impact:"R$ 127.000",severity:"high"},{id:"fin2",icon:"fas fa-file-invoice-dollar",title:"Faturamento Pendente",description:"42 procedimentos aguardando cobrança",timeframe:"Hoje",impact:"R$ 89.000",severity:"medium"},{id:"fin3",icon:"fas fa-chart-line",title:"Oportunidade de Melhoria",description:"Redução de 12% em glosas possível",timeframe:"Este mês",impact:"R$ 45.000",severity:"low"}],metrics:[{icon:"fas fa-shield-alt",value:"R$ 2.4M",label:"Glosas Evitadas",trend:"up",prediction:"+R$ 180K este mês"},{icon:"fas fa-percentage",value:"98.5%",label:"Taxa Aprovação",trend:"up",prediction:"Meta: 99%"},{icon:"fas fa-robot",value:"1,247",label:"Auditorias IA",trend:"up",prediction:"+89 hoje"},{icon:"fas fa-dollar-sign",value:"R$ 18.3M",label:"Faturamento Mês",trend:"stable",prediction:"Projeção: R$ 19M"}],recommendations:[{id:"finrec1",action:"Revisar 15 contas com alto risco de glosa imediatamente",reason:"IA detectou inconsistências em documentação e codificação",priority:"high"},{id:"finrec2",action:"Implementar checklist automático para procedimentos complexos",reason:"Redução de 30% em glosas prevista",priority:"medium"},{id:"finrec3",action:"Treinar equipe em novas diretrizes TUSS/TISS",reason:"Atualização normativa este mês",priority:"low"}]},wellness:{subtitle:"Monitoramento emocional e suporte psicossocial inteligente",mainAlerts:[{id:"well1",icon:"fas fa-heart-broken",title:"Pacientes em Risco",description:"8 pacientes com sinais de depressão severa",timeframe:"Imediato",impact:"Crítico",severity:"high"},{id:"well2",icon:"fas fa-users",title:"Grupos de Apoio",description:"3 grupos precisam de moderação",timeframe:"Hoje",impact:"Alto",severity:"medium"},{id:"well3",icon:"fas fa-calendar-check",title:"Sessões Agendadas",description:"24 atendimentos psicológicos esta semana",timeframe:"Semana",impact:"Normal",severity:"low"}],metrics:[{icon:"fas fa-smile",value:"73%",label:"Bem-Estar Geral",trend:"up",prediction:"Melhora gradual"},{icon:"fas fa-users",value:"234",label:"Pacientes Ativos",trend:"up",prediction:"+18 esta semana"},{icon:"fas fa-brain",value:"156",label:"Sessões Realizadas",trend:"stable",prediction:"24 agendadas"},{icon:"fas fa-hands-helping",value:"89%",label:"Satisfação",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"wellrec1",action:"Contatar 8 pacientes identificados com risco emocional elevado",reason:"Prevenção de crises e abandono de tratamento",priority:"high"},{id:"wellrec2",action:"Expandir horários de grupos de apoio online",reason:"Alta demanda detectada nos horários noturnos",priority:"medium"},{id:"wellrec3",action:"Implementar programa de mindfulness semanal",reason:"Evidências de redução de 40% em ansiedade",priority:"low"}]},research:{subtitle:"Análise preditiva para pesquisa clínica e recrutamento inteligente",mainAlerts:[{id:"res1",icon:"fas fa-vial",title:"Recrutamento Urgente",description:"Estudo ONCO-2024 precisa de 12 pacientes",timeframe:"2 semanas",impact:"Alto",severity:"high"},{id:"res2",icon:"fas fa-chart-bar",title:"Dados Incompletos",description:"38 CRFs pendentes de revisão",timeframe:"Esta semana",impact:"Médio",severity:"medium"},{id:"res3",icon:"fas fa-file-medical-alt",title:"Publicação Pronta",description:"3 artigos prontos para submissão",timeframe:"Este mês",impact:"Positivo",severity:"low"}],metrics:[{icon:"fas fa-flask",value:"24",label:"Estudos Ativos",trend:"up",prediction:"+2 iniciando"},{icon:"fas fa-users",value:"1,847",label:"Participantes",trend:"up",prediction:"+67 este mês"},{icon:"fas fa-percentage",value:"94%",label:"Taxa Retenção",trend:"stable",prediction:"Meta: 95%"},{icon:"fas fa-trophy",value:"42",label:"Publicações 2024",trend:"up",prediction:"15 com IF>5"}],recommendations:[{id:"resrec1",action:"Ativar protocolo de recrutamento acelerado para ONCO-2024",reason:"IA identificou 28 pacientes elegíveis no banco de dados",priority:"high"},{id:"resrec2",action:"Automatizar coleta de dados do REDCap",reason:"Redução de 60% no tempo de preenchimento de CRFs",priority:"medium"},{id:"resrec3",action:"Submeter artigos para journals de alto impacto",reason:"Janela de submissão favorável este mês",priority:"low"}]},admin:{subtitle:"Monitoramento preditivo de sistema e gestão inteligente de plataforma",mainAlerts:[{id:"adm1",icon:"fas fa-server",title:"Carga Crítica Detectada",description:"CPU 78% - Escalonamento automático ativado",timeframe:"Agora",impact:"Sistema",severity:"high"},{id:"adm2",icon:"fas fa-exclamation-circle",title:"Anomalias de Segurança",description:"3 tentativas de acesso suspeitas bloqueadas",timeframe:"Última hora",impact:"Segurança",severity:"medium"},{id:"adm3",icon:"fas fa-sync-alt",title:"Sincronização Pendente",description:"HIS/RIS com delay de 5 minutos",timeframe:"Contínuo",impact:"Integração",severity:"low"}],metrics:[{icon:"fas fa-server",value:"99.98%",label:"Uptime Sistema",trend:"stable",prediction:"SLA garantido"},{icon:"fas fa-tachometer-alt",value:"12ms",label:"Latência Edge",trend:"down",prediction:"Otimizado"},{icon:"fas fa-shield-alt",value:"100%",label:"Compliance",trend:"stable",prediction:"LGPD/ISO OK"},{icon:"fas fa-database",value:"523MB",label:"Database D1",trend:"up",prediction:"78% capacity"}],recommendations:[{id:"admrec1",action:"Implementar auto-scaling para Workers em horário de pico",reason:"Previsão de aumento de 40% na carga às 14h",priority:"high"},{id:"admrec2",action:"Atualizar certificados SSL antes do vencimento",reason:"3 certificados expiram em 15 dias",priority:"medium"},{id:"admrec3",action:"Revisar logs de segurança da última semana",reason:"Auditoria mensal de compliance",priority:"low"}]},default:{subtitle:"Monitoramento inteligente e preditivo",mainAlerts:[],metrics:[],recommendations:[]}};return s[e]||s.default}const Q=new P;function ne(e,t,s){return`
+  `};function Ws(e,t){const s={patient:{subtitle:"Monitoramento preditivo da sua jornada oncológica",mainAlerts:[{id:"pa1",icon:"fas fa-calendar-exclamation",title:"Consulta Próxima",description:"Exame de controle em 3 dias",timeframe:"3 dias",impact:"Alto",severity:"high"},{id:"pa2",icon:"fas fa-pills",title:"Medicação",description:"Estoque baixo de Tamoxifeno",timeframe:"5 dias",impact:"Médio",severity:"medium"},{id:"pa3",icon:"fas fa-heartbeat",title:"Bem-estar",description:"Sessão psicológica recomendada",timeframe:"Preventivo",impact:"Preventivo",severity:"low"}],metrics:[{icon:"fas fa-user-check",value:"92%",label:"Adesão",trend:"stable",prediction:"Mantendo padrão"},{icon:"fas fa-calendar-check",value:"3/5",label:"Consultas",trend:"up",prediction:"2 agendamentos pendentes"},{icon:"fas fa-heart",value:"Bom",label:"Estado Geral",trend:"stable",prediction:"Estável"},{icon:"fas fa-flask",value:"2",label:"Exames Pendentes",trend:"down",prediction:"Agendar esta semana"}],recommendations:[{id:"rec1",action:"Agendar coleta de sangue para hemograma",reason:"Controle mensal do tratamento",priority:"high"},{id:"rec2",action:"Renovar receita de medicação contínua",reason:"Estoque termina em 5 dias",priority:"medium"},{id:"rec3",action:"Participar do grupo de apoio quinta-feira",reason:"Melhoria no bem-estar emocional",priority:"low"}]},doctor:{subtitle:"Alertas preditivos e insights clínicos dos seus pacientes",mainAlerts:[{id:"doc1",icon:"fas fa-exclamation-triangle",title:"Paciente Crítico",description:"João Silva - Risco de neutropenia",timeframe:"Imediato",impact:"Crítico",severity:"high"},{id:"doc2",icon:"fas fa-user-clock",title:"Atrasos Recorrentes",description:"5 pacientes com baixa adesão",timeframe:"Esta semana",impact:"Alto",severity:"medium"},{id:"doc3",icon:"fas fa-microscope",title:"Resultados Pendentes",description:"12 laudos aguardando revisão",timeframe:"24h",impact:"Médio",severity:"medium"}],metrics:[{icon:"fas fa-users",value:"47",label:"Pacientes Ativos",trend:"up",prediction:"+3 esta semana"},{icon:"fas fa-procedures",value:"8",label:"Internados",trend:"stable",prediction:"2 altas previstas"},{icon:"fas fa-clipboard-check",value:"89%",label:"Protocolos OK",trend:"down",prediction:"3 revisões urgentes"},{icon:"fas fa-chart-line",value:"94%",label:"Taxa Sucesso",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"drec1",action:"Revisar protocolo do paciente João Silva imediatamente",reason:"Sinais preditivos de complicação detectados",priority:"high"},{id:"drec2",action:"Agendar reunião multidisciplinar para casos complexos",reason:"3 pacientes necessitam revisão de conduta",priority:"medium"},{id:"drec3",action:"Atualizar protocolos de quimioterapia",reason:"Novas diretrizes publicadas esta semana",priority:"low"}]},navigator:{subtitle:"Coordenação inteligente e otimização da jornada dos pacientes",mainAlerts:[{id:"nav1",icon:"fas fa-exclamation-circle",title:"Pacientes Urgentes",description:"5 pacientes necessitam intervenção imediata",timeframe:"Agora",impact:"Crítico",severity:"high"},{id:"nav2",icon:"fas fa-clock",title:"Atrasos Detectados",description:"12 pacientes com atraso em exames",timeframe:"Hoje",impact:"Alto",severity:"medium"},{id:"nav3",icon:"fas fa-route",title:"Otimização de Rotas",description:"3 jornadas podem ser aceleradas",timeframe:"Esta semana",impact:"Médio",severity:"low"}],metrics:[{icon:"fas fa-users",value:"178",label:"Em Navegação",trend:"up",prediction:"+12 novos hoje"},{icon:"fas fa-tasks",value:"46",label:"Tarefas Pendentes",trend:"down",prediction:"23 urgentes"},{icon:"fas fa-percentage",value:"87%",label:"Taxa Adesão",trend:"stable",prediction:"Meta: 90%"},{icon:"fas fa-star",value:"92%",label:"Satisfação",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"navrec1",action:"Contatar pacientes com exames atrasados imediatamente",reason:"Prevenir abandono de tratamento",priority:"high"},{id:"navrec2",action:"Reorganizar agendamentos da próxima semana",reason:"Otimizar utilização de recursos",priority:"medium"},{id:"navrec3",action:"Atualizar protocolos de navegação",reason:"Novas diretrizes disponíveis",priority:"low"}]},financial:{subtitle:"Inteligência artificial para prevenção de glosas e otimização financeira",mainAlerts:[{id:"fin1",icon:"fas fa-exclamation-triangle",title:"Risco de Glosa Detectado",description:"15 contas com inconsistências identificadas",timeframe:"Urgente",impact:"R$ 127.000",severity:"high"},{id:"fin2",icon:"fas fa-file-invoice-dollar",title:"Faturamento Pendente",description:"42 procedimentos aguardando cobrança",timeframe:"Hoje",impact:"R$ 89.000",severity:"medium"},{id:"fin3",icon:"fas fa-chart-line",title:"Oportunidade de Melhoria",description:"Redução de 12% em glosas possível",timeframe:"Este mês",impact:"R$ 45.000",severity:"low"}],metrics:[{icon:"fas fa-shield-alt",value:"R$ 2.4M",label:"Glosas Evitadas",trend:"up",prediction:"+R$ 180K este mês"},{icon:"fas fa-percentage",value:"98.5%",label:"Taxa Aprovação",trend:"up",prediction:"Meta: 99%"},{icon:"fas fa-robot",value:"1,247",label:"Auditorias IA",trend:"up",prediction:"+89 hoje"},{icon:"fas fa-dollar-sign",value:"R$ 18.3M",label:"Faturamento Mês",trend:"stable",prediction:"Projeção: R$ 19M"}],recommendations:[{id:"finrec1",action:"Revisar 15 contas com alto risco de glosa imediatamente",reason:"IA detectou inconsistências em documentação e codificação",priority:"high"},{id:"finrec2",action:"Implementar checklist automático para procedimentos complexos",reason:"Redução de 30% em glosas prevista",priority:"medium"},{id:"finrec3",action:"Treinar equipe em novas diretrizes TUSS/TISS",reason:"Atualização normativa este mês",priority:"low"}]},wellness:{subtitle:"Monitoramento emocional e suporte psicossocial inteligente",mainAlerts:[{id:"well1",icon:"fas fa-heart-broken",title:"Pacientes em Risco",description:"8 pacientes com sinais de depressão severa",timeframe:"Imediato",impact:"Crítico",severity:"high"},{id:"well2",icon:"fas fa-users",title:"Grupos de Apoio",description:"3 grupos precisam de moderação",timeframe:"Hoje",impact:"Alto",severity:"medium"},{id:"well3",icon:"fas fa-calendar-check",title:"Sessões Agendadas",description:"24 atendimentos psicológicos esta semana",timeframe:"Semana",impact:"Normal",severity:"low"}],metrics:[{icon:"fas fa-smile",value:"73%",label:"Bem-Estar Geral",trend:"up",prediction:"Melhora gradual"},{icon:"fas fa-users",value:"234",label:"Pacientes Ativos",trend:"up",prediction:"+18 esta semana"},{icon:"fas fa-brain",value:"156",label:"Sessões Realizadas",trend:"stable",prediction:"24 agendadas"},{icon:"fas fa-hands-helping",value:"89%",label:"Satisfação",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"wellrec1",action:"Contatar 8 pacientes identificados com risco emocional elevado",reason:"Prevenção de crises e abandono de tratamento",priority:"high"},{id:"wellrec2",action:"Expandir horários de grupos de apoio online",reason:"Alta demanda detectada nos horários noturnos",priority:"medium"},{id:"wellrec3",action:"Implementar programa de mindfulness semanal",reason:"Evidências de redução de 40% em ansiedade",priority:"low"}]},research:{subtitle:"Análise preditiva para pesquisa clínica e recrutamento inteligente",mainAlerts:[{id:"res1",icon:"fas fa-vial",title:"Recrutamento Urgente",description:"Estudo ONCO-2024 precisa de 12 pacientes",timeframe:"2 semanas",impact:"Alto",severity:"high"},{id:"res2",icon:"fas fa-chart-bar",title:"Dados Incompletos",description:"38 CRFs pendentes de revisão",timeframe:"Esta semana",impact:"Médio",severity:"medium"},{id:"res3",icon:"fas fa-file-medical-alt",title:"Publicação Pronta",description:"3 artigos prontos para submissão",timeframe:"Este mês",impact:"Positivo",severity:"low"}],metrics:[{icon:"fas fa-flask",value:"24",label:"Estudos Ativos",trend:"up",prediction:"+2 iniciando"},{icon:"fas fa-users",value:"1,847",label:"Participantes",trend:"up",prediction:"+67 este mês"},{icon:"fas fa-percentage",value:"94%",label:"Taxa Retenção",trend:"stable",prediction:"Meta: 95%"},{icon:"fas fa-trophy",value:"42",label:"Publicações 2024",trend:"up",prediction:"15 com IF>5"}],recommendations:[{id:"resrec1",action:"Ativar protocolo de recrutamento acelerado para ONCO-2024",reason:"IA identificou 28 pacientes elegíveis no banco de dados",priority:"high"},{id:"resrec2",action:"Automatizar coleta de dados do REDCap",reason:"Redução de 60% no tempo de preenchimento de CRFs",priority:"medium"},{id:"resrec3",action:"Submeter artigos para journals de alto impacto",reason:"Janela de submissão favorável este mês",priority:"low"}]},admin:{subtitle:"Monitoramento preditivo de sistema e gestão inteligente de plataforma",mainAlerts:[{id:"adm1",icon:"fas fa-server",title:"Carga Crítica Detectada",description:"CPU 78% - Escalonamento automático ativado",timeframe:"Agora",impact:"Sistema",severity:"high"},{id:"adm2",icon:"fas fa-exclamation-circle",title:"Anomalias de Segurança",description:"3 tentativas de acesso suspeitas bloqueadas",timeframe:"Última hora",impact:"Segurança",severity:"medium"},{id:"adm3",icon:"fas fa-sync-alt",title:"Sincronização Pendente",description:"HIS/RIS com delay de 5 minutos",timeframe:"Contínuo",impact:"Integração",severity:"low"}],metrics:[{icon:"fas fa-server",value:"99.98%",label:"Uptime Sistema",trend:"stable",prediction:"SLA garantido"},{icon:"fas fa-tachometer-alt",value:"12ms",label:"Latência Edge",trend:"down",prediction:"Otimizado"},{icon:"fas fa-shield-alt",value:"100%",label:"Compliance",trend:"stable",prediction:"LGPD/ISO OK"},{icon:"fas fa-database",value:"523MB",label:"Database D1",trend:"up",prediction:"78% capacity"}],recommendations:[{id:"admrec1",action:"Implementar auto-scaling para Workers em horário de pico",reason:"Previsão de aumento de 40% na carga às 14h",priority:"high"},{id:"admrec2",action:"Atualizar certificados SSL antes do vencimento",reason:"3 certificados expiram em 15 dias",priority:"medium"},{id:"admrec3",action:"Revisar logs de segurança da última semana",reason:"Auditoria mensal de compliance",priority:"low"}]},default:{subtitle:"Monitoramento inteligente e preditivo",mainAlerts:[],metrics:[],recommendations:[]}};return s[e]||s.default}const W=new P;function le(e,t,s){return`
         <div class="portal-container min-h-screen bg-gradient-to-br from-gray-50 via-green-50/30 to-emerald-50/20">
             <!-- Portal Header -->
             <div class="glass-effect shadow-lg border-b border-gray-100 mb-8">
@@ -591,7 +591,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
                 ${s}
             </div>
         </div>
-    `}Q.get("/patient",async e=>{const t=`
+    `}W.get("/patient",async e=>{const t=`
         <!-- Métricas em 3 Colunas -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <!-- Coluna 1: Próximos Compromissos -->
@@ -678,7 +678,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         </div>
 
         <!-- Ansiedade de Laura -->
-        ${H("patient")}
+        ${q("patient")}
         
         <!-- Ações Rápidas -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
@@ -706,7 +706,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
                 <p class="text-sm text-gray-600 mt-1">Central de dúvidas</p>
             </button>
         </div>
-    `;return e.json({html:ne("patient","Portal do Paciente",t),scripts:[]})});Q.get("/doctor",async e=>{const t=`
+    `;return e.json({html:le("patient","Portal do Paciente",t),scripts:[]})});W.get("/doctor",async e=>{const t=`
         <!-- Dashboard Médico -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <!-- Pacientes do Dia -->
@@ -770,7 +770,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         </div>
 
         <!-- Ansiedade de Laura - Versão Médica -->
-        ${H("doctor")}
+        ${q("doctor")}
         
         <!-- Ferramentas Clínicas -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
@@ -798,7 +798,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
                 <p class="text-sm text-gray-600 mt-1">Suporte à decisão</p>
             </button>
         </div>
-    `;return e.json({html:ne("doctor","Portal Médico",t),scripts:[]})});Q.get("/navigator",async e=>{const s=`
+    `;return e.json({html:le("doctor","Portal Médico",t),scripts:[]})});W.get("/navigator",async e=>{const s=`
         <!-- Dashboard Navegador -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <!-- Pacientes em Navegação com Botão Trilho -->
@@ -877,7 +877,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         </div>
 
         <!-- Ansiedade de Laura - Versão Navegador -->
-        ${H("navigator")}
+        ${q("navigator")}
         
         <!-- Modal Kanban (Trilho de Atendimentos) -->
         <div id="kanban-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 overflow-y-auto">
@@ -1448,7 +1448,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         <div id="navigator-modal" class="fixed inset-0 z-50 overflow-y-auto" style="display: none; overflow-y: auto !important;">
             <!-- O conteúdo será inserido dinamicamente aqui -->
         </div>
-    `;return e.json({html:ne("navigator","Navegador de Pacientes",s),scripts:[`
+    `;return e.json({html:le("navigator","Navegador de Pacientes",s),scripts:[`
             // ========================================
             // SISTEMA COMPLETO DO PORTAL DO NAVEGADOR
             // ========================================
@@ -1956,7 +1956,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
                     \`;
                 });
             });
-            `]})});Q.get("/financial",async e=>{const t=`
+            `]})});W.get("/financial",async e=>{const t=`
         <!-- Métricas Financeiras -->
         <div class="bg-gradient-to-r from-green-600 to-green-700 rounded-xl shadow-xl p-8 text-white mb-8">
             <h2 class="text-2xl font-bold mb-6">
@@ -1980,7 +1980,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         </div>
 
         <!-- Ansiedade de Laura - Versão Financeira -->
-        ${H("financial")}
+        ${q("financial")}
         
         <!-- Ferramentas Financeiras -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
@@ -2008,7 +2008,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
                 <p class="text-sm text-gray-600 mt-1">Previsões e alertas</p>
             </button>
         </div>
-    `;return e.json({html:ne("financial","Gestão Financeira",t),scripts:[]})});Q.get("/wellness",async e=>{const t=`
+    `;return e.json({html:le("financial","Gestão Financeira",t),scripts:[]})});W.get("/wellness",async e=>{const t=`
         <!-- Welcome Message -->
         <div class="bg-gradient-to-r from-pink-400 to-purple-500 rounded-xl p-6 text-white mb-8">
             <div class="flex items-center justify-between">
@@ -2301,8 +2301,8 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
             </div>
         </div>
 
-        ${H("wellness")}
-    `;return e.json({html:ne("wellness","Bem-Estar e Apoio",t),scripts:[`
+        ${q("wellness")}
+    `;return e.json({html:le("wellness","Bem-Estar e Apoio",t),scripts:[`
             // Função para mostrar conteúdo dinâmico dos botões
             window.showWellnessContent = function(type) {
                 const contentDiv = document.getElementById('wellnessContent');
@@ -2323,7 +2323,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
                     contentDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }
             }
-        `]})});Q.get("/research",async e=>{const t=`
+        `]})});W.get("/research",async e=>{const t=`
         <!-- Dashboard de Pesquisa -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <!-- Estudos Ativos -->
@@ -2389,7 +2389,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         </div>
 
         <!-- Ansiedade de Laura - Versão Pesquisa -->
-        ${H("research")}
+        ${q("research")}
         
         <!-- Ferramentas de Pesquisa -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
@@ -2417,7 +2417,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
                 <p class="text-sm text-gray-600 mt-1">Cursos e treinamentos</p>
             </button>
         </div>
-    `;return e.json({html:ne("research","Pesquisa Clínica",t),scripts:[]})});Q.get("/admin",async e=>{const t=`
+    `;return e.json({html:le("research","Pesquisa Clínica",t),scripts:[]})});W.get("/admin",async e=>{const t=`
         <!-- Dashboard Master Admin -->
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
             <!-- Métricas Críticas do Sistema -->
@@ -2463,7 +2463,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         </div>
 
         <!-- Ansiedade de Laura - Versão Admin -->
-        ${H("admin")}
+        ${q("admin")}
         
         <!-- Painéis de Controle -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
@@ -2595,7 +2595,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
                 <p class="text-sm text-gray-600 mt-1">Config & Deploy</p>
             </button>
         </div>
-    `;return e.json({html:ne("admin","Master Administrator",t),scripts:[]})});const Xt=new P;Xt.get("/kanban-test",e=>e.html(`
+    `;return e.json({html:le("admin","Master Administrator",t),scripts:[]})});const Xt=new P;Xt.get("/kanban-test",e=>e.html(`
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6981,7 +6981,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
     </div>
 </body>
 </html>
-    `));var rt=Object.freeze,Xs=Object.defineProperty,ea=(e,t)=>rt(Xs(e,"raw",{value:rt(t||e.slice())})),nt;const ta=e=>e.html(W(nt||(nt=ea([`
+    `));var rt=Object.freeze,Xs=Object.defineProperty,ea=(e,t)=>rt(Xs(e,"raw",{value:rt(t||e.slice())})),lt;const ta=e=>e.html(Q(lt||(lt=ea([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -8401,7 +8401,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `])),ge(H("patient"))));var lt=Object.freeze,sa=Object.defineProperty,aa=(e,t)=>lt(sa(e,"raw",{value:lt(t||e.slice())})),dt;const ia=e=>e.html(W(dt||(dt=aa([`
+  `])),me(q("patient"))));var nt=Object.freeze,sa=Object.defineProperty,aa=(e,t)=>nt(sa(e,"raw",{value:nt(t||e.slice())})),dt;const ia=e=>e.html(Q(dt||(dt=aa([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -9241,7 +9241,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `]))));var ct=Object.freeze,oa=Object.defineProperty,ra=(e,t)=>ct(oa(e,"raw",{value:ct(e.slice())})),pt;const na=e=>e.html(W(pt||(pt=ra([`
+  `]))));var ct=Object.freeze,oa=Object.defineProperty,ra=(e,t)=>ct(oa(e,"raw",{value:ct(e.slice())})),pt;const la=e=>e.html(Q(pt||(pt=ra([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -9637,7 +9637,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         <\/script>
     </body>
     </html>
-  `]))));var mt=Object.freeze,la=Object.defineProperty,da=(e,t)=>mt(la(e,"raw",{value:mt(e.slice())})),gt;const ca=e=>e.html(W(gt||(gt=da([`
+  `]))));var xt=Object.freeze,na=Object.defineProperty,da=(e,t)=>xt(na(e,"raw",{value:xt(t||e.slice())})),mt;const ca=e=>e.html(Q(mt||(mt=da([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -10664,7 +10664,504 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
             </div>
         </div>
 
-        <!-- Other Modals remain the same... -->
+        <!-- Modal: Jornadas em Risco (View Completa) -->
+        <div id="modalJornadasRisco" class="fixed inset-0 z-50 hidden">
+            <div class="modal-backdrop fixed inset-0" onclick="closeJornadasRisco()"></div>
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="modal-content relative rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden">
+                    <div class="sticky top-0 bg-gradient-to-r from-red-50 to-orange-50 border-b px-6 py-4 flex justify-between items-center">
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-900">Jornadas (Pacientes) em Risco - Análise Preditiva</h2>
+                            <p class="text-sm text-gray-600">31 jornadas identificadas com alto risco de glosas</p>
+                        </div>
+                        <button onclick="closeJornadasRisco()" class="p-2 hover:bg-white/50 rounded-xl">
+                            <i class="fas fa-times text-gray-500"></i>
+                        </button>
+                    </div>
+                    <div class="p-6 overflow-y-auto" style="max-height: calc(90vh - 80px);">
+                        <!-- Filtros e Resumo -->
+                        <div class="flex justify-between items-center mb-6">
+                            <div class="flex space-x-2">
+                                <button class="px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-semibold">
+                                    Alto Risco (12)
+                                </button>
+                                <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-semibold hover:bg-gray-50">
+                                    Médio Risco (15)
+                                </button>
+                                <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-semibold hover:bg-gray-50">
+                                    Baixo Risco (4)
+                                </button>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm text-gray-600">Total em risco:</p>
+                                <p class="text-2xl font-bold text-red-600">R$ 245.8K</p>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 gap-4">
+                            <!-- Paciente 1 - Alto Risco -->
+                            <div class="bg-white border-2 border-red-200 rounded-xl p-5 hover:shadow-xl transition-all">
+                                <div class="flex justify-between items-start">
+                                    <div class="flex items-start space-x-4">
+                                        <div class="p-3 bg-red-100 rounded-xl">
+                                            <i class="fas fa-user-injured text-red-600 text-xl"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-semibold text-gray-900 text-lg">Maria Silva Santos - #PAC2024001</h4>
+                                            <p class="text-sm text-gray-600 mt-1">Oncologia • Dr. Roberto Mendes • Unidade Centro</p>
+                                            <div class="mt-3 grid grid-cols-2 gap-3">
+                                                <div class="text-xs">
+                                                    <i class="fas fa-calendar text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Internação: 15/09/2024 (12 dias)</span>
+                                                </div>
+                                                <div class="text-xs">
+                                                    <i class="fas fa-procedures text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Quimioterapia Ciclo 3</span>
+                                                </div>
+                                                <div class="text-xs">
+                                                    <i class="fas fa-hospital text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Convênio: Unimed Central</span>
+                                                </div>
+                                                <div class="text-xs">
+                                                    <i class="fas fa-exclamation-triangle text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Glosas anteriores: 3</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="mb-3">
+                                            <p class="text-3xl font-bold text-red-600">R$ 45.2K</p>
+                                            <p class="text-xs text-gray-500">Valor em risco</p>
+                                        </div>
+                                        <div class="mb-3">
+                                            <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-bold">
+                                                89% probabilidade
+                                            </span>
+                                        </div>
+                                        <div class="text-xs text-gray-600">
+                                            <p>Prazo: <span class="font-semibold text-red-600">3 dias</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 p-4 bg-red-50 rounded-lg">
+                                    <p class="text-xs font-semibold text-red-800 mb-2">
+                                        <i class="fas fa-exclamation-circle mr-1"></i>
+                                        Principais riscos identificados:
+                                    </p>
+                                    <div class="grid grid-cols-3 gap-2 text-xs text-red-700">
+                                        <div>• Documentação incompleta do procedimento</div>
+                                        <div>• Autorização prévia pendente há 5 dias</div>
+                                        <div>• OPME sem justificativa técnica anexada</div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 flex justify-between items-center">
+                                    <div class="flex space-x-2">
+                                        <button class="px-4 py-2 bg-red-600 text-white rounded-lg text-xs font-semibold hover:bg-red-700">
+                                            <i class="fas fa-exclamation-triangle mr-1"></i>Ação Imediata
+                                        </button>
+                                        <button class="px-4 py-2 border border-gray-300 rounded-lg text-xs font-semibold hover:bg-gray-50">
+                                            <i class="fas fa-phone mr-1"></i>Contatar Médico
+                                        </button>
+                                        <button class="px-4 py-2 border border-gray-300 rounded-lg text-xs font-semibold hover:bg-gray-50">
+                                            <i class="fas fa-file-medical mr-1"></i>Ver Prontuário
+                                        </button>
+                                    </div>
+                                    <span class="text-xs text-gray-500">
+                                        Última atualização: há 2 horas
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Paciente 2 - Alto Risco -->
+                            <div class="bg-white border-2 border-red-200 rounded-xl p-5 hover:shadow-xl transition-all">
+                                <div class="flex justify-between items-start">
+                                    <div class="flex items-start space-x-4">
+                                        <div class="p-3 bg-red-100 rounded-xl">
+                                            <i class="fas fa-user-injured text-red-600 text-xl"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-semibold text-gray-900 text-lg">João Carlos Oliveira - #PAC2024002</h4>
+                                            <p class="text-sm text-gray-600 mt-1">Cirurgia Oncológica • Dr. Ana Paula Costa • Unidade Sul</p>
+                                            <div class="mt-3 grid grid-cols-2 gap-3">
+                                                <div class="text-xs">
+                                                    <i class="fas fa-calendar text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Internação: 18/09/2024 (9 dias)</span>
+                                                </div>
+                                                <div class="text-xs">
+                                                    <i class="fas fa-procedures text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Ressecção Tumoral + Reconstrução</span>
+                                                </div>
+                                                <div class="text-xs">
+                                                    <i class="fas fa-hospital text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Convênio: SulAmérica</span>
+                                                </div>
+                                                <div class="text-xs">
+                                                    <i class="fas fa-exclamation-triangle text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Glosas anteriores: 5</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="mb-3">
+                                            <p class="text-3xl font-bold text-red-600">R$ 67.5K</p>
+                                            <p class="text-xs text-gray-500">Valor em risco</p>
+                                        </div>
+                                        <div class="mb-3">
+                                            <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-bold">
+                                                92% probabilidade
+                                            </span>
+                                        </div>
+                                        <div class="text-xs text-gray-600">
+                                            <p>Prazo: <span class="font-semibold text-red-600">2 dias</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 p-4 bg-red-50 rounded-lg">
+                                    <p class="text-xs font-semibold text-red-800 mb-2">
+                                        <i class="fas fa-exclamation-circle mr-1"></i>
+                                        Principais riscos identificados:
+                                    </p>
+                                    <div class="grid grid-cols-3 gap-2 text-xs text-red-700">
+                                        <div>• OPME de alto custo sem parecer técnico</div>
+                                        <div>• Tempo de internação acima do protocolo</div>
+                                        <div>• Medicamentos off-label utilizados</div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 flex justify-between items-center">
+                                    <div class="flex space-x-2">
+                                        <button class="px-4 py-2 bg-red-600 text-white rounded-lg text-xs font-semibold hover:bg-red-700">
+                                            <i class="fas fa-exclamation-triangle mr-1"></i>Ação Imediata
+                                        </button>
+                                        <button class="px-4 py-2 border border-gray-300 rounded-lg text-xs font-semibold hover:bg-gray-50">
+                                            <i class="fas fa-phone mr-1"></i>Contatar Médico
+                                        </button>
+                                        <button class="px-4 py-2 border border-gray-300 rounded-lg text-xs font-semibold hover:bg-gray-50">
+                                            <i class="fas fa-file-medical mr-1"></i>Ver Prontuário
+                                        </button>
+                                    </div>
+                                    <span class="text-xs text-gray-500">
+                                        Última atualização: há 1 hora
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Paciente 3 - Médio Risco -->
+                            <div class="bg-white border-2 border-yellow-200 rounded-xl p-5 hover:shadow-xl transition-all">
+                                <div class="flex justify-between items-start">
+                                    <div class="flex items-start space-x-4">
+                                        <div class="p-3 bg-yellow-100 rounded-xl">
+                                            <i class="fas fa-user-injured text-yellow-600 text-xl"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-semibold text-gray-900 text-lg">Ana Paula Ferreira - #PAC2024003</h4>
+                                            <p class="text-sm text-gray-600 mt-1">Radioterapia • Dr. Carlos Eduardo • Unidade Norte</p>
+                                            <div class="mt-3 grid grid-cols-2 gap-3">
+                                                <div class="text-xs">
+                                                    <i class="fas fa-calendar text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Tratamento: 20/09/2024 (Sessão 15/30)</span>
+                                                </div>
+                                                <div class="text-xs">
+                                                    <i class="fas fa-procedures text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Radioterapia IMRT</span>
+                                                </div>
+                                                <div class="text-xs">
+                                                    <i class="fas fa-hospital text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Convênio: Bradesco Saúde</span>
+                                                </div>
+                                                <div class="text-xs">
+                                                    <i class="fas fa-exclamation-triangle text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Glosas anteriores: 1</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="mb-3">
+                                            <p class="text-3xl font-bold text-yellow-600">R$ 23.4K</p>
+                                            <p class="text-xs text-gray-500">Valor em risco</p>
+                                        </div>
+                                        <div class="mb-3">
+                                            <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold">
+                                                65% probabilidade
+                                            </span>
+                                        </div>
+                                        <div class="text-xs text-gray-600">
+                                            <p>Prazo: <span class="font-semibold text-yellow-600">5 dias</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 p-4 bg-yellow-50 rounded-lg">
+                                    <p class="text-xs font-semibold text-yellow-800 mb-2">
+                                        <i class="fas fa-exclamation-circle mr-1"></i>
+                                        Principais riscos identificados:
+                                    </p>
+                                    <div class="grid grid-cols-3 gap-2 text-xs text-yellow-700">
+                                        <div>• Número de sessões acima do autorizado</div>
+                                        <div>• Documentação de evolução incompleta</div>
+                                        <div>• Falta de reavaliação médica</div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 flex justify-between items-center">
+                                    <div class="flex space-x-2">
+                                        <button class="px-4 py-2 bg-yellow-600 text-white rounded-lg text-xs font-semibold hover:bg-yellow-700">
+                                            <i class="fas fa-clock mr-1"></i>Monitorar
+                                        </button>
+                                        <button class="px-4 py-2 border border-gray-300 rounded-lg text-xs font-semibold hover:bg-gray-50">
+                                            <i class="fas fa-file-medical mr-1"></i>Completar Docs
+                                        </button>
+                                    </div>
+                                    <span class="text-xs text-gray-500">
+                                        Última atualização: há 4 horas
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Resumo e Ações -->
+                        <div class="mt-6 p-4 bg-gray-100 rounded-xl">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-700">Ações em Massa</p>
+                                    <p class="text-xs text-gray-600">Aplicar para todos os casos selecionados</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700">
+                                        <i class="fas fa-file-export mr-1"></i>Exportar Lista
+                                    </button>
+                                    <button class="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700">
+                                        <i class="fas fa-users mr-1"></i>Notificar Equipes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal: OPME Detail (View Completa) -->
+        <div id="modalOPMEDetail" class="fixed inset-0 z-50 hidden">
+            <div class="modal-backdrop fixed inset-0" onclick="closeOPMEDetail()"></div>
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="modal-content relative rounded-2xl max-w-4xl w-full">
+                    <div class="bg-gradient-to-r from-orange-50 to-amber-50 border-b px-6 py-4 flex justify-between items-center">
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-900">Detalhes do Material OPME</h2>
+                            <p class="text-sm text-gray-600">Informações completas do item</p>
+                        </div>
+                        <button onclick="closeOPMEDetail()" class="p-2 hover:bg-white/50 rounded-xl">
+                            <i class="fas fa-times text-gray-500"></i>
+                        </button>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-2 gap-6">
+                            <!-- Informações do Material -->
+                            <div class="bg-white rounded-xl p-5 border border-gray-200">
+                                <h3 class="font-semibold text-gray-900 mb-4 flex items-center">
+                                    <i class="fas fa-box text-orange-500 mr-2"></i>
+                                    Informações do Material
+                                </h3>
+                                <dl class="space-y-3">
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Código:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">PRO-T4-2024</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Descrição:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">Prótese Oncológica T4</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Categoria:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">Próteses Especializadas</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Fornecedor:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">MedTech Solutions</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">CNPJ Fornecedor:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">12.345.678/0001-90</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Valor Unitário:</dt>
+                                        <dd class="text-sm font-bold text-green-600">R$ 45.000,00</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Quantidade:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">3 unidades</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2">
+                                        <dt class="text-sm text-gray-600">Valor Total:</dt>
+                                        <dd class="text-lg font-bold text-green-600">R$ 135.000,00</dd>
+                                    </div>
+                                </dl>
+                            </div>
+
+                            <!-- Informações Clínicas -->
+                            <div class="bg-white rounded-xl p-5 border border-gray-200">
+                                <h3 class="font-semibold text-gray-900 mb-4 flex items-center">
+                                    <i class="fas fa-user-md text-blue-500 mr-2"></i>
+                                    Informações Clínicas
+                                </h3>
+                                <dl class="space-y-3">
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Paciente:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">João Carlos Silva</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">ID Paciente:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">#PAC2024156</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Médico Solicitante:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">Dr. Roberto Mendes</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">CRM:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">SP-123456</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Data Solicitação:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">15/09/2024</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Procedimento:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">Artroplastia Total Oncológica</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Convênio:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">Unimed Central</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2">
+                                        <dt class="text-sm text-gray-600">Status Autorização:</dt>
+                                        <dd>
+                                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">
+                                                Aprovado
+                                            </span>
+                                        </dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </div>
+
+                        <!-- Justificativa Técnica -->
+                        <div class="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-5">
+                            <h4 class="font-semibold text-blue-900 mb-3 flex items-center">
+                                <i class="fas fa-clipboard-check text-blue-600 mr-2"></i>
+                                Justificativa Técnica
+                            </h4>
+                            <p class="text-sm text-blue-800 leading-relaxed">
+                                Paciente com diagnóstico de osteossarcoma em estágio avançado, necessitando de artroplastia 
+                                total com prótese oncológica especializada. O material específico (PRO-T4-2024) é indicado 
+                                devido às características anatômicas do paciente e necessidade de preservação máxima do 
+                                tecido ósseo saudável. A prótese escolhida oferece melhor biocompatibilidade e durabilidade 
+                                para o caso específico, com expectativa de sobrevida superior a 10 anos. Protocolo aprovado 
+                                pela comissão de OPME do hospital em 14/09/2024.
+                            </p>
+                        </div>
+
+                        <!-- Documentos Anexados -->
+                        <div class="mt-6 bg-gray-50 rounded-xl p-5">
+                            <h4 class="font-semibold text-gray-900 mb-3 flex items-center">
+                                <i class="fas fa-paperclip text-gray-600 mr-2"></i>
+                                Documentos Anexados
+                            </h4>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-file-pdf text-red-500 mr-3"></i>
+                                        <div>
+                                            <p class="text-sm font-medium">Laudo Médico</p>
+                                            <p class="text-xs text-gray-500">PDF • 2.3 MB</p>
+                                        </div>
+                                    </div>
+                                    <button class="text-blue-600 hover:text-blue-800">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-file-pdf text-red-500 mr-3"></i>
+                                        <div>
+                                            <p class="text-sm font-medium">Autorização Convênio</p>
+                                            <p class="text-xs text-gray-500">PDF • 856 KB</p>
+                                        </div>
+                                    </div>
+                                    <button class="text-blue-600 hover:text-blue-800">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-file-image text-blue-500 mr-3"></i>
+                                        <div>
+                                            <p class="text-sm font-medium">Imagens Radiológicas</p>
+                                            <p class="text-xs text-gray-500">DICOM • 45.2 MB</p>
+                                        </div>
+                                    </div>
+                                    <button class="text-blue-600 hover:text-blue-800">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-file-alt text-gray-500 mr-3"></i>
+                                        <div>
+                                            <p class="text-sm font-medium">Nota Fiscal</p>
+                                            <p class="text-xs text-gray-500">XML • 128 KB</p>
+                                        </div>
+                                    </div>
+                                    <button class="text-blue-600 hover:text-blue-800">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ações -->
+                        <div class="mt-6 flex justify-between items-center">
+                            <div class="flex space-x-2">
+                                <button class="px-4 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700">
+                                    <i class="fas fa-check mr-2"></i>Validar Material
+                                </button>
+                                <button class="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700">
+                                    <i class="fas fa-edit mr-2"></i>Editar
+                                </button>
+                                <button class="px-4 py-2 border border-gray-300 rounded-lg font-semibold hover:bg-gray-50">
+                                    <i class="fas fa-print mr-2"></i>Imprimir
+                                </button>
+                            </div>
+                            <span class="text-xs text-gray-500">
+                                Última atualização: 20/09/2024 às 14:35
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal: KPI Extrato (View Completa para cada KPI) -->
+        <div id="modalKPIExtrato" class="fixed inset-0 z-50 hidden">
+            <div class="modal-backdrop fixed inset-0" onclick="closeKPIExtrato()"></div>
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="modal-content relative rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden">
+                    <div id="kpiExtratoHeader" class="sticky top-0 bg-white border-b px-6 py-4 flex justify-between items-center">
+                        <div>
+                            <h2 id="kpiExtratoTitle" class="text-xl font-bold text-gray-900">Extrato Detalhado</h2>
+                            <p id="kpiExtratoSubtitle" class="text-sm text-gray-600">Análise completa do período</p>
+                        </div>
+                        <button onclick="closeKPIExtrato()" class="p-2 hover:bg-gray-100 rounded-xl">
+                            <i class="fas fa-times text-gray-500"></i>
+                        </button>
+                    </div>
+                    <div id="kpiExtratoContent" class="p-6 overflow-y-auto" style="max-height: calc(90vh - 80px);">
+                        <!-- Dynamic content based on KPI type -->
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script>
             // Initialize Charts with proper configuration
@@ -10925,17 +11422,781 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
                 document.getElementById('modalDosseComercial').classList.add('hidden');
             }
 
-            // Other modal functions
+            // Modal: Jornadas em Risco
             function showJornadasRisco() {
-                alert('Abrindo análise detalhada de 31 jornadas em risco...');
+                document.getElementById('modalJornadasRisco').classList.remove('hidden');
             }
 
+            function closeJornadasRisco() {
+                document.getElementById('modalJornadasRisco').classList.add('hidden');
+            }
+
+            // Modal: OPME Detail
             function showOPMEDetail(code) {
-                alert('Abrindo detalhes do OPME: ' + code);
+                document.getElementById('modalOPMEDetail').classList.remove('hidden');
+                // In a real app, would load specific OPME data based on code
             }
 
+            function closeOPMEDetail() {
+                document.getElementById('modalOPMEDetail').classList.add('hidden');
+            }
+
+            // Modal: KPI Extrato
             function showExtratoKPI(type) {
-                alert('Abrindo extrato detalhado: ' + type);
+                const modal = document.getElementById('modalKPIExtrato');
+                const header = document.getElementById('kpiExtratoHeader');
+                const title = document.getElementById('kpiExtratoTitle');
+                const subtitle = document.getElementById('kpiExtratoSubtitle');
+                const content = document.getElementById('kpiExtratoContent');
+                
+                const extratos = {
+                    identificadas: {
+                        title: 'Extrato: Glosas Identificadas',
+                        subtitle: 'R$ 45.678 - 142 ocorrências nos últimos 30 dias',
+                        headerBg: 'bg-gradient-to-r from-red-50 to-pink-50',
+                        content: \`
+                            <div class="space-y-6">
+                                <!-- Resumo Executivo -->
+                                <div class="bg-gradient-to-r from-red-50 to-pink-50 p-6 rounded-xl">
+                                    <h4 class="font-bold text-red-900 mb-4">Resumo Executivo</h4>
+                                    <div class="grid grid-cols-4 gap-4">
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Total Identificado</p>
+                                            <p class="text-2xl font-bold text-red-600">R$ 45.678</p>
+                                            <p class="text-xs text-red-500 mt-1">↑ 8.3% vs mês anterior</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Ocorrências</p>
+                                            <p class="text-2xl font-bold text-gray-900">142</p>
+                                            <p class="text-xs text-gray-500 mt-1">4.7 por dia</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Média por Caso</p>
+                                            <p class="text-2xl font-bold text-gray-900">R$ 322</p>
+                                            <p class="text-xs text-gray-500 mt-1">↓ R$ 45 vs média</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Taxa Crescimento</p>
+                                            <p class="text-2xl font-bold text-red-600">+8.3%</p>
+                                            <p class="text-xs text-red-500 mt-1">Atenção necessária</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Detalhamento Temporal -->
+                                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                                    <h4 class="font-bold text-gray-900 mb-4">Evolução Semanal</h4>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                                            <div class="flex items-center">
+                                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                                                    <span class="text-sm font-bold text-red-600">S1</span>
+                                                </div>
+                                                <div>
+                                                    <p class="font-semibold text-gray-900">Semana 1 (1-7 Set)</p>
+                                                    <p class="text-xs text-gray-600">35 ocorrências</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-lg font-bold text-gray-900">R$ 12.300</p>
+                                                <div class="flex items-center text-xs text-red-600">
+                                                    <i class="fas fa-arrow-up mr-1"></i>
+                                                    <span>15% acima da meta</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                                            <div class="flex items-center">
+                                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                                                    <span class="text-sm font-bold text-red-600">S2</span>
+                                                </div>
+                                                <div>
+                                                    <p class="font-semibold text-gray-900">Semana 2 (8-14 Set)</p>
+                                                    <p class="text-xs text-gray-600">32 ocorrências</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-lg font-bold text-gray-900">R$ 11.200</p>
+                                                <div class="flex items-center text-xs text-yellow-600">
+                                                    <i class="fas fa-arrow-right mr-1"></i>
+                                                    <span>Dentro da meta</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                                            <div class="flex items-center">
+                                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                                                    <span class="text-sm font-bold text-red-600">S3</span>
+                                                </div>
+                                                <div>
+                                                    <p class="font-semibold text-gray-900">Semana 3 (15-21 Set)</p>
+                                                    <p class="text-xs text-gray-600">38 ocorrências</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-lg font-bold text-gray-900">R$ 10.878</p>
+                                                <div class="flex items-center text-xs text-green-600">
+                                                    <i class="fas fa-arrow-down mr-1"></i>
+                                                    <span>8% abaixo da meta</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                                            <div class="flex items-center">
+                                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                                                    <span class="text-sm font-bold text-red-600">S4</span>
+                                                </div>
+                                                <div>
+                                                    <p class="font-semibold text-gray-900">Semana 4 (22-28 Set)</p>
+                                                    <p class="text-xs text-gray-600">37 ocorrências</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-lg font-bold text-gray-900">R$ 11.300</p>
+                                                <div class="flex items-center text-xs text-yellow-600">
+                                                    <i class="fas fa-arrow-right mr-1"></i>
+                                                    <span>Dentro da meta</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Top 5 Causas -->
+                                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                                    <h4 class="font-bold text-gray-900 mb-4">Top 5 Principais Causas</h4>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center flex-1">
+                                                <span class="text-sm font-semibold text-gray-700 w-20">1º</span>
+                                                <div class="flex-1">
+                                                    <p class="text-sm font-medium">Documentação Incompleta</p>
+                                                    <div class="mt-1 h-2 bg-gray-200 rounded-full">
+                                                        <div class="h-2 bg-red-500 rounded-full" style="width: 35%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-right ml-4">
+                                                <p class="font-bold">R$ 15.987</p>
+                                                <p class="text-xs text-gray-500">35%</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center flex-1">
+                                                <span class="text-sm font-semibold text-gray-700 w-20">2º</span>
+                                                <div class="flex-1">
+                                                    <p class="text-sm font-medium">Autorização Prévia</p>
+                                                    <div class="mt-1 h-2 bg-gray-200 rounded-full">
+                                                        <div class="h-2 bg-orange-500 rounded-full" style="width: 28%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-right ml-4">
+                                                <p class="font-bold">R$ 12.789</p>
+                                                <p class="text-xs text-gray-500">28%</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center flex-1">
+                                                <span class="text-sm font-semibold text-gray-700 w-20">3º</span>
+                                                <div class="flex-1">
+                                                    <p class="text-sm font-medium">Codificação Incorreta</p>
+                                                    <div class="mt-1 h-2 bg-gray-200 rounded-full">
+                                                        <div class="h-2 bg-yellow-500 rounded-full" style="width: 20%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-right ml-4">
+                                                <p class="font-bold">R$ 9.135</p>
+                                                <p class="text-xs text-gray-500">20%</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center flex-1">
+                                                <span class="text-sm font-semibold text-gray-700 w-20">4º</span>
+                                                <div class="flex-1">
+                                                    <p class="text-sm font-medium">OPME sem justificativa</p>
+                                                    <div class="mt-1 h-2 bg-gray-200 rounded-full">
+                                                        <div class="h-2 bg-blue-500 rounded-full" style="width: 10%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-right ml-4">
+                                                <p class="font-bold">R$ 4.567</p>
+                                                <p class="text-xs text-gray-500">10%</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center flex-1">
+                                                <span class="text-sm font-semibold text-gray-700 w-20">5º</span>
+                                                <div class="flex-1">
+                                                    <p class="text-sm font-medium">Outros</p>
+                                                    <div class="mt-1 h-2 bg-gray-200 rounded-full">
+                                                        <div class="h-2 bg-gray-500 rounded-full" style="width: 7%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-right ml-4">
+                                                <p class="font-bold">R$ 3.200</p>
+                                                <p class="text-xs text-gray-500">7%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        \`
+                    },
+                    revertidas: {
+                        title: 'Extrato: Glosas Revertidas',
+                        subtitle: 'R$ 285.432 - Taxa de sucesso 85%',
+                        headerBg: 'bg-gradient-to-r from-green-50 to-emerald-50',
+                        content: \`
+                            <div class="space-y-6">
+                                <!-- Performance de Reversão -->
+                                <div class="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl">
+                                    <h4 class="font-bold text-green-900 mb-4">Performance de Reversão</h4>
+                                    <div class="grid grid-cols-4 gap-4">
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Total Revertido</p>
+                                            <p class="text-2xl font-bold text-green-600">R$ 285.432</p>
+                                            <p class="text-xs text-green-500 mt-1">Meta superada</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Taxa Sucesso</p>
+                                            <p class="text-2xl font-bold text-green-600">85%</p>
+                                            <p class="text-xs text-gray-500 mt-1">↑ 5% vs meta</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Tempo Médio</p>
+                                            <p class="text-2xl font-bold text-blue-600">3.5 dias</p>
+                                            <p class="text-xs text-blue-500 mt-1">↓ 2 dias vs anterior</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Casos Resolvidos</p>
+                                            <p class="text-2xl font-bold text-gray-900">121</p>
+                                            <p class="text-xs text-gray-500 mt-1">De 142 total</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Histórico de Reversões -->
+                                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                                    <h4 class="font-bold text-gray-900 mb-4">Histórico de Reversões - Últimos 6 Meses</h4>
+                                    <canvas id="reversoesChart" height="200"></canvas>
+                                </div>
+
+                                <!-- Top Reversões por Categoria -->
+                                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                                    <h4 class="font-bold text-gray-900 mb-4">Reversões por Categoria</h4>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                                            <div class="flex justify-between items-start">
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Documentação Complementada</p>
+                                                    <p class="text-xs text-gray-600 mt-1">45 casos resolvidos</p>
+                                                </div>
+                                                <div class="text-right">
+                                                    <p class="text-lg font-bold text-green-600">R$ 95.8K</p>
+                                                    <span class="text-xs text-green-500">100% sucesso</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                            <div class="flex justify-between items-start">
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Autorização Obtida</p>
+                                                    <p class="text-xs text-gray-600 mt-1">38 casos resolvidos</p>
+                                                </div>
+                                                <div class="text-right">
+                                                    <p class="text-lg font-bold text-blue-600">R$ 78.4K</p>
+                                                    <span class="text-xs text-blue-500">95% sucesso</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500">
+                                            <div class="flex justify-between items-start">
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Codificação Corrigida</p>
+                                                    <p class="text-xs text-gray-600 mt-1">28 casos resolvidos</p>
+                                                </div>
+                                                <div class="text-right">
+                                                    <p class="text-lg font-bold text-purple-600">R$ 67.2K</p>
+                                                    <span class="text-xs text-purple-500">88% sucesso</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 bg-orange-50 rounded-lg border-l-4 border-orange-500">
+                                            <div class="flex justify-between items-start">
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">OPME Justificado</p>
+                                                    <p class="text-xs text-gray-600 mt-1">10 casos resolvidos</p>
+                                                </div>
+                                                <div class="text-right">
+                                                    <p class="text-lg font-bold text-orange-600">R$ 44.0K</p>
+                                                    <span class="text-xs text-orange-500">71% sucesso</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        \`
+                    },
+                    roi: {
+                        title: 'Extrato: ROI Otimização',
+                        subtitle: '5.2x de retorno - R$ 3.64M economizado em 12 meses',
+                        headerBg: 'bg-gradient-to-r from-purple-50 to-indigo-50',
+                        content: \`
+                            <div class="space-y-6">
+                                <!-- Análise de ROI -->
+                                <div class="bg-gradient-to-r from-purple-50 to-indigo-50 p-6 rounded-xl">
+                                    <h4 class="font-bold text-purple-900 mb-4">Análise de Retorno sobre Investimento</h4>
+                                    <div class="grid grid-cols-3 gap-4">
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Investimento Total</p>
+                                            <p class="text-2xl font-bold text-purple-600">R$ 700K</p>
+                                            <p class="text-xs text-gray-500 mt-1">Tecnologia + Equipe</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Retorno Obtido</p>
+                                            <p class="text-2xl font-bold text-green-600">R$ 3.64M</p>
+                                            <p class="text-xs text-gray-500 mt-1">Em 12 meses</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Multiplicador ROI</p>
+                                            <p class="text-2xl font-bold text-purple-600">5.2x</p>
+                                            <p class="text-xs text-purple-500 mt-1">Acima da meta 4x</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Breakdown de Economia -->
+                                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                                    <h4 class="font-bold text-gray-900 mb-4">Composição da Economia Total</h4>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Glosas Evitadas</span>
+                                                <span class="text-sm font-bold">R$ 1.8M (49.5%)</span>
+                                            </div>
+                                            <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                                                <div class="h-3 bg-gradient-to-r from-green-400 to-green-600 rounded-full" style="width: 49.5%"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Otimização OPME</span>
+                                                <span class="text-sm font-bold">R$ 820K (22.5%)</span>
+                                            </div>
+                                            <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                                                <div class="h-3 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full" style="width: 22.5%"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Automação de Processos</span>
+                                                <span class="text-sm font-bold">R$ 640K (17.6%)</span>
+                                            </div>
+                                            <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                                                <div class="h-3 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full" style="width: 17.6%"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Redução Tempo Internação</span>
+                                                <span class="text-sm font-bold">R$ 380K (10.4%)</span>
+                                            </div>
+                                            <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                                                <div class="h-3 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full" style="width: 10.4%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Projeção Futura -->
+                                <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-6">
+                                    <h4 class="font-bold text-indigo-900 mb-4">Projeção para Próximos 12 Meses</h4>
+                                    <div class="grid grid-cols-2 gap-6">
+                                        <div>
+                                            <p class="text-sm text-gray-700 mb-3">Com Melhorias Contínuas</p>
+                                            <div class="space-y-2">
+                                                <div class="flex justify-between">
+                                                    <span class="text-sm">ROI Esperado</span>
+                                                    <span class="font-bold text-indigo-600">6.8x</span>
+                                                </div>
+                                                <div class="flex justify-between">
+                                                    <span class="text-sm">Economia Projetada</span>
+                                                    <span class="font-bold text-indigo-600">R$ 4.76M</span>
+                                                </div>
+                                                <div class="flex justify-between">
+                                                    <span class="text-sm">Crescimento</span>
+                                                    <span class="font-bold text-green-600">+31%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm text-gray-700 mb-3">Oportunidades Identificadas</p>
+                                            <ul class="text-xs space-y-1 text-gray-600">
+                                                <li>• Expansão IA preditiva: +R$ 450K</li>
+                                                <li>• Novos convênios: +R$ 320K</li>
+                                                <li>• Processo cirúrgico: +R$ 280K</li>
+                                                <li>• Farmácia clínica: +R$ 160K</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        \`
+                    },
+                    tempo: {
+                        title: 'Extrato: Tempo Médio de Reversão',
+                        subtitle: '3.5 dias - Melhor performance do período',
+                        headerBg: 'bg-gradient-to-r from-blue-50 to-cyan-50',
+                        content: \`
+                            <div class="space-y-6">
+                                <!-- Métricas de Tempo -->
+                                <div class="bg-gradient-to-r from-blue-50 to-cyan-50 p-6 rounded-xl">
+                                    <h4 class="font-bold text-blue-900 mb-4">Performance de Tempo</h4>
+                                    <div class="grid grid-cols-4 gap-4">
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Tempo Médio Atual</p>
+                                            <p class="text-2xl font-bold text-blue-600">3.5 dias</p>
+                                            <p class="text-xs text-green-500 mt-1">↓ 2 dias vs anterior</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Melhor Tempo</p>
+                                            <p class="text-2xl font-bold text-green-600">1 dia</p>
+                                            <p class="text-xs text-gray-500 mt-1">15% dos casos</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Pior Tempo</p>
+                                            <p class="text-2xl font-bold text-red-600">12 dias</p>
+                                            <p class="text-xs text-gray-500 mt-1">3% dos casos</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Meta</p>
+                                            <p class="text-2xl font-bold text-gray-900">4 dias</p>
+                                            <p class="text-xs text-blue-500 mt-1">Meta superada</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Distribuição por Faixas de Tempo -->
+                                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                                    <h4 class="font-bold text-gray-900 mb-4">Distribuição por Tempo de Resolução</h4>
+                                    <div class="space-y-3">
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <div class="flex items-center">
+                                                    <div class="w-4 h-4 bg-green-500 rounded mr-2"></div>
+                                                    <span class="text-sm font-medium">0-2 dias (Excelente)</span>
+                                                </div>
+                                                <span class="text-sm font-bold">45 casos (37%)</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 bg-green-500 rounded-full" style="width: 37%"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <div class="flex items-center">
+                                                    <div class="w-4 h-4 bg-blue-500 rounded mr-2"></div>
+                                                    <span class="text-sm font-medium">3-4 dias (Bom)</span>
+                                                </div>
+                                                <span class="text-sm font-bold">48 casos (40%)</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 bg-blue-500 rounded-full" style="width: 40%"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <div class="flex items-center">
+                                                    <div class="w-4 h-4 bg-yellow-500 rounded mr-2"></div>
+                                                    <span class="text-sm font-medium">5-7 dias (Regular)</span>
+                                                </div>
+                                                <span class="text-sm font-bold">22 casos (18%)</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 bg-yellow-500 rounded-full" style="width: 18%"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <div class="flex items-center">
+                                                    <div class="w-4 h-4 bg-red-500 rounded mr-2"></div>
+                                                    <span class="text-sm font-medium">8+ dias (Crítico)</span>
+                                                </div>
+                                                <span class="text-sm font-bold">6 casos (5%)</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 bg-red-500 rounded-full" style="width: 5%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Fatores de Impacto -->
+                                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                                    <h4 class="font-bold text-gray-900 mb-4">Principais Fatores de Atraso</h4>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="p-4 bg-red-50 rounded-lg">
+                                            <div class="flex items-start">
+                                                <i class="fas fa-file-alt text-red-500 mt-1 mr-3"></i>
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Documentação Pendente</p>
+                                                    <p class="text-xs text-gray-600 mt-1">Média: +3.2 dias extras</p>
+                                                    <p class="text-xs text-red-600">28% dos atrasos</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 bg-orange-50 rounded-lg">
+                                            <div class="flex items-start">
+                                                <i class="fas fa-user-clock text-orange-500 mt-1 mr-3"></i>
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Resposta Convênio</p>
+                                                    <p class="text-xs text-gray-600 mt-1">Média: +2.8 dias extras</p>
+                                                    <p class="text-xs text-orange-600">24% dos atrasos</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 bg-yellow-50 rounded-lg">
+                                            <div class="flex items-start">
+                                                <i class="fas fa-hospital text-yellow-500 mt-1 mr-3"></i>
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Validação Interna</p>
+                                                    <p class="text-xs text-gray-600 mt-1">Média: +1.5 dias extras</p>
+                                                    <p class="text-xs text-yellow-600">18% dos atrasos</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 bg-purple-50 rounded-lg">
+                                            <div class="flex items-start">
+                                                <i class="fas fa-stethoscope text-purple-500 mt-1 mr-3"></i>
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Parecer Médico</p>
+                                                    <p class="text-xs text-gray-600 mt-1">Média: +1.2 dias extras</p>
+                                                    <p class="text-xs text-purple-600">12% dos atrasos</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        \`
+                    },
+                    opme: {
+                        title: 'Extrato: Controle OPME',
+                        subtitle: 'R$ 567.890 - 94% de conformidade',
+                        headerBg: 'bg-gradient-to-r from-orange-50 to-amber-50',
+                        content: \`
+                            <div class="space-y-6">
+                                <!-- Resumo OPME -->
+                                <div class="bg-gradient-to-r from-orange-50 to-amber-50 p-6 rounded-xl">
+                                    <h4 class="font-bold text-orange-900 mb-4">Controle de Materiais OPME</h4>
+                                    <div class="grid grid-cols-4 gap-4">
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Valor Total</p>
+                                            <p class="text-2xl font-bold text-orange-600">R$ 567.890</p>
+                                            <p class="text-xs text-gray-500 mt-1">23 itens ativos</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Conformidade</p>
+                                            <p class="text-2xl font-bold text-green-600">94%</p>
+                                            <p class="text-xs text-green-500 mt-1">↑ 3% vs mês anterior</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Economia Média</p>
+                                            <p class="text-2xl font-bold text-blue-600">18%</p>
+                                            <p class="text-xs text-blue-500 mt-1">vs tabela referência</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Pendências</p>
+                                            <p class="text-2xl font-bold text-red-600">4</p>
+                                            <p class="text-xs text-red-500 mt-1">Ação necessária</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Top Fornecedores -->
+                                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                                    <h4 class="font-bold text-gray-900 mb-4">Principais Fornecedores</h4>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                            <div class="flex items-center">
+                                                <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-3">
+                                                    <i class="fas fa-building text-orange-600"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="font-semibold text-gray-900">MedTech Solutions</p>
+                                                    <p class="text-xs text-gray-600">8 produtos • Score: A+</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-lg font-bold">R$ 245.000</p>
+                                                <p class="text-xs text-green-600">Economia: 22%</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                            <div class="flex items-center">
+                                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                                    <i class="fas fa-building text-blue-600"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="font-semibold text-gray-900">OncoSupply BR</p>
+                                                    <p class="text-xs text-gray-600">5 produtos • Score: B+</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-lg font-bold">R$ 178.500</p>
+                                                <p class="text-xs text-green-600">Economia: 15%</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                            <div class="flex items-center">
+                                                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                                                    <i class="fas fa-building text-purple-600"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="font-semibold text-gray-900">BioMedical Corp</p>
+                                                    <p class="text-xs text-gray-600">6 produtos • Score: A</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-lg font-bold">R$ 89.300</p>
+                                                <p class="text-xs text-green-600">Economia: 19%</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                            <div class="flex items-center">
+                                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                                                    <i class="fas fa-building text-green-600"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="font-semibold text-gray-900">Outros (4 fornecedores)</p>
+                                                    <p class="text-xs text-gray-600">4 produtos • Score: B</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-lg font-bold">R$ 55.090</p>
+                                                <p class="text-xs text-green-600">Economia: 12%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Categorias de OPME -->
+                                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                                    <h4 class="font-bold text-gray-900 mb-4">Distribuição por Categoria</h4>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="p-4 bg-gradient-to-r from-blue-50 to-transparent rounded-lg">
+                                            <div class="flex justify-between items-center mb-3">
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Próteses</p>
+                                                    <p class="text-xs text-gray-600">7 itens</p>
+                                                </div>
+                                                <p class="text-lg font-bold text-blue-600">R$ 287.000</p>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 bg-blue-500 rounded-full" style="width: 50.5%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 bg-gradient-to-r from-green-50 to-transparent rounded-lg">
+                                            <div class="flex justify-between items-center mb-3">
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Órteses</p>
+                                                    <p class="text-xs text-gray-600">5 itens</p>
+                                                </div>
+                                                <p class="text-lg font-bold text-green-600">R$ 142.400</p>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 bg-green-500 rounded-full" style="width: 25%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 bg-gradient-to-r from-purple-50 to-transparent rounded-lg">
+                                            <div class="flex justify-between items-center mb-3">
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Materiais</p>
+                                                    <p class="text-xs text-gray-600">8 itens</p>
+                                                </div>
+                                                <p class="text-lg font-bold text-purple-600">R$ 98.600</p>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 bg-purple-500 rounded-full" style="width: 17.4%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 bg-gradient-to-r from-orange-50 to-transparent rounded-lg">
+                                            <div class="flex justify-between items-center mb-3">
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Equipamentos</p>
+                                                    <p class="text-xs text-gray-600">3 itens</p>
+                                                </div>
+                                                <p class="text-lg font-bold text-orange-600">R$ 39.890</p>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 bg-orange-500 rounded-full" style="width: 7.1%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        \`
+                    }
+                };
+                
+                const data = extratos[type] || extratos.identificadas;
+                
+                // Update header background
+                header.className = \`sticky top-0 \${data.headerBg} border-b px-6 py-4 flex justify-between items-center\`;
+                
+                title.textContent = data.title;
+                subtitle.textContent = data.subtitle;
+                content.innerHTML = data.content;
+                
+                modal.classList.remove('hidden');
+                
+                // Initialize charts if needed for specific extratos
+                if (type === 'revertidas' && !window.reversoesChartInit) {
+                    setTimeout(() => {
+                        const ctx = document.getElementById('reversoesChart');
+                        if (ctx) {
+                            new Chart(ctx.getContext('2d'), {
+                                type: 'line',
+                                data: {
+                                    labels: ['Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set'],
+                                    datasets: [{
+                                        label: 'Taxa de Reversão',
+                                        data: [75, 78, 80, 82, 83, 85],
+                                        borderColor: '#10b981',
+                                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                                        tension: 0.4
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    scales: {
+                                        y: {
+                                            beginAtZero: false,
+                                            min: 70,
+                                            max: 90,
+                                            ticks: {
+                                                callback: function(value) {
+                                                    return value + '%';
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                            window.reversoesChartInit = true;
+                        }
+                    }, 100);
+                }
+            }
+
+            function closeKPIExtrato() {
+                document.getElementById('modalKPIExtrato').classList.add('hidden');
             }
 
             function novoRecurso() {
@@ -10944,7 +12205,2575 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         <\/script>
     </body>
     </html>
-  `]))));var xt=Object.freeze,pa=Object.defineProperty,ma=(e,t)=>xt(pa(e,"raw",{value:xt(t||e.slice())})),ut;const ga=e=>e.html(W(ut||(ut=ma([`
+  `],[`
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Portal de Gestão Financeira - ACCamargo Cancer Center</title>
+        <script src="https://cdn.tailwindcss.com"><\/script>
+        <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"><\/script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"><\/script>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+            
+            body { font-family: 'Inter', sans-serif; }
+            
+            .glass-premium {
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.6);
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
+            }
+            
+            .kpi-card-premium {
+                background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+                border: 1px solid rgba(0, 0, 0, 0.04);
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .kpi-card-premium::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+                transition: left 0.5s;
+            }
+            
+            .kpi-card-premium:hover::before {
+                left: 100%;
+            }
+            
+            .kpi-card-premium:hover {
+                transform: translateY(-8px) scale(1.02);
+                box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.15);
+                border-color: rgba(59, 130, 246, 0.3);
+            }
+            
+            .status-badge-success {
+                background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+            }
+            
+            .status-badge-warning {
+                background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+                box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+            }
+            
+            .status-badge-danger {
+                background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+                box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+            }
+            
+            .status-badge-info {
+                background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+                box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+            }
+            
+            .tab-nav-premium {
+                background: rgba(243, 244, 246, 0.5);
+                backdrop-filter: blur(10px);
+                border-radius: 12px;
+                padding: 4px;
+            }
+            
+            .tab-button {
+                position: relative;
+                transition: all 0.3s ease;
+                border-radius: 8px;
+            }
+            
+            .tab-button.active {
+                background: white;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                color: #1e40af;
+                font-weight: 600;
+            }
+            
+            .risk-meter {
+                background: conic-gradient(
+                    from 180deg,
+                    #ef4444 0deg,
+                    #f59e0b 90deg,
+                    #eab308 180deg,
+                    #22c55e 270deg,
+                    #ef4444 360deg
+                );
+                border-radius: 50%;
+                position: relative;
+            }
+            
+            .pulse-dot {
+                animation: pulse-dot 2s infinite;
+            }
+            
+            @keyframes pulse-dot {
+                0%, 100% { transform: scale(1); opacity: 1; }
+                50% { transform: scale(1.2); opacity: 0.7; }
+            }
+            
+            .gradient-border {
+                background: linear-gradient(white, white) padding-box,
+                           linear-gradient(135deg, #667eea 0%, #764ba2 100%) border-box;
+                border: 2px solid transparent;
+            }
+            
+            .chart-container {
+                background: linear-gradient(135deg, rgba(249, 250, 251, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%);
+                border-radius: 16px;
+                padding: 24px;
+                max-width: 100%;
+                overflow: hidden;
+            }
+            
+            .data-table-row:hover {
+                background: linear-gradient(90deg, rgba(59, 130, 246, 0.05) 0%, rgba(59, 130, 246, 0.02) 100%);
+                transition: all 0.3s ease;
+            }
+            
+            .modal-backdrop {
+                backdrop-filter: blur(8px);
+                background: rgba(0, 0, 0, 0.6);
+            }
+            
+            .modal-content {
+                background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+                box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.8);
+            }
+            
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            @keyframes fadeInUp {
+                from { transform: translateY(20px); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
+            
+            .animate-slide-in { animation: slideInRight 0.5s ease-out; }
+            .animate-fade-up { animation: fadeInUp 0.6s ease-out; }
+            
+            .risk-indicator {
+                position: relative;
+                display: inline-block;
+            }
+            
+            .risk-indicator::after {
+                content: '';
+                position: absolute;
+                top: -2px;
+                right: -2px;
+                width: 8px;
+                height: 8px;
+                background: #ef4444;
+                border-radius: 50%;
+                animation: pulse-dot 2s infinite;
+            }
+            
+            .commercial-card {
+                background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+                border-left: 4px solid #0ea5e9;
+            }
+        </style>
+    </head>
+    <body class="bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/20 min-h-screen">
+
+        <!-- Professional Header -->
+        <div class="glass-premium sticky top-0 z-40 border-b border-gray-200/50">
+            <div class="container mx-auto px-4 py-3">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <button onclick="window.history.back()" class="p-2 hover:bg-gray-100/80 rounded-xl transition-all">
+                            <i class="fas fa-arrow-left text-gray-700"></i>
+                        </button>
+                        <div>
+                            <h1 class="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                                Portal de Gestão Financeira
+                            </h1>
+                            <p class="text-sm text-gray-500 font-medium">Sistema Inteligente de Análise Preditiva</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <select id="dateRange" class="px-4 py-2 border border-gray-200 rounded-xl bg-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="7d">Últimos 7 dias</option>
+                            <option value="30d" selected>Últimos 30 dias</option>
+                            <option value="90d">Últimos 90 dias</option>
+                            <option value="12m">Últimos 12 meses</option>
+                        </select>
+                        <button onclick="openDosseComercial()" class="px-5 py-2.5 bg-gradient-to-r from-sky-600 to-cyan-600 text-white rounded-xl hover:shadow-lg transition-all font-semibold text-sm">
+                            <i class="fas fa-briefcase mr-2"></i>Dossiê Comercial
+                        </button>
+                        <button onclick="openDashboardCompleto()" class="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:shadow-lg transition-all font-semibold text-sm">
+                            <i class="fas fa-chart-line mr-2"></i>Dashboard
+                        </button>
+                        <button class="px-4 py-2.5 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 transition-all">
+                            <i class="fas fa-download text-gray-600"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-4 py-6">
+            
+            <!-- LAURA Finance AI Alert - Professional Design -->
+            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-red-600 via-red-700 to-purple-700 p-6 mb-6 shadow-2xl animate-fade-up">
+                <div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -mr-48 -mt-48"></div>
+                <div class="relative flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="p-4 bg-white/20 backdrop-blur rounded-2xl mr-5">
+                            <i class="fas fa-brain text-4xl text-white"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold text-white mb-3">LAURA Finance AI - Análise Preditiva</h2>
+                            <div class="grid grid-cols-3 gap-8">
+                                <div>
+                                    <p class="text-4xl font-bold text-white">R$ 245.8K</p>
+                                    <p class="text-white/90 text-sm mt-1">Glosas previstas em 7 dias</p>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="relative w-20 h-20 mr-3">
+                                        <svg class="transform -rotate-90" width="80" height="80">
+                                            <circle cx="40" cy="40" r="35" stroke="rgba(255,255,255,0.2)" stroke-width="8" fill="none"/>
+                                            <circle cx="40" cy="40" r="35" stroke="white" stroke-width="8" fill="none" 
+                                                    stroke-dasharray="220" stroke-dashoffset="61.6" stroke-linecap="round"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <span class="text-2xl font-bold text-white">72%</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="text-white/90 text-sm">Risk Score</p>
+                                        <p class="text-xs text-white/70">Alto Risco</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="text-4xl font-bold text-white">31</p>
+                                    <p class="text-white/90 text-sm mt-1">Jornadas em risco</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="showJornadasRisco()" class="px-6 py-3 bg-white text-red-700 rounded-xl font-bold hover:shadow-lg transition-all">
+                        <i class="fas fa-users-medical mr-2"></i>Ver Jornadas em Risco
+                    </button>
+                </div>
+            </div>
+
+            <!-- 5 KPIs Premium Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+                <!-- Glosas Identificadas -->
+                <div class="kpi-card-premium p-5 rounded-2xl shadow-lg cursor-pointer" onclick="showExtratoKPI('identificadas')">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="p-3 bg-gradient-to-br from-red-100 to-red-200 rounded-xl">
+                            <i class="fas fa-exclamation-circle text-red-600 text-xl"></i>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs font-bold text-red-600">↑ 8.3%</span>
+                            <i class="fas fa-info-circle text-gray-400 text-xs ml-1"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">R$ 45.678</h3>
+                    <p class="text-xs text-gray-600 mt-1 font-medium">Glosas Identificadas</p>
+                    <div class="mt-3">
+                        <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-red-400 to-red-600 rounded-full" style="width: 65%"></div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">142 ocorrências</p>
+                    </div>
+                </div>
+
+                <!-- Glosas Revertidas -->
+                <div class="kpi-card-premium p-5 rounded-2xl shadow-lg cursor-pointer" onclick="showExtratoKPI('revertidas')">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="p-3 bg-gradient-to-br from-green-100 to-green-200 rounded-xl">
+                            <i class="fas fa-check-double text-green-600 text-xl"></i>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs font-bold text-green-600">85%</span>
+                            <i class="fas fa-info-circle text-gray-400 text-xs ml-1"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">R$ 285.432</h3>
+                    <p class="text-xs text-gray-600 mt-1 font-medium">Glosas Revertidas</p>
+                    <div class="mt-3">
+                        <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-green-400 to-green-600 rounded-full" style="width: 85%"></div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Taxa de sucesso</p>
+                    </div>
+                </div>
+
+                <!-- ROI Otimização -->
+                <div class="kpi-card-premium p-5 rounded-2xl shadow-lg cursor-pointer" onclick="showExtratoKPI('roi')">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="p-3 bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl">
+                            <i class="fas fa-chart-line text-purple-600 text-xl"></i>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs font-bold text-purple-600">5.2x</span>
+                            <i class="fas fa-info-circle text-gray-400 text-xs ml-1"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">5.2x</h3>
+                    <p class="text-xs text-gray-600 mt-1 font-medium">ROI Otimização</p>
+                    <div class="mt-3">
+                        <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-purple-400 to-purple-600 rounded-full" style="width: 95%"></div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">R$ 3.64M economizado</p>
+                    </div>
+                </div>
+
+                <!-- Tempo Médio -->
+                <div class="kpi-card-premium p-5 rounded-2xl shadow-lg cursor-pointer" onclick="showExtratoKPI('tempo')">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="p-3 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl">
+                            <i class="fas fa-clock text-blue-600 text-xl"></i>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs font-bold text-blue-600">↓ 2d</span>
+                            <i class="fas fa-info-circle text-gray-400 text-xs ml-1"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">3.5 dias</h3>
+                    <p class="text-xs text-gray-600 mt-1 font-medium">Tempo Médio Reversão</p>
+                    <div class="mt-3">
+                        <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-blue-400 to-blue-600 rounded-full" style="width: 75%"></div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Melhor que média</p>
+                    </div>
+                </div>
+
+                <!-- Controle OPME -->
+                <div class="kpi-card-premium p-5 rounded-2xl shadow-lg cursor-pointer" onclick="showExtratoKPI('opme')">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="p-3 bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl">
+                            <i class="fas fa-boxes text-orange-600 text-xl"></i>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs font-bold text-orange-600">94%</span>
+                            <i class="fas fa-info-circle text-gray-400 text-xs ml-1"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">R$ 567.890</h3>
+                    <p class="text-xs text-gray-600 mt-1 font-medium">Controle OPME</p>
+                    <div class="mt-3">
+                        <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-orange-400 to-orange-600 rounded-full" style="width: 94%"></div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Conformidade</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Left Column -->
+                <div class="lg:col-span-2 space-y-6">
+                    
+                    <!-- Enhanced Análise Detalhada de Glosas -->
+                    <div class="glass-premium rounded-2xl p-6 shadow-xl">
+                        <div class="flex items-center justify-between mb-5">
+                            <h3 class="text-xl font-bold text-gray-900">Análise Detalhada de Glosas</h3>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-xs text-gray-500">Atualizado há 5 min</span>
+                                <div class="w-2 h-2 bg-green-500 rounded-full pulse-dot"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Premium Tabs -->
+                        <div class="tab-nav-premium flex space-x-2 mb-6">
+                            <button onclick="showGlosaTab('causa')" id="tab-causa" class="tab-button active px-4 py-2 text-sm font-medium">
+                                <i class="fas fa-exclamation-triangle mr-2"></i>Por Causa
+                            </button>
+                            <button onclick="showGlosaTab('convenio')" id="tab-convenio" class="tab-button px-4 py-2 text-sm font-medium text-gray-600">
+                                <i class="fas fa-hospital mr-2"></i>Por Convênio
+                            </button>
+                            <button onclick="showGlosaTab('unidade')" id="tab-unidade" class="tab-button px-4 py-2 text-sm font-medium text-gray-600">
+                                <i class="fas fa-building mr-2"></i>Por Unidade
+                            </button>
+                            <button onclick="showGlosaTab('tendencia')" id="tab-tendencia" class="tab-button px-4 py-2 text-sm font-medium text-gray-600">
+                                <i class="fas fa-chart-line mr-2"></i>Tendência
+                            </button>
+                        </div>
+
+                        <!-- Tab Content with Enhanced Visualizations -->
+                        <div id="glosa-content">
+                            <!-- Por Causa (Default) -->
+                            <div id="content-causa" class="tab-content">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="chart-container" style="height: 250px;">
+                                        <canvas id="causaChart"></canvas>
+                                    </div>
+                                    <div class="space-y-3">
+                                        <div class="bg-gradient-to-r from-red-50 to-transparent p-4 rounded-xl border-l-4 border-red-500">
+                                            <div class="flex justify-between items-start">
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Documentação Incompleta</p>
+                                                    <p class="text-xs text-gray-500 mt-1">34 casos • 24% do total</p>
+                                                </div>
+                                                <div class="text-right">
+                                                    <p class="text-lg font-bold text-red-600">R$ 142.3K</p>
+                                                    <span class="text-xs px-2 py-1 bg-red-100 text-red-700 rounded-full">↑ 12%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-yellow-50 to-transparent p-4 rounded-xl border-l-4 border-yellow-500">
+                                            <div class="flex justify-between items-start">
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Autorização Prévia</p>
+                                                    <p class="text-xs text-gray-500 mt-1">28 casos • 20% do total</p>
+                                                </div>
+                                                <div class="text-right">
+                                                    <p class="text-lg font-bold text-yellow-600">R$ 98.7K</p>
+                                                    <span class="text-xs px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full">→ 0%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-blue-50 to-transparent p-4 rounded-xl border-l-4 border-blue-500">
+                                            <div class="flex justify-between items-start">
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Codificação Incorreta</p>
+                                                    <p class="text-xs text-gray-500 mt-1">52 casos • 37% do total</p>
+                                                </div>
+                                                <div class="text-right">
+                                                    <p class="text-lg font-bold text-blue-600">R$ 246.2K</p>
+                                                    <span class="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded-full">↓ 5%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hidden tabs content placeholders -->
+                            <div id="content-convenio" class="tab-content hidden">
+                                <div id="convenioChart" class="chart-container"></div>
+                            </div>
+                            <div id="content-unidade" class="tab-content hidden">
+                                <div id="unidadeChart" class="chart-container"></div>
+                            </div>
+                            <div id="content-tendencia" class="tab-content hidden">
+                                <div id="tendenciaChart" class="chart-container"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controle OPME Premium Table -->
+                    <div class="glass-premium rounded-2xl p-6 shadow-xl">
+                        <div class="flex justify-between items-center mb-5">
+                            <h3 class="text-xl font-bold text-gray-900">Controle OPME em Tempo Real</h3>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1.5 bg-gray-100 rounded-lg hover:bg-gray-200 transition-all text-sm">
+                                    <i class="fas fa-filter mr-1"></i>Filtrar
+                                </button>
+                                <button class="px-3 py-1.5 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-all text-sm">
+                                    <i class="fas fa-sync mr-1"></i>Atualizar
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="border-b border-gray-200">
+                                        <th class="text-left py-3 px-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">Material</th>
+                                        <th class="text-center py-3 px-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">Qtd</th>
+                                        <th class="text-right py-3 px-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">Custo Unit</th>
+                                        <th class="text-right py-3 px-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">Total</th>
+                                        <th class="text-left py-3 px-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">Fornecedor</th>
+                                        <th class="text-center py-3 px-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
+                                        <th class="text-center py-3 px-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="data-table-row border-b border-gray-100">
+                                        <td class="py-4 px-3">
+                                            <div>
+                                                <p class="font-semibold text-gray-900">Prótese Oncológica T4</p>
+                                                <p class="text-xs text-gray-500">PRO-T4-2024</p>
+                                            </div>
+                                        </td>
+                                        <td class="text-center py-4 px-3 font-medium">3</td>
+                                        <td class="text-right py-4 px-3 font-medium">R$ 45.000</td>
+                                        <td class="text-right py-4 px-3 font-bold text-gray-900">R$ 135.000</td>
+                                        <td class="py-4 px-3 text-sm">MedTech Solutions</td>
+                                        <td class="text-center py-4 px-3">
+                                            <span class="px-3 py-1 text-xs font-semibold text-white rounded-full status-badge-success">
+                                                Aprovado
+                                            </span>
+                                        </td>
+                                        <td class="text-center py-4 px-3">
+                                            <button onclick="showOPMEDetail('PRO-T4-2024')" class="text-blue-600 hover:text-blue-800 p-2 hover:bg-blue-50 rounded-lg transition-all">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="mt-5 flex justify-between items-center">
+                            <p class="text-sm text-gray-600">
+                                Total controlado: <span class="font-bold text-gray-900 text-lg">R$ 567.890</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="space-y-6">
+                    <!-- ROI Card Premium -->
+                    <div class="rounded-2xl bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 p-6 text-white shadow-2xl">
+                        <h3 class="text-lg font-bold mb-4">ROI em Tempo Real</h3>
+                        <div class="text-center mb-5">
+                            <p class="text-5xl font-bold">5.2x</p>
+                            <p class="text-sm opacity-90 mt-1">Retorno sobre Investimento</p>
+                        </div>
+                        <div class="space-y-3 border-t border-white/20 pt-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm opacity-90">Glosas Evitadas</span>
+                                <span class="font-bold text-lg">R$ 1.8M</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm opacity-90">Otimização OPME</span>
+                                <span class="font-bold text-lg">R$ 820K</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm opacity-90">Automação</span>
+                                <span class="font-bold text-lg">R$ 640K</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions Premium -->
+                    <div class="glass-premium rounded-2xl p-6 shadow-xl">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Ações Rápidas</h3>
+                        <div class="space-y-2">
+                            <button onclick="openDosseComercial()" class="w-full text-left px-4 py-3 bg-gradient-to-r from-sky-50 to-sky-100/50 hover:from-sky-100 hover:to-sky-200/50 rounded-xl transition-all flex items-center justify-between group">
+                                <span class="text-sm font-semibold text-sky-700">
+                                    <i class="fas fa-briefcase mr-2"></i>
+                                    Dossiê Comercial
+                                </span>
+                                <i class="fas fa-arrow-right text-sky-400 group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                            <button onclick="novoRecurso()" class="w-full text-left px-4 py-3 bg-gradient-to-r from-blue-50 to-blue-100/50 hover:from-blue-100 hover:to-blue-200/50 rounded-xl transition-all flex items-center justify-between group">
+                                <span class="text-sm font-semibold text-blue-700">
+                                    <i class="fas fa-file-medical mr-2"></i>
+                                    Abrir Recurso
+                                </span>
+                                <i class="fas fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal: Dashboard Completo MELHORADO -->
+        <div id="dashboardCompleto" class="fixed inset-0 z-50 hidden">
+            <div class="modal-backdrop fixed inset-0" onclick="closeDashboardCompleto()"></div>
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="modal-content relative rounded-2xl max-w-[95vw] w-full max-h-[90vh] overflow-hidden animate-slide-in">
+                    <div class="sticky top-0 bg-white border-b border-gray-200 px-8 py-5 flex justify-between items-center z-10">
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-900">Dashboard Executivo Completo</h2>
+                            <p class="text-sm text-gray-500 mt-1">Visão consolidada de performance e riscos</p>
+                        </div>
+                        <button onclick="closeDashboardCompleto()" class="p-2 hover:bg-gray-100 rounded-xl transition-all">
+                            <i class="fas fa-times text-gray-500 text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="p-8 overflow-y-auto" style="max-height: calc(90vh - 100px);">
+                        <!-- Executive Summary Cards -->
+                        <div class="grid grid-cols-4 gap-5 mb-8">
+                            <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-5 text-white">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div class="p-2 bg-white/20 rounded-lg">
+                                        <i class="fas fa-dollar-sign text-xl"></i>
+                                    </div>
+                                    <span class="text-xs bg-white/20 px-2 py-1 rounded-full">↑ 15.3%</span>
+                                </div>
+                                <p class="text-3xl font-bold">R$ 12.4M</p>
+                                <p class="text-sm opacity-90 mt-1">Faturamento Total</p>
+                            </div>
+                            <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-5 text-white">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div class="p-2 bg-white/20 rounded-lg">
+                                        <i class="fas fa-shield-alt text-xl"></i>
+                                    </div>
+                                    <span class="text-xs bg-white/20 px-2 py-1 rounded-full">Meta: R$ 4M</span>
+                                </div>
+                                <p class="text-3xl font-bold">R$ 3.8M</p>
+                                <p class="text-sm opacity-90 mt-1">Glosas Evitadas</p>
+                            </div>
+                            <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-5 text-white">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div class="p-2 bg-white/20 rounded-lg">
+                                        <i class="fas fa-chart-pie text-xl"></i>
+                                    </div>
+                                    <span class="text-xs bg-white/20 px-2 py-1 rounded-full">ROI: 5.2x</span>
+                                </div>
+                                <p class="text-3xl font-bold">R$ 5.2M</p>
+                                <p class="text-sm opacity-90 mt-1">Economia Total</p>
+                            </div>
+                            <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl p-5 text-white">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div class="p-2 bg-white/20 rounded-lg">
+                                        <i class="fas fa-users text-xl"></i>
+                                    </div>
+                                    <span class="text-xs bg-white/20 px-2 py-1 rounded-full">31 em risco</span>
+                                </div>
+                                <p class="text-3xl font-bold">847</p>
+                                <p class="text-sm opacity-90 mt-1">Jornadas Ativas</p>
+                            </div>
+                        </div>
+
+                        <!-- Risk Analysis Section -->
+                        <div class="grid grid-cols-3 gap-6 mb-8">
+                            <!-- Jornadas de Risco -->
+                            <div class="bg-white rounded-2xl p-6 shadow-lg">
+                                <h4 class="font-bold text-gray-900 mb-4 flex items-center">
+                                    <i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>
+                                    Jornadas de Risco
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="p-3 bg-red-50 rounded-lg border-l-4 border-red-500">
+                                        <div class="flex justify-between items-center">
+                                            <div>
+                                                <p class="text-sm font-semibold text-gray-900">Alto Risco</p>
+                                                <p class="text-xs text-gray-600">Ação imediata</p>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-2xl font-bold text-red-600">12</p>
+                                                <p class="text-xs text-red-500">R$ 145K</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                                        <div class="flex justify-between items-center">
+                                            <div>
+                                                <p class="text-sm font-semibold text-gray-900">Médio Risco</p>
+                                                <p class="text-xs text-gray-600">Monitorar</p>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-2xl font-bold text-yellow-600">15</p>
+                                                <p class="text-xs text-yellow-500">R$ 87K</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                        <div class="flex justify-between items-center">
+                                            <div>
+                                                <p class="text-sm font-semibold text-gray-900">Baixo Risco</p>
+                                                <p class="text-xs text-gray-600">Acompanhar</p>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-2xl font-bold text-blue-600">4</p>
+                                                <p class="text-xs text-blue-500">R$ 13.8K</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fornecedores Críticos -->
+                            <div class="bg-white rounded-2xl p-6 shadow-lg">
+                                <h4 class="font-bold text-gray-900 mb-4 flex items-center">
+                                    <i class="fas fa-truck text-orange-500 mr-2"></i>
+                                    Fornecedores Críticos
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="p-3 bg-orange-50 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <p class="text-sm font-semibold text-gray-900">MedTech Solutions</p>
+                                                <p class="text-xs text-gray-600">3 pendências</p>
+                                            </div>
+                                            <span class="risk-indicator">
+                                                <span class="text-xs font-bold text-orange-600">R$ 245K</span>
+                                            </span>
+                                        </div>
+                                        <div class="mt-2">
+                                            <div class="h-1.5 bg-gray-200 rounded-full">
+                                                <div class="h-1.5 bg-orange-500 rounded-full" style="width: 75%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 bg-yellow-50 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <p class="text-sm font-semibold text-gray-900">OncoSupply BR</p>
+                                                <p class="text-xs text-gray-600">5 pendências</p>
+                                            </div>
+                                            <span class="text-xs font-bold text-yellow-600">R$ 178K</span>
+                                        </div>
+                                        <div class="mt-2">
+                                            <div class="h-1.5 bg-gray-200 rounded-full">
+                                                <div class="h-1.5 bg-yellow-500 rounded-full" style="width: 60%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Contratos em Risco -->
+                            <div class="bg-white rounded-2xl p-6 shadow-lg">
+                                <h4 class="font-bold text-gray-900 mb-4 flex items-center">
+                                    <i class="fas fa-file-contract text-purple-500 mr-2"></i>
+                                    Contratos em Risco
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="p-3 bg-purple-50 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <p class="text-sm font-semibold text-gray-900">Unimed Central</p>
+                                                <p class="text-xs text-gray-600">Vence em 15 dias</p>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-sm font-bold text-purple-600">R$ 2.3M</p>
+                                                <span class="text-xs px-2 py-1 bg-purple-100 text-purple-700 rounded-full">
+                                                    Renovação
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 bg-red-50 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <p class="text-sm font-semibold text-gray-900">SulAmérica</p>
+                                                <p class="text-xs text-gray-600">Negociação crítica</p>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-sm font-bold text-red-600">R$ 1.8M</p>
+                                                <span class="text-xs px-2 py-1 bg-red-100 text-red-700 rounded-full">
+                                                    Urgente
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Demandas Comerciais Impactadas -->
+                        <div class="bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl p-6 mb-8">
+                            <h4 class="font-bold text-gray-900 mb-5">Demandas Comerciais Impactadas</h4>
+                            <div class="grid grid-cols-4 gap-4">
+                                <div class="bg-white rounded-xl p-4 shadow-sm">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <i class="fas fa-procedures text-blue-600 text-2xl"></i>
+                                        <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">↑ 12%</span>
+                                    </div>
+                                    <p class="text-2xl font-bold text-gray-900">234</p>
+                                    <p class="text-xs text-gray-600">Cirurgias Complexas</p>
+                                    <p class="text-xs text-blue-600 mt-1">R$ 4.5M impacto</p>
+                                </div>
+                                <div class="bg-white rounded-xl p-4 shadow-sm">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <i class="fas fa-pills text-green-600 text-2xl"></i>
+                                        <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">↑ 8%</span>
+                                    </div>
+                                    <p class="text-2xl font-bold text-gray-900">567</p>
+                                    <p class="text-xs text-gray-600">Quimioterapias</p>
+                                    <p class="text-xs text-green-600 mt-1">R$ 2.8M impacto</p>
+                                </div>
+                                <div class="bg-white rounded-xl p-4 shadow-sm">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <i class="fas fa-radiation text-purple-600 text-2xl"></i>
+                                        <span class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">→ 0%</span>
+                                    </div>
+                                    <p class="text-2xl font-bold text-gray-900">189</p>
+                                    <p class="text-xs text-gray-600">Radioterapias</p>
+                                    <p class="text-xs text-purple-600 mt-1">R$ 1.2M impacto</p>
+                                </div>
+                                <div class="bg-white rounded-xl p-4 shadow-sm">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <i class="fas fa-microscope text-orange-600 text-2xl"></i>
+                                        <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full">↓ 5%</span>
+                                    </div>
+                                    <p class="text-2xl font-bold text-gray-900">412</p>
+                                    <p class="text-xs text-gray-600">Exames Especializados</p>
+                                    <p class="text-xs text-orange-600 mt-1">R$ 890K impacto</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Charts Grid -->
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="bg-white rounded-2xl p-6 shadow-lg">
+                                <h4 class="font-bold text-gray-900 mb-4">Evolução Financeira - 12 Meses</h4>
+                                <div style="height: 250px; position: relative;">
+                                    <canvas id="evolucaoFinanceira"></canvas>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-2xl p-6 shadow-lg">
+                                <h4 class="font-bold text-gray-900 mb-4">Distribuição de Custos</h4>
+                                <div style="height: 250px; position: relative;">
+                                    <canvas id="distribuicaoCustos"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal: Dossiê Comercial -->
+        <div id="modalDosseComercial" class="fixed inset-0 z-50 hidden">
+            <div class="modal-backdrop fixed inset-0" onclick="closeDosseComercial()"></div>
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="modal-content relative rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden">
+                    <div class="sticky top-0 bg-gradient-to-r from-sky-50 to-cyan-50 border-b px-8 py-5 flex justify-between items-center">
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-900">Dossiê Comercial - Negociação com Operadoras</h2>
+                            <p class="text-sm text-gray-600 mt-1">Dados estratégicos para fortalecer negociações</p>
+                        </div>
+                        <button onclick="closeDosseComercial()" class="p-2 hover:bg-white/50 rounded-xl transition-all">
+                            <i class="fas fa-times text-gray-500 text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="p-8 overflow-y-auto bg-gradient-to-br from-white to-sky-50/30" style="max-height: calc(90vh - 100px);">
+                        
+                        <!-- Success Metrics -->
+                        <div class="grid grid-cols-4 gap-4 mb-8">
+                            <div class="commercial-card rounded-xl p-5">
+                                <div class="flex justify-between items-start mb-3">
+                                    <i class="fas fa-trophy text-yellow-500 text-2xl"></i>
+                                    <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-semibold">
+                                        +23% vs ano
+                                    </span>
+                                </div>
+                                <p class="text-3xl font-bold text-gray-900">94.7%</p>
+                                <p class="text-sm text-gray-700 font-medium">Taxa de Sucesso</p>
+                                <p class="text-xs text-gray-600 mt-1">Tratamentos bem-sucedidos</p>
+                            </div>
+                            <div class="commercial-card rounded-xl p-5">
+                                <div class="flex justify-between items-start mb-3">
+                                    <i class="fas fa-chart-line text-green-500 text-2xl"></i>
+                                    <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-semibold">
+                                        Top 5 Brasil
+                                    </span>
+                                </div>
+                                <p class="text-3xl font-bold text-gray-900">R$ 487M</p>
+                                <p class="text-sm text-gray-700 font-medium">Volume Anual</p>
+                                <p class="text-xs text-gray-600 mt-1">Faturamento operadoras</p>
+                            </div>
+                            <div class="commercial-card rounded-xl p-5">
+                                <div class="flex justify-between items-start mb-3">
+                                    <i class="fas fa-award text-purple-500 text-2xl"></i>
+                                    <span class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full font-semibold">
+                                        Certificado
+                                    </span>
+                                </div>
+                                <p class="text-3xl font-bold text-gray-900">A+</p>
+                                <p class="text-sm text-gray-700 font-medium">Rating Qualidade</p>
+                                <p class="text-xs text-gray-600 mt-1">Acreditação internacional</p>
+                            </div>
+                            <div class="commercial-card rounded-xl p-5">
+                                <div class="flex justify-between items-start mb-3">
+                                    <i class="fas fa-users text-blue-500 text-2xl"></i>
+                                    <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full font-semibold">
+                                        NPS 78
+                                    </span>
+                                </div>
+                                <p class="text-3xl font-bold text-gray-900">12.847</p>
+                                <p class="text-sm text-gray-700 font-medium">Pacientes Atendidos</p>
+                                <p class="text-xs text-gray-600 mt-1">Últimos 12 meses</p>
+                            </div>
+                        </div>
+
+                        <!-- Cases de Sucesso -->
+                        <div class="bg-white rounded-2xl p-6 shadow-lg mb-8">
+                            <h3 class="text-xl font-bold text-gray-900 mb-5">Cases de Sucesso - Argumentos de Negociação</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="border-l-4 border-green-500 p-4 bg-green-50 rounded-lg">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="font-semibold text-gray-900">Programa de Oncologia Integrativa</h4>
+                                        <span class="text-xs bg-green-600 text-white px-2 py-1 rounded-full">Destaque</span>
+                                    </div>
+                                    <p class="text-sm text-gray-700 mb-3">
+                                        Redução de 34% no tempo de internação através de protocolos integrativos, 
+                                        resultando em economia de R$ 2.3M/ano para operadoras parceiras.
+                                    </p>
+                                    <div class="grid grid-cols-3 gap-2 text-xs">
+                                        <div class="bg-white p-2 rounded text-center">
+                                            <p class="font-bold text-green-600">-34%</p>
+                                            <p class="text-gray-600">Internação</p>
+                                        </div>
+                                        <div class="bg-white p-2 rounded text-center">
+                                            <p class="font-bold text-green-600">R$ 2.3M</p>
+                                            <p class="text-gray-600">Economia</p>
+                                        </div>
+                                        <div class="bg-white p-2 rounded text-center">
+                                            <p class="font-bold text-green-600">456</p>
+                                            <p class="text-gray-600">Pacientes</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="border-l-4 border-blue-500 p-4 bg-blue-50 rounded-lg">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="font-semibold text-gray-900">Fast-Track Diagnóstico</h4>
+                                        <span class="text-xs bg-blue-600 text-white px-2 py-1 rounded-full">Inovação</span>
+                                    </div>
+                                    <p class="text-sm text-gray-700 mb-3">
+                                        Diagnóstico completo em 72h com 98% de precisão. Redução de 45% nos custos 
+                                        com exames desnecessários e início precoce do tratamento.
+                                    </p>
+                                    <div class="grid grid-cols-3 gap-2 text-xs">
+                                        <div class="bg-white p-2 rounded text-center">
+                                            <p class="font-bold text-blue-600">72h</p>
+                                            <p class="text-gray-600">Diagnóstico</p>
+                                        </div>
+                                        <div class="bg-white p-2 rounded text-center">
+                                            <p class="font-bold text-blue-600">98%</p>
+                                            <p class="text-gray-600">Precisão</p>
+                                        </div>
+                                        <div class="bg-white p-2 rounded text-center">
+                                            <p class="font-bold text-blue-600">-45%</p>
+                                            <p class="text-gray-600">Custos</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Comparativo com Mercado -->
+                        <div class="grid grid-cols-2 gap-6 mb-8">
+                            <div class="bg-white rounded-2xl p-6 shadow-lg">
+                                <h4 class="font-bold text-gray-900 mb-4">Vantagens Competitivas</h4>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between p-3 bg-gradient-to-r from-green-50 to-transparent rounded-lg">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                            <span class="text-sm font-medium">Menor taxa de reoperação</span>
+                                        </div>
+                                        <span class="text-sm font-bold text-green-600">2.3% vs 8.7%</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gradient-to-r from-blue-50 to-transparent rounded-lg">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-check-circle text-blue-500 mr-3"></i>
+                                            <span class="text-sm font-medium">Tempo médio alta</span>
+                                        </div>
+                                        <span class="text-sm font-bold text-blue-600">3.5d vs 6.2d</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gradient-to-r from-purple-50 to-transparent rounded-lg">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-check-circle text-purple-500 mr-3"></i>
+                                            <span class="text-sm font-medium">Satisfação paciente</span>
+                                        </div>
+                                        <span class="text-sm font-bold text-purple-600">96% vs 71%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-2xl p-6 shadow-lg">
+                                <h4 class="font-bold text-gray-900 mb-4">Economia Gerada para Operadoras</h4>
+                                <div class="space-y-3">
+                                    <div class="p-3 bg-gradient-to-r from-emerald-50 to-green-50 rounded-lg">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-sm font-semibold text-gray-900">Unimed</span>
+                                            <span class="text-sm font-bold text-green-600">R$ 4.2M/ano</span>
+                                        </div>
+                                        <div class="h-2 bg-gray-200 rounded-full">
+                                            <div class="h-2 bg-gradient-to-r from-green-400 to-green-600 rounded-full" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-sm font-semibold text-gray-900">SulAmérica</span>
+                                            <span class="text-sm font-bold text-blue-600">R$ 3.8M/ano</span>
+                                        </div>
+                                        <div class="h-2 bg-gray-200 rounded-full">
+                                            <div class="h-2 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full" style="width: 78%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-sm font-semibold text-gray-900">Bradesco</span>
+                                            <span class="text-sm font-bold text-purple-600">R$ 2.9M/ano</span>
+                                        </div>
+                                        <div class="h-2 bg-gray-200 rounded-full">
+                                            <div class="h-2 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full" style="width: 65%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="flex justify-between items-center">
+                            <div class="flex space-x-3">
+                                <button class="px-5 py-2.5 bg-sky-600 text-white rounded-xl font-semibold hover:bg-sky-700 transition-all">
+                                    <i class="fas fa-download mr-2"></i>Exportar Dossiê PDF
+                                </button>
+                                <button class="px-5 py-2.5 bg-white border border-gray-300 rounded-xl font-semibold hover:bg-gray-50 transition-all">
+                                    <i class="fas fa-share mr-2"></i>Compartilhar
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-500">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                Dados atualizados em tempo real com base em 12.847 atendimentos
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal: Jornadas em Risco (View Completa) -->
+        <div id="modalJornadasRisco" class="fixed inset-0 z-50 hidden">
+            <div class="modal-backdrop fixed inset-0" onclick="closeJornadasRisco()"></div>
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="modal-content relative rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden">
+                    <div class="sticky top-0 bg-gradient-to-r from-red-50 to-orange-50 border-b px-6 py-4 flex justify-between items-center">
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-900">Jornadas (Pacientes) em Risco - Análise Preditiva</h2>
+                            <p class="text-sm text-gray-600">31 jornadas identificadas com alto risco de glosas</p>
+                        </div>
+                        <button onclick="closeJornadasRisco()" class="p-2 hover:bg-white/50 rounded-xl">
+                            <i class="fas fa-times text-gray-500"></i>
+                        </button>
+                    </div>
+                    <div class="p-6 overflow-y-auto" style="max-height: calc(90vh - 80px);">
+                        <!-- Filtros e Resumo -->
+                        <div class="flex justify-between items-center mb-6">
+                            <div class="flex space-x-2">
+                                <button class="px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-semibold">
+                                    Alto Risco (12)
+                                </button>
+                                <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-semibold hover:bg-gray-50">
+                                    Médio Risco (15)
+                                </button>
+                                <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-semibold hover:bg-gray-50">
+                                    Baixo Risco (4)
+                                </button>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm text-gray-600">Total em risco:</p>
+                                <p class="text-2xl font-bold text-red-600">R$ 245.8K</p>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 gap-4">
+                            <!-- Paciente 1 - Alto Risco -->
+                            <div class="bg-white border-2 border-red-200 rounded-xl p-5 hover:shadow-xl transition-all">
+                                <div class="flex justify-between items-start">
+                                    <div class="flex items-start space-x-4">
+                                        <div class="p-3 bg-red-100 rounded-xl">
+                                            <i class="fas fa-user-injured text-red-600 text-xl"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-semibold text-gray-900 text-lg">Maria Silva Santos - #PAC2024001</h4>
+                                            <p class="text-sm text-gray-600 mt-1">Oncologia • Dr. Roberto Mendes • Unidade Centro</p>
+                                            <div class="mt-3 grid grid-cols-2 gap-3">
+                                                <div class="text-xs">
+                                                    <i class="fas fa-calendar text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Internação: 15/09/2024 (12 dias)</span>
+                                                </div>
+                                                <div class="text-xs">
+                                                    <i class="fas fa-procedures text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Quimioterapia Ciclo 3</span>
+                                                </div>
+                                                <div class="text-xs">
+                                                    <i class="fas fa-hospital text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Convênio: Unimed Central</span>
+                                                </div>
+                                                <div class="text-xs">
+                                                    <i class="fas fa-exclamation-triangle text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Glosas anteriores: 3</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="mb-3">
+                                            <p class="text-3xl font-bold text-red-600">R$ 45.2K</p>
+                                            <p class="text-xs text-gray-500">Valor em risco</p>
+                                        </div>
+                                        <div class="mb-3">
+                                            <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-bold">
+                                                89% probabilidade
+                                            </span>
+                                        </div>
+                                        <div class="text-xs text-gray-600">
+                                            <p>Prazo: <span class="font-semibold text-red-600">3 dias</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 p-4 bg-red-50 rounded-lg">
+                                    <p class="text-xs font-semibold text-red-800 mb-2">
+                                        <i class="fas fa-exclamation-circle mr-1"></i>
+                                        Principais riscos identificados:
+                                    </p>
+                                    <div class="grid grid-cols-3 gap-2 text-xs text-red-700">
+                                        <div>• Documentação incompleta do procedimento</div>
+                                        <div>• Autorização prévia pendente há 5 dias</div>
+                                        <div>• OPME sem justificativa técnica anexada</div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 flex justify-between items-center">
+                                    <div class="flex space-x-2">
+                                        <button class="px-4 py-2 bg-red-600 text-white rounded-lg text-xs font-semibold hover:bg-red-700">
+                                            <i class="fas fa-exclamation-triangle mr-1"></i>Ação Imediata
+                                        </button>
+                                        <button class="px-4 py-2 border border-gray-300 rounded-lg text-xs font-semibold hover:bg-gray-50">
+                                            <i class="fas fa-phone mr-1"></i>Contatar Médico
+                                        </button>
+                                        <button class="px-4 py-2 border border-gray-300 rounded-lg text-xs font-semibold hover:bg-gray-50">
+                                            <i class="fas fa-file-medical mr-1"></i>Ver Prontuário
+                                        </button>
+                                    </div>
+                                    <span class="text-xs text-gray-500">
+                                        Última atualização: há 2 horas
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Paciente 2 - Alto Risco -->
+                            <div class="bg-white border-2 border-red-200 rounded-xl p-5 hover:shadow-xl transition-all">
+                                <div class="flex justify-between items-start">
+                                    <div class="flex items-start space-x-4">
+                                        <div class="p-3 bg-red-100 rounded-xl">
+                                            <i class="fas fa-user-injured text-red-600 text-xl"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-semibold text-gray-900 text-lg">João Carlos Oliveira - #PAC2024002</h4>
+                                            <p class="text-sm text-gray-600 mt-1">Cirurgia Oncológica • Dr. Ana Paula Costa • Unidade Sul</p>
+                                            <div class="mt-3 grid grid-cols-2 gap-3">
+                                                <div class="text-xs">
+                                                    <i class="fas fa-calendar text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Internação: 18/09/2024 (9 dias)</span>
+                                                </div>
+                                                <div class="text-xs">
+                                                    <i class="fas fa-procedures text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Ressecção Tumoral + Reconstrução</span>
+                                                </div>
+                                                <div class="text-xs">
+                                                    <i class="fas fa-hospital text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Convênio: SulAmérica</span>
+                                                </div>
+                                                <div class="text-xs">
+                                                    <i class="fas fa-exclamation-triangle text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Glosas anteriores: 5</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="mb-3">
+                                            <p class="text-3xl font-bold text-red-600">R$ 67.5K</p>
+                                            <p class="text-xs text-gray-500">Valor em risco</p>
+                                        </div>
+                                        <div class="mb-3">
+                                            <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-bold">
+                                                92% probabilidade
+                                            </span>
+                                        </div>
+                                        <div class="text-xs text-gray-600">
+                                            <p>Prazo: <span class="font-semibold text-red-600">2 dias</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 p-4 bg-red-50 rounded-lg">
+                                    <p class="text-xs font-semibold text-red-800 mb-2">
+                                        <i class="fas fa-exclamation-circle mr-1"></i>
+                                        Principais riscos identificados:
+                                    </p>
+                                    <div class="grid grid-cols-3 gap-2 text-xs text-red-700">
+                                        <div>• OPME de alto custo sem parecer técnico</div>
+                                        <div>• Tempo de internação acima do protocolo</div>
+                                        <div>• Medicamentos off-label utilizados</div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 flex justify-between items-center">
+                                    <div class="flex space-x-2">
+                                        <button class="px-4 py-2 bg-red-600 text-white rounded-lg text-xs font-semibold hover:bg-red-700">
+                                            <i class="fas fa-exclamation-triangle mr-1"></i>Ação Imediata
+                                        </button>
+                                        <button class="px-4 py-2 border border-gray-300 rounded-lg text-xs font-semibold hover:bg-gray-50">
+                                            <i class="fas fa-phone mr-1"></i>Contatar Médico
+                                        </button>
+                                        <button class="px-4 py-2 border border-gray-300 rounded-lg text-xs font-semibold hover:bg-gray-50">
+                                            <i class="fas fa-file-medical mr-1"></i>Ver Prontuário
+                                        </button>
+                                    </div>
+                                    <span class="text-xs text-gray-500">
+                                        Última atualização: há 1 hora
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Paciente 3 - Médio Risco -->
+                            <div class="bg-white border-2 border-yellow-200 rounded-xl p-5 hover:shadow-xl transition-all">
+                                <div class="flex justify-between items-start">
+                                    <div class="flex items-start space-x-4">
+                                        <div class="p-3 bg-yellow-100 rounded-xl">
+                                            <i class="fas fa-user-injured text-yellow-600 text-xl"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-semibold text-gray-900 text-lg">Ana Paula Ferreira - #PAC2024003</h4>
+                                            <p class="text-sm text-gray-600 mt-1">Radioterapia • Dr. Carlos Eduardo • Unidade Norte</p>
+                                            <div class="mt-3 grid grid-cols-2 gap-3">
+                                                <div class="text-xs">
+                                                    <i class="fas fa-calendar text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Tratamento: 20/09/2024 (Sessão 15/30)</span>
+                                                </div>
+                                                <div class="text-xs">
+                                                    <i class="fas fa-procedures text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Radioterapia IMRT</span>
+                                                </div>
+                                                <div class="text-xs">
+                                                    <i class="fas fa-hospital text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Convênio: Bradesco Saúde</span>
+                                                </div>
+                                                <div class="text-xs">
+                                                    <i class="fas fa-exclamation-triangle text-gray-400 mr-1"></i>
+                                                    <span class="text-gray-600">Glosas anteriores: 1</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="mb-3">
+                                            <p class="text-3xl font-bold text-yellow-600">R$ 23.4K</p>
+                                            <p class="text-xs text-gray-500">Valor em risco</p>
+                                        </div>
+                                        <div class="mb-3">
+                                            <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold">
+                                                65% probabilidade
+                                            </span>
+                                        </div>
+                                        <div class="text-xs text-gray-600">
+                                            <p>Prazo: <span class="font-semibold text-yellow-600">5 dias</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 p-4 bg-yellow-50 rounded-lg">
+                                    <p class="text-xs font-semibold text-yellow-800 mb-2">
+                                        <i class="fas fa-exclamation-circle mr-1"></i>
+                                        Principais riscos identificados:
+                                    </p>
+                                    <div class="grid grid-cols-3 gap-2 text-xs text-yellow-700">
+                                        <div>• Número de sessões acima do autorizado</div>
+                                        <div>• Documentação de evolução incompleta</div>
+                                        <div>• Falta de reavaliação médica</div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 flex justify-between items-center">
+                                    <div class="flex space-x-2">
+                                        <button class="px-4 py-2 bg-yellow-600 text-white rounded-lg text-xs font-semibold hover:bg-yellow-700">
+                                            <i class="fas fa-clock mr-1"></i>Monitorar
+                                        </button>
+                                        <button class="px-4 py-2 border border-gray-300 rounded-lg text-xs font-semibold hover:bg-gray-50">
+                                            <i class="fas fa-file-medical mr-1"></i>Completar Docs
+                                        </button>
+                                    </div>
+                                    <span class="text-xs text-gray-500">
+                                        Última atualização: há 4 horas
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Resumo e Ações -->
+                        <div class="mt-6 p-4 bg-gray-100 rounded-xl">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-700">Ações em Massa</p>
+                                    <p class="text-xs text-gray-600">Aplicar para todos os casos selecionados</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700">
+                                        <i class="fas fa-file-export mr-1"></i>Exportar Lista
+                                    </button>
+                                    <button class="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700">
+                                        <i class="fas fa-users mr-1"></i>Notificar Equipes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal: OPME Detail (View Completa) -->
+        <div id="modalOPMEDetail" class="fixed inset-0 z-50 hidden">
+            <div class="modal-backdrop fixed inset-0" onclick="closeOPMEDetail()"></div>
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="modal-content relative rounded-2xl max-w-4xl w-full">
+                    <div class="bg-gradient-to-r from-orange-50 to-amber-50 border-b px-6 py-4 flex justify-between items-center">
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-900">Detalhes do Material OPME</h2>
+                            <p class="text-sm text-gray-600">Informações completas do item</p>
+                        </div>
+                        <button onclick="closeOPMEDetail()" class="p-2 hover:bg-white/50 rounded-xl">
+                            <i class="fas fa-times text-gray-500"></i>
+                        </button>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-2 gap-6">
+                            <!-- Informações do Material -->
+                            <div class="bg-white rounded-xl p-5 border border-gray-200">
+                                <h3 class="font-semibold text-gray-900 mb-4 flex items-center">
+                                    <i class="fas fa-box text-orange-500 mr-2"></i>
+                                    Informações do Material
+                                </h3>
+                                <dl class="space-y-3">
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Código:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">PRO-T4-2024</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Descrição:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">Prótese Oncológica T4</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Categoria:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">Próteses Especializadas</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Fornecedor:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">MedTech Solutions</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">CNPJ Fornecedor:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">12.345.678/0001-90</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Valor Unitário:</dt>
+                                        <dd class="text-sm font-bold text-green-600">R$ 45.000,00</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Quantidade:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">3 unidades</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2">
+                                        <dt class="text-sm text-gray-600">Valor Total:</dt>
+                                        <dd class="text-lg font-bold text-green-600">R$ 135.000,00</dd>
+                                    </div>
+                                </dl>
+                            </div>
+
+                            <!-- Informações Clínicas -->
+                            <div class="bg-white rounded-xl p-5 border border-gray-200">
+                                <h3 class="font-semibold text-gray-900 mb-4 flex items-center">
+                                    <i class="fas fa-user-md text-blue-500 mr-2"></i>
+                                    Informações Clínicas
+                                </h3>
+                                <dl class="space-y-3">
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Paciente:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">João Carlos Silva</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">ID Paciente:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">#PAC2024156</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Médico Solicitante:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">Dr. Roberto Mendes</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">CRM:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">SP-123456</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Data Solicitação:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">15/09/2024</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Procedimento:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">Artroplastia Total Oncológica</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 border-b border-gray-100">
+                                        <dt class="text-sm text-gray-600">Convênio:</dt>
+                                        <dd class="text-sm font-semibold text-gray-900">Unimed Central</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2">
+                                        <dt class="text-sm text-gray-600">Status Autorização:</dt>
+                                        <dd>
+                                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">
+                                                Aprovado
+                                            </span>
+                                        </dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </div>
+
+                        <!-- Justificativa Técnica -->
+                        <div class="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-5">
+                            <h4 class="font-semibold text-blue-900 mb-3 flex items-center">
+                                <i class="fas fa-clipboard-check text-blue-600 mr-2"></i>
+                                Justificativa Técnica
+                            </h4>
+                            <p class="text-sm text-blue-800 leading-relaxed">
+                                Paciente com diagnóstico de osteossarcoma em estágio avançado, necessitando de artroplastia 
+                                total com prótese oncológica especializada. O material específico (PRO-T4-2024) é indicado 
+                                devido às características anatômicas do paciente e necessidade de preservação máxima do 
+                                tecido ósseo saudável. A prótese escolhida oferece melhor biocompatibilidade e durabilidade 
+                                para o caso específico, com expectativa de sobrevida superior a 10 anos. Protocolo aprovado 
+                                pela comissão de OPME do hospital em 14/09/2024.
+                            </p>
+                        </div>
+
+                        <!-- Documentos Anexados -->
+                        <div class="mt-6 bg-gray-50 rounded-xl p-5">
+                            <h4 class="font-semibold text-gray-900 mb-3 flex items-center">
+                                <i class="fas fa-paperclip text-gray-600 mr-2"></i>
+                                Documentos Anexados
+                            </h4>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-file-pdf text-red-500 mr-3"></i>
+                                        <div>
+                                            <p class="text-sm font-medium">Laudo Médico</p>
+                                            <p class="text-xs text-gray-500">PDF • 2.3 MB</p>
+                                        </div>
+                                    </div>
+                                    <button class="text-blue-600 hover:text-blue-800">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-file-pdf text-red-500 mr-3"></i>
+                                        <div>
+                                            <p class="text-sm font-medium">Autorização Convênio</p>
+                                            <p class="text-xs text-gray-500">PDF • 856 KB</p>
+                                        </div>
+                                    </div>
+                                    <button class="text-blue-600 hover:text-blue-800">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-file-image text-blue-500 mr-3"></i>
+                                        <div>
+                                            <p class="text-sm font-medium">Imagens Radiológicas</p>
+                                            <p class="text-xs text-gray-500">DICOM • 45.2 MB</p>
+                                        </div>
+                                    </div>
+                                    <button class="text-blue-600 hover:text-blue-800">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-file-alt text-gray-500 mr-3"></i>
+                                        <div>
+                                            <p class="text-sm font-medium">Nota Fiscal</p>
+                                            <p class="text-xs text-gray-500">XML • 128 KB</p>
+                                        </div>
+                                    </div>
+                                    <button class="text-blue-600 hover:text-blue-800">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ações -->
+                        <div class="mt-6 flex justify-between items-center">
+                            <div class="flex space-x-2">
+                                <button class="px-4 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700">
+                                    <i class="fas fa-check mr-2"></i>Validar Material
+                                </button>
+                                <button class="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700">
+                                    <i class="fas fa-edit mr-2"></i>Editar
+                                </button>
+                                <button class="px-4 py-2 border border-gray-300 rounded-lg font-semibold hover:bg-gray-50">
+                                    <i class="fas fa-print mr-2"></i>Imprimir
+                                </button>
+                            </div>
+                            <span class="text-xs text-gray-500">
+                                Última atualização: 20/09/2024 às 14:35
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal: KPI Extrato (View Completa para cada KPI) -->
+        <div id="modalKPIExtrato" class="fixed inset-0 z-50 hidden">
+            <div class="modal-backdrop fixed inset-0" onclick="closeKPIExtrato()"></div>
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="modal-content relative rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden">
+                    <div id="kpiExtratoHeader" class="sticky top-0 bg-white border-b px-6 py-4 flex justify-between items-center">
+                        <div>
+                            <h2 id="kpiExtratoTitle" class="text-xl font-bold text-gray-900">Extrato Detalhado</h2>
+                            <p id="kpiExtratoSubtitle" class="text-sm text-gray-600">Análise completa do período</p>
+                        </div>
+                        <button onclick="closeKPIExtrato()" class="p-2 hover:bg-gray-100 rounded-xl">
+                            <i class="fas fa-times text-gray-500"></i>
+                        </button>
+                    </div>
+                    <div id="kpiExtratoContent" class="p-6 overflow-y-auto" style="max-height: calc(90vh - 80px);">
+                        <!-- Dynamic content based on KPI type -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Initialize Charts with proper configuration
+            Chart.defaults.responsive = true;
+            Chart.defaults.maintainAspectRatio = false;
+
+            // Initialize Causa Chart
+            const causaCtx = document.getElementById('causaChart');
+            if (causaCtx) {
+                const causaChart = new Chart(causaCtx.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Documentação', 'Autorização', 'Codificação', 'Outros'],
+                        datasets: [{
+                            data: [142300, 98700, 246200, 85000],
+                            backgroundColor: [
+                                'rgba(239, 68, 68, 0.9)',
+                                'rgba(245, 158, 11, 0.9)',
+                                'rgba(59, 130, 246, 0.9)',
+                                'rgba(139, 92, 246, 0.9)'
+                            ],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    padding: 10,
+                                    font: { size: 10 }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Tab Management
+            function showGlosaTab(tab) {
+                document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+                document.querySelectorAll('.tab-button').forEach(el => {
+                    el.classList.remove('active');
+                    el.classList.add('text-gray-600');
+                });
+                
+                document.getElementById('content-' + tab).classList.remove('hidden');
+                document.getElementById('tab-' + tab).classList.add('active');
+                document.getElementById('tab-' + tab).classList.remove('text-gray-600');
+                
+                // Initialize dynamic charts
+                if (tab === 'convenio' && !window.convenioInit) {
+                    initConvenioChart();
+                } else if (tab === 'unidade' && !window.unidadeInit) {
+                    initUnidadeChart();
+                } else if (tab === 'tendencia' && !window.tendenciaInit) {
+                    initTendenciaChart();
+                }
+            }
+
+            function initConvenioChart() {
+                const container = document.getElementById('convenioChart');
+                container.innerHTML = '<canvas id="convenioCanvas"></canvas>';
+                const ctx = document.getElementById('convenioCanvas').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Unimed', 'SulAmérica', 'Bradesco', 'Amil', 'Outros'],
+                        datasets: [{
+                            label: 'Valor Glosas',
+                            data: [185000, 142000, 98000, 87000, 60200],
+                            backgroundColor: 'rgba(59, 130, 246, 0.8)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return 'R$ ' + (value/1000).toFixed(0) + 'K';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+                window.convenioInit = true;
+            }
+
+            function initUnidadeChart() {
+                const container = document.getElementById('unidadeChart');
+                container.innerHTML = '<canvas id="unidadeCanvas"></canvas>';
+                const ctx = document.getElementById('unidadeCanvas').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Centro', 'Sul', 'Norte', 'Oeste'],
+                        datasets: [{
+                            label: 'Glosas por Unidade',
+                            data: [245000, 187000, 98000, 42200],
+                            backgroundColor: ['#10b981', '#f59e0b', '#ef4444', '#8b5cf6']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: 'y',
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return 'R$ ' + (value/1000).toFixed(0) + 'K';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+                window.unidadeInit = true;
+            }
+
+            function initTendenciaChart() {
+                const container = document.getElementById('tendenciaChart');
+                container.innerHTML = '<canvas id="tendenciaCanvas"></canvas>';
+                const ctx = document.getElementById('tendenciaCanvas').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                        datasets: [{
+                            label: 'Tendência de Glosas',
+                            data: [450000, 470000, 460000, 485000, 475000, 487200],
+                            borderColor: '#ef4444',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return 'R$ ' + (value/1000).toFixed(0) + 'K';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+                window.tendenciaInit = true;
+            }
+
+            // Dashboard Functions
+            function openDashboardCompleto() {
+                document.getElementById('dashboardCompleto').classList.remove('hidden');
+                if (!window.dashboardInit) {
+                    setTimeout(initDashboardCharts, 100);
+                    window.dashboardInit = true;
+                }
+            }
+
+            function closeDashboardCompleto() {
+                document.getElementById('dashboardCompleto').classList.add('hidden');
+            }
+
+            function initDashboardCharts() {
+                // Evolution Chart
+                const evolCtx = document.getElementById('evolucaoFinanceira');
+                if (evolCtx) {
+                    new Chart(evolCtx.getContext('2d'), {
+                        type: 'line',
+                        data: {
+                            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                            datasets: [{
+                                label: 'Faturamento',
+                                data: [10.2, 10.5, 10.8, 11.2, 11.5, 11.8, 11.9, 12.1, 12.2, 12.3, 12.4, 12.4],
+                                borderColor: '#3b82f6',
+                                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                                tension: 0.4
+                            }, {
+                                label: 'Glosas',
+                                data: [0.5, 0.48, 0.47, 0.45, 0.44, 0.42, 0.41, 0.40, 0.38, 0.37, 0.35, 0.34],
+                                borderColor: '#ef4444',
+                                backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                                tension: 0.4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { position: 'bottom' }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        callback: function(value) {
+                                            return 'R$ ' + value + 'M';
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // Distribution Chart
+                const distCtx = document.getElementById('distribuicaoCustos');
+                if (distCtx) {
+                    new Chart(distCtx.getContext('2d'), {
+                        type: 'pie',
+                        data: {
+                            labels: ['OPME', 'Medicamentos', 'Procedimentos', 'Internação', 'Exames'],
+                            datasets: [{
+                                data: [35, 25, 20, 15, 5],
+                                backgroundColor: [
+                                    'rgba(59, 130, 246, 0.9)',
+                                    'rgba(16, 185, 129, 0.9)',
+                                    'rgba(245, 158, 11, 0.9)',
+                                    'rgba(239, 68, 68, 0.9)',
+                                    'rgba(139, 92, 246, 0.9)'
+                                ]
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { 
+                                    position: 'right',
+                                    labels: {
+                                        padding: 10,
+                                        font: { size: 11 }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+
+            // Dossiê Comercial
+            function openDosseComercial() {
+                document.getElementById('modalDosseComercial').classList.remove('hidden');
+            }
+
+            function closeDosseComercial() {
+                document.getElementById('modalDosseComercial').classList.add('hidden');
+            }
+
+            // Modal: Jornadas em Risco
+            function showJornadasRisco() {
+                document.getElementById('modalJornadasRisco').classList.remove('hidden');
+            }
+
+            function closeJornadasRisco() {
+                document.getElementById('modalJornadasRisco').classList.add('hidden');
+            }
+
+            // Modal: OPME Detail
+            function showOPMEDetail(code) {
+                document.getElementById('modalOPMEDetail').classList.remove('hidden');
+                // In a real app, would load specific OPME data based on code
+            }
+
+            function closeOPMEDetail() {
+                document.getElementById('modalOPMEDetail').classList.add('hidden');
+            }
+
+            // Modal: KPI Extrato
+            function showExtratoKPI(type) {
+                const modal = document.getElementById('modalKPIExtrato');
+                const header = document.getElementById('kpiExtratoHeader');
+                const title = document.getElementById('kpiExtratoTitle');
+                const subtitle = document.getElementById('kpiExtratoSubtitle');
+                const content = document.getElementById('kpiExtratoContent');
+                
+                const extratos = {
+                    identificadas: {
+                        title: 'Extrato: Glosas Identificadas',
+                        subtitle: 'R$ 45.678 - 142 ocorrências nos últimos 30 dias',
+                        headerBg: 'bg-gradient-to-r from-red-50 to-pink-50',
+                        content: \\\`
+                            <div class="space-y-6">
+                                <!-- Resumo Executivo -->
+                                <div class="bg-gradient-to-r from-red-50 to-pink-50 p-6 rounded-xl">
+                                    <h4 class="font-bold text-red-900 mb-4">Resumo Executivo</h4>
+                                    <div class="grid grid-cols-4 gap-4">
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Total Identificado</p>
+                                            <p class="text-2xl font-bold text-red-600">R$ 45.678</p>
+                                            <p class="text-xs text-red-500 mt-1">↑ 8.3% vs mês anterior</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Ocorrências</p>
+                                            <p class="text-2xl font-bold text-gray-900">142</p>
+                                            <p class="text-xs text-gray-500 mt-1">4.7 por dia</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Média por Caso</p>
+                                            <p class="text-2xl font-bold text-gray-900">R$ 322</p>
+                                            <p class="text-xs text-gray-500 mt-1">↓ R$ 45 vs média</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Taxa Crescimento</p>
+                                            <p class="text-2xl font-bold text-red-600">+8.3%</p>
+                                            <p class="text-xs text-red-500 mt-1">Atenção necessária</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Detalhamento Temporal -->
+                                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                                    <h4 class="font-bold text-gray-900 mb-4">Evolução Semanal</h4>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                                            <div class="flex items-center">
+                                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                                                    <span class="text-sm font-bold text-red-600">S1</span>
+                                                </div>
+                                                <div>
+                                                    <p class="font-semibold text-gray-900">Semana 1 (1-7 Set)</p>
+                                                    <p class="text-xs text-gray-600">35 ocorrências</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-lg font-bold text-gray-900">R$ 12.300</p>
+                                                <div class="flex items-center text-xs text-red-600">
+                                                    <i class="fas fa-arrow-up mr-1"></i>
+                                                    <span>15% acima da meta</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                                            <div class="flex items-center">
+                                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                                                    <span class="text-sm font-bold text-red-600">S2</span>
+                                                </div>
+                                                <div>
+                                                    <p class="font-semibold text-gray-900">Semana 2 (8-14 Set)</p>
+                                                    <p class="text-xs text-gray-600">32 ocorrências</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-lg font-bold text-gray-900">R$ 11.200</p>
+                                                <div class="flex items-center text-xs text-yellow-600">
+                                                    <i class="fas fa-arrow-right mr-1"></i>
+                                                    <span>Dentro da meta</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                                            <div class="flex items-center">
+                                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                                                    <span class="text-sm font-bold text-red-600">S3</span>
+                                                </div>
+                                                <div>
+                                                    <p class="font-semibold text-gray-900">Semana 3 (15-21 Set)</p>
+                                                    <p class="text-xs text-gray-600">38 ocorrências</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-lg font-bold text-gray-900">R$ 10.878</p>
+                                                <div class="flex items-center text-xs text-green-600">
+                                                    <i class="fas fa-arrow-down mr-1"></i>
+                                                    <span>8% abaixo da meta</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                                            <div class="flex items-center">
+                                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                                                    <span class="text-sm font-bold text-red-600">S4</span>
+                                                </div>
+                                                <div>
+                                                    <p class="font-semibold text-gray-900">Semana 4 (22-28 Set)</p>
+                                                    <p class="text-xs text-gray-600">37 ocorrências</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-lg font-bold text-gray-900">R$ 11.300</p>
+                                                <div class="flex items-center text-xs text-yellow-600">
+                                                    <i class="fas fa-arrow-right mr-1"></i>
+                                                    <span>Dentro da meta</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Top 5 Causas -->
+                                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                                    <h4 class="font-bold text-gray-900 mb-4">Top 5 Principais Causas</h4>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center flex-1">
+                                                <span class="text-sm font-semibold text-gray-700 w-20">1º</span>
+                                                <div class="flex-1">
+                                                    <p class="text-sm font-medium">Documentação Incompleta</p>
+                                                    <div class="mt-1 h-2 bg-gray-200 rounded-full">
+                                                        <div class="h-2 bg-red-500 rounded-full" style="width: 35%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-right ml-4">
+                                                <p class="font-bold">R$ 15.987</p>
+                                                <p class="text-xs text-gray-500">35%</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center flex-1">
+                                                <span class="text-sm font-semibold text-gray-700 w-20">2º</span>
+                                                <div class="flex-1">
+                                                    <p class="text-sm font-medium">Autorização Prévia</p>
+                                                    <div class="mt-1 h-2 bg-gray-200 rounded-full">
+                                                        <div class="h-2 bg-orange-500 rounded-full" style="width: 28%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-right ml-4">
+                                                <p class="font-bold">R$ 12.789</p>
+                                                <p class="text-xs text-gray-500">28%</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center flex-1">
+                                                <span class="text-sm font-semibold text-gray-700 w-20">3º</span>
+                                                <div class="flex-1">
+                                                    <p class="text-sm font-medium">Codificação Incorreta</p>
+                                                    <div class="mt-1 h-2 bg-gray-200 rounded-full">
+                                                        <div class="h-2 bg-yellow-500 rounded-full" style="width: 20%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-right ml-4">
+                                                <p class="font-bold">R$ 9.135</p>
+                                                <p class="text-xs text-gray-500">20%</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center flex-1">
+                                                <span class="text-sm font-semibold text-gray-700 w-20">4º</span>
+                                                <div class="flex-1">
+                                                    <p class="text-sm font-medium">OPME sem justificativa</p>
+                                                    <div class="mt-1 h-2 bg-gray-200 rounded-full">
+                                                        <div class="h-2 bg-blue-500 rounded-full" style="width: 10%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-right ml-4">
+                                                <p class="font-bold">R$ 4.567</p>
+                                                <p class="text-xs text-gray-500">10%</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center flex-1">
+                                                <span class="text-sm font-semibold text-gray-700 w-20">5º</span>
+                                                <div class="flex-1">
+                                                    <p class="text-sm font-medium">Outros</p>
+                                                    <div class="mt-1 h-2 bg-gray-200 rounded-full">
+                                                        <div class="h-2 bg-gray-500 rounded-full" style="width: 7%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-right ml-4">
+                                                <p class="font-bold">R$ 3.200</p>
+                                                <p class="text-xs text-gray-500">7%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        \\\`
+                    },
+                    revertidas: {
+                        title: 'Extrato: Glosas Revertidas',
+                        subtitle: 'R$ 285.432 - Taxa de sucesso 85%',
+                        headerBg: 'bg-gradient-to-r from-green-50 to-emerald-50',
+                        content: \\\`
+                            <div class="space-y-6">
+                                <!-- Performance de Reversão -->
+                                <div class="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl">
+                                    <h4 class="font-bold text-green-900 mb-4">Performance de Reversão</h4>
+                                    <div class="grid grid-cols-4 gap-4">
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Total Revertido</p>
+                                            <p class="text-2xl font-bold text-green-600">R$ 285.432</p>
+                                            <p class="text-xs text-green-500 mt-1">Meta superada</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Taxa Sucesso</p>
+                                            <p class="text-2xl font-bold text-green-600">85%</p>
+                                            <p class="text-xs text-gray-500 mt-1">↑ 5% vs meta</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Tempo Médio</p>
+                                            <p class="text-2xl font-bold text-blue-600">3.5 dias</p>
+                                            <p class="text-xs text-blue-500 mt-1">↓ 2 dias vs anterior</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Casos Resolvidos</p>
+                                            <p class="text-2xl font-bold text-gray-900">121</p>
+                                            <p class="text-xs text-gray-500 mt-1">De 142 total</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Histórico de Reversões -->
+                                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                                    <h4 class="font-bold text-gray-900 mb-4">Histórico de Reversões - Últimos 6 Meses</h4>
+                                    <canvas id="reversoesChart" height="200"></canvas>
+                                </div>
+
+                                <!-- Top Reversões por Categoria -->
+                                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                                    <h4 class="font-bold text-gray-900 mb-4">Reversões por Categoria</h4>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                                            <div class="flex justify-between items-start">
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Documentação Complementada</p>
+                                                    <p class="text-xs text-gray-600 mt-1">45 casos resolvidos</p>
+                                                </div>
+                                                <div class="text-right">
+                                                    <p class="text-lg font-bold text-green-600">R$ 95.8K</p>
+                                                    <span class="text-xs text-green-500">100% sucesso</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                            <div class="flex justify-between items-start">
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Autorização Obtida</p>
+                                                    <p class="text-xs text-gray-600 mt-1">38 casos resolvidos</p>
+                                                </div>
+                                                <div class="text-right">
+                                                    <p class="text-lg font-bold text-blue-600">R$ 78.4K</p>
+                                                    <span class="text-xs text-blue-500">95% sucesso</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500">
+                                            <div class="flex justify-between items-start">
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Codificação Corrigida</p>
+                                                    <p class="text-xs text-gray-600 mt-1">28 casos resolvidos</p>
+                                                </div>
+                                                <div class="text-right">
+                                                    <p class="text-lg font-bold text-purple-600">R$ 67.2K</p>
+                                                    <span class="text-xs text-purple-500">88% sucesso</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 bg-orange-50 rounded-lg border-l-4 border-orange-500">
+                                            <div class="flex justify-between items-start">
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">OPME Justificado</p>
+                                                    <p class="text-xs text-gray-600 mt-1">10 casos resolvidos</p>
+                                                </div>
+                                                <div class="text-right">
+                                                    <p class="text-lg font-bold text-orange-600">R$ 44.0K</p>
+                                                    <span class="text-xs text-orange-500">71% sucesso</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        \\\`
+                    },
+                    roi: {
+                        title: 'Extrato: ROI Otimização',
+                        subtitle: '5.2x de retorno - R$ 3.64M economizado em 12 meses',
+                        headerBg: 'bg-gradient-to-r from-purple-50 to-indigo-50',
+                        content: \\\`
+                            <div class="space-y-6">
+                                <!-- Análise de ROI -->
+                                <div class="bg-gradient-to-r from-purple-50 to-indigo-50 p-6 rounded-xl">
+                                    <h4 class="font-bold text-purple-900 mb-4">Análise de Retorno sobre Investimento</h4>
+                                    <div class="grid grid-cols-3 gap-4">
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Investimento Total</p>
+                                            <p class="text-2xl font-bold text-purple-600">R$ 700K</p>
+                                            <p class="text-xs text-gray-500 mt-1">Tecnologia + Equipe</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Retorno Obtido</p>
+                                            <p class="text-2xl font-bold text-green-600">R$ 3.64M</p>
+                                            <p class="text-xs text-gray-500 mt-1">Em 12 meses</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Multiplicador ROI</p>
+                                            <p class="text-2xl font-bold text-purple-600">5.2x</p>
+                                            <p class="text-xs text-purple-500 mt-1">Acima da meta 4x</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Breakdown de Economia -->
+                                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                                    <h4 class="font-bold text-gray-900 mb-4">Composição da Economia Total</h4>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Glosas Evitadas</span>
+                                                <span class="text-sm font-bold">R$ 1.8M (49.5%)</span>
+                                            </div>
+                                            <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                                                <div class="h-3 bg-gradient-to-r from-green-400 to-green-600 rounded-full" style="width: 49.5%"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Otimização OPME</span>
+                                                <span class="text-sm font-bold">R$ 820K (22.5%)</span>
+                                            </div>
+                                            <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                                                <div class="h-3 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full" style="width: 22.5%"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Automação de Processos</span>
+                                                <span class="text-sm font-bold">R$ 640K (17.6%)</span>
+                                            </div>
+                                            <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                                                <div class="h-3 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full" style="width: 17.6%"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Redução Tempo Internação</span>
+                                                <span class="text-sm font-bold">R$ 380K (10.4%)</span>
+                                            </div>
+                                            <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                                                <div class="h-3 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full" style="width: 10.4%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Projeção Futura -->
+                                <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-6">
+                                    <h4 class="font-bold text-indigo-900 mb-4">Projeção para Próximos 12 Meses</h4>
+                                    <div class="grid grid-cols-2 gap-6">
+                                        <div>
+                                            <p class="text-sm text-gray-700 mb-3">Com Melhorias Contínuas</p>
+                                            <div class="space-y-2">
+                                                <div class="flex justify-between">
+                                                    <span class="text-sm">ROI Esperado</span>
+                                                    <span class="font-bold text-indigo-600">6.8x</span>
+                                                </div>
+                                                <div class="flex justify-between">
+                                                    <span class="text-sm">Economia Projetada</span>
+                                                    <span class="font-bold text-indigo-600">R$ 4.76M</span>
+                                                </div>
+                                                <div class="flex justify-between">
+                                                    <span class="text-sm">Crescimento</span>
+                                                    <span class="font-bold text-green-600">+31%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm text-gray-700 mb-3">Oportunidades Identificadas</p>
+                                            <ul class="text-xs space-y-1 text-gray-600">
+                                                <li>• Expansão IA preditiva: +R$ 450K</li>
+                                                <li>• Novos convênios: +R$ 320K</li>
+                                                <li>• Processo cirúrgico: +R$ 280K</li>
+                                                <li>• Farmácia clínica: +R$ 160K</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        \\\`
+                    },
+                    tempo: {
+                        title: 'Extrato: Tempo Médio de Reversão',
+                        subtitle: '3.5 dias - Melhor performance do período',
+                        headerBg: 'bg-gradient-to-r from-blue-50 to-cyan-50',
+                        content: \\\`
+                            <div class="space-y-6">
+                                <!-- Métricas de Tempo -->
+                                <div class="bg-gradient-to-r from-blue-50 to-cyan-50 p-6 rounded-xl">
+                                    <h4 class="font-bold text-blue-900 mb-4">Performance de Tempo</h4>
+                                    <div class="grid grid-cols-4 gap-4">
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Tempo Médio Atual</p>
+                                            <p class="text-2xl font-bold text-blue-600">3.5 dias</p>
+                                            <p class="text-xs text-green-500 mt-1">↓ 2 dias vs anterior</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Melhor Tempo</p>
+                                            <p class="text-2xl font-bold text-green-600">1 dia</p>
+                                            <p class="text-xs text-gray-500 mt-1">15% dos casos</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Pior Tempo</p>
+                                            <p class="text-2xl font-bold text-red-600">12 dias</p>
+                                            <p class="text-xs text-gray-500 mt-1">3% dos casos</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Meta</p>
+                                            <p class="text-2xl font-bold text-gray-900">4 dias</p>
+                                            <p class="text-xs text-blue-500 mt-1">Meta superada</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Distribuição por Faixas de Tempo -->
+                                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                                    <h4 class="font-bold text-gray-900 mb-4">Distribuição por Tempo de Resolução</h4>
+                                    <div class="space-y-3">
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <div class="flex items-center">
+                                                    <div class="w-4 h-4 bg-green-500 rounded mr-2"></div>
+                                                    <span class="text-sm font-medium">0-2 dias (Excelente)</span>
+                                                </div>
+                                                <span class="text-sm font-bold">45 casos (37%)</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 bg-green-500 rounded-full" style="width: 37%"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <div class="flex items-center">
+                                                    <div class="w-4 h-4 bg-blue-500 rounded mr-2"></div>
+                                                    <span class="text-sm font-medium">3-4 dias (Bom)</span>
+                                                </div>
+                                                <span class="text-sm font-bold">48 casos (40%)</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 bg-blue-500 rounded-full" style="width: 40%"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <div class="flex items-center">
+                                                    <div class="w-4 h-4 bg-yellow-500 rounded mr-2"></div>
+                                                    <span class="text-sm font-medium">5-7 dias (Regular)</span>
+                                                </div>
+                                                <span class="text-sm font-bold">22 casos (18%)</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 bg-yellow-500 rounded-full" style="width: 18%"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <div class="flex items-center">
+                                                    <div class="w-4 h-4 bg-red-500 rounded mr-2"></div>
+                                                    <span class="text-sm font-medium">8+ dias (Crítico)</span>
+                                                </div>
+                                                <span class="text-sm font-bold">6 casos (5%)</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 bg-red-500 rounded-full" style="width: 5%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Fatores de Impacto -->
+                                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                                    <h4 class="font-bold text-gray-900 mb-4">Principais Fatores de Atraso</h4>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="p-4 bg-red-50 rounded-lg">
+                                            <div class="flex items-start">
+                                                <i class="fas fa-file-alt text-red-500 mt-1 mr-3"></i>
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Documentação Pendente</p>
+                                                    <p class="text-xs text-gray-600 mt-1">Média: +3.2 dias extras</p>
+                                                    <p class="text-xs text-red-600">28% dos atrasos</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 bg-orange-50 rounded-lg">
+                                            <div class="flex items-start">
+                                                <i class="fas fa-user-clock text-orange-500 mt-1 mr-3"></i>
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Resposta Convênio</p>
+                                                    <p class="text-xs text-gray-600 mt-1">Média: +2.8 dias extras</p>
+                                                    <p class="text-xs text-orange-600">24% dos atrasos</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 bg-yellow-50 rounded-lg">
+                                            <div class="flex items-start">
+                                                <i class="fas fa-hospital text-yellow-500 mt-1 mr-3"></i>
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Validação Interna</p>
+                                                    <p class="text-xs text-gray-600 mt-1">Média: +1.5 dias extras</p>
+                                                    <p class="text-xs text-yellow-600">18% dos atrasos</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 bg-purple-50 rounded-lg">
+                                            <div class="flex items-start">
+                                                <i class="fas fa-stethoscope text-purple-500 mt-1 mr-3"></i>
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Parecer Médico</p>
+                                                    <p class="text-xs text-gray-600 mt-1">Média: +1.2 dias extras</p>
+                                                    <p class="text-xs text-purple-600">12% dos atrasos</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        \\\`
+                    },
+                    opme: {
+                        title: 'Extrato: Controle OPME',
+                        subtitle: 'R$ 567.890 - 94% de conformidade',
+                        headerBg: 'bg-gradient-to-r from-orange-50 to-amber-50',
+                        content: \\\`
+                            <div class="space-y-6">
+                                <!-- Resumo OPME -->
+                                <div class="bg-gradient-to-r from-orange-50 to-amber-50 p-6 rounded-xl">
+                                    <h4 class="font-bold text-orange-900 mb-4">Controle de Materiais OPME</h4>
+                                    <div class="grid grid-cols-4 gap-4">
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Valor Total</p>
+                                            <p class="text-2xl font-bold text-orange-600">R$ 567.890</p>
+                                            <p class="text-xs text-gray-500 mt-1">23 itens ativos</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Conformidade</p>
+                                            <p class="text-2xl font-bold text-green-600">94%</p>
+                                            <p class="text-xs text-green-500 mt-1">↑ 3% vs mês anterior</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Economia Média</p>
+                                            <p class="text-2xl font-bold text-blue-600">18%</p>
+                                            <p class="text-xs text-blue-500 mt-1">vs tabela referência</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <p class="text-xs text-gray-600">Pendências</p>
+                                            <p class="text-2xl font-bold text-red-600">4</p>
+                                            <p class="text-xs text-red-500 mt-1">Ação necessária</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Top Fornecedores -->
+                                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                                    <h4 class="font-bold text-gray-900 mb-4">Principais Fornecedores</h4>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                            <div class="flex items-center">
+                                                <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-3">
+                                                    <i class="fas fa-building text-orange-600"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="font-semibold text-gray-900">MedTech Solutions</p>
+                                                    <p class="text-xs text-gray-600">8 produtos • Score: A+</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-lg font-bold">R$ 245.000</p>
+                                                <p class="text-xs text-green-600">Economia: 22%</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                            <div class="flex items-center">
+                                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                                    <i class="fas fa-building text-blue-600"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="font-semibold text-gray-900">OncoSupply BR</p>
+                                                    <p class="text-xs text-gray-600">5 produtos • Score: B+</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-lg font-bold">R$ 178.500</p>
+                                                <p class="text-xs text-green-600">Economia: 15%</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                            <div class="flex items-center">
+                                                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                                                    <i class="fas fa-building text-purple-600"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="font-semibold text-gray-900">BioMedical Corp</p>
+                                                    <p class="text-xs text-gray-600">6 produtos • Score: A</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-lg font-bold">R$ 89.300</p>
+                                                <p class="text-xs text-green-600">Economia: 19%</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                            <div class="flex items-center">
+                                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                                                    <i class="fas fa-building text-green-600"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="font-semibold text-gray-900">Outros (4 fornecedores)</p>
+                                                    <p class="text-xs text-gray-600">4 produtos • Score: B</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-lg font-bold">R$ 55.090</p>
+                                                <p class="text-xs text-green-600">Economia: 12%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Categorias de OPME -->
+                                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                                    <h4 class="font-bold text-gray-900 mb-4">Distribuição por Categoria</h4>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="p-4 bg-gradient-to-r from-blue-50 to-transparent rounded-lg">
+                                            <div class="flex justify-between items-center mb-3">
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Próteses</p>
+                                                    <p class="text-xs text-gray-600">7 itens</p>
+                                                </div>
+                                                <p class="text-lg font-bold text-blue-600">R$ 287.000</p>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 bg-blue-500 rounded-full" style="width: 50.5%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 bg-gradient-to-r from-green-50 to-transparent rounded-lg">
+                                            <div class="flex justify-between items-center mb-3">
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Órteses</p>
+                                                    <p class="text-xs text-gray-600">5 itens</p>
+                                                </div>
+                                                <p class="text-lg font-bold text-green-600">R$ 142.400</p>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 bg-green-500 rounded-full" style="width: 25%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 bg-gradient-to-r from-purple-50 to-transparent rounded-lg">
+                                            <div class="flex justify-between items-center mb-3">
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Materiais</p>
+                                                    <p class="text-xs text-gray-600">8 itens</p>
+                                                </div>
+                                                <p class="text-lg font-bold text-purple-600">R$ 98.600</p>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 bg-purple-500 rounded-full" style="width: 17.4%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 bg-gradient-to-r from-orange-50 to-transparent rounded-lg">
+                                            <div class="flex justify-between items-center mb-3">
+                                                <div>
+                                                    <p class="text-sm font-semibold text-gray-900">Equipamentos</p>
+                                                    <p class="text-xs text-gray-600">3 itens</p>
+                                                </div>
+                                                <p class="text-lg font-bold text-orange-600">R$ 39.890</p>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 bg-orange-500 rounded-full" style="width: 7.1%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        \\\`
+                    }
+                };
+                
+                const data = extratos[type] || extratos.identificadas;
+                
+                // Update header background
+                header.className = \\\`sticky top-0 \\\${data.headerBg} border-b px-6 py-4 flex justify-between items-center\\\`;
+                
+                title.textContent = data.title;
+                subtitle.textContent = data.subtitle;
+                content.innerHTML = data.content;
+                
+                modal.classList.remove('hidden');
+                
+                // Initialize charts if needed for specific extratos
+                if (type === 'revertidas' && !window.reversoesChartInit) {
+                    setTimeout(() => {
+                        const ctx = document.getElementById('reversoesChart');
+                        if (ctx) {
+                            new Chart(ctx.getContext('2d'), {
+                                type: 'line',
+                                data: {
+                                    labels: ['Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set'],
+                                    datasets: [{
+                                        label: 'Taxa de Reversão',
+                                        data: [75, 78, 80, 82, 83, 85],
+                                        borderColor: '#10b981',
+                                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                                        tension: 0.4
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    scales: {
+                                        y: {
+                                            beginAtZero: false,
+                                            min: 70,
+                                            max: 90,
+                                            ticks: {
+                                                callback: function(value) {
+                                                    return value + '%';
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                            window.reversoesChartInit = true;
+                        }
+                    }, 100);
+                }
+            }
+
+            function closeKPIExtrato() {
+                document.getElementById('modalKPIExtrato').classList.add('hidden');
+            }
+
+            function novoRecurso() {
+                alert('Abrindo formulário para novo recurso de glosa...');
+            }
+        <\/script>
+    </body>
+    </html>
+  `]))));var gt=Object.freeze,pa=Object.defineProperty,xa=(e,t)=>gt(pa(e,"raw",{value:gt(t||e.slice())})),bt;const ma=e=>e.html(Q(bt||(bt=xa([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -12564,7 +16393,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         <\/script>
     </body>
     </html>
-  `])))),xa=e=>e.redirect("/research-portal");var bt=Object.freeze,ua=Object.defineProperty,ba=(e,t)=>bt(ua(e,"raw",{value:bt(e.slice())})),vt;const va=e=>e.html(W(vt||(vt=ba([`
+  `])))),ga=e=>e.redirect("/research-portal");var ut=Object.freeze,ba=Object.defineProperty,ua=(e,t)=>ut(ba(e,"raw",{value:ut(e.slice())})),vt;const va=e=>e.html(Q(vt||(vt=ua([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -12843,7 +16672,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `]))));var ft=Object.freeze,fa=Object.defineProperty,ha=(e,t)=>ft(fa(e,"raw",{value:ft(e.slice())})),ht;const ya=e=>e.html(W(ht||(ht=ha([`
+  `]))));var ft=Object.freeze,fa=Object.defineProperty,ha=(e,t)=>ft(fa(e,"raw",{value:ft(e.slice())})),ht;const ya=e=>e.html(Q(ht||(ht=ha([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -13721,7 +17550,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         <\/script>
     </body>
     </html>
-  `])),ge(H("admin"))));new P;const wa=e=>e.html(`
+  `])),me(q("admin"))));new P;const wa=e=>e.html(`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -14026,7 +17855,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ns=(e,t,s)=>t in
         <\/script>
     </body>
     </html>
-  `);var yt=Object.freeze,Ca=Object.defineProperty,Aa=(e,t)=>yt(Ca(e,"raw",{value:yt(e.slice())})),wt;const v=new P;v.use("/api/*",qs());v.use("/static/*",Zt({root:"./public"}));v.use("/*.html",Zt({root:"./public"}));v.route("/api/patient",Re);v.route("/api/doctor",De);v.route("/api/navigator",Le);v.route("/api/financial",Oe);v.route("/api/wellness",Ne);v.route("/api/research",ye);v.route("/api/admin",oe);v.route("/api/ai",re);v.route("/api/portal",Q);v.route("/",Xt);v.route("/",es);v.route("/",ts);v.route("/",ss);v.route("/",Be);v.route("/",as);v.route("/",Y);v.get("/patient-view/:id",e=>{const t=e.req.param("id");return e.redirect(`/patient-view-integrated/${t}`,301)});v.get("/portal/patient",ta);v.get("/portal/doctor",ia);v.get("/portal/navigator",na);v.get("/portal/financial",ca);v.get("/portal/wellness",ga);v.get("/portal/research",xa);v.get("/portal/admin-master",va);v.get("/admin-master",ya);v.get("/test-integration",wa);v.get("/",e=>e.html(W(wt||(wt=Aa([`
+  `);var yt=Object.freeze,Ca=Object.defineProperty,Aa=(e,t)=>yt(Ca(e,"raw",{value:yt(e.slice())})),wt;const v=new P;v.use("/api/*",zs());v.use("/static/*",Zt({root:"./public"}));v.use("/*.html",Zt({root:"./public"}));v.route("/api/patient",Te);v.route("/api/doctor",De);v.route("/api/navigator",Le);v.route("/api/financial",Oe);v.route("/api/wellness",$e);v.route("/api/research",ye);v.route("/api/admin",oe);v.route("/api/ai",re);v.route("/api/portal",W);v.route("/",Xt);v.route("/",es);v.route("/",ts);v.route("/",ss);v.route("/",Be);v.route("/",as);v.route("/",Y);v.get("/patient-view/:id",e=>{const t=e.req.param("id");return e.redirect(`/patient-view-integrated/${t}`,301)});v.get("/portal/patient",ta);v.get("/portal/doctor",ia);v.get("/portal/navigator",la);v.get("/portal/financial",ca);v.get("/portal/wellness",ma);v.get("/portal/research",ga);v.get("/portal/admin-master",va);v.get("/admin-master",ya);v.get("/test-integration",wa);v.get("/",e=>e.html(Q(wt||(wt=Aa([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
