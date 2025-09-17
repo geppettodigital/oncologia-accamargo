@@ -1527,7 +1527,57 @@ export const financialUltimatePage = (c: any) => {
             </div>
         </div>
 
+        <script src="/static/financial-portal-functions.js"></script>
         <script>
+            // DEFINIR FUNÇÕES DOS MODAIS DIRETAMENTE AQUI
+            window.showJornadasRisco = function() {
+                console.log('Abrindo modal Jornadas em Risco');
+                const modal = document.getElementById('modalJornadasRisco');
+                if (modal) {
+                    modal.classList.remove('hidden');
+                } else {
+                    alert('Modal Jornadas em Risco está sendo carregado...');
+                }
+            }
+
+            window.showOPMEDetail = function(code) {
+                console.log('Abrindo modal OPME Detail para código:', code);
+                const modal = document.getElementById('modalOPMEDetail');
+                if (modal) {
+                    const codeElement = document.getElementById('opme-code');
+                    if (codeElement) {
+                        codeElement.textContent = code;
+                    }
+                    modal.classList.remove('hidden');
+                } else {
+                    alert('Detalhes do OPME ' + code + ' estão sendo carregados...');
+                }
+            }
+
+            window.showExtratoKPI = function(type) {
+                console.log('Abrindo extrato KPI:', type);
+                const modal = document.getElementById('modalKPIExtrato');
+                if (modal) {
+                    modal.classList.remove('hidden');
+                    // Aqui você pode adicionar lógica para mostrar conteúdo específico baseado no type
+                } else {
+                    alert('Extrato do KPI está sendo carregado...');
+                }
+            }
+
+            window.closeModal = function(modalId) {
+                console.log('Fechando modal:', modalId);
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.classList.add('hidden');
+                }
+            }
+
+            window.filterRisco = function(nivel) {
+                console.log('Filtrando por nível de risco:', nivel);
+                // Implementar filtro de risco
+            }
+
             // Initialize Charts with proper configuration
             Chart.defaults.responsive = true;
             Chart.defaults.maintainAspectRatio = false;
