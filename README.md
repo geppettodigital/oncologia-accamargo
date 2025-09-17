@@ -28,32 +28,34 @@ Plataforma completa de gestão oncológica integrada com LAURA Assistant, oferec
    - 5 colunas: Triagem → Diagnóstico → Tratamento → Acompanhamento → Alta
    - 6 pacientes exemplo com dados completos
    - Modal com 6 abas: Geral, Contatar, Agendar, Jornada, Checklist, IA Laura
-4. **Gestão Financeira** - Prevenção inteligente de glosas com IA preditiva [ENHANCED v4.0]
+4. **Gestão Financeira** - Prevenção inteligente de glosas com IA preditiva [ENHANCED v5.0]
    - **✅ LAURA Finance AI - Sistema Preditivo Completo**:
      - Alerta Principal: R$ 245.8K em glosas previstas nos próximos 7 dias
      - Risk Score: 72% de probabilidade com visualização em anel
      - 31 pacientes identificados necessitando ação preventiva imediata
-   - **✅ 5 KPIs Principais com Indicadores Visuais**:
-     - Glosas Identificadas: R$ 45.678 (↑ 8.3%)
-     - Glosas Revertidas: R$ 285.432 (85% taxa sucesso)
-     - ROI Otimização: 5.2x
-     - Tempo Médio Reversão: 3.5 dias (↓ 2d)
-     - Controle OPME: R$ 567.890 (94% conformidade)
-   - **✅ Análise Detalhada de Glosas com 4 Abas Navegáveis**:
-     - Por Causa: Gráfico doughnut com distribuição
-     - Por Convênio: Gráfico de barras por operadora
-     - Por Unidade: Análise horizontal por localização
-     - Tendência: Evolução temporal com projeções
-   - **✅ Controle OPME em Tempo Real - 10 Itens**:
+   - **✅ 5 KPIs Principais com Extratos Detalhados**:
+     - Glosas Identificadas: R$ 485.7K (↑ 12.3%)
+     - Glosas Revertidas: R$ 367.2K (75.6% taxa sucesso)
+     - ROI Otimização: 287%
+     - Tempo Médio Reversão: 4.2 dias (↓ 2.1d)
+     - Controle OPME: 98.7% conformidade
+   - **✅ Modais com Visões Detalhadas**:
+     - **Jornadas em Risco**: Visualização de pacientes com risco de glosa
+     - **OPME Detalhado**: Análise item por item com compliance
+     - **Extratos KPI**: Visualização completa de cada indicador
+   - **✅ Sistema de Filtros e Ações**:
+     - Filtros por nível de risco (alto/médio/baixo)
+     - Ações em lote para múltiplos pacientes
+     - Exportação de relatórios completos
+   - **✅ Controle OPME em Tempo Real**:
      - Tabela completa com fornecedores e status
-     - Códigos de cores (verde/amarelo/vermelho)
-     - Paginação e filtros avançados
-     - Total controlado: R$ 567.890
-   - **✅ Dashboard Completo (Modal Dedicado)**:
-     - Visão 360° com 4 métricas principais
-     - Gráficos consolidados de 12 meses
-     - Integração com métricas de outros portais
-     - ROI detalhado: R$ 3.64M economizado
+     - Análise de compliance por fornecedor
+     - Economia gerada: R$ 892K
+   - **✅ Integração Total com Portal Principal**:
+     - Acesso via: /portal/financial
+     - Funções JavaScript globais implementadas
+     - Script externo para garantir funcionamento dos modais
+     - Carregamento dinâmico via SPA
 5. **Bem-estar Integrado** - Suporte psicológico e qualidade de vida
 6. **Pesquisa Clínica** - Recrutamento e gestão de trials
    - **✅ Portal de Pesquisa Aprimorado**: Interface principal com navegação intuitiva
@@ -143,6 +145,7 @@ webapp/
 - **Local**: http://localhost:3000
 - **Sandbox**: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev
 - **Portal Navegador**: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev#navigator
+- **Portal Financeiro**: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev/portal/financial
 - **Portal de Pesquisa**: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev#research
 - **Views de Pesquisa**:
   - Estudos: https://3000-is0o3lqkacvyzl4g7t2eu-6532622b.e2b.dev/research/studies
@@ -178,9 +181,11 @@ webapp/
    - O modal é reutilizável em todos os contextos
    - Dados sincronizados em tempo real
 
-### Produção (quando deployado)
-- **Principal**: https://[project-name].pages.dev
-- **API Health**: https://[project-name].pages.dev/api/health
+### Produção
+- **Principal**: https://oncologia-accamargo.pages.dev
+- **Portal Financeiro**: https://oncologia-accamargo.pages.dev/portal/financial
+- **API Health**: https://oncologia-accamargo.pages.dev/api/health
+- **GitHub**: https://github.com/geppettodigital/oncologia-accamargo
 
 ## 🚀 Comandos Principais
 
@@ -231,7 +236,17 @@ pm2 logs oncologia-plataforma --nostream  # Ver logs
 
 ## 📝 Notas da Versão
 
-### v1.2.0 (Atual - Janeiro 2025)
+### v1.3.0 (Atual - 17 Janeiro 2025)
+- ✅ Portal Financeiro COMPLETAMENTE INTEGRADO com modais funcionais
+- ✅ 3 novas funcionalidades implementadas:
+  - Visualização de Jornadas em Risco de pacientes
+  - Visualização detalhada de OPME por código
+  - Extratos completos de cada KPI com gráficos
+- ✅ Script JavaScript global para garantir funcionamento dos modais
+- ✅ Integração total via /portal/financial
+- ✅ Deploy completo no Cloudflare Pages
+
+### v1.2.0
 - ✅ Portal de Pesquisa Clínica completamente aprimorado
 - ✅ 7 novas views especializadas para gestão de pesquisa
 - ✅ Integração com REDCap e sistemas de análise
