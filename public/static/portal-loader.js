@@ -203,18 +203,42 @@ function showError(message) {
 
 // Inicializar componentes específicos do portal
 function initializePortalComponents(portalType) {
-    // Inicializar Ansiedade de Laura se existir
-    if (document.getElementById('ai-concerns-container')) {
-        initializeAIConcerns(portalType);
+    console.log(`Inicializando componentes do portal: ${portalType}`);
+    
+    // Inicializar Portal Financeiro
+    if (portalType === 'financial') {
+        // Aguardar um momento para garantir que o DOM esteja pronto
+        setTimeout(() => {
+            if (window.FinancialPortalLoader && typeof window.FinancialPortalLoader.initialize === 'function') {
+                window.FinancialPortalLoader.initialize();
+                console.log('Portal Financeiro LAURA inicializado via loader');
+            } else if (typeof window.initializeFinancialPortal === 'function') {
+                window.initializeFinancialPortal();
+                console.log('Portal Financeiro LAURA inicializado diretamente');
+            } else {
+                console.log('Aguardando carregamento do Portal Financeiro...');
+                // Tentar novamente após um curto delay
+                setTimeout(() => {
+                    if (window.FinancialPortalLoader) {
+                        window.FinancialPortalLoader.initialize();
+                    }
+                }, 500);
+            }
+        }, 100);
     }
     
-    // Inicializar gráficos se existirem
+    // Inicializar Ansiedade de Laura se existir
+    if (document.getElementById('ai-concerns-container')) {
+        if (typeof initializeAIConcerns === 'function') {
+            initializeAIConcerns(portalType);
+        }
+    }
+    
+    // Inicializar gráficos gerais se existirem
     if (typeof Chart !== 'undefined' && typeof initializeCharts === 'function') {
         initializeCharts(portalType);
     }
     
-    // Inicializar outras funcionalidades específicas
-    // Por enquanto, essas funções não existem, então vamos apenas logar
     console.log(`Portal ${portalType} carregado com sucesso`);
 }
 

@@ -534,6 +534,7 @@ app.get('/', (c) => {
         </script>
     <script src="/static/portal-helpers.js"></script>
     <script src="/static/portal-functions.js"></script>
+    <script src="/static/financial-portal-loader.js"></script>
     <script src="/static/action-plan-system.js"></script>
     <script src="/static/action-plan-handlers.js"></script>
     </body>

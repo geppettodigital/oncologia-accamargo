@@ -18943,6 +18943,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         <\/script>
     <script src="/static/portal-helpers.js"><\/script>
     <script src="/static/portal-functions.js"><\/script>
+    <script src="/static/financial-portal-loader.js"><\/script>
     <script src="/static/action-plan-system.js"><\/script>
     <script src="/static/action-plan-handlers.js"><\/script>
     </body>

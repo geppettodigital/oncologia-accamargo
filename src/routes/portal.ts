@@ -1438,7 +1438,8 @@ portalRoutes.get('/navigator', async (c) => {
 
 // Portal Financeiro
 portalRoutes.get('/financial', async (c) => {
-    // Retornar o conteúdo do Portal Financeiro para carregamento dinâmico
+    // Retornar o conteúdo completo do Portal Financeiro LAURA para carregamento dinâmico
+    // Este conteúdo é idêntico ao servido em /portal/financial
     const { html, scripts } = financialPortalContent();
     return c.json({
         html: html,
