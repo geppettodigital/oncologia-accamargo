@@ -1531,38 +1531,51 @@ export const financialUltimatePage = (c: any) => {
         <script>
             // DEFINIR FUNÇÕES DOS MODAIS DIRETAMENTE AQUI
             window.showJornadasRisco = function() {
-                console.log('Abrindo modal Jornadas em Risco');
-                const modal = document.getElementById('modalJornadasRisco');
-                if (modal) {
-                    modal.classList.remove('hidden');
-                } else {
-                    alert('Modal Jornadas em Risco está sendo carregado...');
-                }
+                console.log('showJornadasRisco chamada');
+                setTimeout(() => {
+                    const modal = document.getElementById('modalJornadasRisco');
+                    console.log('Modal encontrado:', modal);
+                    if (modal) {
+                        modal.classList.remove('hidden');
+                        modal.style.display = 'block';
+                        console.log('Modal deveria estar visível agora');
+                    } else {
+                        console.error('Modal não encontrado no DOM');
+                        alert('Erro: Modal não encontrado. Recarregue a página.');
+                    }
+                }, 100);
             }
 
             window.showOPMEDetail = function(code) {
-                console.log('Abrindo modal OPME Detail para código:', code);
-                const modal = document.getElementById('modalOPMEDetail');
-                if (modal) {
-                    const codeElement = document.getElementById('opme-code');
-                    if (codeElement) {
-                        codeElement.textContent = code;
+                console.log('showOPMEDetail chamada para:', code);
+                setTimeout(() => {
+                    const modal = document.getElementById('modalOPMEDetail');
+                    if (modal) {
+                        const codeElement = document.getElementById('opme-code');
+                        if (codeElement) {
+                            codeElement.textContent = code;
+                        }
+                        modal.classList.remove('hidden');
+                        modal.style.display = 'block';
+                        console.log('Modal OPME visível');
+                    } else {
+                        console.error('Modal OPME não encontrado');
                     }
-                    modal.classList.remove('hidden');
-                } else {
-                    alert('Detalhes do OPME ' + code + ' estão sendo carregados...');
-                }
+                }, 100);
             }
 
             window.showExtratoKPI = function(type) {
-                console.log('Abrindo extrato KPI:', type);
-                const modal = document.getElementById('modalKPIExtrato');
-                if (modal) {
-                    modal.classList.remove('hidden');
-                    // Aqui você pode adicionar lógica para mostrar conteúdo específico baseado no type
-                } else {
-                    alert('Extrato do KPI está sendo carregado...');
-                }
+                console.log('showExtratoKPI chamada:', type);
+                setTimeout(() => {
+                    const modal = document.getElementById('modalKPIExtrato');
+                    if (modal) {
+                        modal.classList.remove('hidden');
+                        modal.style.display = 'block';
+                        console.log('Modal KPI visível para:', type);
+                    } else {
+                        console.error('Modal KPI não encontrado');
+                    }
+                }, 100);
             }
 
             window.closeModal = function(modalId) {
@@ -1570,7 +1583,21 @@ export const financialUltimatePage = (c: any) => {
                 const modal = document.getElementById(modalId);
                 if (modal) {
                     modal.classList.add('hidden');
+                    modal.style.display = 'none';
                 }
+            }
+            
+            // Função alternativa de fechar específica para cada modal
+            window.closeJornadasRisco = function() {
+                closeModal('modalJornadasRisco');
+            }
+            
+            window.closeOPMEDetail = function() {
+                closeModal('modalOPMEDetail');
+            }
+            
+            window.closeKPIExtrato = function() {
+                closeModal('modalKPIExtrato');
             }
 
             window.filterRisco = function(nivel) {
