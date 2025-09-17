@@ -27,6 +27,7 @@ import { patientPage } from './pages/patient'
 import { doctorPage } from './pages/doctor'
 import { navigatorPage } from './pages/navigator'
 import { financialPage } from './pages/financial'
+import { financialPageNew } from './pages/financial-new'
 import { wellnessPage } from './pages/wellness'
 import { researchPage } from './pages/research'
 import { adminMasterPage } from './pages/admin-master'
@@ -79,7 +80,7 @@ app.get('/patient-view/:id', (c) => {
 app.get('/portal/patient', patientPage)
 app.get('/portal/doctor', doctorPage)
 app.get('/portal/navigator', navigatorPage)
-app.get('/portal/financial', financialPage)
+app.get('/portal/financial', financialPageNew)
 app.get('/portal/wellness', wellnessPage)
 app.get('/portal/research', researchPage)
 app.get('/portal/admin-master', adminMasterPage)
