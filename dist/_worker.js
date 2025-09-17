@@ -1,4 +1,4 @@
-var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in e?rs(e,t,{enumerable:!0,configurable:!0,writable:!0,value:s}):e[t]=s;var g=(e,t,s)=>ls(e,typeof t!="symbol"?t+"":t,s),Je=(e,t,s)=>t.has(e)||et("Cannot "+s);var n=(e,t,s)=>(Je(e,t,"read from private field"),s?s.call(e):t.get(e)),u=(e,t,s)=>t.has(e)?et("Cannot add the same private member more than once"):t instanceof WeakSet?t.add(e):t.set(e,s),m=(e,t,s,a)=>(Je(e,t,"write to private field"),a?a.call(e,s):t.set(e,s),s),f=(e,t,s)=>(Je(e,t,"access private method"),s);var tt=(e,t,s,a)=>({set _(i){m(e,t,i,s)},get _(){return n(e,t,a)}});var st=(e,t,s)=>(a,i)=>{let o=-1;return r(0);async function r(d){if(d<=o)throw new Error("next() called multiple times");o=d;let l,c=!1,p;if(e[d]?(p=e[d][0][0],a.req.routeIndex=d):p=d===e.length&&i||void 0,p)try{l=await p(a,()=>r(d+1))}catch(x){if(x instanceof Error&&t)a.error=x,l=await t(x,a),c=!0;else throw x}else a.finalized===!1&&s&&(l=await s(a));return l&&(a.finalized===!1||c)&&(a.res=l),a}},ns=Symbol(),ds=async(e,t=Object.create(null))=>{const{all:s=!1,dot:a=!1}=t,o=(e instanceof Bt?e.raw.headers:e.headers).get("Content-Type");return o!=null&&o.startsWith("multipart/form-data")||o!=null&&o.startsWith("application/x-www-form-urlencoded")?cs(e,{all:s,dot:a}):{}};async function cs(e,t){const s=await e.formData();return s?ps(s,t):{}}function ps(e,t){const s=Object.create(null);return e.forEach((a,i)=>{t.all||i.endsWith("[]")?xs(s,i,a):s[i]=a}),t.dot&&Object.entries(s).forEach(([a,i])=>{a.includes(".")&&(ms(s,a,i),delete s[a])}),s}var xs=(e,t,s)=>{e[t]!==void 0?Array.isArray(e[t])?e[t].push(s):e[t]=[e[t],s]:t.endsWith("[]")?e[t]=[s]:e[t]=s},ms=(e,t,s)=>{let a=e;const i=t.split(".");i.forEach((o,r)=>{r===i.length-1?a[o]=s:((!a[o]||typeof a[o]!="object"||Array.isArray(a[o])||a[o]instanceof File)&&(a[o]=Object.create(null)),a=a[o])})},Mt=e=>{const t=e.split("/");return t[0]===""&&t.shift(),t},gs=e=>{const{groups:t,path:s}=bs(e),a=Mt(s);return us(a,t)},bs=e=>{const t=[];return e=e.replace(/\{[^}]+\}/g,(s,a)=>{const i=`@${a}`;return t.push([i,s]),i}),{groups:t,path:e}},us=(e,t)=>{for(let s=t.length-1;s>=0;s--){const[a]=t[s];for(let i=e.length-1;i>=0;i--)if(e[i].includes(a)){e[i]=e[i].replace(a,t[s][1]);break}}return e},Ne={},vs=(e,t)=>{if(e==="*")return"*";const s=e.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);if(s){const a=`${e}#${t}`;return Ne[a]||(s[2]?Ne[a]=t&&t[0]!==":"&&t[0]!=="*"?[a,s[1],new RegExp(`^${s[2]}(?=/${t})`)]:[e,s[1],new RegExp(`^${s[2]}$`)]:Ne[a]=[e,s[1],!0]),Ne[a]}return null},Ze=(e,t)=>{try{return t(e)}catch{return e.replace(/(?:%[0-9A-Fa-f]{2})+/g,s=>{try{return t(s)}catch{return s}})}},fs=e=>Ze(e,decodeURI),Dt=e=>{const t=e.url,s=t.indexOf("/",t.indexOf(":")+4);let a=s;for(;a<t.length;a++){const i=t.charCodeAt(a);if(i===37){const o=t.indexOf("?",a),r=t.slice(s,o===-1?void 0:o);return fs(r.includes("%25")?r.replace(/%25/g,"%2525"):r)}else if(i===63)break}return t.slice(s,a)},hs=e=>{const t=Dt(e);return t.length>1&&t.at(-1)==="/"?t.slice(0,-1):t},de=(e,t,...s)=>(s.length&&(t=de(t,...s)),`${(e==null?void 0:e[0])==="/"?"":"/"}${e}${t==="/"?"":`${(e==null?void 0:e.at(-1))==="/"?"":"/"}${(t==null?void 0:t[0])==="/"?t.slice(1):t}`}`),Lt=e=>{if(e.charCodeAt(e.length-1)!==63||!e.includes(":"))return null;const t=e.split("/"),s=[];let a="";return t.forEach(i=>{if(i!==""&&!/\:/.test(i))a+="/"+i;else if(/\:/.test(i))if(/\?/.test(i)){s.length===0&&a===""?s.push("/"):s.push(a);const o=i.replace("?","");a+="/"+o,s.push(a)}else a+="/"+i}),s.filter((i,o,r)=>r.indexOf(i)===o)},Ke=e=>/[%+]/.test(e)?(e.indexOf("+")!==-1&&(e=e.replace(/\+/g," ")),e.indexOf("%")!==-1?Ze(e,$t):e):e,Ot=(e,t,s)=>{let a;if(!s&&t&&!/[%+]/.test(t)){let r=e.indexOf(`?${t}`,8);for(r===-1&&(r=e.indexOf(`&${t}`,8));r!==-1;){const d=e.charCodeAt(r+t.length+1);if(d===61){const l=r+t.length+2,c=e.indexOf("&",l);return Ke(e.slice(l,c===-1?void 0:c))}else if(d==38||isNaN(d))return"";r=e.indexOf(`&${t}`,r+1)}if(a=/[%+]/.test(e),!a)return}const i={};a??(a=/[%+]/.test(e));let o=e.indexOf("?",8);for(;o!==-1;){const r=e.indexOf("&",o+1);let d=e.indexOf("=",o);d>r&&r!==-1&&(d=-1);let l=e.slice(o+1,d===-1?r===-1?void 0:r:d);if(a&&(l=Ke(l)),o=r,l==="")continue;let c;d===-1?c="":(c=e.slice(d+1,r===-1?void 0:r),a&&(c=Ke(c))),s?(i[l]&&Array.isArray(i[l])||(i[l]=[]),i[l].push(c)):i[l]??(i[l]=c)}return t?i[t]:i},ys=Ot,ws=(e,t)=>Ot(e,t,!0),$t=decodeURIComponent,at=e=>Ze(e,$t),me,S,z,Nt,Ft,Qe,H,At,Bt=(At=class{constructor(e,t="/",s=[[]]){u(this,z);g(this,"raw");u(this,me);u(this,S);g(this,"routeIndex",0);g(this,"path");g(this,"bodyCache",{});u(this,H,e=>{const{bodyCache:t,raw:s}=this,a=t[e];if(a)return a;const i=Object.keys(t)[0];return i?t[i].then(o=>(i==="json"&&(o=JSON.stringify(o)),new Response(o)[e]())):t[e]=s[e]()});this.raw=e,this.path=t,m(this,S,s),m(this,me,{})}param(e){return e?f(this,z,Nt).call(this,e):f(this,z,Ft).call(this)}query(e){return ys(this.url,e)}queries(e){return ws(this.url,e)}header(e){if(e)return this.raw.headers.get(e)??void 0;const t={};return this.raw.headers.forEach((s,a)=>{t[a]=s}),t}async parseBody(e){var t;return(t=this.bodyCache).parsedBody??(t.parsedBody=await ds(this,e))}json(){return n(this,H).call(this,"text").then(e=>JSON.parse(e))}text(){return n(this,H).call(this,"text")}arrayBuffer(){return n(this,H).call(this,"arrayBuffer")}blob(){return n(this,H).call(this,"blob")}formData(){return n(this,H).call(this,"formData")}addValidatedData(e,t){n(this,me)[e]=t}valid(e){return n(this,me)[e]}get url(){return this.raw.url}get method(){return this.raw.method}get[ns](){return n(this,S)}get matchedRoutes(){return n(this,S)[0].map(([[,e]])=>e)}get routePath(){return n(this,S)[0].map(([[,e]])=>e)[this.routeIndex].path}},me=new WeakMap,S=new WeakMap,z=new WeakSet,Nt=function(e){const t=n(this,S)[0][this.routeIndex][1][e],s=f(this,z,Qe).call(this,t);return s?/\%/.test(s)?at(s):s:void 0},Ft=function(){const e={},t=Object.keys(n(this,S)[0][this.routeIndex][1]);for(const s of t){const a=f(this,z,Qe).call(this,n(this,S)[0][this.routeIndex][1][s]);a&&typeof a=="string"&&(e[s]=/\%/.test(a)?at(a):a)}return e},Qe=function(e){return n(this,S)[1]?n(this,S)[1][e]:e},H=new WeakMap,At),zt={Stringify:1},xe=(e,t)=>{const s=new String(e);return s.isEscaped=!0,s.callbacks=t,s},Cs=/[&<>'"]/,As=async(e,t)=>{let s="";t||(t=[]);const a=await Promise.all(e);for(let i=a.length-1;s+=a[i],i--,!(i<0);i--){let o=a[i];typeof o=="object"&&t.push(...o.callbacks||[]);const r=o.isEscaped;if(o=await(typeof o=="object"?o.toString():o),typeof o=="object"&&t.push(...o.callbacks||[]),o.isEscaped??r)s+=o;else{const d=[s];We(o,d),s=d[0]}}return xe(s,t)},We=(e,t)=>{const s=e.search(Cs);if(s===-1){t[0]+=e;return}let a,i,o=0;for(i=s;i<e.length;i++){switch(e.charCodeAt(i)){case 34:a="&quot;";break;case 39:a="&#39;";break;case 38:a="&amp;";break;case 60:a="&lt;";break;case 62:a="&gt;";break;default:continue}t[0]+=e.substring(o,i)+a,o=i+1}t[0]+=e.substring(o,i)},Ps=e=>{const t=e.callbacks;if(!(t!=null&&t.length))return e;const s=[e],a={};return t.forEach(i=>i({phase:zt.Stringify,buffer:s,context:a})),s[0]},qt=async(e,t,s,a,i)=>{typeof e=="object"&&!(e instanceof String)&&(e instanceof Promise||(e=e.toString()),e instanceof Promise&&(e=await e));const o=e.callbacks;return o!=null&&o.length?(i?i[0]+=e:i=[e],Promise.all(o.map(d=>d({phase:t,buffer:i,context:a}))).then(d=>Promise.all(d.filter(Boolean).map(l=>qt(l,t,!1,a,i))).then(()=>i[0]))):Promise.resolve(e)},ks="text/plain; charset=UTF-8",_e=(e,t)=>({"Content-Type":e,...t}),je,Ie,$,ge,B,E,Ee,be,ue,ee,Re,Se,V,ce,Pt,js=(Pt=class{constructor(e,t){u(this,V);u(this,je);u(this,Ie);g(this,"env",{});u(this,$);g(this,"finalized",!1);g(this,"error");u(this,ge);u(this,B);u(this,E);u(this,Ee);u(this,be);u(this,ue);u(this,ee);u(this,Re);u(this,Se);g(this,"render",(...e)=>(n(this,be)??m(this,be,t=>this.html(t)),n(this,be).call(this,...e)));g(this,"setLayout",e=>m(this,Ee,e));g(this,"getLayout",()=>n(this,Ee));g(this,"setRenderer",e=>{m(this,be,e)});g(this,"header",(e,t,s)=>{this.finalized&&m(this,E,new Response(n(this,E).body,n(this,E)));const a=n(this,E)?n(this,E).headers:n(this,ee)??m(this,ee,new Headers);t===void 0?a.delete(e):s!=null&&s.append?a.append(e,t):a.set(e,t)});g(this,"status",e=>{m(this,ge,e)});g(this,"set",(e,t)=>{n(this,$)??m(this,$,new Map),n(this,$).set(e,t)});g(this,"get",e=>n(this,$)?n(this,$).get(e):void 0);g(this,"newResponse",(...e)=>f(this,V,ce).call(this,...e));g(this,"body",(e,t,s)=>f(this,V,ce).call(this,e,t,s));g(this,"text",(e,t,s)=>!n(this,ee)&&!n(this,ge)&&!t&&!s&&!this.finalized?new Response(e):f(this,V,ce).call(this,e,t,_e(ks,s)));g(this,"json",(e,t,s)=>f(this,V,ce).call(this,JSON.stringify(e),t,_e("application/json",s)));g(this,"html",(e,t,s)=>{const a=i=>f(this,V,ce).call(this,i,t,_e("text/html; charset=UTF-8",s));return typeof e=="object"?qt(e,zt.Stringify,!1,{}).then(a):a(e)});g(this,"redirect",(e,t)=>{const s=String(e);return this.header("Location",/[^\x00-\xFF]/.test(s)?encodeURI(s):s),this.newResponse(null,t??302)});g(this,"notFound",()=>(n(this,ue)??m(this,ue,()=>new Response),n(this,ue).call(this,this)));m(this,je,e),t&&(m(this,B,t.executionCtx),this.env=t.env,m(this,ue,t.notFoundHandler),m(this,Se,t.path),m(this,Re,t.matchResult))}get req(){return n(this,Ie)??m(this,Ie,new Bt(n(this,je),n(this,Se),n(this,Re))),n(this,Ie)}get event(){if(n(this,B)&&"respondWith"in n(this,B))return n(this,B);throw Error("This context has no FetchEvent")}get executionCtx(){if(n(this,B))return n(this,B);throw Error("This context has no ExecutionContext")}get res(){return n(this,E)||m(this,E,new Response(null,{headers:n(this,ee)??m(this,ee,new Headers)}))}set res(e){if(n(this,E)&&e){e=new Response(e.body,e);for(const[t,s]of n(this,E).headers.entries())if(t!=="content-type")if(t==="set-cookie"){const a=n(this,E).headers.getSetCookie();e.headers.delete("set-cookie");for(const i of a)e.headers.append("set-cookie",i)}else e.headers.set(t,s)}m(this,E,e),this.finalized=!0}get var(){return n(this,$)?Object.fromEntries(n(this,$)):{}}},je=new WeakMap,Ie=new WeakMap,$=new WeakMap,ge=new WeakMap,B=new WeakMap,E=new WeakMap,Ee=new WeakMap,be=new WeakMap,ue=new WeakMap,ee=new WeakMap,Re=new WeakMap,Se=new WeakMap,V=new WeakSet,ce=function(e,t,s){const a=n(this,E)?new Headers(n(this,E).headers):n(this,ee)??new Headers;if(typeof t=="object"&&"headers"in t){const o=t.headers instanceof Headers?t.headers:new Headers(t.headers);for(const[r,d]of o)r.toLowerCase()==="set-cookie"?a.append(r,d):a.set(r,d)}if(s)for(const[o,r]of Object.entries(s))if(typeof r=="string")a.set(o,r);else{a.delete(o);for(const d of r)a.append(o,d)}const i=typeof t=="number"?t:(t==null?void 0:t.status)??n(this,ge);return new Response(e,{status:i,headers:a})},Pt),C="ALL",Is="all",Es=["get","post","put","delete","options","patch"],Ht="Can not add a route since the matcher is already built.",Vt=class extends Error{},Rs="__COMPOSED_HANDLER",Ss=e=>e.text("404 Not Found",404),it=(e,t)=>{if("getResponse"in e){const s=e.getResponse();return t.newResponse(s.body,s)}return console.error(e),t.text("Internal Server Error",500)},T,A,Ut,M,Z,Fe,ze,kt,Gt=(kt=class{constructor(t={}){u(this,A);g(this,"get");g(this,"post");g(this,"put");g(this,"delete");g(this,"options");g(this,"patch");g(this,"all");g(this,"on");g(this,"use");g(this,"router");g(this,"getPath");g(this,"_basePath","/");u(this,T,"/");g(this,"routes",[]);u(this,M,Ss);g(this,"errorHandler",it);g(this,"onError",t=>(this.errorHandler=t,this));g(this,"notFound",t=>(m(this,M,t),this));g(this,"fetch",(t,...s)=>f(this,A,ze).call(this,t,s[1],s[0],t.method));g(this,"request",(t,s,a,i)=>t instanceof Request?this.fetch(s?new Request(t,s):t,a,i):(t=t.toString(),this.fetch(new Request(/^https?:\/\//.test(t)?t:`http://localhost${de("/",t)}`,s),a,i)));g(this,"fire",()=>{addEventListener("fetch",t=>{t.respondWith(f(this,A,ze).call(this,t.request,t,void 0,t.request.method))})});[...Es,Is].forEach(o=>{this[o]=(r,...d)=>(typeof r=="string"?m(this,T,r):f(this,A,Z).call(this,o,n(this,T),r),d.forEach(l=>{f(this,A,Z).call(this,o,n(this,T),l)}),this)}),this.on=(o,r,...d)=>{for(const l of[r].flat()){m(this,T,l);for(const c of[o].flat())d.map(p=>{f(this,A,Z).call(this,c.toUpperCase(),n(this,T),p)})}return this},this.use=(o,...r)=>(typeof o=="string"?m(this,T,o):(m(this,T,"*"),r.unshift(o)),r.forEach(d=>{f(this,A,Z).call(this,C,n(this,T),d)}),this);const{strict:a,...i}=t;Object.assign(this,i),this.getPath=a??!0?t.getPath??Dt:hs}route(t,s){const a=this.basePath(t);return s.routes.map(i=>{var r;let o;s.errorHandler===it?o=i.handler:(o=async(d,l)=>(await st([],s.errorHandler)(d,()=>i.handler(d,l))).res,o[Rs]=i.handler),f(r=a,A,Z).call(r,i.method,i.path,o)}),this}basePath(t){const s=f(this,A,Ut).call(this);return s._basePath=de(this._basePath,t),s}mount(t,s,a){let i,o;a&&(typeof a=="function"?o=a:(o=a.optionHandler,a.replaceRequest===!1?i=l=>l:i=a.replaceRequest));const r=o?l=>{const c=o(l);return Array.isArray(c)?c:[c]}:l=>{let c;try{c=l.executionCtx}catch{}return[l.env,c]};i||(i=(()=>{const l=de(this._basePath,t),c=l==="/"?0:l.length;return p=>{const x=new URL(p.url);return x.pathname=x.pathname.slice(c)||"/",new Request(x,p)}})());const d=async(l,c)=>{const p=await s(i(l.req.raw),...r(l));if(p)return p;await c()};return f(this,A,Z).call(this,C,de(t,"*"),d),this}},T=new WeakMap,A=new WeakSet,Ut=function(){const t=new Gt({router:this.router,getPath:this.getPath});return t.errorHandler=this.errorHandler,m(t,M,n(this,M)),t.routes=this.routes,t},M=new WeakMap,Z=function(t,s,a){t=t.toUpperCase(),s=de(this._basePath,s);const i={basePath:this._basePath,path:s,method:t,handler:a};this.router.add(t,s,[a,i]),this.routes.push(i)},Fe=function(t,s){if(t instanceof Error)return this.errorHandler(t,s);throw t},ze=function(t,s,a,i){if(i==="HEAD")return(async()=>new Response(null,await f(this,A,ze).call(this,t,s,a,"GET")))();const o=this.getPath(t,{env:a}),r=this.router.match(i,o),d=new js(t,{path:o,matchResult:r,env:a,executionCtx:s,notFoundHandler:n(this,M)});if(r[0].length===1){let c;try{c=r[0][0][0][0](d,async()=>{d.res=await n(this,M).call(this,d)})}catch(p){return f(this,A,Fe).call(this,p,d)}return c instanceof Promise?c.then(p=>p||(d.finalized?d.res:n(this,M).call(this,d))).catch(p=>f(this,A,Fe).call(this,p,d)):c??n(this,M).call(this,d)}const l=st(r[0],this.errorHandler,n(this,M));return(async()=>{try{const c=await l(d);if(!c.finalized)throw new Error("Context is not finalized. Did you forget to return a Response object or `await next()`?");return c.res}catch(c){return f(this,A,Fe).call(this,c,d)}})()},kt),He="[^/]+",Pe=".*",ke="(?:|/.*)",pe=Symbol(),Ts=new Set(".\\+*[^]$()");function Ms(e,t){return e.length===1?t.length===1?e<t?-1:1:-1:t.length===1||e===Pe||e===ke?1:t===Pe||t===ke?-1:e===He?1:t===He?-1:e.length===t.length?e<t?-1:1:t.length-e.length}var te,se,D,jt,Ye=(jt=class{constructor(){u(this,te);u(this,se);u(this,D,Object.create(null))}insert(t,s,a,i,o){if(t.length===0){if(n(this,te)!==void 0)throw pe;if(o)return;m(this,te,s);return}const[r,...d]=t,l=r==="*"?d.length===0?["","",Pe]:["","",He]:r==="/*"?["","",ke]:r.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);let c;if(l){const p=l[1];let x=l[2]||He;if(p&&l[2]&&(x===".*"||(x=x.replace(/^\((?!\?:)(?=[^)]+\)$)/,"(?:"),/\((?!\?:)/.test(x))))throw pe;if(c=n(this,D)[x],!c){if(Object.keys(n(this,D)).some(b=>b!==Pe&&b!==ke))throw pe;if(o)return;c=n(this,D)[x]=new Ye,p!==""&&m(c,se,i.varIndex++)}!o&&p!==""&&a.push([p,n(c,se)])}else if(c=n(this,D)[r],!c){if(Object.keys(n(this,D)).some(p=>p.length>1&&p!==Pe&&p!==ke))throw pe;if(o)return;c=n(this,D)[r]=new Ye}c.insert(d,s,a,i,o)}buildRegExpStr(){const s=Object.keys(n(this,D)).sort(Ms).map(a=>{const i=n(this,D)[a];return(typeof n(i,se)=="number"?`(${a})@${n(i,se)}`:Ts.has(a)?`\\${a}`:a)+i.buildRegExpStr()});return typeof n(this,te)=="number"&&s.unshift(`#${n(this,te)}`),s.length===0?"":s.length===1?s[0]:"(?:"+s.join("|")+")"}},te=new WeakMap,se=new WeakMap,D=new WeakMap,jt),Ve,Te,It,Ds=(It=class{constructor(){u(this,Ve,{varIndex:0});u(this,Te,new Ye)}insert(e,t,s){const a=[],i=[];for(let r=0;;){let d=!1;if(e=e.replace(/\{[^}]+\}/g,l=>{const c=`@\\${r}`;return i[r]=[c,l],r++,d=!0,c}),!d)break}const o=e.match(/(?::[^\/]+)|(?:\/\*$)|./g)||[];for(let r=i.length-1;r>=0;r--){const[d]=i[r];for(let l=o.length-1;l>=0;l--)if(o[l].indexOf(d)!==-1){o[l]=o[l].replace(d,i[r][1]);break}}return n(this,Te).insert(o,t,a,n(this,Ve),s),a}buildRegExp(){let e=n(this,Te).buildRegExpStr();if(e==="")return[/^$/,[],[]];let t=0;const s=[],a=[];return e=e.replace(/#(\d+)|@(\d+)|\.\*\$/g,(i,o,r)=>o!==void 0?(s[++t]=Number(o),"$()"):(r!==void 0&&(a[Number(r)]=++t),"")),[new RegExp(`^${e}`),s,a]}},Ve=new WeakMap,Te=new WeakMap,It),Jt=[],Ls=[/^$/,[],Object.create(null)],qe=Object.create(null);function Kt(e){return qe[e]??(qe[e]=new RegExp(e==="*"?"":`^${e.replace(/\/\*$|([.\\+*[^\]$()])/g,(t,s)=>s?`\\${s}`:"(?:|/.*)")}$`))}function Os(){qe=Object.create(null)}function $s(e){var c;const t=new Ds,s=[];if(e.length===0)return Ls;const a=e.map(p=>[!/\*|\/:/.test(p[0]),...p]).sort(([p,x],[b,w])=>p?1:b?-1:x.length-w.length),i=Object.create(null);for(let p=0,x=-1,b=a.length;p<b;p++){const[w,R,h]=a[p];w?i[R]=[h.map(([I])=>[I,Object.create(null)]),Jt]:x++;let y;try{y=t.insert(R,x,w)}catch(I){throw I===pe?new Vt(R):I}w||(s[x]=h.map(([I,le])=>{const we=Object.create(null);for(le-=1;le>=0;le--){const[L,Ge]=y[le];we[L]=Ge}return[I,we]}))}const[o,r,d]=t.buildRegExp();for(let p=0,x=s.length;p<x;p++)for(let b=0,w=s[p].length;b<w;b++){const R=(c=s[p][b])==null?void 0:c[1];if(!R)continue;const h=Object.keys(R);for(let y=0,I=h.length;y<I;y++)R[h[y]]=d[R[h[y]]]}const l=[];for(const p in r)l[p]=s[r[p]];return[o,l,i]}function ne(e,t){if(e){for(const s of Object.keys(e).sort((a,i)=>i.length-a.length))if(Kt(s).test(t))return[...e[s]]}}var G,U,fe,_t,Qt,Et,Bs=(Et=class{constructor(){u(this,fe);g(this,"name","RegExpRouter");u(this,G);u(this,U);m(this,G,{[C]:Object.create(null)}),m(this,U,{[C]:Object.create(null)})}add(e,t,s){var d;const a=n(this,G),i=n(this,U);if(!a||!i)throw new Error(Ht);a[e]||[a,i].forEach(l=>{l[e]=Object.create(null),Object.keys(l[C]).forEach(c=>{l[e][c]=[...l[C][c]]})}),t==="/*"&&(t="*");const o=(t.match(/\/:/g)||[]).length;if(/\*$/.test(t)){const l=Kt(t);e===C?Object.keys(a).forEach(c=>{var p;(p=a[c])[t]||(p[t]=ne(a[c],t)||ne(a[C],t)||[])}):(d=a[e])[t]||(d[t]=ne(a[e],t)||ne(a[C],t)||[]),Object.keys(a).forEach(c=>{(e===C||e===c)&&Object.keys(a[c]).forEach(p=>{l.test(p)&&a[c][p].push([s,o])})}),Object.keys(i).forEach(c=>{(e===C||e===c)&&Object.keys(i[c]).forEach(p=>l.test(p)&&i[c][p].push([s,o]))});return}const r=Lt(t)||[t];for(let l=0,c=r.length;l<c;l++){const p=r[l];Object.keys(i).forEach(x=>{var b;(e===C||e===x)&&((b=i[x])[p]||(b[p]=[...ne(a[x],p)||ne(a[C],p)||[]]),i[x][p].push([s,o-c+l+1]))})}}match(e,t){Os();const s=f(this,fe,_t).call(this);return this.match=(a,i)=>{const o=s[a]||s[C],r=o[2][i];if(r)return r;const d=i.match(o[0]);if(!d)return[[],Jt];const l=d.indexOf("",1);return[o[1][l],d]},this.match(e,t)}},G=new WeakMap,U=new WeakMap,fe=new WeakSet,_t=function(){const e=Object.create(null);return Object.keys(n(this,U)).concat(Object.keys(n(this,G))).forEach(t=>{e[t]||(e[t]=f(this,fe,Qt).call(this,t))}),m(this,G,m(this,U,void 0)),e},Qt=function(e){const t=[];let s=e===C;return[n(this,G),n(this,U)].forEach(a=>{const i=a[e]?Object.keys(a[e]).map(o=>[o,a[e][o]]):[];i.length!==0?(s||(s=!0),t.push(...i)):e!==C&&t.push(...Object.keys(a[C]).map(o=>[o,a[C][o]]))}),s?$s(t):null},Et),J,N,Rt,Ns=(Rt=class{constructor(e){g(this,"name","SmartRouter");u(this,J,[]);u(this,N,[]);m(this,J,e.routers)}add(e,t,s){if(!n(this,N))throw new Error(Ht);n(this,N).push([e,t,s])}match(e,t){if(!n(this,N))throw new Error("Fatal error");const s=n(this,J),a=n(this,N),i=s.length;let o=0,r;for(;o<i;o++){const d=s[o];try{for(let l=0,c=a.length;l<c;l++)d.add(...a[l]);r=d.match(e,t)}catch(l){if(l instanceof Vt)continue;throw l}this.match=d.match.bind(d),m(this,J,[d]),m(this,N,void 0);break}if(o===i)throw new Error("Fatal error");return this.name=`SmartRouter + ${this.activeRouter.name}`,r}get activeRouter(){if(n(this,N)||n(this,J).length!==1)throw new Error("No active router has been determined yet.");return n(this,J)[0]}},J=new WeakMap,N=new WeakMap,Rt),Ae=Object.create(null),K,j,ae,ve,k,F,X,St,Wt=(St=class{constructor(e,t,s){u(this,F);u(this,K);u(this,j);u(this,ae);u(this,ve,0);u(this,k,Ae);if(m(this,j,s||Object.create(null)),m(this,K,[]),e&&t){const a=Object.create(null);a[e]={handler:t,possibleKeys:[],score:0},m(this,K,[a])}m(this,ae,[])}insert(e,t,s){m(this,ve,++tt(this,ve)._);let a=this;const i=gs(t),o=[];for(let r=0,d=i.length;r<d;r++){const l=i[r],c=i[r+1],p=vs(l,c),x=Array.isArray(p)?p[0]:l;if(x in n(a,j)){a=n(a,j)[x],p&&o.push(p[1]);continue}n(a,j)[x]=new Wt,p&&(n(a,ae).push(p),o.push(p[1])),a=n(a,j)[x]}return n(a,K).push({[e]:{handler:s,possibleKeys:o.filter((r,d,l)=>l.indexOf(r)===d),score:n(this,ve)}}),a}search(e,t){var d;const s=[];m(this,k,Ae);let i=[this];const o=Mt(t),r=[];for(let l=0,c=o.length;l<c;l++){const p=o[l],x=l===c-1,b=[];for(let w=0,R=i.length;w<R;w++){const h=i[w],y=n(h,j)[p];y&&(m(y,k,n(h,k)),x?(n(y,j)["*"]&&s.push(...f(this,F,X).call(this,n(y,j)["*"],e,n(h,k))),s.push(...f(this,F,X).call(this,y,e,n(h,k)))):b.push(y));for(let I=0,le=n(h,ae).length;I<le;I++){const we=n(h,ae)[I],L=n(h,k)===Ae?{}:{...n(h,k)};if(we==="*"){const q=n(h,j)["*"];q&&(s.push(...f(this,F,X).call(this,q,e,n(h,k))),m(q,k,L),b.push(q));continue}const[Ge,Xe,Ce]=we;if(!p&&!(Ce instanceof RegExp))continue;const O=n(h,j)[Ge],os=o.slice(l).join("/");if(Ce instanceof RegExp){const q=Ce.exec(os);if(q){if(L[Xe]=q[0],s.push(...f(this,F,X).call(this,O,e,n(h,k),L)),Object.keys(n(O,j)).length){m(O,k,L);const Ue=((d=q[0].match(/\//))==null?void 0:d.length)??0;(r[Ue]||(r[Ue]=[])).push(O)}continue}}(Ce===!0||Ce.test(p))&&(L[Xe]=p,x?(s.push(...f(this,F,X).call(this,O,e,L,n(h,k))),n(O,j)["*"]&&s.push(...f(this,F,X).call(this,n(O,j)["*"],e,L,n(h,k)))):(m(O,k,L),b.push(O)))}}i=b.concat(r.shift()??[])}return s.length>1&&s.sort((l,c)=>l.score-c.score),[s.map(({handler:l,params:c})=>[l,c])]}},K=new WeakMap,j=new WeakMap,ae=new WeakMap,ve=new WeakMap,k=new WeakMap,F=new WeakSet,X=function(e,t,s,a){const i=[];for(let o=0,r=n(e,K).length;o<r;o++){const d=n(e,K)[o],l=d[t]||d[C],c={};if(l!==void 0&&(l.params=Object.create(null),i.push(l),s!==Ae||a&&a!==Ae))for(let p=0,x=l.possibleKeys.length;p<x;p++){const b=l.possibleKeys[p],w=c[l.score];l.params[b]=a!=null&&a[b]&&!w?a[b]:s[b]??(a==null?void 0:a[b]),c[l.score]=!0}}return i},St),ie,Tt,Fs=(Tt=class{constructor(){g(this,"name","TrieRouter");u(this,ie);m(this,ie,new Wt)}add(e,t,s){const a=Lt(t);if(a){for(let i=0,o=a.length;i<o;i++)n(this,ie).insert(e,a[i],s);return}n(this,ie).insert(e,t,s)}match(e,t){return n(this,ie).search(e,t)}},ie=new WeakMap,Tt),P=class extends Gt{constructor(e={}){super(e),this.router=e.router??new Ns({routers:[new Bs,new Fs]})}},zs=e=>{const s={...{origin:"*",allowMethods:["GET","HEAD","PUT","POST","DELETE","PATCH"],allowHeaders:[],exposeHeaders:[]},...e},a=(o=>typeof o=="string"?o==="*"?()=>o:r=>o===r?r:null:typeof o=="function"?o:r=>o.includes(r)?r:null)(s.origin),i=(o=>typeof o=="function"?o:Array.isArray(o)?()=>o:()=>[])(s.allowMethods);return async function(r,d){var p;function l(x,b){r.res.headers.set(x,b)}const c=await a(r.req.header("origin")||"",r);if(c&&l("Access-Control-Allow-Origin",c),s.origin!=="*"){const x=r.req.header("Vary");x?l("Vary",x):l("Vary","Origin")}if(s.credentials&&l("Access-Control-Allow-Credentials","true"),(p=s.exposeHeaders)!=null&&p.length&&l("Access-Control-Expose-Headers",s.exposeHeaders.join(",")),r.req.method==="OPTIONS"){s.maxAge!=null&&l("Access-Control-Max-Age",s.maxAge.toString());const x=await i(r.req.header("origin")||"",r);x.length&&l("Access-Control-Allow-Methods",x.join(","));let b=s.allowHeaders;if(!(b!=null&&b.length)){const w=r.req.header("Access-Control-Request-Headers");w&&(b=w.split(/\s*,\s*/))}return b!=null&&b.length&&(l("Access-Control-Allow-Headers",b.join(",")),r.res.headers.append("Vary","Access-Control-Request-Headers")),r.res.headers.delete("Content-Length"),r.res.headers.delete("Content-Type"),new Response(null,{headers:r.res.headers,status:204,statusText:"No Content"})}await d()}},qs=/^\s*(?:text\/(?!event-stream(?:[;\s]|$))[^;\s]+|application\/(?:javascript|json|xml|xml-dtd|ecmascript|dart|postscript|rtf|tar|toml|vnd\.dart|vnd\.ms-fontobject|vnd\.ms-opentype|wasm|x-httpd-php|x-javascript|x-ns-proxy-autoconfig|x-sh|x-tar|x-virtualbox-hdd|x-virtualbox-ova|x-virtualbox-ovf|x-virtualbox-vbox|x-virtualbox-vdi|x-virtualbox-vhd|x-virtualbox-vmdk|x-www-form-urlencoded)|font\/(?:otf|ttf)|image\/(?:bmp|vnd\.adobe\.photoshop|vnd\.microsoft\.icon|vnd\.ms-dds|x-icon|x-ms-bmp)|message\/rfc822|model\/gltf-binary|x-shader\/x-fragment|x-shader\/x-vertex|[^;\s]+?\+(?:json|text|xml|yaml))(?:[;\s]|$)/i,ot=(e,t=Vs)=>{const s=/\.([a-zA-Z0-9]+?)$/,a=e.match(s);if(!a)return;let i=t[a[1]];return i&&i.startsWith("text")&&(i+="; charset=utf-8"),i},Hs={aac:"audio/aac",avi:"video/x-msvideo",avif:"image/avif",av1:"video/av1",bin:"application/octet-stream",bmp:"image/bmp",css:"text/css",csv:"text/csv",eot:"application/vnd.ms-fontobject",epub:"application/epub+zip",gif:"image/gif",gz:"application/gzip",htm:"text/html",html:"text/html",ico:"image/x-icon",ics:"text/calendar",jpeg:"image/jpeg",jpg:"image/jpeg",js:"text/javascript",json:"application/json",jsonld:"application/ld+json",map:"application/json",mid:"audio/x-midi",midi:"audio/x-midi",mjs:"text/javascript",mp3:"audio/mpeg",mp4:"video/mp4",mpeg:"video/mpeg",oga:"audio/ogg",ogv:"video/ogg",ogx:"application/ogg",opus:"audio/opus",otf:"font/otf",pdf:"application/pdf",png:"image/png",rtf:"application/rtf",svg:"image/svg+xml",tif:"image/tiff",tiff:"image/tiff",ts:"video/mp2t",ttf:"font/ttf",txt:"text/plain",wasm:"application/wasm",webm:"video/webm",weba:"audio/webm",webmanifest:"application/manifest+json",webp:"image/webp",woff:"font/woff",woff2:"font/woff2",xhtml:"application/xhtml+xml",xml:"application/xml",zip:"application/zip","3gp":"video/3gpp","3g2":"video/3gpp2",gltf:"model/gltf+json",glb:"model/gltf-binary"},Vs=Hs,Gs=(...e)=>{let t=e.filter(i=>i!=="").join("/");t=t.replace(new RegExp("(?<=\\/)\\/+","g"),"");const s=t.split("/"),a=[];for(const i of s)i===".."&&a.length>0&&a.at(-1)!==".."?a.pop():i!=="."&&a.push(i);return a.join("/")||"."},Yt={br:".br",zstd:".zst",gzip:".gz"},Us=Object.keys(Yt),Js="index.html",Ks=e=>{const t=e.root??"./",s=e.path,a=e.join??Gs;return async(i,o)=>{var p,x,b,w;if(i.finalized)return o();let r;if(e.path)r=e.path;else try{if(r=decodeURIComponent(i.req.path),/(?:^|[\/\\])\.\.(?:$|[\/\\])/.test(r))throw new Error}catch{return await((p=e.onNotFound)==null?void 0:p.call(e,i.req.path,i)),o()}let d=a(t,!s&&e.rewriteRequestPath?e.rewriteRequestPath(r):r);e.isDir&&await e.isDir(d)&&(d=a(d,Js));const l=e.getContent;let c=await l(d,i);if(c instanceof Response)return i.newResponse(c.body,c);if(c){const R=e.mimes&&ot(d,e.mimes)||ot(d);if(i.header("Content-Type",R||"application/octet-stream"),e.precompressed&&(!R||qs.test(R))){const h=new Set((x=i.req.header("Accept-Encoding"))==null?void 0:x.split(",").map(y=>y.trim()));for(const y of Us){if(!h.has(y))continue;const I=await l(d+Yt[y],i);if(I){c=I,i.header("Content-Encoding",y),i.header("Vary","Accept-Encoding",{append:!0});break}}}return await((b=e.onFound)==null?void 0:b.call(e,d,i)),i.body(c)}await((w=e.onNotFound)==null?void 0:w.call(e,d,i)),await o()}},_s=async(e,t)=>{let s;t&&t.manifest?typeof t.manifest=="string"?s=JSON.parse(t.manifest):s=t.manifest:typeof __STATIC_CONTENT_MANIFEST=="string"?s=JSON.parse(__STATIC_CONTENT_MANIFEST):s=__STATIC_CONTENT_MANIFEST;let a;t&&t.namespace?a=t.namespace:a=__STATIC_CONTENT;const i=s[e]||e;if(!i)return null;const o=await a.get(i,{type:"stream"});return o||null},Qs=e=>async function(s,a){return Ks({...e,getContent:async o=>_s(o,{manifest:e.manifest,namespace:e.namespace?e.namespace:s.env?s.env.__STATIC_CONTENT:void 0})})(s,a)},Zt=e=>Qs(e),_=(e,...t)=>{const s=[""];for(let a=0,i=e.length-1;a<i;a++){s[0]+=e[a];const o=Array.isArray(t[a])?t[a].flat(1/0):[t[a]];for(let r=0,d=o.length;r<d;r++){const l=o[r];if(typeof l=="string")We(l,s);else if(typeof l=="number")s[0]+=l;else{if(typeof l=="boolean"||l===null||l===void 0)continue;if(typeof l=="object"&&l.isEscaped)if(l.callbacks)s.unshift("",l);else{const c=l.toString();c instanceof Promise?s.unshift("",c):s[0]+=c}else l instanceof Promise?s.unshift("",l):We(l.toString(),s)}}}return s[0]+=e.at(-1),s.length===1?"callbacks"in s?xe(Ps(xe(s[0],s.callbacks))):xe(s[0]):As(s,s.callbacks)};const Me=new P;Me.get("/profile/:id",async e=>{const t=e.req.param("id");return e.json({id:t,name:"João Silva",diagnosis:"Em tratamento",nextAppointment:"2024-02-15",treatmentStage:"Quimioterapia"})});Me.post("/symptoms",async e=>(await e.req.json(),e.json({success:!0,message:"Sintomas registrados com sucesso",aiRecommendation:"Monitoramento contínuo recomendado"})));Me.get("/journey/:id",async e=>{const t=e.req.param("id");return e.json({patientId:t,stages:[{date:"2024-01-01",event:"Diagnóstico inicial",status:"completed"},{date:"2024-01-15",event:"Início do tratamento",status:"completed"},{date:"2024-02-01",event:"Primeira sessão de quimioterapia",status:"in-progress"},{date:"2024-03-01",event:"Avaliação de resposta",status:"pending"}]})});Me.post("/triage",async e=>{const t=await e.req.json(),{symptoms:s,age:a,gender:i,history:o}=t,r=s.includes("dor intensa")?"high":"medium";return e.json({urgencyLevel:r,recommendation:r==="high"?"Procure atendimento médico imediato":"Agende uma consulta com seu médico",suggestedSpecialty:"Oncologia",estimatedWaitTime:r==="high"?"0-2 horas":"1-3 dias"})});const De=new P;De.get("/patients",async e=>e.json({patients:[{id:"1",name:"João Silva",age:55,diagnosis:"Câncer de Pulmão",stage:"IIIa",lastVisit:"2024-01-28",nextAppointment:"2024-02-15",riskScore:.7,alertLevel:"medium"},{id:"2",name:"Maria Santos",age:42,diagnosis:"Câncer de Mama",stage:"IIb",lastVisit:"2024-01-25",nextAppointment:"2024-02-10",riskScore:.4,alertLevel:"low"}]}));De.post("/ai-assistant",async e=>{const t=await e.req.json(),{query:s,patientContext:a,type:i}=t;let o="";return i==="treatment-recommendation"?o=`Baseado no perfil do paciente e diretrizes atuais:
+var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in e?rs(e,t,{enumerable:!0,configurable:!0,writable:!0,value:s}):e[t]=s;var g=(e,t,s)=>ls(e,typeof t!="symbol"?t+"":t,s),Je=(e,t,s)=>t.has(e)||et("Cannot "+s);var n=(e,t,s)=>(Je(e,t,"read from private field"),s?s.call(e):t.get(e)),u=(e,t,s)=>t.has(e)?et("Cannot add the same private member more than once"):t instanceof WeakSet?t.add(e):t.set(e,s),m=(e,t,s,a)=>(Je(e,t,"write to private field"),a?a.call(e,s):t.set(e,s),s),f=(e,t,s)=>(Je(e,t,"access private method"),s);var tt=(e,t,s,a)=>({set _(i){m(e,t,i,s)},get _(){return n(e,t,a)}});var st=(e,t,s)=>(a,i)=>{let o=-1;return r(0);async function r(d){if(d<=o)throw new Error("next() called multiple times");o=d;let l,c=!1,p;if(e[d]?(p=e[d][0][0],a.req.routeIndex=d):p=d===e.length&&i||void 0,p)try{l=await p(a,()=>r(d+1))}catch(x){if(x instanceof Error&&t)a.error=x,l=await t(x,a),c=!0;else throw x}else a.finalized===!1&&s&&(l=await s(a));return l&&(a.finalized===!1||c)&&(a.res=l),a}},ns=Symbol(),ds=async(e,t=Object.create(null))=>{const{all:s=!1,dot:a=!1}=t,o=(e instanceof Bt?e.raw.headers:e.headers).get("Content-Type");return o!=null&&o.startsWith("multipart/form-data")||o!=null&&o.startsWith("application/x-www-form-urlencoded")?cs(e,{all:s,dot:a}):{}};async function cs(e,t){const s=await e.formData();return s?ps(s,t):{}}function ps(e,t){const s=Object.create(null);return e.forEach((a,i)=>{t.all||i.endsWith("[]")?xs(s,i,a):s[i]=a}),t.dot&&Object.entries(s).forEach(([a,i])=>{a.includes(".")&&(ms(s,a,i),delete s[a])}),s}var xs=(e,t,s)=>{e[t]!==void 0?Array.isArray(e[t])?e[t].push(s):e[t]=[e[t],s]:t.endsWith("[]")?e[t]=[s]:e[t]=s},ms=(e,t,s)=>{let a=e;const i=t.split(".");i.forEach((o,r)=>{r===i.length-1?a[o]=s:((!a[o]||typeof a[o]!="object"||Array.isArray(a[o])||a[o]instanceof File)&&(a[o]=Object.create(null)),a=a[o])})},Tt=e=>{const t=e.split("/");return t[0]===""&&t.shift(),t},gs=e=>{const{groups:t,path:s}=bs(e),a=Tt(s);return us(a,t)},bs=e=>{const t=[];return e=e.replace(/\{[^}]+\}/g,(s,a)=>{const i=`@${a}`;return t.push([i,s]),i}),{groups:t,path:e}},us=(e,t)=>{for(let s=t.length-1;s>=0;s--){const[a]=t[s];for(let i=e.length-1;i>=0;i--)if(e[i].includes(a)){e[i]=e[i].replace(a,t[s][1]);break}}return e},Fe={},vs=(e,t)=>{if(e==="*")return"*";const s=e.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);if(s){const a=`${e}#${t}`;return Fe[a]||(s[2]?Fe[a]=t&&t[0]!==":"&&t[0]!=="*"?[a,s[1],new RegExp(`^${s[2]}(?=/${t})`)]:[e,s[1],new RegExp(`^${s[2]}$`)]:Fe[a]=[e,s[1],!0]),Fe[a]}return null},Ze=(e,t)=>{try{return t(e)}catch{return e.replace(/(?:%[0-9A-Fa-f]{2})+/g,s=>{try{return t(s)}catch{return s}})}},fs=e=>Ze(e,decodeURI),Dt=e=>{const t=e.url,s=t.indexOf("/",t.indexOf(":")+4);let a=s;for(;a<t.length;a++){const i=t.charCodeAt(a);if(i===37){const o=t.indexOf("?",a),r=t.slice(s,o===-1?void 0:o);return fs(r.includes("%25")?r.replace(/%25/g,"%2525"):r)}else if(i===63)break}return t.slice(s,a)},hs=e=>{const t=Dt(e);return t.length>1&&t.at(-1)==="/"?t.slice(0,-1):t},de=(e,t,...s)=>(s.length&&(t=de(t,...s)),`${(e==null?void 0:e[0])==="/"?"":"/"}${e}${t==="/"?"":`${(e==null?void 0:e.at(-1))==="/"?"":"/"}${(t==null?void 0:t[0])==="/"?t.slice(1):t}`}`),Lt=e=>{if(e.charCodeAt(e.length-1)!==63||!e.includes(":"))return null;const t=e.split("/"),s=[];let a="";return t.forEach(i=>{if(i!==""&&!/\:/.test(i))a+="/"+i;else if(/\:/.test(i))if(/\?/.test(i)){s.length===0&&a===""?s.push("/"):s.push(a);const o=i.replace("?","");a+="/"+o,s.push(a)}else a+="/"+i}),s.filter((i,o,r)=>r.indexOf(i)===o)},Ke=e=>/[%+]/.test(e)?(e.indexOf("+")!==-1&&(e=e.replace(/\+/g," ")),e.indexOf("%")!==-1?Ze(e,$t):e):e,Ot=(e,t,s)=>{let a;if(!s&&t&&!/[%+]/.test(t)){let r=e.indexOf(`?${t}`,8);for(r===-1&&(r=e.indexOf(`&${t}`,8));r!==-1;){const d=e.charCodeAt(r+t.length+1);if(d===61){const l=r+t.length+2,c=e.indexOf("&",l);return Ke(e.slice(l,c===-1?void 0:c))}else if(d==38||isNaN(d))return"";r=e.indexOf(`&${t}`,r+1)}if(a=/[%+]/.test(e),!a)return}const i={};a??(a=/[%+]/.test(e));let o=e.indexOf("?",8);for(;o!==-1;){const r=e.indexOf("&",o+1);let d=e.indexOf("=",o);d>r&&r!==-1&&(d=-1);let l=e.slice(o+1,d===-1?r===-1?void 0:r:d);if(a&&(l=Ke(l)),o=r,l==="")continue;let c;d===-1?c="":(c=e.slice(d+1,r===-1?void 0:r),a&&(c=Ke(c))),s?(i[l]&&Array.isArray(i[l])||(i[l]=[]),i[l].push(c)):i[l]??(i[l]=c)}return t?i[t]:i},ys=Ot,ws=(e,t)=>Ot(e,t,!0),$t=decodeURIComponent,at=e=>Ze(e,$t),me,M,z,Ft,Nt,Qe,q,At,Bt=(At=class{constructor(e,t="/",s=[[]]){u(this,z);g(this,"raw");u(this,me);u(this,M);g(this,"routeIndex",0);g(this,"path");g(this,"bodyCache",{});u(this,q,e=>{const{bodyCache:t,raw:s}=this,a=t[e];if(a)return a;const i=Object.keys(t)[0];return i?t[i].then(o=>(i==="json"&&(o=JSON.stringify(o)),new Response(o)[e]())):t[e]=s[e]()});this.raw=e,this.path=t,m(this,M,s),m(this,me,{})}param(e){return e?f(this,z,Ft).call(this,e):f(this,z,Nt).call(this)}query(e){return ys(this.url,e)}queries(e){return ws(this.url,e)}header(e){if(e)return this.raw.headers.get(e)??void 0;const t={};return this.raw.headers.forEach((s,a)=>{t[a]=s}),t}async parseBody(e){var t;return(t=this.bodyCache).parsedBody??(t.parsedBody=await ds(this,e))}json(){return n(this,q).call(this,"text").then(e=>JSON.parse(e))}text(){return n(this,q).call(this,"text")}arrayBuffer(){return n(this,q).call(this,"arrayBuffer")}blob(){return n(this,q).call(this,"blob")}formData(){return n(this,q).call(this,"formData")}addValidatedData(e,t){n(this,me)[e]=t}valid(e){return n(this,me)[e]}get url(){return this.raw.url}get method(){return this.raw.method}get[ns](){return n(this,M)}get matchedRoutes(){return n(this,M)[0].map(([[,e]])=>e)}get routePath(){return n(this,M)[0].map(([[,e]])=>e)[this.routeIndex].path}},me=new WeakMap,M=new WeakMap,z=new WeakSet,Ft=function(e){const t=n(this,M)[0][this.routeIndex][1][e],s=f(this,z,Qe).call(this,t);return s?/\%/.test(s)?at(s):s:void 0},Nt=function(){const e={},t=Object.keys(n(this,M)[0][this.routeIndex][1]);for(const s of t){const a=f(this,z,Qe).call(this,n(this,M)[0][this.routeIndex][1][s]);a&&typeof a=="string"&&(e[s]=/\%/.test(a)?at(a):a)}return e},Qe=function(e){return n(this,M)[1]?n(this,M)[1][e]:e},q=new WeakMap,At),zt={Stringify:1},xe=(e,t)=>{const s=new String(e);return s.isEscaped=!0,s.callbacks=t,s},Cs=/[&<>'"]/,As=async(e,t)=>{let s="";t||(t=[]);const a=await Promise.all(e);for(let i=a.length-1;s+=a[i],i--,!(i<0);i--){let o=a[i];typeof o=="object"&&t.push(...o.callbacks||[]);const r=o.isEscaped;if(o=await(typeof o=="object"?o.toString():o),typeof o=="object"&&t.push(...o.callbacks||[]),o.isEscaped??r)s+=o;else{const d=[s];We(o,d),s=d[0]}}return xe(s,t)},We=(e,t)=>{const s=e.search(Cs);if(s===-1){t[0]+=e;return}let a,i,o=0;for(i=s;i<e.length;i++){switch(e.charCodeAt(i)){case 34:a="&quot;";break;case 39:a="&#39;";break;case 38:a="&amp;";break;case 60:a="&lt;";break;case 62:a="&gt;";break;default:continue}t[0]+=e.substring(o,i)+a,o=i+1}t[0]+=e.substring(o,i)},Ps=e=>{const t=e.callbacks;if(!(t!=null&&t.length))return e;const s=[e],a={};return t.forEach(i=>i({phase:zt.Stringify,buffer:s,context:a})),s[0]},Vt=async(e,t,s,a,i)=>{typeof e=="object"&&!(e instanceof String)&&(e instanceof Promise||(e=e.toString()),e instanceof Promise&&(e=await e));const o=e.callbacks;return o!=null&&o.length?(i?i[0]+=e:i=[e],Promise.all(o.map(d=>d({phase:t,buffer:i,context:a}))).then(d=>Promise.all(d.filter(Boolean).map(l=>Vt(l,t,!1,a,i))).then(()=>i[0]))):Promise.resolve(e)},ks="text/plain; charset=UTF-8",_e=(e,t)=>({"Content-Type":e,...t}),je,Ie,$,ge,B,E,Ee,be,ue,ee,Re,Me,H,ce,Pt,js=(Pt=class{constructor(e,t){u(this,H);u(this,je);u(this,Ie);g(this,"env",{});u(this,$);g(this,"finalized",!1);g(this,"error");u(this,ge);u(this,B);u(this,E);u(this,Ee);u(this,be);u(this,ue);u(this,ee);u(this,Re);u(this,Me);g(this,"render",(...e)=>(n(this,be)??m(this,be,t=>this.html(t)),n(this,be).call(this,...e)));g(this,"setLayout",e=>m(this,Ee,e));g(this,"getLayout",()=>n(this,Ee));g(this,"setRenderer",e=>{m(this,be,e)});g(this,"header",(e,t,s)=>{this.finalized&&m(this,E,new Response(n(this,E).body,n(this,E)));const a=n(this,E)?n(this,E).headers:n(this,ee)??m(this,ee,new Headers);t===void 0?a.delete(e):s!=null&&s.append?a.append(e,t):a.set(e,t)});g(this,"status",e=>{m(this,ge,e)});g(this,"set",(e,t)=>{n(this,$)??m(this,$,new Map),n(this,$).set(e,t)});g(this,"get",e=>n(this,$)?n(this,$).get(e):void 0);g(this,"newResponse",(...e)=>f(this,H,ce).call(this,...e));g(this,"body",(e,t,s)=>f(this,H,ce).call(this,e,t,s));g(this,"text",(e,t,s)=>!n(this,ee)&&!n(this,ge)&&!t&&!s&&!this.finalized?new Response(e):f(this,H,ce).call(this,e,t,_e(ks,s)));g(this,"json",(e,t,s)=>f(this,H,ce).call(this,JSON.stringify(e),t,_e("application/json",s)));g(this,"html",(e,t,s)=>{const a=i=>f(this,H,ce).call(this,i,t,_e("text/html; charset=UTF-8",s));return typeof e=="object"?Vt(e,zt.Stringify,!1,{}).then(a):a(e)});g(this,"redirect",(e,t)=>{const s=String(e);return this.header("Location",/[^\x00-\xFF]/.test(s)?encodeURI(s):s),this.newResponse(null,t??302)});g(this,"notFound",()=>(n(this,ue)??m(this,ue,()=>new Response),n(this,ue).call(this,this)));m(this,je,e),t&&(m(this,B,t.executionCtx),this.env=t.env,m(this,ue,t.notFoundHandler),m(this,Me,t.path),m(this,Re,t.matchResult))}get req(){return n(this,Ie)??m(this,Ie,new Bt(n(this,je),n(this,Me),n(this,Re))),n(this,Ie)}get event(){if(n(this,B)&&"respondWith"in n(this,B))return n(this,B);throw Error("This context has no FetchEvent")}get executionCtx(){if(n(this,B))return n(this,B);throw Error("This context has no ExecutionContext")}get res(){return n(this,E)||m(this,E,new Response(null,{headers:n(this,ee)??m(this,ee,new Headers)}))}set res(e){if(n(this,E)&&e){e=new Response(e.body,e);for(const[t,s]of n(this,E).headers.entries())if(t!=="content-type")if(t==="set-cookie"){const a=n(this,E).headers.getSetCookie();e.headers.delete("set-cookie");for(const i of a)e.headers.append("set-cookie",i)}else e.headers.set(t,s)}m(this,E,e),this.finalized=!0}get var(){return n(this,$)?Object.fromEntries(n(this,$)):{}}},je=new WeakMap,Ie=new WeakMap,$=new WeakMap,ge=new WeakMap,B=new WeakMap,E=new WeakMap,Ee=new WeakMap,be=new WeakMap,ue=new WeakMap,ee=new WeakMap,Re=new WeakMap,Me=new WeakMap,H=new WeakSet,ce=function(e,t,s){const a=n(this,E)?new Headers(n(this,E).headers):n(this,ee)??new Headers;if(typeof t=="object"&&"headers"in t){const o=t.headers instanceof Headers?t.headers:new Headers(t.headers);for(const[r,d]of o)r.toLowerCase()==="set-cookie"?a.append(r,d):a.set(r,d)}if(s)for(const[o,r]of Object.entries(s))if(typeof r=="string")a.set(o,r);else{a.delete(o);for(const d of r)a.append(o,d)}const i=typeof t=="number"?t:(t==null?void 0:t.status)??n(this,ge);return new Response(e,{status:i,headers:a})},Pt),C="ALL",Is="all",Es=["get","post","put","delete","options","patch"],qt="Can not add a route since the matcher is already built.",Ht=class extends Error{},Rs="__COMPOSED_HANDLER",Ms=e=>e.text("404 Not Found",404),it=(e,t)=>{if("getResponse"in e){const s=e.getResponse();return t.newResponse(s.body,s)}return console.error(e),t.text("Internal Server Error",500)},S,A,Ut,T,Z,Ne,ze,kt,Gt=(kt=class{constructor(t={}){u(this,A);g(this,"get");g(this,"post");g(this,"put");g(this,"delete");g(this,"options");g(this,"patch");g(this,"all");g(this,"on");g(this,"use");g(this,"router");g(this,"getPath");g(this,"_basePath","/");u(this,S,"/");g(this,"routes",[]);u(this,T,Ms);g(this,"errorHandler",it);g(this,"onError",t=>(this.errorHandler=t,this));g(this,"notFound",t=>(m(this,T,t),this));g(this,"fetch",(t,...s)=>f(this,A,ze).call(this,t,s[1],s[0],t.method));g(this,"request",(t,s,a,i)=>t instanceof Request?this.fetch(s?new Request(t,s):t,a,i):(t=t.toString(),this.fetch(new Request(/^https?:\/\//.test(t)?t:`http://localhost${de("/",t)}`,s),a,i)));g(this,"fire",()=>{addEventListener("fetch",t=>{t.respondWith(f(this,A,ze).call(this,t.request,t,void 0,t.request.method))})});[...Es,Is].forEach(o=>{this[o]=(r,...d)=>(typeof r=="string"?m(this,S,r):f(this,A,Z).call(this,o,n(this,S),r),d.forEach(l=>{f(this,A,Z).call(this,o,n(this,S),l)}),this)}),this.on=(o,r,...d)=>{for(const l of[r].flat()){m(this,S,l);for(const c of[o].flat())d.map(p=>{f(this,A,Z).call(this,c.toUpperCase(),n(this,S),p)})}return this},this.use=(o,...r)=>(typeof o=="string"?m(this,S,o):(m(this,S,"*"),r.unshift(o)),r.forEach(d=>{f(this,A,Z).call(this,C,n(this,S),d)}),this);const{strict:a,...i}=t;Object.assign(this,i),this.getPath=a??!0?t.getPath??Dt:hs}route(t,s){const a=this.basePath(t);return s.routes.map(i=>{var r;let o;s.errorHandler===it?o=i.handler:(o=async(d,l)=>(await st([],s.errorHandler)(d,()=>i.handler(d,l))).res,o[Rs]=i.handler),f(r=a,A,Z).call(r,i.method,i.path,o)}),this}basePath(t){const s=f(this,A,Ut).call(this);return s._basePath=de(this._basePath,t),s}mount(t,s,a){let i,o;a&&(typeof a=="function"?o=a:(o=a.optionHandler,a.replaceRequest===!1?i=l=>l:i=a.replaceRequest));const r=o?l=>{const c=o(l);return Array.isArray(c)?c:[c]}:l=>{let c;try{c=l.executionCtx}catch{}return[l.env,c]};i||(i=(()=>{const l=de(this._basePath,t),c=l==="/"?0:l.length;return p=>{const x=new URL(p.url);return x.pathname=x.pathname.slice(c)||"/",new Request(x,p)}})());const d=async(l,c)=>{const p=await s(i(l.req.raw),...r(l));if(p)return p;await c()};return f(this,A,Z).call(this,C,de(t,"*"),d),this}},S=new WeakMap,A=new WeakSet,Ut=function(){const t=new Gt({router:this.router,getPath:this.getPath});return t.errorHandler=this.errorHandler,m(t,T,n(this,T)),t.routes=this.routes,t},T=new WeakMap,Z=function(t,s,a){t=t.toUpperCase(),s=de(this._basePath,s);const i={basePath:this._basePath,path:s,method:t,handler:a};this.router.add(t,s,[a,i]),this.routes.push(i)},Ne=function(t,s){if(t instanceof Error)return this.errorHandler(t,s);throw t},ze=function(t,s,a,i){if(i==="HEAD")return(async()=>new Response(null,await f(this,A,ze).call(this,t,s,a,"GET")))();const o=this.getPath(t,{env:a}),r=this.router.match(i,o),d=new js(t,{path:o,matchResult:r,env:a,executionCtx:s,notFoundHandler:n(this,T)});if(r[0].length===1){let c;try{c=r[0][0][0][0](d,async()=>{d.res=await n(this,T).call(this,d)})}catch(p){return f(this,A,Ne).call(this,p,d)}return c instanceof Promise?c.then(p=>p||(d.finalized?d.res:n(this,T).call(this,d))).catch(p=>f(this,A,Ne).call(this,p,d)):c??n(this,T).call(this,d)}const l=st(r[0],this.errorHandler,n(this,T));return(async()=>{try{const c=await l(d);if(!c.finalized)throw new Error("Context is not finalized. Did you forget to return a Response object or `await next()`?");return c.res}catch(c){return f(this,A,Ne).call(this,c,d)}})()},kt),qe="[^/]+",Pe=".*",ke="(?:|/.*)",pe=Symbol(),Ss=new Set(".\\+*[^]$()");function Ts(e,t){return e.length===1?t.length===1?e<t?-1:1:-1:t.length===1||e===Pe||e===ke?1:t===Pe||t===ke?-1:e===qe?1:t===qe?-1:e.length===t.length?e<t?-1:1:t.length-e.length}var te,se,D,jt,Ye=(jt=class{constructor(){u(this,te);u(this,se);u(this,D,Object.create(null))}insert(t,s,a,i,o){if(t.length===0){if(n(this,te)!==void 0)throw pe;if(o)return;m(this,te,s);return}const[r,...d]=t,l=r==="*"?d.length===0?["","",Pe]:["","",qe]:r==="/*"?["","",ke]:r.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);let c;if(l){const p=l[1];let x=l[2]||qe;if(p&&l[2]&&(x===".*"||(x=x.replace(/^\((?!\?:)(?=[^)]+\)$)/,"(?:"),/\((?!\?:)/.test(x))))throw pe;if(c=n(this,D)[x],!c){if(Object.keys(n(this,D)).some(b=>b!==Pe&&b!==ke))throw pe;if(o)return;c=n(this,D)[x]=new Ye,p!==""&&m(c,se,i.varIndex++)}!o&&p!==""&&a.push([p,n(c,se)])}else if(c=n(this,D)[r],!c){if(Object.keys(n(this,D)).some(p=>p.length>1&&p!==Pe&&p!==ke))throw pe;if(o)return;c=n(this,D)[r]=new Ye}c.insert(d,s,a,i,o)}buildRegExpStr(){const s=Object.keys(n(this,D)).sort(Ts).map(a=>{const i=n(this,D)[a];return(typeof n(i,se)=="number"?`(${a})@${n(i,se)}`:Ss.has(a)?`\\${a}`:a)+i.buildRegExpStr()});return typeof n(this,te)=="number"&&s.unshift(`#${n(this,te)}`),s.length===0?"":s.length===1?s[0]:"(?:"+s.join("|")+")"}},te=new WeakMap,se=new WeakMap,D=new WeakMap,jt),He,Se,It,Ds=(It=class{constructor(){u(this,He,{varIndex:0});u(this,Se,new Ye)}insert(e,t,s){const a=[],i=[];for(let r=0;;){let d=!1;if(e=e.replace(/\{[^}]+\}/g,l=>{const c=`@\\${r}`;return i[r]=[c,l],r++,d=!0,c}),!d)break}const o=e.match(/(?::[^\/]+)|(?:\/\*$)|./g)||[];for(let r=i.length-1;r>=0;r--){const[d]=i[r];for(let l=o.length-1;l>=0;l--)if(o[l].indexOf(d)!==-1){o[l]=o[l].replace(d,i[r][1]);break}}return n(this,Se).insert(o,t,a,n(this,He),s),a}buildRegExp(){let e=n(this,Se).buildRegExpStr();if(e==="")return[/^$/,[],[]];let t=0;const s=[],a=[];return e=e.replace(/#(\d+)|@(\d+)|\.\*\$/g,(i,o,r)=>o!==void 0?(s[++t]=Number(o),"$()"):(r!==void 0&&(a[Number(r)]=++t),"")),[new RegExp(`^${e}`),s,a]}},He=new WeakMap,Se=new WeakMap,It),Jt=[],Ls=[/^$/,[],Object.create(null)],Ve=Object.create(null);function Kt(e){return Ve[e]??(Ve[e]=new RegExp(e==="*"?"":`^${e.replace(/\/\*$|([.\\+*[^\]$()])/g,(t,s)=>s?`\\${s}`:"(?:|/.*)")}$`))}function Os(){Ve=Object.create(null)}function $s(e){var c;const t=new Ds,s=[];if(e.length===0)return Ls;const a=e.map(p=>[!/\*|\/:/.test(p[0]),...p]).sort(([p,x],[b,w])=>p?1:b?-1:x.length-w.length),i=Object.create(null);for(let p=0,x=-1,b=a.length;p<b;p++){const[w,R,h]=a[p];w?i[R]=[h.map(([I])=>[I,Object.create(null)]),Jt]:x++;let y;try{y=t.insert(R,x,w)}catch(I){throw I===pe?new Ht(R):I}w||(s[x]=h.map(([I,le])=>{const we=Object.create(null);for(le-=1;le>=0;le--){const[L,Ge]=y[le];we[L]=Ge}return[I,we]}))}const[o,r,d]=t.buildRegExp();for(let p=0,x=s.length;p<x;p++)for(let b=0,w=s[p].length;b<w;b++){const R=(c=s[p][b])==null?void 0:c[1];if(!R)continue;const h=Object.keys(R);for(let y=0,I=h.length;y<I;y++)R[h[y]]=d[R[h[y]]]}const l=[];for(const p in r)l[p]=s[r[p]];return[o,l,i]}function ne(e,t){if(e){for(const s of Object.keys(e).sort((a,i)=>i.length-a.length))if(Kt(s).test(t))return[...e[s]]}}var G,U,fe,_t,Qt,Et,Bs=(Et=class{constructor(){u(this,fe);g(this,"name","RegExpRouter");u(this,G);u(this,U);m(this,G,{[C]:Object.create(null)}),m(this,U,{[C]:Object.create(null)})}add(e,t,s){var d;const a=n(this,G),i=n(this,U);if(!a||!i)throw new Error(qt);a[e]||[a,i].forEach(l=>{l[e]=Object.create(null),Object.keys(l[C]).forEach(c=>{l[e][c]=[...l[C][c]]})}),t==="/*"&&(t="*");const o=(t.match(/\/:/g)||[]).length;if(/\*$/.test(t)){const l=Kt(t);e===C?Object.keys(a).forEach(c=>{var p;(p=a[c])[t]||(p[t]=ne(a[c],t)||ne(a[C],t)||[])}):(d=a[e])[t]||(d[t]=ne(a[e],t)||ne(a[C],t)||[]),Object.keys(a).forEach(c=>{(e===C||e===c)&&Object.keys(a[c]).forEach(p=>{l.test(p)&&a[c][p].push([s,o])})}),Object.keys(i).forEach(c=>{(e===C||e===c)&&Object.keys(i[c]).forEach(p=>l.test(p)&&i[c][p].push([s,o]))});return}const r=Lt(t)||[t];for(let l=0,c=r.length;l<c;l++){const p=r[l];Object.keys(i).forEach(x=>{var b;(e===C||e===x)&&((b=i[x])[p]||(b[p]=[...ne(a[x],p)||ne(a[C],p)||[]]),i[x][p].push([s,o-c+l+1]))})}}match(e,t){Os();const s=f(this,fe,_t).call(this);return this.match=(a,i)=>{const o=s[a]||s[C],r=o[2][i];if(r)return r;const d=i.match(o[0]);if(!d)return[[],Jt];const l=d.indexOf("",1);return[o[1][l],d]},this.match(e,t)}},G=new WeakMap,U=new WeakMap,fe=new WeakSet,_t=function(){const e=Object.create(null);return Object.keys(n(this,U)).concat(Object.keys(n(this,G))).forEach(t=>{e[t]||(e[t]=f(this,fe,Qt).call(this,t))}),m(this,G,m(this,U,void 0)),e},Qt=function(e){const t=[];let s=e===C;return[n(this,G),n(this,U)].forEach(a=>{const i=a[e]?Object.keys(a[e]).map(o=>[o,a[e][o]]):[];i.length!==0?(s||(s=!0),t.push(...i)):e!==C&&t.push(...Object.keys(a[C]).map(o=>[o,a[C][o]]))}),s?$s(t):null},Et),J,F,Rt,Fs=(Rt=class{constructor(e){g(this,"name","SmartRouter");u(this,J,[]);u(this,F,[]);m(this,J,e.routers)}add(e,t,s){if(!n(this,F))throw new Error(qt);n(this,F).push([e,t,s])}match(e,t){if(!n(this,F))throw new Error("Fatal error");const s=n(this,J),a=n(this,F),i=s.length;let o=0,r;for(;o<i;o++){const d=s[o];try{for(let l=0,c=a.length;l<c;l++)d.add(...a[l]);r=d.match(e,t)}catch(l){if(l instanceof Ht)continue;throw l}this.match=d.match.bind(d),m(this,J,[d]),m(this,F,void 0);break}if(o===i)throw new Error("Fatal error");return this.name=`SmartRouter + ${this.activeRouter.name}`,r}get activeRouter(){if(n(this,F)||n(this,J).length!==1)throw new Error("No active router has been determined yet.");return n(this,J)[0]}},J=new WeakMap,F=new WeakMap,Rt),Ae=Object.create(null),K,j,ae,ve,k,N,X,Mt,Wt=(Mt=class{constructor(e,t,s){u(this,N);u(this,K);u(this,j);u(this,ae);u(this,ve,0);u(this,k,Ae);if(m(this,j,s||Object.create(null)),m(this,K,[]),e&&t){const a=Object.create(null);a[e]={handler:t,possibleKeys:[],score:0},m(this,K,[a])}m(this,ae,[])}insert(e,t,s){m(this,ve,++tt(this,ve)._);let a=this;const i=gs(t),o=[];for(let r=0,d=i.length;r<d;r++){const l=i[r],c=i[r+1],p=vs(l,c),x=Array.isArray(p)?p[0]:l;if(x in n(a,j)){a=n(a,j)[x],p&&o.push(p[1]);continue}n(a,j)[x]=new Wt,p&&(n(a,ae).push(p),o.push(p[1])),a=n(a,j)[x]}return n(a,K).push({[e]:{handler:s,possibleKeys:o.filter((r,d,l)=>l.indexOf(r)===d),score:n(this,ve)}}),a}search(e,t){var d;const s=[];m(this,k,Ae);let i=[this];const o=Tt(t),r=[];for(let l=0,c=o.length;l<c;l++){const p=o[l],x=l===c-1,b=[];for(let w=0,R=i.length;w<R;w++){const h=i[w],y=n(h,j)[p];y&&(m(y,k,n(h,k)),x?(n(y,j)["*"]&&s.push(...f(this,N,X).call(this,n(y,j)["*"],e,n(h,k))),s.push(...f(this,N,X).call(this,y,e,n(h,k)))):b.push(y));for(let I=0,le=n(h,ae).length;I<le;I++){const we=n(h,ae)[I],L=n(h,k)===Ae?{}:{...n(h,k)};if(we==="*"){const V=n(h,j)["*"];V&&(s.push(...f(this,N,X).call(this,V,e,n(h,k))),m(V,k,L),b.push(V));continue}const[Ge,Xe,Ce]=we;if(!p&&!(Ce instanceof RegExp))continue;const O=n(h,j)[Ge],os=o.slice(l).join("/");if(Ce instanceof RegExp){const V=Ce.exec(os);if(V){if(L[Xe]=V[0],s.push(...f(this,N,X).call(this,O,e,n(h,k),L)),Object.keys(n(O,j)).length){m(O,k,L);const Ue=((d=V[0].match(/\//))==null?void 0:d.length)??0;(r[Ue]||(r[Ue]=[])).push(O)}continue}}(Ce===!0||Ce.test(p))&&(L[Xe]=p,x?(s.push(...f(this,N,X).call(this,O,e,L,n(h,k))),n(O,j)["*"]&&s.push(...f(this,N,X).call(this,n(O,j)["*"],e,L,n(h,k)))):(m(O,k,L),b.push(O)))}}i=b.concat(r.shift()??[])}return s.length>1&&s.sort((l,c)=>l.score-c.score),[s.map(({handler:l,params:c})=>[l,c])]}},K=new WeakMap,j=new WeakMap,ae=new WeakMap,ve=new WeakMap,k=new WeakMap,N=new WeakSet,X=function(e,t,s,a){const i=[];for(let o=0,r=n(e,K).length;o<r;o++){const d=n(e,K)[o],l=d[t]||d[C],c={};if(l!==void 0&&(l.params=Object.create(null),i.push(l),s!==Ae||a&&a!==Ae))for(let p=0,x=l.possibleKeys.length;p<x;p++){const b=l.possibleKeys[p],w=c[l.score];l.params[b]=a!=null&&a[b]&&!w?a[b]:s[b]??(a==null?void 0:a[b]),c[l.score]=!0}}return i},Mt),ie,St,Ns=(St=class{constructor(){g(this,"name","TrieRouter");u(this,ie);m(this,ie,new Wt)}add(e,t,s){const a=Lt(t);if(a){for(let i=0,o=a.length;i<o;i++)n(this,ie).insert(e,a[i],s);return}n(this,ie).insert(e,t,s)}match(e,t){return n(this,ie).search(e,t)}},ie=new WeakMap,St),P=class extends Gt{constructor(e={}){super(e),this.router=e.router??new Fs({routers:[new Bs,new Ns]})}},zs=e=>{const s={...{origin:"*",allowMethods:["GET","HEAD","PUT","POST","DELETE","PATCH"],allowHeaders:[],exposeHeaders:[]},...e},a=(o=>typeof o=="string"?o==="*"?()=>o:r=>o===r?r:null:typeof o=="function"?o:r=>o.includes(r)?r:null)(s.origin),i=(o=>typeof o=="function"?o:Array.isArray(o)?()=>o:()=>[])(s.allowMethods);return async function(r,d){var p;function l(x,b){r.res.headers.set(x,b)}const c=await a(r.req.header("origin")||"",r);if(c&&l("Access-Control-Allow-Origin",c),s.origin!=="*"){const x=r.req.header("Vary");x?l("Vary",x):l("Vary","Origin")}if(s.credentials&&l("Access-Control-Allow-Credentials","true"),(p=s.exposeHeaders)!=null&&p.length&&l("Access-Control-Expose-Headers",s.exposeHeaders.join(",")),r.req.method==="OPTIONS"){s.maxAge!=null&&l("Access-Control-Max-Age",s.maxAge.toString());const x=await i(r.req.header("origin")||"",r);x.length&&l("Access-Control-Allow-Methods",x.join(","));let b=s.allowHeaders;if(!(b!=null&&b.length)){const w=r.req.header("Access-Control-Request-Headers");w&&(b=w.split(/\s*,\s*/))}return b!=null&&b.length&&(l("Access-Control-Allow-Headers",b.join(",")),r.res.headers.append("Vary","Access-Control-Request-Headers")),r.res.headers.delete("Content-Length"),r.res.headers.delete("Content-Type"),new Response(null,{headers:r.res.headers,status:204,statusText:"No Content"})}await d()}},Vs=/^\s*(?:text\/(?!event-stream(?:[;\s]|$))[^;\s]+|application\/(?:javascript|json|xml|xml-dtd|ecmascript|dart|postscript|rtf|tar|toml|vnd\.dart|vnd\.ms-fontobject|vnd\.ms-opentype|wasm|x-httpd-php|x-javascript|x-ns-proxy-autoconfig|x-sh|x-tar|x-virtualbox-hdd|x-virtualbox-ova|x-virtualbox-ovf|x-virtualbox-vbox|x-virtualbox-vdi|x-virtualbox-vhd|x-virtualbox-vmdk|x-www-form-urlencoded)|font\/(?:otf|ttf)|image\/(?:bmp|vnd\.adobe\.photoshop|vnd\.microsoft\.icon|vnd\.ms-dds|x-icon|x-ms-bmp)|message\/rfc822|model\/gltf-binary|x-shader\/x-fragment|x-shader\/x-vertex|[^;\s]+?\+(?:json|text|xml|yaml))(?:[;\s]|$)/i,ot=(e,t=Hs)=>{const s=/\.([a-zA-Z0-9]+?)$/,a=e.match(s);if(!a)return;let i=t[a[1]];return i&&i.startsWith("text")&&(i+="; charset=utf-8"),i},qs={aac:"audio/aac",avi:"video/x-msvideo",avif:"image/avif",av1:"video/av1",bin:"application/octet-stream",bmp:"image/bmp",css:"text/css",csv:"text/csv",eot:"application/vnd.ms-fontobject",epub:"application/epub+zip",gif:"image/gif",gz:"application/gzip",htm:"text/html",html:"text/html",ico:"image/x-icon",ics:"text/calendar",jpeg:"image/jpeg",jpg:"image/jpeg",js:"text/javascript",json:"application/json",jsonld:"application/ld+json",map:"application/json",mid:"audio/x-midi",midi:"audio/x-midi",mjs:"text/javascript",mp3:"audio/mpeg",mp4:"video/mp4",mpeg:"video/mpeg",oga:"audio/ogg",ogv:"video/ogg",ogx:"application/ogg",opus:"audio/opus",otf:"font/otf",pdf:"application/pdf",png:"image/png",rtf:"application/rtf",svg:"image/svg+xml",tif:"image/tiff",tiff:"image/tiff",ts:"video/mp2t",ttf:"font/ttf",txt:"text/plain",wasm:"application/wasm",webm:"video/webm",weba:"audio/webm",webmanifest:"application/manifest+json",webp:"image/webp",woff:"font/woff",woff2:"font/woff2",xhtml:"application/xhtml+xml",xml:"application/xml",zip:"application/zip","3gp":"video/3gpp","3g2":"video/3gpp2",gltf:"model/gltf+json",glb:"model/gltf-binary"},Hs=qs,Gs=(...e)=>{let t=e.filter(i=>i!=="").join("/");t=t.replace(new RegExp("(?<=\\/)\\/+","g"),"");const s=t.split("/"),a=[];for(const i of s)i===".."&&a.length>0&&a.at(-1)!==".."?a.pop():i!=="."&&a.push(i);return a.join("/")||"."},Yt={br:".br",zstd:".zst",gzip:".gz"},Us=Object.keys(Yt),Js="index.html",Ks=e=>{const t=e.root??"./",s=e.path,a=e.join??Gs;return async(i,o)=>{var p,x,b,w;if(i.finalized)return o();let r;if(e.path)r=e.path;else try{if(r=decodeURIComponent(i.req.path),/(?:^|[\/\\])\.\.(?:$|[\/\\])/.test(r))throw new Error}catch{return await((p=e.onNotFound)==null?void 0:p.call(e,i.req.path,i)),o()}let d=a(t,!s&&e.rewriteRequestPath?e.rewriteRequestPath(r):r);e.isDir&&await e.isDir(d)&&(d=a(d,Js));const l=e.getContent;let c=await l(d,i);if(c instanceof Response)return i.newResponse(c.body,c);if(c){const R=e.mimes&&ot(d,e.mimes)||ot(d);if(i.header("Content-Type",R||"application/octet-stream"),e.precompressed&&(!R||Vs.test(R))){const h=new Set((x=i.req.header("Accept-Encoding"))==null?void 0:x.split(",").map(y=>y.trim()));for(const y of Us){if(!h.has(y))continue;const I=await l(d+Yt[y],i);if(I){c=I,i.header("Content-Encoding",y),i.header("Vary","Accept-Encoding",{append:!0});break}}}return await((b=e.onFound)==null?void 0:b.call(e,d,i)),i.body(c)}await((w=e.onNotFound)==null?void 0:w.call(e,d,i)),await o()}},_s=async(e,t)=>{let s;t&&t.manifest?typeof t.manifest=="string"?s=JSON.parse(t.manifest):s=t.manifest:typeof __STATIC_CONTENT_MANIFEST=="string"?s=JSON.parse(__STATIC_CONTENT_MANIFEST):s=__STATIC_CONTENT_MANIFEST;let a;t&&t.namespace?a=t.namespace:a=__STATIC_CONTENT;const i=s[e]||e;if(!i)return null;const o=await a.get(i,{type:"stream"});return o||null},Qs=e=>async function(s,a){return Ks({...e,getContent:async o=>_s(o,{manifest:e.manifest,namespace:e.namespace?e.namespace:s.env?s.env.__STATIC_CONTENT:void 0})})(s,a)},Zt=e=>Qs(e),_=(e,...t)=>{const s=[""];for(let a=0,i=e.length-1;a<i;a++){s[0]+=e[a];const o=Array.isArray(t[a])?t[a].flat(1/0):[t[a]];for(let r=0,d=o.length;r<d;r++){const l=o[r];if(typeof l=="string")We(l,s);else if(typeof l=="number")s[0]+=l;else{if(typeof l=="boolean"||l===null||l===void 0)continue;if(typeof l=="object"&&l.isEscaped)if(l.callbacks)s.unshift("",l);else{const c=l.toString();c instanceof Promise?s.unshift("",c):s[0]+=c}else l instanceof Promise?s.unshift("",l):We(l.toString(),s)}}}return s[0]+=e.at(-1),s.length===1?"callbacks"in s?xe(Ps(xe(s[0],s.callbacks))):xe(s[0]):As(s,s.callbacks)};const Te=new P;Te.get("/profile/:id",async e=>{const t=e.req.param("id");return e.json({id:t,name:"João Silva",diagnosis:"Em tratamento",nextAppointment:"2024-02-15",treatmentStage:"Quimioterapia"})});Te.post("/symptoms",async e=>(await e.req.json(),e.json({success:!0,message:"Sintomas registrados com sucesso",aiRecommendation:"Monitoramento contínuo recomendado"})));Te.get("/journey/:id",async e=>{const t=e.req.param("id");return e.json({patientId:t,stages:[{date:"2024-01-01",event:"Diagnóstico inicial",status:"completed"},{date:"2024-01-15",event:"Início do tratamento",status:"completed"},{date:"2024-02-01",event:"Primeira sessão de quimioterapia",status:"in-progress"},{date:"2024-03-01",event:"Avaliação de resposta",status:"pending"}]})});Te.post("/triage",async e=>{const t=await e.req.json(),{symptoms:s,age:a,gender:i,history:o}=t,r=s.includes("dor intensa")?"high":"medium";return e.json({urgencyLevel:r,recommendation:r==="high"?"Procure atendimento médico imediato":"Agende uma consulta com seu médico",suggestedSpecialty:"Oncologia",estimatedWaitTime:r==="high"?"0-2 horas":"1-3 dias"})});const De=new P;De.get("/patients",async e=>e.json({patients:[{id:"1",name:"João Silva",age:55,diagnosis:"Câncer de Pulmão",stage:"IIIa",lastVisit:"2024-01-28",nextAppointment:"2024-02-15",riskScore:.7,alertLevel:"medium"},{id:"2",name:"Maria Santos",age:42,diagnosis:"Câncer de Mama",stage:"IIb",lastVisit:"2024-01-25",nextAppointment:"2024-02-10",riskScore:.4,alertLevel:"low"}]}));De.post("/ai-assistant",async e=>{const t=await e.req.json(),{query:s,patientContext:a,type:i}=t;let o="";return i==="treatment-recommendation"?o=`Baseado no perfil do paciente e diretrizes atuais:
     1. Considerar esquema FOLFIRINOX para pacientes com bom performance status
     2. Avaliar função hepática e renal antes do início
     3. Monitorar toxicidade hematológica semanalmente
@@ -564,7 +564,706 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         // Removido o gráfico comparativo antigo - agora existe apenas no Master Admin como componente separado
       });
     <\/script>
-  `};function Ws(e,t){const s={patient:{subtitle:"Monitoramento preditivo da sua jornada oncológica",mainAlerts:[{id:"pa1",icon:"fas fa-calendar-exclamation",title:"Consulta Próxima",description:"Exame de controle em 3 dias",timeframe:"3 dias",impact:"Alto",severity:"high"},{id:"pa2",icon:"fas fa-pills",title:"Medicação",description:"Estoque baixo de Tamoxifeno",timeframe:"5 dias",impact:"Médio",severity:"medium"},{id:"pa3",icon:"fas fa-heartbeat",title:"Bem-estar",description:"Sessão psicológica recomendada",timeframe:"Preventivo",impact:"Preventivo",severity:"low"}],metrics:[{icon:"fas fa-user-check",value:"92%",label:"Adesão",trend:"stable",prediction:"Mantendo padrão"},{icon:"fas fa-calendar-check",value:"3/5",label:"Consultas",trend:"up",prediction:"2 agendamentos pendentes"},{icon:"fas fa-heart",value:"Bom",label:"Estado Geral",trend:"stable",prediction:"Estável"},{icon:"fas fa-flask",value:"2",label:"Exames Pendentes",trend:"down",prediction:"Agendar esta semana"}],recommendations:[{id:"rec1",action:"Agendar coleta de sangue para hemograma",reason:"Controle mensal do tratamento",priority:"high"},{id:"rec2",action:"Renovar receita de medicação contínua",reason:"Estoque termina em 5 dias",priority:"medium"},{id:"rec3",action:"Participar do grupo de apoio quinta-feira",reason:"Melhoria no bem-estar emocional",priority:"low"}]},doctor:{subtitle:"Alertas preditivos e insights clínicos dos seus pacientes",mainAlerts:[{id:"doc1",icon:"fas fa-exclamation-triangle",title:"Paciente Crítico",description:"João Silva - Risco de neutropenia",timeframe:"Imediato",impact:"Crítico",severity:"high"},{id:"doc2",icon:"fas fa-user-clock",title:"Atrasos Recorrentes",description:"5 pacientes com baixa adesão",timeframe:"Esta semana",impact:"Alto",severity:"medium"},{id:"doc3",icon:"fas fa-microscope",title:"Resultados Pendentes",description:"12 laudos aguardando revisão",timeframe:"24h",impact:"Médio",severity:"medium"}],metrics:[{icon:"fas fa-users",value:"47",label:"Pacientes Ativos",trend:"up",prediction:"+3 esta semana"},{icon:"fas fa-procedures",value:"8",label:"Internados",trend:"stable",prediction:"2 altas previstas"},{icon:"fas fa-clipboard-check",value:"89%",label:"Protocolos OK",trend:"down",prediction:"3 revisões urgentes"},{icon:"fas fa-chart-line",value:"94%",label:"Taxa Sucesso",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"drec1",action:"Revisar protocolo do paciente João Silva imediatamente",reason:"Sinais preditivos de complicação detectados",priority:"high"},{id:"drec2",action:"Agendar reunião multidisciplinar para casos complexos",reason:"3 pacientes necessitam revisão de conduta",priority:"medium"},{id:"drec3",action:"Atualizar protocolos de quimioterapia",reason:"Novas diretrizes publicadas esta semana",priority:"low"}]},navigator:{subtitle:"Coordenação inteligente e otimização da jornada dos pacientes",mainAlerts:[{id:"nav1",icon:"fas fa-exclamation-circle",title:"Pacientes Urgentes",description:"5 pacientes necessitam intervenção imediata",timeframe:"Agora",impact:"Crítico",severity:"high"},{id:"nav2",icon:"fas fa-clock",title:"Atrasos Detectados",description:"12 pacientes com atraso em exames",timeframe:"Hoje",impact:"Alto",severity:"medium"},{id:"nav3",icon:"fas fa-route",title:"Otimização de Rotas",description:"3 jornadas podem ser aceleradas",timeframe:"Esta semana",impact:"Médio",severity:"low"}],metrics:[{icon:"fas fa-users",value:"178",label:"Em Navegação",trend:"up",prediction:"+12 novos hoje"},{icon:"fas fa-tasks",value:"46",label:"Tarefas Pendentes",trend:"down",prediction:"23 urgentes"},{icon:"fas fa-percentage",value:"87%",label:"Taxa Adesão",trend:"stable",prediction:"Meta: 90%"},{icon:"fas fa-star",value:"92%",label:"Satisfação",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"navrec1",action:"Contatar pacientes com exames atrasados imediatamente",reason:"Prevenir abandono de tratamento",priority:"high"},{id:"navrec2",action:"Reorganizar agendamentos da próxima semana",reason:"Otimizar utilização de recursos",priority:"medium"},{id:"navrec3",action:"Atualizar protocolos de navegação",reason:"Novas diretrizes disponíveis",priority:"low"}]},financial:{subtitle:"Inteligência artificial para prevenção de glosas e otimização financeira",mainAlerts:[{id:"fin1",icon:"fas fa-exclamation-triangle",title:"Risco de Glosa Detectado",description:"15 contas com inconsistências identificadas",timeframe:"Urgente",impact:"R$ 127.000",severity:"high"},{id:"fin2",icon:"fas fa-file-invoice-dollar",title:"Faturamento Pendente",description:"42 procedimentos aguardando cobrança",timeframe:"Hoje",impact:"R$ 89.000",severity:"medium"},{id:"fin3",icon:"fas fa-chart-line",title:"Oportunidade de Melhoria",description:"Redução de 12% em glosas possível",timeframe:"Este mês",impact:"R$ 45.000",severity:"low"}],metrics:[{icon:"fas fa-shield-alt",value:"R$ 2.4M",label:"Glosas Evitadas",trend:"up",prediction:"+R$ 180K este mês"},{icon:"fas fa-percentage",value:"98.5%",label:"Taxa Aprovação",trend:"up",prediction:"Meta: 99%"},{icon:"fas fa-robot",value:"1,247",label:"Auditorias IA",trend:"up",prediction:"+89 hoje"},{icon:"fas fa-dollar-sign",value:"R$ 18.3M",label:"Faturamento Mês",trend:"stable",prediction:"Projeção: R$ 19M"}],recommendations:[{id:"finrec1",action:"Revisar 15 contas com alto risco de glosa imediatamente",reason:"IA detectou inconsistências em documentação e codificação",priority:"high"},{id:"finrec2",action:"Implementar checklist automático para procedimentos complexos",reason:"Redução de 30% em glosas prevista",priority:"medium"},{id:"finrec3",action:"Treinar equipe em novas diretrizes TUSS/TISS",reason:"Atualização normativa este mês",priority:"low"}]},wellness:{subtitle:"Monitoramento emocional e suporte psicossocial inteligente",mainAlerts:[{id:"well1",icon:"fas fa-heart-broken",title:"Pacientes em Risco",description:"8 pacientes com sinais de depressão severa",timeframe:"Imediato",impact:"Crítico",severity:"high"},{id:"well2",icon:"fas fa-users",title:"Grupos de Apoio",description:"3 grupos precisam de moderação",timeframe:"Hoje",impact:"Alto",severity:"medium"},{id:"well3",icon:"fas fa-calendar-check",title:"Sessões Agendadas",description:"24 atendimentos psicológicos esta semana",timeframe:"Semana",impact:"Normal",severity:"low"}],metrics:[{icon:"fas fa-smile",value:"73%",label:"Bem-Estar Geral",trend:"up",prediction:"Melhora gradual"},{icon:"fas fa-users",value:"234",label:"Pacientes Ativos",trend:"up",prediction:"+18 esta semana"},{icon:"fas fa-brain",value:"156",label:"Sessões Realizadas",trend:"stable",prediction:"24 agendadas"},{icon:"fas fa-hands-helping",value:"89%",label:"Satisfação",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"wellrec1",action:"Contatar 8 pacientes identificados com risco emocional elevado",reason:"Prevenção de crises e abandono de tratamento",priority:"high"},{id:"wellrec2",action:"Expandir horários de grupos de apoio online",reason:"Alta demanda detectada nos horários noturnos",priority:"medium"},{id:"wellrec3",action:"Implementar programa de mindfulness semanal",reason:"Evidências de redução de 40% em ansiedade",priority:"low"}]},research:{subtitle:"Análise preditiva para pesquisa clínica e recrutamento inteligente",mainAlerts:[{id:"res1",icon:"fas fa-vial",title:"Recrutamento Urgente",description:"Estudo ONCO-2024 precisa de 12 pacientes",timeframe:"2 semanas",impact:"Alto",severity:"high"},{id:"res2",icon:"fas fa-chart-bar",title:"Dados Incompletos",description:"38 CRFs pendentes de revisão",timeframe:"Esta semana",impact:"Médio",severity:"medium"},{id:"res3",icon:"fas fa-file-medical-alt",title:"Publicação Pronta",description:"3 artigos prontos para submissão",timeframe:"Este mês",impact:"Positivo",severity:"low"}],metrics:[{icon:"fas fa-flask",value:"24",label:"Estudos Ativos",trend:"up",prediction:"+2 iniciando"},{icon:"fas fa-users",value:"1,847",label:"Participantes",trend:"up",prediction:"+67 este mês"},{icon:"fas fa-percentage",value:"94%",label:"Taxa Retenção",trend:"stable",prediction:"Meta: 95%"},{icon:"fas fa-trophy",value:"42",label:"Publicações 2024",trend:"up",prediction:"15 com IF>5"}],recommendations:[{id:"resrec1",action:"Ativar protocolo de recrutamento acelerado para ONCO-2024",reason:"IA identificou 28 pacientes elegíveis no banco de dados",priority:"high"},{id:"resrec2",action:"Automatizar coleta de dados do REDCap",reason:"Redução de 60% no tempo de preenchimento de CRFs",priority:"medium"},{id:"resrec3",action:"Submeter artigos para journals de alto impacto",reason:"Janela de submissão favorável este mês",priority:"low"}]},admin:{subtitle:"Monitoramento preditivo de sistema e gestão inteligente de plataforma",mainAlerts:[{id:"adm1",icon:"fas fa-server",title:"Carga Crítica Detectada",description:"CPU 78% - Escalonamento automático ativado",timeframe:"Agora",impact:"Sistema",severity:"high"},{id:"adm2",icon:"fas fa-exclamation-circle",title:"Anomalias de Segurança",description:"3 tentativas de acesso suspeitas bloqueadas",timeframe:"Última hora",impact:"Segurança",severity:"medium"},{id:"adm3",icon:"fas fa-sync-alt",title:"Sincronização Pendente",description:"HIS/RIS com delay de 5 minutos",timeframe:"Contínuo",impact:"Integração",severity:"low"}],metrics:[{icon:"fas fa-server",value:"99.98%",label:"Uptime Sistema",trend:"stable",prediction:"SLA garantido"},{icon:"fas fa-tachometer-alt",value:"12ms",label:"Latência Edge",trend:"down",prediction:"Otimizado"},{icon:"fas fa-shield-alt",value:"100%",label:"Compliance",trend:"stable",prediction:"LGPD/ISO OK"},{icon:"fas fa-database",value:"523MB",label:"Database D1",trend:"up",prediction:"78% capacity"}],recommendations:[{id:"admrec1",action:"Implementar auto-scaling para Workers em horário de pico",reason:"Previsão de aumento de 40% na carga às 14h",priority:"high"},{id:"admrec2",action:"Atualizar certificados SSL antes do vencimento",reason:"3 certificados expiram em 15 dias",priority:"medium"},{id:"admrec3",action:"Revisar logs de segurança da última semana",reason:"Auditoria mensal de compliance",priority:"low"}]},default:{subtitle:"Monitoramento inteligente e preditivo",mainAlerts:[],metrics:[],recommendations:[]}};return s[e]||s.default}const W=new P;function ye(e,t,s){return`
+  `};function Ws(e,t){const s={patient:{subtitle:"Monitoramento preditivo da sua jornada oncológica",mainAlerts:[{id:"pa1",icon:"fas fa-calendar-exclamation",title:"Consulta Próxima",description:"Exame de controle em 3 dias",timeframe:"3 dias",impact:"Alto",severity:"high"},{id:"pa2",icon:"fas fa-pills",title:"Medicação",description:"Estoque baixo de Tamoxifeno",timeframe:"5 dias",impact:"Médio",severity:"medium"},{id:"pa3",icon:"fas fa-heartbeat",title:"Bem-estar",description:"Sessão psicológica recomendada",timeframe:"Preventivo",impact:"Preventivo",severity:"low"}],metrics:[{icon:"fas fa-user-check",value:"92%",label:"Adesão",trend:"stable",prediction:"Mantendo padrão"},{icon:"fas fa-calendar-check",value:"3/5",label:"Consultas",trend:"up",prediction:"2 agendamentos pendentes"},{icon:"fas fa-heart",value:"Bom",label:"Estado Geral",trend:"stable",prediction:"Estável"},{icon:"fas fa-flask",value:"2",label:"Exames Pendentes",trend:"down",prediction:"Agendar esta semana"}],recommendations:[{id:"rec1",action:"Agendar coleta de sangue para hemograma",reason:"Controle mensal do tratamento",priority:"high"},{id:"rec2",action:"Renovar receita de medicação contínua",reason:"Estoque termina em 5 dias",priority:"medium"},{id:"rec3",action:"Participar do grupo de apoio quinta-feira",reason:"Melhoria no bem-estar emocional",priority:"low"}]},doctor:{subtitle:"Alertas preditivos e insights clínicos dos seus pacientes",mainAlerts:[{id:"doc1",icon:"fas fa-exclamation-triangle",title:"Paciente Crítico",description:"João Silva - Risco de neutropenia",timeframe:"Imediato",impact:"Crítico",severity:"high"},{id:"doc2",icon:"fas fa-user-clock",title:"Atrasos Recorrentes",description:"5 pacientes com baixa adesão",timeframe:"Esta semana",impact:"Alto",severity:"medium"},{id:"doc3",icon:"fas fa-microscope",title:"Resultados Pendentes",description:"12 laudos aguardando revisão",timeframe:"24h",impact:"Médio",severity:"medium"}],metrics:[{icon:"fas fa-users",value:"47",label:"Pacientes Ativos",trend:"up",prediction:"+3 esta semana"},{icon:"fas fa-procedures",value:"8",label:"Internados",trend:"stable",prediction:"2 altas previstas"},{icon:"fas fa-clipboard-check",value:"89%",label:"Protocolos OK",trend:"down",prediction:"3 revisões urgentes"},{icon:"fas fa-chart-line",value:"94%",label:"Taxa Sucesso",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"drec1",action:"Revisar protocolo do paciente João Silva imediatamente",reason:"Sinais preditivos de complicação detectados",priority:"high"},{id:"drec2",action:"Agendar reunião multidisciplinar para casos complexos",reason:"3 pacientes necessitam revisão de conduta",priority:"medium"},{id:"drec3",action:"Atualizar protocolos de quimioterapia",reason:"Novas diretrizes publicadas esta semana",priority:"low"}]},navigator:{subtitle:"Coordenação inteligente e otimização da jornada dos pacientes",mainAlerts:[{id:"nav1",icon:"fas fa-exclamation-circle",title:"Pacientes Urgentes",description:"5 pacientes necessitam intervenção imediata",timeframe:"Agora",impact:"Crítico",severity:"high"},{id:"nav2",icon:"fas fa-clock",title:"Atrasos Detectados",description:"12 pacientes com atraso em exames",timeframe:"Hoje",impact:"Alto",severity:"medium"},{id:"nav3",icon:"fas fa-route",title:"Otimização de Rotas",description:"3 jornadas podem ser aceleradas",timeframe:"Esta semana",impact:"Médio",severity:"low"}],metrics:[{icon:"fas fa-users",value:"178",label:"Em Navegação",trend:"up",prediction:"+12 novos hoje"},{icon:"fas fa-tasks",value:"46",label:"Tarefas Pendentes",trend:"down",prediction:"23 urgentes"},{icon:"fas fa-percentage",value:"87%",label:"Taxa Adesão",trend:"stable",prediction:"Meta: 90%"},{icon:"fas fa-star",value:"92%",label:"Satisfação",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"navrec1",action:"Contatar pacientes com exames atrasados imediatamente",reason:"Prevenir abandono de tratamento",priority:"high"},{id:"navrec2",action:"Reorganizar agendamentos da próxima semana",reason:"Otimizar utilização de recursos",priority:"medium"},{id:"navrec3",action:"Atualizar protocolos de navegação",reason:"Novas diretrizes disponíveis",priority:"low"}]},financial:{subtitle:"Inteligência artificial para prevenção de glosas e otimização financeira",mainAlerts:[{id:"fin1",icon:"fas fa-exclamation-triangle",title:"Risco de Glosa Detectado",description:"15 contas com inconsistências identificadas",timeframe:"Urgente",impact:"R$ 127.000",severity:"high"},{id:"fin2",icon:"fas fa-file-invoice-dollar",title:"Faturamento Pendente",description:"42 procedimentos aguardando cobrança",timeframe:"Hoje",impact:"R$ 89.000",severity:"medium"},{id:"fin3",icon:"fas fa-chart-line",title:"Oportunidade de Melhoria",description:"Redução de 12% em glosas possível",timeframe:"Este mês",impact:"R$ 45.000",severity:"low"}],metrics:[{icon:"fas fa-shield-alt",value:"R$ 2.4M",label:"Glosas Evitadas",trend:"up",prediction:"+R$ 180K este mês"},{icon:"fas fa-percentage",value:"98.5%",label:"Taxa Aprovação",trend:"up",prediction:"Meta: 99%"},{icon:"fas fa-robot",value:"1,247",label:"Auditorias IA",trend:"up",prediction:"+89 hoje"},{icon:"fas fa-dollar-sign",value:"R$ 18.3M",label:"Faturamento Mês",trend:"stable",prediction:"Projeção: R$ 19M"}],recommendations:[{id:"finrec1",action:"Revisar 15 contas com alto risco de glosa imediatamente",reason:"IA detectou inconsistências em documentação e codificação",priority:"high"},{id:"finrec2",action:"Implementar checklist automático para procedimentos complexos",reason:"Redução de 30% em glosas prevista",priority:"medium"},{id:"finrec3",action:"Treinar equipe em novas diretrizes TUSS/TISS",reason:"Atualização normativa este mês",priority:"low"}]},wellness:{subtitle:"Monitoramento emocional e suporte psicossocial inteligente",mainAlerts:[{id:"well1",icon:"fas fa-heart-broken",title:"Pacientes em Risco",description:"8 pacientes com sinais de depressão severa",timeframe:"Imediato",impact:"Crítico",severity:"high"},{id:"well2",icon:"fas fa-users",title:"Grupos de Apoio",description:"3 grupos precisam de moderação",timeframe:"Hoje",impact:"Alto",severity:"medium"},{id:"well3",icon:"fas fa-calendar-check",title:"Sessões Agendadas",description:"24 atendimentos psicológicos esta semana",timeframe:"Semana",impact:"Normal",severity:"low"}],metrics:[{icon:"fas fa-smile",value:"73%",label:"Bem-Estar Geral",trend:"up",prediction:"Melhora gradual"},{icon:"fas fa-users",value:"234",label:"Pacientes Ativos",trend:"up",prediction:"+18 esta semana"},{icon:"fas fa-brain",value:"156",label:"Sessões Realizadas",trend:"stable",prediction:"24 agendadas"},{icon:"fas fa-hands-helping",value:"89%",label:"Satisfação",trend:"up",prediction:"Acima da média"}],recommendations:[{id:"wellrec1",action:"Contatar 8 pacientes identificados com risco emocional elevado",reason:"Prevenção de crises e abandono de tratamento",priority:"high"},{id:"wellrec2",action:"Expandir horários de grupos de apoio online",reason:"Alta demanda detectada nos horários noturnos",priority:"medium"},{id:"wellrec3",action:"Implementar programa de mindfulness semanal",reason:"Evidências de redução de 40% em ansiedade",priority:"low"}]},research:{subtitle:"Análise preditiva para pesquisa clínica e recrutamento inteligente",mainAlerts:[{id:"res1",icon:"fas fa-vial",title:"Recrutamento Urgente",description:"Estudo ONCO-2024 precisa de 12 pacientes",timeframe:"2 semanas",impact:"Alto",severity:"high"},{id:"res2",icon:"fas fa-chart-bar",title:"Dados Incompletos",description:"38 CRFs pendentes de revisão",timeframe:"Esta semana",impact:"Médio",severity:"medium"},{id:"res3",icon:"fas fa-file-medical-alt",title:"Publicação Pronta",description:"3 artigos prontos para submissão",timeframe:"Este mês",impact:"Positivo",severity:"low"}],metrics:[{icon:"fas fa-flask",value:"24",label:"Estudos Ativos",trend:"up",prediction:"+2 iniciando"},{icon:"fas fa-users",value:"1,847",label:"Participantes",trend:"up",prediction:"+67 este mês"},{icon:"fas fa-percentage",value:"94%",label:"Taxa Retenção",trend:"stable",prediction:"Meta: 95%"},{icon:"fas fa-trophy",value:"42",label:"Publicações 2024",trend:"up",prediction:"15 com IF>5"}],recommendations:[{id:"resrec1",action:"Ativar protocolo de recrutamento acelerado para ONCO-2024",reason:"IA identificou 28 pacientes elegíveis no banco de dados",priority:"high"},{id:"resrec2",action:"Automatizar coleta de dados do REDCap",reason:"Redução de 60% no tempo de preenchimento de CRFs",priority:"medium"},{id:"resrec3",action:"Submeter artigos para journals de alto impacto",reason:"Janela de submissão favorável este mês",priority:"low"}]},admin:{subtitle:"Monitoramento preditivo de sistema e gestão inteligente de plataforma",mainAlerts:[{id:"adm1",icon:"fas fa-server",title:"Carga Crítica Detectada",description:"CPU 78% - Escalonamento automático ativado",timeframe:"Agora",impact:"Sistema",severity:"high"},{id:"adm2",icon:"fas fa-exclamation-circle",title:"Anomalias de Segurança",description:"3 tentativas de acesso suspeitas bloqueadas",timeframe:"Última hora",impact:"Segurança",severity:"medium"},{id:"adm3",icon:"fas fa-sync-alt",title:"Sincronização Pendente",description:"HIS/RIS com delay de 5 minutos",timeframe:"Contínuo",impact:"Integração",severity:"low"}],metrics:[{icon:"fas fa-server",value:"99.98%",label:"Uptime Sistema",trend:"stable",prediction:"SLA garantido"},{icon:"fas fa-tachometer-alt",value:"12ms",label:"Latência Edge",trend:"down",prediction:"Otimizado"},{icon:"fas fa-shield-alt",value:"100%",label:"Compliance",trend:"stable",prediction:"LGPD/ISO OK"},{icon:"fas fa-database",value:"523MB",label:"Database D1",trend:"up",prediction:"78% capacity"}],recommendations:[{id:"admrec1",action:"Implementar auto-scaling para Workers em horário de pico",reason:"Previsão de aumento de 40% na carga às 14h",priority:"high"},{id:"admrec2",action:"Atualizar certificados SSL antes do vencimento",reason:"3 certificados expiram em 15 dias",priority:"medium"},{id:"admrec3",action:"Revisar logs de segurança da última semana",reason:"Auditoria mensal de compliance",priority:"low"}]},default:{subtitle:"Monitoramento inteligente e preditivo",mainAlerts:[],metrics:[],recommendations:[]}};return s[e]||s.default}const Ys=()=>{const e=`
+        <!-- Portal Financeiro LAURA - Sistema Preditivo de Gestão -->
+        <div class="bg-gradient-to-br from-gray-50 via-white to-gray-50 min-h-screen">
+            <!-- Header Premium -->
+            <div class="glass-premium p-6 mb-8 border-b border-gray-100">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-4">
+                        <button onclick="goBack()" class="text-gray-600 hover:text-gray-800 transition-colors">
+                            <i class="fas fa-arrow-left text-xl"></i>
+                        </button>
+                        <div>
+                            <h1 class="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
+                                Portal de Gestão Financeira LAURA
+                            </h1>
+                            <p class="text-gray-600 mt-1">Sistema Preditivo de Análise de Riscos Financeiros</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full text-sm font-semibold shadow-lg">
+                            <i class="fas fa-shield-check mr-2"></i>IA Ativa
+                        </span>
+                        <button class="px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all">
+                            <i class="fas fa-download mr-2"></i>Exportar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPIs Premium Row -->
+            <div class="px-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+                    <!-- Glosas Identificadas -->
+                    <div class="kpi-card-premium rounded-xl p-6 relative overflow-hidden cursor-pointer" onclick="showExtratoKPI('glosas_identificadas')">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-red-500/10 to-transparent rounded-full -mr-16 -mt-16"></div>
+                        <div class="relative">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="p-3 bg-gradient-to-br from-red-500 to-red-600 rounded-xl shadow-lg">
+                                    <i class="fas fa-exclamation-triangle text-white text-xl"></i>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-600" onclick="event.stopPropagation(); showExtratoKPI('glosas_identificadas')">
+                                    <i class="fas fa-file-alt"></i>
+                                </button>
+                            </div>
+                            <div class="text-3xl font-bold text-gray-800 mb-1">R$ 485.7K</div>
+                            <div class="text-sm text-gray-600 font-medium">Glosas Identificadas</div>
+                            <div class="text-xs text-red-600 font-semibold mt-2">
+                                <i class="fas fa-arrow-up mr-1"></i>12.3% vs mês anterior
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Glosas Revertidas -->
+                    <div class="kpi-card-premium rounded-xl p-6 relative overflow-hidden cursor-pointer" onclick="showExtratoKPI('glosas_revertidas')">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-500/10 to-transparent rounded-full -mr-16 -mt-16"></div>
+                        <div class="relative">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="p-3 bg-gradient-to-br from-green-500 to-green-600 rounded-xl shadow-lg">
+                                    <i class="fas fa-check-circle text-white text-xl"></i>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-600" onclick="event.stopPropagation(); showExtratoKPI('glosas_revertidas')">
+                                    <i class="fas fa-file-alt"></i>
+                                </button>
+                            </div>
+                            <div class="text-3xl font-bold text-gray-800 mb-1">R$ 367.2K</div>
+                            <div class="text-sm text-gray-600 font-medium">Glosas Revertidas</div>
+                            <div class="text-xs text-green-600 font-semibold mt-2">
+                                <i class="fas fa-arrow-up mr-1"></i>75.6% taxa reversão
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ROI Otimização -->
+                    <div class="kpi-card-premium rounded-xl p-6 relative overflow-hidden cursor-pointer" onclick="showExtratoKPI('roi_otimizacao')">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/10 to-transparent rounded-full -mr-16 -mt-16"></div>
+                        <div class="relative">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="p-3 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg">
+                                    <i class="fas fa-chart-line text-white text-xl"></i>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-600" onclick="event.stopPropagation(); showExtratoKPI('roi_otimizacao')">
+                                    <i class="fas fa-file-alt"></i>
+                                </button>
+                            </div>
+                            <div class="text-3xl font-bold text-gray-800 mb-1">287%</div>
+                            <div class="text-sm text-gray-600 font-medium">ROI Otimização</div>
+                            <div class="text-xs text-blue-600 font-semibold mt-2">
+                                <i class="fas fa-trophy mr-1"></i>Meta superada
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tempo Médio Reversão -->
+                    <div class="kpi-card-premium rounded-xl p-6 relative overflow-hidden cursor-pointer" onclick="showExtratoKPI('tempo_reversao')">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500/10 to-transparent rounded-full -mr-16 -mt-16"></div>
+                        <div class="relative">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="p-3 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl shadow-lg">
+                                    <i class="fas fa-clock text-white text-xl"></i>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-600" onclick="event.stopPropagation(); showExtratoKPI('tempo_reversao')">
+                                    <i class="fas fa-file-alt"></i>
+                                </button>
+                            </div>
+                            <div class="text-3xl font-bold text-gray-800 mb-1">4.2 dias</div>
+                            <div class="text-sm text-gray-600 font-medium">Tempo Médio Reversão</div>
+                            <div class="text-xs text-purple-600 font-semibold mt-2">
+                                <i class="fas fa-arrow-down mr-1"></i>Redução de 2.1 dias
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controle OPME -->
+                    <div class="kpi-card-premium rounded-xl p-6 relative overflow-hidden cursor-pointer" onclick="showExtratoKPI('controle_opme')">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-500/10 to-transparent rounded-full -mr-16 -mt-16"></div>
+                        <div class="relative">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="p-3 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl shadow-lg">
+                                    <i class="fas fa-microscope text-white text-xl"></i>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-600" onclick="event.stopPropagation(); showExtratoKPI('controle_opme')">
+                                    <i class="fas fa-file-alt"></i>
+                                </button>
+                            </div>
+                            <div class="text-3xl font-bold text-gray-800 mb-1">98.7%</div>
+                            <div class="text-sm text-gray-600 font-medium">Controle OPME</div>
+                            <div class="text-xs text-amber-600 font-semibold mt-2">
+                                <i class="fas fa-shield-alt mr-1"></i>Compliance total
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="px-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Left Column -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Dashboard Analytics -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Dashboard de Análise Preditiva</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4">
+                                <canvas id="glosasTrendChart" width="200" height="150"></canvas>
+                            </div>
+                            <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4">
+                                <canvas id="reversaoChart" width="200" height="150"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controle OPME em Tempo Real -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-bold text-gray-800">Controle OPME em Tempo Real</h3>
+                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">
+                                <i class="fas fa-circle text-green-500 mr-1" style="font-size: 8px;"></i>
+                                Monitorando
+                            </span>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="border-b border-gray-200">
+                                        <th class="text-left py-3 text-sm font-semibold text-gray-700">Material</th>
+                                        <th class="text-left py-3 text-sm font-semibold text-gray-700">Fornecedor</th>
+                                        <th class="text-left py-3 text-sm font-semibold text-gray-700">Valor</th>
+                                        <th class="text-left py-3 text-sm font-semibold text-gray-700">Status</th>
+                                        <th class="text-center py-3 text-sm font-semibold text-gray-700">Ação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${["Stent Coronário","Prótese de Quadril","Marca-passo","Válvula Cardíaca","Prótese de Joelho"].map((s,a)=>`
+                                    <tr class="border-b border-gray-100 hover:bg-gray-50">
+                                        <td class="py-3 text-sm">${s}</td>
+                                        <td class="py-3 text-sm text-gray-600">${["MedTech Inc","OrthoLife","CardioTech","ValveMed","JointPro"][a]}</td>
+                                        <td class="py-3 text-sm font-semibold">R$ ${[12.45,28.9,45.2,67.8,34.5][a].toFixed(2)}0</td>
+                                        <td class="py-3">
+                                            <span class="px-2 py-1 ${a%3===0?"bg-yellow-100 text-yellow-700":"bg-green-100 text-green-700"} rounded-full text-xs">
+                                                ${a%3===0?"Análise":"Aprovado"}
+                                            </span>
+                                        </td>
+                                        <td class="py-3 text-center">
+                                            <button onclick="showOPMEDetail('${["ST","PQ","MP","VC","PJ"][a]}-2024-00${a+1}')" class="text-blue-600 hover:text-blue-800">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    `).join("")}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="space-y-6">
+                    <!-- Jornadas em Risco -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-bold text-gray-800">Jornadas em Risco</h3>
+                            <button onclick="showJornadasRisco()" class="text-blue-600 text-sm hover:underline">Ver Todos</button>
+                        </div>
+                        <div class="space-y-3">
+                            ${[{nome:"Maria Silva",id:"45123",risco:87,nivel:"alto",cor:"red"},{nome:"João Santos",id:"45124",risco:65,nivel:"medio",cor:"yellow"},{nome:"Ana Costa",id:"45125",risco:45,nivel:"baixo",cor:"green"}].map(s=>`
+                            <div class="p-3 bg-${s.cor}-50 border-l-4 border-${s.cor}-500 rounded-lg">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <p class="font-semibold text-gray-800">${s.nome}</p>
+                                        <p class="text-xs text-gray-600">ID: #${s.id}</p>
+                                    </div>
+                                    <span class="px-2 py-1 bg-${s.cor}-100 text-${s.cor}-700 rounded-full text-xs font-bold">${s.risco}%</span>
+                                </div>
+                                <p class="text-sm text-gray-700 mt-1">${s.nivel==="alto"?"Alto risco de glosa":s.nivel==="medio"?"Documentação pendente":"Monitoramento preventivo"}</p>
+                            </div>
+                            `).join("")}
+                        </div>
+                    </div>
+
+                    <!-- Alertas LAURA -->
+                    <div class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl shadow-lg p-6 text-white">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-brain text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold">Alertas LAURA Finance AI</h3>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-white/10 rounded-lg backdrop-blur">
+                                <p class="text-sm font-semibold mb-1">⚠️ Padrão Detectado</p>
+                                <p class="text-xs opacity-90">15 casos com alta probabilidade de glosa por documentação incompleta</p>
+                            </div>
+                            <div class="p-3 bg-white/10 rounded-lg backdrop-blur">
+                                <p class="text-sm font-semibold mb-1">💡 Oportunidade</p>
+                                <p class="text-xs opacity-90">Potencial economia de R$ 127.5K com revisão preventiva</p>
+                            </div>
+                            <div class="p-3 bg-white/10 rounded-lg backdrop-blur">
+                                <p class="text-sm font-semibold mb-1">📈 Tendência</p>
+                                <p class="text-xs opacity-90">Aumento de 8% na taxa de reversão com novo protocolo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modals -->
+        ${Zs()}
+
+        <style>
+            ${ta()}
+        </style>
+    `,t=[sa()];return{html:e,scripts:t}};function Zs(){return`
+        <!-- Modal: Jornadas em Risco -->
+        <div id="modalJornadasRisco" class="fixed inset-0 z-50 hidden">
+            <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeModal('modalJornadasRisco')"></div>
+            <div class="absolute inset-4 md:inset-8 bg-white rounded-2xl shadow-2xl overflow-hidden">
+                <div class="h-full flex flex-col">
+                    <div class="bg-gradient-to-r from-red-600 to-red-700 p-6 text-white">
+                        <div class="flex justify-between items-center">
+                            <h2 class="text-2xl font-bold">Jornadas (Pacientes) em Risco - Visão Completa</h2>
+                            <button onclick="closeModal('modalJornadasRisco')" class="text-white/80 hover:text-white">
+                                <i class="fas fa-times text-2xl"></i>
+                            </button>
+                        </div>
+                        <div class="mt-4 flex gap-2">
+                            <button onclick="filterRisco('all')" class="px-4 py-2 bg-white/20 rounded-lg hover:bg-white/30">Todos</button>
+                            <button onclick="filterRisco('alto')" class="px-4 py-2 bg-red-800/50 rounded-lg hover:bg-red-800/70">Alto Risco</button>
+                            <button onclick="filterRisco('medio')" class="px-4 py-2 bg-yellow-600/50 rounded-lg hover:bg-yellow-600/70">Médio Risco</button>
+                            <button onclick="filterRisco('baixo')" class="px-4 py-2 bg-green-600/50 rounded-lg hover:bg-green-600/70">Baixo Risco</button>
+                        </div>
+                    </div>
+                    <div class="flex-1 overflow-y-auto p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            ${Xs()}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal: OPME Detail -->
+        <div id="modalOPMEDetail" class="fixed inset-0 z-50 hidden">
+            <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeModal('modalOPMEDetail')"></div>
+            <div class="absolute inset-8 md:inset-16 bg-white rounded-2xl shadow-2xl overflow-hidden max-w-4xl mx-auto">
+                <div class="h-full flex flex-col">
+                    <div class="bg-gradient-to-r from-amber-600 to-amber-700 p-6 text-white">
+                        <div class="flex justify-between items-center">
+                            <h2 class="text-2xl font-bold">Detalhes OPME - Visão Completa</h2>
+                            <button onclick="closeModal('modalOPMEDetail')" class="text-white/80 hover:text-white">
+                                <i class="fas fa-times text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex-1 overflow-y-auto p-6">
+                        ${ea()}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal: KPI Extratos -->
+        <div id="modalKPIExtrato" class="fixed inset-0 z-50 hidden">
+            <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeModal('modalKPIExtrato')"></div>
+            <div class="absolute inset-4 md:inset-8 bg-white rounded-2xl shadow-2xl overflow-hidden">
+                <div class="h-full flex flex-col">
+                    <div id="modalKPIExtratoHeader" class="bg-gradient-to-r from-blue-600 to-blue-700 p-6 text-white">
+                        <div class="flex justify-between items-center">
+                            <h2 id="modalKPIExtratoTitle" class="text-2xl font-bold">Extrato Detalhado</h2>
+                            <button onclick="closeModal('modalKPIExtrato')" class="text-white/80 hover:text-white">
+                                <i class="fas fa-times text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="modalKPIExtratoContent" class="flex-1 overflow-y-auto p-6">
+                        <!-- Content will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    `}function Xs(){return[...Array.from({length:10},(t,s)=>({nome:["Maria Silva","João Santos","Ana Costa","Pedro Lima","Julia Ferreira","Carlos Mendes","Patricia Souza","Roberto Alves","Fernanda Cruz","Miguel Torres"][s],id:`4512${s}`,risco:85+Math.floor(Math.random()*15),nivel:"alto",diagnostico:["CA Mama","CA Pulmão","CA Colorretal","CA Próstata","Leucemia","CA Gástrico","Linfoma","CA Ovário","CA Pâncreas","Mieloma"][s],tempo:`${3+s} meses`,alerta:"Documentação incompleta - Alto risco de glosa"})),...Array.from({length:10},(t,s)=>({nome:["Lucas Oliveira","Beatriz Lima","André Castro","Sofia Rocha","Gabriel Melo","Isabella Santos","Thiago Costa","Laura Barbosa","Rafael Dias","Camila Nunes"][s],id:`4513${s}`,risco:60+Math.floor(Math.random()*15),nivel:"medio",diagnostico:["CA Tireoide","CA Rim","CA Bexiga","CA Endométrio","CA Fígado","Melanoma","CA Esôfago","CA Cérebro","Sarcoma","CA Testículo"][s],tempo:`${2+s} meses`,alerta:"Autorização pendente - Risco moderado"})),...Array.from({length:11},(t,s)=>({nome:["Diego Martins","Amanda Vieira","Felipe Correia","Mariana Gomes","Bruno Cardoso","Leticia Pinto","Rodrigo Cunha","Natalia Freitas","Eduardo Machado","Juliana Ramos","Henrique Moreira"][s],id:`4514${s}`,risco:30+Math.floor(Math.random()*15),nivel:"baixo",diagnostico:["CA Pele","CA in situ","Tumor Benigno","Pré-cancer","Displasia","Adenoma","Papiloma","Lipoma","Fibroma","Cisto","Pólipo"][s],tempo:`${1+Math.floor(s/2)} meses`,alerta:"Monitoramento preventivo - Baixo risco"}))].map(t=>`
+        <div class="p-4 ${t.nivel==="alto"?"bg-red-50 border-l-4 border-red-500":t.nivel==="medio"?"bg-yellow-50 border-l-4 border-yellow-500":"bg-green-50 border-l-4 border-green-500"} rounded-lg hover:shadow-lg transition-all patient-risk-card" data-risk="${t.nivel}">
+            <div class="flex justify-between items-start mb-2">
+                <div>
+                    <p class="font-bold text-gray-800">${t.nome}</p>
+                    <p class="text-xs text-gray-600">ID: #${t.id}</p>
+                </div>
+                <span class="px-2 py-1 ${t.nivel==="alto"?"bg-red-100 text-red-700":t.nivel==="medio"?"bg-yellow-100 text-yellow-700":"bg-green-100 text-green-700"} rounded-full text-xs font-bold">
+                    ${t.risco}%
+                </span>
+            </div>
+            <p class="text-sm text-gray-700 font-semibold">${t.diagnostico}</p>
+            <p class="text-xs text-gray-600 mt-1">Em tratamento: ${t.tempo}</p>
+            <div class="mt-2 pt-2 border-t ${t.nivel==="alto"?"border-red-200":t.nivel==="medio"?"border-yellow-200":"border-green-200"}">
+                <p class="text-xs ${t.nivel==="alto"?"text-red-700":t.nivel==="medio"?"text-yellow-700":"text-green-700"} font-medium">
+                    <i class="fas fa-exclamation-circle mr-1"></i>${t.alerta}
+                </p>
+            </div>
+        </div>
+    `).join("")}function ea(){return`
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="font-bold text-gray-800 mb-3">Informações do Material</h3>
+                <div class="space-y-2 bg-gray-50 p-4 rounded-lg">
+                    <p class="text-sm"><span class="font-semibold">Código:</span> <span id="opme-code">ST-2024-001</span></p>
+                    <p class="text-sm"><span class="font-semibold">Material:</span> Stent Coronário Drug-Eluting</p>
+                    <p class="text-sm"><span class="font-semibold">Fabricante:</span> MedTech Inc</p>
+                    <p class="text-sm"><span class="font-semibold">Modelo:</span> XR-500 Premium</p>
+                    <p class="text-sm"><span class="font-semibold">Registro ANVISA:</span> 10235.2024.001</p>
+                    <p class="text-sm"><span class="font-semibold">Valor Unitário:</span> R$ 12.450,00</p>
+                    <p class="text-sm"><span class="font-semibold">Quantidade:</span> 1 unidade</p>
+                </div>
+            </div>
+            <div>
+                <h3 class="font-bold text-gray-800 mb-3">Dados Clínicos</h3>
+                <div class="space-y-2 bg-blue-50 p-4 rounded-lg">
+                    <p class="text-sm"><span class="font-semibold">Paciente:</span> João da Silva Santos</p>
+                    <p class="text-sm"><span class="font-semibold">CPF:</span> ***.***.789-**</p>
+                    <p class="text-sm"><span class="font-semibold">Idade:</span> 62 anos</p>
+                    <p class="text-sm"><span class="font-semibold">Procedimento:</span> Angioplastia Coronariana</p>
+                    <p class="text-sm"><span class="font-semibold">CID:</span> I25.1 - Doença aterosclerótica do coração</p>
+                    <p class="text-sm"><span class="font-semibold">Médico Solicitante:</span> Dr. Carlos Eduardo Santos - CRM 12345</p>
+                    <p class="text-sm"><span class="font-semibold">Data Prevista:</span> 20/01/2025</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-6">
+            <h3 class="font-bold text-gray-800 mb-3">Justificativa Técnica Detalhada</h3>
+            <div class="p-4 bg-amber-50 rounded-lg">
+                <p class="text-sm text-gray-700 leading-relaxed">
+                    Paciente masculino, 62 anos, portador de doença arterial coronariana com lesão crítica de 90% em artéria descendente anterior (ADA) proximal, 
+                    documentada por cateterismo cardíaco realizado em 10/01/2025. Apresenta angina instável classe III (CCS), com episódios diários de dor precordial 
+                    aos mínimos esforços, refratária ao tratamento medicamentoso otimizado. 
+                </p>
+                <p class="text-sm text-gray-700 leading-relaxed mt-2">
+                    O stent farmacológico é indicado devido ao alto risco de reestenose considerando: diabetes mellitus tipo 2, lesão longa (>20mm), 
+                    vaso de fino calibre (<3mm) e localização proximal da ADA. Estudos demonstram redução de 70% na taxa de reestenose com stents 
+                    farmacológicos versus convencionais neste perfil de paciente.
+                </p>
+            </div>
+        </div>
+
+        <div class="mt-6">
+            <h3 class="font-bold text-gray-800 mb-3">Documentação Anexada</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <button class="p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                    <i class="fas fa-file-pdf text-red-600 text-2xl mb-1"></i>
+                    <p class="text-xs">Laudo Cateterismo</p>
+                </button>
+                <button class="p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                    <i class="fas fa-file-medical text-blue-600 text-2xl mb-1"></i>
+                    <p class="text-xs">Relatório Médico</p>
+                </button>
+                <button class="p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                    <i class="fas fa-file-invoice text-green-600 text-2xl mb-1"></i>
+                    <p class="text-xs">Orçamento</p>
+                </button>
+                <button class="p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                    <i class="fas fa-file-signature text-purple-600 text-2xl mb-1"></i>
+                    <p class="text-xs">Termo Consentimento</p>
+                </button>
+            </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-green-50 rounded-lg">
+            <h3 class="font-bold text-gray-800 mb-2">Análise LAURA AI</h3>
+            <div class="flex items-start gap-3">
+                <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-check text-white"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-700">
+                        <span class="font-semibold text-green-700">Aprovação Recomendada:</span> 
+                        Documentação completa, justificativa técnica adequada, material compatível com protocolo institucional. 
+                        Probabilidade de glosa: <span class="font-bold text-green-600">2.3%</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-6 flex justify-end gap-3">
+            <button onclick="closeModal('modalOPMEDetail')" class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                Fechar
+            </button>
+            <button class="px-6 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors">
+                <i class="fas fa-clock mr-2"></i>Solicitar Revisão
+            </button>
+            <button class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                <i class="fas fa-check mr-2"></i>Aprovar Material
+            </button>
+        </div>
+    `}function ta(){return`
+        .glass-premium {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        
+        .kpi-card-premium {
+            background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .kpi-card-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .kpi-card-premium:hover::before {
+            left: 100%;
+        }
+        
+        .kpi-card-premium:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.15);
+        }
+    `}function sa(){return`
+        // Initialize Charts
+        function initFinancialCharts() {
+            // Glosas Trend Chart
+            const ctx1 = document.getElementById('glosasTrendChart')?.getContext('2d');
+            if (ctx1) {
+                new Chart(ctx1, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                        datasets: [{
+                            label: 'Glosas Identificadas',
+                            data: [320, 380, 420, 390, 450, 486],
+                            borderColor: 'rgb(239, 68, 68)',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return 'R$ ' + value + 'K';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Reversao Chart
+            const ctx2 = document.getElementById('reversaoChart')?.getContext('2d');
+            if (ctx2) {
+                new Chart(ctx2, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                        datasets: [{
+                            label: 'Taxa de Reversão',
+                            data: [65, 70, 72, 68, 74, 76],
+                            backgroundColor: 'rgba(34, 197, 94, 0.8)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Modal Functions
+        window.showJornadasRisco = function() {
+            document.getElementById('modalJornadasRisco').classList.remove('hidden');
+        }
+
+        window.showOPMEDetail = function(code) {
+            const codeElement = document.getElementById('opme-code');
+            if (codeElement) {
+                codeElement.textContent = code;
+            }
+            document.getElementById('modalOPMEDetail').classList.remove('hidden');
+        }
+
+        window.showExtratoKPI = function(type) {
+            const modal = document.getElementById('modalKPIExtrato');
+            const header = document.getElementById('modalKPIExtratoHeader');
+            const title = document.getElementById('modalKPIExtratoTitle');
+            const content = document.getElementById('modalKPIExtratoContent');
+            
+            const extratos = {
+                'glosas_identificadas': {
+                    title: 'Extrato de Glosas Identificadas',
+                    color: 'from-red-600 to-red-700',
+                    content: generateGlosasIdentificadasContent()
+                },
+                'glosas_revertidas': {
+                    title: 'Extrato de Glosas Revertidas',
+                    color: 'from-green-600 to-green-700',
+                    content: generateGlosasRevertidasContent()
+                },
+                'roi_otimizacao': {
+                    title: 'ROI de Otimização',
+                    color: 'from-blue-600 to-blue-700',
+                    content: generateROIContent()
+                },
+                'tempo_reversao': {
+                    title: 'Tempo Médio de Reversão',
+                    color: 'from-purple-600 to-purple-700',
+                    content: generateTempoReversaoContent()
+                },
+                'controle_opme': {
+                    title: 'Controle OPME',
+                    color: 'from-amber-600 to-amber-700',
+                    content: generateControleOPMEContent()
+                }
+            };
+            
+            const extrato = extratos[type];
+            if (extrato) {
+                title.textContent = extrato.title;
+                header.className = 'bg-gradient-to-r ' + extrato.color + ' p-6 text-white';
+                content.innerHTML = extrato.content;
+                modal.classList.remove('hidden');
+            }
+        }
+
+        function generateGlosasIdentificadasContent() {
+            return '<div class="space-y-4">' +
+                '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">' +
+                '<div class="bg-red-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Total Identificado</p><p class="text-2xl font-bold text-red-600">R$ 485.700</p></div>' +
+                '<div class="bg-red-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Casos</p><p class="text-2xl font-bold text-red-600">127</p></div>' +
+                '<div class="bg-red-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Taxa Crescimento</p><p class="text-2xl font-bold text-red-600">+12.3%</p></div>' +
+                '</div>' +
+                '<table class="w-full"><thead><tr class="border-b"><th class="text-left py-2">Código</th><th class="text-left py-2">Paciente</th><th class="text-left py-2">Valor</th><th class="text-left py-2">Motivo</th><th class="text-left py-2">Status</th></tr></thead>' +
+                '<tbody>' +
+                '<tr class="border-b"><td class="py-2">GL-2024-001</td><td class="py-2">Maria Silva</td><td class="py-2 font-semibold">R$ 12.450</td><td class="py-2">Doc. Incompleta</td><td class="py-2"><span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs">Pendente</span></td></tr>' +
+                '<tr class="border-b"><td class="py-2">GL-2024-002</td><td class="py-2">João Santos</td><td class="py-2 font-semibold">R$ 8.900</td><td class="py-2">Código Incorreto</td><td class="py-2"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs">Revisão</span></td></tr>' +
+                '<tr class="border-b"><td class="py-2">GL-2024-003</td><td class="py-2">Ana Costa</td><td class="py-2 font-semibold">R$ 15.200</td><td class="py-2">Autorização Vencida</td><td class="py-2"><span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs">Pendente</span></td></tr>' +
+                '<tr class="border-b"><td class="py-2">GL-2024-004</td><td class="py-2">Pedro Lima</td><td class="py-2 font-semibold">R$ 6.780</td><td class="py-2">Duplicidade</td><td class="py-2"><span class="px-2 py-1 bg-orange-100 text-orange-700 rounded-full text-xs">Análise</span></td></tr>' +
+                '<tr class="border-b"><td class="py-2">GL-2024-005</td><td class="py-2">Julia Ferreira</td><td class="py-2 font-semibold">R$ 22.100</td><td class="py-2">Falta Laudo</td><td class="py-2"><span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs">Pendente</span></td></tr>' +
+                '</tbody></table></div>';
+        }
+
+        function generateGlosasRevertidasContent() {
+            return '<div class="space-y-4">' +
+                '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">' +
+                '<div class="bg-green-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Total Revertido</p><p class="text-2xl font-bold text-green-600">R$ 367.200</p></div>' +
+                '<div class="bg-green-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Casos Revertidos</p><p class="text-2xl font-bold text-green-600">96</p></div>' +
+                '<div class="bg-green-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Taxa Sucesso</p><p class="text-2xl font-bold text-green-600">75.6%</p></div>' +
+                '</div>' +
+                '<table class="w-full"><thead><tr class="border-b"><th class="text-left py-2">Código</th><th class="text-left py-2">Paciente</th><th class="text-left py-2">Valor</th><th class="text-left py-2">Data Reversão</th><th class="text-left py-2">Tempo</th></tr></thead>' +
+                '<tbody>' +
+                '<tr class="border-b"><td class="py-2">RV-2024-001</td><td class="py-2">Ana Costa</td><td class="py-2 font-semibold text-green-600">R$ 15.200</td><td class="py-2">10/01/2025</td><td class="py-2">3 dias</td></tr>' +
+                '<tr class="border-b"><td class="py-2">RV-2024-002</td><td class="py-2">Pedro Lima</td><td class="py-2 font-semibold text-green-600">R$ 9.800</td><td class="py-2">12/01/2025</td><td class="py-2">5 dias</td></tr>' +
+                '<tr class="border-b"><td class="py-2">RV-2024-003</td><td class="py-2">Carlos Mendes</td><td class="py-2 font-semibold text-green-600">R$ 18.450</td><td class="py-2">13/01/2025</td><td class="py-2">2 dias</td></tr>' +
+                '<tr class="border-b"><td class="py-2">RV-2024-004</td><td class="py-2">Patricia Souza</td><td class="py-2 font-semibold text-green-600">R$ 7.320</td><td class="py-2">14/01/2025</td><td class="py-2">4 dias</td></tr>' +
+                '<tr class="border-b"><td class="py-2">RV-2024-005</td><td class="py-2">Roberto Alves</td><td class="py-2 font-semibold text-green-600">R$ 25.600</td><td class="py-2">15/01/2025</td><td class="py-2">6 dias</td></tr>' +
+                '</tbody></table></div>';
+        }
+
+        function generateROIContent() {
+            return '<div class="space-y-4">' +
+                '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">' +
+                '<div class="bg-blue-50 p-4 rounded-lg"><p class="text-sm text-gray-600">ROI Total</p><p class="text-2xl font-bold text-blue-600">287%</p></div>' +
+                '<div class="bg-blue-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Economia Gerada</p><p class="text-2xl font-bold text-blue-600">R$ 2.4M</p></div>' +
+                '<div class="bg-blue-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Investimento</p><p class="text-2xl font-bold text-blue-600">R$ 836K</p></div>' +
+                '</div>' +
+                '<div class="bg-gray-50 p-4 rounded-lg">' +
+                '<h4 class="font-bold text-gray-800 mb-3">Breakdown de Economias</h4>' +
+                '<div class="space-y-2">' +
+                '<div class="flex justify-between items-center py-2 border-b"><span>Prevenção de Glosas</span><span class="font-bold text-green-600">R$ 1.2M</span></div>' +
+                '<div class="flex justify-between items-center py-2 border-b"><span>Otimização OPME</span><span class="font-bold text-green-600">R$ 680K</span></div>' +
+                '<div class="flex justify-between items-center py-2 border-b"><span>Redução Retrabalho</span><span class="font-bold text-green-600">R$ 320K</span></div>' +
+                '<div class="flex justify-between items-center py-2 border-b"><span>Agilidade Processos</span><span class="font-bold text-green-600">R$ 200K</span></div>' +
+                '</div></div></div>';
+        }
+
+        function generateTempoReversaoContent() {
+            return '<div class="space-y-4">' +
+                '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">' +
+                '<div class="bg-purple-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Tempo Médio</p><p class="text-2xl font-bold text-purple-600">4.2 dias</p></div>' +
+                '<div class="bg-purple-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Melhor Tempo</p><p class="text-2xl font-bold text-purple-600">1 dia</p></div>' +
+                '<div class="bg-purple-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Redução</p><p class="text-2xl font-bold text-purple-600">-2.1 dias</p></div>' +
+                '</div>' +
+                '<div class="bg-gray-50 p-4 rounded-lg">' +
+                '<h4 class="font-bold text-gray-800 mb-3">Evolução Temporal</h4>' +
+                '<table class="w-full"><thead><tr class="border-b"><th class="text-left py-2">Mês</th><th class="text-left py-2">Tempo Médio</th><th class="text-left py-2">Variação</th></tr></thead>' +
+                '<tbody>' +
+                '<tr class="border-b"><td class="py-2">Janeiro</td><td class="py-2">6.3 dias</td><td class="py-2 text-red-600">Base</td></tr>' +
+                '<tr class="border-b"><td class="py-2">Fevereiro</td><td class="py-2">5.8 dias</td><td class="py-2 text-green-600">-0.5 dias</td></tr>' +
+                '<tr class="border-b"><td class="py-2">Março</td><td class="py-2">5.2 dias</td><td class="py-2 text-green-600">-0.6 dias</td></tr>' +
+                '<tr class="border-b"><td class="py-2">Abril</td><td class="py-2">4.9 dias</td><td class="py-2 text-green-600">-0.3 dias</td></tr>' +
+                '<tr class="border-b"><td class="py-2">Maio</td><td class="py-2">4.5 dias</td><td class="py-2 text-green-600">-0.4 dias</td></tr>' +
+                '<tr class="border-b"><td class="py-2">Junho</td><td class="py-2 font-bold">4.2 dias</td><td class="py-2 text-green-600 font-bold">-0.3 dias</td></tr>' +
+                '</tbody></table></div></div>';
+        }
+
+        function generateControleOPMEContent() {
+            return '<div class="space-y-4">' +
+                '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">' +
+                '<div class="bg-amber-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Compliance</p><p class="text-2xl font-bold text-amber-600">98.7%</p></div>' +
+                '<div class="bg-amber-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Materiais Analisados</p><p class="text-2xl font-bold text-amber-600">1.247</p></div>' +
+                '<div class="bg-amber-50 p-4 rounded-lg"><p class="text-sm text-gray-600">Economia</p><p class="text-2xl font-bold text-amber-600">R$ 892K</p></div>' +
+                '</div>' +
+                '<table class="w-full"><thead><tr class="border-b"><th class="text-left py-2">Fornecedor</th><th class="text-left py-2">Materiais</th><th class="text-left py-2">Valor Total</th><th class="text-left py-2">Compliance</th></tr></thead>' +
+                '<tbody>' +
+                '<tr class="border-b"><td class="py-2">MedTech Inc</td><td class="py-2">234</td><td class="py-2 font-semibold">R$ 2.8M</td><td class="py-2"><span class="text-green-600 font-bold">99.2%</span></td></tr>' +
+                '<tr class="border-b"><td class="py-2">OrthoLife</td><td class="py-2">189</td><td class="py-2 font-semibold">R$ 1.9M</td><td class="py-2"><span class="text-green-600 font-bold">98.4%</span></td></tr>' +
+                '<tr class="border-b"><td class="py-2">CardioTech</td><td class="py-2">156</td><td class="py-2 font-semibold">R$ 3.2M</td><td class="py-2"><span class="text-green-600 font-bold">99.5%</span></td></tr>' +
+                '<tr class="border-b"><td class="py-2">ValveMed</td><td class="py-2">98</td><td class="py-2 font-semibold">R$ 4.1M</td><td class="py-2"><span class="text-yellow-600 font-bold">97.8%</span></td></tr>' +
+                '<tr class="border-b"><td class="py-2">JointPro</td><td class="py-2">145</td><td class="py-2 font-semibold">R$ 1.5M</td><td class="py-2"><span class="text-green-600 font-bold">98.9%</span></td></tr>' +
+                '</tbody></table></div>';
+        }
+
+        window.closeModal = function(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        window.filterRisco = function(nivel) {
+            const cards = document.querySelectorAll('.patient-risk-card');
+            cards.forEach(card => {
+                if (nivel === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = card.dataset.risk === nivel ? 'block' : 'none';
+                }
+            });
+        }
+
+        // Initialize charts on load
+        setTimeout(initFinancialCharts, 100);
+    `}const W=new P;function ye(e,t,s){return`
         <div class="portal-container min-h-screen bg-gradient-to-br from-gray-50 via-green-50/30 to-emerald-50/20">
             <!-- Portal Header -->
             <div class="glass-effect shadow-lg border-b border-gray-100 mb-8">
@@ -1956,7 +2655,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
                     \`;
                 });
             });
-            `]})});W.get("/financial",async e=>e.redirect("/portal/financial"));W.get("/wellness",async e=>{const t=`
+            `]})});W.get("/financial",async e=>{const{html:t,scripts:s}=Ys();return e.json({html:t,scripts:s})});W.get("/wellness",async e=>{const t=`
         <!-- Welcome Message -->
         <div class="bg-gradient-to-r from-pink-400 to-purple-500 rounded-xl p-6 text-white mb-8">
             <div class="flex items-center justify-between">
@@ -2949,7 +3648,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
     <\/script>
 </body>
 </html>
-    `));const es=new P,Ys={"PAC-001":{nome:"Maria Silva Santos",idade:52,diagnostico:"Carcinoma Ductal Invasivo - Mama",estadiamento:"IIA (T2N0M0)",medico:"Dr. Roberto Almeida",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4321",email:"maria.silva@email.com",convenio:"Unimed Premium",proximaConsulta:"25/01/2025 - 14:30",cicloTratamento:"2/6",risco:35},"PAC-002":{nome:"Ana Costa",idade:45,diagnostico:"Carcinoma Pulmonar",estadiamento:"IIIA",medico:"Dr. Carlos Santos",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4322",email:"ana.costa@email.com",convenio:"SulAmérica",proximaConsulta:"28/01/2025 - 10:00",cicloTratamento:"4/8",risco:45},"PAC-003":{nome:"Carlos Mendes",idade:58,diagnostico:"Linfoma de Hodgkin",estadiamento:"IIB",medico:"Dra. Marina Costa",navegador:"Enf. João Silva",telefone:"(11) 98765-4323",email:"carlos.mendes@email.com",convenio:"Bradesco Saúde",proximaConsulta:"20/01/2025 - 15:00",cicloTratamento:"3/6",risco:25},"PAC-004":{nome:"João Santos",idade:67,diagnostico:"Carcinoma de Próstata",estadiamento:"I",medico:"Dr. Paulo Ferreira",navegador:"Enf. Ana Rodrigues",telefone:"(11) 98765-4324",email:"joao.santos@email.com",convenio:"Amil",proximaConsulta:"22/01/2025 - 09:00",cicloTratamento:"1/4",risco:15},"PAC-005":{nome:"Pedro Oliveira",idade:49,diagnostico:"Melanoma",estadiamento:"IIA",medico:"Dra. Lucia Martins",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4325",email:"pedro.oliveira@email.com",convenio:"Porto Seguro",proximaConsulta:"Tratamento Concluído",cicloTratamento:"Completo",risco:10},"PAC-006":{nome:"Lucia Ferreira",idade:55,diagnostico:"Carcinoma Colorretal",estadiamento:"IIIC",medico:"Dr. Roberto Almeida",navegador:"Enf. João Silva",telefone:"(11) 98765-4326",email:"lucia.ferreira@email.com",convenio:"Unimed",proximaConsulta:"25/01/2025 - 11:00",cicloTratamento:"Pós-cirúrgico",risco:30}};es.get("/patient-view/:id",e=>{const t=e.req.param("id"),s=Ys[t];return s?e.html(`
+    `));const es=new P,aa={"PAC-001":{nome:"Maria Silva Santos",idade:52,diagnostico:"Carcinoma Ductal Invasivo - Mama",estadiamento:"IIA (T2N0M0)",medico:"Dr. Roberto Almeida",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4321",email:"maria.silva@email.com",convenio:"Unimed Premium",proximaConsulta:"25/01/2025 - 14:30",cicloTratamento:"2/6",risco:35},"PAC-002":{nome:"Ana Costa",idade:45,diagnostico:"Carcinoma Pulmonar",estadiamento:"IIIA",medico:"Dr. Carlos Santos",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4322",email:"ana.costa@email.com",convenio:"SulAmérica",proximaConsulta:"28/01/2025 - 10:00",cicloTratamento:"4/8",risco:45},"PAC-003":{nome:"Carlos Mendes",idade:58,diagnostico:"Linfoma de Hodgkin",estadiamento:"IIB",medico:"Dra. Marina Costa",navegador:"Enf. João Silva",telefone:"(11) 98765-4323",email:"carlos.mendes@email.com",convenio:"Bradesco Saúde",proximaConsulta:"20/01/2025 - 15:00",cicloTratamento:"3/6",risco:25},"PAC-004":{nome:"João Santos",idade:67,diagnostico:"Carcinoma de Próstata",estadiamento:"I",medico:"Dr. Paulo Ferreira",navegador:"Enf. Ana Rodrigues",telefone:"(11) 98765-4324",email:"joao.santos@email.com",convenio:"Amil",proximaConsulta:"22/01/2025 - 09:00",cicloTratamento:"1/4",risco:15},"PAC-005":{nome:"Pedro Oliveira",idade:49,diagnostico:"Melanoma",estadiamento:"IIA",medico:"Dra. Lucia Martins",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4325",email:"pedro.oliveira@email.com",convenio:"Porto Seguro",proximaConsulta:"Tratamento Concluído",cicloTratamento:"Completo",risco:10},"PAC-006":{nome:"Lucia Ferreira",idade:55,diagnostico:"Carcinoma Colorretal",estadiamento:"IIIC",medico:"Dr. Roberto Almeida",navegador:"Enf. João Silva",telefone:"(11) 98765-4326",email:"lucia.ferreira@email.com",convenio:"Unimed",proximaConsulta:"25/01/2025 - 11:00",cicloTratamento:"Pós-cirúrgico",risco:30}};es.get("/patient-view/:id",e=>{const t=e.req.param("id"),s=aa[t];return s?e.html(`
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -3269,7 +3968,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
                 </div>
             </body>
             </html>
-        `)});const ts=new P,Zs={"PAC-001":{nome:"Maria Silva Santos",idade:52,diagnostico:"Carcinoma Ductal Invasivo - Mama",estadiamento:"IIA (T2N0M0)",medico:"Dr. Roberto Almeida",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4321",email:"maria.silva@email.com",convenio:"Unimed Premium",proximaConsulta:"25/01/2025 - 14:30",cicloTratamento:"2/6",risco:35,foto:"https://ui-avatars.com/api/?name=Maria+Silva&background=EC4899&color=fff",dataInicio:"10/01/2025",fase:"Tratamento Ativo"},"PAC-002":{nome:"Ana Costa",idade:45,diagnostico:"Carcinoma Pulmonar",estadiamento:"IIIA",medico:"Dr. Carlos Santos",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4322",email:"ana.costa@email.com",convenio:"SulAmérica",proximaConsulta:"28/01/2025 - 10:00",cicloTratamento:"4/8",risco:45,foto:"https://ui-avatars.com/api/?name=Ana+Costa&background=F59E0B&color=fff",dataInicio:"05/01/2025",fase:"Quimioterapia"},"PAC-003":{nome:"Carlos Mendes",idade:58,diagnostico:"Linfoma de Hodgkin",estadiamento:"IIB",medico:"Dra. Marina Costa",navegador:"Enf. João Silva",telefone:"(11) 98765-4323",email:"carlos.mendes@email.com",convenio:"Bradesco Saúde",proximaConsulta:"20/01/2025 - 15:00",cicloTratamento:"3/6",risco:25,foto:"https://ui-avatars.com/api/?name=Carlos+Mendes&background=3B82F6&color=fff",dataInicio:"15/12/2024",fase:"Tratamento Combinado"},"PAC-004":{nome:"João Santos",idade:67,diagnostico:"Carcinoma de Próstata",estadiamento:"I",medico:"Dr. Paulo Ferreira",navegador:"Enf. Ana Rodrigues",telefone:"(11) 98765-4324",email:"joao.santos@email.com",convenio:"Amil",proximaConsulta:"22/01/2025 - 09:00",cicloTratamento:"1/4",risco:15,foto:"https://ui-avatars.com/api/?name=João+Santos&background=10B981&color=fff",dataInicio:"08/01/2025",fase:"Início do Tratamento"},"PAC-005":{nome:"Pedro Oliveira",idade:49,diagnostico:"Melanoma",estadiamento:"IIA",medico:"Dra. Lucia Martins",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4325",email:"pedro.oliveira@email.com",convenio:"Porto Seguro",proximaConsulta:"Acompanhamento Trimestral",cicloTratamento:"Completo",risco:10,foto:"https://ui-avatars.com/api/?name=Pedro+Oliveira&background=8B5CF6&color=fff",dataInicio:"01/10/2024",fase:"Remissão - Acompanhamento"},"PAC-006":{nome:"Lucia Ferreira",idade:55,diagnostico:"Carcinoma Colorretal",estadiamento:"IIIC",medico:"Dr. Roberto Almeida",navegador:"Enf. João Silva",telefone:"(11) 98765-4326",email:"lucia.ferreira@email.com",convenio:"Unimed",proximaConsulta:"25/01/2025 - 11:00",cicloTratamento:"Pós-cirúrgico",risco:30,foto:"https://ui-avatars.com/api/?name=Lucia+Ferreira&background=EF4444&color=fff",dataInicio:"20/12/2024",fase:"Recuperação Pós-Cirúrgica"}};ts.get("/patient-view-integrated/:id",e=>{const t=e.req.param("id"),s=Zs[t];return s?e.html(`
+        `)});const ts=new P,ia={"PAC-001":{nome:"Maria Silva Santos",idade:52,diagnostico:"Carcinoma Ductal Invasivo - Mama",estadiamento:"IIA (T2N0M0)",medico:"Dr. Roberto Almeida",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4321",email:"maria.silva@email.com",convenio:"Unimed Premium",proximaConsulta:"25/01/2025 - 14:30",cicloTratamento:"2/6",risco:35,foto:"https://ui-avatars.com/api/?name=Maria+Silva&background=EC4899&color=fff",dataInicio:"10/01/2025",fase:"Tratamento Ativo"},"PAC-002":{nome:"Ana Costa",idade:45,diagnostico:"Carcinoma Pulmonar",estadiamento:"IIIA",medico:"Dr. Carlos Santos",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4322",email:"ana.costa@email.com",convenio:"SulAmérica",proximaConsulta:"28/01/2025 - 10:00",cicloTratamento:"4/8",risco:45,foto:"https://ui-avatars.com/api/?name=Ana+Costa&background=F59E0B&color=fff",dataInicio:"05/01/2025",fase:"Quimioterapia"},"PAC-003":{nome:"Carlos Mendes",idade:58,diagnostico:"Linfoma de Hodgkin",estadiamento:"IIB",medico:"Dra. Marina Costa",navegador:"Enf. João Silva",telefone:"(11) 98765-4323",email:"carlos.mendes@email.com",convenio:"Bradesco Saúde",proximaConsulta:"20/01/2025 - 15:00",cicloTratamento:"3/6",risco:25,foto:"https://ui-avatars.com/api/?name=Carlos+Mendes&background=3B82F6&color=fff",dataInicio:"15/12/2024",fase:"Tratamento Combinado"},"PAC-004":{nome:"João Santos",idade:67,diagnostico:"Carcinoma de Próstata",estadiamento:"I",medico:"Dr. Paulo Ferreira",navegador:"Enf. Ana Rodrigues",telefone:"(11) 98765-4324",email:"joao.santos@email.com",convenio:"Amil",proximaConsulta:"22/01/2025 - 09:00",cicloTratamento:"1/4",risco:15,foto:"https://ui-avatars.com/api/?name=João+Santos&background=10B981&color=fff",dataInicio:"08/01/2025",fase:"Início do Tratamento"},"PAC-005":{nome:"Pedro Oliveira",idade:49,diagnostico:"Melanoma",estadiamento:"IIA",medico:"Dra. Lucia Martins",navegador:"Enf. Patricia Lima",telefone:"(11) 98765-4325",email:"pedro.oliveira@email.com",convenio:"Porto Seguro",proximaConsulta:"Acompanhamento Trimestral",cicloTratamento:"Completo",risco:10,foto:"https://ui-avatars.com/api/?name=Pedro+Oliveira&background=8B5CF6&color=fff",dataInicio:"01/10/2024",fase:"Remissão - Acompanhamento"},"PAC-006":{nome:"Lucia Ferreira",idade:55,diagnostico:"Carcinoma Colorretal",estadiamento:"IIIC",medico:"Dr. Roberto Almeida",navegador:"Enf. João Silva",telefone:"(11) 98765-4326",email:"lucia.ferreira@email.com",convenio:"Unimed",proximaConsulta:"25/01/2025 - 11:00",cicloTratamento:"Pós-cirúrgico",risco:30,foto:"https://ui-avatars.com/api/?name=Lucia+Ferreira&background=EF4444&color=fff",dataInicio:"20/12/2024",fase:"Recuperação Pós-Cirúrgica"}};ts.get("/patient-view-integrated/:id",e=>{const t=e.req.param("id"),s=ia[t];return s?e.html(`
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6929,7 +7628,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
     </div>
 </body>
 </html>
-    `));var rt=Object.freeze,Xs=Object.defineProperty,ea=(e,t)=>rt(Xs(e,"raw",{value:rt(t||e.slice())})),lt;const ta=e=>e.html(_(lt||(lt=ea([`
+    `));var rt=Object.freeze,oa=Object.defineProperty,ra=(e,t)=>rt(oa(e,"raw",{value:rt(t||e.slice())})),lt;const la=e=>e.html(_(lt||(lt=ra([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -8349,7 +9048,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `])),xe(Q("patient"))));var nt=Object.freeze,sa=Object.defineProperty,aa=(e,t)=>nt(sa(e,"raw",{value:nt(t||e.slice())})),dt;const ia=e=>e.html(_(dt||(dt=aa([`
+  `])),xe(Q("patient"))));var nt=Object.freeze,na=Object.defineProperty,da=(e,t)=>nt(na(e,"raw",{value:nt(t||e.slice())})),dt;const ca=e=>e.html(_(dt||(dt=da([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -9189,7 +9888,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `]))));var ct=Object.freeze,oa=Object.defineProperty,ra=(e,t)=>ct(oa(e,"raw",{value:ct(e.slice())})),pt;const la=e=>e.html(_(pt||(pt=ra([`
+  `]))));var ct=Object.freeze,pa=Object.defineProperty,xa=(e,t)=>ct(pa(e,"raw",{value:ct(e.slice())})),pt;const ma=e=>e.html(_(pt||(pt=xa([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -9585,7 +10284,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         <\/script>
     </body>
     </html>
-  `]))));var xt=Object.freeze,na=Object.defineProperty,da=(e,t)=>xt(na(e,"raw",{value:xt(t||e.slice())})),mt;const ca=e=>e.html(_(mt||(mt=da([`
+  `]))));var xt=Object.freeze,ga=Object.defineProperty,ba=(e,t)=>xt(ga(e,"raw",{value:xt(t||e.slice())})),mt;const ua=e=>e.html(_(mt||(mt=ba([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -14721,7 +15420,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         <\/script>
     </body>
     </html>
-  `]))));var gt=Object.freeze,pa=Object.defineProperty,xa=(e,t)=>gt(pa(e,"raw",{value:gt(t||e.slice())})),bt;const ma=e=>e.html(_(bt||(bt=xa([`
+  `]))));var gt=Object.freeze,va=Object.defineProperty,fa=(e,t)=>gt(va(e,"raw",{value:gt(t||e.slice())})),bt;const ha=e=>e.html(_(bt||(bt=fa([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -16341,7 +17040,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         <\/script>
     </body>
     </html>
-  `])))),ga=e=>e.redirect("/research-portal");var ut=Object.freeze,ba=Object.defineProperty,ua=(e,t)=>ut(ba(e,"raw",{value:ut(e.slice())})),vt;const va=e=>e.html(_(vt||(vt=ua([`
+  `])))),ya=e=>e.redirect("/research-portal");var ut=Object.freeze,wa=Object.defineProperty,Ca=(e,t)=>ut(wa(e,"raw",{value:ut(e.slice())})),vt;const Aa=e=>e.html(_(vt||(vt=Ca([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -16620,7 +17319,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         <script src="/static/action-plan-handlers.js"><\/script>
     </body>
     </html>
-  `]))));var ft=Object.freeze,fa=Object.defineProperty,ha=(e,t)=>ft(fa(e,"raw",{value:ft(e.slice())})),ht;const ya=e=>e.html(_(ht||(ht=ha([`
+  `]))));var ft=Object.freeze,Pa=Object.defineProperty,ka=(e,t)=>ft(Pa(e,"raw",{value:ft(e.slice())})),ht;const ja=e=>e.html(_(ht||(ht=ka([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -17498,7 +18197,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         <\/script>
     </body>
     </html>
-  `])),xe(Q("admin"))));new P;const wa=e=>e.html(`
+  `])),xe(Q("admin"))));new P;const Ia=e=>e.html(`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -17803,7 +18502,7 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         <\/script>
     </body>
     </html>
-  `);var yt=Object.freeze,Ca=Object.defineProperty,Aa=(e,t)=>yt(Ca(e,"raw",{value:yt(e.slice())})),wt;const v=new P;v.use("/api/*",zs());v.use("/static/*",Zt({root:"./public"}));v.use("/*.html",Zt({root:"./public"}));v.route("/api/patient",Me);v.route("/api/doctor",De);v.route("/api/navigator",Le);v.route("/api/financial",Oe);v.route("/api/wellness",$e);v.route("/api/research",he);v.route("/api/admin",oe);v.route("/api/ai",re);v.route("/api/portal",W);v.route("/",Xt);v.route("/",es);v.route("/",ts);v.route("/",ss);v.route("/",Be);v.route("/",as);v.route("/",Y);v.get("/patient-view/:id",e=>{const t=e.req.param("id");return e.redirect(`/patient-view-integrated/${t}`,301)});v.get("/portal/patient",ta);v.get("/portal/doctor",ia);v.get("/portal/navigator",la);v.get("/portal/financial",ca);v.get("/portal/wellness",ma);v.get("/portal/research",ga);v.get("/portal/admin-master",va);v.get("/admin-master",ya);v.get("/test-integration",wa);v.get("/",e=>e.html(_(wt||(wt=Aa([`
+  `);var yt=Object.freeze,Ea=Object.defineProperty,Ra=(e,t)=>yt(Ea(e,"raw",{value:yt(e.slice())})),wt;const v=new P;v.use("/api/*",zs());v.use("/static/*",Zt({root:"./public"}));v.use("/*.html",Zt({root:"./public"}));v.route("/api/patient",Te);v.route("/api/doctor",De);v.route("/api/navigator",Le);v.route("/api/financial",Oe);v.route("/api/wellness",$e);v.route("/api/research",he);v.route("/api/admin",oe);v.route("/api/ai",re);v.route("/api/portal",W);v.route("/",Xt);v.route("/",es);v.route("/",ts);v.route("/",ss);v.route("/",Be);v.route("/",as);v.route("/",Y);v.get("/patient-view/:id",e=>{const t=e.req.param("id");return e.redirect(`/patient-view-integrated/${t}`,301)});v.get("/portal/patient",la);v.get("/portal/doctor",ca);v.get("/portal/navigator",ma);v.get("/portal/financial",ua);v.get("/portal/wellness",ha);v.get("/portal/research",ya);v.get("/portal/admin-master",Aa);v.get("/admin-master",ja);v.get("/test-integration",Ia);v.get("/",e=>e.html(_(wt||(wt=Ra([`
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -18581,4 +19280,4 @@ var rs=Object.defineProperty;var et=e=>{throw TypeError(e)};var ls=(e,t,s)=>t in
         document.getElementById('content').innerHTML = '<p class="p-8 text-center text-2xl text-gray-600">👆 Clique em um dos botões acima para testar as funcionalidades</p>';
     <\/script>
 </body>
-</html>`));const Ct=new P,Pa=Object.assign({"/src/index.tsx":v});let is=!1;for(const[,e]of Object.entries(Pa))e&&(Ct.all("*",t=>{let s;try{s=t.executionCtx}catch{}return e.fetch(t.req.raw,t.env,s)}),Ct.notFound(t=>{let s;try{s=t.executionCtx}catch{}return e.fetch(t.req.raw,t.env,s)}),is=!0);if(!is)throw new Error("Can't import modules from ['/src/index.ts','/src/index.tsx','/app/server.ts']");export{Ct as default};
+</html>`));const Ct=new P,Ma=Object.assign({"/src/index.tsx":v});let is=!1;for(const[,e]of Object.entries(Ma))e&&(Ct.all("*",t=>{let s;try{s=t.executionCtx}catch{}return e.fetch(t.req.raw,t.env,s)}),Ct.notFound(t=>{let s;try{s=t.executionCtx}catch{}return e.fetch(t.req.raw,t.env,s)}),is=!0);if(!is)throw new Error("Can't import modules from ['/src/index.ts','/src/index.tsx','/app/server.ts']");export{Ct as default};
