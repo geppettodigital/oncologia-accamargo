@@ -11,6 +11,19 @@ async function loadPortal(portalType) {
             return;
         }
         
+        // Portal Financeiro - Suporta ambos os modos
+        if (portalType === 'financial') {
+            // Verificar se está configurado para usar SPA (padrão) ou acesso direto
+            const useDirectAccess = localStorage.getItem('financial-portal-mode') === 'direct';
+            
+            if (useDirectAccess) {
+                // Acesso direto - mais estável para modais complexos
+                window.location.href = '/portal/financial';
+                return;
+            }
+            // Caso contrário, continua com carregamento SPA normal
+        }
+        
         // Mostrar loading
         showLoading();
         
@@ -39,6 +52,11 @@ async function loadPortal(portalType) {
         
         // Inicializar componentes específicos do portal
         initializePortalComponents(portalType);
+        
+        // Caso especial: Portal Financeiro precisa carregar funções adicionais
+        if (portalType === 'financial') {
+            loadFinancialPortalFunctions();
+        }
         
         // Scroll suave para o topo
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -147,6 +165,36 @@ function goBack() {
 function loadHome() {
     window.currentPortal = null;
     window.location.href = '/';
+}
+
+// Carregar funções específicas do Portal Financeiro
+function loadFinancialPortalFunctions() {
+    // Verificar se as funções já estão carregadas
+    if (window.showJornadasRisco && window.showOPMEDetail && window.showExtratoKPI) {
+        console.log('✅ Funções do Portal Financeiro já carregadas');
+        return;
+    }
+    
+    // Verificar se o script externo está carregado
+    const scriptSrc = '/static/financial-portal-functions.js';
+    let script = document.querySelector(`script[src="${scriptSrc}"]`);
+    
+    if (!script) {
+        // Carregar o script se não estiver presente
+        script = document.createElement('script');
+        script.src = scriptSrc;
+        script.onload = () => {
+            console.log('✅ Script de funções do Portal Financeiro carregado');
+            // Verificar se as funções foram definidas
+            if (window.showJornadasRisco) {
+                console.log('✅ Funções do Portal Financeiro disponíveis');
+            }
+        };
+        script.onerror = () => {
+            console.error('❌ Erro ao carregar script de funções do Portal Financeiro');
+        };
+        document.head.appendChild(script);
+    }
 }
 
 // Mostrar loading

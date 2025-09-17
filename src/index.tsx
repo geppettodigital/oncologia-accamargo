@@ -286,6 +286,11 @@ app.get('/', (c) => {
                                 <i class="fas fa-question text-lg"></i>
                             </button>
                         </div>
+                        <div class="mt-2">
+                            <a href="/portal/financial" class="text-xs text-gray-500 hover:text-gray-700 underline">
+                                Acesso direto (recomendado)
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -534,6 +539,8 @@ app.get('/', (c) => {
         </script>
     <script src="/static/portal-helpers.js"></script>
     <script src="/static/portal-functions.js"></script>
+    <script src="/static/portal-loader.js"></script>
+    <script src="/static/financial-portal-functions.js"></script>
     <script src="/static/financial-portal-loader.js"></script>
     <script src="/static/action-plan-system.js"></script>
     <script src="/static/action-plan-handlers.js"></script>
